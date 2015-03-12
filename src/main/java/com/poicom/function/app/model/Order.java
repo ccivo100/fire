@@ -18,11 +18,7 @@ public class Order extends Model<Order> {
 		return Db.paginate(pageNumber, pageSize,
 				SqlKit.sql("order.findReportFullOffersBySelect") + blank,
 				SqlKit.sql("order.findReportFullOffersByFrom"), paras);
-		/*return Db.paginate(pageNumber, pageSize,
-				"SELECT o.id, o.description, o.offer_at, f.full_name off_user,"
-				+ " o.status, d.full_name deal_user , t.name type_name"
-				+ blank,
-				SqlKit.sql("order.findReportFullOffersByFrom"), paras);*/
+
 	}
 
 }

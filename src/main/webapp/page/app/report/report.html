@@ -62,13 +62,7 @@
 
 <#include "/page/app/report/_model.html"/>
 <script type="text/javascript">
-function openWin(tag,obj)
-         {
-             obj.target="_blank";
-             obj.href = "/report/print?id="+tag;
-             obj.click();
-         }
-         
+
 function dodel(id){
 $('#testModal').modal('show').on('shown.bs.modal',function(){
 $(".btn-primary").attr('href','/report/print?id='+id);
