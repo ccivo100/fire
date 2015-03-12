@@ -1,0 +1,17 @@
+<fieldset class="solid">
+	
+	<input type="hidden" name="user.id" value="${(user.id)!}" />
+	<div>
+		<label>工号</label>
+		<input type="text" name="user.username" value="${(user.username)!}" />${usernameMsg!}
+	</div>
+	<div>
+		<label>密码</label>
+		<input type="password" name="user.password" value="${(user.password)!}">${passwordMsg!}
+	</div>
+	
+	<div>
+		<label>&nbsp;</label>
+		<input value="提交" type="submit">
+	</div>
+</fieldset>

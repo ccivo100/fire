@@ -1,0 +1,13 @@
+<#if bool>
+${user!}
+<#else>
+${latestProduct.url!}
+${latestProduct.name!}
+</#if>
+<@default.upper name="123">
+	bar
+</@default.upper>
+
+<@default.repeat count=3 hr=true> 
+  Test 
+</@default.repeat>

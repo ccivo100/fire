@@ -1,0 +1,173 @@
+﻿﻿<#include "/page/common/_layout.html"/>
+<@layout activebar="bootstrap" html_title="bootstrap">
+<div class="jumbotron">
+<h2>Bootstrap树形菜单JS代码特效</h2>
+</div>
+<div>
+<p>
+	<code>&lt;header&gt;</code>
+</p>
+<p>如果需要把代码显示为一个独立的块元素，请使用 &lt;pre&gt; 标签：</p>
+<pre>
+	&lt;article&gt;
+		&lt;h1&gt;Article Heading&lt;/h1&gt;
+	&lt;/article&gt;
+</pre>
+</div>
+
+<div class="table-responsive">
+	<table class="table table-striped table-bordered table-hover table-condensed">
+		<caption>上下文表格布局</caption>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>DESTRIPTION</th>
+				<th>NAME</th>
+				<th>PRICE</th>
+				<th>AGE</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr class="active">
+				<td>1</td>
+				<td>悬停颜色</td>
+				<td>FFD</td>
+				<td>30.5</td>
+				<td>25</td>
+			</tr>
+			
+			<tr class="success">
+				<td>2</td>
+				<td>成功动作</td>
+				<td>FFD</td>
+				<td>30.5</td>
+				<td>25</td>
+			</tr>
+			
+			<tr class="warning">
+				<td>3</td>
+				<td>需要警告</td>
+				<td>FFD</td>
+				<td>30.5</td>
+				<td>25</td>
+			</tr>
+			
+			<tr class="danger">
+				<td>4</td>
+				<td>危险操作</td>
+				<td>FFD</td>
+				<td>30.5</td>
+				<td>25</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<div class="page-header">
+<h3>文件上传</h3>
+</div>
+<div class="tree">
+<h3>表单功能</h3><#if success??><h5>上传成功</h5></#if>
+<form role="form" method="post" action="/bootstrap/upfile" enctype="multipart/form-data">
+	<div class="form-group">
+		<label for="name">名称</label>
+		<input type="text" class="form-control" id="name" name="name" placeholder="请输入名称">
+	</div>
+	<div class="form-group">
+		<label for="inputfile">文件输入</label>
+		<input type="file" id="inputfile" name="upfile">
+		<p class="help-block">这里是快级别帮助文本的实例</p>
+	</div>
+	<div class="checkbox">
+		<label>
+		<input type="checkbox">请打勾
+		</label>
+	</div>
+	<button type="submit" class="btn btn-default">提交</button>
+
+</form>
+
+</div>
+
+<div class="page-header">
+<h3>Ajax</h3>
+</div>
+<script>
+var xmlhttp;
+/* AJAX方法一 */
+function myFunc1(url,cfunc){
+	var btn=document.getElementById("submitBtn");
+	var unameFile=document.getElementById("uname");
+	var myDiv=document.getElementById("myDiv");
+
+	/* 创建 XMLHttpRequest*/
+	xmlhttp=createXHR();
+	var uname=unameFile.value;
+	/* 根据HTTP请求的状态，异步更改数据 */
+	xmlhttp.onreadystatechange=cfunc;
+	/* GET方法的参数是跟在URL后面的 */
+	xmlhttp.open("POST",url,true);
+	/* 如果是用POST方法想服务器发送数据，则需要下面这句代码 */
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	/* POST方法的参数是用send方法传递的 */
+	xmlhttp.send("pname=Henry&uname="+uname);
+}
+/* AJAX方法二 */
+function myFunc2(url,cfunc){
+	/* 创建 XMLHttpRequest*/
+	xmlhttp=createXHR();
+	xmlhttp.onreadystatechange=cfunc;
+	xmlhttp.open("GET",url,true);
+	xmlhttp.send();
+}
+
+
+/* 判断IE7+, Firefox, Chrome, Opera, Safari或者是IE6, IE5 */
+function createXHR(){
+	if(window.XMLHttpRequest){
+		return new XMLHttpRequest();
+	}else{
+		return new ActiveXObject("Microsoft.XMLHTTP");
+	}
+}
+function loadXMLDoc(){
+	myFunc1("/bootstrap/ajax",function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			/* 获取响应内容 ，即服务器传过来的数据->pname&&uname的值*/
+			var resultServerText=xmlhttp.responseText;
+			document.getElementById("myDiv").innerHTML=resultServerText;
+			
+	    }
+	});
+}
+function loadXMLText(){
+	myFunc2("/ajax/cd_catalog.xml",function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			/* 获取响应内容 ，即服务器传过来的数据->pname&&uname的值*/
+			var xmlDoc=xmlhttp.responseXML;
+			txt="";
+		    x=xmlDoc.getElementsByTagName("ARTIST");
+		    for (i=0;i<x.length;i++){
+		    	txt=txt + x[i].childNodes[0].nodeValue + "<br>";
+		    }
+			document.getElementById("myDiv2").innerHTML=txt;
+	    }
+	});
+}
+
+</script>
+<div class="tree well">
+<label for="uname">用户名:</label>
+<input type="text" name="username" id="uname" onkeyup="loadXMLDoc()" >
+<div class="tree " id="myDiv"><h2>使用 AJAX 修改该文本内容</h2></div>
+
+<!-- <button class="btn btn-primary" id="submitBtn" type="button" onclick="loadXMLDoc()">修改TEXT</button> -->
+<div class="tree" id="myDiv2"></div>
+<button class="btn btn-primary" id="submit" type="button" onclick="loadXMLText()">修改XML</button>
+
+</div>
+
+
+
+</@layout>

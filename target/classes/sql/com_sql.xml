@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<sqlRoot>
+  <sqlGroup name="order">
+  	<sql id="findReportOffersBySelect">
+  		SELECT ordr.*
+  	</sql>
+  	<sql id="findReportOffersByFrom">
+  		FROM com_order ordr 
+  		WHERE ordr.offer_user=?
+  	</sql>
+  	
+  	<sql id="findReportFullOffersBySelect">
+  		SELECT o.id, o.description, o.offer_at, f.full_name off_user, o.status, d.full_name deal_user , t.name type_name
+  	</sql>
+  	<sql id="findReportFullOffersByFrom">
+  		FROM com_order as o 
+		LEFT OUTER JOIN sec_user AS f ON o.offer_user=f.id 
+		LEFT OUTER JOIN sec_user AS d ON o.deal_user=d.id
+		LEFT OUTER JOIN com_type AS t ON o.type=t.id
+		WHERE o.offer_user=?
+  	</sql>
+  	
+  </sqlGroup>
+
+</sqlRoot>

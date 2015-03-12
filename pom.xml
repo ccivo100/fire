@@ -1,0 +1,230 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>poicom</groupId>
+	<artifactId>fire</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>fire Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<licenses>
+    	<license>
+      		<name>Apache License Version 2.0</name>
+      		<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+    	</license>
+   	 	<license>
+      		<name>The New BSD License</name>
+      		<url>http://www.opensource.org/licenses/bsd-license.html</url>
+    	</license>
+    	<license>
+      		<name>The Academic Free License, v. 2.1</name>
+      		<url>http://opensource-definition.org/licenses/afl-2.1.html</url>
+    	</license>
+  	</licenses>
+	
+	<!-- developers用于定义开发者的个人信息。 -->
+	<developers>
+    	<developer>
+      		<name>FireTercel</name>
+      		<email>tdy2837@gmail.com</email>
+      		<organization>FireTercel</organization>
+      		<organizationUrl>https://github.com/FireTercel</organizationUrl> 
+    	</developer>
+  	</developers>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- 引入shrio包版本號0.2 -->
+		<jfinal-shiro.version>0.2</jfinal-shiro.version> <!-- 封装安全框架 -->
+		<jfinal-sqlinxml.version>0.1</jfinal-sqlinxml.version> <!-- xml格式的sql -->
+		<jfinal-tablebind.version>0.1</jfinal-tablebind.version> <!-- 扫描model -->
+		<jfinal-routebind.version>0.1</jfinal-routebind.version> <!-- 扫描路径 -->
+		<jfinal-captcha.version>0.1</jfinal-captcha.version> <!-- 验证码 -->
+		<jfinal-shiro-freemarker.version>0.2</jfinal-shiro-freemarker.version> <!-- 安全框架的freemarker标签 -->
+		<jfinal-ext.version>3.1.3</jfinal-ext.version> <!-- 周扒皮的ext包 -->
+		<druid.version>1.0.9</druid.version> <!-- 阿里巴巴数据库连接池 -->
+	</properties>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.2</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.jfinal</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>8.1.8</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.jfinal</groupId>
+			<artifactId>jfinal</artifactId>
+			<version>1.9</version>
+		</dependency>
+		
+				<!-- 引入shrio包 -->
+		<dependency>
+   			<groupId>cn.dreampie</groupId>
+   			<artifactId>jfinal-shiro</artifactId>
+   			<version>${jfinal-shiro.version}</version>
+		</dependency>
+		
+		<dependency>
+   			<groupId>cn.dreampie</groupId>
+   			<artifactId>jfinal-sqlinxml</artifactId>
+   			<version>${jfinal-sqlinxml.version}</version>
+		</dependency>
+		
+		<dependency>
+   			<groupId>cn.dreampie</groupId>
+   			<artifactId>jfinal-tablebind</artifactId>
+   			<version>${jfinal-tablebind.version}</version>
+		</dependency>
+		
+		<dependency>
+   			<groupId>cn.dreampie</groupId>
+   			<artifactId>jfinal-routebind</artifactId>
+   			<version>${jfinal-routebind.version}</version>
+		</dependency>
+		
+		<dependency>
+   			<groupId>cn.dreampie</groupId>
+   			<artifactId>jfinal-captcha</artifactId>
+   			<version>${jfinal-captcha.version}</version>
+		</dependency>
+		
+		<dependency>
+      		<groupId>cn.dreampie</groupId>
+      		<artifactId>jfinal-shiro-freemarker</artifactId>
+      		<version>${jfinal-shiro-freemarker.version}</version>
+    	</dependency> 
+
+		<dependency>
+			<groupId>com.jfinal</groupId>
+			<artifactId>jfinal-ext</artifactId>
+			<version>${jfinal-ext.version}</version>
+		</dependency>
+
+		<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
+			<groupId>org.eclipse.jetty.orbit</groupId>
+			<artifactId>javax.servlet.jsp</artifactId>
+			<version>2.2.0.v201112011158</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
+			<groupId>org.eclipse.jetty.orbit</groupId>
+			<artifactId>org.apache.jasper.glassfish</artifactId>
+			<version>2.2.2.v201112011158</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
+			<groupId>org.eclipse.jetty.orbit</groupId>
+			<artifactId>javax.el</artifactId>
+			<version>2.2.0.v201108011116</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
+			<groupId>org.eclipse.jetty.orbit</groupId>
+			<artifactId>com.sun.el</artifactId>
+			<version>2.2.0.v201108011116</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->
+			<groupId>org.eclipse.jetty.orbit</groupId>
+			<artifactId>org.eclipse.jdt.core</artifactId>
+			<version>3.7.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency><!-- JSTL 支持 -->
+			<groupId>org.eclipse.jetty.orbit</groupId>
+			<artifactId>javax.servlet.jsp.jstl</artifactId>
+			<version>1.2.0.v201105211821</version>
+			<!-- exclusions用于声明，不要依赖，即项目中用到了javax.servlet.jsp.jstl， 但是，删除掉javax.servlet的依赖 -->
+			<exclusions><!-- 避免导出 servlet jar 包 -->
+				<exclusion>
+					<groupId>org.eclipse.jetty.orbit</groupId>
+					<artifactId>javax.servlet</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency><!-- JSTL 支持 -->
+			<groupId>org.eclipse.jetty.orbit</groupId>
+			<artifactId>org.apache.taglibs.standard.glassfish</artifactId>
+			<version>1.2.0.v201112081803</version>
+			<exclusions><!-- 避免导出 servlet jar 包 -->
+				<exclusion>
+					<groupId>org.eclipse.jetty.orbit</groupId>
+					<artifactId>javax.servlet</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>${druid.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.20</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>2.6.6</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.16</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.5</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.20</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jfinal</groupId>
+			<artifactId>cos</artifactId>
+			<version>26Dec2008</version>
+		</dependency>
+
+	</dependencies>
+	
+	<build>
+		<finalName>fire</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>8.1.8.v20121106</version>
+				<configuration>
+					<stopKey>stop</stopKey>
+					<stopPort>5599</stopPort>
+					<webAppConfig>
+						<contextPath>/</contextPath>
+					</webAppConfig>
+					<scanIntervalSeconds>5</scanIntervalSeconds>
+					<connectors>
+						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+							<port>80</port>
+							<maxIdleTime>60000</maxIdleTime>
+						</connector>
+					</connectors>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
