@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version: 5.6.23-log)
-# Date: 2015-03-12 18:27:31
+# Date: 2015-03-13 18:05:44
 # Generator: MySQL-Front 5.3  (Build 4.89)
 
 /*!40101 SET NAMES utf8 */;
@@ -41,13 +41,13 @@ CREATE TABLE `com_order` (
   `comment` text COMMENT '处理意见',
   `deal_at` timestamp NULL DEFAULT NULL COMMENT '处理时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='工单';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='工单';
 
 #
 # Data for table "com_order"
 #
 
-INSERT INTO `com_order` VALUES (1,4,'电脑故障，电脑坏了，坏了，坏了，真的坏了，如何处理。',3,'2015-03-10 15:29:46',NULL,0,NULL,NULL,NULL),(2,4,'打印机故障',1,'2015-03-12 09:27:52',NULL,0,NULL,NULL,NULL),(3,4,'电话故障',2,'2015-03-12 09:28:39',NULL,1,3,'建议测试','2015-03-13 00:00:00'),(4,4,'电话打不通',2,'2015-03-12 09:29:58',NULL,0,NULL,NULL,NULL),(5,1,'管理员测试',1,'2015-03-12 10:47:06',NULL,1,3,NULL,NULL);
+INSERT INTO `com_order` VALUES (1,4,'电脑故障，电脑坏了，坏了，坏了，真的坏了，如何处理。',3,'2015-03-10 15:29:46',NULL,0,NULL,NULL,NULL),(2,4,'打印机故障',1,'2015-03-12 09:27:52',NULL,0,NULL,NULL,NULL),(3,4,'电话故障',2,'2015-03-12 09:28:39',NULL,1,3,'建议测试','2015-03-13 00:00:00'),(4,4,'电话打不通',2,'2015-03-12 09:29:58',NULL,0,NULL,NULL,NULL),(5,1,'管理员测试',1,'2015-03-12 10:47:06',NULL,1,3,NULL,NULL),(6,4,'电脑坏了怎么办',3,'2015-03-13 16:47:13',NULL,0,NULL,NULL,NULL),(7,4,'打印机打印不了',1,'2015-03-13 16:52:37',NULL,0,NULL,NULL,NULL),(8,4,'打印机又坏了\r\n',1,'2015-03-13 16:55:21',NULL,0,NULL,NULL,NULL);
 
 #
 # Structure for table "com_type"
@@ -194,13 +194,13 @@ CREATE TABLE `sec_user_info` (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户信息';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户信息';
 
 #
 # Data for table "sec_user_info"
 #
 
-INSERT INTO `sec_user_info` VALUES (1,1,1,0,1,'2015-03-11 10:42:24',NULL,NULL);
+INSERT INTO `sec_user_info` VALUES (1,1,1,0,1,'2015-03-11 10:42:24',NULL,NULL),(2,4,NULL,0,3,'2015-03-13 15:35:03',NULL,NULL);
 
 #
 # Structure for table "sec_user_role"

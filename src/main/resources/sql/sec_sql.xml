@@ -6,6 +6,25 @@
     </sql>
     <sql id="findUserPageByFrom">FROM `sec_user` user 
     </sql>
+    
+    <sql id="findAllBySelect">
+		select u.id userid,u.username account,u.providername providernme,
+		u.email email,u.phone phone,u.password psw,
+		u.hasher hasher,u.salt salt,u.avatar_url avatat,
+		u.first_name firstname,u.last_name lastname,u.full_name fullname,
+		u.created_at createtime,u.updated_at updatetime,u.deleted_at deletetime,
+		s.id info_id,s.user_id info_userid,s.branch_id info_branchid,s.creator_id info_creator,s.gender gender,
+    	s.created_at info_createtime,s.updated_at info_updatetime,s.deleted_at info_deletetime,
+		c.id branchid,c.name branch,
+    	c.created_at branch_createtime,c.updated_at branch_updatetime,c.deleted_at branch_deletetime
+    </sql>
+    
+    <sql id="findAllByFrom">
+    	from sec_user_info as s 
+		left outer join com_branch as c on s.branch_id=c.id
+		left outer join sec_user as u on s.user_id=u.id 
+		where u.id=?
+    </sql>
   
     <sql id="findInfoBySelect">SELECT `user`.*,`userInfo`.street street,`userInfo`.gender gender,
       `userInfo`.zip_code zip_code,`province`.name province,`city`.name city,`county`.name

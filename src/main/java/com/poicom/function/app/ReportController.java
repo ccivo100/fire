@@ -1,12 +1,16 @@
 package com.poicom.function.app;
 
+import java.util.List;
+
 import cn.dreampie.ValidateKit;
 import cn.dreampie.routebind.ControllerKey;
 import cn.dreampie.shiro.core.SubjectKit;
 
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.activerecord.Record;
 import com.poicom.function.app.model.Order;
 import com.poicom.function.user.model.User;
+import com.poicom.function.user.model.UserInfo;
 
 /**
  * @描述 故障申报
@@ -47,6 +51,9 @@ public class ReportController extends Controller{
 	 * 查询工单详细内容
 	 */
 	public void query(){
+		Integer reportid=getParaToInt("id");
+		setAttr("typeList",Order.dao.getAllType());
+		setAttr("order",Order.dao.getReportOrder(getParaToInt("id")));
 		
 	}
 	
@@ -56,10 +63,37 @@ public class ReportController extends Controller{
 	}
 	
 	/**
+	 * 进入新建工单页面
+	 */
+	public void add(){
+		User user=getCurrentUser();
+		Record userinfo=UserInfo.dao.getAllUserInfo(user.get("id"));
+		setAttr("userinfo",userinfo);
+		setAttr("typeList",Order.dao.getAllType());
+		render("add.html");
+	}
+	
+	/**
 	 * 新建工单
 	 */
 	public void save(){
+		//offer_user
+		Integer userid=getParaToInt("userid");
+		//type
+		Integer selectType=getParaToInt("selectType");
+		//description
+		String description=getPara("description");
 		
+		Order order=new Order().set("offer_user", getParaToInt("userid"))
+				.set("description", getPara("description"))
+				.set("type", getParaToInt("selectType"))
+				.set("status", 0);
+		if(order.save())
+			redirect("/report/offer");
+		else
+			System.out.println("userid:"+userid+" type:"+selectType+" des:"+description);
+		
+		redirect("/report/offer");
 	}
 	
 	/**

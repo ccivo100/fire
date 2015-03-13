@@ -1,5 +1,5 @@
 <!-- modal save -->
-<div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveLabel" aria-hidden="true">
+<div id="saveModal" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="saveLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
     <form class="form-horizontal save" id="saveForm" role="form" action="/report/save" method="post">
@@ -8,7 +8,7 @@
         <h4 class="modal-title" id="saveLabel">新建工单</h4>
       </div>
       <div class="modal-body">
-        
+
           <input type="hidden" name="do" value="save">
           
             <div class="form-group">
@@ -72,7 +72,8 @@
       </div>
       <div class="modal-body">
       	<input type="hidden" name="do" value="delete">
-      	<input type="hidden" name="user.id" value="">
+      	<input id="userid" type="text" name="userid" value="">
+      	<a class="btn btn-primary" href="">确认</a>
         <p id="confirmContent">确认修改？</p>
       </div>
       <div class="modal-footer">

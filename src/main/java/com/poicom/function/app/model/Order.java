@@ -1,5 +1,7 @@
 package com.poicom.function.app.model;
 
+import java.util.List;
+
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
@@ -18,7 +20,19 @@ public class Order extends Model<Order> {
 		return Db.paginate(pageNumber, pageSize,
 				SqlKit.sql("order.findReportFullOffersBySelect") + blank,
 				SqlKit.sql("order.findReportFullOffersByFrom"), paras);
-
+	}
+	
+	public Record getReportOrder(Object... paras){
+		return Db.findFirst(SqlKit.sql("order.findReportOfferBySelect") + blank
+				+ SqlKit.sql("order.findReportOfferByFrom"), paras);
+	}
+	
+	/**
+	 * 获得所有故障类型
+	 * @return
+	 */
+	public List<Record> getAllType(){
+		return Db.find("select * from com_type");
 	}
 
 }
