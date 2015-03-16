@@ -15,6 +15,13 @@ public class Order extends Model<Order> {
 
 	public static Order dao = new Order();
 
+	/**
+	 * 根据报障人员id，查询其申报的故障工单
+	 * @param pageNumber
+	 * @param pageSize
+	 * @param paras
+	 * @return
+	 */
 	public Page<Record> getReportOrderPage(int pageNumber, int pageSize,
 			Object... paras) {
 		return Db.paginate(pageNumber, pageSize,
@@ -22,17 +29,35 @@ public class Order extends Model<Order> {
 				SqlKit.sql("order.findReportFullOffersByFrom"), paras);
 	}
 	
-	public Record getReportOrder(Object... paras){
+	/**
+	 * 根据故障工单id，查询该工单的详细信息（报障人员、运维人员查询）
+	 * @param paras
+	 * @return
+	 */
+	public Record getCommonOrder(Object... paras){
 		return Db.findFirst(SqlKit.sql("order.findReportOfferBySelect") + blank
 				+ SqlKit.sql("order.findReportOfferByFrom"), paras);
 	}
 	
 	/**
-	 * 获得所有故障类型
+	 * 获得所有故障类型（通用）
 	 * @return
 	 */
 	public List<Record> getAllType(){
 		return Db.find("select * from com_type");
+	}
+	
+	/**
+	 * 根据运维人员id，查询其处理范围的故障工单
+	 * @param pageNumber
+	 * @param pageSize
+	 * @param paras
+	 * @return
+	 */
+	public Page<Record> getOperateOrderPage(int pageNumber,int pageSize,Object... paras){
+		return Db.paginate(pageNumber, pageSize,
+				SqlKit.sql("order.findOperateFullBySelect") + blank,
+				SqlKit.sql("order.findOperateFullByFrom"), paras);
 	}
 
 }

@@ -1,13 +1,13 @@
 ﻿<#include "/page/common/_layout.html" />
-<@layout activebar="report" html_title="新建工单">
+<@layout activebar="report" html_title="处理工单">
 <div class="page-header">
-<h2>报障管理 ---&gt; 新建工单
+<h2>运维管理 ---&gt; 处理工单
 </h2>
 </div>
 <div class="form_box">
 	<!-- 代表上写文、/blog代表控制器、/save代表控制器中的方法 -->
-	<form class="form-inline" action="/report/save" method="post" >
-		<#include "_form.ftl" />
+	<form class="form-inline" action="/operate/update" method="post" >
+		<#include "_formdeal.html" />
 	</form>
 	
 </div>

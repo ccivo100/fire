@@ -7,7 +7,8 @@
     <sql id="findUserPageByFrom">FROM `sec_user` user 
     </sql>
     
-    <sql id="findAllBySelect">
+    <!-- 查询用户所有信息 -->
+    <sql id="findInfoBySelect">
 		select u.id userid,u.username account,u.providername providernme,
 		u.email email,u.phone phone,u.password psw,
 		u.hasher hasher,u.salt salt,u.avatar_url avatat,
@@ -18,26 +19,25 @@
 		c.id branchid,c.name branch,
     	c.created_at branch_createtime,c.updated_at branch_updatetime,c.deleted_at branch_deletetime
     </sql>
-    
-    <sql id="findAllByFrom">
+    <sql id="findInfoByFrom">
     	from sec_user_info as s 
 		left outer join com_branch as c on s.branch_id=c.id
 		left outer join sec_user as u on s.user_id=u.id 
 		where u.id=?
     </sql>
-  
-    <sql id="findInfoBySelect">SELECT `user`.*,`userInfo`.street street,`userInfo`.gender gender,
-      `userInfo`.zip_code zip_code,`province`.name province,`city`.name city,`county`.name
-      county,`userRole`.role_id role_id
-    </sql>
-    <sql id="findInfoByFrom">FROM sec_user `user` LEFT JOIN sec_user_info `userInfo`
-      ON(`user`.id=`userInfo`.id)
-      LEFT JOIN sec_user_role `userRole` ON(`user`.id=`userRole`.user_id)
-      LEFT JOIN com_area `province` ON(`userInfo`.province_id=`province`.id) LEFT JOIN com_area `city`
-      ON(`userInfo`.city_id=`city`.id) LEFT JOIN com_area `county`
-      ON(`userInfo`.county_id=`county`.id) LEFT JOIN sec_user_role `userRole` ON
-      (`user`.id=`userRole`.user_id)
-    </sql>
+    
+    <!-- 根据用户id，查询用户所属公司 -->
+  	
+  	<sql id="findUserBranchBySelect">
+  		SELECT  bra.name branch
+  	</sql>
+  	<sql id="findUserBranchByFrom">
+  		FROM sec_user_info AS info
+		LEFT OUTER JOIN sec_user AS u ON info.user_id=u.id
+		LEFT OUTER JOIN com_branch AS bra ON info.branch_id=bra.id
+		WHERE info.user_id=?
+  	</sql>
+  	
   </sqlGroup>
 
   <sqlGroup name="role">

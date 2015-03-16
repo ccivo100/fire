@@ -4,6 +4,8 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 
+import cn.dreampie.ValidateKit;
+import cn.dreampie.shiro.core.SubjectKit;
 import cn.dreampie.sqlinxml.SqlKit;
 import cn.dreampie.tablebind.TableBind;
 import cn.dreampie.web.model.Model;
@@ -17,5 +19,16 @@ public class User extends Model<User> {
 		return Db.paginate(pageNumber, pageSize, SqlKit.sql("user.findUserPageBySelect")+ blank, SqlKit.sql("user.findUserPageByFrom"));
 	}
 	
+	/**
+	 * 获取当前登陆用户信息
+	 * @return
+	 */
+	public User getCurrentUser(){
+		User user=SubjectKit.getUser();
+		if(ValidateKit.isNullOrEmpty(user))
+			return null;
+		else
+			return user;
+	}
 
 }

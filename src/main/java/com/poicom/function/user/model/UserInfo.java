@@ -20,12 +20,23 @@ public class UserInfo extends Model<UserInfo> {
 	public static UserInfo dao=new UserInfo();
 	
 	/**
-	 * 获得当前用户的所有信息
+	 * 根据用户id，获得该用户的所有信息
 	 * @param paras
 	 * @return
 	 */
 	public Record getAllUserInfo(Object... paras){
-		return Db.findFirst(SqlKit.sql("user.findAllBySelect")+blank+SqlKit.sql("user.findAllByFrom"),paras);
+		return Db.findFirst(SqlKit.sql("user.findInfoBySelect") + blank
+				+ SqlKit.sql("user.findInfoByFrom"), paras);
+	}
+	
+	/**
+	 * 根据用户id，获得该用户的分公司信息
+	 * @param paras
+	 * @return
+	 */
+	public Record getUserBranch(Object... paras){
+		return Db.findFirst(SqlKit.sql("user.findUserBranchBySelect") + blank
+				+ SqlKit.sql("user.findUserBranchByFrom"), paras);
 	}
 	
 }

@@ -1,0 +1,59 @@
+<#include "/page/common/_layout.html"/>
+<@layout activebar="user" html_title="运维管理">
+
+<div class="page-header">
+<h3>故障处理&nbsp;&nbsp;
+</h3>
+</div>
+<form class="form-inline branch" role="form" action="/admin/branch" method="get">
+	
+  &nbsp;
+</form>
+  &nbsp;
+	<input type="hidden" name="do" value="report">
+	<table class="table table-bordered table-hover table-condensed">
+		<thead>
+			<tr>
+				<th width="2%">序号</th>
+				<th width="15%">故障描述</th>
+				<th width="5%">申报时间</th>
+				<th width="5%">申报人</th>
+				<th width="3%">当前状态</th>
+				<th width="5%">操作</th>
+			</tr>
+		</thead>
+				<tbody>
+			<#list operatePage.getList() as operate>
+			<tr class="<#if operate.status=1>success</#if>">
+				<td style="text-align:left;">${operate_index+1}</td>
+				<td style="text-align:left;">${operate.description}</td>
+				<td style="text-align:left;">${operate.offer_at}</td>
+				<td style="text-align:left;">${operate.offer_user}</td>
+				<td >
+					<#if operate.status=0>
+					未处理
+					</#if>
+					<#if operate.status=1>
+					已处理
+					</#if>
+				</td>
+				
+				<td style="text-align:left;">
+				&nbsp;&nbsp;<a class="query"   href="/order/query?id=${operate.id}"  >查看</a> 
+				<#if operate.status=0>
+				&nbsp;&nbsp;<a class="delete"  href="/operate/edit?id=${operate.id}" >处理</a>
+				</#if>
+					
+				</td>
+				
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+	<#include "/page/common/_paginate.html" />
+	<@paginate currentPage=operatePage.pageNumber totalPage=operatePage.totalPage actionUrl="/operate/deal/" />
+
+
+<#include "/page/app/report/_model.html"/>
+
+</@layout>

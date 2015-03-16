@@ -43,9 +43,9 @@
 				</td>
 				
 				<td style="text-align:left;">
-				&nbsp;&nbsp;<a class="query"  userid="${report.id}" href="/report/query?id=${report.id}"  >查看</a> 
+				&nbsp;&nbsp;<a class="query"  userid="${report.id}" href="/order/query?id=${report.id}"  >查看</a> 
 				<#if report.status=0>
-				&nbsp;&nbsp;<a class="delete" userid="${report.id}" href="javascript:void(0)" data-toggle="modal" data-label="修改" data-content="确认修改？">修改</a>
+				&nbsp;&nbsp;<a class="delete" userid="${report.id}" href="/report/edit?id=${report.id}" >修改</a>
 				</#if>
 					
 				</td>
@@ -59,13 +59,5 @@
 
 
 <#include "/page/app/report/_model.html"/>
-<script type="text/javascript">
 
-function dodel(id){
-$('#testModal').modal('show').on('shown.bs.modal',function(){
-$(".btn-primary").attr('href','/report/print?id='+id);
-})
-}
-     
-</script>
 </@layout>

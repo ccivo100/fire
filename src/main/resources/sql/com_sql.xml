@@ -9,9 +9,11 @@
   		WHERE ordr.offer_user=?
   	</sql>
   	
+  	<!-- 报障业务 -->
   	<!-- 查询报障人员提交的所有故障单 多表查询order、user、user、type -->
   	<sql id="findReportFullOffersBySelect">
-  		SELECT o.id, o.description, o.offer_at, f.full_name off_user, o.status, d.full_name deal_user , t.name type_name
+  		SELECT o.id, o.description, o.offer_at, f.full_name off_user, o.status,
+  		 d.full_name deal_user ,o.deal_at , t.name type_name
   	</sql>
   	<sql id="findReportFullOffersByFrom">
   		FROM com_order as o 
@@ -21,14 +23,15 @@
 		WHERE o.offer_user=? order by o.id asc
   	</sql>
   	
-  	<!-- 根据工单id查询该工单的内容 多表查询 -->
+  	<!-- 根据工单id查询该工单的详细内容 多表查询 -->
   	<sql id="findReportOfferBySelect">
-  		SELECT t1.name tname,o.type typeid,u1.full_name offername, u1.phone offerphone,
+		SELECT o.id orderid,  t1.name tname,o.type typeid,o.offer_user offerid,
+		u1.full_name offername, u1.phone offerphone,
 		o.description description,o.offer_at offertime,
+		o.status o_status,o.deal_user dealid,
 		u2.full_name dealname,u2.phone dealphone,
 		o.comment commen,o.deal_at dealtime
   	</sql>
-  	
   	<sql id="findReportOfferByFrom">
   		FROM com_order AS o 
 		LEFT OUTER JOIN sec_user AS u1 ON o.offer_user = u1.id
@@ -36,6 +39,20 @@
 		LEFT OUTER JOIN com_type AS t1 ON o.type=t1.id
 		WHERE o.id=?
   	</sql>
+  	
+  	<!-- 运维业务 -->
+  	<!-- 查询运维人员处理范围的所有故障单 多表查询order、user、user、type  -->
+  	<sql id="findOperateFullBySelect">
+  		select o.id,o.description,o.offer_at ,f.full_name offer_user,
+		o.status,d.full_name deal_user ,o.deal_at
+  	</sql>
+  	<sql id="findOperateFullByFrom">
+  		from com_order as o 
+		left outer join sec_user as f on o.offer_user=f.id
+		left outer join sec_user as d on o.deal_user=d.id
+		where o.type in(select cut.type_id  from com_user_type as cut where user_id=?)
+  	</sql>
+  	
   </sqlGroup>
 
 </sqlRoot>

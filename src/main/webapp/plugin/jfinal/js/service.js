@@ -29,7 +29,7 @@ $(document).ready(function(){
 	});
 });
 
-$(document).ready(function(){
+/*$(document).ready(function(){
 	$("a.delete").click(function(){
 		$('#confirmModal').modal('show').on('shown.bs.modal',function(){
 			$("input#userid").attr('value','/report/print?id='+$("a.delete").attr("userid"));
@@ -38,4 +38,4 @@ $(document).ready(function(){
 		
 	});
 	
-});
+});*/

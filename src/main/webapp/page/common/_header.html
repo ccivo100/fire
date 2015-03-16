@@ -34,17 +34,17 @@
     					</li>
       				</@shiro.hasPermission>
       				
-      				<@shiro.hasPermission name="P_OPERATION">
+      				<@shiro.hasPermission name="P_OPERATE">
       					<li class="dropdown">
-    					<a href="/operation"	class="dropdown-toggle" data-toggle="dropdown">
+    					<a href="/operate"	class="dropdown-toggle" data-toggle="dropdown">
     							运维管理<span	class="caret"></span>
     					</a>
     						<ul class="dropdown-menu" role="menu">
     							<@shiro.hasPermission name="P_O_DEAL">
-    							<li><a href="/operation/deal">故障处理</a></li>
+    							<li><a href="/operate/deal">故障处理</a></li>
     							</@shiro.hasPermission>
     							<@shiro.hasPermission name="P_O_TASK">
-    							<li><a href="/operation/task">任务分配</a></li>
+    							<li><a href="/operate/task">任务分配</a></li>
     							</@shiro.hasPermission>
     						</ul>
     					</li>

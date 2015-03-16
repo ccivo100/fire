@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version: 5.6.23-log)
-# Date: 2015-03-13 18:05:44
+# Date: 2015-03-16 17:39:53
 # Generator: MySQL-Front 5.3  (Build 4.89)
 
 /*!40101 SET NAMES utf8 */;
@@ -41,13 +41,13 @@ CREATE TABLE `com_order` (
   `comment` text COMMENT '处理意见',
   `deal_at` timestamp NULL DEFAULT NULL COMMENT '处理时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='工单';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='工单';
 
 #
 # Data for table "com_order"
 #
 
-INSERT INTO `com_order` VALUES (1,4,'电脑故障，电脑坏了，坏了，坏了，真的坏了，如何处理。',3,'2015-03-10 15:29:46',NULL,0,NULL,NULL,NULL),(2,4,'打印机故障',1,'2015-03-12 09:27:52',NULL,0,NULL,NULL,NULL),(3,4,'电话故障',2,'2015-03-12 09:28:39',NULL,1,3,'建议测试','2015-03-13 00:00:00'),(4,4,'电话打不通',2,'2015-03-12 09:29:58',NULL,0,NULL,NULL,NULL),(5,1,'管理员测试',1,'2015-03-12 10:47:06',NULL,1,3,NULL,NULL),(6,4,'电脑坏了怎么办',3,'2015-03-13 16:47:13',NULL,0,NULL,NULL,NULL),(7,4,'打印机打印不了',1,'2015-03-13 16:52:37',NULL,0,NULL,NULL,NULL),(8,4,'打印机又坏了\r\n',1,'2015-03-13 16:55:21',NULL,0,NULL,NULL,NULL);
+INSERT INTO `com_order` VALUES (1,4,'电脑故障，电脑坏了，坏了，坏了，真的坏了，如何处理。',3,'2015-03-10 15:29:46',NULL,1,3,'马上处理好。','2015-03-16 17:30:23'),(2,4,'打印机故障11111',1,'2015-03-12 09:27:52','2015-03-16 15:45:25',1,2,'马上处理好','2015-03-16 17:31:46'),(3,4,'电话故障',2,'2015-03-12 09:28:39',NULL,1,3,'建议测试','2015-03-13 00:00:00'),(4,4,'电话打不通',2,'2015-03-12 09:29:58',NULL,0,NULL,NULL,NULL),(5,1,'管理员测试',1,'2015-03-12 10:47:06',NULL,1,3,NULL,NULL),(6,4,'电脑坏了怎么办',3,'2015-03-13 16:47:13',NULL,0,NULL,NULL,NULL),(7,4,'打印机打印不了',1,'2015-03-13 16:52:37',NULL,0,NULL,NULL,NULL),(8,4,'打印机又坏了\r\n',1,'2015-03-13 16:55:21',NULL,0,NULL,NULL,NULL),(9,4,'打印机还是不可以使用。',1,'2015-03-16 09:03:34',NULL,0,NULL,NULL,NULL),(10,4,'打印机啊啊啊啊啊啊啊',1,'2015-03-16 15:03:54',NULL,0,NULL,NULL,NULL),(12,4,'快点处理电话故障吧兄弟',2,'2015-03-16 15:10:05','2015-03-16 15:47:46',0,NULL,NULL,NULL),(13,4,'电话打不通啊，怎么办才好啊',2,'2015-03-16 15:10:59','2015-03-16 15:47:28',0,NULL,NULL,NULL),(14,4,'打印机故障了好吗',1,'2015-03-16 15:25:21',NULL,0,NULL,NULL,NULL);
 
 #
 # Structure for table "com_type"
@@ -106,7 +106,7 @@ CREATE TABLE `sec_permission` (
 # Data for table "sec_permission"
 #
 
-INSERT INTO `sec_permission` VALUES (1,'管理员目录','P_ADMIN','/admin/**','',0,'2014-12-16 12:22:31','2015-03-11 10:20:23',NULL),(2,'权限管理','P_A_ROLE','/admin/role/**','',1,'2014-12-16 12:22:31','2015-03-11 10:20:29',NULL),(3,'用户管理','P_A_USER','/admin/user/**','',1,'2014-12-16 12:22:31','2015-03-11 10:20:33',NULL),(4,'工单管理','P_A_ORDER','/admin/order/**','',1,'2014-12-16 12:22:31','2015-03-11 10:20:37',NULL),(5,'异常管理','P_A_EXCEPTION','/admin/exception/**',NULL,1,'2015-03-10 12:27:55','2015-03-11 10:20:41',NULL),(6,'运维管理','P_OPERATION','/operation/**',NULL,0,'2015-03-11 10:07:27',NULL,NULL),(7,'故障处理','P_O_DEAL','/operation/deal/**',NULL,6,'2015-03-11 10:12:23','2015-03-11 10:20:09',NULL),(8,'任务分配','P_O_TASK','/operation/task/**',NULL,6,'2015-03-11 10:18:15',NULL,NULL),(9,'报障管理','P_REPORT','/report/**',NULL,0,'2015-03-11 10:13:18','2015-03-11 10:17:34',NULL),(10,'故障申报','P_R_OFFER','/report/offer/**',NULL,9,'2015-03-11 10:16:25','2015-03-11 10:20:02',NULL);
+INSERT INTO `sec_permission` VALUES (1,'管理员目录','P_ADMIN','/admin/**','',0,'2014-12-16 12:22:31','2015-03-11 10:20:23',NULL),(2,'权限管理','P_A_ROLE','/admin/role/**','',1,'2014-12-16 12:22:31','2015-03-11 10:20:29',NULL),(3,'用户管理','P_A_USER','/admin/user/**','',1,'2014-12-16 12:22:31','2015-03-11 10:20:33',NULL),(4,'工单管理','P_A_ORDER','/admin/order/**','',1,'2014-12-16 12:22:31','2015-03-11 10:20:37',NULL),(5,'异常管理','P_A_EXCEPTION','/admin/exception/**',NULL,1,'2015-03-10 12:27:55','2015-03-11 10:20:41',NULL),(6,'运维管理','P_OPERATE','/operate/**',NULL,0,'2015-03-11 10:07:27','2015-03-16 10:12:04',NULL),(7,'故障处理','P_O_DEAL','/operate/deal/**',NULL,6,'2015-03-11 10:12:23','2015-03-16 10:12:07',NULL),(8,'任务分配','P_O_TASK','/operate/task/**',NULL,6,'2015-03-11 10:18:15','2015-03-16 10:12:14',NULL),(9,'报障管理','P_REPORT','/report/**',NULL,0,'2015-03-11 10:13:18','2015-03-11 10:17:34',NULL),(10,'故障申报','P_R_OFFER','/report/offer/**',NULL,9,'2015-03-11 10:16:25','2015-03-11 10:20:02',NULL);
 
 #
 # Structure for table "sec_role"
@@ -194,13 +194,13 @@ CREATE TABLE `sec_user_info` (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户信息';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='用户信息';
 
 #
 # Data for table "sec_user_info"
 #
 
-INSERT INTO `sec_user_info` VALUES (1,1,1,0,1,'2015-03-11 10:42:24',NULL,NULL),(2,4,NULL,0,3,'2015-03-13 15:35:03',NULL,NULL);
+INSERT INTO `sec_user_info` VALUES (1,1,1,0,1,'2015-03-11 10:42:24',NULL,NULL),(2,4,1,0,3,'2015-03-13 15:35:03','2015-03-16 17:18:24',NULL),(3,3,1,0,1,'2015-03-16 12:18:29','2015-03-16 12:19:19',NULL),(4,2,1,0,1,'2015-03-16 17:18:17',NULL,NULL);
 
 #
 # Structure for table "sec_user_role"
