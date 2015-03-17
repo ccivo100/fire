@@ -39,6 +39,13 @@
 		LEFT OUTER JOIN com_type AS t1 ON o.type=t1.id
 		WHERE o.id=?
   	</sql>
+  	<sql id="findOverOrderByFrom"><!-- 查询完结工单，自助查询解决故障 -->
+  		from com_order as o 
+		left outer join sec_user as u1 on o.offer_user = u1.id
+		left outer join sec_user as u2 on o.deal_user = u2.id
+		left outer join com_type as t1 on o.type=t1.id
+		where o.description like '%?%'
+  	</sql>
   	
   	<!-- 运维业务 -->
   	<!-- 查询运维人员处理范围的所有故障单 多表查询order、user、user、type  -->

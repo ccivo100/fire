@@ -1,5 +1,7 @@
 package com.poicom.function.user.model;
 
+import java.util.List;
+
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
@@ -16,7 +18,9 @@ public class User extends Model<User> {
 	public static User dao=new User();
 	
 	public Page<Record> getUserPage(int pageNumber,int pageSize){
-		return Db.paginate(pageNumber, pageSize, SqlKit.sql("user.findUserPageBySelect")+ blank, SqlKit.sql("user.findUserPageByFrom"));
+		return Db.paginate(pageNumber, pageSize,
+				SqlKit.sql("user.findUserPageBySelect") + blank,
+				SqlKit.sql("user.findUserPageByFrom"));
 	}
 	
 	/**
@@ -29,6 +33,17 @@ public class User extends Model<User> {
 			return null;
 		else
 			return user;
+	}
+	
+	/**
+	 * 根据故障类型id，获得相应运维人员信息
+	 * @param paras
+	 * @return
+	 */
+	public List<Record> getOperatorList(Object... paras){
+		return Db.find(
+				SqlKit.sql("user.findOperatorBySelect") + blank
+						+ SqlKit.sql("user.findOperatorByFrom"), paras);
 	}
 
 }

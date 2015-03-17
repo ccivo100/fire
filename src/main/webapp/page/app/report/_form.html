@@ -1,0 +1,64 @@
+<div >
+	<input type="hidden" name="userid" value="${(userinfo.userid)!}">
+	<input type="hidden" name="orderid" value="${(order.orderid)!}">
+	
+	<div class="form-group">
+		<label class="col-sm-2 control-label">故障类型</label>
+		<div class="col-sm-4">
+		<#if order??>
+		<select id="selectType" name="selectType" class="form-control" disabled>
+		
+		<#else>
+
+		<select id="selectType" name="selectType" class="form-control" >
+		
+		</#if>
+			<option value="-1" selected="selected">请选择</option>
+			<#if order??>
+				<#list typeList as type>
+					<option value="${type.id}"  <#if order.typeid=type.id>selected="selected"</#if> >${type.name}</option>
+				</#list>
+			<#else>
+				<#list typeList as type>
+					<option value="${type.id}">${type.name}</option>
+				</#list>
+			</#if>
+		
+		</select>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-sm-2 control-label">申报人</label>
+		<div class="col-sm-6">
+			<input type="text" class="form-control" name="offer_user" value="${(userinfo.fullname)!}" readonly />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">联系电话</label>
+		<div class="col-sm-6">
+			<input type="text" class="form-control" name="phone" value="${(userinfo.phone)!}" readonly />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">所属单位</label>
+		<div class="col-sm-6">
+			<input type="text" class="form-control" name="branchid" value="${(userinfo.branch)!}" readonly />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">故障描述</label>
+		<div class="col-sm-6">
+			<textarea name="description"  class="form-control" cols="80" rows="7" required>${(order.description)!}</textarea>
+		</div>
+		<div class="col-sm-4">
+			${descriptionMsg!}
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<input value="提交" type="submit" class="btn btn-default">
+		</div>
+	</div>
+</div>

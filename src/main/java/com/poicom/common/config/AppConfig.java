@@ -1,6 +1,7 @@
 package com.poicom.common.config;
 
 import cn.dreampie.log.Slf4jLogFactory;
+import cn.dreampie.mail.MailerPlugin;
 import cn.dreampie.routebind.RouteBind;
 import cn.dreampie.shiro.core.ShiroInterceptor;
 import cn.dreampie.shiro.core.ShiroPlugin;
@@ -100,6 +101,9 @@ public class AppConfig extends JFinalConfig {
 		me.add(new EhCachePlugin());
 		//shiro权限框架
 	    me.add(new ShiroPlugin(routes, new MyJdbcAuthzService())); 
+	    
+	    //邮件插件
+	    me.add(new MailerPlugin());
 	}
 
 	@Override

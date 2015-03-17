@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version: 5.6.23-log)
-# Date: 2015-03-16 17:39:53
+# Date: 2015-03-17 18:11:03
 # Generator: MySQL-Front 5.3  (Build 4.89)
 
 /*!40101 SET NAMES utf8 */;
@@ -41,13 +41,13 @@ CREATE TABLE `com_order` (
   `comment` text COMMENT '处理意见',
   `deal_at` timestamp NULL DEFAULT NULL COMMENT '处理时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='工单';
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='工单';
 
 #
 # Data for table "com_order"
 #
 
-INSERT INTO `com_order` VALUES (1,4,'电脑故障，电脑坏了，坏了，坏了，真的坏了，如何处理。',3,'2015-03-10 15:29:46',NULL,1,3,'马上处理好。','2015-03-16 17:30:23'),(2,4,'打印机故障11111',1,'2015-03-12 09:27:52','2015-03-16 15:45:25',1,2,'马上处理好','2015-03-16 17:31:46'),(3,4,'电话故障',2,'2015-03-12 09:28:39',NULL,1,3,'建议测试','2015-03-13 00:00:00'),(4,4,'电话打不通',2,'2015-03-12 09:29:58',NULL,0,NULL,NULL,NULL),(5,1,'管理员测试',1,'2015-03-12 10:47:06',NULL,1,3,NULL,NULL),(6,4,'电脑坏了怎么办',3,'2015-03-13 16:47:13',NULL,0,NULL,NULL,NULL),(7,4,'打印机打印不了',1,'2015-03-13 16:52:37',NULL,0,NULL,NULL,NULL),(8,4,'打印机又坏了\r\n',1,'2015-03-13 16:55:21',NULL,0,NULL,NULL,NULL),(9,4,'打印机还是不可以使用。',1,'2015-03-16 09:03:34',NULL,0,NULL,NULL,NULL),(10,4,'打印机啊啊啊啊啊啊啊',1,'2015-03-16 15:03:54',NULL,0,NULL,NULL,NULL),(12,4,'快点处理电话故障吧兄弟',2,'2015-03-16 15:10:05','2015-03-16 15:47:46',0,NULL,NULL,NULL),(13,4,'电话打不通啊，怎么办才好啊',2,'2015-03-16 15:10:59','2015-03-16 15:47:28',0,NULL,NULL,NULL),(14,4,'打印机故障了好吗',1,'2015-03-16 15:25:21',NULL,0,NULL,NULL,NULL);
+INSERT INTO `com_order` VALUES (1,4,'电脑故障，电脑坏了，坏了，坏了，真的坏了，如何处理。',3,'2015-03-10 15:29:46',NULL,1,3,'马上处理好。','2015-03-16 17:30:23'),(2,4,'打印机故障11111',1,'2015-03-12 09:27:52','2015-03-16 15:45:25',1,2,'马上处理好','2015-03-16 17:31:46'),(3,4,'电话故障',2,'2015-03-12 09:28:39',NULL,1,3,'建议测试','2015-03-13 00:00:00'),(4,4,'电话打不通',2,'2015-03-12 09:29:58',NULL,1,3,'重新制作电话头接口。','2015-03-17 17:11:57'),(5,1,'管理员测试',1,'2015-03-12 10:47:06',NULL,1,3,NULL,NULL),(6,4,'电脑坏了怎么办',3,'2015-03-13 16:47:13',NULL,0,NULL,NULL,NULL),(7,4,'打印机打印不了',1,'2015-03-13 16:52:37',NULL,0,NULL,NULL,NULL),(8,4,'打印机又坏了\r\n',1,'2015-03-13 16:55:21',NULL,0,NULL,NULL,NULL),(9,4,'打印机还是不可以使用。',1,'2015-03-16 09:03:34',NULL,0,NULL,NULL,NULL),(10,4,'打印机啊啊啊啊啊啊啊',1,'2015-03-16 15:03:54',NULL,0,NULL,NULL,NULL),(12,4,'快点处理电话故障吧兄弟',2,'2015-03-16 15:10:05','2015-03-16 15:47:46',0,NULL,NULL,NULL),(13,4,'电话打不通啊，怎么办才好啊',2,'2015-03-16 15:10:59','2015-03-16 15:47:28',0,NULL,NULL,NULL),(14,4,'打印机故障了好吗',1,'2015-03-16 15:25:21',NULL,0,NULL,NULL,NULL),(15,4,'发送故障了，赶紧处理',2,'2015-03-17 09:41:35',NULL,0,NULL,NULL,NULL),(16,4,'测试邮件',3,'2015-03-17 09:48:16',NULL,0,NULL,NULL,NULL),(17,4,'邮件测试',1,'2015-03-17 09:59:06',NULL,0,NULL,NULL,NULL),(18,4,'继续邮件测试',1,'2015-03-17 10:07:20',NULL,0,NULL,NULL,NULL),(19,4,'邮件测试',3,'2015-03-17 10:15:08',NULL,0,NULL,NULL,NULL),(20,4,'邮件测试',2,'2015-03-17 11:17:27',NULL,0,NULL,NULL,NULL),(21,4,'故障邮件测试',1,'2015-03-17 11:27:43',NULL,0,NULL,NULL,NULL),(22,4,'邮件测试继续。',1,'2015-03-17 11:31:57',NULL,0,NULL,NULL,NULL),(23,4,'上放水电费',1,'2015-03-17 11:34:26',NULL,0,NULL,NULL,NULL),(24,4,'sfsdfsdfs',1,'2015-03-17 11:35:40',NULL,0,NULL,NULL,NULL),(25,4,'小林，我的打印机坏了，快过来帮我处理一下呗。',1,'2015-03-17 11:49:22',NULL,0,NULL,NULL,NULL);
 
 #
 # Structure for table "com_type"
@@ -177,7 +177,7 @@ CREATE TABLE `sec_user` (
 # Data for table "sec_user"
 #
 
-INSERT INTO `sec_user` VALUES (1,'admin','admin','admin','88888888','$shiro1$SHA-256$500000$o/aFEzJOSlJxqFL+a04+Tg==$iJfedksd5GXgvtuz50A4XL2p0X9YyPFe58Lzgb26NsQ=','default_hasher',' ',NULL,'科技','点通','点通科技','2015-03-11 10:46:12','2015-03-11 10:46:16',NULL),(2,'deal','admin','wangrenhui1990@gmail.com','18611434500','$shiro1$SHA-256$500000$o/aFEzJOSlJxqFL+a04+Tg==$iJfedksd5GXgvtuz50A4XL2p0X9YyPFe58Lzgb26NsQ=','default_hasher','','','科技','点通','运维主管','2015-03-10 14:48:05','2015-03-11 10:47:32',NULL),(3,'dealler','admin','tdy2837','15900000000','$shiro1$SHA-256$500000$o/aFEzJOSlJxqFL+a04+Tg==$iJfedksd5GXgvtuz50A4XL2p0X9YyPFe58Lzgb26NsQ=','default_hasher',' ',NULL,'张','三','运维员','2015-03-10 15:35:38','2015-03-11 10:47:35',NULL),(4,'reporter','admin','tdy','165154','$shiro1$SHA-256$500000$o/aFEzJOSlJxqFL+a04+Tg==$iJfedksd5GXgvtuz50A4XL2p0X9YyPFe58Lzgb26NsQ=','default_hasher',' ',NULL,'李','四','报障员','2015-03-11 10:40:18','2015-03-11 10:47:43',NULL);
+INSERT INTO `sec_user` VALUES (1,'admin','admin','283784513@qq.com','88880000','$shiro1$SHA-256$500000$o/aFEzJOSlJxqFL+a04+Tg==$iJfedksd5GXgvtuz50A4XL2p0X9YyPFe58Lzgb26NsQ=','default_hasher',' ',NULL,'科技','点通','点通科技','2015-03-11 10:46:12','2015-03-17 10:56:33',NULL),(2,'deal','admin','283784513@qq.com','00008888','$shiro1$SHA-256$500000$o/aFEzJOSlJxqFL+a04+Tg==$iJfedksd5GXgvtuz50A4XL2p0X9YyPFe58Lzgb26NsQ=','default_hasher','','','科技','点通','运维主管','2015-03-10 14:48:05','2015-03-17 11:50:14',NULL),(3,'dealler','admin','283784513@qq.com','66660000','$shiro1$SHA-256$500000$o/aFEzJOSlJxqFL+a04+Tg==$iJfedksd5GXgvtuz50A4XL2p0X9YyPFe58Lzgb26NsQ=','default_hasher',' ',NULL,'张','三','运维员','2015-03-10 15:35:38','2015-03-17 10:56:42',NULL),(4,'reporter','admin','283784513@qq.com','00006666','$shiro1$SHA-256$500000$o/aFEzJOSlJxqFL+a04+Tg==$iJfedksd5GXgvtuz50A4XL2p0X9YyPFe58Lzgb26NsQ=','default_hasher',' ',NULL,'李','四','报障员','2015-03-11 10:40:18','2015-03-17 10:56:46',NULL);
 
 #
 # Structure for table "sec_user_info"

@@ -38,6 +38,19 @@
 		WHERE info.user_id=?
   	</sql>
   	
+  	<!-- 根据故障类型，查找运维人员的信息 -->
+  	<sql id="findOperatorBySelect">
+  		SELECT u.id userid,u.email useremail,u.phone userphone,
+		u.first_name firstname,u.last_name lastname,u.full_name fullname
+  	</sql>
+  	<sql id="findOperatorByFrom">
+  		FROM sec_user AS u
+		WHERE u.id 
+		IN(SELECT cut.user_id 
+			 FROM com_user_type AS cut 
+			 WHERE cut.type_id=?)
+  	</sql>
+  	
   </sqlGroup>
 
   <sqlGroup name="role">

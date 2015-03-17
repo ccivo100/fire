@@ -2,8 +2,12 @@ package com.poicom.function.app;
 
 
 import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.mail.EmailException;
 
 import cn.dreampie.ValidateKit;
+import cn.dreampie.mail.Mailer;
 import cn.dreampie.routebind.ControllerKey;
 
 import com.jfinal.aop.Before;
@@ -57,16 +61,11 @@ public class ReportController extends Controller{
 	}
 	
 	/**
-	 * @描述 新建故障工单
+	 * @描述 新建故障工单 并发送邮件、短信通知
 	 */
 	public void save(){
-		//offer_user
-		Integer userid=getParaToInt("userid");
-		//type
-		Integer selectType=getParaToInt("selectType");
-		//description
-		String description=getPara("description");
 		
+		//获取表单数据，填充进Order
 		Order order=new Order().set("offer_user", getParaToInt("userid"))
 				.set("description", getPara("description"))
 				.set("type", getParaToInt("selectType"))
@@ -74,10 +73,25 @@ public class ReportController extends Controller{
 		if(order.save())
 			redirect("/report/offer");
 		else
-			System.out.println("userid:"+userid+" type:"+selectType+" des:"+description);
+			System.out.println("userid:" + getParaToInt("userid") + " type:"
+					+ getParaToInt("selectType") + " des:"
+					+ getPara("description"));
 		
-		//发送邮件通知
-		sendEmail();
+		//当前用户详细信息
+		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
+		//运维人员列表
+		List<Record> dealList=User.dao.getOperatorList(getParaToInt("selectType"));
+		
+		//发送邮件
+		for (Record deal : dealList) {
+			//获取邮件内容
+			String body=getMailBody(userinfo,getPara("description"),deal.getStr("fullname")).toString();
+			//发送邮件通知
+			if(ValidateKit.isEmail(deal.getStr("useremail"))){
+				sendEmail("点通故障系统提醒您！",body,deal.getStr("useremail"));
+			}
+			
+		}
 		
 		redirect("/report/offer");
 	}
@@ -123,8 +137,47 @@ public class ReportController extends Controller{
 	
 	/**
 	 * @描述 发送邮件通知
+	 *            主题        subject
+	 *            内容        body
+	 *            接收邮件 paras
 	 */
-	public void sendEmail(){
+	public void sendEmail(String subject,String body,String... paras){
+		
+		try {
+			Mailer.sendHtml(subject, body, paras);
+		} catch (EmailException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	/**
+	 * @描述 发送短信通知
+	 */
+	public void sendSms(){
+		
+	}
+	
+	/**
+	 * 邮件内容 body
+	 * @param offer
+	 * @param description
+	 * @param deal
+	 * @return
+	 */
+	public StringBuffer getMailBody(Record offer,String description,String deal){
+		
+		StringBuffer body=new StringBuffer();
+		
+		body.append("您好，"+deal+"：<br/>")
+		.append("&nbsp;&nbsp;&nbsp;&nbsp;" + offer.getStr("branch") + "的 "
+						+ offer.getStr("fullname") + " ("
+						+ offer.getStr("phone") + ") 发来故障工单。<br/>")
+		.append("故障内容："+description+"<br/>")
+		.append("请及时处理。");
+		
+		return body;
 		
 	}
 

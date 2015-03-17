@@ -1,3 +1,5 @@
+
+/* Bootstrap的树形样式 */
 .table_box .pagination {
 	/* float: right; */
 	font-size: 14px;
@@ -68,4 +70,18 @@
     background:#eee;
     border:1px solid #94a0b4;
     color:#000
+}
+
+/* 系统的页脚 */
+.footer{
+  padding: 40px 0;
+  margin-top: 70px;
+  color: #999;
+  text-align: center;
+  bottom: 0;
+  background-color: #f9f9f9;
+  border-top: 1px solid #e5e5e5;
+}
+.footer p:last-child {
+  margin-bottom: 0;
 }
