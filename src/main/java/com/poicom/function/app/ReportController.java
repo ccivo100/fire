@@ -63,6 +63,7 @@ public class ReportController extends Controller{
 	/**
 	 * @描述 新建故障工单 并发送邮件、短信通知
 	 */
+	@Before(ReportValidator.class)
 	public void save(){
 		
 		//获取表单数据，填充进Order

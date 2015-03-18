@@ -55,6 +55,16 @@
 			${descriptionMsg!}
 		</div>
 	</div>
+	<div class="form-group">
+	<label class="col-sm-2 control-label"></label>
+		<div class="col-sm-6">
+		<#if descriptionMsg??>
+			<div class="index-alert index-alert-danger" style="background-image: none;">
+				${(descriptionMsg)!}dfg
+			</div>
+		</#if>
+		</div>
+	</div>
 
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">

@@ -44,6 +44,7 @@ public class AppConfig extends JFinalConfig {
 		me.setDevMode(getPropertyToBoolean("devMode", false));
 		Logger.setLoggerFactory(new Slf4jLogFactory());
 		me.setError401View("/page/index/_signin.ftl");
+		me.setError403View("/page/app/error403.html");
 		me.setError404View("/page/app/error404.html");
 		
 	}

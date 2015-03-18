@@ -40,6 +40,21 @@ public class Order extends Model<Order> {
 	}
 	
 	/**
+	 * @描述 根据故障描述，查询相应的故障类型
+	 * @param pageNumber
+	 * @param pageSize
+	 * @param paras
+	 * @return
+	 */
+	public Page<Record> getOverOrdersPage(int pageNumber, int pageSize,String where,
+			Object... paras) {
+		
+		return Db.paginate(pageNumber, pageSize,
+				SqlKit.sql("order.findReportOfferBySelect") + blank,
+				SqlKit.sql("order.findOverOrderByFrom")+blank+where, paras);
+	}
+	
+	/**
 	 * 获得所有故障类型（通用）
 	 * @return
 	 */
@@ -59,5 +74,7 @@ public class Order extends Model<Order> {
 				SqlKit.sql("order.findOperateFullBySelect") + blank,
 				SqlKit.sql("order.findOperateFullByFrom"), paras);
 	}
+	
+	
 
 }

@@ -1,18 +1,87 @@
 ﻿<#include "/page/common/_layout.html"/>
 <@layout activebar="index" html_title="首页">
-<div class="jumbotron">
-<h2>点通科技报障系统项目首页</h2>
-<div>
-	<p>欢迎 Welcome！</p>
-	
-	
-	<br><br><br>
-	<p><a href="/" class="btn btn-primary btn-lg" role="button">Learn Demo &raquo;</a></p>
-	
-	<br/>
-</div>
 
+<div class="index-title">
+<h2>点通科技报障系统项目首页</h2>
+	<br>
 </div>
+	
+		<div class=" index-background">
+			<form class="form-horizontal" role="form" action="/" method="post">
+				<div class="row">
+					<div class="col-sm-6 col-md-6 col-lg-6">
+							<div class="form-group">
+								<label class="col-sm-4 control-label">关键词</label>
+								<div class="col-sm-8">
+									<input type="text"   class="form-control"  name="condition" value="${(condition)!}" placeholder="故障描述" autofocus/>
+								</div>
+							</div>
+					</div>
+					<div class="col-sm-1 col-md-1 col-lg-1">
+							<div class="form-group">
+								<button type="submit" class="btn btn-default">搜索</button>
+							</div>
+					</div>
+					<div class="col-sm-4 col-md-4 col-lg-4">
+							<div class="form-group">
+								<#if searchMsg??>
+							  	<div class="index-alert index-alert-danger" style="background-image: none;">
+					          		${(searchMsg)!}
+					        	</div>
+							  	</#if>
+							</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		
+		<table class="table table-bordered table-hover ">
+		<thead>
+			<tr>
+				<th width="2%">序号</th>
+				<th width="15%">故障描述</th>
+				<th width="5%">申报时间</th>
+				<th width="5%">申报人</th>
+				<th width="3%">当前状态</th>
+				<th width="5%">操作</th>
+			</tr>
+		</thead>
+			<#if overOrderPage??>
+				<tbody>
+			<#list overOrderPage.getList() as order>
+			<tr class="<#if order.o_status=1>success</#if>">
+				<td style="text-align:left;">${order_index+1}</td>
+				<td style="text-align:left;">${order.description}</td>
+				<td style="text-align:left;">${order.offertime}</td>
+				<td style="text-align:left;">${order.offername}</td>
+				<td >
+					<#if order.o_status=0>
+					未处理
+					</#if>
+					<#if order.o_status=1>
+					已处理
+					</#if>
+				</td>
+				
+				<td style="text-align:left;">
+				&nbsp;&nbsp;<a class="query"   href="/order/query?id=${order.orderid}"  >查看</a> 
+					
+				</td>
+				
+			</tr>
+			</#list>
+		</tbody>
+		</#if>
+	</table>
+		<#if overOrderPage??>
+			<#include "/page/common/_paginate.html" />
+			<@paginate currentPage=overOrderPage.pageNumber totalPage=overOrderPage.totalPage actionUrl="/" />
+				
+		</#if>
+	<br/>
+
+	
+
 
 
 

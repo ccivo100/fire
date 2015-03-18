@@ -44,7 +44,7 @@
 		left outer join sec_user as u1 on o.offer_user = u1.id
 		left outer join sec_user as u2 on o.deal_user = u2.id
 		left outer join com_type as t1 on o.type=t1.id
-		where o.description like '%?%'
+		where 1=1 and  o.status=1
   	</sql>
   	
   	<!-- 运维业务 -->

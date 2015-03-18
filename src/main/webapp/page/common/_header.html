@@ -65,25 +65,28 @@
       				
 					<li class="dropdown">
 					<a href="/bootstrap"	class="dropdown-toggle" data-toggle="dropdown">
-						Bootstrap管理<span	class="caret"></span>
+						用户管理<span	class="caret"></span>
 					</a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="/bootstrap">Bootstrap主页</a></li>
-							<li><a href="/bootstrap/tree">树形菜单</a></li>
-							<li><a href="/bootstrap/school">Bootstrap学校</a></li>
-							<li><a href="/autho">权限树</a></li>
-							<li class="divider"></li>
 							<li class="dropdown-header"><b>用户操作</b></li>
-							
+							<li class="divider"></li>
 							<@shiro.authenticated>
       							<li><a href="/user/center">
-        						<@shiro.principal name="full_name"/>
+        						个人中心
+      							</a></li>
+      							<li><a href="/user/pwdPage">
+      							修改密码
       							</a></li>
       						<li><a href="/signout">退出</a></li>
    	 						</@shiro.authenticated>
 							<@shiro.notAuthenticated>
 								<li><a href="/signin">登录</a></li>
 							</@shiro.notAuthenticated>
+							<li class="divider"></li>
+							<li><a href="/bootstrap">Bootstrap主页</a></li>
+							<li><a href="/bootstrap/tree">树形菜单</a></li>
+							<li><a href="/bootstrap/school">Bootstrap学校</a></li>
+							<li><a href="/autho">权限树</a></li>
 						</ul>
 					</li>
 				</ul>

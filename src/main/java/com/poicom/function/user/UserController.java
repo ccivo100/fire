@@ -12,6 +12,7 @@ import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.poicom.function.user.model.User;
+import com.poicom.function.user.model.UserInfo;
 
 @ControllerKey(value="/user")
 public class UserController extends Controller {
@@ -20,14 +21,34 @@ public class UserController extends Controller {
 		redirect("/user/center");
 	}
 	
+	
+	
+	/**
+	 * 进入修改用户密码页面
+	 */
 	public void center(){
+		User user=SubjectKit.getUser();
+		if(!ValidateKit.isNullOrEmpty(user)){
+			setAttr("userInfo",UserInfo.dao.getAllUserInfo(user.get("id")));
+		}
+		render("/page/app/user/center.html");
+		
+	}
+	
+	/**
+	 * 
+	 */
+	public void pwdPage(){
 		User user=SubjectKit.getUser();
 		if(!ValidateKit.isNullOrEmpty(user)){
 			setAttr("user", user);
 		}
-		render("/page/app/user/center.html");
+		render("/page/app/user/pwd.html");
 	}
 	
+	/**
+	 * 修改用户密码
+	 */
 	@Before({UserValidator.class,Tx.class})
 	public void updatePwd(){
 		keepModel(User.class);

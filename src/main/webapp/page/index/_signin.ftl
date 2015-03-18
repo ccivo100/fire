@@ -14,7 +14,7 @@
       <input type="text" name="captcha" value="" class="form-control captcha" ng-minlength="4" ng-maxlength="4"
              placeholder="验证码" required>
       <img id="captcha" class="captcha" src="/captcha?width=128&height=45&fontsize=30&time=${.now?time}">
-      <a href="javascript:ref_captcha()">验证码看不清
+      <a href="javascript:ref_captcha()">验证码看不清</a>
     </div>
   	</div>
 	<div class="checkbox">

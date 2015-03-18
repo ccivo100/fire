@@ -5,10 +5,16 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cn.dreampie.ValidateKit;
 import cn.dreampie.captcha.CaptchaRender;
 import cn.dreampie.routebind.ControllerKey;
 import cn.dreampie.shiro.core.SubjectKit;
+
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
+import com.poicom.function.app.model.Order;
 
 /**
  * IndexController
@@ -22,8 +28,18 @@ public class IndexController extends Controller {
 	/**
 	 * 根目录
 	 */
+	@Before(IndexValidator.class)
 	public void index() {
-
+		Page <Record> overOrderPage;
+		if(ValidateKit.isNullOrEmpty(getPara("condition"))){
+			overOrderPage=Order.dao.getOverOrdersPage(getParaToInt(0,1), 10, "");
+			
+		}else{
+			String condition ="%"+getPara("condition").trim()+"%";
+			String where=" and o.description like ?";
+			overOrderPage=Order.dao.getOverOrdersPage(getParaToInt(0,1), 10, where, condition);
+		}
+		setAttr("overOrderPage",overOrderPage);
 		render(indexView);
 
 	}
