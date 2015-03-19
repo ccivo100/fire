@@ -5,26 +5,26 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">故障类型</label>
 		<div class="col-sm-4">
-		<#if order??>
-		<select id="selectType" name="selectType" class="form-control" disabled>
-		
-		<#else>
-
-		<select id="selectType" name="selectType" class="form-control" >
-		
-		</#if>
-			<option value="-1" selected="selected">请选择</option>
 			<#if order??>
-				<#list typeList as type>
-					<option value="${type.id}"  <#if order.typeid=type.id>selected="selected"</#if> >${type.name}</option>
-				</#list>
+			<select id="selectType" name="selectType" class="form-control" disabled required autofocus>
+			
 			<#else>
-				<#list typeList as type>
-					<option value="${type.id}">${type.name}</option>
-				</#list>
+	
+			<select id="selectType" name="selectType" class="form-control" required autofocus>
+			
 			</#if>
-		
-		</select>
+				<option value="" selected="selected">请选择</option>
+				<#if order??>
+					<#list typeList as type>
+						<option value="${type.id}"  <#if order.typeid=type.id>selected="selected"</#if> >${type.name}</option>
+					</#list>
+				<#else>
+					<#list typeList as type>
+						<option value="${type.id}">${type.name}</option>
+					</#list>
+				</#if>
+			
+			</select>
 		</div>
 	</div>
 
@@ -49,26 +49,16 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">故障描述</label>
 		<div class="col-sm-6">
-			<textarea name="description"  class="form-control" cols="80" rows="7" required>${(order.description)!}</textarea>
+			<textarea name="description"  class="form-control" maxlength="250" cols="80" rows="7" required>${(order.description)!}</textarea>
 		</div>
 		<div class="col-sm-4">
 			${descriptionMsg!}
 		</div>
 	</div>
-	<div class="form-group">
-	<label class="col-sm-2 control-label"></label>
-		<div class="col-sm-6">
-		<#if descriptionMsg??>
-			<div class="index-alert index-alert-danger" style="background-image: none;">
-				${(descriptionMsg)!}dfg
-			</div>
-		</#if>
-		</div>
-	</div>
 
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
-			<input value="提交" type="submit" class="btn btn-default">
+			<button value="提交" type="submit" class="btn btn-primary save" data-loading-text="正在提交...">提交</button>
 		</div>
 	</div>
 </div>

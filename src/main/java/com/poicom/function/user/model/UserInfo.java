@@ -17,6 +17,10 @@ import cn.dreampie.web.model.Model;
 @TableBind(tableName = "sec_user_info")
 public class UserInfo extends Model<UserInfo> {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3424907544751263092L;
 	public static UserInfo dao=new UserInfo();
 	
 	/**

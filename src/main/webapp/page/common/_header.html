@@ -8,17 +8,18 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/">JFinal Fire</a>
+				<a class="navbar-brand" href="/">点通科技</a>
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="<#if activebar='index'>active</#if>"><a  href="/">首页</a></li>
+					<li class="<#if activebar='index'>active</#if>">
+					<a  href="/"><span class="glyphicon glyphicon-fire"></span> 首页</a></li>
 					
 					
 					<@shiro.hasPermission name="P_ADMIN">
         				<li class="dropdown">
     					<a href="/admin"	class="dropdown-toggle" data-toggle="dropdown">
-    							管理员目录<span	class="caret"></span>
+    					<span class="glyphicon glyphicon-list"></span> 管理员目录<span	class="caret"></span>
     					</a>
     						<ul class="dropdown-menu" role="menu">
     							<@shiro.hasPermission name="P_A_ROLE">
@@ -37,7 +38,7 @@
       				<@shiro.hasPermission name="P_OPERATE">
       					<li class="dropdown">
     					<a href="/operate"	class="dropdown-toggle" data-toggle="dropdown">
-    							运维管理<span	class="caret"></span>
+    					<span class="glyphicon glyphicon-list"></span> 运维管理<span	class="caret"></span>
     					</a>
     						<ul class="dropdown-menu" role="menu">
     							<@shiro.hasPermission name="P_O_DEAL">
@@ -53,7 +54,7 @@
       				<@shiro.hasPermission name="P_REPORT">
   						<li class="dropdown">
     					<a href="/report"	class="dropdown-toggle" data-toggle="dropdown">
-    							报障管理<span	class="caret"></span>
+    					<span class="glyphicon glyphicon-list"></span> 报障管理<span	class="caret"></span>
     					</a>
     						<ul class="dropdown-menu" role="menu">
     							<@shiro.hasPermission name="P_R_OFFER">
@@ -65,7 +66,7 @@
       				
 					<li class="dropdown">
 					<a href="/bootstrap"	class="dropdown-toggle" data-toggle="dropdown">
-						用户管理<span	class="caret"></span>
+					<span class="glyphicon glyphicon-user"></span> 用户管理<span	class="caret"></span>
 					</a>
 						<ul class="dropdown-menu" role="menu">
 							<li class="dropdown-header"><b>用户操作</b></li>

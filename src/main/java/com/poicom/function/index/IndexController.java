@@ -1,7 +1,5 @@
 package com.poicom.function.index;
 
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,6 +37,8 @@ public class IndexController extends Controller {
 			String where=" and o.description like ?";
 			overOrderPage=Order.dao.getOverOrdersPage(getParaToInt(0,1), 10, where, condition);
 		}
+		
+		Order.dao.format(overOrderPage,"description");
 		setAttr("overOrderPage",overOrderPage);
 		render(indexView);
 

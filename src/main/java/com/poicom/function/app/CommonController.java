@@ -20,9 +20,6 @@ public class CommonController extends Controller{
 	 * 查询故障工单详细内容
 	 */
 	public void query(){
-		
-		
-			
 		Record order = Order.dao.getCommonOrder(getParaToInt("id"));
 
 		//获取工单申报者的分公司信息

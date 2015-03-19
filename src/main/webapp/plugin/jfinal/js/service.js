@@ -29,6 +29,16 @@ $(document).ready(function(){
 	});
 });
 
+$(document).ready(function(){
+	$('button[data-loading-text]').click(function(){
+		var btn=$(this).button('loading');
+		setTimeout(function(){
+			btn.button('reset');
+		},1000);
+	});
+});
+
+
 /*$(document).ready(function(){
 	$("a.delete").click(function(){
 		$('#confirmModal').modal('show').on('shown.bs.modal',function(){

@@ -2,6 +2,8 @@ package com.poicom.function.app.model;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
@@ -13,6 +15,10 @@ import cn.dreampie.web.model.Model;
 @TableBind(tableName = "com_order")
 public class Order extends Model<Order> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3474341426070972713L;
 	public static Order dao = new Order();
 
 	/**
@@ -40,7 +46,7 @@ public class Order extends Model<Order> {
 	}
 	
 	/**
-	 * @描述 根据故障描述，查询相应的故障类型
+	 * @描述 根据故障描述，查询相应的故障工单
 	 * @param pageNumber
 	 * @param pageSize
 	 * @param paras
@@ -54,10 +60,12 @@ public class Order extends Model<Order> {
 				SqlKit.sql("order.findOverOrderByFrom")+blank+where, paras);
 	}
 	
+	
 	/**
-	 * 获得所有故障类型（通用）
+	 * 获得所有故障类型（弃用）
 	 * @return
 	 */
+	@Deprecated
 	public List<Record> getAllType(){
 		return Db.find("select * from com_type");
 	}
@@ -75,6 +83,19 @@ public class Order extends Model<Order> {
 				SqlKit.sql("order.findOperateFullByFrom"), paras);
 	}
 	
+	/**
+	 * @描述 如果attr，如description的长度超过30，则后面用...代替。
+	 * @param page
+	 * @param paras
+	 */
+	public void format(Page<Record> page,String... paras){
+		for(Record record:page.getList()){
+			for(String attr:paras){
+				record.set(attr, StringUtils.abbreviate(record.getStr(attr), 30));
+			}
+			
+		}
+	}
 	
 
 }

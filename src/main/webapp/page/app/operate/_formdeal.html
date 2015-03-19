@@ -1,6 +1,7 @@
 <div class="row" >
 	<input type="hidden" name="orderid" value="${(order.orderid)!}">
 	<input type="hidden" name="dealid" value="${(userinfo.userid)!}">
+	<input type="hidden" name="offeruser" value="${(order.offername)!}">
 	<div class="col-sm-6 col-md-6 col-lg-6">
 	<div class="page-header">
 		<h3>故障描述</h3>
@@ -89,7 +90,7 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">处理意见</label>
 		<div class="col-sm-8">
-		<textarea name="commen"   class="form-control"  cols="80" rows="7"  required>${(order.commen)!}</textarea>${descriptionMsg!}
+		<textarea name="commen"   class="form-control" maxlength="100"  cols="80" rows="7"  required autofocus>${(order.commen)!}</textarea>${descriptionMsg!}
 		</div>
 	</div>
 
@@ -108,3 +109,6 @@
 
 	</div>
 </div>
+
+
+

@@ -4,6 +4,7 @@ package com.poicom.function.app;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.validate.Validator;
+import com.poicom.function.app.model.ErrorType;
 
 public class ReportValidator extends Validator{
 
@@ -23,10 +24,11 @@ public class ReportValidator extends Validator{
 	@Override
 	protected void handleError(Controller c) {
 		
-		c.keepPara("typeList");
+		
+		c.keepModel(ErrorType.class);
 		c.keepPara("order");
 		c.keepPara("userinfo");
-		c.render("/page/app/common/query.html");
+		c.render("/page/app/report/add.html");
 	}
 
 }

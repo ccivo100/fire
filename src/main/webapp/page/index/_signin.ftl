@@ -27,7 +27,7 @@
           <@shiro.loginException name="shiroLoginFailure"/>
         </div>
     </@shiro.isLoginFailure>
-	<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+	<button class="btn btn-lg btn-primary btn-block" data-loading-text="正在提交..." type="submit">Sign in</button>
 </form>
 <script>
 var xmlhttp;

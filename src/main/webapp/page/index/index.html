@@ -19,7 +19,9 @@
 					</div>
 					<div class="col-sm-1 col-md-1 col-lg-1">
 							<div class="form-group">
-								<button type="submit" class="btn btn-default">搜索</button>
+								<button type="submit" class="btn btn-default">
+									<span class="glyphicon glyphicon-search"></span> 搜索
+								</button>
 							</div>
 					</div>
 					<div class="col-sm-4 col-md-4 col-lg-4">
@@ -49,7 +51,7 @@
 			<#if overOrderPage??>
 				<tbody>
 			<#list overOrderPage.getList() as order>
-			<tr class="<#if order.o_status=1>success</#if>">
+			<tr >
 				<td style="text-align:left;">${order_index+1}</td>
 				<td style="text-align:left;">${order.description}</td>
 				<td style="text-align:left;">${order.offertime}</td>
