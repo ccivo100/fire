@@ -12,6 +12,7 @@ import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.plugin.ehcache.CacheName;
 import com.poicom.function.app.model.Order;
 
 /**
@@ -29,13 +30,14 @@ public class IndexController extends Controller {
 	@Before(IndexValidator.class)
 	public void index() {
 		Page <Record> overOrderPage;
+		String orderby=" order by o.offer_at desc ";
 		if(ValidateKit.isNullOrEmpty(getPara("condition"))){
-			overOrderPage=Order.dao.getOverOrdersPage(getParaToInt(0,1), 10, "");
+			overOrderPage=Order.dao.getOverOrdersPage(getParaToInt(0,1), 10, orderby);
 			
 		}else{
 			String condition ="%"+getPara("condition").trim()+"%";
 			String where=" and o.description like ?";
-			overOrderPage=Order.dao.getOverOrdersPage(getParaToInt(0,1), 10, where, condition);
+			overOrderPage=Order.dao.getOverOrdersPage(getParaToInt(0,1), 10, where+orderby, condition);
 		}
 		
 		Order.dao.format(overOrderPage,"description");

@@ -1,6 +1,8 @@
 body {
-  padding-top: 40px;
-  padding-bottom: 40px;
+	/* 如果 _header.html的nav使用了 .navbar-static-top则要去掉这两个样式
+		如果 _header.html的nav使用了 .navbar-fixed-top则需要这两个样式*/
+  /* padding-top: 40px;
+  padding-bottom: 40px; */
   background-color: #eee;
 }
 

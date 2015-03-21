@@ -1,6 +1,7 @@
 package com.poicom.function.app.model;
 
 import java.util.List;
+import java.util.Random;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -84,14 +85,14 @@ public class Order extends Model<Order> {
 	}
 	
 	/**
-	 * @描述 如果attr，如description的长度超过30，则后面用...代替。
+	 * @描述 如果attr，如description的长度超过30（随机，由Random决定），则后面用...代替。
 	 * @param page
 	 * @param paras
 	 */
 	public void format(Page<Record> page,String... paras){
 		for(Record record:page.getList()){
 			for(String attr:paras){
-				record.set(attr, StringUtils.abbreviate(record.getStr(attr), 30));
+				record.set(attr, StringUtils.abbreviate(record.getStr(attr), (new Random().nextInt(5)+26)));
 			}
 			
 		}

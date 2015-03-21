@@ -93,7 +93,7 @@
          diskPersistent="true"
          diskExpiryThreadIntervalSeconds="600"/>
          
-	<cache name="/clothes/list" 
+	<cache name="/order/query" 
 		 maxElementsInMemory="10000"
          overflowToDisk="true"
          eternal="true"
@@ -103,7 +103,7 @@
          diskExpiryThreadIntervalSeconds="600"
 		   />
 		   
-	<cache name="/clothes" 
+	<cache name="/user/center" 
 		 maxElementsInMemory="10000"
          overflowToDisk="true"
          eternal="true"
@@ -112,4 +112,6 @@
          diskPersistent="true"
          diskExpiryThreadIntervalSeconds="600" 
 		   />
+		   
+	
 </ehcache>

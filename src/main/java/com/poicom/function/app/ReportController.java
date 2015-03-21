@@ -20,6 +20,9 @@ import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
+import com.jfinal.plugin.ehcache.CacheInterceptor;
+import com.jfinal.plugin.ehcache.CacheName;
+import com.jfinal.plugin.ehcache.EvictInterceptor;
 import com.poicom.function.app.model.ErrorType;
 import com.poicom.function.app.model.Order;
 import com.poicom.function.user.model.User;
@@ -43,6 +46,8 @@ public class ReportController extends Controller{
 	/**
 	 * @描述 报障人员查询本账号申报的故障工单
 	 */
+	@Before(CacheInterceptor.class)
+	@CacheName("/report/offer")
 	public void offer(){
 		User user=User.dao.getCurrentUser();
 		System.out.println(user.get("id"));
@@ -75,6 +80,8 @@ public class ReportController extends Controller{
 	/**
 	 * @描述 新建故障工单 并发送邮件、短信通知
 	 */
+	@Before( EvictInterceptor.class)
+	@CacheName("/report/offer")
 	public void save(){
 		
 		//获取表单数据，填充进Order
@@ -146,7 +153,8 @@ public class ReportController extends Controller{
 	/**
 	 *  @描述 处理申报人员更新故障工单操作 
 	 */
-	@Before(Tx.class)
+	@Before( {Tx.class,EvictInterceptor.class})
+	@CacheName("/report/offer")
 	public void update(){
 		//order_id
 		Integer orderid=getParaToInt("orderid");
@@ -229,9 +237,9 @@ public class ReportController extends Controller{
 		String phones=phoneFormat(phone);
 		System.out.println(phones);
 		
-		String department="XXX";
-		String name="XXX";
-		String type="XXX";
+		String department="XX";
+		String name="XX";
+		String type="XX";
 		
 		
 		StringBuffer contt=new StringBuffer();

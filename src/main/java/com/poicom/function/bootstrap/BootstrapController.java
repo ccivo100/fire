@@ -1,6 +1,10 @@
 package com.poicom.function.bootstrap;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,6 +14,7 @@ import cn.dreampie.routebind.ControllerKey;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.PathKit;
 import com.jfinal.upload.UploadFile;
+import com.poicom.common.kit.excel.PoiKit;
 
 /**
  * 用于指向BootStrap例子的控制器。
@@ -42,7 +47,16 @@ public class BootstrapController extends Controller {
 	public void upfile(){
 		UploadFile uploadFile=getFile("upfile");
 		//String name=getPara("name");
-		uploadFile.getFile().renameTo(new File("dongyu.log"));
+		//uploadFile.getFile().renameTo(new File("dongyu.log"));
+		
+		FileInputStream headeris= loadFile(uploadFile.getFile());
+		FileInputStream contentis= loadFile(uploadFile.getFile());
+		String[] header=PoiKit.readHeader(headeris);
+		Map<Integer,String> content=PoiKit.readContent(contentis);
+		
+		System.out.println(header);
+		System.out.println(content);
+		
 		
 		//System.out.println(name);
 		boolean success=false;
@@ -61,6 +75,35 @@ public class BootstrapController extends Controller {
 		setAttr("pname", name);
 		setAttr("uname", uname);
 		render("/ajax/index.html");
+	}
+	
+	/**
+	 * @描述 将上次文件转换为FileInputStream
+	 * @param upload
+	 * @return FileInputStream
+	 */
+	public FileInputStream loadFile(File upload){
+		FileInputStream is=null;
+		try {
+			is=new FileInputStream(upload);
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return is;
+	}
+	
+	/**
+	 * @描述 打印
+	 * @param obj
+	 */
+	public void print(Object obj){
+		if(obj instanceof String[]){
+			
+		}else if(obj instanceof Map){
+			
+		}
 	}
 	
 

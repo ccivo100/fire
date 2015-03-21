@@ -51,6 +51,18 @@
 			 WHERE cut.type_id=?)
   	</sql>
   	
+  	<!-- 根据部门id，查询部门人员 -->
+  	<sql id="findBranchUserBySelect">
+  		SELECT u.id userid,u.full_name fullname,sui.gender gender,cb.name branch,
+		u.deleted_at delete_at,u.remark remark
+  	</sql>
+  	<sql id="findBranchUserByFrom">
+  		FROM sec_user_info AS sui
+		LEFT OUTER JOIN sec_user AS u ON u.id=sui.user_id
+		LEFT OUTER JOIN com_branch AS cb ON sui.branch_id=cb.id
+		WHERE sui.branch_id=? 
+  	</sql>
+  	
   </sqlGroup>
 
   <sqlGroup name="role">

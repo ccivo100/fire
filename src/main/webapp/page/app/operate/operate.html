@@ -5,7 +5,7 @@
 <h2>故障处理</h2>
 	<br>
 </div>
-
+<div class="tree">
 	<input type="hidden" name="do" value="report">
 	<table class="table table-bordered table-hover ">
 		<thead>
@@ -35,9 +35,9 @@
 				</td>
 				
 				<td style="text-align:left;">
-				&nbsp;&nbsp;<a class="query"   href="/order/query?id=${operate.id}"  >查看</a> 
+				&nbsp;&nbsp;<a class="btn btn-primary btn-xs"   href="/order/query?id=${operate.id}"  >查看</a> 
 				<#if operate.status=0>
-				&nbsp;&nbsp;<a class="delete"  href="/operate/edit?id=${operate.id}" >处理</a>
+				&nbsp;&nbsp;<a class="btn btn-primary btn-xs"  href="/operate/edit?id=${operate.id}" >处理</a>
 				</#if>
 					
 				</td>
@@ -51,5 +51,5 @@
 
 
 <#include "/page/app/report/_model.html"/>
-
+</div>
 </@layout>

@@ -11,6 +11,8 @@ import cn.dreampie.shiro.hasher.HasherKit;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.tx.Tx;
+import com.jfinal.plugin.ehcache.CacheInterceptor;
+import com.jfinal.plugin.ehcache.CacheName;
 import com.poicom.function.user.model.User;
 import com.poicom.function.user.model.UserInfo;
 
@@ -26,6 +28,8 @@ public class UserController extends Controller {
 	/**
 	 * 进入修改用户密码页面
 	 */
+	@Before(CacheInterceptor.class)
+	@CacheName("/user/center")
 	public void center(){
 		User user=SubjectKit.getUser();
 		if(!ValidateKit.isNullOrEmpty(user)){

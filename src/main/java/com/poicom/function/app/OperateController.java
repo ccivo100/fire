@@ -1,5 +1,7 @@
 package com.poicom.function.app;
 
+import java.util.List;
+
 import org.apache.commons.mail.EmailException;
 import org.joda.time.DateTime;
 
@@ -9,6 +11,7 @@ import cn.dreampie.routebind.ControllerKey;
 
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
@@ -73,7 +76,7 @@ public class OperateController extends Controller{
 		
 		//order_id
 		Integer orderid=getParaToInt("orderid");
-		//description
+		//comment
 		String comment=getPara("commen");
 		
 		Order.dao.findById(orderid).set("deal_user", getParaToInt("dealid"))
@@ -82,49 +85,103 @@ public class OperateController extends Controller{
 						DateTime.now().toString("yyyy-MM-dd HH:mm:ss"))
 				.set("status", 1).update();
 		
-		//当前用户详细信息
-		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
-		
 		redirect("/operate/deal");
 	}
 	
 	/**
-	 * @描述 发送邮件通知
-	 *            主题        subject
-	 *            内容        body
-	 *            接收邮件 paras
+	 * @描述 任务分配
 	 */
-	public void sendEmail(String subject,String body,String... paras){
+	public void task(){
+		//Branch_id 为10的用户。
+		Page<Record> userPage=UserInfo.dao.getUserByBranch(getParaToInt(0,1), 10);
 		
-		try {
-			Mailer.sendHtml(subject, body, paras);
-		} catch (EmailException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		for(int i=0;i<userPage.getList().size();i++){
+			List<Record> list= ErrorType.dao.getOperatorType(userPage.getList().get(i).get("userid"));
+			StringBuffer types=new StringBuffer();
+			for(int j=0;j<list.size();j++){
+				types.append(list.get(j).getStr("typename")+"；");
+			}
+			//userPage.getList().get(i).set("remark", types.toString());
+			userPage.getList().get(i).set("remark", list);
 		}
+		
+		setAttr("userPage",userPage);
+		setAttr("typeList",ErrorType.dao.getAllType());
 		
 	}
 	
 	/**
-	 * 邮件内容 body
-	 * @param offer
-	 * @param description
-	 * @param deal
-	 * @return
+	 * @描述 分配操作
 	 */
-	public StringBuffer getMailBody(Record offer,String description,String deal){
-		
-		StringBuffer body=new StringBuffer();
-		
-		body.append("您好，"+deal+"：<br/>")
-		.append("&nbsp;&nbsp;&nbsp;&nbsp;" + offer.getStr("branch") + "的 "
-						+ offer.getStr("fullname") + " ("
-						+ offer.getStr("phone") + ") 发来故障工单。<br/>")
-		.append("故障内容："+description+"<br/>")
-		.append("请及时处理。");
-		
-		return body;
-		
+	public void assign(){
+		String userid=getPara("id");
+		setAttr("userinfo",UserInfo.dao.getAllUserInfo(userid));
+		setAttr("usertype",ErrorType.dao.getOperatorType(userid));
+		setAttr("typeList",ErrorType.dao.getAllType());
 	}
+	
+	/**
+	 * @描述 执行分配操作
+	 */
+	@Before(Tx.class)
+	public void doassign(){
+		//前台选中的 类型s
+		String[] types=getParaValues("types");
+		
+		//用户-类型 中间表
+		List<Record> cut=ErrorType.dao.getTypeByUser(getParaToLong("userid"));
+		
+		
+		if(ValidateKit.isNullOrEmpty(types)){
+			for(int i=0;i<cut.size();i++){
+				System.out.println(cut.get(i).getLong("typeid")+" 已取消，执行删除操作！");
+				Db.deleteById("com_user_type", cut.get(i).getLong("id"));
+			}
+		}else if(ValidateKit.isNullOrEmpty(cut)){
+			for(int i=0;i<types.length;i++){
+				System.out.println(types[i]+" 不存在，执行新增操作！");
+				Record record=new Record().set("user_id", getPara("userid")).set("type_id", types[i]);
+				Db.save("com_user_type", record);
+			}
+		}else{
+			//需要处理该故障类型?，不存在则新增。
+			for(int i=0;i<types.length;i++){
+				boolean flag=false;
+				for(int j=0;j<cut.size();j++){
+					if(Integer.parseInt(types[i])==cut.get(j).getLong("typeid")){
+						flag=true;
+						break;
+					}
+				}
+				if(flag){
+					System.out.println(types[i]+" 存在，保留不删除！");
+				}else if(!flag){
+					System.out.println(types[i]+" 不存在，执行新增操作！");
+					Record record=new Record().set("user_id", getPara("userid")).set("type_id", types[i]);
+					Db.save("com_user_type", record);
+				}
+			}
+			
+			//需要保留该故障类型?，不保留则删除
+			for(int i=0;i<cut.size();i++){
+				boolean flag=false;
+				for(int j=0;j<types.length;j++){
+					if(cut.get(i).getLong("typeid")==Integer.parseInt(types[j])){
+						flag=true;
+						break;
+					}
+				}
+				if(flag){
+					System.out.println(cut.get(i).getLong("typeid")+" 未取消，保留不删除！");
+				}else if(!flag){
+					System.out.println(cut.get(i).getLong("typeid")+" 已取消，执行删除操作！");
+					Db.deleteById("com_user_type", cut.get(i).getLong("id"));
+				}
+			}
+		}
+		
+		redirect("/operate/task");
+	}
+
 
 }

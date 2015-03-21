@@ -5,6 +5,7 @@
 <h2>故障申报</h2>
 	<br>
 </div>
+<div class="tree">
 <form class="form-inline branch" role="form" action="/admin/branch" method="get">
 
   &nbsp;
@@ -43,9 +44,9 @@
 				</td>
 				
 				<td style="text-align:left;">
-				&nbsp;&nbsp;<a class="query"  userid="${report.id}" href="/order/query?id=${report.id}"  >查看</a> 
+				&nbsp;&nbsp;<a class="btn btn-primary btn-xs"  userid="${report.id}" href="/order/query?id=${report.id}"  >查看</a> 
 				<#if report.status=0>
-				&nbsp;&nbsp;<a class="delete" userid="${report.id}" href="/report/edit?id=${report.id}" >修改</a>
+				&nbsp;&nbsp;<a class="btn btn-primary btn-xs" userid="${report.id}" href="/report/edit?id=${report.id}" >修改</a>
 				</#if>
 					
 				</td>
@@ -59,5 +60,5 @@
 
 
 <#include "/page/app/report/_model.html"/>
-
+</div>
 </@layout>

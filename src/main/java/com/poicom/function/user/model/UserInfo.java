@@ -3,6 +3,7 @@ package com.poicom.function.user.model;
 import java.util.List;
 
 import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 
 import cn.dreampie.sqlinxml.SqlKit;
@@ -41,6 +42,19 @@ public class UserInfo extends Model<UserInfo> {
 	public Record getUserBranch(Object... paras){
 		return Db.findFirst(SqlKit.sql("user.findUserBranchBySelect") + blank
 				+ SqlKit.sql("user.findUserBranchByFrom"), paras);
+	}
+	
+	/**
+	 * @描述 根据用户Branch_id，查找该部门用户详细信息
+	 * @param pageNumber
+	 * @param pageSize
+	 * @param paras
+	 * @return
+	 */
+	public Page<Record> getUserByBranch(int pageNumber,int pageSize,Object... paras){
+		return Db.paginate(pageNumber, pageSize,
+				SqlKit.sql("user.findBranchUserBySelect") + blank,
+				SqlKit.sql("user.findBranchUserByFrom"), 10);
 	}
 	
 }

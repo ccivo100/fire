@@ -9,6 +9,18 @@
   		WHERE ordr.offer_user=?
   	</sql>
   	
+  	<!-- 根据运维人员id，获取处理故障类型列表 -->
+  	<sql id="findOperatorTypeBySelect">
+  		SELECT ct.id id, ct.name typename
+  	</sql>
+  	<sql id="findOperatorTypeByFrom">
+  		FROM com_type AS ct 
+		WHERE ct.id in(
+      		SELECT cut.type_id 
+      		FROM com_user_type AS cut 
+      		WHERE cut.user_id=?)
+  	</sql>
+  	
   	<!-- 报障业务 -->
   	<!-- 查询报障人员提交的所有故障单 多表查询order、user、user、type -->
   	<sql id="findReportFullOffersBySelect">
@@ -20,7 +32,7 @@
 		LEFT OUTER JOIN sec_user AS f ON o.offer_user=f.id 
 		LEFT OUTER JOIN sec_user AS d ON o.deal_user=d.id
 		LEFT OUTER JOIN com_type AS t ON o.type=t.id
-		WHERE o.offer_user=? order by o.id asc
+		WHERE o.offer_user=? order by o.status asc ,o.offer_at asc
   	</sql>
   	
   	<!-- 根据工单id查询该工单的详细内容 多表查询 -->
@@ -44,7 +56,7 @@
 		left outer join sec_user as u1 on o.offer_user = u1.id
 		left outer join sec_user as u2 on o.deal_user = u2.id
 		left outer join com_type as t1 on o.type=t1.id
-		where 1=1 and  o.status=1
+		where 1=1 and  o.status=1 
   	</sql>
   	
   	<!-- 运维业务 -->
@@ -58,6 +70,7 @@
 		left outer join sec_user as f on o.offer_user=f.id
 		left outer join sec_user as d on o.deal_user=d.id
 		where o.type in(select cut.type_id  from com_user_type as cut where user_id=?)
+		order by o.status asc,o.offer_at asc
   	</sql>
   	
   </sqlGroup>

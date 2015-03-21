@@ -3,8 +3,11 @@ package com.poicom.function.app;
 import cn.dreampie.ValidateKit;
 import cn.dreampie.routebind.ControllerKey;
 
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.plugin.ehcache.CacheInterceptor;
+import com.jfinal.plugin.ehcache.CacheName;
 import com.poicom.function.app.model.Order;
 import com.poicom.function.user.model.UserInfo;
 
@@ -19,6 +22,8 @@ public class CommonController extends Controller{
 	/**
 	 * 查询故障工单详细内容
 	 */
+	@Before(CacheInterceptor.class)
+	@CacheName("/order/query")
 	public void query(){
 		Record order = Order.dao.getCommonOrder(getParaToInt("id"));
 
