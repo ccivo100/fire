@@ -40,7 +40,7 @@ public class IndexController extends Controller {
 			overOrderPage=Order.dao.getOverOrdersPage(getParaToInt(0,1), 10, where+orderby, condition);
 		}
 		
-		Order.dao.format(overOrderPage,"description");
+		Order.dao.format(overOrderPage,"odescription");
 		setAttr("overOrderPage",overOrderPage);
 		render(indexView);
 

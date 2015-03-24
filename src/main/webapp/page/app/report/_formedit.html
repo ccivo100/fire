@@ -9,11 +9,7 @@
 
 		<div class="col-sm-4">
 			<#if otypeid??>
-				<#if otypeid="">
-				<select id="selectType" name="selectType" class="form-control"  required autofocus>
-				<#else>
 				<select id="selectType" name="selectType" class="form-control" disabled required autofocus>
-				</#if>
 			<#else>
 	
 			<select id="selectType" name="selectType" class="form-control" required autofocus>
@@ -24,9 +20,7 @@
 					<#list typeList as type>
 						
 						<option value="${type.id}"  
-							<#if otypeid="">
-							
-							<#elseif ((otypeid!'-1')?number)=type.id>
+							<#if ((otypeid!'-1')?number)=type.id>
 								selected="selected"
 							</#if> >
 							${type.name}

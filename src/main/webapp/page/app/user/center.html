@@ -9,10 +9,10 @@
 	<div class="jumbotron">
 	    <#if userInfo??>
 	    
-		    登陆账号：  ${(userInfo.account)!}<br>
-		    姓名： ${(userInfo.fullname)!}<br>
-		    性别：<#if userInfo.gender=0>男<#else>女</#if><br>
-		    所属单位：${(userInfo.branch)!}<br>
+		    登陆账号：  ${(userInfo.uaccount)!}<br>
+		    姓名： ${(userInfo.ufullname)!}<br>
+		    性别：<#if userInfo.info_gender=0>男<#else>女</#if><br>
+		    所属单位：${(userInfo.bname)!}<br>
 		    
 	    </#if>
 	</div>

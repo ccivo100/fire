@@ -5,11 +5,9 @@
 <h2>点通科技报障系统项目首页</h2>
 	<br>
 </div>
-	
-		<div class=" index-background">
+	<div class=" index-background">
 			<form class="bs-example bs-example-form" role="form" action="/" method="post">
 		      	<div class="row">
-
 				         <div class="col-lg-6">
 				            <div class="input-group">
 				            	<span class="input-group-addon">关键字</span>
@@ -50,21 +48,19 @@
 			<#list overOrderPage.getList() as order>
 			<tr >
 				<td style="text-align:left;">${order_index+1}</td>
-				<td style="text-align:left;">${order.description}</td>
-				<td style="text-align:left;">${order.offertime}</td>
-				<td style="text-align:left;">${order.offername}</td>
+				<td style="text-align:left;">${order.odescription}</td>
+				<td style="text-align:left;">${order.ooffertime}</td>
+				<td style="text-align:left;">${order.uoffername}</td>
 				<td >
-					<#if order.o_status=0>
+					<#if order.ostatus=0>
 					未处理
 					</#if>
-					<#if order.o_status=1>
+					<#if order.ostatus=1>
 					已处理
 					</#if>
 				</td>
-				
 				<td style="text-align:left;">
-				&nbsp;&nbsp;<a class="btn btn-primary btn-xs"   href="/order/query?id=${order.orderid}"  >查看</a> 
-					
+				&nbsp;&nbsp;<a class="btn btn-primary btn-xs"   href="/order/query?id=${order.oorderid}"  >查看</a> 
 				</td>
 				
 			</tr>
@@ -77,11 +73,6 @@
 			<@paginate currentPage=overOrderPage.pageNumber totalPage=overOrderPage.totalPage actionUrl="/" />
 				
 		</#if>
-	<br/>
-
-	
 
 </div>
-
-
 </@layout>

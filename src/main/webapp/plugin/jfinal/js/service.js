@@ -38,6 +38,13 @@ $(document).ready(function(){
 	});
 });
 
+function trim(str){ 
+    return str.replace(/(^\s*)|(\s*$)/g, "");
+}
+
+
+
+
 
 /*$(document).ready(function(){
 	$("a.delete").click(function(){

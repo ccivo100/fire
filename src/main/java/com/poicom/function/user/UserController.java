@@ -28,8 +28,6 @@ public class UserController extends Controller {
 	/**
 	 * 进入修改用户密码页面
 	 */
-	@Before(CacheInterceptor.class)
-	@CacheName("/user/center")
 	public void center(){
 		User user=SubjectKit.getUser();
 		if(!ValidateKit.isNullOrEmpty(user)){

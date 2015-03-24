@@ -9,11 +9,11 @@
 	
 	<form class="form-horizontal" role="form" action="/operate/doassign" method="post" >
 		<div class="row">
-			<input type="hidden" name="userid" value="${(userinfo.userid)}">
+			<input type="hidden" name="userid" value="${(userinfo.uuserid)}">
 			<div class="form-group">
 				<label class="col-sm-2 control-label">姓名</label>
 				<div class="col-sm-4">
-					<input type="text" class="form-control"  name="offer_user" value="${(userinfo.fullname)!}" readonly/>
+					<input type="text" class="form-control"  name="offer_user" value="${(userinfo.ufullname)!}" readonly/>
 				</div>
 			</div>
 			<div class="form-group">

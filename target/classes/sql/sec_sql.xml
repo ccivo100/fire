@@ -9,15 +9,15 @@
     
     <!-- 查询用户所有信息 -->
     <sql id="findInfoBySelect">
-		select u.id userid,u.username account,u.providername providernme,
-		u.email email,u.phone phone,u.password psw,
-		u.hasher hasher,u.salt salt,u.avatar_url avatat,
-		u.first_name firstname,u.last_name lastname,u.full_name fullname,
-		u.created_at createtime,u.updated_at updatetime,u.deleted_at deletetime,
-		s.id info_id,s.user_id info_userid,s.branch_id info_branchid,s.creator_id info_creator,s.gender gender,
+		select u.id uuserid,u.username uaccount,u.providername uprovidername,
+		u.email uemail,u.phone uphone,u.password upassword,
+		u.hasher uhasher,u.salt usalt,u.avatar_url uavatatarurl,
+		u.first_name ufirstname,u.last_name ulastname,u.full_name ufullname,
+		u.created_at ucreatetime,u.updated_at uupdatetime,u.deleted_at udeletetime,
+		s.id info_id,s.user_id info_userid,s.branch_id info_branchid,s.creator_id info_creatorid,s.gender info_gender,
     	s.created_at info_createtime,s.updated_at info_updatetime,s.deleted_at info_deletetime,
-		c.id branchid,c.name branch,
-    	c.created_at branch_createtime,c.updated_at branch_updatetime,c.deleted_at branch_deletetime
+		c.id bid,c.name bname,
+    	c.created_at bcreatetime,c.updated_at bupdatetime,c.deleted_at bdeletetime
     </sql>
     <sql id="findInfoByFrom">
     	from sec_user_info as s 
@@ -29,7 +29,7 @@
     <!-- 根据用户id，查询用户所属公司 -->
   	
   	<sql id="findUserBranchBySelect">
-  		SELECT  bra.name branch
+  		SELECT  bra.name bname
   	</sql>
   	<sql id="findUserBranchByFrom">
   		FROM sec_user_info AS info

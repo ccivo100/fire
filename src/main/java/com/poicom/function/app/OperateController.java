@@ -10,11 +10,14 @@ import cn.dreampie.mail.Mailer;
 import cn.dreampie.routebind.ControllerKey;
 
 import com.jfinal.aop.Before;
-import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
+import com.jfinal.plugin.ehcache.CacheInterceptor;
+import com.jfinal.plugin.ehcache.CacheName;
+import com.jfinal.plugin.ehcache.EvictInterceptor;
+import com.poicom.common.controller.JFController;
 import com.poicom.function.app.model.ErrorType;
 import com.poicom.function.app.model.Order;
 import com.poicom.function.user.model.User;
@@ -26,7 +29,7 @@ import com.poicom.function.user.model.UserInfo;
  *
  */
 @ControllerKey(value="/operate",path="/page/app/operate")
-public class OperateController extends Controller{
+public class OperateController extends JFController{
 	
 	public void index(){
 		
@@ -53,17 +56,19 @@ public class OperateController extends Controller{
 		
 		//工单详细信息
 		Record order = Order.dao.getCommonOrder(getParaToInt("id"));
+		setAttr(order);
 		setAttr("order", order);
 		
 		//当前用户详细信息
 		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
+		setAttr(userinfo);
 		setAttr("userinfo",userinfo);
 		
 		//获取工单申报者的分公司信息
-		Record offer=UserInfo.dao.getUserBranch(order.getLong("offerid"));
+		Record offer=UserInfo.dao.getUserBranch(order.getLong("oofferid"));
 
 		if(!ValidateKit.isNullOrEmpty(offer))
-			setAttr("offer_branch",offer.getStr("branch"));
+			setAttr("offer_branch",offer.getStr("bname"));
 
 		
 	}
@@ -71,15 +76,16 @@ public class OperateController extends Controller{
 	/**
 	 * @描述 提交故障处理建议
 	 */
-	@Before(Tx.class)
+	@Before({Tx.class,CommonValidator.class,EvictInterceptor.class})
+	@CacheName("/order/query")
 	public void update(){
 		
 		//order_id
-		Integer orderid=getParaToInt("orderid");
+		Integer orderid=getParaToInt("oorderid");
 		//comment
-		String comment=getPara("commen");
+		String comment=getPara("ocomment");
 		
-		Order.dao.findById(orderid).set("deal_user", getParaToInt("dealid"))
+		Order.dao.findById(orderid).set("deal_user", getParaToInt("uuserid"))
 				.set("comment", comment)
 				.set("deal_at", 
 						DateTime.now().toString("yyyy-MM-dd HH:mm:ss"))

@@ -9,15 +9,17 @@ import com.poicom.function.user.model.UserInfo;
 public class JFController extends Controller{
 	
 	/**
-	 * 报障人员、运维人员，查询故障工单详细信息
+	 * @描述 Record 转换为Attr
+	 * @param record
 	 */
-	protected void query(){
-		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
-		setAttr("typeList",Order.dao.getAllType());
-		
-		setAttr("userinfo",userinfo);
-		setAttr("order",Order.dao.getCommonOrder(getParaToInt("id")));
-		render("/page/app/common/query.html");
+	public void setAttr(Record record){
+		String[] column=record.getColumnNames();
+		for(int i=0;i<column.length;i++){
+			//System.out.println(column[i]+"："+record.get(column[i]));
+			setAttr(column[i],record.get(column[i]));
+		}
 	}
+	
+	
 
 }

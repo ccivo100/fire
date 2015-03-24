@@ -37,12 +37,12 @@
   	
   	<!-- 根据工单id查询该工单的详细内容 多表查询 -->
   	<sql id="findReportOfferBySelect">
-		SELECT o.id orderid,  t1.name tname,o.type typeid,o.offer_user offerid,
-		u1.full_name offername, u1.phone offerphone,
-		o.description description,o.offer_at offertime,
-		o.status o_status,o.deal_user dealid,
-		u2.full_name dealname,u2.phone dealphone,
-		o.comment commen,o.deal_at dealtime
+		SELECT o.id oorderid,  t1.name tname,o.type otypeid,o.offer_user oofferid,
+		u1.full_name uoffername, u1.phone uofferphone,
+		o.description odescription,o.offer_at ooffertime,
+		o.status ostatus,o.deal_user odealid,
+		u2.full_name udealname,u2.phone udealphone,
+		o.comment ocomment,o.deal_at odealtime
   	</sql>
   	<sql id="findReportOfferByFrom">
   		FROM com_order AS o 

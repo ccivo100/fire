@@ -13,12 +13,24 @@ import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.poicom.function.user.model.User;
 
-@ControllerKey(value="/admin",path="/page/app/user")
+@ControllerKey(value="/admin",path="/page/app/admin")
 public class AdminController extends Controller {
 	
 	public void index(){
 		setAttr("userPage", User.dao.getUserPage(getParaToInt(0, 1), 10));
 		render("user.html");
+	}
+	
+	public void role(){
+		
+	}
+	
+	public void user(){
+		
+	}
+	
+	public void order(){
+		
 	}
 	
 	
@@ -96,10 +108,5 @@ public class AdminController extends Controller {
 		
 	}
 	
-	public void test(){
-		String todo=getPara("do");
-		System.out.println(todo);
-		redirect("/admin");
-	}
 
 }

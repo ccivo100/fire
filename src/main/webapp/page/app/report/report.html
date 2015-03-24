@@ -5,16 +5,29 @@
 <h2>故障申报</h2>
 	<br>
 </div>
-<div class="tree">
-<form class="form-inline branch" role="form" action="/admin/branch" method="get">
-
-  &nbsp;
-	<div class="form-group pull-right">
-    <a  class="btn btn-success"  href="/report/add">故障申报</a>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#testModal">测试</button>
-  	</div>
-</form>
-  &nbsp;
+<div class="index-background">
+  			<form class="bs-example bs-example-form" role="form" action="/admin/branch" method="get">
+		      	<div class="row">
+				         <div class="col-lg-6">
+				            <div class="form-group">
+				               <span class="input-group-btn">
+				                  <a  class="btn btn-success"  href="/report/add">
+				                     <span class="glyphicon glyphicon-search"></span> 故障申报
+				                  </a>
+				               </span>
+				            </div>
+				         </div>
+		         		<div class="col-lg-6">
+							<div class="form-group">
+								<span class="input-group-btn">
+				                  <a  class="btn btn-success"  href="/report/add">
+				                     <span class="glyphicon glyphicon-search"></span> 故障申报
+				                  </a>
+				               </span>
+							</div>
+					</div>
+		      	</div>
+		   </form>
 
 	<table class="table table-bordered table-hover">
 		<thead>
@@ -31,9 +44,9 @@
 			<#list reportPage.getList() as report>
 			<tr class="<#if report.status=1>success</#if>">
 				<td style="text-align:left;">${report_index+1}</td>
-				<td style="text-align:left;">${report.description}</td>
-				<td style="text-align:left;">${report.offer_at}</td>
-				<td style="text-align:left;">${report.off_user}</td>
+				<td style="text-align:left;">${(report.description)!}</td>
+				<td style="text-align:left;">${(report.offer_at)!}</td>
+				<td style="text-align:left;">${(report.off_user)!}</td>
 				<td >
 					<#if report.status=0>
 					未处理
@@ -44,9 +57,9 @@
 				</td>
 				
 				<td style="text-align:left;">
-				&nbsp;&nbsp;<a class="btn btn-primary btn-xs"  userid="${report.id}" href="/order/query?id=${report.id}"  >查看</a> 
+				&nbsp;&nbsp;<a class="btn btn-primary btn-xs"   href="/order/query?id=${report.id}"  >查看</a> 
 				<#if report.status=0>
-				&nbsp;&nbsp;<a class="btn btn-primary btn-xs" userid="${report.id}" href="/report/edit?id=${report.id}" >修改</a>
+				&nbsp;&nbsp;<a class="btn btn-primary btn-xs"  href="/report/edit?id=${report.id}" >修改</a>
 				</#if>
 					
 				</td>
@@ -58,7 +71,5 @@
 	<#include "/page/common/_paginate.html" />
 	<@paginate currentPage=reportPage.pageNumber totalPage=reportPage.totalPage actionUrl="/report/offer/" />
 
-
-<#include "/page/app/report/_model.html"/>
 </div>
 </@layout>

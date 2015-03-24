@@ -103,6 +103,11 @@
 }
 
 
+/*  */
+textarea{
+	resize: none;
+}
+
 /* 系统的页脚 */
 .footer{
   padding: 40px 0;

@@ -16,13 +16,13 @@ import cn.dreampie.mail.Mailer;
 import cn.dreampie.routebind.ControllerKey;
 
 import com.jfinal.aop.Before;
-import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.jfinal.plugin.ehcache.CacheInterceptor;
 import com.jfinal.plugin.ehcache.CacheName;
 import com.jfinal.plugin.ehcache.EvictInterceptor;
+import com.poicom.common.controller.JFController;
 import com.poicom.function.app.model.ErrorType;
 import com.poicom.function.app.model.Order;
 import com.poicom.function.user.model.User;
@@ -34,7 +34,7 @@ import com.poicom.function.user.model.UserInfo;
  *
  */
 @ControllerKey(value = "/report", path = "/page/app/report")
-public class ReportController extends Controller{
+public class ReportController extends JFController{
 	
 	public void index(){
 		
@@ -47,7 +47,7 @@ public class ReportController extends Controller{
 	 * @描述 报障人员查询本账号申报的故障工单
 	 */
 	@Before(CacheInterceptor.class)
-	@CacheName("/report/offer")
+	@CacheName("/order/query")
 	public void offer(){
 		User user=User.dao.getCurrentUser();
 		System.out.println(user.get("id"));
@@ -72,21 +72,25 @@ public class ReportController extends Controller{
 	 */
 	public void add(){
 		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
+		
+		setAttr(userinfo);
+		
 		setAttr("userinfo",userinfo);
 		setAttr("typeList",ErrorType.dao.getAllType());
 		render("add.html");
 	}
 	
+	
 	/**
 	 * @描述 新建故障工单 并发送邮件、短信通知
 	 */
-	@Before( EvictInterceptor.class)
-	@CacheName("/report/offer")
+	@Before( {Tx.class,CommonValidator.class,EvictInterceptor.class})
+	@CacheName("/order/query")
 	public void save(){
 		
 		//获取表单数据，填充进Order
-		Order order=new Order().set("offer_user", getParaToInt("userid"))
-				.set("description", getPara("description"))
+		Order order=new Order().set("offer_user", getParaToInt("uuserid"))
+				.set("description", getPara("odescription"))
 				.set("type", getParaToInt("selectType"))
 				.set("status", 0)
 				.set("offer_at", 
@@ -94,9 +98,9 @@ public class ReportController extends Controller{
 		if(order.save())
 			redirect("/report/offer");
 		else
-			System.out.println("userid:" + getParaToInt("userid") + " type:"
+			System.out.println("userid:" + getParaToInt("uuserid") + " type:"
 					+ getParaToInt("selectType") + " des:"
-					+ getPara("description"));
+					+ getPara("odescription"));
 		
 		//当前用户详细信息
 		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
@@ -106,10 +110,10 @@ public class ReportController extends Controller{
 		//发送邮件
 		for (Record deal : dealList) {
 			//获取邮件内容
-			String body=getMailBody(userinfo,getPara("description"),deal.getStr("fullname")).toString();
+			String body=getMailBody(userinfo,getPara("odescription"),deal.getStr("fullname")).toString();
 			//发送邮件通知
 			if(ValidateKit.isEmail(deal.getStr("useremail"))){
-				sendEmail("点通故障系统提醒您！",body,deal.getStr("useremail"));
+				sendEmail("XX故障系统提醒您！",body,deal.getStr("useremail"));
 			}
 			//电话&&非空 then 保存电话列表
 			if(!ValidateKit.isNullOrEmpty(deal.getStr("userphone"))){
@@ -138,10 +142,12 @@ public class ReportController extends Controller{
 		
 		//工单详细信息
 		Record order = Order.dao.getCommonOrder(getParaToInt("id"));
+		setAttr(order);
 		setAttr("order", order);
 		
 		//当前用户详细信息
 		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
+		setAttr(userinfo);
 		setAttr("userinfo",userinfo);
 		
 		//获取工单申报者的分公司信息
@@ -153,17 +159,17 @@ public class ReportController extends Controller{
 	/**
 	 *  @描述 处理申报人员更新故障工单操作 
 	 */
-	@Before( {Tx.class,EvictInterceptor.class})
-	@CacheName("/report/offer")
+	@Before( {Tx.class,CommonValidator.class,EvictInterceptor.class})
+	@CacheName("/order/query")
 	public void update(){
 		//order_id
-		Integer orderid=getParaToInt("orderid");
+		Integer orderid=getParaToInt("oorderid");
 		//description
-		String description=getPara("description");
+		String description=getPara("odescription");
 		
 		Order.dao
 				.findById(orderid)
-				.set("description", getPara("description"))
+				.set("description", getPara("odescription"))
 				.set("updated_at",
 						DateTime.now().toString("yyyy-MM-dd HH:mm:ss"))
 				.update();
@@ -201,9 +207,9 @@ public class ReportController extends Controller{
 		StringBuffer body=new StringBuffer();
 		
 		body.append("您好，"+deal+"：<br/>")
-		.append("&nbsp;&nbsp;&nbsp;&nbsp;" + offer.getStr("branch") + "的 "
-						+ offer.getStr("fullname") + " ("
-						+ offer.getStr("phone") + ") 发来故障工单。<br/>")
+		.append("&nbsp;&nbsp;&nbsp;&nbsp;" + offer.getStr("bname") + "的 "
+						+ offer.getStr("ufullname") + " ("
+						+ offer.getStr("uphone") + ") 发来故障工单。<br/>")
 		.append("故障内容："+description+"<br/>")
 		.append("请及时处理。");
 		
