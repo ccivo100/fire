@@ -13,3 +13,6 @@ $(function () {
         e.stopPropagation();
     });
 });
+
+/*admin/role中的权限管理*/
+

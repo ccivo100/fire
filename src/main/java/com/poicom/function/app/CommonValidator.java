@@ -15,15 +15,15 @@ public class CommonValidator extends Validator{
 		
 		if(getActionKey().equals("/report/save")|getActionKey().equals("/report/update")){
 			
-			if(!ValidateKit.isLength(c.getPara("odescription"), 30, 250))
+			if(!ValidateKit.isLength(c.getPara("odescription"), 2, 250))
 			{
-				addError("descriptionMsg","故障描述应不少于30字！");
+				addError("descriptionMsg","故障描述应不少于2字！");
 			}
 		}
 		else if(getActionKey().equals("/operate/update")){
-			if(!ValidateKit.isLength(c.getPara("ocomment"), 30, 250))
+			if(!ValidateKit.isLength(c.getPara("ocomment"), 2, 250))
 			{
-				addError("commentMsg","处理意见应不少于30字！");
+				addError("commentMsg","处理意见应不少于2字！");
 			}
 		}
 		

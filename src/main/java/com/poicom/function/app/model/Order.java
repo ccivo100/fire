@@ -29,11 +29,11 @@ public class Order extends Model<Order> {
 	 * @param paras
 	 * @return
 	 */
-	public Page<Record> getReportOrderPage(int pageNumber, int pageSize,
+	public Page<Record> getReportOrderPage(int pageNumber, int pageSize,String where,
 			Object... paras) {
 		return Db.paginate(pageNumber, pageSize,
 				SqlKit.sql("order.findReportFullOffersBySelect") + blank,
-				SqlKit.sql("order.findReportFullOffersByFrom"), paras);
+				SqlKit.sql("order.findReportFullOffersByFrom")+ blank+where, paras);
 	}
 	
 	/**

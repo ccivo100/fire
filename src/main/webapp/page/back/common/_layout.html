@@ -1,0 +1,28 @@
+<#macro layout activebar html_title>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<!--页面meta、link-->
+<#include "/page/back/common/_meta.html"/>
+<#include "/page/back/common/_link.html"/>
+<!--页面js-->
+<#include "/page/back/common/_js.html"/>
+<title>${html_title}</title>
+</head>
+<body>
+	<!--页头-->
+	<#include "/page/back/common/_header.html"/>
+	
+	<!--页面内容-->
+	<div style="min-height:492px">
+		<#nested>
+	</div>
+	
+	<!--页尾-->
+	<#include "/page/back/common/_footer.html"/>
+	
+
+
+</body>
+</html>
+</#macro>

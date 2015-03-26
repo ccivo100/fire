@@ -33,8 +33,11 @@
     					<span class="glyphicon glyphicon-list"></span> 管理员目录<span	class="caret"></span>
     					</a>
     						<ul class="dropdown-menu" role="menu">
-    							<@shiro.hasPermission name="P_A_ROLE">
-    							<li><a href="/admin/role">权限管理</a></li>
+	    						<@shiro.hasPermission name="P_A_ROLE">
+								<li><a href="/admin/role">角色管理</a></li>
+								</@shiro.hasPermission>
+    							<@shiro.hasPermission name="P_A_PERMISSION">
+    							<li><a href="/admin/permission">权限管理</a></li>
     							</@shiro.hasPermission>
     							<@shiro.hasPermission name="P_A_USER">
     							<li><a href="/admin/user">用户管理</a></li>

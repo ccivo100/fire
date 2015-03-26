@@ -6,22 +6,43 @@
 	<br>
 </div>
 <div class="index-background">
-  			<form class="bs-example bs-example-form" role="form" action="/admin/branch" method="get">
+  			<form class="bs-example bs-example-form" role="form" action="/report/offer" method="get">
 		      	<div class="row">
-				         <div class="col-lg-6">
-				            <div class="form-group">
-				               <span class="input-group-btn">
-				                  <a  class="btn btn-success"  href="/report/add">
-				                     <span class="glyphicon glyphicon-search"></span> 故障申报
-				                  </a>
-				               </span>
+				         <div class="col-lg-4">
+				            <div class="input-group">
+				            	<span class="input-group-addon">故障类型</span>
+				               	<select id="selectType" name="selectType" class="form-control"   autofocus>
+				               		
+				               		<option value="" selected="selected">请选择</option>
+				               		<#list typeList as type>
+								         <option value="${type.id}"  
+								         	<#if typeid??>
+								         		<#if typeid="">
+								         		
+								         		<#elseif typeid?number=type.id>
+								         			selected="selected"
+												</#if>
+								         	</#if>
+								         >
+											${type.name}
+										</option>
+									</#list>
+								</select>
+							
+								<span class="input-group-btn">
+									<button class="btn btn-default">
+					               <span class="glyphicon glyphicon-search"></span>Search
+					               </button>
+								</span>
 				            </div>
 				         </div>
-		         		<div class="col-lg-6">
+				         <div class="col-lg-4">
+				         </div>
+		         		<div class="col-lg-2">
 							<div class="form-group">
 								<span class="input-group-btn">
 				                  <a  class="btn btn-success"  href="/report/add">
-				                     <span class="glyphicon glyphicon-search"></span> 故障申报
+				                      故障申报
 				                  </a>
 				               </span>
 							</div>
@@ -29,6 +50,7 @@
 		      	</div>
 		   </form>
 
+	
 	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>

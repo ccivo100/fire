@@ -118,5 +118,9 @@ public class IndexController extends Controller {
 		captcha.setRandomColor(true);
 		render(captcha);
 	}
+	
+	public void back(){
+		render("/page/back/index/index.html");
+	}
 
 }

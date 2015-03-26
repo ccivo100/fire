@@ -1,0 +1,28 @@
+<#include "/page/common/_layout.html"/>
+<@layout activebar="user" html_title="权限管理">
+
+<form class="form-inline branch" role="form" action="/admin/role" method="get">
+
+	
+	<div class="form-group pull-right">
+  	</div>
+</form>
+
+ <div class="tree ">
+	<ul>
+		<#list permissionTree as permissions>
+			<li>
+				<span><i class="glyphicon glyphicon-folder-open"></i> ${(permissions.name)!}</span>
+				<ul>
+				    <#list permissions.children as permission>
+				    	<li>
+				        	<span><i class="glyphicon glyphicon-minus-sign"></i> ${(permission.name)!}</span> 
+				    	</li>
+				    </#list>
+				</ul>
+			</li>
+		</#list>
+	</ul>
+</div>
+
+</@layout>

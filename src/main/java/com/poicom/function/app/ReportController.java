@@ -50,22 +50,26 @@ public class ReportController extends JFController{
 	@CacheName("/order/query")
 	public void offer(){
 		User user=User.dao.getCurrentUser();
-		System.out.println(user.get("id"));
+		Page<Record> reportPage;
+		String orderby=" order by o.status asc ,o.offer_at asc ";
 		
-		Page<Record> reportPage=Order.dao.getReportOrderPage(getParaToInt(0,1), 10,user.get("id"));
+		if(ValidateKit.isNullOrEmpty(getPara("selectType"))){
+			reportPage=Order.dao.getReportOrderPage(getParaToInt(0,1), 10,orderby,user.get("id"));
+		}else{
+			String where=" and o.type=? ";
+			reportPage=Order.dao.getReportOrderPage(getParaToInt(0,1), 10,where+orderby,user.get("id"),getParaToInt("selectType"));
+		}
+		
 		
 		Order.dao.format(reportPage,"description");
 		
 		setAttr("reportPage",reportPage);
+		setAttr("typeList",ErrorType.dao.getAllType());
+		setAttr("typeid",getPara("selectType"));
 		render("report.html");
 	}
 	
-	
-	//测试
-	public void print(){
-		System.out.println("id="+getPara("id"));
-		redirect("/report/offer");
-	}
+
 	
 	/**
 	 * @描述 进入新建故障工单页面
@@ -113,7 +117,7 @@ public class ReportController extends JFController{
 			String body=getMailBody(userinfo,getPara("odescription"),deal.getStr("fullname")).toString();
 			//发送邮件通知
 			if(ValidateKit.isEmail(deal.getStr("useremail"))){
-				sendEmail("XX故障系统提醒您！",body,deal.getStr("useremail"));
+				sendEmail("点通故障系统提醒您！",body,deal.getStr("useremail"));
 			}
 			//电话&&非空 then 保存电话列表
 			if(!ValidateKit.isNullOrEmpty(deal.getStr("userphone"))){
@@ -124,7 +128,7 @@ public class ReportController extends JFController{
 			
 		}
 		//发送短信
-		//String[] array =new String[phones.size()];
+		String[] array =new String[phones.size()];
 		//sendSms(userinfo,phones.toArray(array));
 		
 		
@@ -250,9 +254,9 @@ public class ReportController extends JFController{
 		
 		StringBuffer contt=new StringBuffer();
 		contt.append("您好，")
-				.append(userinfo.getStr("branch")+"的 ")
-				.append(userinfo.getStr("fullname"))
-				.append(" ("+userinfo.getStr("phone")+") ")
+				.append(userinfo.getStr("bname")+"的 ")
+				.append(userinfo.getStr("ufullname"))
+				.append(" ("+userinfo.getStr("uphone")+") ")
 				.append("提交了故障工单，请尽快处理。");
 		String content =contt.toString();
 

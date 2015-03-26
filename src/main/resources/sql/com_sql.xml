@@ -32,7 +32,7 @@
 		LEFT OUTER JOIN sec_user AS f ON o.offer_user=f.id 
 		LEFT OUTER JOIN sec_user AS d ON o.deal_user=d.id
 		LEFT OUTER JOIN com_type AS t ON o.type=t.id
-		WHERE o.offer_user=? order by o.status asc ,o.offer_at asc
+		WHERE o.offer_user=? 
   	</sql>
   	
   	<!-- 根据工单id查询该工单的详细内容 多表查询 -->

@@ -2,7 +2,9 @@ package com.poicom.function.user;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
+import cn.dreampie.ValidateKit;
 import cn.dreampie.routebind.ControllerKey;
 import cn.dreampie.shiro.core.SubjectKit;
 import cn.dreampie.shiro.hasher.HasherInfo;
@@ -11,6 +13,8 @@ import cn.dreampie.shiro.hasher.HasherKit;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.tx.Tx;
+import com.poicom.function.user.model.Permission;
+import com.poicom.function.user.model.Role;
 import com.poicom.function.user.model.User;
 
 @ControllerKey(value="/admin",path="/page/app/admin")
@@ -21,14 +25,81 @@ public class AdminController extends Controller {
 		render("user.html");
 	}
 	
+	/**
+	 * 权限管理
+	 */
 	public void role(){
+		List<Role> roles=Role.dao.find("select * from sec_role where pid=?",0);
+		for(Role role:roles){
+			List<Role> rchild=Role.dao.find("select * from sec_role where pid=?",role.get("id"));
+			role.setChildren(rchild);
+		}
+		setAttr("roleTree",roles);
+		
+		
+		
 		
 	}
 	
+	/**
+	 * 新增角色
+	 */
+	public void addrole(){
+		
+		if(ValidateKit.isNullOrEmpty(getPara("id"))){
+
+		}else{
+			System.out.println(getParaToLong("id"));
+			setAttr("pid",getParaToLong("id"));
+		}
+		
+		/*Role role=Role.dao.findById(getPara("id"));
+		setAttr("role",role);*/
+		render("/page/app/admin/role/add.html");
+	}
+	public void doadd(){
+		getModel(Role.class).save();
+		redirect("/admin/role");
+	}
+	
+	/**
+	 * 更新角色
+	 */
+	public void editrole(){
+		Role role=Role.dao.findById(getPara("id"));
+		setAttr("role",role);
+		render("/page/app/admin/role/edit.html");
+	}
+	public void doedit(){
+		getModel(Role.class).update();
+		redirect("/admin/role");
+	}
+	
+	public void permission(){
+		List<Permission> permissions=Permission.dao.find("select * from sec_permission where pid=?",0);
+		for(Permission permission:permissions){
+			List<Permission> pchild=Permission.dao.find("select * from sec_permission where pid=?", permission.get("id"));
+			permission.setChildren(pchild);
+		}
+		setAttr("permissionTree",permissions);
+	}
+	/**
+	 * 权限处理
+	 */
+	public void addpermission(){
+		
+	}
+	
+	/**
+	 * 用户管理
+	 */
 	public void user(){
 		
 	}
 	
+	/**
+	 * 工单管理
+	 */
 	public void order(){
 		
 	}
