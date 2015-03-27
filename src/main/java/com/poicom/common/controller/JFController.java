@@ -2,11 +2,9 @@ package com.poicom.common.controller;
 
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Record;
-import com.poicom.function.app.model.Order;
-import com.poicom.function.user.model.User;
-import com.poicom.function.user.model.UserInfo;
 
 public class JFController extends Controller{
+	
 	
 	/**
 	 * @描述 Record 转换为Attr

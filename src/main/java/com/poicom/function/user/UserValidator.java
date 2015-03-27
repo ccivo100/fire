@@ -1,5 +1,8 @@
 package com.poicom.function.user;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import cn.dreampie.ValidateKit;
 import cn.dreampie.shiro.core.SubjectKit;
 import cn.dreampie.shiro.hasher.Hasher;
@@ -10,6 +13,8 @@ import com.jfinal.validate.Validator;
 import com.poicom.function.user.model.User;
 
 public class UserValidator extends Validator {
+	
+	protected Logger logger=LoggerFactory.getLogger(getClass());
 
 	@Override
 	protected void validate(Controller c) {

@@ -8,6 +8,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import cn.dreampie.resource.HttpResource;
 import cn.dreampie.routebind.ControllerKey;
 
@@ -23,6 +26,7 @@ import com.poicom.common.kit.excel.PoiKit;
  */
 @ControllerKey(value="/bootstrap",path="/page/bootstrap")
 public class BootstrapController extends Controller {
+	protected Logger logger=LoggerFactory.getLogger(getClass());
 	
 	public void index(){
 		
@@ -42,6 +46,10 @@ public class BootstrapController extends Controller {
 	public void school(){
 		
 		render("school.html");
+	}
+	
+	public void dash(){
+		
 	}
 	
 	public void upfile(){

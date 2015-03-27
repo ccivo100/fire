@@ -1,5 +1,8 @@
 package com.poicom.function.user;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import cn.dreampie.ValidateKit;
 import cn.dreampie.routebind.ControllerKey;
 import cn.dreampie.shiro.core.ShiroKit;
@@ -19,11 +22,11 @@ import com.poicom.function.user.model.UserInfo;
 @ControllerKey(value="/user")
 public class UserController extends Controller {
 	
+	protected Logger logger=LoggerFactory.getLogger(getClass());
+	
 	public void index(){
 		redirect("/user/center");
 	}
-	
-	
 	
 	/**
 	 * 进入修改用户密码页面

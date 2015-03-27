@@ -1,6 +1,9 @@
 package com.poicom.function.app;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import cn.dreampie.ValidateKit;
 
 import com.jfinal.core.Controller;
@@ -9,6 +12,8 @@ import com.jfinal.validate.Validator;
 import com.poicom.function.app.model.ErrorType;
 
 public class CommonValidator extends Validator{
+	
+	protected Logger logger=LoggerFactory.getLogger(getClass());
 
 	@Override
 	protected void validate(Controller c) {

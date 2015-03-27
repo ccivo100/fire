@@ -1,5 +1,5 @@
 <#include "/page/common/_layout.html"/>
-<@layout activebar="user" html_title="权限管理">
+<@layout activebar="user" html_title="角色管理">
 
 
 <div class="tree ">
@@ -9,12 +9,12 @@
 			<span>
 				<i class="glyphicon glyphicon-folder-open"></i> ${(roles.name)!}
 			</span>
-			<a class="btn btn-info btn-sm"   href="/admin/dorole&id=${(roles.id)!}"  >编辑</a> 
+			<a class="btn btn-info btn-sm"   href="/admin/dorole&id=${(roles.id)!}"  >权限分配</a> 
 			<ul>
 				<#list roles.children as role>
 				<li>
 					<span><i class="glyphicon glyphicon-minus-sign"></i> ${(role.name)!}</span> 
-						<a class="btn btn-info btn-sm"   href="/admin/dorole&id=${(role.id)!}"  >编辑</a> 
+						<a class="btn btn-info btn-sm"   href="/admin/dorole&id=${(role.id)!}"  >权限分配</a> 
 				</li>
 				</#list>
 			</ul>
@@ -39,19 +39,18 @@
 	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>
-				<th width="2%">角色编号</th>
-				<th width="5%">角色名称</th>
-				<th width="5%">角色代码</th>
-				<th width="3%">父节点编号</th>
+				<th width="3%">角色编号</th>
+				<th width="4%">角色名称</th>
+				<th width="4%">角色代码</th>
+				<th width="4%">父节点编号</th>
 				<th width="5%">创建时间</th>
-				<th width="5%">状态</th>
-				<th width="5%">操作</th>
+				<th width="3%">状态</th>
+				<th width="8%">操作</th>
 			</tr>
 		</thead>
 		<tbody>
 			<#list roleTree as roles>
 			<tr>
-			
 				<td>${(roles.id)!}</td>
 				<td> ${(roles.name)!}</td>
 				<td>${(roles.value)!}</td>
@@ -59,18 +58,16 @@
 				<td>${(roles.created_at)!}</td>
 				<td><#if roles.deleted_at??>禁用<#else>正常</#if></td>
 				<td><a class="btn btn-primary btn-xs"  href="/admin/editrole?id=${(roles.id)!}" >编辑</a>
-				<a class="btn btn-primary btn-xs"  href="/admin/addrole?id=${(roles.id)!}" >添加</a>
 				<#if roles.deleted_at??>
-				<a class="btn btn-primary btn-xs"  href="/admin/dorole?id=${(roles.id)!}" >启用</a>
+				<a class="btn btn-danger btn-xs"  href="/admin/onrole?id=${(roles.id)!}" >启用</a>
 				<#else>
-				
+				<a class="btn btn-primary btn-xs"  href="/admin/offrole?id=${(roles.id)!}" >禁用</a>
 				</#if>
-				
+				<a class="btn btn-primary btn-xs"  href="/admin/addrole?id=${(roles.id)!}" >添加</a>
 				</td>
 			</tr>
 			<#list roles.children as role>
 				<tr>
-			
 				<td>${(role.id)!}</td>
 				<td><span class="glyphicon glyphicon-minus-sign"></span>     ${(role.name)!}</td>
 				<td>${(role.value)!}</td>
@@ -80,9 +77,9 @@
 				<td>
 				<a class="btn btn-primary btn-xs"  href="/admin/editrole?id=${(role.id)!}" >编辑</a>
 				<#if role.deleted_at??>
-				<a class="btn btn-primary btn-xs"  href="/admin/dorole?id=${(role.id)!}" >启用</a>
+				<a class="btn btn-danger btn-xs"  href="/admin/onrole?id=${(role.id)!}" >启用</a>
 				<#else>
-				
+				<a class="btn btn-primary btn-xs"  href="/admin/offrole?id=${(role.id)!}" >禁用</a>
 				</#if>
 				</td>
 			</tr>

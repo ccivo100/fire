@@ -1,5 +1,8 @@
 package com.poicom.function.index;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import cn.dreampie.ValidateKit;
 
 import com.jfinal.core.Controller;
@@ -7,6 +10,8 @@ import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.validate.Validator;
 
 public class IndexValidator extends Validator{
+	
+	protected Logger logger=LoggerFactory.getLogger(getClass());
 
 	@Override
 	protected void validate(Controller c) {

@@ -4,6 +4,10 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import cn.dreampie.ValidateKit;
 import cn.dreampie.routebind.ControllerKey;
 import cn.dreampie.shiro.core.SubjectKit;
@@ -20,24 +24,23 @@ import com.poicom.function.user.model.User;
 @ControllerKey(value="/admin",path="/page/app/admin")
 public class AdminController extends Controller {
 	
+	protected Logger logger=LoggerFactory.getLogger(getClass());
+	
 	public void index(){
 		setAttr("userPage", User.dao.getUserPage(getParaToInt(0, 1), 10));
 		render("user.html");
 	}
 	
 	/**
-	 * 权限管理
+	 * 角色管理
 	 */
 	public void role(){
-		List<Role> roles=Role.dao.find("select * from sec_role where pid=?",0);
+		List<Role> roles=Role.dao.findRolesByPid(0);
 		for(Role role:roles){
-			List<Role> rchild=Role.dao.find("select * from sec_role where pid=?",role.get("id"));
+			List<Role> rchild=Role.dao.findRolesByPid(role.get("id"));
 			role.setChildren(rchild);
 		}
 		setAttr("roleTree",roles);
-		
-		
-		
 		
 	}
 	
@@ -53,10 +56,12 @@ public class AdminController extends Controller {
 			setAttr("pid",getParaToLong("id"));
 		}
 		
-		/*Role role=Role.dao.findById(getPara("id"));
-		setAttr("role",role);*/
 		render("/page/app/admin/role/add.html");
 	}
+	/**
+	 * 新增角色操作
+	 */
+	@Before(AdminValidator.class)
 	public void doadd(){
 		getModel(Role.class).save();
 		redirect("/admin/role");
@@ -70,25 +75,86 @@ public class AdminController extends Controller {
 		setAttr("role",role);
 		render("/page/app/admin/role/edit.html");
 	}
+	/**
+	 * 更新角色操作
+	 */
+	@Before(AdminValidator.class)
 	public void doedit(){
 		getModel(Role.class).update();
 		redirect("/admin/role");
 	}
 	
+	public void offrole(){
+		Role.dao.findById(getPara("id")).set("deleted_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
+		redirect("/admin/role");
+	}
+	
+	public void onrole(){
+		Role.dao.findById(getPara("id")).set("deleted_at", null).update();
+		redirect("/admin/role");
+	}
+	
+	
+	/**
+	 * 权限管理
+	 */
 	public void permission(){
-		List<Permission> permissions=Permission.dao.find("select * from sec_permission where pid=?",0);
+		List<Permission> permissions=Permission.dao.findPermissionsByPid(0);
 		for(Permission permission:permissions){
-			List<Permission> pchild=Permission.dao.find("select * from sec_permission where pid=?", permission.get("id"));
+			List<Permission> pchild=Permission.dao.findPermissionsByPid(permission.get("id"));
 			permission.setChildren(pchild);
 		}
 		setAttr("permissionTree",permissions);
 	}
 	/**
-	 * 权限处理
+	 * 新增权限
 	 */
 	public void addpermission(){
-		
+		if(ValidateKit.isNullOrEmpty(getPara("id"))){
+
+		}else{
+			System.out.println(getParaToLong("id"));
+			setAttr("pid",getParaToLong("id"));
+		}
+		render("/page/app/admin/permission/add.html");
 	}
+	/**
+	 * 新增权限操作
+	 */
+	@Before(AdminValidator.class)
+	public void doaddpermission(){
+		getModel(Permission.class).save();
+		redirect("/admin/permission");
+	}
+	
+	/**
+	 * 更新权限
+	 */
+	public void editpermission(){
+		Permission permission=Permission.dao.findById(getPara("id"));
+		setAttr("permission",permission);
+		render("/page/app/admin/permission/edit.html");
+	}
+	/**
+	 * 更新权限操作
+	 */
+	@Before(AdminValidator.class)
+	public void doeditpermission(){
+		getModel(Permission.class).update();
+		redirect("/admin/permission");
+	}
+	
+	public void offpermission(){
+		Permission.dao.findById(getPara("id")).set("deleted_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
+		redirect("/admin/permission");
+	}
+	
+	public void onpermission(){
+		Permission.dao.findById(getPara("id")).set("deleted_at", null).update();
+		redirect("/admin/permission");
+	}
+	
+	
 	
 	/**
 	 * 用户管理

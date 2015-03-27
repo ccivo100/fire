@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.commons.mail.EmailException;
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cn.dreampie.ValidateKit;
 import cn.dreampie.mail.Mailer;
@@ -30,6 +32,7 @@ import com.poicom.function.user.model.UserInfo;
  */
 @ControllerKey(value="/operate",path="/page/app/operate")
 public class OperateController extends JFController{
+	protected Logger logger=LoggerFactory.getLogger(getClass());
 	
 	public void index(){
 		

@@ -86,9 +86,11 @@
 							<li class="dropdown-header"><b>用户操作</b></li>
 							<li class="divider"></li>
 							<@shiro.authenticated>
+								<@shiro.hasPermission name="P_U_CENTER">
       							<li><a href="/user/center">
         						个人中心
       							</a></li>
+      							</@shiro.hasPermission>
       							<li><a href="/user/pwdPage">
       							修改密码
       							</a></li>
@@ -102,6 +104,7 @@
 							<li><a href="/bootstrap/tree">树形菜单</a></li>
 							<li><a href="/bootstrap/school">Bootstrap学校</a></li>
 							<li><a href="/autho">权限树</a></li>
+							<li><a href="/bootstrap/dash">DASH</a></li>
 						</ul>
 					</li>
 				</ul>

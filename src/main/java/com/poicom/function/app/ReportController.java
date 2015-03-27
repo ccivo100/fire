@@ -10,6 +10,8 @@ import java.util.List;
 
 import org.apache.commons.mail.EmailException;
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cn.dreampie.ValidateKit;
 import cn.dreampie.mail.Mailer;
@@ -35,6 +37,8 @@ import com.poicom.function.user.model.UserInfo;
  */
 @ControllerKey(value = "/report", path = "/page/app/report")
 public class ReportController extends JFController{
+	
+	protected Logger logger=LoggerFactory.getLogger(getClass());
 	
 	public void index(){
 		
@@ -257,7 +261,7 @@ public class ReportController extends JFController{
 				.append(userinfo.getStr("bname")+"的 ")
 				.append(userinfo.getStr("ufullname"))
 				.append(" ("+userinfo.getStr("uphone")+") ")
-				.append("提交了故障工单，请尽快处理。");
+				.append("提交了故障工单，请尽快处理。【一点通】");
 		String content =contt.toString();
 
 		try {

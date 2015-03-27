@@ -95,5 +95,13 @@ public class Role extends Model<Role> implements TreeNode<Role>{
 		return Db.query("SELECT `role`.id " + SqlKit.sql("role.findChildrenByFrom") + blank + getWhere(where), paras);
 	}
 	
+	/**
+	 * @描述 获得根角色List<Role>
+	 * @return
+	 */
+	public List<Role> findRolesByPid(Object... paras){
+		return find("select * from sec_role where pid=?",paras);
+	}
+	
 
 }
