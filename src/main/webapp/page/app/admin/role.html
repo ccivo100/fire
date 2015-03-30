@@ -1,26 +1,66 @@
 <#include "/page/common/_layout.html"/>
 <@layout activebar="user" html_title="角色管理">
 
+<script>
+
+$(document).ready(function(){
+	$("#pper").mousedown(function(){
+   		test(); 
+    });
+
+}
+
+function test(id){
+	$.ajax({
+	    type : "post",
+	    url : "/admin/loadPermission",
+	    dataType : "json",
+	    data:{rid=id},
+	    success : function(json) {
+	        alert("success");
+	        console.info(json);
+	    },
+	    error : function(textStatus) {
+	        alert("error");
+	        console.info(msg);
+	    }
+	});
+}
+
+
+</script>
 
 <div class="tree ">
-	<ul>
-		<#list roleTree as roles>
-			<li>
-			<span>
-				<i class="glyphicon glyphicon-folder-open"></i> ${(roles.name)!}
-			</span>
-			<a class="btn btn-info btn-sm"   href="/admin/dorole&id=${(roles.id)!}"  >权限分配</a> 
-			<ul>
-				<#list roles.children as role>
+	
+	<div class="row">
+		<div class="col-sm-4 col-md-4 col-lg-4">
+		<ul>
+			<#list roleTree as roles>
 				<li>
-					<span><i class="glyphicon glyphicon-minus-sign"></i> ${(role.name)!}</span> 
-						<a class="btn btn-info btn-sm"   href="/admin/dorole&id=${(role.id)!}"  >权限分配</a> 
+				<span>
+					<i class="glyphicon glyphicon-folder-open"></i> ${(roles.name)!}
+				</span>
+				<a class="btn btn-info btn-sm"   href="/admin/dorole&id=${(roles.id)!}"  >权限分配</a> 
+				<ul>
+					<#list roles.children as role>
+					<li>
+						<span><i class="glyphicon glyphicon-minus-sign"></i> ${(role.name)!}</span> 
+							<a class="btn btn-info btn-sm"   href="/admin/dorole&id=${(role.id)!}"  >权限分配</a> 
+					</li>
+					</#list>
+				</ul>
 				</li>
-				</#list>
-			</ul>
-			</li>
-		</#list>
-	</ul>
+			</#list>
+		</ul>
+		</div>
+		
+		<div id="per" class="col-sm-8 col-md-8 col-lg-8">
+			
+		</div>
+	
+	</div>
+	
+
 </div>
 <div class="index-background">
 <form class="bs-example bs-example-form" role="form" action="/" method="get">
@@ -56,7 +96,7 @@
 				<td>${(roles.value)!}</td>
 				<td>${(roles.pid)!}</td>
 				<td>${(roles.created_at)!}</td>
-				<td><#if roles.deleted_at??>禁用<#else>正常</#if></td>
+				<td><#if roles.deleted_at??><span class="glyphicon glyphicon-remove"></span>禁用<#else>正常</#if></td>
 				<td><a class="btn btn-primary btn-xs"  href="/admin/editrole?id=${(roles.id)!}" >编辑</a>
 				<#if roles.deleted_at??>
 				<a class="btn btn-danger btn-xs"  href="/admin/onrole?id=${(roles.id)!}" >启用</a>
@@ -73,7 +113,7 @@
 				<td>${(role.value)!}</td>
 				<td>${(role.pid)!}</td>
 				<td>${(role.created_at)!}</td>
-				<td><#if role.deleted_at??>禁用<#else>正常</#if></td>
+				<td><#if role.deleted_at??><span class="glyphicon glyphicon-remove"></span>禁用<#else>正常</#if></td>
 				<td>
 				<a class="btn btn-primary btn-xs"  href="/admin/editrole?id=${(role.id)!}" >编辑</a>
 				<#if role.deleted_at??>

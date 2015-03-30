@@ -25,6 +25,11 @@
 		left outer join sec_user as u on s.user_id=u.id 
 		where u.id=?
     </sql>
+    <sql id="findAllUserByFrom">
+    	FROM sec_user_info AS s 
+		LEFT OUTER JOIN com_branch AS c on s.branch_id=c.id
+		LEFT OUTER JOIN sec_user as u on s.user_id=u.id 
+    </sql>
     
     <!-- 根据用户id，查询用户所属公司 -->
   	

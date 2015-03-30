@@ -261,7 +261,7 @@ public class ReportController extends JFController{
 				.append(userinfo.getStr("bname")+"的 ")
 				.append(userinfo.getStr("ufullname"))
 				.append(" ("+userinfo.getStr("uphone")+") ")
-				.append("提交了故障工单，请尽快处理。【一点通】");
+				.append("提交了故障工单，请尽快处理。");
 		String content =contt.toString();
 
 		try {

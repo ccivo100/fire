@@ -9,6 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cn.dreampie.ValidateKit;
+import cn.dreampie.quartz.QuartzKey;
+import cn.dreampie.quartz.job.QuartzCronJob;
+import cn.dreampie.quartz.job.QuartzOnceJob;
 import cn.dreampie.routebind.ControllerKey;
 import cn.dreampie.shiro.core.SubjectKit;
 import cn.dreampie.shiro.hasher.HasherInfo;
@@ -16,10 +19,14 @@ import cn.dreampie.shiro.hasher.HasherKit;
 
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
+import com.poicom.function.job.AlertJob;
 import com.poicom.function.user.model.Permission;
 import com.poicom.function.user.model.Role;
 import com.poicom.function.user.model.User;
+import com.poicom.function.user.model.UserInfo;
 
 @ControllerKey(value="/admin",path="/page/app/admin")
 public class AdminController extends Controller {
@@ -154,13 +161,41 @@ public class AdminController extends Controller {
 		redirect("/admin/permission");
 	}
 	
+	public void loadPermission(){
+		int id=getParaToInt("rid");
+		List<Permission> permissionList=Permission.dao.findByRole("",id);
+		
+		renderJson("permissionList",permissionList);
+		//render("/page/app/admin/role/loadper.html");
+	}
+	
 	
 	
 	/**
 	 * 用户管理
 	 */
 	public void user(){
+		Page<User> userPage=User.dao.getAllUserPage(getParaToInt(0,1), 10);
 		
+		//run once
+		new QuartzOnceJob(new QuartzKey(2, "test", "test"), new Date(), AlertJob.class).addParam("name", "quartz").start();
+		setAttr("userPage",userPage);
+	}
+	
+	public void edituser(){
+		
+		Record user=UserInfo.dao.getAllUserInfo(getPara("id"));
+		new QuartzCronJob(new QuartzKey(1, "test", "test"), "*/5 * * * * ?", AlertJob.class).addParam("name", "quartz").stop();
+		render("/page/app/admin/user/edit.html");
+	}
+	
+	public void onuser(){
+		User.dao.findById(getPara("id")).set("deleted_at", null).update();
+		redirect("/admin/user");
+	}
+	public void offuser(){
+		User.dao.findById(getPara("id")).set("deleted_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
+		redirect("/admin/user");
 	}
 	
 	/**

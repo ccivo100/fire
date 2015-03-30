@@ -45,5 +45,11 @@ public class User extends Model<User> {
 				SqlKit.sql("user.findOperatorBySelect") + blank
 						+ SqlKit.sql("user.findOperatorByFrom"), paras);
 	}
+	
+	public Page<User> getAllUserPage(int pageNumber,int pageSize,Object... paras){
+		return paginate(pageNumber, pageSize,
+				SqlKit.sql("user.findInfoBySelect"),
+				SqlKit.sql("user.findAllUserByFrom"), paras);
+	}
 
 }

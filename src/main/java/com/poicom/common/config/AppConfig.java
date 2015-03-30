@@ -2,6 +2,9 @@ package com.poicom.common.config;
 
 import cn.dreampie.log.Slf4jLogFactory;
 import cn.dreampie.mail.MailerPlugin;
+import cn.dreampie.quartz.QuartzKey;
+import cn.dreampie.quartz.QuartzPlugin;
+import cn.dreampie.quartz.job.QuartzCronJob;
 import cn.dreampie.routebind.RouteBind;
 import cn.dreampie.shiro.core.ShiroInterceptor;
 import cn.dreampie.shiro.core.ShiroPlugin;
@@ -20,6 +23,7 @@ import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
+import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.ext.interceptor.SessionInViewInterceptor;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
@@ -29,6 +33,7 @@ import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.FreeMarkerRender;
 import com.poicom.common.resource.ResourceTags;
 import com.poicom.common.shiro.MyJdbcAuthzService;
+import com.poicom.function.job.AlertJob;
 
 public class AppConfig extends JFinalConfig {
 	
@@ -51,7 +56,7 @@ public class AppConfig extends JFinalConfig {
 
 	@Override
 	public void configHandler(Handlers me) {
-		// TODO Auto-generated method stub
+		me.add(new ContextPathHandler("contextpath"));
 
 	}
 
@@ -105,6 +110,9 @@ public class AppConfig extends JFinalConfig {
 	    
 	    //邮件插件
 	    me.add(new MailerPlugin());
+	    
+	    //定时器
+	    me.add(new QuartzPlugin());
 	}
 
 	@Override
@@ -121,7 +129,7 @@ public class AppConfig extends JFinalConfig {
 		FreeMarkerRender.setProperties(loadPropertyFile("freemarker.properties"));
 		FreeMarkerRender.getConfiguration().setSharedVariable("shiro",new ShiroTags());
 		FreeMarkerRender.getConfiguration().setSharedVariable("resource", new ResourceTags());
-		
+		new QuartzCronJob(new QuartzKey(1, "test", "test"), "0 09 18 * * ?", AlertJob.class).addParam("name", "quartz").start();
 	}
 	
 	public static void main(String[] args) {

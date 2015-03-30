@@ -1,0 +1,14 @@
+﻿<form class="form-horizontal" role="form" action="/operate/doassign" method="post" >
+	<div class="form-group">
+		<#list permissionList as permission>
+			<input type="checkbox" id="per" name="types" value="${(permission.name)!}">
+		</#list>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button value="提交" type="submit" class="btn btn-primary save" data-loading-text="正在提交...">提交</button>
+		</div>
+	</div>
+
+
+</form>
