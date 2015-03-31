@@ -1,0 +1,14 @@
+﻿<#include "/page/common/_layout.html" />
+<@layout activebar="report" html_title="新增类型">
+<div class="page-header">
+<h2>类型管理 ---&gt; 新增类型
+</h2>
+</div>
+<div class="tree">
+	<!-- 代表上写文、/blog代表控制器、/save代表控制器中的方法 -->
+	<form class="form-horizontal" role="form"  action="/admin/doaddtype" method="post" >
+		<#include "_form.html" />
+	</form>
+	
+</div>
+</@layout>

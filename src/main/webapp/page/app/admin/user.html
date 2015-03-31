@@ -9,12 +9,13 @@
 	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>
-				<th width="5%">姓名</th>
-				<th width="5%">账号</th>
-				<th width="8%">所属单位</th>
-				<th width="8%">联系电话</th>
-				<th width="8%">状态</th>
-				<th width="10%">操作</th>
+				<th width="4%">姓名</th>
+				<th width="4%">账号</th>
+				<th width="7%">所属单位</th>
+				<th width="4%">联系电话</th>
+				<th width="25%">角色</th>
+				<th width="4%">状态</th>
+				<th width="5%">操作</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -24,6 +25,7 @@
 				<td>${(user.uaccount)!}</td>
 				<td>${(user.bname)!}</td>
 				<td>${(user.uphone)!}</td>
+				<td>${(user.remark)!}</td>
 				<td>
 				<#if user.udeletetime??>
 				<span class="glyphicon glyphicon-remove"></span>禁用

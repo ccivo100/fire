@@ -3,6 +3,7 @@ package com.poicom.function.user.model;
 import java.util.List;
 
 import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Record;
 
 import cn.dreampie.sqlinxml.SqlKit;
 import cn.dreampie.tablebind.TableBind;
@@ -28,5 +29,15 @@ public class UserRole extends Model<UserRole> {
 	 */
 	public List<String> findUserIds(String where,Object... paras){
 		return Db.query("SELECT DISTINCT `userRole`.user_id " + SqlKit.sql("userRole.findByFrom") + " " + getWhere(where), paras);
+	}
+	
+	/**
+	 * @描述 根据用户id，查询其相应角色
+	 * @param paras
+	 * @return
+	 */
+	public List<Record> findUserRolesById(Object... paras){
+		return Db.find(SqlKit.sql("userRole.findUserRolesBySelect") + blank
+				+ SqlKit.sql("userRole.findUserRolesByFrom"), paras);
 	}
 }

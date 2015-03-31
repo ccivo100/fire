@@ -58,5 +58,6 @@ public class Permission extends Model<Permission> implements TreeNode<Permission
 	public List<Permission> findPermissionsByPid(Object... paras){
 		return find("select * from sec_permission where pid=?",paras);
 	}
+	
 
 }

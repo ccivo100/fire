@@ -84,8 +84,17 @@
   </sqlGroup>
 
   <sqlGroup name="userRole">
-  	<sql>FROM sec_user_role `userRole` 
-  	
+  	<sql id="findUserRolesBySelect">
+  		select sur.id id, u.id userid,r.id roleid,r.name rname
+  	</sql>
+  	<sql id="findUserRolesByFrom">
+  		from sec_user_role as sur
+		left join sec_user as u on sur.user_id=u.id
+		left join sec_role as r on sur.role_id=r.id
+		where u.id=?
+  	</sql>
+  	<sql>
+  		FROM sec_user_role `userRole` 
   	</sql>
   </sqlGroup>
 

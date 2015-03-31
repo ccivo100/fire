@@ -2,7 +2,9 @@ package com.poicom.function.user;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -22,11 +24,14 @@ import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
+import com.poicom.function.app.model.ErrorType;
 import com.poicom.function.job.AlertJob;
 import com.poicom.function.user.model.Permission;
 import com.poicom.function.user.model.Role;
+import com.poicom.function.user.model.RolePermission;
 import com.poicom.function.user.model.User;
 import com.poicom.function.user.model.UserInfo;
+import com.poicom.function.user.model.UserRole;
 
 @ControllerKey(value="/admin",path="/page/app/admin")
 public class AdminController extends Controller {
@@ -48,21 +53,18 @@ public class AdminController extends Controller {
 			role.setChildren(rchild);
 		}
 		setAttr("roleTree",roles);
-		
 	}
 	
 	/**
 	 * 新增角色
 	 */
 	public void addrole(){
-		
 		if(ValidateKit.isNullOrEmpty(getPara("id"))){
 
 		}else{
 			System.out.println(getParaToLong("id"));
 			setAttr("pid",getParaToLong("id"));
 		}
-		
 		render("/page/app/admin/role/add.html");
 	}
 	/**
@@ -91,11 +93,62 @@ public class AdminController extends Controller {
 		redirect("/admin/role");
 	}
 	
+	/**
+	 * 角色分配权限
+	 */
+	public void assignrole(){
+		
+		Role role=Role.dao.findById(getPara("id"));
+		List<String> userpermission=RolePermission.dao.findPermissionIds("role_id=?",role.get("id"));
+		List<Permission> permissions=Permission.dao.findPermissionsByPid(0);
+		for(Permission permission:permissions){
+			List<Permission> pchild=Permission.dao.findPermissionsByPid(permission.get("id"));
+			permission.setChildren(pchild);
+		}
+		
+		setAttr("role",role);
+		setAttr("userpermission",userpermission);
+		setAttr("permissions",permissions);
+		render("/page/app/admin/role/assign.html");
+	}
+	
+	@Before(Tx.class)
+	public void doassignrole(){
+		//页面传值
+		String[] permissions=getParaValues("pers");
+		Long roleid=getParaToLong("roleid");
+		//当前角色已分配权限List
+		List<RolePermission> rps=RolePermission.dao.findRolePermissionByRoleId(roleid);
+		
+		if(ValidateKit.isNullOrEmpty(permissions)){
+			for(int i=0;i<rps.size();i++){
+				logger.info(rps.get(i).getLong("permission_id")+" 已取消，执行删除操作！");
+				rps.get(i).delete();
+			}
+		}else {
+			Map<Long,Permission> perMap=new HashMap<Long,Permission>();
+			for(int i=0;i<permissions.length;i++){
+				//根据页面选择的id，查询该Permission的父id，根据父id查询到父Permission。
+				Permission pf=Permission.dao.findById(Permission.dao.findById(permissions[i]).get("pid"));
+				if(perMap.get(pf.get("id"))==null){
+					perMap.put(pf.getLong("id"), pf);
+				}
+				new RolePermission().set("role_id", roleid).set("permission_id", permissions[i]).save();
+			}
+			for(RolePermission rp:rps){
+				rp.delete();
+			}
+			for(Permission p:perMap.values()){
+				new RolePermission().set("role_id", roleid).set("permission_id", p.get("id")).save();
+			}
+		}
+		redirect("/admin/role");
+	}
+	
 	public void offrole(){
 		Role.dao.findById(getPara("id")).set("deleted_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
 		redirect("/admin/role");
 	}
-	
 	public void onrole(){
 		Role.dao.findById(getPara("id")).set("deleted_at", null).update();
 		redirect("/admin/role");
@@ -177,16 +230,87 @@ public class AdminController extends Controller {
 	public void user(){
 		Page<User> userPage=User.dao.getAllUserPage(getParaToInt(0,1), 10);
 		
-		//run once
-		new QuartzOnceJob(new QuartzKey(2, "test", "test"), new Date(), AlertJob.class).addParam("name", "quartz").start();
+		for(int i=0;i<userPage.getList().size();i++){
+			List<Record> list=UserRole.dao.findUserRolesById(userPage.getList().get(i).get("uuserid"));
+			StringBuffer roles=new StringBuffer();
+			for(int j=0;j<list.size();j++){
+				roles.append(list.get(j).get("rname")+"；");
+			}
+			userPage.getList().get(i).set("remark", roles);
+			
+		}
 		setAttr("userPage",userPage);
 	}
 	
 	public void edituser(){
-		
-		Record user=UserInfo.dao.getAllUserInfo(getPara("id"));
-		new QuartzCronJob(new QuartzKey(1, "test", "test"), "*/5 * * * * ?", AlertJob.class).addParam("name", "quartz").stop();
+		String userid=getPara("id");
+		setAttr("userinfo",UserInfo.dao.getAllUserInfo(userid));
+		setAttr("userrole",UserRole.dao.findUserRolesById(userid));
+		setAttr("roleList",Role.dao.findAll());
 		render("/page/app/admin/user/edit.html");
+	}
+	/**
+	 * @描述 执行分配角色操作
+	 */
+	@Before(Tx.class)
+	public void doedituser(){
+		//前台选中的 角色s
+		String[] roles=getParaValues("roles");
+		
+		//用户-角色 中间表
+		List<Record> sur=UserRole.dao.findUserRolesById(getParaToLong("userid"));
+		
+		//1、用户有角色，取消所有角色
+		if(ValidateKit.isNullOrEmpty(roles)){
+			for(int i=0;i<sur.size();i++){
+				logger.info(sur.get(i).getLong("roleid")+" 已取消，执行删除操作！");
+				UserRole.dao.findById(sur.get(i).getLong("id")).delete();
+			}
+		}
+		//2、用户无角色，新增角色
+		else if(ValidateKit.isNullOrEmpty(sur)){
+			for(int i=0;i<roles.length;i++){
+				logger.info(roles[i]+" 不存在，执行新增操作！");
+				new UserRole().set("user_id", getPara("userid")).set("role_id", roles[i]).save();
+			}
+		}
+		//3、用户有角色
+		else{
+			//需要分配该角色?，不存在则新增。
+			for(int i=0;i<roles.length;i++){
+				boolean flag=false;
+				for(int j=0;j<sur.size();j++){
+					if(Integer.parseInt(roles[i])==sur.get(j).getLong("roleid")){
+						flag=true;
+						break;
+					}
+				}
+				if(flag){
+					logger.info(roles[i]+" 存在，保留不删除！");
+				}else if(!flag){
+					logger.info(roles[i]+" 不存在，执行新增操作！");
+					new UserRole().set("user_id", getPara("userid")).set("role_id", roles[i]).save();
+				}
+			}
+			
+			//需要保留该角色?，不保留则删除
+			for(int i=0;i<sur.size();i++){
+				boolean flag=false;
+				for(int j=0;j<roles.length;j++){
+					if(sur.get(i).getLong("roleid")==Integer.parseInt(roles[j])){
+						flag=true;
+						break;
+					}
+				}
+				if(flag){
+					logger.info(sur.get(i).getLong("roleid")+" 未取消，保留不删除！");
+				}else if(!flag){
+					logger.info(sur.get(i).getLong("roleid")+" 已取消，执行删除操作！");
+					UserRole.dao.findById(sur.get(i).getLong("id")).delete();
+				}
+			}
+		}
+		redirect("/admin/user");
 	}
 	
 	public void onuser(){
@@ -204,6 +328,40 @@ public class AdminController extends Controller {
 	public void order(){
 		
 	}
+	
+	/**
+	 * 故障类型管理
+	 */
+	public void type(){
+		List<ErrorType> typeList=ErrorType.dao.findAll();
+		setAttr("typeList",typeList);
+	}
+	
+	public void addtype(){
+		render("/page/app/admin/type/add.html");
+	}
+	public void doaddtype(){
+		getModel(ErrorType.class).save();
+		redirect("/admin/type");
+	}
+	public void edittype(){
+		ErrorType errorType=ErrorType.dao.findById(getPara("id"));
+		setAttr("errorType",errorType);
+		render("/page/app/admin/type/edit.html");
+	}
+	public void doedittype(){
+		getModel(ErrorType.class).update();
+		redirect("/admin/type");
+	}
+	public void ontype(){
+		ErrorType.dao.findById(getPara("id")).set("deleted_at", null).update();
+		redirect("/admin/type");
+	}
+	public void offtype(){
+		ErrorType.dao.findById(getPara("id")).set("deleted_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
+		redirect("/admin/type");
+	}
+	
 	
 	
 	public void add(){}

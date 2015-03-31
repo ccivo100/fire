@@ -129,7 +129,7 @@ public class AppConfig extends JFinalConfig {
 		FreeMarkerRender.setProperties(loadPropertyFile("freemarker.properties"));
 		FreeMarkerRender.getConfiguration().setSharedVariable("shiro",new ShiroTags());
 		FreeMarkerRender.getConfiguration().setSharedVariable("resource", new ResourceTags());
-		new QuartzCronJob(new QuartzKey(1, "test", "test"), "0 09 18 * * ?", AlertJob.class).addParam("name", "quartz").start();
+		new QuartzCronJob(new QuartzKey(1, "test", "test"), "/05 * * * * ?", AlertJob.class).addParam("name", "quartz").start();
 	}
 	
 	public static void main(String[] args) {

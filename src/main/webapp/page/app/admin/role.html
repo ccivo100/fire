@@ -1,35 +1,6 @@
 <#include "/page/common/_layout.html"/>
 <@layout activebar="user" html_title="角色管理">
 
-<script>
-
-$(document).ready(function(){
-	$("#pper").mousedown(function(){
-   		test(); 
-    });
-
-}
-
-function test(id){
-	$.ajax({
-	    type : "post",
-	    url : "/admin/loadPermission",
-	    dataType : "json",
-	    data:{rid=id},
-	    success : function(json) {
-	        alert("success");
-	        console.info(json);
-	    },
-	    error : function(textStatus) {
-	        alert("error");
-	        console.info(msg);
-	    }
-	});
-}
-
-
-</script>
-
 <div class="tree ">
 	
 	<div class="row">
@@ -40,12 +11,12 @@ function test(id){
 				<span>
 					<i class="glyphicon glyphicon-folder-open"></i> ${(roles.name)!}
 				</span>
-				<a class="btn btn-info btn-sm"   href="/admin/dorole&id=${(roles.id)!}"  >权限分配</a> 
+				<a class="btn btn-info btn-sm"   href="/admin/assignrole?id=${(roles.id)!}"  >权限分配</a> 
 				<ul>
 					<#list roles.children as role>
 					<li>
 						<span><i class="glyphicon glyphicon-minus-sign"></i> ${(role.name)!}</span> 
-							<a class="btn btn-info btn-sm"   href="/admin/dorole&id=${(role.id)!}"  >权限分配</a> 
+							<a class="btn btn-info btn-sm"   href="/admin/assignrole?id=${(role.id)!}"  >权限分配</a> 
 					</li>
 					</#list>
 				</ul>

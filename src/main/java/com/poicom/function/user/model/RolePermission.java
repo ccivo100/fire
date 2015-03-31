@@ -18,4 +18,8 @@ public class RolePermission extends Model<RolePermission> {
 	public List<String> findPermissionIds(String where, Object... paras){
 		return Db.query("SELECT DISTINCT `rolePermission`.permission_id FROM sec_role_permission `rolePermission` " + getWhere(where), paras);
 	}
+	
+	public List<RolePermission> findRolePermissionByRoleId(Object... paras){
+		return find("select * from sec_role_permission where role_id=?",paras);
+	}
 }

@@ -98,5 +98,9 @@ public class Order extends Model<Order> {
 		}
 	}
 	
+	public List<Order> findOrderByStatus(Object... paras){
+		return find("select * from com_order where status=?",paras);
+	}
+	
 
 }
