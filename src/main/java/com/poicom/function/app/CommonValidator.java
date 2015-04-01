@@ -80,9 +80,11 @@ public class CommonValidator extends Validator{
 			
 			if(!ValidateKit.isNullOrEmpty(c.getPara("ostatus"))){
 				if(c.getPara("ostatus").equals("已处理")){
-					c.setAttr("ostatus", 1);
-				}else if(c.getPara("ostatus").equals("未处理")){
 					c.setAttr("ostatus", 0);
+				}else if(c.getPara("ostatus").equals("未处理")){
+					c.setAttr("ostatus", 1);
+				}else if(c.getPara("ostatus").equals("超时未处理")){
+					c.setAttr("ostatus", 2);
 				}
 			}
 			

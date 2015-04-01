@@ -15,10 +15,12 @@
   	</sql>
   	<sql id="findOperatorTypeByFrom">
   		FROM com_type AS ct 
-		WHERE ct.id in(
+		WHERE ct.deleted_at is null 
+		AND ct.id in(
       		SELECT cut.type_id 
       		FROM com_user_type AS cut 
       		WHERE cut.user_id=?)
+      	
   	</sql>
   	
   	<!-- 报障业务 -->
@@ -42,21 +44,20 @@
 		o.description odescription,o.offer_at ooffertime,
 		o.status ostatus,o.deal_user odealid,
 		u2.full_name udealname,u2.phone udealphone,
-		o.comment ocomment,o.deal_at odealtime
+		o.comment ocomment,o.deal_at odealtime,o.spend_time ospendtime
   	</sql>
-  	<sql id="findReportOfferByFrom">
-  		FROM com_order AS o 
+  	<sql id="findOrdersByFrom"><!-- 根据条件，查询工单 -->
+  	  	FROM com_order AS o 
 		LEFT OUTER JOIN sec_user AS u1 ON o.offer_user = u1.id
 		LEFT OUTER JOIN sec_user AS u2 ON o.deal_user = u2.id
 		LEFT OUTER JOIN com_type AS t1 ON o.type=t1.id
-		WHERE o.id=?
   	</sql>
   	<sql id="findOverOrderByFrom"><!-- 查询完结工单，自助查询解决故障 -->
   		from com_order as o 
 		left outer join sec_user as u1 on o.offer_user = u1.id
 		left outer join sec_user as u2 on o.deal_user = u2.id
 		left outer join com_type as t1 on o.type=t1.id
-		where 1=1 and  o.status=1 
+		where 1=1 and  o.status=0 
   	</sql>
   	
   	<!-- 运维业务 -->
@@ -70,8 +71,9 @@
 		left outer join sec_user as f on o.offer_user=f.id
 		left outer join sec_user as d on o.deal_user=d.id
 		where o.type in(select cut.type_id  from com_user_type as cut where user_id=?)
-		order by o.status asc,o.offer_at asc
+		order by o.status desc,o.offer_at asc
   	</sql>
+  	
   	
   </sqlGroup>
 

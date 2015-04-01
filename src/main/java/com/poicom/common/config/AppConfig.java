@@ -1,10 +1,13 @@
 package com.poicom.common.config;
 
+import java.util.Date;
+
 import cn.dreampie.log.Slf4jLogFactory;
 import cn.dreampie.mail.MailerPlugin;
 import cn.dreampie.quartz.QuartzKey;
 import cn.dreampie.quartz.QuartzPlugin;
 import cn.dreampie.quartz.job.QuartzCronJob;
+import cn.dreampie.quartz.job.QuartzOnceJob;
 import cn.dreampie.routebind.RouteBind;
 import cn.dreampie.shiro.core.ShiroInterceptor;
 import cn.dreampie.shiro.core.ShiroPlugin;
@@ -129,7 +132,7 @@ public class AppConfig extends JFinalConfig {
 		FreeMarkerRender.setProperties(loadPropertyFile("freemarker.properties"));
 		FreeMarkerRender.getConfiguration().setSharedVariable("shiro",new ShiroTags());
 		FreeMarkerRender.getConfiguration().setSharedVariable("resource", new ResourceTags());
-		new QuartzCronJob(new QuartzKey(1, "test", "test"), "/05 * * * * ?", AlertJob.class).addParam("name", "quartz").start();
+		new QuartzCronJob(new QuartzKey(1, "test", "test"), "0 30 08 * * ?", AlertJob.class).start();
 	}
 	
 	public static void main(String[] args) {

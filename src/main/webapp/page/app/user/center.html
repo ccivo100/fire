@@ -3,18 +3,44 @@
 <script data-main="/javascript/app/user/init" src="/webjars/requirejs/2.1.14/require.min.js" charset="utf-8"></script>
 <!-- endbuild -->
 <@layout activebar="center" html_title="个人中心">
-<div class="page-header">
-  <h2>个人中心</h2>
-</div>
-	<div class="jumbotron">
-	    <#if userInfo??>
-	    
-		    登陆账号：  ${(userInfo.uaccount)!}<br>
-		    姓名： ${(userInfo.ufullname)!}<br>
-		    性别：<#if userInfo.info_gender=0>男<#else>女</#if><br>
-		    所属单位：${(userInfo.bname)!}<br>
-		    
-	    </#if>
+
+<div class="tree">
+	<div class="page-header">
+		<h3>个人中心</h3>
 	</div>
+	
+	<div class="row">
+		<div class="col-sm-2 col-md-2 col-lg-2">
+			<img alt="头像" src="${(userInfo.uavatatarurl)!}">
+		</div>
+		<div class="col-sm-8 col-md-8 col-lg-8">
+			<div class="form-group">
+				<label class="col-sm-3 col-md-3 col-lg-3 control-label">登陆账号</label>
+					${(userInfo.uaccount)!}
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 col-md-3 col-lg-3 control-label">姓名</label>
+					${(userInfo.ufullname)!}
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 col-md-3 col-lg-3 control-label">性别</label>
+					<#if userInfo.info_gender=0>男<#else>女</#if>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 col-md-3 col-lg-3 control-label">所属单位</label>
+					${(userInfo.bname)!}
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 col-md-3 col-lg-3 control-label">创建时间</label>
+					${(userInfo.ucreatetime)!}
+			</div>
+		</div>
+		<div class="col-sm-2 col-md-2 col-lg-2">
+		
+		</div>
+	</div>
+	
+
+</div>
 
 </@layout>

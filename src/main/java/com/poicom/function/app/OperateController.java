@@ -12,6 +12,7 @@ import cn.dreampie.mail.Mailer;
 import cn.dreampie.routebind.ControllerKey;
 
 import com.jfinal.aop.Before;
+import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
@@ -20,6 +21,7 @@ import com.jfinal.plugin.ehcache.CacheInterceptor;
 import com.jfinal.plugin.ehcache.CacheName;
 import com.jfinal.plugin.ehcache.EvictInterceptor;
 import com.poicom.common.controller.JFController;
+import com.poicom.common.kit.DateKit;
 import com.poicom.function.app.model.ErrorType;
 import com.poicom.function.app.model.Order;
 import com.poicom.function.user.model.User;
@@ -57,8 +59,9 @@ public class OperateController extends JFController{
 		//故障类型
 		setAttr("typeList",ErrorType.dao.getAllType());
 		
+		String where="o.id=?";
 		//工单详细信息
-		Record order = Order.dao.getCommonOrder(getParaToInt("id"));
+		Record order = Order.dao.getCommonOrder(where,getParaToInt("id"));
 		setAttr(order);
 		setAttr("order", order);
 		
@@ -87,12 +90,26 @@ public class OperateController extends JFController{
 		Integer orderid=getParaToInt("oorderid");
 		//comment
 		String comment=getPara("ocomment");
+		Order order=Order.dao.findById(orderid);
 		
-		Order.dao.findById(orderid).set("deal_user", getParaToInt("uuserid"))
-				.set("comment", comment)
-				.set("deal_at", 
-						DateTime.now().toString("yyyy-MM-dd HH:mm:ss"))
-				.set("status", 1).update();
+		int time=PropKit.getInt("alert.time", 20);
+		String offer_at=order.get("offer_at").toString();
+		DateTime now=DateTime.now();
+		int t =DateKit.dateBetween(offer_at, now);
+		
+		//设置基本内容：处理人，建议，处理时间，修改状态等。
+		order.set("deal_user", getParaToInt("uuserid"))
+		.set("comment", comment)
+		.set("deal_at", 
+				DateTime.now().toString("yyyy-MM-dd HH:mm:ss"))
+		.set("status", 0);
+		
+		//若处理时间超时，则
+		if(t>time){
+			order.set("spend_time", t).update();
+		}else{
+			order.update();
+		}
 		
 		redirect("/operate/deal");
 	}

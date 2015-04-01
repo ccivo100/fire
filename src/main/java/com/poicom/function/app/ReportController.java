@@ -25,6 +25,7 @@ import com.jfinal.plugin.ehcache.CacheInterceptor;
 import com.jfinal.plugin.ehcache.CacheName;
 import com.jfinal.plugin.ehcache.EvictInterceptor;
 import com.poicom.common.controller.JFController;
+import com.poicom.common.kit.AlertKit;
 import com.poicom.function.app.model.ErrorType;
 import com.poicom.function.app.model.Order;
 import com.poicom.function.user.model.User;
@@ -55,7 +56,7 @@ public class ReportController extends JFController{
 	public void offer(){
 		User user=User.dao.getCurrentUser();
 		Page<Record> reportPage;
-		String orderby=" order by o.status asc ,o.offer_at asc ";
+		String orderby=" order by o.status desc ,o.offer_at asc ";
 		
 		if(ValidateKit.isNullOrEmpty(getPara("selectType"))){
 			reportPage=Order.dao.getReportOrderPage(getParaToInt(0,1), 10,orderby,user.get("id"));
@@ -100,7 +101,7 @@ public class ReportController extends JFController{
 		Order order=new Order().set("offer_user", getParaToInt("uuserid"))
 				.set("description", getPara("odescription"))
 				.set("type", getParaToInt("selectType"))
-				.set("status", 0)
+				.set("status", 1)
 				.set("offer_at", 
 						DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
 		if(order.save())
@@ -118,10 +119,10 @@ public class ReportController extends JFController{
 		//发送邮件
 		for (Record deal : dealList) {
 			//获取邮件内容
-			String body=getMailBody(userinfo,getPara("odescription"),deal.getStr("fullname")).toString();
+			String body=AlertKit.getMailBody(userinfo,getPara("odescription"),deal.getStr("fullname")).toString();
 			//发送邮件通知
 			if(ValidateKit.isEmail(deal.getStr("useremail"))){
-				sendEmail("点通故障系统提醒您！",body,deal.getStr("useremail"));
+				AlertKit.sendEmail("点通故障系统提醒您！",body,deal.getStr("useremail"));
 			}
 			//电话&&非空 then 保存电话列表
 			if(!ValidateKit.isNullOrEmpty(deal.getStr("userphone"))){
@@ -133,7 +134,7 @@ public class ReportController extends JFController{
 		}
 		//发送短信
 		String[] array =new String[phones.size()];
-		//sendSms(userinfo,phones.toArray(array));
+		//AlertKit.sendSms(userinfo,phones.toArray(array));
 		
 		
 		redirect("/report/offer");
@@ -148,8 +149,9 @@ public class ReportController extends JFController{
 		//故障类型
 		setAttr("typeList",ErrorType.dao.getAllType());
 		
+		String where="o.id=?";
 		//工单详细信息
-		Record order = Order.dao.getCommonOrder(getParaToInt("id"));
+		Record order = Order.dao.getCommonOrder(where,getParaToInt("id"));
 		setAttr(order);
 		setAttr("order", order);
 		
@@ -187,48 +189,9 @@ public class ReportController extends JFController{
 	}
 	
 	/**
-	 * @描述 发送邮件通知
-	 *            主题        subject
-	 *            内容        body
-	 *            接收邮件 paras
-	 */
-	public void sendEmail(String subject,String body,String... paras){
-		
-		try {
-			Mailer.sendHtml(subject, body, paras);
-		} catch (EmailException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-
-	/**
-	 * 邮件内容 body
-	 * @param offer
-	 * @param description
-	 * @param deal
-	 * @return
-	 */
-	public StringBuffer getMailBody(Record offer,String description,String deal){
-		
-		StringBuffer body=new StringBuffer();
-		
-		body.append("您好，"+deal+"：<br/>")
-		.append("&nbsp;&nbsp;&nbsp;&nbsp;" + offer.getStr("bname") + "的 "
-						+ offer.getStr("ufullname") + " ("
-						+ offer.getStr("uphone") + ") 发来故障工单。<br/>")
-		.append("故障内容："+description+"<br/>")
-		.append("请及时处理。");
-		
-		return body;
-		
-	}
-	
-	/**
 	 * @描述 电话数组格式化
 	 */
-	private String phoneFormat(String... phone){
+	/*private String phoneFormat(String... phone){
 		StringBuffer p=new StringBuffer();
 		for(int i=0;i<phone.length;i++){
 			if(i==(phone.length-1)){
@@ -239,14 +202,14 @@ public class ReportController extends JFController{
 		//电话列表...
 		return p.toString();
 		
-	}
+	}*/
 	
 	/**
 	 * @描述 发送短信通知
 	 * @param userinfo
 	 * @param phone
 	 */
-	public void sendSms(Record userinfo,String... phone ){
+	/*public void sendSms(Record userinfo,String... phone ){
 		//电话列表...
 		String phones=phoneFormat(phone);
 		System.out.println(phones);
@@ -296,7 +259,7 @@ public class ReportController extends JFController{
 			e.printStackTrace();
 		}
 		
-	}
+	}*/
 	
 	
 

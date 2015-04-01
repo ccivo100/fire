@@ -30,7 +30,7 @@ public class ErrorType extends Model<ErrorType>{
 	 * @return
 	 */
 	public List<ErrorType> getAllType(){
-		return ErrorType.dao.find("select * from com_type");
+		return ErrorType.dao.find("select * from com_type where deleted_at is null");
 	}
 	
 	/**

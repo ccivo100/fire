@@ -1,8 +1,5 @@
 <nav class="navbar navbar-default navbar-static-top" role="navigation">
 		<div class="container">
-			<div>
-		      <p class="navbar-text">Signed in as Thomas</p>
-		   </div>
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed"
 					data-toggle="collapse" data-target="#example-navbar-collapse" aria-expanded="false"
@@ -23,9 +20,10 @@
 		   
 			<div id="example-navbar-collapse" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="<#if activebar='index'>active</#if>">
+				<@shiro.hasPermission name="P_INDEX">	
+				<li class="<#if activebar='index'>active</#if>">
 					<a  href="/"><span class="glyphicon glyphicon-fire"></span> 首页</a></li>
-					
+					</@shiro.hasPermission>
 					
 					<@shiro.hasPermission name="P_ADMIN">
         				<li class="dropdown">
@@ -39,15 +37,16 @@
     							<@shiro.hasPermission name="P_A_PERMISSION">
     							<li><a href="/admin/permission">权限管理</a></li>
     							</@shiro.hasPermission>
+    							<@shiro.hasPermission name="P_A_TYPE">
+    							<li><a href="/admin/type">类型管理</a></li>
+    							</@shiro.hasPermission>
     							<@shiro.hasPermission name="P_A_USER">
     							<li><a href="/admin/user">用户管理</a></li>
     							</@shiro.hasPermission>
-    							<@shiro.hasPermission name="P_A_ORDER">
-    							<li><a href="/admin/order">工单管理</a></li>
+    							<@shiro.hasPermission name="P_A_EXCEPTION">
+    							<li><a href="/admin/exception">异常管理</a></li>
     							</@shiro.hasPermission>
-    							<@shiro.hasPermission name="P_A_TYPE">
-    							<li><a href="/admin/type">故障类型管理</a></li>
-    							</@shiro.hasPermission>
+    							
     						</ul>
     					</li>
       				</@shiro.hasPermission>
@@ -102,12 +101,13 @@
 							<@shiro.notAuthenticated>
 								<li><a href="/signin">登录</a></li>
 							</@shiro.notAuthenticated>
-							<li class="divider"></li>
+<!--							<li class="divider"></li>
 							<li><a href="/bootstrap">Bootstrap主页</a></li>
 							<li><a href="/bootstrap/tree">树形菜单</a></li>
 							<li><a href="/bootstrap/school">Bootstrap学校</a></li>
 							<li><a href="/autho">权限树</a></li>
 							<li><a href="/bootstrap/dash">DASH</a></li>
+-->
 						</ul>
 					</li>
 				</ul>

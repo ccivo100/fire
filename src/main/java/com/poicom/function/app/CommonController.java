@@ -25,7 +25,8 @@ public class CommonController extends JFController{
 	@Before(CacheInterceptor.class)
 	@CacheName("/order/query")
 	public void query(){
-		Record order = Order.dao.getCommonOrder(getParaToInt("id"));
+		String where="o.id=?";
+		Record order = Order.dao.getCommonOrder(where,getParaToInt("id"));
 
 		//获取工单申报者的分公司信息
 		Record offer=UserInfo.dao.getUserBranch(order.getLong("oofferid"));

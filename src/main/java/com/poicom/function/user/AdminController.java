@@ -25,6 +25,7 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.poicom.function.app.model.ErrorType;
+import com.poicom.function.app.model.Order;
 import com.poicom.function.job.AlertJob;
 import com.poicom.function.user.model.Permission;
 import com.poicom.function.user.model.Role;
@@ -325,7 +326,10 @@ public class AdminController extends Controller {
 	/**
 	 * 工单管理
 	 */
-	public void order(){
+	public void exception(){
+		String where=" o.status=2 OR o.spend_time IS NOT NULL";
+		Page<Record> orderPage=Order.dao.findExceptionOrders(getParaToInt(0,1), 10,where);
+		setAttr("orderPage",orderPage);
 		
 	}
 	

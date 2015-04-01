@@ -1,11 +1,9 @@
 <#include "/page/common/_layout.html"/>
 <@layout activebar="user" html_title="运维管理">
-
-<div class="index-title">
-<h2>故障处理</h2>
-	<br>
-</div>
 <div class="tree">
+	<div class="page-header">
+		<h3>故障处理</h3>
+	</div>
 	<input type="hidden" name="do" value="report">
 	<table class="table table-bordered table-hover ">
 		<thead>
@@ -20,24 +18,25 @@
 		</thead>
 				<tbody>
 			<#list operatePage.getList() as operate>
-			<tr class="<#if operate.status=1>success</#if>">
+			<tr class="<#if operate.status=0>success<#elseif operate.status=2>danger</#if>">
 				<td style="text-align:left;">${operate_index+1}</td>
 				<td style="text-align:left;">${operate.description}</td>
 				<td style="text-align:left;">${operate.offer_at}</td>
 				<td style="text-align:left;">${operate.offer_user}</td>
 				<td >
 					<#if operate.status=0>
-					未处理
-					</#if>
-					<#if operate.status=1>
 					已处理
+					<#elseif operate.status=1>
+					未处理 
+					<#elseif operate.status=2>
+					超时未处理
 					</#if>
 				</td>
 				
 				<td style="text-align:left;">
-				&nbsp;&nbsp;<a class="btn btn-primary btn-xs"   href="/order/query?id=${operate.id}"  >查看</a> 
-				<#if operate.status=0>
-				&nbsp;&nbsp;<a class="btn btn-primary btn-xs"  href="/operate/edit?id=${operate.id}" >处理</a>
+				<a class="btn btn-primary btn-xs"   href="/order/query?id=${operate.id}"  >查看</a> 
+				<#if operate.status!=0>
+				<a class="btn btn-primary btn-xs"  href="/operate/edit?id=${operate.id}" >处理</a>
 				</#if>
 					
 				</td>

@@ -1,11 +1,10 @@
 <#include "/page/common/_layout.html"/>
 <@layout activebar="user" html_title="报障管理">
 
-<div class="index-title">
-<h2>故障申报</h2>
-	<br>
-</div>
 <div class="index-background">
+	<div class="page-header">
+		<h3>故障申报</h3>
+	</div>
   			<form class="bs-example bs-example-form" role="form" action="/report/offer" method="get">
 		      	<div class="row">
 				         <div class="col-lg-4">
@@ -64,24 +63,25 @@
 		</thead>
 				<tbody>
 			<#list reportPage.getList() as report>
-			<tr class="<#if report.status=1>success</#if>">
+			<tr class="<#if report.status=0>success<#elseif report.status=2>danger</#if>">
 				<td style="text-align:left;">${report_index+1}</td>
 				<td style="text-align:left;">${(report.description)!}</td>
 				<td style="text-align:left;">${(report.offer_at)!}</td>
 				<td style="text-align:left;">${(report.off_user)!}</td>
 				<td >
 					<#if report.status=0>
-					未处理
-					</#if>
-					<#if report.status=1>
 					已处理
+					<#elseif report.status=1>
+					未处理
+					<#elseif report.status=2>
+					超时未处理
 					</#if>
 				</td>
 				
 				<td style="text-align:left;">
-				&nbsp;&nbsp;<a class="btn btn-primary btn-xs"   href="/order/query?id=${report.id}"  >查看</a> 
-				<#if report.status=0>
-				&nbsp;&nbsp;<a class="btn btn-primary btn-xs"  href="/report/edit?id=${report.id}" >修改</a>
+				<a class="btn btn-primary btn-xs"   href="/order/query?id=${report.id}"  >查看</a> 
+				<#if report.status!=0>
+				<a class="btn btn-primary btn-xs"  href="/report/edit?id=${report.id}" >修改</a>
 				</#if>
 					
 				</td>

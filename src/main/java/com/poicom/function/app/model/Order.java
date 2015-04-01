@@ -41,9 +41,9 @@ public class Order extends Model<Order> {
 	 * @param paras
 	 * @return
 	 */
-	public Record getCommonOrder(Object... paras){
+	public Record getCommonOrder(String where,Object... paras){
 		return Db.findFirst(SqlKit.sql("order.findReportOfferBySelect") + blank
-				+ SqlKit.sql("order.findReportOfferByFrom"), paras);
+				+ SqlKit.sql("order.findOrdersByFrom")+getWhere(where), paras);
 	}
 	
 	/**
@@ -98,9 +98,23 @@ public class Order extends Model<Order> {
 		}
 	}
 	
+	/**
+	 * 根据status获取Order。
+	 * @param paras
+	 * @return
+	 */
 	public List<Order> findOrderByStatus(Object... paras){
 		return find("select * from com_order where status=?",paras);
 	}
 	
+	/**
+	 * 根据条件获取Order。
+	 * @param where
+	 * @param paras
+	 * @return
+	 */
+	public Page<Record> findExceptionOrders(int pageNumber,int pageSize,String where,Object... paras){
+		return Db.paginate(pageNumber, pageSize, SqlKit.sql("order.findReportOfferBySelect"), SqlKit.sql("order.findOrdersByFrom")+getWhere(where),paras);
+	}
 
 }

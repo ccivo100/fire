@@ -1,12 +1,9 @@
 ﻿<#include "/page/common/_layout.html" />
 <@layout activebar="report" html_title="任务分配">
-
-<div class="index-title">
-<h2>任务分配</h2>
-	<br>
-</div>
 <div class="tree">
-	
+	<div class="page-header">
+		<h3>任务分配</h3>
+	</div>
 	<form class="form-horizontal" role="form" action="/operate/doassign" method="post" >
 		<div class="row">
 			<input type="hidden" name="userid" value="${(userinfo.uuserid)}">

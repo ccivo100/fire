@@ -58,7 +58,7 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">工单状态</label>
 		<div class="col-sm-8">
-			<input type="text" class="form-control"  name="offer_user" value="<#if ostatus=1>已处理<#else>未处理</#if>" readonly/>
+			<input type="text" class="form-control"  name="offer_user" value="<#if ostatus=0>已处理<#elseif ostatus=1>未处理<#elseif ostatus=2>超时未处理</#if>" readonly/>
 		</div>
 	</div>
 	<div class="form-group">
