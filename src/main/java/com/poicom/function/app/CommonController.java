@@ -22,8 +22,6 @@ public class CommonController extends JFController{
 	/**
 	 * 查询故障工单详细内容
 	 */
-	@Before(CacheInterceptor.class)
-	@CacheName("/order/query")
 	public void query(){
 		String where="o.id=?";
 		Record order = Order.dao.getCommonOrder(where,getParaToInt("id"));
@@ -42,6 +40,8 @@ public class CommonController extends JFController{
 		setAttr("order", order);
 		//故障类型
 		setAttr("typeList",Order.dao.getAllType());
+		String back=getPara("back");
+		setAttr("back",back);
 		
 		render("/page/app/common/query.html");
 	}

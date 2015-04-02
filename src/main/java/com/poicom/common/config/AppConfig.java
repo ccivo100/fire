@@ -36,6 +36,7 @@ import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.FreeMarkerRender;
 import com.poicom.common.resource.ResourceTags;
 import com.poicom.common.shiro.MyJdbcAuthzService;
+import com.poicom.function.app.CommonInterceptor;
 import com.poicom.function.job.AlertJob;
 
 public class AppConfig extends JFinalConfig {
@@ -71,6 +72,7 @@ public class AppConfig extends JFinalConfig {
 		me.add(new ShiroInterceptor());
 		me.add(new SessionInViewInterceptor());
 		me.add(new UrlInterceptor());
+		me.add(new CommonInterceptor());
 		
 	}
 

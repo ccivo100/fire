@@ -51,8 +51,6 @@ public class ReportController extends JFController{
 	/**
 	 * @描述 报障人员查询本账号申报的故障工单
 	 */
-	@Before(CacheInterceptor.class)
-	@CacheName("/order/query")
 	public void offer(){
 		User user=User.dao.getCurrentUser();
 		Page<Record> reportPage;

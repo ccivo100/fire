@@ -1,13 +1,24 @@
 <#include "/page/common/_layout.html"/>
-<@layout activebar="user" html_title="报障管理">
+<@layout activebar="report" html_title="报障管理">
 
 <div class="index-background">
-	<div class="page-header">
-		<h3>故障申报</h3>
-	</div>
+<div class="page-header">
+<ul class="nav nav-tabs">
+   <li class="active"><a href="#">故障申报列表</a></li>
+   <li><a  class="popover-toggle"  href="/report/add" 
+				                  	title="温馨提示"  data-container="body" 
+      								data-toggle="popover" data-placement="top" 
+      								data-content="点击新建故障工单">
+				                      故障申报
+				                  </a></li>
+</ul>
+</div>
+<!-- 
   			<form class="bs-example bs-example-form" role="form" action="/report/offer" method="get">
 		      	<div class="row">
-				         <div class="col-lg-4">
+		      		
+				         <div class="col-lg-8">
+				         
 				            <div class="input-group">
 				            	<span class="input-group-addon">故障类型</span>
 				               	<select id="selectType" name="selectType" class="form-control"   autofocus>
@@ -34,13 +45,16 @@
 					               </button>
 								</span>
 				            </div>
+				            
 				         </div>
-				         <div class="col-lg-4">
-				         </div>
+					 
 		         		<div class="col-lg-2">
 							<div class="form-group">
 								<span class="input-group-btn">
-				                  <a  class="btn btn-success"  href="/report/add">
+				                  <a  class="btn btn-success popover-toggle"  href="/report/add" 
+				                  	title="温馨提示"  data-container="body" 
+      								data-toggle="popover" data-placement="top" 
+      								data-content="点击新建故障工单">
 				                      故障申报
 				                  </a>
 				               </span>
@@ -48,7 +62,7 @@
 					</div>
 		      	</div>
 		   </form>
-
+-->
 	
 	<table class="table table-bordered table-hover">
 		<thead>
@@ -79,19 +93,30 @@
 				</td>
 				
 				<td style="text-align:left;">
-				<a class="btn btn-primary btn-xs"   href="/order/query?id=${report.id}"  >查看</a> 
+				<a class="btn btn-primary btn-xs"   href="/order/query?id=${report.id}&back=${back!}"  >查看</a> 
 				<#if report.status!=0>
-				<a class="btn btn-primary btn-xs"  href="/report/edit?id=${report.id}" >修改</a>
+				<a class="btn btn-primary btn-xs"  href="/report/edit?id=${report.id}&back=${back!}" >修改</a>
 				</#if>
-					
 				</td>
-				
 			</tr>
 			</#list>
+			
+			<#if reportPage.getList().size()!=10>
+			<#assign size=(10-reportPage.getList().size())>
+				<#list 1..size as t>
+					<tr>
+						<td>${(reportPage.getList().size()+t)!}</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</#list>
+			</#if>
 		</tbody>
 	</table>
 	<#include "/page/common/_paginate.html" />
 	<@paginate currentPage=reportPage.pageNumber totalPage=reportPage.totalPage actionUrl="/report/offer/" />
-
 </div>
 </@layout>

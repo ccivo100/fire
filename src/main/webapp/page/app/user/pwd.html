@@ -1,10 +1,11 @@
 ﻿<#include "/page/common/_layout.html"/>
-<!-- build:js javascript/main.js -->
-<script data-main="/javascript/app/user/init" src="/webjars/requirejs/2.1.14/require.min.js" charset="utf-8"></script>
-<!-- endbuild -->
 <@layout activebar="center" html_title="修改密码">
+<div class="index-background">
 <div class="page-header">
-  <h2>修改密码</h2>
+<ul class="nav nav-tabs">
+   <li ><a href="/user/center">个人中心</a></li>
+   <li class="active"><a href="#">修改密码</a></li>
+</ul>
 </div>
     <#if user??>
       <form id="update_pwd" class="form-horizontal update" role="form" method="post" action="/user/updatePwd">
@@ -12,7 +13,7 @@
           <label for="username" class="col-sm-2 control-label">用 户 名:</label>
 
           <div class="col-sm-8">
-          ${(user.full_name)!}(${(user.username)!})(${(user.phone)!})
+          ${(user.full_name)!}(${(user.phone)!})
           </div>
         </div>
         <div class="form-group">
@@ -59,5 +60,6 @@
         </div>
       </form>
     </#if>
+</div>
 </@layout>
 

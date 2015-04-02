@@ -1,8 +1,12 @@
 ﻿<#include "/page/common/_layout.html" />
 <@layout activebar="report" html_title="权限分配">
-
+<div class="page-header">
+<ul class="nav nav-tabs">
+   <li><a href="/admin/role">角色管理</a></li>
+   <li class="active"><a href="#">权限分配</a></li>
+</ul>
+</div>
 <div class="tree">
-
 <form class="form-horizontal" role="form" action="/admin/doassignrole" method="post" >
 	<div class="row">
 			<input type="hidden" name="roleid" value="${(role.id)}">

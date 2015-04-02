@@ -1,18 +1,21 @@
 <#include "/page/common/_layout.html"/>
 <@layout activebar="user" html_title="用户管理">
 
-<div class="tree">
-	<div class="page-header">
-		<h3>用户管理</h3>
-	</div>
+<div class="index-background">
+<div class="page-header">
+<ul class="nav nav-tabs">
+   <li class="active"><a href="#">用户管理</a></li>
+</ul>
+</div>
 	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>
+				<th width="2%">编号</th>
 				<th width="4%">姓名</th>
 				<th width="4%">账号</th>
-				<th width="7%">所属单位</th>
+				<th width="8%">所属单位</th>
 				<th width="4%">联系电话</th>
-				<th width="25%">角色</th>
+				<th width="24%">角色</th>
 				<th width="4%">状态</th>
 				<th width="5%">操作</th>
 			</tr>
@@ -20,8 +23,9 @@
 		<tbody>
 			<#list userPage.getList() as user>
 			<tr>
+				<td>${(user_index+1)!}</td>
 				<td>${(user.ufullname)!}</td>
-				<td>${(user.uaccount)!}</td>
+				<td><#if user.info_creatorid=1>*****<#else>${(user.uaccount)!}</#if></td>
 				<td>${(user.bname)!}</td>
 				<td>${(user.uphone)!}</td>
 				<td>${(user.remark)!}</td>
@@ -41,10 +45,22 @@
 					</#if>
 				</td>
 			</tr>
-			
-				
 			</#list>
-			
+			<#if userPage.getList().size()!=10>
+			<#assign size=(10-userPage.getList().size())>
+				<#list 1..size as t>
+					<tr>
+						<td>${(userPage.getList().size()+t)!}</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</#list>
+			</#if>
 		</tbody>
 	</table>
 	<#include "/page/common/_paginate.html" />

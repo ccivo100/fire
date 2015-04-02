@@ -1,10 +1,12 @@
 ﻿<#include "/page/common/_layout.html" />
 <@layout activebar="report" html_title="编辑权限">
-<div class="page-header">
-<h2>权限管理 ---&gt; 编辑权限
-</h2>
-</div>
-<div class="tree">
+<div class="index-background">
+	<div class="page-header">
+	<ul class="nav nav-tabs">
+	   <li><a href="/admin/permission">权限管理</a></li>
+	   <li class="active"><a href="">编辑权限</a></li>
+	</ul>
+	</div>	
 	<form class="form-horizontal" role="form"  action="/admin/doeditpermission" method="post" >
 		<#include "_form.html" />
 	</form>

@@ -1,9 +1,11 @@
 <#include "/page/common/_layout.html"/>
 <@layout activebar="user" html_title="运维管理">
-<div class="tree">
-	<div class="page-header">
-		<h3>故障处理</h3>
-	</div>
+<div class="index-background">
+<div class="page-header">
+<ul class="nav nav-tabs">
+   <li class="active"><a href="#">故障列表</a></li>
+</ul>
+</div>
 	<input type="hidden" name="do" value="report">
 	<table class="table table-bordered table-hover ">
 		<thead>
@@ -12,7 +14,7 @@
 				<th width="15%">故障描述</th>
 				<th width="5%">申报时间</th>
 				<th width="5%">申报人</th>
-				<th width="3%">当前状态</th>
+				<th width="4%">当前状态</th>
 				<th width="5%">操作</th>
 			</tr>
 		</thead>
@@ -34,21 +36,31 @@
 				</td>
 				
 				<td style="text-align:left;">
-				<a class="btn btn-primary btn-xs"   href="/order/query?id=${operate.id}"  >查看</a> 
+				<a class="btn btn-primary btn-xs"   href="/order/query?id=${operate.id}&back=${back!}"  >查看</a> 
 				<#if operate.status!=0>
-				<a class="btn btn-primary btn-xs"  href="/operate/edit?id=${operate.id}" >处理</a>
+				<a class="btn btn-primary btn-xs"  href="/operate/edit?id=${operate.id}&back=${back!}" >处理</a>
 				</#if>
-					
 				</td>
-				
 			</tr>
 			</#list>
+			
+			<#if operatePage.getList().size()!=10>
+			<#assign size=(10-operatePage.getList().size())>
+				<#list 1..size as t>
+					<tr>
+						<td>${(operatePage.getList().size()+t)!}</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</#list>
+			</#if>
 		</tbody>
 	</table>
 	<#include "/page/common/_paginate.html" />
 	<@paginate currentPage=operatePage.pageNumber totalPage=operatePage.totalPage actionUrl="/operate/deal/" />
 
-
-<#include "/page/app/report/_model.html"/>
 </div>
 </@layout>

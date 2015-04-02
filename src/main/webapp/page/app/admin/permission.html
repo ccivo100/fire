@@ -1,36 +1,12 @@
 <#include "/page/common/_layout.html"/>
 <@layout activebar="user" html_title="权限管理">
 
- <div class="tree ">
- 	<div class="page-header">
-		<h3>权限管理</h3>
-	</div>
-	<div class="row">
-		<div class="col-sm-4 col-md-4 col-lg-4">
-			<ul>
-				<#list permissionTree as permissions>
-					<li>
-						<span><i class="glyphicon glyphicon-folder-open"></i> ${(permissions.name)!}</span>
-						<ul>
-						    <#list permissions.children as permission>
-						    	<li>
-						        	<span><i class="glyphicon glyphicon-minus-sign"></i> ${(permission.name)!}</span> 
-						    	</li>
-						    </#list>
-						</ul>
-					</li>
-				</#list>
-			</ul>
-		</div>
-		
-		<div id="per" class="col-sm-8 col-md-8 col-lg-8">
-			
-		</div>
-	
-	</div>
-</div>
-
 <div class="index-background">
+<div class="page-header">
+<ul class="nav nav-tabs">
+   <li class="active"><a href="#">权限管理</a></li>
+</ul>
+</div>
 <form class="bs-example bs-example-form" role="form" action="/" method="get">
 	<div class="row">
 			<div class="col-lg-2">
@@ -100,6 +76,31 @@
 	
 	</table>
 
+</div>
+ <div class="tree ">
+	<div class="row">
+		<div class="col-sm-4 col-md-4 col-lg-4">
+			<ul>
+				<#list permissionTree as permissions>
+					<li>
+						<span><i class="glyphicon glyphicon-folder-open"></i> ${(permissions.name)!}</span>
+						<ul>
+						    <#list permissions.children as permission>
+						    	<li>
+						        	<span><i class="glyphicon glyphicon-minus-sign"></i> ${(permission.name)!}</span> 
+						    	</li>
+						    </#list>
+						</ul>
+					</li>
+				</#list>
+			</ul>
+		</div>
+		
+		<div id="per" class="col-sm-8 col-md-8 col-lg-8">
+			
+		</div>
+	
+	</div>
 </div>
 
 </@layout>
