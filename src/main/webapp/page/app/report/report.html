@@ -5,7 +5,7 @@
 <div class="page-header">
 <ul class="nav nav-tabs">
    <li class="active"><a href="#">故障申报列表</a></li>
-   <li><a  class="popover-toggle"  href="/report/add" 
+   <li><a  class="popover-toggle"  href="${ContextPath}/report/add" 
 				                  	title="温馨提示"  data-container="body" 
       								data-toggle="popover" data-placement="top" 
       								data-content="点击新建故障工单">
@@ -93,9 +93,9 @@
 				</td>
 				
 				<td style="text-align:left;">
-				<a class="btn btn-primary btn-xs"   href="/order/query?id=${report.id}&back=${back!}"  >查看</a> 
+				<a class="btn btn-primary btn-xs"   href="${ContextPath}/order/query?id=${report.id}&back=${back!}"  >查看</a> 
 				<#if report.status!=0>
-				<a class="btn btn-primary btn-xs"  href="/report/edit?id=${report.id}&back=${back!}" >修改</a>
+				<a class="btn btn-primary btn-xs"  href="${ContextPath}/report/edit?id=${report.id}&back=${back!}" >修改</a>
 				</#if>
 				</td>
 			</tr>

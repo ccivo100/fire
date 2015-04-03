@@ -344,6 +344,7 @@ public class AdminController extends Controller {
 	public void addtype(){
 		render("/page/app/admin/type/add.html");
 	}
+	@Before(AdminValidator.class)
 	public void doaddtype(){
 		getModel(ErrorType.class).save();
 		redirect("/admin/type");
@@ -353,6 +354,7 @@ public class AdminController extends Controller {
 		setAttr("errorType",errorType);
 		render("/page/app/admin/type/edit.html");
 	}
+	@Before(AdminValidator.class)
 	public void doedittype(){
 		getModel(ErrorType.class).update();
 		redirect("/admin/type");

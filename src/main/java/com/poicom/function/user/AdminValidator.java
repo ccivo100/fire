@@ -9,6 +9,7 @@ import cn.dreampie.ValidateKit;
 
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
+import com.poicom.function.app.model.ErrorType;
 import com.poicom.function.user.model.Permission;
 import com.poicom.function.user.model.Role;
 
@@ -148,6 +149,17 @@ public class AdminValidator extends Validator{
 				}
 			}
 		}
+		
+		//
+		else if(getActionKey().equals("/admin/doaddtype")|getActionKey().equals("/admin/doedittype")){
+			if(ValidateKit.isNullOrEmpty("errorType.name")){
+				
+				addError("nameMsg", "输入内容不为空");
+			}else if(!ValidateKit.isLength(c.getPara("errorType.name"), 5, 15)){
+				addError("nameMsg", "输入字数不少于5...");
+			}
+		}
+
 	}
 
 	@Override
@@ -176,7 +188,13 @@ public class AdminValidator extends Validator{
 			c.keepModel(Permission.class);
 			c.render("/page/app/admin/permission/edit.html");
 		}
-		
+		else if(getActionKey().equals("/admin/doaddtype")){
+			c.keepModel(ErrorType.class);
+			c.render("/page/app/admin/type/add.html");
+		}else if(getActionKey().equals("/admin/doedittype")){
+			c.keepModel(ErrorType.class);
+			c.render("/page/app/admin/type/edit.html");
+		}
 	}
 
 }

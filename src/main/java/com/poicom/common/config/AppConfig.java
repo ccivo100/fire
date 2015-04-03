@@ -60,7 +60,7 @@ public class AppConfig extends JFinalConfig {
 
 	@Override
 	public void configHandler(Handlers me) {
-		me.add(new ContextPathHandler("contextpath"));
+		me.add(new ContextPathHandler("ContextPath"));
 
 	}
 

@@ -36,9 +36,9 @@
 				</td>
 				
 				<td style="text-align:left;">
-				<a class="btn btn-primary btn-xs"   href="/order/query?id=${operate.id}&back=${back!}"  >查看</a> 
+				<a class="btn btn-primary btn-xs"   href="${ContextPath}/order/query?id=${operate.id}&back=${back!}"  >查看</a> 
 				<#if operate.status!=0>
-				<a class="btn btn-primary btn-xs"  href="/operate/edit?id=${operate.id}&back=${back!}" >处理</a>
+				<a class="btn btn-primary btn-xs"  href="${ContextPath}/operate/edit?id=${operate.id}&back=${back!}" >处理</a>
 				</#if>
 				</td>
 			</tr>

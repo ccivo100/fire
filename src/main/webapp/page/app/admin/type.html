@@ -7,12 +7,12 @@
    <li class="active"><a href="#">类型管理</a></li>
 </ul>
 </div>
-<form class="bs-example bs-example-form" role="form" action="/" method="get">
+<form class="bs-example bs-example-form" role="form" action="${ContextPath}/" method="get">
 	<div class="row">
 			<div class="col-sm-4 col-md-4 col-lg-4">
 				<div class="form-group">
 				<span class="input-group-btn">
-					<a  class="btn btn-success"  href="/admin/addtype">
+					<a  class="btn btn-success"  href="${ContextPath}/admin/addtype">
 				     	新增类型
 					</a>
 				</span>
@@ -37,11 +37,11 @@
 				<td> ${(type.name)!}</td>
 				<td> ${(type.created_at)!}</td>
 				<td><#if type.deleted_at??><span class="glyphicon glyphicon-remove"></span>禁用<#else>正常</#if></td>
-				<td><a class="btn btn-primary btn-xs"  href="/admin/edittype?id=${(type.id)!}" >编辑</a>
+				<td><a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/edittype?id=${(type.id)!}" >编辑</a>
 				<#if type.deleted_at??>
-				<a class="btn btn-danger btn-xs"  href="/admin/ontype?id=${(type.id)!}" >启用</a>
+				<a class="btn btn-danger btn-xs"  href="${ContextPath}/admin/ontype?id=${(type.id)!}" >启用</a>
 				<#else>
-				<a class="btn btn-primary btn-xs"  href="/admin/offtype?id=${(type.id)!}" >禁用</a>
+				<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/offtype?id=${(type.id)!}" >禁用</a>
 				</#if>
 				
 				</td>

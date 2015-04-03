@@ -8,13 +8,13 @@
 <div class="page-header">
 <ul class="nav nav-tabs">
    <li class="active"><a href="#">个人中心</a></li>
-   <li ><a href="/user/pwdPage">修改密码</a></li>
+   <li ><a href="${ContextPath}/user/pwdPage">修改密码</a></li>
 </ul>
 </div>
 	
 	<div class="row">
 		<div class="col-sm-2 col-md-2 col-lg-2">
-			<img alt="头像" src="${(userInfo.uavatatarurl)!}">
+			<img alt="头像" src="${ContextPath}${(userInfo.uavatatarurl)!}" />
 		</div>
 		<div class="col-sm-8 col-md-8 col-lg-8">
 			<div class="form-group">

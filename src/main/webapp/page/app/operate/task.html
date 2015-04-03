@@ -25,7 +25,7 @@
 				<td>${user.branch}</td>
 				<td>${user.fullname}</td>
 				
-				<form class="form-horizontal" role="form" action="/operate/doassign" method="post" >
+				<form class="form-horizontal" role="form" action="${ContextPath}/operate/doassign" method="post" >
 				<input type="hidden" name="userid" value="${(user.userid)}">
 				<td>
 					<#list typeList as type>
@@ -42,7 +42,7 @@
 				
 				</td>
 				<td>
-					<a href="/operate/assign?id=${user.userid}">分配</a>
+					<a href="${ContextPath}/operate/assign?id=${user.userid}">分配</a>
 					<button value="提交" type="submit" class="btn btn-primary btn-xs " data-loading-text="正在提交...">提交</button>
 				</td>
 				</form>

@@ -1,11 +1,14 @@
 ﻿<#include "/page/common/_layout.html" />
 <@layout activebar="report" html_title="编辑用户">
+
+<div class="index-background">
 <div class="page-header">
-<h2>用户管理 ---&gt; 编辑用户
-</h2>
+<ul class="nav nav-tabs">
+   <li ><a href="${ContextPath}/admin/user">用户管理</a></li>
+   <li class="active"><a href="#">编辑用户</a></li>
+</ul>
 </div>
-<div class="tree">
-	<form class="form-horizontal" role="form" action="/admin/doedituser" method="post" >
+	<form class="form-horizontal" role="form" action="${ContextPath}/admin/doedituser" method="post" >
 		<div class="row">
 			<input type="hidden" name="userid" value="${(userinfo.uuserid)}">
 			<div class="form-group">

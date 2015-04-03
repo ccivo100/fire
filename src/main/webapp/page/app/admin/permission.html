@@ -7,12 +7,12 @@
    <li class="active"><a href="#">权限管理</a></li>
 </ul>
 </div>
-<form class="bs-example bs-example-form" role="form" action="/" method="get">
+<form class="bs-example bs-example-form" role="form" action="${ContextPath}/" method="get">
 	<div class="row">
 			<div class="col-lg-2">
 				<div class="form-group">
 				<span class="input-group-btn">
-					<a  class="btn btn-success"  href="/admin/addpermission">
+					<a  class="btn btn-success"  href="${ContextPath}/admin/addpermission">
 				     	新增权限
 					</a>
 				</span>
@@ -43,13 +43,13 @@
 				<td>${(permissions.pid)!}</td>
 				<td>${(permissions.created_at)!}</td>
 				<td><#if permissions.deleted_at??><span class="glyphicon glyphicon-remove"></span> 禁用<#else>正常</#if></td>
-				<td><a class="btn btn-primary btn-xs"  href="/admin/editpermission?id=${(permissions.id)!}" >编辑</a>
+				<td><a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/editpermission?id=${(permissions.id)!}" >编辑</a>
 				<#if permissions.deleted_at??>
-				<a class="btn btn-danger btn-xs"  href="/admin/onpermission?id=${(permissions.id)!}" >启用</a>
+				<a class="btn btn-danger btn-xs"  href="${ContextPath}/admin/onpermission?id=${(permissions.id)!}" >启用</a>
 				<#else>
-				<a class="btn btn-primary btn-xs"  href="/admin/offpermission?id=${(permissions.id)!}" >禁用</a>
+				<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/offpermission?id=${(permissions.id)!}" >禁用</a>
 				</#if>
-				<a class="btn btn-primary btn-xs"  href="/admin/addpermission?id=${(permissions.id)!}" >添加</a>
+				<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/addpermission?id=${(permissions.id)!}" >添加</a>
 				</td>
 			</tr>
 			<#list permissions.children as permission>
@@ -62,11 +62,11 @@
 				<td>${(permission.created_at)!}</td>
 				<td><#if permission.deleted_at??><span class="glyphicon glyphicon-remove"></span> 禁用<#else>正常</#if></td>
 				<td>
-				<a class="btn btn-primary btn-xs"  href="/admin/editpermission?id=${(permission.id)!}" >编辑</a>
+				<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/editpermission?id=${(permission.id)!}" >编辑</a>
 				<#if permission.deleted_at??>
-				<a class="btn btn-danger btn-xs"  href="/admin/onpermission?id=${(permission.id)!}" >启用</a>
+				<a class="btn btn-danger btn-xs"  href="${ContextPath}/admin/onpermission?id=${(permission.id)!}" >启用</a>
 				<#else>
-				<a class="btn btn-primary btn-xs"  href="/admin/offpermission?id=${(permission.id)!}" >禁用</a>
+				<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/offpermission?id=${(permission.id)!}" >禁用</a>
 				</#if>
 				</td>
 			</tr>
