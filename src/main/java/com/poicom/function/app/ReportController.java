@@ -57,10 +57,11 @@ public class ReportController extends JFController{
 		String orderby=" order by o.status desc ,o.offer_at asc ";
 		
 		if(ValidateKit.isNullOrEmpty(getPara("selectType"))){
-			reportPage=Order.dao.getReportOrderPage(getParaToInt(0,1), 10,orderby,user.get("id"));
+			String where=" o.offer_user=? ";
+			reportPage=Order.dao.getReportOrderPage(getParaToInt(0,1), 10,where,orderby,user.get("id"));
 		}else{
-			String where=" and o.type=? ";
-			reportPage=Order.dao.getReportOrderPage(getParaToInt(0,1), 10,where+orderby,user.get("id"),getParaToInt("selectType"));
+			String where=" o.offer_user=? and o.type=? ";
+			reportPage=Order.dao.getReportOrderPage(getParaToInt(0,1), 10,where,orderby,user.get("id"),getParaToInt("selectType"));
 		}
 		
 		

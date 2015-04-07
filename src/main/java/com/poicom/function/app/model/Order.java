@@ -29,11 +29,11 @@ public class Order extends Model<Order> {
 	 * @param paras
 	 * @return
 	 */
-	public Page<Record> getReportOrderPage(int pageNumber, int pageSize,String where,
+	public Page<Record> getReportOrderPage(int pageNumber, int pageSize,String where,String orderby,
 			Object... paras) {
 		return Db.paginate(pageNumber, pageSize,
 				SqlKit.sql("order.findReportFullOffersBySelect") + blank,
-				SqlKit.sql("order.findReportFullOffersByFrom")+ blank+where, paras);
+				SqlKit.sql("order.findOrdersByFrom")+ getWhere(where)+orderby, paras);
 	}
 	
 	/**
@@ -47,18 +47,18 @@ public class Order extends Model<Order> {
 	}
 	
 	/**
-	 * @描述 根据故障描述，查询相应的故障工单
+	 * @描述 根据故障描述：description，查询相应的故障工单：完毕工单
 	 * @param pageNumber
 	 * @param pageSize
 	 * @param paras
 	 * @return
 	 */
-	public Page<Record> getOverOrdersPage(int pageNumber, int pageSize,String where,
+	public Page<Record> getOverOrdersPage(int pageNumber, int pageSize,String where,String orderby,
 			Object... paras) {
 		
 		return Db.paginate(pageNumber, pageSize,
 				SqlKit.sql("order.findReportOfferBySelect") + blank,
-				SqlKit.sql("order.findOverOrderByFrom")+blank+where, paras);
+				SqlKit.sql("order.findOrdersByFrom")+getWhere(where)+orderby, paras);
 	}
 	
 	
@@ -78,10 +78,10 @@ public class Order extends Model<Order> {
 	 * @param paras
 	 * @return
 	 */
-	public Page<Record> getOperateOrderPage(int pageNumber,int pageSize,Object... paras){
+	public Page<Record> getOperateOrderPage(int pageNumber,int pageSize,String where,String orderby,Object... paras){
 		return Db.paginate(pageNumber, pageSize,
 				SqlKit.sql("order.findOperateFullBySelect") + blank,
-				SqlKit.sql("order.findOperateFullByFrom"), paras);
+				SqlKit.sql("order.findOrdersByFrom")+getWhere(where)+orderby, paras);
 	}
 	
 	/**

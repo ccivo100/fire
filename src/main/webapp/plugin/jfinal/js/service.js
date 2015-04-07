@@ -61,6 +61,65 @@ $(document).ready(function(){
 	setTimeout(getnums, 3500);  
 }); 
 
+function gettree(result){
+	$.each(result.permissionList,function(i,item){
+		$("#myDiv3").append(
+				"<div>" + item.id + "</div>" + 
+                "<div>" + item.name    + "</div>" +
+                "<div>" + item.value + "</div><hr/>");
+		
+	});
+}
+function getper(result){
+	$.each(result.permissions,function(i,item){
+		$("#per").append(
+				"<div>" + item.id + "</div>" + 
+                "<div>" + item.name    + "</div>" +
+                "<div>" + item.value + "</div><hr/>");
+		
+	});
+}
+
+$(function(){
+	$("#ajaxgetBtn").click(function(){
+		$("#myDiv3").html("");
+		$.ajax({
+			type:"get",
+			url:"/bootstrap/ajaxget?param=1",
+			dataType:"json",
+			success:function(result){
+				gettree(result);
+			}
+		});
+	});
+	$(".ajaxrole").click(function(){
+		$("#per").html("");
+		$.ajax({
+			type:"post",
+			url:"/admin/ajaxgetper",
+			data:{roleid:1},
+			dataType:"json",
+			success:function(result){
+				getper(result);
+			}
+		});
+	});
+	$("#ajaxpostBtn").click(function(){
+		$("#ajaxresult").html("");
+		$.ajax({
+			type:"post",
+			url:"/param/ajaxpost",
+			data:{param1:1,param2:2},
+			dataType:"json",
+			success:function(result){
+				$("#ajaxresult").html(result.msg);
+			}
+		});
+	});
+});
+
+
+
 /*$(document).ready(function(){
 	$("a.delete").click(function(){
 		$('#confirmModal').modal('show').on('shown.bs.modal',function(){

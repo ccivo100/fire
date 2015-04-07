@@ -26,7 +26,7 @@ public class IndexController extends Controller {
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	/**
-	 * 根目录
+	 * 主页根目录
 	 */
 	@Before(IndexValidator.class)
 	public void index() {
@@ -35,19 +35,20 @@ public class IndexController extends Controller {
 		if(ValidateKit.isNullOrEmpty(user)){
 			redirect("/signin");
 		}else{
-			Page <Record> overOrderPage;
+			Page <Record> ordersPage;
 			String orderby=" order by o.offer_at desc ";
 			if(ValidateKit.isNullOrEmpty(getPara("condition"))){
-				overOrderPage=Order.dao.getOverOrdersPage(getParaToInt(0,1), 10, orderby);
+				String where=" 1=1 and  o.status=0 ";
+				ordersPage=Order.dao.getOverOrdersPage(getParaToInt(0,1), 10, where,orderby);
 				
 			}else{
 				String condition ="%"+getPara("condition").trim()+"%";
-				String where=" and o.description like ?";
-				overOrderPage=Order.dao.getOverOrdersPage(getParaToInt(0,1), 10, where+orderby, condition);
+				String where=" 1=1 and  o.status=0 and o.description like ?";
+				ordersPage=Order.dao.getOverOrdersPage(getParaToInt(0,1), 10, where,orderby, condition);
 			}
 			
-			Order.dao.format(overOrderPage,"odescription");
-			setAttr("overOrderPage",overOrderPage);
+			Order.dao.format(ordersPage,"odescription");
+			setAttr("overOrderPage",ordersPage);
 			render(indexView);
 		}
 		

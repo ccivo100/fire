@@ -85,6 +85,7 @@
 					<i class="glyphicon glyphicon-folder-open"></i> ${(roles.name)!}
 				</span>
 				<a class="btn btn-info btn-sm"   href="${ContextPath}/admin/assignrole?id=${(roles.id)!}"  >权限分配</a> 
+				<button id="ajaxrole${roles.id}" class="btn btn-info btn-sm">分配</button>
 				<ul>
 					<#list roles.children as role>
 					<li>

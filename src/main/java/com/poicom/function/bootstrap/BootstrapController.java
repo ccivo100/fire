@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import com.jfinal.core.Controller;
 import com.jfinal.kit.PathKit;
 import com.jfinal.upload.UploadFile;
 import com.poicom.common.kit.excel.PoiKit;
+import com.poicom.function.user.model.Permission;
 
 /**
  * 用于指向BootStrap例子的控制器。
@@ -51,6 +53,30 @@ public class BootstrapController extends Controller {
 	public void dash(){
 		
 	}
+	
+	/**
+	 * test ajax get
+	 */
+	public void ajaxget(){
+		int param=getParaToInt("param");
+		List<Permission> permissionList=Permission.dao.findByRole("", param);
+		logger.error(permissionList.toString());
+		renderJson("permissionList", permissionList);
+	}
+	
+	/**
+	 * test ajax post
+	 */
+	public void ajaxpost(){
+		
+	}
+	
+	public void testJson(){
+		List<Permission> permissionList=Permission.dao.findByRole("", 3);
+		logger.error(permissionList.toString());
+		renderJson("msg",permissionList);
+	}
+
 	
 	public void upfile(){
 		UploadFile uploadFile=getFile("upfile");

@@ -155,6 +155,15 @@ public class AdminController extends Controller {
 		redirect("/admin/role");
 	}
 	
+	public void ajaxgetper(){
+		List<Permission> permissions=Permission.dao.findPermissionsByPid(0);
+		for(Permission permission:permissions){
+			List<Permission> pchild=Permission.dao.findPermissionsByPid(permission.get("id"));
+			permission.setChildren(pchild);
+		}
+		renderJson("permissions",permissions);
+	}
+	
 	
 	/**
 	 * 权限管理
