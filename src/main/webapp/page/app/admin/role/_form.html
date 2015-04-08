@@ -6,7 +6,7 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">角色名称</label>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" name="role.name" value="${(role.name)!}"  required/>
+			<input type="text" class="form-control" name="role.name" value="${(role.name)!}"  required autocomplete="off"/>
 		</div>
 		<div class="col-sm-4">
 			<#if nameMsg??>
@@ -19,7 +19,7 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">角色代码</label>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" name="role.value" value="${(role.value)!}" required />
+			<input type="text" class="form-control" name="role.value" value="${(role.value)!}" required autocomplete="off"/>
 		</div>
 		<div class="col-sm-4">
 			<#if valueMsg??>
@@ -33,7 +33,7 @@
 		<label class="col-sm-2 control-label">父节点</label>
 		<div class="col-sm-4">
 			<#if pid??>
-			<input type="text" class="form-control" name="role.pid" value="${pid}" readonly  required/>
+			<input type="text" class="form-control" name="role.pid" value="${pid}" readonly  required />
 			<#else>
 			<input type="text" class="form-control" name="role.pid" <#if role?? > value="${(role.pid)!}" <#else>value="0" readonly</#if> <#if (role.pid)?? && role.pid=0>readonly</#if>  required/>
 			</#if>

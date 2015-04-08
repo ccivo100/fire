@@ -57,4 +57,8 @@ public class UserInfo extends Model<UserInfo> {
 				SqlKit.sql("user.findBranchUserByFrom"), 10);
 	}
 	
+	public UserInfo get(String attr,Object paras){
+		return findFirst("select * from sec_user_info where "+attr+"=?", paras);
+	}
+	
 }

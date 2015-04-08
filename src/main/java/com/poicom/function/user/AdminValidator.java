@@ -150,13 +150,22 @@ public class AdminValidator extends Validator{
 			}
 		}
 		
-		//
+		//故障类型验证
 		else if(getActionKey().equals("/admin/doaddtype")|getActionKey().equals("/admin/doedittype")){
 			if(ValidateKit.isNullOrEmpty("errorType.name")){
 				
 				addError("nameMsg", "输入内容不为空");
 			}else if(!ValidateKit.isLength(c.getPara("errorType.name"), 5, 15)){
 				addError("nameMsg", "输入字数不少于5...");
+			}
+		}
+		//单位验证
+		else if(getActionKey().equals("/admin/doaddbranch")|getActionKey().equals("/admin/doeditbranch")){
+			if(ValidateKit.isNullOrEmpty("branch.name")){
+				
+				addError("nameMsg", "输入内容不为空");
+			}else if(!ValidateKit.isLength(c.getPara("branch.name"), 4, 15)){
+				addError("nameMsg", "输入字数不少于4...");
 			}
 		}
 
@@ -188,12 +197,21 @@ public class AdminValidator extends Validator{
 			c.keepModel(Permission.class);
 			c.render("/page/app/admin/permission/edit.html");
 		}
+		//故障类型跳转
 		else if(getActionKey().equals("/admin/doaddtype")){
 			c.keepModel(ErrorType.class);
 			c.render("/page/app/admin/type/add.html");
 		}else if(getActionKey().equals("/admin/doedittype")){
 			c.keepModel(ErrorType.class);
 			c.render("/page/app/admin/type/edit.html");
+		}
+		//单位跳转
+		else if(getActionKey().equals("/admin/doaddbranch")){
+			c.keepModel(ErrorType.class);
+			c.render("/page/app/admin/branch/add.html");
+		}else if(getActionKey().equals("/admin/doeditbranch")){
+			c.keepModel(ErrorType.class);
+			c.render("/page/app/admin/branch/edit.html");
 		}
 	}
 

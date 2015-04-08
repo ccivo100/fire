@@ -1,0 +1,56 @@
+<#include "/page/common/_layout.html"/>
+<@layout activebar="user" html_title="单位管理">
+
+<div class="index-background">
+<div class="page-header">
+<ul class="nav nav-tabs">
+   <li ><a href="${ContextPath}/admin/user">用户管理</a></li>
+   <li class="active"><a href="#">单位管理</a></li>
+</ul>
+</div>
+<form class="bs-example bs-example-form" role="form" action="${ContextPath}/" method="get">
+	<div class="row">
+			<div class="col-sm-4 col-md-4 col-lg-4">
+				<div class="form-group">
+				<span class="input-group-btn">
+					<a  class="btn btn-success"  href="${ContextPath}/admin/addbranch">
+				     	新增单位
+					</a>
+				</span>
+				</div>
+			</div>
+	</div>
+</form>
+<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th width="2%">序号</th>
+				<th width="10%">单位名称</th>
+				<th width="5%">创建时间</th>
+				<th width="4%">状态</th>
+				<th width="4%">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list branchList as branch>
+			<tr>
+				<td>${(branch.id)!}</td>
+				<td> ${(branch.name)!}</td>
+				<td> ${(branch.created_at)!}</td>
+				<td><#if branch.deleted_at??><span class="glyphicon glyphicon-remove"></span>禁用<#else>正常</#if></td>
+				<td><a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/editbranch?id=${(branch.id)!}" >编辑</a>
+				<#if branch.deleted_at??>
+				<a class="btn btn-danger btn-xs"  href="${ContextPath}/admin/onbranch?id=${(branch.id)!}" >启用</a>
+				<#else>
+				<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/offbranch?id=${(branch.id)!}" >禁用</a>
+				</#if>
+				
+				</td>
+			</tr>
+
+			</#list>
+		</tbody>
+	
+	</table>
+</div>
+</@layout>

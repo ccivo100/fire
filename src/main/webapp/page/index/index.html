@@ -1,7 +1,7 @@
 ﻿<#include "/page/common/_layout.html"/>
-<@layout activebar="index" html_title="首页">
+<@layout activebar="index" html_title="点通网络故障申报系统">
 <div class="index-title">
-<h2>点通科技报障系统项目首页</h2>
+<h2>点通网络科技故障申报系统</h2>
 	<br>
 </div>
 	<div class=" index-background">
@@ -10,7 +10,7 @@
 				         <div class="col-sm-6 col-md-5 col-lg-4">
 				            <div class="input-group">
 				            	<span class="input-group-addon">关键字</span>
-				               <input type="text"   class="form-control"  name="condition" value="${(condition)!}" placeholder="故障描述" maxlength="10" autofocus/>
+				               <input type="text"   class="form-control"  name="condition" value="${(condition)!}" placeholder="故障描述" maxlength="10" autofocus autocomplete="off"/>
 				               <span class="input-group-btn">
 				                  <button class="btn btn-default" type="submit">
 				                     <span class="glyphicon glyphicon-search"></span> 搜索

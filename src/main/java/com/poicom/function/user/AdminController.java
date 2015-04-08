@@ -24,6 +24,7 @@ import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
+import com.poicom.function.app.model.Branch;
 import com.poicom.function.app.model.ErrorType;
 import com.poicom.function.app.model.Order;
 import com.poicom.function.job.AlertJob;
@@ -53,6 +54,7 @@ public class AdminController extends Controller {
 			List<Role> rchild=Role.dao.findRolesByPid(role.get("id"));
 			role.setChildren(rchild);
 		}
+		
 		setAttr("roleTree",roles);
 	}
 	
@@ -123,7 +125,7 @@ public class AdminController extends Controller {
 		
 		if(ValidateKit.isNullOrEmpty(permissions)){
 			for(int i=0;i<rps.size();i++){
-				logger.info(rps.get(i).getLong("permission_id")+" 已取消，执行删除操作！");
+				logger.error(rps.get(i).getLong("permission_id")+" 已取消，执行删除操作！");
 				rps.get(i).delete();
 			}
 		}else {
@@ -257,10 +259,11 @@ public class AdminController extends Controller {
 		setAttr("userinfo",UserInfo.dao.getAllUserInfo(userid));
 		setAttr("userrole",UserRole.dao.findUserRolesById(userid));
 		setAttr("roleList",Role.dao.findAll());
+		setAttr("branchList",Branch.dao.getAllBranch());
 		render("/page/app/admin/user/edit.html");
 	}
 	/**
-	 * @描述 执行分配角色操作
+	 * @描述 执行分配角色操作，更改单位操作
 	 */
 	@Before(Tx.class)
 	public void doedituser(){
@@ -273,14 +276,14 @@ public class AdminController extends Controller {
 		//1、用户有角色，取消所有角色
 		if(ValidateKit.isNullOrEmpty(roles)){
 			for(int i=0;i<sur.size();i++){
-				logger.info(sur.get(i).getLong("roleid")+" 已取消，执行删除操作！");
+				logger.error(sur.get(i).getLong("roleid")+" 已取消，执行删除操作！");
 				UserRole.dao.findById(sur.get(i).getLong("id")).delete();
 			}
 		}
 		//2、用户无角色，新增角色
 		else if(ValidateKit.isNullOrEmpty(sur)){
 			for(int i=0;i<roles.length;i++){
-				logger.info(roles[i]+" 不存在，执行新增操作！");
+				logger.error(roles[i]+" 不存在，执行新增操作！");
 				new UserRole().set("user_id", getPara("userid")).set("role_id", roles[i]).save();
 			}
 		}
@@ -296,9 +299,9 @@ public class AdminController extends Controller {
 					}
 				}
 				if(flag){
-					logger.info(roles[i]+" 存在，保留不删除！");
+					logger.error(roles[i]+" 存在，保留不删除！");
 				}else if(!flag){
-					logger.info(roles[i]+" 不存在，执行新增操作！");
+					logger.error(roles[i]+" 不存在，执行新增操作！");
 					new UserRole().set("user_id", getPara("userid")).set("role_id", roles[i]).save();
 				}
 			}
@@ -313,14 +316,27 @@ public class AdminController extends Controller {
 					}
 				}
 				if(flag){
-					logger.info(sur.get(i).getLong("roleid")+" 未取消，保留不删除！");
+					logger.error(sur.get(i).getLong("roleid")+" 未取消，保留不删除！");
 				}else if(!flag){
-					logger.info(sur.get(i).getLong("roleid")+" 已取消，执行删除操作！");
+					logger.error(sur.get(i).getLong("roleid")+" 已取消，执行删除操作！");
 					UserRole.dao.findById(sur.get(i).getLong("id")).delete();
 				}
 			}
 		}
+		
+		logger.error(getPara("selectBranch"));
+		UserInfo userinfo=UserInfo.dao.get("user_id", getParaToLong("userid"));
+		if(userinfo.get("branch_id")!=getPara("selectBranch")){
+			userinfo.set("branch_id", getPara("selectBranch")).update();
+		}
+		
 		redirect("/admin/user");
+	}
+	
+	public void migrateuser(){
+		List<Branch> branchList=Branch.dao.getAllBranch();
+		
+		render("/admin/migrate.html");
 	}
 	
 	public void onuser(){
@@ -333,13 +349,49 @@ public class AdminController extends Controller {
 	}
 	
 	/**
-	 * 工单管理
+	 * 单位管理
+	 */
+	public void branch(){
+		List<Branch> branchList=Branch.dao.findAll();
+		setAttr("branchList",branchList);
+	}
+	
+	public void addbranch(){
+		render("/page/app/admin/branch/add.html");
+	}
+	@Before(AdminValidator.class)
+	public void doaddbranch(){
+		getModel(Branch.class).save();
+		redirect("/admin/branch");
+	}
+	
+	public void editbranch(){
+		Branch branch=Branch.dao.findById(getPara("id"));
+		setAttr("branch",branch);
+		render("/page/app/admin/branch/edit.html");
+	}
+	@Before(AdminValidator.class)
+	public void doeditbranch(){
+		getModel(Branch.class).update();
+		redirect("/admin/branch");
+	}
+	
+	public void onbranch(){
+		Branch.dao.findById(getPara("id")).set("deleted_at", null).update();
+		redirect("/admin/branch");
+	}
+	public void offbranch(){
+		Branch.dao.findById(getPara("id")).set("deleted_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
+		redirect("/admin/branch");
+	}
+	
+	/**
+	 * 异常工单管理
 	 */
 	public void exception(){
 		String where=" o.status=2 OR o.spend_time IS NOT NULL";
 		Page<Record> orderPage=Order.dao.findExceptionOrders(getParaToInt(0,1), 10,where);
 		setAttr("orderPage",orderPage);
-		
 	}
 	
 	/**

@@ -1,7 +1,5 @@
 package com.poicom.common.config;
 
-import java.util.Date;
-
 import cn.dreampie.log.Slf4jLogFactory;
 import cn.dreampie.mail.MailerPlugin;
 import cn.dreampie.quartz.QuartzKey;
