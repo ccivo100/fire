@@ -14,6 +14,10 @@ import cn.dreampie.web.model.Model;
  */
 @TableBind(tableName="sec_permission")
 public class Permission extends Model<Permission> implements TreeNode<Permission>{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5934957900463679947L;
 	public static Permission dao=new Permission();
 
 	@Override

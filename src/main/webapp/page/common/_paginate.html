@@ -1,63 +1,44 @@
 <#macro paginate currentPage totalPage actionUrl urlParas="">
 	<#if (totalPage <= 0) || (currentPage > totalPage)><#return></#if>
-	<#local startPage = currentPage - 4>
-	<#if (startPage < 1)><#local startPage = 1></#if>
-	
-	<#local endPage = currentPage + 4>
-	<#if (endPage > totalPage)><#local endPage = totalPage></#if>
-	<nav>
-		<ul class="pagination">
-			<#if (currentPage <= 8)>
-				<#local startPage = 1>
-			</#if>
-			<#if ((totalPage - currentPage) < 8)>
-				<#local endPage = totalPage>
-			</#if>
-			
-			<#if (currentPage == 1)>
-			<li class="disabled">
-				<span aria-hidden="true">上页</span>
-			</li>
-			<#else>
-			<li >
-				<a href="${ContextPath}${actionUrl}#{currentPage - 1}${urlParas!}" aria-label="Previous">
-					<span aria-hidden="true">上页</span>
-				</a>
-			</li>
-			</#if>
-			
-			<#if (currentPage > 8)>
-				<li class="active"><a href="${ContextPath}${actionUrl}#{1}${urlParas!}">#{1}</a></li>
-				<li><a href="${ContextPath}${actionUrl}#{2}${urlParas!}">#{2}</a></li>
-				<li><span class="gap">…</span></li>
-			</#if>
-			
-			<#list startPage..endPage as i>
-				<#if currentPage == i>
-					<li class="active"><span class="current">#{i}</span></li>
-				<#else>
-					<li ><a href="${ContextPath}${actionUrl}#{i}${urlParas!}">#{i}</a></li>
-				</#if>
-			</#list>
-			
-			<#if ((totalPage - currentPage) >= 8)>
-				<li><span class="gap">…</span></li>
-				<li><a href="${ContextPath}${actionUrl}#{totalPage - 1}${urlParas!}">#{totalPage - 1}</a></li>
-				<li><a href="${ContextPath}${actionUrl}#{totalPage}${urlParas!}">#{totalPage}</a></li>
-			</#if>
-			
-			<#if (currentPage == totalPage)>
-			<li class="disabled">
-				<span aria-hidden="true">下页</span>
-			</li>
-			<#else>
-			<li>
-				<a href="${ContextPath}${actionUrl}#{currentPage + 1}${urlParas!}" aria-label="Next" rel="next">
-					<span aria-hidden="true">下页</span>
-				</a>
-			</li>
-			</#if>
-		</ul>
-	</nav>
+   <#local startPage = currentPage - 2>
+   <#if (startPage < 1)><#local startPage = 1></#if>
+    
+   <#local endPage = currentPage + 2>
+   <#if (endPage > totalPage)><#local endPage = totalPage></#if>
+    
+   <div id="page">
+        <ul class="pagination">
+         <#if (currentPage <= 3)>
+            <#local startPage = 1>
+         </#if>
+         <#if ((totalPage - currentPage) < 2)>
+            <#local endPage = totalPage>
+         </#if>
+          
+         <#if (currentPage == 1)>
+                <li class="disabled"><a>首页</a></li>
+                <li class="disabled"><a>上页</a></li>
+         <#else>
+                <li><a href="${actionUrl}1${urlParas!}">首页</a></li>
+                <li><a href="${actionUrl}#{currentPage - 1}${urlParas!}">上页</a></li>
+         </#if>
+          
+         <#list startPage..endPage as i>
+            <#if currentPage == i>
+               <li class="active"><a class="disabled">#{i}</a></li>
+            <#else>
+               <li><a href="${actionUrl}#{i}${urlParas!}">#{i}</a></li>
+            </#if>
+         </#list>
+          
+         <#if (currentPage == totalPage)>
+            <li class="disabled"><a>下页</a></li>
+            <li class="disabled"><a>尾页</a></li>
+         <#else>
+            <li><a href="${actionUrl}#{currentPage + 1}${urlParas!}">下页</a></li>
+            <li><a href="${actionUrl}#{totalPage}${urlParas!}">尾页</a></li>
+         </#if>
+        </ul>
+   </div>
 
 </#macro>

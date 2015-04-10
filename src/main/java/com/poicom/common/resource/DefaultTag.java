@@ -8,6 +8,7 @@ import freemarker.template.*;
 
 public abstract class DefaultTag implements TemplateDirectiveModel {
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void execute(Environment env, Map params, TemplateModel[] loopVars,TemplateDirectiveBody body) throws TemplateException, IOException {
 		verifyParameters(params);
@@ -15,9 +16,11 @@ public abstract class DefaultTag implements TemplateDirectiveModel {
 
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public abstract void render(Environment env, Map params, TemplateDirectiveBody body) throws IOException, TemplateException;
 	
 	
+	@SuppressWarnings("rawtypes")
 	protected String getParam(Map params, String name) {
         Object value = params.get(name);
 
@@ -28,6 +31,7 @@ public abstract class DefaultTag implements TemplateDirectiveModel {
         return null;
     }
 	
+	@SuppressWarnings("rawtypes")
 	protected void verifyParameters(Map params) throws TemplateModelException {
     }
 	

@@ -77,18 +77,18 @@
 		</thead>
 				<tbody>
 			<#list reportPage.getList() as report>
-			<tr class="<#if report.status=0>success<#elseif report.status=2>danger</#if>">
+			<tr class="<#if report.status=0><#elseif report.status=2>danger</#if>">
 				<td style="text-align:left;">${report_index+1}</td>
 				<td style="text-align:left;">${(report.description)!}</td>
 				<td style="text-align:left;">${(report.offer_at)!}</td>
 				<td style="text-align:left;">${(report.off_user)!}</td>
 				<td >
 					<#if report.status=0>
-					已处理
+					<span class="label label-success">已处理</span>
 					<#elseif report.status=1>
-					未处理
+					<span class="label label-default">未处理</span>
 					<#elseif report.status=2>
-					超时未处理
+					<span class="label label-danger">超时未处理</span>
 					</#if>
 				</td>
 				

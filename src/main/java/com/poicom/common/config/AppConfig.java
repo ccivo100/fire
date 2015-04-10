@@ -1,11 +1,12 @@
 package com.poicom.common.config;
 
-import cn.dreampie.log.Slf4jLogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import cn.dreampie.mail.MailerPlugin;
 import cn.dreampie.quartz.QuartzKey;
 import cn.dreampie.quartz.QuartzPlugin;
 import cn.dreampie.quartz.job.QuartzCronJob;
-import cn.dreampie.quartz.job.QuartzOnceJob;
 import cn.dreampie.routebind.RouteBind;
 import cn.dreampie.shiro.core.ShiroInterceptor;
 import cn.dreampie.shiro.core.ShiroPlugin;
@@ -24,20 +25,23 @@ import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
-import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.ext.interceptor.SessionInViewInterceptor;
-import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
 import com.jfinal.plugin.activerecord.dialect.AnsiSqlDialect;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.FreeMarkerRender;
+import com.poicom.common.freemarker.FreeMarkerRenderFactory;
+import com.poicom.common.handler.GlobalHandler;
+import com.poicom.common.job.AlertJob;
 import com.poicom.common.resource.ResourceTags;
 import com.poicom.common.shiro.MyJdbcAuthzService;
+import com.poicom.common.thread.ThreadSysLog;
 import com.poicom.function.app.CommonInterceptor;
-import com.poicom.function.job.AlertJob;
 
 public class AppConfig extends JFinalConfig {
+	
+	private static Logger logger =LoggerFactory.getLogger(AppConfig.class);
 	
 	/** 
 	 * 供Shiro插件使用。
@@ -48,8 +52,12 @@ public class AppConfig extends JFinalConfig {
 	public void configConstant(Constants me) {
 		// 加载少量必要配置，随后可用getProperty(...)获取值
 		loadPropertyFile("application.properties");
+		//设置是否开发模式
 		me.setDevMode(getPropertyToBoolean("devMode", false));
-		Logger.setLoggerFactory(new Slf4jLogFactory());
+		//设置视图FreeMarker设置
+		me.setMainRenderFactory(new FreeMarkerRenderFactory());
+		//Logger.setLoggerFactory(new Slf4jLogFactory());
+		//设置异常跳转视图
 		me.setError401View("/page/index/_signin.ftl");
 		me.setError403View("/page/app/error403.html");
 		me.setError404View("/page/app/error404.html");
@@ -58,7 +66,8 @@ public class AppConfig extends JFinalConfig {
 
 	@Override
 	public void configHandler(Handlers me) {
-		me.add(new ContextPathHandler("ContextPath"));
+		logger.info("configHandler 全局配置处理器，主要是记录日志和request域值处理");
+		me.add(new GlobalHandler());
 
 	}
 
@@ -133,6 +142,16 @@ public class AppConfig extends JFinalConfig {
 		FreeMarkerRender.getConfiguration().setSharedVariable("shiro",new ShiroTags());
 		FreeMarkerRender.getConfiguration().setSharedVariable("resource", new ResourceTags());
 		new QuartzCronJob(new QuartzKey(1, "test", "test"), "0 30 08 * * ?", AlertJob.class).start();
+		
+		logger.info("afterJFinalStart 启动操作日志入库线程");
+		ThreadSysLog.startSaveDBThread();
+	}
+	
+	public void beforeJFinalStop(){
+		
+		logger.info("beforeJFinalStop 释放日志入库线程");
+		ThreadSysLog.setThreadRun(false);
+		
 	}
 	
 	public static void main(String[] args) {

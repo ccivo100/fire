@@ -15,7 +15,11 @@ import cn.dreampie.web.model.Model;
 @TableBind(tableName="sec_user")
 public class User extends Model<User> {
 	
-	public static User dao=new User();
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1923879818586171796L;
+	public static final User dao=new User();
 	
 	public Page<Record> getUserPage(int pageNumber,int pageSize){
 		return Db.paginate(pageNumber, pageSize,

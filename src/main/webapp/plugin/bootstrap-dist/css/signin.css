@@ -102,4 +102,15 @@ body {
 	border-color: #ddd transparent #ddd #ddd;
 	*border-right-color: #ffffff;
 }
-
+#backtotop {
+    width: 24px;
+    color: gray;
+    padding: 12px 0 12px 5px;
+    display: none;
+    position: fixed;
+    cursor: pointer;
+    text-align: center;
+    z-index: 20;
+    background-color: #fff;
+    border-radius: 12px 0 0 12px;
+}

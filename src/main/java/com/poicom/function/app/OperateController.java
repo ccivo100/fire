@@ -2,13 +2,11 @@ package com.poicom.function.app;
 
 import java.util.List;
 
-import org.apache.commons.mail.EmailException;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cn.dreampie.ValidateKit;
-import cn.dreampie.mail.Mailer;
 import cn.dreampie.routebind.ControllerKey;
 
 import com.jfinal.aop.Before;
@@ -17,7 +15,6 @@ import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
-import com.jfinal.plugin.ehcache.CacheInterceptor;
 import com.jfinal.plugin.ehcache.CacheName;
 import com.jfinal.plugin.ehcache.EvictInterceptor;
 import com.poicom.common.controller.JFController;

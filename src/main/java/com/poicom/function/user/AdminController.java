@@ -11,9 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cn.dreampie.ValidateKit;
-import cn.dreampie.quartz.QuartzKey;
-import cn.dreampie.quartz.job.QuartzCronJob;
-import cn.dreampie.quartz.job.QuartzOnceJob;
 import cn.dreampie.routebind.ControllerKey;
 import cn.dreampie.shiro.core.SubjectKit;
 import cn.dreampie.shiro.hasher.HasherInfo;
@@ -24,10 +21,12 @@ import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
+import com.jfinal.plugin.ehcache.CacheInterceptor;
+import com.jfinal.plugin.ehcache.CacheName;
+import com.jfinal.plugin.ehcache.EvictInterceptor;
 import com.poicom.function.app.model.Branch;
 import com.poicom.function.app.model.ErrorType;
 import com.poicom.function.app.model.Order;
-import com.poicom.function.job.AlertJob;
 import com.poicom.function.user.model.Permission;
 import com.poicom.function.user.model.Role;
 import com.poicom.function.user.model.RolePermission;
@@ -48,6 +47,8 @@ public class AdminController extends Controller {
 	/**
 	 * 角色管理
 	 */
+	@Before(CacheInterceptor.class)
+	@CacheName("/admin/role")
 	public void role(){
 		List<Role> roles=Role.dao.findRolesByPid(0);
 		for(Role role:roles){
@@ -56,6 +57,7 @@ public class AdminController extends Controller {
 		}
 		
 		setAttr("roleTree",roles);
+		render("role.html");
 	}
 	
 	/**
@@ -73,7 +75,8 @@ public class AdminController extends Controller {
 	/**
 	 * 新增角色操作
 	 */
-	@Before(AdminValidator.class)
+	@Before({AdminValidator.class,EvictInterceptor.class})
+	@CacheName("/admin/role")
 	public void doadd(){
 		getModel(Role.class).save();
 		redirect("/admin/role");
@@ -90,7 +93,8 @@ public class AdminController extends Controller {
 	/**
 	 * 更新角色操作
 	 */
-	@Before(AdminValidator.class)
+	@Before({AdminValidator.class,EvictInterceptor.class})
+	@CacheName("/admin/role")
 	public void doedit(){
 		getModel(Role.class).update();
 		redirect("/admin/role");
@@ -148,10 +152,14 @@ public class AdminController extends Controller {
 		redirect("/admin/role");
 	}
 	
+	@Before({EvictInterceptor.class})
+	@CacheName("/admin/role")
 	public void offrole(){
 		Role.dao.findById(getPara("id")).set("deleted_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
 		redirect("/admin/role");
 	}
+	@Before({EvictInterceptor.class})
+	@CacheName("/admin/role")
 	public void onrole(){
 		Role.dao.findById(getPara("id")).set("deleted_at", null).update();
 		redirect("/admin/role");
@@ -170,6 +178,8 @@ public class AdminController extends Controller {
 	/**
 	 * 权限管理
 	 */
+	@Before(CacheInterceptor.class)
+	@CacheName("/admin/permission")
 	public void permission(){
 		List<Permission> permissions=Permission.dao.findPermissionsByPid(0);
 		for(Permission permission:permissions){
@@ -177,6 +187,7 @@ public class AdminController extends Controller {
 			permission.setChildren(pchild);
 		}
 		setAttr("permissionTree",permissions);
+		render("permission.html");
 	}
 	/**
 	 * 新增权限
@@ -193,7 +204,8 @@ public class AdminController extends Controller {
 	/**
 	 * 新增权限操作
 	 */
-	@Before(AdminValidator.class)
+	@Before({AdminValidator.class,EvictInterceptor.class})
+	@CacheName("/admin/permission")
 	public void doaddpermission(){
 		getModel(Permission.class).save();
 		redirect("/admin/permission");
@@ -210,17 +222,21 @@ public class AdminController extends Controller {
 	/**
 	 * 更新权限操作
 	 */
-	@Before(AdminValidator.class)
+	@Before({AdminValidator.class,EvictInterceptor.class})
+	@CacheName("/admin/permission")
 	public void doeditpermission(){
 		getModel(Permission.class).update();
 		redirect("/admin/permission");
 	}
 	
+	@Before({EvictInterceptor.class})
+	@CacheName("/admin/permission")
 	public void offpermission(){
 		Permission.dao.findById(getPara("id")).set("deleted_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
 		redirect("/admin/permission");
 	}
-	
+	@Before({EvictInterceptor.class})
+	@CacheName("/admin/permission")
 	public void onpermission(){
 		Permission.dao.findById(getPara("id")).set("deleted_at", null).update();
 		redirect("/admin/permission");
@@ -334,7 +350,7 @@ public class AdminController extends Controller {
 	}
 	
 	public void migrateuser(){
-		List<Branch> branchList=Branch.dao.getAllBranch();
+		//List<Branch> branchList=Branch.dao.getAllBranch();
 		
 		render("/admin/migrate.html");
 	}
@@ -397,15 +413,19 @@ public class AdminController extends Controller {
 	/**
 	 * 故障类型管理
 	 */
+	@Before(CacheInterceptor.class)
+	@CacheName("/admin/type")
 	public void type(){
 		List<ErrorType> typeList=ErrorType.dao.findAll();
 		setAttr("typeList",typeList);
+		render("type.html");
 	}
 	
 	public void addtype(){
 		render("/page/app/admin/type/add.html");
 	}
-	@Before(AdminValidator.class)
+	@Before({AdminValidator.class,EvictInterceptor.class})
+	@CacheName("/admin/type")
 	public void doaddtype(){
 		getModel(ErrorType.class).save();
 		redirect("/admin/type");
@@ -415,15 +435,20 @@ public class AdminController extends Controller {
 		setAttr("errorType",errorType);
 		render("/page/app/admin/type/edit.html");
 	}
-	@Before(AdminValidator.class)
+	@Before({AdminValidator.class,EvictInterceptor.class})
+	@CacheName("/admin/type")
 	public void doedittype(){
 		getModel(ErrorType.class).update();
 		redirect("/admin/type");
 	}
+	@Before({EvictInterceptor.class})
+	@CacheName("/admin/type")
 	public void ontype(){
 		ErrorType.dao.findById(getPara("id")).set("deleted_at", null).update();
 		redirect("/admin/type");
 	}
+	@Before({EvictInterceptor.class})
+	@CacheName("/admin/type")
 	public void offtype(){
 		ErrorType.dao.findById(getPara("id")).set("deleted_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
 		redirect("/admin/type");
@@ -492,8 +517,8 @@ public class AdminController extends Controller {
 	}
 	
 	public void edit(){
-		User user=User.dao.findById(getParaToInt());
-		HasherInfo passwordInfo =HasherKit.hash(user.getStr("password"));
+		//User user=User.dao.findById(getParaToInt());
+		//HasherInfo passwordInfo =HasherKit.hash(user.getStr("password"));
 		setAttr("user", User.dao.findById(getParaToInt()));
 	}
 	

@@ -1,4 +1,4 @@
-package com.poicom.function.job;
+package com.poicom.common.job;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -72,7 +72,7 @@ public class AlertJob implements Job{
 				}
 			}
 			//发送短信
-			String[] array =new String[phones.size()];
+			//String[] array =new String[phones.size()];
 			//AlertKit.sendSms(userinfo,phones.toArray(array));
 		}
 	}

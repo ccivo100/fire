@@ -11,6 +11,7 @@ import freemarker.template.TemplateException;
 
 public class StaticTag extends DefaultTag {
 	
+	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger("StaticTag");
 	
 	private static String res_static = "";
@@ -20,6 +21,7 @@ public class StaticTag extends DefaultTag {
         res_static = PropertiesKit.me().getProperty("resource.static", "");
     }
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void render(Environment env, Map params, TemplateDirectiveBody body)
 			throws IOException, TemplateException {

@@ -12,7 +12,6 @@ import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
-import com.jfinal.plugin.ehcache.CacheName;
 import com.poicom.function.app.model.Order;
 import com.poicom.function.user.model.User;
 
@@ -82,7 +81,8 @@ public class IndexController extends Controller {
 	 * 验证码
 	 */
 	public void captcha() {
-		int width = 0, height = 0, minnum = 0, maxnum = 0, fontsize = 0, fontmin = 0, fontmax = 0;
+		int width = 0, height = 0, minnum = 0, maxnum = 0, fontsize = 0;
+		//int width = 0, height = 0, minnum = 0, maxnum = 0, fontsize = 0, fontmin = 0, fontmax = 0;
 		if(isParaExists("timestamp")){
 			System.out.println(getPara("timestamp"));
 		}

@@ -112,6 +112,35 @@
          diskPersistent="true"
          diskExpiryThreadIntervalSeconds="600" 
 		   />
-		   
+	
+	<cache name="/admin/role" 
+		 maxElementsInMemory="10000"
+         overflowToDisk="true"
+         eternal="true"
+         timeToLiveSeconds="0"
+         timeToIdleSeconds="0"
+         diskPersistent="true"
+         diskExpiryThreadIntervalSeconds="600" 
+	 />
+	 
+	 <cache name="/admin/permission" 
+		 maxElementsInMemory="10000"
+         overflowToDisk="true"
+         eternal="true"
+         timeToLiveSeconds="0"
+         timeToIdleSeconds="0"
+         diskPersistent="true"
+         diskExpiryThreadIntervalSeconds="600" 
+	 />
+	 
+	 <cache name="/admin/type" 
+		 maxElementsInMemory="10000"
+         overflowToDisk="true"
+         eternal="true"
+         timeToLiveSeconds="0"
+         timeToIdleSeconds="0"
+         diskPersistent="true"
+         diskExpiryThreadIntervalSeconds="600" 
+	 />
 	
 </ehcache>

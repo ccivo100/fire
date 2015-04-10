@@ -1,3 +1,28 @@
+<div id="backtotop" style="display: none; top: 502px; right: 0px;">回到顶部</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        function t() {
+            n.css({
+                top: o,
+                right: 0
+            })
+        }
+        var n = $("#backtotop"),
+                o = $(window).height() - n.height() - 200;
+        n.click(function() {
+            return $("html,body").animate({
+                scrollTop: 0
+            }),
+            !1
+        }),
+        $(window).scroll(function() {
+            var t = $(window).scrollTop();
+            t > 200 ? n.fadeIn() : n.fadeOut()
+        }),
+        t(),
+        $(window).resize(t);
+            });
+</script>
 <div class="footer">
 <div class="container">
       <p>Hello,I'm footer</p>

@@ -12,6 +12,10 @@ import cn.dreampie.web.model.Model;
 
 @TableBind(tableName="sec_role")
 public class Role extends Model<Role> implements TreeNode<Role>{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -588034349380836740L;
 	public static Role dao=new Role();
 
 	@Override

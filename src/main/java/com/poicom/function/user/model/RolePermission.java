@@ -9,6 +9,10 @@ import cn.dreampie.web.model.Model;
 
 @TableBind(tableName = "sec_role_permission")
 public class RolePermission extends Model<RolePermission> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1485058649065474980L;
 	public static RolePermission dao=new RolePermission();
 	
 	/**

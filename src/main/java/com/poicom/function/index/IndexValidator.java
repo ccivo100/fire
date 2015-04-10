@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import cn.dreampie.ValidateKit;
 
 import com.jfinal.core.Controller;
-import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.validate.Validator;
 
 public class IndexValidator extends Validator{

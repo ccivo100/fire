@@ -52,7 +52,7 @@
 				<td style="text-align:left;">${order.uoffername}</td>
 				<td >
 					<#if order.ostatus=0>
-					已处理
+					<span class="label label-success">已处理</span>
 					</#if>
 					<#if order.ostatus=1>
 					未处理
@@ -79,12 +79,11 @@
 		</tbody>
 		</#if>
 
-			
-
 	</table>
 		<#if overOrderPage??>
 			<#include "/page/common/_paginate.html" />
 			<@paginate currentPage=overOrderPage.pageNumber totalPage=overOrderPage.totalPage actionUrl="/" />
 		</#if>
 </div>
+
 </@layout>

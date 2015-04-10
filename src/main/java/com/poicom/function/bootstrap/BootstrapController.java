@@ -3,20 +3,12 @@ package com.poicom.function.bootstrap;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import cn.dreampie.resource.HttpResource;
 import cn.dreampie.routebind.ControllerKey;
-
 import com.jfinal.core.Controller;
-import com.jfinal.kit.PathKit;
 import com.jfinal.upload.UploadFile;
 import com.poicom.common.kit.excel.PoiKit;
 import com.poicom.function.user.model.Permission;
@@ -105,7 +97,7 @@ public class BootstrapController extends Controller {
 	public void ajax(){
 		String name=getPara("pname");
 		String uname=getPara("uname");
-		HttpServletResponse resp=getResponse();
+		//HttpServletResponse resp=getResponse();
 		setAttr("pname", name);
 		setAttr("uname", uname);
 		render("/ajax/index.html");

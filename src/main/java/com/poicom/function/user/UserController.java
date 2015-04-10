@@ -14,8 +14,6 @@ import cn.dreampie.shiro.hasher.HasherKit;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.tx.Tx;
-import com.jfinal.plugin.ehcache.CacheInterceptor;
-import com.jfinal.plugin.ehcache.CacheName;
 import com.poicom.function.user.model.User;
 import com.poicom.function.user.model.UserInfo;
 
@@ -81,7 +79,7 @@ public class UserController extends Controller {
 	 * 测试权限管理
 	 */
 	public void addPermission(){
-		User user=SubjectKit.getUser();
+		//User user=SubjectKit.getUser();
 		
 		//要先插入到sec_permission中，在执行下面的代码
 		ShiroKit.addJdbcAuthz("/test/1", "P_TEST_1");

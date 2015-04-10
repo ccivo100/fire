@@ -28,6 +28,7 @@ public class PoiKit {
 	 * @param InputStream
 	 * @return String 表头内容的数组
 	 */
+	@SuppressWarnings("deprecation")
 	public static String[] readHeader(InputStream is){
 		try{
 			fs=new POIFSFileSystem(is);
@@ -53,6 +54,7 @@ public class PoiKit {
 	 * @param InputStream
 	 * @return Map 包含单元格数据内容的Map对象
 	 */
+	@SuppressWarnings("deprecation")
 	public static Map<Integer,String> readContent(InputStream is){
 		Map<Integer, String> content = new HashMap<Integer, String>(); // 用来获取单个Excel文件内容
 		StringBuffer str=new StringBuffer();
