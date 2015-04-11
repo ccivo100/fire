@@ -39967,3 +39967,403 @@ Caused by: java.sql.SQLException: Access denied for user 'root'@'localhost' (usi
 
 2015-04-11 19:10:50
 [INFO]-[Thread: defaultScheduler_Worker-2]-[com.poicom.common.kit.DateKit.dateBetween()]: 一共 4 小时 
+
+2015-04-11 19:20:06
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.Server.doStart()]: jetty-8.1.8.v20121106
+
+2015-04-11 19:20:06
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-11 19:20:06
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-11 19:20:06
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-11 19:20:06
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-11 19:20:07
+[INFO]-[Thread: main]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-11 19:20:08
+[INFO]-[Thread: main]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-11 19:20:08
+[INFO]-[Thread: main]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-11 19:20:08
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 1887 ms.
+
+2015-04-11 19:20:08
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-11 19:20:10
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-11 19:20:11
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-11 19:20:11
+[INFO]-[Thread: main]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-11 19:20:11
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-11 19:20:11
+[INFO]-[Thread: main]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-11 19:20:11
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-11 19:20:11
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-11 19:20:11
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-11 19:20:11
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-11 19:20:11
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-11 19:20:11
+[INFO]-[Thread: main]-[com.poicom.common.quartz.QuartzPlugin.startPropertiesJobs()]: This  job  has started,id:1,name:channel,group:default
+
+2015-04-11 19:20:11
+[INFO]-[Thread: main]-[com.poicom.common.quartz.QuartzPlugin.startPropertiesJobs()]: This  job  has started,id:1,name:channel,group:default
+
+2015-04-11 19:20:11
+[INFO]-[Thread: main]-[com.poicom.common.quartz.QuartzPlugin.startPropertiesJobs()]: This  job  has started,id:1,name:channel,group:default
+
+2015-04-11 19:20:11
+[INFO]-[Thread: main]-[com.poicom.common.quartz.QuartzPlugin.startPropertiesJobs()]: This  job  has started,id:1,name:channel,group:default
+
+2015-04-11 19:20:11
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-11 19:20:11
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-11 19:20:12
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.AbstractConnector.doStart()]: Started SelectChannelConnector@0.0.0.0:80
+
+2015-04-11 19:20:15
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 两个时间相差：
+
+2015-04-11 19:20:15
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 一共 33 小时 
+
+2015-04-11 19:20:15
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 两个时间相差：
+
+2015-04-11 19:20:15
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 一共 33 小时 
+
+2015-04-11 19:20:15
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 两个时间相差：
+
+2015-04-11 19:20:15
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 一共 33 小时 
+
+2015-04-11 19:20:15
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 两个时间相差：
+
+2015-04-11 19:20:15
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 一共 33 小时 
+
+2015-04-11 19:20:15
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 两个时间相差：
+
+2015-04-11 19:20:15
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 一共 33 小时 
+
+2015-04-11 19:20:15
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 两个时间相差：
+
+2015-04-11 19:20:15
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 一共 33 小时 
+
+2015-04-11 19:20:15
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 两个时间相差：
+
+2015-04-11 19:20:15
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 一共 33 小时 
+
+2015-04-11 19:20:15
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 两个时间相差：
+
+2015-04-11 19:20:15
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 一共 33 小时 
+
+2015-04-11 19:20:15
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 两个时间相差：
+
+2015-04-11 19:20:15
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 一共 33 小时 
+
+2015-04-11 19:20:15
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 两个时间相差：
+
+2015-04-11 19:20:15
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 一共 33 小时 
+
+2015-04-11 19:20:16
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 两个时间相差：
+
+2015-04-11 19:20:16
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 一共 33 小时 
+
+2015-04-11 19:20:16
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 两个时间相差：
+
+2015-04-11 19:20:16
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 一共 33 小时 
+
+2015-04-11 19:20:16
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 两个时间相差：
+
+2015-04-11 19:20:16
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 一共 8 小时 
+
+2015-04-11 19:20:16
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 两个时间相差：
+
+2015-04-11 19:20:16
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 一共 4 小时 
+
+2015-04-11 19:20:16
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.job.AlertJob.execute()]: [com.jfinal.plugin.activerecord.Record@e4519b0d {userphone:15900088260, useremail:283784513@qq.com, userid:2, lastname:点通, firstname:科技, fullname:运维主管}, com.jfinal.plugin.activerecord.Record@2584bd7b {userphone:15900088260, useremail:283784513@qq.com, userid:3, lastname:三, firstname:张, fullname:运维员}]
+
+2015-04-11 19:20:20
+[INFO]-[Thread: defaultScheduler_Worker-2]-[com.poicom.common.kit.DateKit.dateBetween()]: 两个时间相差：
+
+2015-04-11 19:20:20
+[INFO]-[Thread: defaultScheduler_Worker-2]-[com.poicom.common.kit.DateKit.dateBetween()]: 一共 8 小时 
+
+2015-04-11 19:20:20
+[INFO]-[Thread: defaultScheduler_Worker-2]-[com.poicom.common.kit.DateKit.dateBetween()]: 两个时间相差：
+
+2015-04-11 19:20:20
+[INFO]-[Thread: defaultScheduler_Worker-2]-[com.poicom.common.kit.DateKit.dateBetween()]: 一共 4 小时 
+
+2015-04-11 19:20:20
+[INFO]-[Thread: defaultScheduler_Worker-2]-[com.poicom.common.job.AlertJob.execute()]: []
+
+2015-04-11 22:27:43
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-11 22:27:44
+[INFO]-[Thread: main]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-11 22:27:46
+[INFO]-[Thread: main]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-11 22:27:46
+[INFO]-[Thread: main]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-11 22:27:46
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 2739 ms.
+
+2015-04-11 22:27:52
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-11 22:27:55
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-11 22:27:55
+[INFO]-[Thread: main]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-11 22:27:55
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-11 22:27:55
+[INFO]-[Thread: main]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-11 22:27:55
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-11 22:27:55
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-11 22:27:55
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-11 22:27:55
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-11 22:27:55
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-11 22:27:55
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-11 22:29:09
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-11 22:29:09
+[INFO]-[Thread: main]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-11 22:29:11
+[INFO]-[Thread: main]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-11 22:29:12
+[INFO]-[Thread: main]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-11 22:29:12
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 2616 ms.
+
+2015-04-11 22:29:13
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-11 22:29:14
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-11 22:29:14
+[INFO]-[Thread: main]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-11 22:29:14
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-11 22:29:14
+[INFO]-[Thread: main]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-11 22:29:15
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-11 22:29:15
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-11 22:29:15
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-11 22:29:15
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-11 22:29:15
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-11 22:29:15
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-11 22:29:47
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-11 22:29:48
+[INFO]-[Thread: main]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-11 22:29:49
+[INFO]-[Thread: main]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-11 22:29:49
+[INFO]-[Thread: main]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-11 22:29:49
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 1743 ms.
+
+2015-04-11 22:29:51
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-11 22:29:52
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-11 22:29:52
+[INFO]-[Thread: main]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-11 22:29:52
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-11 22:29:52
+[INFO]-[Thread: main]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-11 22:29:52
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-11 22:29:52
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-11 22:29:52
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-11 22:29:52
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-11 22:29:52
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-11 22:29:52
+[INFO]-[Thread: main]-[com.poicom.common.quartz.QuartzPlugin.startPropertiesJobs()]: This  job  has started,id:1,name:channel,group:default
+
+2015-04-11 22:29:52
+[INFO]-[Thread: main]-[com.poicom.common.quartz.QuartzPlugin.startPropertiesJobs()]: This  job  has started,id:1,name:channel,group:default
+
+2015-04-11 22:29:52
+[INFO]-[Thread: main]-[com.poicom.common.quartz.QuartzPlugin.startPropertiesJobs()]: This  job  has started,id:1,name:channel,group:default
+
+2015-04-11 22:29:52
+[INFO]-[Thread: main]-[com.poicom.common.quartz.QuartzPlugin.startPropertiesJobs()]: This  job  has started,id:1,name:channel,group:default
+
+2015-04-11 22:29:52
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-11 22:29:53
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-11 22:29:55
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 两个时间相差：
+
+2015-04-11 22:29:55
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 一共 12 小时 
+
+2015-04-11 22:29:55
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 两个时间相差：
+
+2015-04-11 22:29:55
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.kit.DateKit.dateBetween()]: 一共 7 小时 
+
+2015-04-11 22:29:55
+[INFO]-[Thread: defaultScheduler_Worker-1]-[com.poicom.common.job.AlertJob.execute()]: []
+
+2015-04-11 22:30:00
+[INFO]-[Thread: defaultScheduler_Worker-2]-[com.poicom.common.kit.DateKit.dateBetween()]: 两个时间相差：
+
+2015-04-11 22:30:00
+[INFO]-[Thread: defaultScheduler_Worker-2]-[com.poicom.common.kit.DateKit.dateBetween()]: 一共 12 小时 
+
+2015-04-11 22:30:00
+[INFO]-[Thread: defaultScheduler_Worker-2]-[com.poicom.common.kit.DateKit.dateBetween()]: 两个时间相差：
+
+2015-04-11 22:30:00
+[INFO]-[Thread: defaultScheduler_Worker-2]-[com.poicom.common.kit.DateKit.dateBetween()]: 一共 7 小时 
+
+2015-04-11 22:30:00
+[INFO]-[Thread: defaultScheduler_Worker-2]-[com.poicom.common.job.AlertJob.execute()]: []

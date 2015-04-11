@@ -4,8 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cn.dreampie.mail.MailerPlugin;
-import cn.dreampie.quartz.QuartzKey;
-import cn.dreampie.quartz.job.QuartzCronJob;
 import cn.dreampie.routebind.RouteBind;
 import cn.dreampie.shiro.core.ShiroInterceptor;
 import cn.dreampie.shiro.core.ShiroPlugin;
@@ -33,7 +31,6 @@ import com.jfinal.render.FreeMarkerRender;
 import com.poicom.common.freemarker.FreeMarkerRenderFactory;
 import com.poicom.common.handler.GlobalHandler;
 import com.poicom.common.interceptor.HSRInterceptor;
-import com.poicom.common.job.AlertJob;
 import com.poicom.common.quartz.QuartzPlugin;
 import com.poicom.common.resource.ResourceTags;
 import com.poicom.common.shiro.MyJdbcAuthzService;
@@ -137,7 +134,6 @@ public class AppConfig extends JFinalConfig {
 		FreeMarkerRender.setProperties(loadPropertyFile("freemarker.properties"));
 		FreeMarkerRender.getConfiguration().setSharedVariable("shiro",new ShiroTags());
 		FreeMarkerRender.getConfiguration().setSharedVariable("resource", new ResourceTags());
-		//new QuartzCronJob(new QuartzKey(1, "test", "test"), "0 30 08 * * ?", AlertJob.class).start();
 		
 		logger.info("afterJFinalStart 启动操作日志入库线程");
 		ThreadSysLog.startSaveDBThread();
