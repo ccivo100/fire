@@ -50,7 +50,7 @@ public class AlertJob implements Job{
 				getAlertOperator(operatorMap,order);
 			}
 		}
-		System.out.println(operatorMap.values());
+		logger.info(operatorMap.values().toString());
 		//doAlert(operatorMap);
 	}
 	

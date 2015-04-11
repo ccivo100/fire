@@ -14,6 +14,11 @@ import java.util.concurrent.ConcurrentMap;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.StrKit;
 
+/**
+ * 配置文件Kit
+ * @author DONGYU
+ *
+ */
 public class PropertiesKit {
 
 	private ConcurrentMap<String, Object> propertiesAttrs = new ConcurrentHashMap<String, Object>();

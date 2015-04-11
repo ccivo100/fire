@@ -20,10 +20,10 @@ public class QuartzPlugin implements IPlugin {
 	public static boolean dsAlone = false;
 	
 	/**
-	 * 默认配置文件位置及命名
+	 * 默认配置文件位置及命名，配置文件前面不可加"/"
 	 */
 	private String config="quartz/quartz.properties";
-	private String jobs="/quartz/jobs.properties";
+	private String jobs="quartz/jobs.properties";
 	
 	public QuartzPlugin(){
 		
