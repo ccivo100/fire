@@ -16,9 +16,9 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 
-import com.poicom.function.user.model.Permission;
-import com.poicom.function.user.model.Role;
-import com.poicom.function.user.model.User;
+import com.poicom.function.system.model.Permission;
+import com.poicom.function.system.model.Role;
+import com.poicom.function.system.model.User;
 
 import cn.dreampie.ValidateKit;
 import cn.dreampie.shiro.core.SubjectKit;

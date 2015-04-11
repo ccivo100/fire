@@ -1,4 +1,4 @@
-package com.poicom.function.user;
+package com.poicom.function.system;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +10,7 @@ import cn.dreampie.shiro.hasher.HasherKit;
 
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
-import com.poicom.function.user.model.User;
+import com.poicom.function.system.model.User;
 
 public class UserValidator extends Validator {
 	

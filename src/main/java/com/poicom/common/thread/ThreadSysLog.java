@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.poicom.function.user.model.Syslog;
+import com.poicom.function.system.model.Syslog;
 
 /**
  * 操作日志入库处理
@@ -62,7 +62,7 @@ public class ThreadSysLog {
 	
 	public static void startSaveDBThread(){
 		try{
-			for(int i=0;i<0;i++){
+			for(int i=0;i<10;i++){
 				Thread insertDbThread =new Thread(new Runnable(){
 					public void run(){
 						while(threadRun){
@@ -84,21 +84,13 @@ public class ThreadSysLog {
 						}
 					}
 				});
+				
 				insertDbThread.setName("com-poicom-Thread-SysLog-insertDB-"+(i+1));
 				insertDbThread.start();
 			}
-			
 		}catch(Exception e){
 			throw new RuntimeException("ThreadSysLog new Thread Exception");
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

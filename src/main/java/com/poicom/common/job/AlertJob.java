@@ -7,8 +7,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.joda.time.DateTime;
-import org.joda.time.Days;
-import org.joda.time.Hours;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -24,8 +22,14 @@ import com.jfinal.plugin.activerecord.tx.Tx;
 import com.poicom.common.kit.AlertKit;
 import com.poicom.common.kit.DateKit;
 import com.poicom.function.app.model.Order;
-import com.poicom.function.user.model.User;
+import com.poicom.function.system.model.User;
 
+/**
+ * 定时器，定时扫面com_order表中
+ * 对超时未处理的数据进行设置并触发短信提示功能
+ * @author poicom7
+ *
+ */
 public class AlertJob implements Job{
 	
 	protected Logger logger=LoggerFactory.getLogger(getClass());
@@ -92,27 +96,5 @@ public class AlertJob implements Job{
 		}
 	}
 	
-	
-	/**
-	 * @描述 判断申报时间和现在时间差。
-	 * @param offer_at
-	 * @param now
-	 * @return
-	 */
-	@Deprecated
-	public int dateBetween(DateTime offer_at,DateTime now){
-		
-		System.out.print("两个时间相差：");
-		/*System.out.print(Days.daysBetween(offer_at, now).getDays() + " 天, ");
-        System.out.print(Hours.hoursBetween(offer_at, now).getHours() % 24
-                + " 小时, ");
-        System.out.print(Minutes.minutesBetween(offer_at, now).getMinutes() % 60
-                + " 分钟, ");
-        System.out.println(Seconds.secondsBetween(offer_at, now).getSeconds() % 60
-                + " 秒.");*/
-        int time=Days.daysBetween(offer_at, now).getDays()*24+Hours.hoursBetween(offer_at, now).getHours() % 24;
-        System.out.println("一共 "+time+" 小时 ");
-        return time;
-	}
 
 }

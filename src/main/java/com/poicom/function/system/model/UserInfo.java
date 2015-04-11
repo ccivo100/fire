@@ -1,4 +1,4 @@
-package com.poicom.function.user.model;
+package com.poicom.function.system.model;
 
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;

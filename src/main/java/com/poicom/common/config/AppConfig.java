@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import cn.dreampie.mail.MailerPlugin;
 import cn.dreampie.quartz.QuartzKey;
-import cn.dreampie.quartz.QuartzPlugin;
 import cn.dreampie.quartz.job.QuartzCronJob;
 import cn.dreampie.routebind.RouteBind;
 import cn.dreampie.shiro.core.ShiroInterceptor;
@@ -33,7 +32,9 @@ import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.FreeMarkerRender;
 import com.poicom.common.freemarker.FreeMarkerRenderFactory;
 import com.poicom.common.handler.GlobalHandler;
+import com.poicom.common.interceptor.HSRInterceptor;
 import com.poicom.common.job.AlertJob;
+import com.poicom.common.quartz.QuartzPlugin;
 import com.poicom.common.resource.ResourceTags;
 import com.poicom.common.shiro.MyJdbcAuthzService;
 import com.poicom.common.thread.ThreadSysLog;
@@ -68,7 +69,6 @@ public class AppConfig extends JFinalConfig {
 	public void configHandler(Handlers me) {
 		logger.info("configHandler 全局配置处理器，主要是记录日志和request域值处理");
 		me.add(new GlobalHandler());
-
 	}
 
 	@Override
@@ -80,12 +80,11 @@ public class AppConfig extends JFinalConfig {
 		me.add(new SessionInViewInterceptor());
 		me.add(new UrlInterceptor());
 		me.add(new CommonInterceptor());
-		
+		me.add(new HSRInterceptor());
 	}
 
 	@Override
 	public void configPlugin(Plugins me) {
-	
 		//配置druid连接池
 		DruidPlugin druidPlugin = new DruidPlugin(getProperty("db.default.url"), getProperty("db.default.user"), getProperty("db.default.password"), getProperty("db.default.driver"));
 		// StatFilter提供JDBC层的统计信息
@@ -112,7 +111,6 @@ public class AppConfig extends JFinalConfig {
 		tableBindPlugin.setDialect(new AnsiSqlDialect());
 		me.add(tableBindPlugin);
 		
-		
 		//sql语句plugin
 		me.add(new SqlInXmlPlugin());
 		//ehcache缓存
@@ -129,10 +127,8 @@ public class AppConfig extends JFinalConfig {
 
 	@Override
 	public void configRoute(Routes me) {
-
 		this.routes=me;
 		RouteBind routeBind=new RouteBind();
-		
 		me.add(routeBind);
 	}
 	
@@ -141,17 +137,15 @@ public class AppConfig extends JFinalConfig {
 		FreeMarkerRender.setProperties(loadPropertyFile("freemarker.properties"));
 		FreeMarkerRender.getConfiguration().setSharedVariable("shiro",new ShiroTags());
 		FreeMarkerRender.getConfiguration().setSharedVariable("resource", new ResourceTags());
-		new QuartzCronJob(new QuartzKey(1, "test", "test"), "0 30 08 * * ?", AlertJob.class).start();
+		//new QuartzCronJob(new QuartzKey(1, "test", "test"), "0 30 08 * * ?", AlertJob.class).start();
 		
 		logger.info("afterJFinalStart 启动操作日志入库线程");
 		ThreadSysLog.startSaveDBThread();
 	}
 	
 	public void beforeJFinalStop(){
-		
 		logger.info("beforeJFinalStop 释放日志入库线程");
 		ThreadSysLog.setThreadRun(false);
-		
 	}
 	
 	public static void main(String[] args) {

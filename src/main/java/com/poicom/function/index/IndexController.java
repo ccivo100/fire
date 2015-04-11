@@ -13,7 +13,7 @@ import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.poicom.function.app.model.Order;
-import com.poicom.function.user.model.User;
+import com.poicom.function.system.model.User;
 
 /**
  * IndexController
@@ -21,7 +21,7 @@ import com.poicom.function.user.model.User;
 @ControllerKey(value = "/", path = "/page/index")
 public class IndexController extends Controller {
 
-	static String indexView = "index.html";
+	private final static String indexView = "index.html";
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	/**

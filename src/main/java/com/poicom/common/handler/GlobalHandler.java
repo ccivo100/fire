@@ -14,7 +14,7 @@ import com.poicom.common.freemarker.MyFreeMarkerRender;
 import com.poicom.common.kit.DateKit;
 import com.poicom.common.kit.WebKit;
 import com.poicom.common.thread.ThreadSysLog;
-import com.poicom.function.user.model.Syslog;
+import com.poicom.function.system.model.Syslog;
 
 
 /**

@@ -10,7 +10,7 @@ import java.util.zip.CRC32;
  * @author poicom7
  *
  */
-public class IdeaKeygen {
+public class _IdeaKeygen {
 	public static short getCRC(String s, int i, byte bytes[]) {
 	    CRC32 crc32 = new CRC32();
 	    if (s != null) {

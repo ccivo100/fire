@@ -1,4 +1,4 @@
-package com.poicom.function.user;
+package com.poicom.function.system;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import cn.dreampie.ValidateKit;
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
 import com.poicom.function.app.model.ErrorType;
-import com.poicom.function.user.model.Permission;
-import com.poicom.function.user.model.Role;
+import com.poicom.function.system.model.Permission;
+import com.poicom.function.system.model.Role;
 
 public class AdminValidator extends Validator{
 	

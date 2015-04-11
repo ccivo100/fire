@@ -6,7 +6,7 @@ import cn.dreampie.routebind.ControllerKey;
 import com.jfinal.plugin.activerecord.Record;
 import com.poicom.common.controller.JFController;
 import com.poicom.function.app.model.Order;
-import com.poicom.function.user.model.UserInfo;
+import com.poicom.function.system.model.UserInfo;
 
 /**
  * 
@@ -15,6 +15,8 @@ import com.poicom.function.user.model.UserInfo;
  */
 @ControllerKey(value = "/order", path = "/page/app/common")
 public class CommonController extends JFController{
+	
+	private final static String COMMON_QUERY_PAGE="query.html";
 	
 	/**
 	 * 查询故障工单详细内容
@@ -41,7 +43,7 @@ public class CommonController extends JFController{
 		String back=getPara("back");
 		setAttr("back",back);
 		
-		render("/page/app/common/query.html");
+		render(COMMON_QUERY_PAGE);
 	}
 	
 

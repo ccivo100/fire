@@ -30,9 +30,9 @@ public class DateKit {
 	public static final String pattern_ymd = "yyyy-MM-dd"; // pattern_ymd
 	public static final String pattern_ymd_hms = "yyyy-MM-dd HH:mm:ss"; // pattern_ymdtime
 	public static final String pattern_ymd_hms_s = "yyyy-MM-dd HH:mm:ss:SSS"; // pattern_ymdtimeMillisecond
-	
+	public static final String pattern_bt_hms_s = "yyyy-MM-dd HH:mm:ss.SS"; 
 	public static int dateBetween(String offer,DateTime now){
-		format = DateTimeFormat .forPattern(pattern_ymd_hms_s);
+		format = DateTimeFormat .forPattern(pattern_bt_hms_s);
 		DateTime offer_at=DateTime.parse(offer,format);
 		logger.info("两个时间相差：");
 		int time=Days.daysBetween(offer_at, now).getDays()*24+Hours.hoursBetween(offer_at, now).getHours() % 24;

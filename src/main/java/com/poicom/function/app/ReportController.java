@@ -20,8 +20,8 @@ import com.poicom.common.controller.JFController;
 import com.poicom.common.kit.AlertKit;
 import com.poicom.function.app.model.ErrorType;
 import com.poicom.function.app.model.Order;
-import com.poicom.function.user.model.User;
-import com.poicom.function.user.model.UserInfo;
+import com.poicom.function.system.model.User;
+import com.poicom.function.system.model.UserInfo;
 
 /**
  * @描述 故障申报

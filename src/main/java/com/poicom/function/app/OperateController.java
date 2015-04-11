@@ -21,8 +21,8 @@ import com.poicom.common.controller.JFController;
 import com.poicom.common.kit.DateKit;
 import com.poicom.function.app.model.ErrorType;
 import com.poicom.function.app.model.Order;
-import com.poicom.function.user.model.User;
-import com.poicom.function.user.model.UserInfo;
+import com.poicom.function.system.model.User;
+import com.poicom.function.system.model.UserInfo;
 
 /**
  * @描述 运维管理
@@ -32,6 +32,11 @@ import com.poicom.function.user.model.UserInfo;
 @ControllerKey(value="/operate",path="/page/app/operate")
 public class OperateController extends JFController{
 	protected Logger logger=LoggerFactory.getLogger(getClass());
+	
+	private final static String OPERATE_PAGE="operate.html";
+	private final static String OPERATE_EDIT_PAGE="edit.html";
+	private final static String ASSIGN_PAGE="assign.ftl";
+	private final static String OPERATE_TASK_PAGE="task.ftl";
 	
 	public void index(){
 		
@@ -50,7 +55,7 @@ public class OperateController extends JFController{
 			Page <Record> operatePage=Order.dao.getOperateOrderPage(getParaToInt(0,1), 10,where,orderby, user.get("id"));
 			Order.dao.format(operatePage,"description");
 			setAttr("operatePage",operatePage);
-			render("operate.html");
+			render(OPERATE_PAGE);
 		}
 		
 	}
@@ -78,7 +83,8 @@ public class OperateController extends JFController{
 
 		if(!ValidateKit.isNullOrEmpty(offer))
 			setAttr("offer_branch",offer.getStr("bname"));
-
+		
+		render(OPERATE_EDIT_PAGE);
 		
 	}
 	
@@ -137,6 +143,7 @@ public class OperateController extends JFController{
 		setAttr("userPage",userPage);
 		setAttr("typeList",ErrorType.dao.getAllType());
 		
+		render(OPERATE_TASK_PAGE);
 	}
 	
 	/**
@@ -147,6 +154,7 @@ public class OperateController extends JFController{
 		setAttr("userinfo",UserInfo.dao.getAllUserInfo(userid));
 		setAttr("usertype",ErrorType.dao.getOperatorType(userid));
 		setAttr("typeList",ErrorType.dao.getAllType());
+		render(ASSIGN_PAGE);
 	}
 	
 	/**

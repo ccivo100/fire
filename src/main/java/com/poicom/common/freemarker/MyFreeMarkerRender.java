@@ -18,7 +18,6 @@ public class MyFreeMarkerRender extends FreeMarkerRender {
 	
 	public MyFreeMarkerRender(String view) {
 		super(view);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public void render(){

@@ -1,4 +1,4 @@
-package com.poicom.function.user;
+package com.poicom.function.system;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -27,17 +27,28 @@ import com.jfinal.plugin.ehcache.EvictInterceptor;
 import com.poicom.function.app.model.Branch;
 import com.poicom.function.app.model.ErrorType;
 import com.poicom.function.app.model.Order;
-import com.poicom.function.user.model.Permission;
-import com.poicom.function.user.model.Role;
-import com.poicom.function.user.model.RolePermission;
-import com.poicom.function.user.model.User;
-import com.poicom.function.user.model.UserInfo;
-import com.poicom.function.user.model.UserRole;
+import com.poicom.function.system.model.Permission;
+import com.poicom.function.system.model.Role;
+import com.poicom.function.system.model.RolePermission;
+import com.poicom.function.system.model.User;
+import com.poicom.function.system.model.UserInfo;
+import com.poicom.function.system.model.UserRole;
 
 @ControllerKey(value="/admin",path="/page/app/admin")
 public class AdminController extends Controller {
 	
 	protected Logger logger=LoggerFactory.getLogger(getClass());
+	
+	private final static String ROLE_ADD_PAGE="role/add.html";
+	private final static String ROLE_EDIT_PAGE="role/edit.html";
+	private final static String ROLE_ASSIGN_PAGE="role/assign.ftl";
+	private final static String PERMISSION_ADD_PAGE="permission/add.html";
+	private final static String PERMISSION_EDIT_PAGE="permission/edit.html";
+	private final static String USER_EDIT_PAGE="user/edit.ftl";
+	private final static String BRANCH_ADD_PAGE="branch/add.html";
+	private final static String BRANCH_EDIT_PAGE="branch/edit.html";
+	private final static String TYPE_ADD_PAGE="type/add.html";
+	private final static String TYPE_EDIT_PAGE="type/edit.html";
 	
 	public void index(){
 		setAttr("userPage", User.dao.getUserPage(getParaToInt(0, 1), 10));
@@ -70,7 +81,7 @@ public class AdminController extends Controller {
 			System.out.println(getParaToLong("id"));
 			setAttr("pid",getParaToLong("id"));
 		}
-		render("/page/app/admin/role/add.html");
+		render(ROLE_ADD_PAGE);
 	}
 	/**
 	 * 新增角色操作
@@ -88,7 +99,7 @@ public class AdminController extends Controller {
 	public void editrole(){
 		Role role=Role.dao.findById(getPara("id"));
 		setAttr("role",role);
-		render("/page/app/admin/role/edit.html");
+		render(ROLE_EDIT_PAGE);
 	}
 	/**
 	 * 更新角色操作
@@ -116,7 +127,7 @@ public class AdminController extends Controller {
 		setAttr("role",role);
 		setAttr("userpermission",userpermission);
 		setAttr("permissions",permissions);
-		render("/page/app/admin/role/assign.html");
+		render(ROLE_ASSIGN_PAGE);
 	}
 	
 	@Before(Tx.class)
@@ -199,7 +210,7 @@ public class AdminController extends Controller {
 			System.out.println(getParaToLong("id"));
 			setAttr("pid",getParaToLong("id"));
 		}
-		render("/page/app/admin/permission/add.html");
+		render(PERMISSION_ADD_PAGE);
 	}
 	/**
 	 * 新增权限操作
@@ -217,7 +228,7 @@ public class AdminController extends Controller {
 	public void editpermission(){
 		Permission permission=Permission.dao.findById(getPara("id"));
 		setAttr("permission",permission);
-		render("/page/app/admin/permission/edit.html");
+		render(PERMISSION_EDIT_PAGE);
 	}
 	/**
 	 * 更新权限操作
@@ -276,7 +287,7 @@ public class AdminController extends Controller {
 		setAttr("userrole",UserRole.dao.findUserRolesById(userid));
 		setAttr("roleList",Role.dao.findAll());
 		setAttr("branchList",Branch.dao.getAllBranch());
-		render("/page/app/admin/user/edit.html");
+		render(USER_EDIT_PAGE);
 	}
 	/**
 	 * @描述 执行分配角色操作，更改单位操作
@@ -373,7 +384,7 @@ public class AdminController extends Controller {
 	}
 	
 	public void addbranch(){
-		render("/page/app/admin/branch/add.html");
+		render(BRANCH_ADD_PAGE);
 	}
 	@Before(AdminValidator.class)
 	public void doaddbranch(){
@@ -384,7 +395,7 @@ public class AdminController extends Controller {
 	public void editbranch(){
 		Branch branch=Branch.dao.findById(getPara("id"));
 		setAttr("branch",branch);
-		render("/page/app/admin/branch/edit.html");
+		render(BRANCH_EDIT_PAGE);
 	}
 	@Before(AdminValidator.class)
 	public void doeditbranch(){
@@ -422,7 +433,7 @@ public class AdminController extends Controller {
 	}
 	
 	public void addtype(){
-		render("/page/app/admin/type/add.html");
+		render(TYPE_ADD_PAGE);
 	}
 	@Before({AdminValidator.class,EvictInterceptor.class})
 	@CacheName("/admin/type")
@@ -433,7 +444,7 @@ public class AdminController extends Controller {
 	public void edittype(){
 		ErrorType errorType=ErrorType.dao.findById(getPara("id"));
 		setAttr("errorType",errorType);
-		render("/page/app/admin/type/edit.html");
+		render(TYPE_EDIT_PAGE);
 	}
 	@Before({AdminValidator.class,EvictInterceptor.class})
 	@CacheName("/admin/type")

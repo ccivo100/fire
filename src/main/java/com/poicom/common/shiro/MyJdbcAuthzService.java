@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.poicom.function.user.model.Permission;
-import com.poicom.function.user.model.Role;
+import com.poicom.function.system.model.Permission;
+import com.poicom.function.system.model.Role;
 
 import cn.dreampie.shiro.core.JdbcAuthzService;
 import cn.dreampie.shiro.core.handler.AuthzHandler;
