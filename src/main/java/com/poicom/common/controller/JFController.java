@@ -8,13 +8,16 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cn.dreampie.routebind.ControllerKey;
+
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Record;
 import com.poicom.function.system.model.Syslog;
 
-public class JFController extends Controller{
+@ControllerKey(value="/jf")
+public class JfController extends Controller{
 	
-	private static Logger logger=LoggerFactory.getLogger(JFController.class);
+	private static Logger logger=LoggerFactory.getLogger(JfController.class);
 	
 	/**
 	 * 全局变量

@@ -16,7 +16,7 @@ import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.jfinal.plugin.ehcache.CacheName;
 import com.jfinal.plugin.ehcache.EvictInterceptor;
-import com.poicom.common.controller.JFController;
+import com.poicom.common.controller.JfController;
 import com.poicom.common.kit.AlertKit;
 import com.poicom.function.app.model.ErrorType;
 import com.poicom.function.app.model.Order;
@@ -29,7 +29,7 @@ import com.poicom.function.system.model.UserInfo;
  *
  */
 @ControllerKey(value = "/report", path = "/page/app/report")
-public class ReportController extends JFController{
+public class ReportController extends JfController{
 	
 	protected Logger logger=LoggerFactory.getLogger(getClass());
 	

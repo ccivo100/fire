@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cn.dreampie.mail.MailerPlugin;
-import cn.dreampie.routebind.RouteBind;
 import cn.dreampie.shiro.core.ShiroInterceptor;
 import cn.dreampie.shiro.core.ShiroPlugin;
 import cn.dreampie.shiro.freemarker.ShiroTags;
@@ -33,8 +32,10 @@ import com.poicom.common.handler.GlobalHandler;
 import com.poicom.common.interceptor.HSRInterceptor;
 import com.poicom.common.quartz.QuartzPlugin;
 import com.poicom.common.resource.ResourceTags;
+import com.poicom.common.routebind.RouteBind;
 import com.poicom.common.shiro.MyJdbcAuthzService;
 import com.poicom.common.thread.ThreadSysLog;
+import com.poicom.function.*;
 import com.poicom.function.app.CommonInterceptor;
 
 public class AppConfig extends JFinalConfig {
@@ -123,12 +124,12 @@ public class AppConfig extends JFinalConfig {
 	}
 
 	@Override
-	public void configRoute(Routes me) {
+	public void configRoute(Routes me) { 
 		this.routes=me;
-		RouteBind routeBind=new RouteBind();
+		RouteBind routeBind=new RouteBind();   
 		me.add(routeBind);
-	}
-	
+	} 
+	 
 	public void afterJFinalStart(){
 		super.afterJFinalStart();
 		FreeMarkerRender.setProperties(loadPropertyFile("freemarker.properties"));

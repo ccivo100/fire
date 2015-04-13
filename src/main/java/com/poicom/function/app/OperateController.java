@@ -17,7 +17,7 @@ import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.jfinal.plugin.ehcache.CacheName;
 import com.jfinal.plugin.ehcache.EvictInterceptor;
-import com.poicom.common.controller.JFController;
+import com.poicom.common.controller.JfController;
 import com.poicom.common.kit.DateKit;
 import com.poicom.function.app.model.ErrorType;
 import com.poicom.function.app.model.Order;
@@ -30,7 +30,7 @@ import com.poicom.function.system.model.UserInfo;
  *
  */
 @ControllerKey(value="/operate",path="/page/app/operate")
-public class OperateController extends JFController{
+public class OperateController extends JfController{
 	protected Logger logger=LoggerFactory.getLogger(getClass());
 	
 	private final static String OPERATE_PAGE="operate.html";
