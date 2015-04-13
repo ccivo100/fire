@@ -124,7 +124,7 @@ public class ReportController extends JfController{
 			
 		}
 		//发送短信
-		//String[] array =new String[phones.size()];
+		String[] array =new String[phones.size()];
 		//AlertKit.sendSms(userinfo,phones.toArray(array));
 		
 		

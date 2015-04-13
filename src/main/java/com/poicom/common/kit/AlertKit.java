@@ -82,9 +82,9 @@ public class AlertKit {
 		String phones=phoneFormat(phone);
 		System.out.println(phones);
 		
-		String department="XX";
-		String name="XX";
-		String type="XX";
+		String department="xx";
+		String name="xx";
+		String type="xx";
 		
 		
 		StringBuffer contt=new StringBuffer();
@@ -95,7 +95,7 @@ public class AlertKit {
 			.append(userinfo.getStr("bname")+"的 ")
 			.append(userinfo.getStr("ufullname"))
 			.append(" ("+userinfo.getStr("uphone")+") ")
-			.append("提交了故障工单，请尽快处理。");
+			.append("提交了故障工单，请尽快处理。【一点通】");
 		}
 		
 		String content =contt.toString();

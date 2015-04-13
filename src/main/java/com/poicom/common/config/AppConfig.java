@@ -78,7 +78,7 @@ public class AppConfig extends JFinalConfig {
 		me.add(new SessionInViewInterceptor());
 		me.add(new UrlInterceptor());
 		me.add(new CommonInterceptor());
-		me.add(new HSRInterceptor());
+		//me.add(new HSRInterceptor());
 	}
 
 	@Override
@@ -126,7 +126,7 @@ public class AppConfig extends JFinalConfig {
 	@Override
 	public void configRoute(Routes me) { 
 		this.routes=me;
-		RouteBind routeBind=new RouteBind();   
+		RouteBind routeBind=new RouteBind();
 		me.add(routeBind);
 	} 
 	 

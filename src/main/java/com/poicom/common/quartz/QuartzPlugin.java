@@ -62,7 +62,7 @@ public class QuartzPlugin implements IPlugin {
 		}catch(Exception e){
 			throw new RuntimeException("Can't stop quartz plugin.", e);
 		}
-	}
+	} 
 	
 	public void startPropertiesJobs(){
 		if(PropertiesKit.exist(jobs)){
