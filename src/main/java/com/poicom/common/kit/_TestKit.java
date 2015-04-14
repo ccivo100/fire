@@ -7,6 +7,8 @@ import java.util.Enumeration;
 
 import org.junit.Test;
 
+import cn.dreampie.ValidateKit;
+
 public class _TestKit {
 	
 	/**
@@ -21,7 +23,7 @@ public class _TestKit {
 		modelName=new String(items);
 		System.out.println(modelName+" "+('a'-'A'));
 	}
-	@Test
+	
 	public void t_resources(){
 		Class clazz=this.getClass();
 		URLClassLoader loader = (URLClassLoader)clazz.getClassLoader();
@@ -33,6 +35,14 @@ public class _TestKit {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	@Test
+	public void t_isEmail(){
+		String email="dantechan@poicom.net";
+		if(ValidateKit.isEmail(email)){
+			System.out.println("true");
+		}else
+			System.out.println("false");
 	}
 
 }

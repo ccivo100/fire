@@ -37,7 +37,7 @@ import com.poicom.function.system.model.UserRole;
 @ControllerKey(value="/admin",path="/page/app/admin")
 public class AdminController extends Controller {
 	
-	protected Logger logger=LoggerFactory.getLogger(getClass());
+	protected Logger logger=LoggerFactory.getLogger(AdminController.class);
 	
 	private final static String ROLE_ADD_PAGE="role/add.html";
 	private final static String ROLE_EDIT_PAGE="role/edit.html";

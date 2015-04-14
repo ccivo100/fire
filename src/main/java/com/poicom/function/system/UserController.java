@@ -17,10 +17,13 @@ import com.jfinal.plugin.activerecord.tx.Tx;
 import com.poicom.function.system.model.User;
 import com.poicom.function.system.model.UserInfo;
 
-@ControllerKey(value="/user")
+@ControllerKey(value="/user",path="/page/app/user")
 public class UserController extends Controller {
 	
-	protected Logger logger=LoggerFactory.getLogger(getClass());
+	protected Logger logger=LoggerFactory.getLogger(UserController.class);
+	
+	private final static String CENTER_PAGE="center.html";
+	private final static String PWD_PAGE="pwd.html";
 	
 	public void index(){
 		redirect("/user/center");
@@ -33,10 +36,12 @@ public class UserController extends Controller {
 		User user=SubjectKit.getUser();
 		if(!ValidateKit.isNullOrEmpty(user)){
 			setAttr("userInfo",UserInfo.dao.getAllUserInfo(user.get("id")));
+			setSessionAttr("current_user", user);
 		}
-		render("/page/app/user/center.html");
+		render(CENTER_PAGE);
 		
 	}
+	
 	
 	/**
 	 * 
@@ -46,7 +51,7 @@ public class UserController extends Controller {
 		if(!ValidateKit.isNullOrEmpty(user)){
 			setAttr("user", user);
 		}
-		render("/page/app/user/pwd.html");
+		render(PWD_PAGE);
 	}
 	
 	/**

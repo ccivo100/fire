@@ -23,8 +23,9 @@
 				<ul class="nav navbar-nav">
 				<@shiro.hasPermission name="P_INDEX">	
 				<li class="<#if activebar='index'>active</#if>">
-					<a  href="${ContextPath}/"><span class="glyphicon glyphicon-fire"></span> 首页</a></li>
-					</@shiro.hasPermission>
+					<a  href="${ContextPath}/"><span class="glyphicon glyphicon-fire"></span> 首页</a>
+				</li>
+				</@shiro.hasPermission>
 					
 					<@shiro.hasPermission name="P_ADMIN">
         				<li class="dropdown">
@@ -32,6 +33,8 @@
     					<span class="glyphicon glyphicon-list"></span> 管理员目录<span	class="caret"></span>
     					</a>
     						<ul class="dropdown-menu" role="menu">
+	    						<li class="dropdown-header"><b>管理操作</b></li>
+								<li class="divider"></li>
 	    						<@shiro.hasPermission name="P_A_ROLE">
 								<li><a href="${ContextPath}/admin/role">角色管理</a></li>
 								</@shiro.hasPermission>
@@ -58,6 +61,8 @@
     					<span class="glyphicon glyphicon-list"></span> 运维管理<span	class="caret"></span>
     					</a>
     						<ul class="dropdown-menu" role="menu">
+	    						<li class="dropdown-header"><b>运维操作</b></li>
+								<li class="divider"></li>
     							<@shiro.hasPermission name="P_O_DEAL">
     							<li><a href="${ContextPath}/operate/deal">故障处理</a></li>
     							</@shiro.hasPermission>
@@ -74,6 +79,8 @@
     					<span class="glyphicon glyphicon-list"></span> 报障管理<span	class="caret"></span>
     					</a>
     						<ul class="dropdown-menu" role="menu">
+	    						<li class="dropdown-header"><b>报障操作</b></li>
+								<li class="divider"></li>
     							<@shiro.hasPermission name="P_R_OFFER">
     							<li><a href="${ContextPath}/report/offer">故障申报</a></li>
     							</@shiro.hasPermission>
@@ -81,6 +88,7 @@
     					</li>
   					</@shiro.hasPermission>
       				
+  					<@shiro.hasPermission name="P_USER">
 					<li class="dropdown">
 					<a href="${ContextPath}/bootstrap"	class="dropdown-toggle" data-toggle="dropdown">
 					<span class="glyphicon glyphicon-user"></span> 用户管理<span	class="caret"></span>
@@ -88,29 +96,34 @@
 						<ul class="dropdown-menu" role="menu">
 							<li class="dropdown-header"><b>用户操作</b></li>
 							<li class="divider"></li>
-							<@shiro.authenticated>
+							
 								<@shiro.hasPermission name="P_U_CENTER">
-      							<li><a href="${ContextPath}/user/center">
-        						个人中心
-      							</a></li>
+      								<li><a href="${ContextPath}/user/center">个人中心</a></li>
       							</@shiro.hasPermission>
-      							<li><a href="${ContextPath}/user/pwdPage">
-      							修改密码
-      							</a></li>
-      						<li><a href="${ContextPath}/signout">退出</a></li>
-   	 						</@shiro.authenticated>
-							<@shiro.notAuthenticated>
-								<li><a href="${ContextPath}/signin">登录</a></li>
-							</@shiro.notAuthenticated>
-							<li class="divider"></li>
+      							
+      							<@shiro.hasPermission name="P_U_PWD">
+      								<li><a href="${ContextPath}/user/pwdPage">修改密码</a></li>
+      							</@shiro.hasPermission>
+      						
+<!--							<li class="divider"></li>
 							<li><a href="${ContextPath}/bootstrap">Bootstrap主页</a></li>
 							<li><a href="${ContextPath}/bootstrap/tree">树形菜单</a></li>
 							<li><a href="${ContextPath}/bootstrap/school">Bootstrap学校</a></li>
 							<li><a href="${ContextPath}/autho">权限树</a></li>
 							<li><a href="${ContextPath}/bootstrap/dash">DASH</a></li>
-
+-->
 						</ul>
 					</li>
+					</@shiro.hasPermission>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+				<@shiro.authenticated>
+					<li><a href="${ContextPath}/user/center">${(session["PRINCIPALS_SESSION_KEY"].full_name)!}</a></li>
+					<li><a href="${ContextPath}/signout">退出</a></li>
+					</@shiro.authenticated>
+				<@shiro.notAuthenticated>
+					<li><a href="${ContextPath}/signin">登录</a></li>
+				</@shiro.notAuthenticated>
 				</ul>
 			</div>
 		</div>

@@ -55,5 +55,9 @@ public class User extends Model<User> {
 				SqlKit.sql("user.findInfoBySelect"),
 				SqlKit.sql("user.findAllUserByFrom"), paras);
 	}
+	
+	public User findUserByAttr(String attr,Object paras){
+		return findFirst("select * from sec_user where "+attr+" =? ",paras);
+	}
 
 }

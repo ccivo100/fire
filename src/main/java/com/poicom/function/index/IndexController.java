@@ -22,7 +22,8 @@ import com.poicom.function.system.model.User;
 public class IndexController extends Controller {
 
 	private final static String indexView = "index.html";
-	protected Logger logger = LoggerFactory.getLogger(getClass());
+	private final static String RETRIEVE_PAGE="retrieve.html";
+	protected Logger logger = LoggerFactory.getLogger(IndexController.class);
 
 	/**
 	 * 主页根目录
@@ -129,8 +130,29 @@ public class IndexController extends Controller {
 		render(captcha);
 	}
 	
-	public void back(){
-		render("/page/back/index/index.html");
+	/**
+	 * 找回密码页面
+	 */
+	public void retrieve(){
+		
+		render(RETRIEVE_PAGE);
+	}
+	
+	/**
+	 * 找回密码操作
+	 */
+	public void doretrieve(){
+		String username=getPara("username");
+		String email=getPara("email");
+		
+		User user=User.dao.findUserByAttr("username", username);
+		if(ValidateKit.isNullOrEmpty(user)){
+			
+		}
+	}
+	
+	public void getretrieve(){
+		
 	}
 
 }

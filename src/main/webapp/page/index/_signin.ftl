@@ -21,6 +21,7 @@
 		<label>
 			<input type="checkbox" value="remember-me">记住我
 		</label>
+		<label><a href="${ContextPath}/retrieve">忘记密码</a></label>
 	</div>
 	<@shiro.isLoginFailure name="shiroLoginFailure">
         <div class="alert alert-danger" style="background-image: none;">
