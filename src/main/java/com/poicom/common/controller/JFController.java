@@ -15,9 +15,9 @@ import com.jfinal.plugin.activerecord.Record;
 import com.poicom.function.system.model.Syslog;
 
 @ControllerKey(value="/jf")
-public class JfController extends Controller{
+public class JFController extends Controller{
 	
-	private static Logger logger=LoggerFactory.getLogger(JfController.class);
+	private static Logger logger=LoggerFactory.getLogger(JFController.class);
 	
 	/**
 	 * 全局变量

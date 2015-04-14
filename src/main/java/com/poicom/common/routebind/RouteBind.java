@@ -5,7 +5,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import cn.dreampie.ClassSearchKit;
 import cn.dreampie.routebind.ControllerKey;
 
 import com.google.common.base.Preconditions;
@@ -13,6 +12,7 @@ import com.google.common.collect.Lists;
 import com.jfinal.config.Routes;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.StrKit;
+import com.poicom.common.kit.ClassSearchKit;
 import com.poicom.common.kit.CollectionKit;
 
 public class RouteBind extends Routes {
@@ -86,7 +86,7 @@ public class RouteBind extends Routes {
 		for (Class controller : controllerClasses) {
 			if (excludeClasses.contains(controller)) {
 				continue;
-			}
+			} 
 			controllerKey = (ControllerKey) controller	.getAnnotation(ControllerKey.class);
 			if (controllerKey == null) {
 				if (!autoScan) {

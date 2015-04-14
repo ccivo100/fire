@@ -1,35 +1,48 @@
 ﻿<#include "/page/common/_layout.html"/>
 <@layout activebar="signin" html_title="登录">
-<div class="jumbotron">
-
-<form class="form-signin" role="form" method="post" action="${ContextPath}/signin">
-	<h2 class="form-signin-heading">请登录</h2>
-	<!-- <input class="form-control" type="email" placeholder="用户名" required autofocus> -->
-	<input class="form-control" type="text" name="username" value="${(username)!}" placeholder="用户名" required autofocus autocomplete="off">
-	<input class="form-control" type="password" name="password" value="${(password)!}" placeholder="密码" required>
-	<div>
-    <label >验证码:</label>
-
-    <div >
-      <input type="text" name="captcha" value="" class="form-control captcha" ng-minlength="4" ng-maxlength="4"
-             placeholder="验证码" required autocomplete="off">
-      <img id="captcha" class="captcha" src="${ContextPath}/captcha?width=128&height=45&fontsize=30&time=${.now?time}">
-      <a href="javascript:ref_captcha()">验证码看不清</a>
-    </div>
-  	</div>
-	<div class="checkbox">
-		<label>
-			<input type="checkbox" value="remember-me">记住我
-		</label>
-		<label><a href="${ContextPath}/retrieve">忘记密码</a></label>
+<div class="row">
+	
+	<div class="col-xs-7">
+		<div class="jumbotron">
+			<img src="/touxiang.jpg" height="440" width="500">
+		</div>
 	</div>
-	<@shiro.isLoginFailure name="shiroLoginFailure">
-        <div class="alert alert-danger" style="background-image: none;">
-          <@shiro.loginException name="shiroLoginFailure"/>
-        </div>
-    </@shiro.isLoginFailure>
-	<button class="btn btn-lg btn-primary btn-block" data-loading-text="正在提交..." type="submit">Sign in</button>
-</form>
+	<div class="col-xs-5">
+		<div class="jumbotron">
+	
+			<form class="form-signin" role="form" method="post" action="${ContextPath}/signin">
+				<h2 class="form-signin-heading">请登录</h2>
+				<!-- <input class="form-control" type="email" placeholder="用户名" required autofocus> -->
+				<input class="form-control" type="text" name="username" value="${(username)!}" placeholder="用户名" required autofocus autocomplete="off">
+				<input class="form-control" type="password" name="password" value="${(password)!}" placeholder="密码" required>
+				<div>
+			    <label >验证码:</label>
+			
+			    <div >
+			      <input type="text" name="captcha" value="" class="form-control captcha" ng-minlength="4" ng-maxlength="4"
+			             placeholder="验证码" required autocomplete="off">
+			      <img id="captcha" class="captcha" src="${ContextPath}/captcha?width=128&height=45&fontsize=30&time=${.now?time}">
+			      <a href="javascript:ref_captcha()">验证码看不清</a>
+			    </div>
+			  	</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" name="rememberMe" value="remember-me">记住我
+					</label>
+					<label><a href="${ContextPath}/retrieve">忘记密码</a></label>
+				</div>
+				<@shiro.isLoginFailure name="shiroLoginFailure">
+			        <div class="alert alert-danger" style="background-image: none;">
+			          <@shiro.loginException name="shiroLoginFailure"/>
+			        </div>
+			    </@shiro.isLoginFailure>
+				<button class="btn btn-lg btn-primary btn-block" data-loading-text="正在提交..." type="submit">Sign in</button>
+			</form>
+	
+		</div>
+	</div>
+</div>
+
 <script>
 var xmlhttp;
 function func_get(url,cfunc){
@@ -61,10 +74,7 @@ function ref_captcha(){
 
 }
 
-
 </script>
-</div>
-
 
 
 </@layout>

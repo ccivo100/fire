@@ -4,7 +4,7 @@ import cn.dreampie.ValidateKit;
 import cn.dreampie.routebind.ControllerKey;
 
 import com.jfinal.plugin.activerecord.Record;
-import com.poicom.common.controller.JfController;
+import com.poicom.common.controller.JFController;
 import com.poicom.function.app.model.Order;
 import com.poicom.function.system.model.UserInfo;
 
@@ -14,7 +14,7 @@ import com.poicom.function.system.model.UserInfo;
  *
  */
 @ControllerKey(value = "/order", path = "/page/app/common")
-public class CommonController extends JfController{
+public class CommonController extends JFController{
 	
 	private final static String COMMON_QUERY_PAGE="query.html";
 	
