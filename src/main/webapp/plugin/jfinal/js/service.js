@@ -118,7 +118,26 @@ $(function(){
 	});
 });
 
-
+$(function(){
+	
+	$("#contactMe button#submit").click(function(){
+		
+		$.ajax({
+			type:"post",
+			url:"/user/contactMe",
+			data:{
+				name:$("#cname").val(),
+				phone:$("#cphone").val(),
+				context:$("#ccontext").val()},
+			dataType:"json",
+			success:function(result){
+				alert(result.state);
+			}
+		});
+		
+	});
+	
+});
 
 /*$(document).ready(function(){
 	$("a.delete").click(function(){

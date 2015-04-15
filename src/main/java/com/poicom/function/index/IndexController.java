@@ -5,13 +5,18 @@ import org.slf4j.LoggerFactory;
 
 import cn.dreampie.ValidateKit;
 import cn.dreampie.captcha.CaptchaRender;
+import cn.dreampie.encription.EncriptionKit;
 import cn.dreampie.routebind.ControllerKey;
 import cn.dreampie.shiro.core.SubjectKit;
+import cn.dreampie.shiro.hasher.Hasher;
+import cn.dreampie.shiro.hasher.HasherInfo;
+import cn.dreampie.shiro.hasher.HasherKit;
 
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
+import com.poicom.common.kit.AlertKit;
 import com.poicom.function.app.model.Order;
 import com.poicom.function.system.model.User;
 
@@ -23,6 +28,7 @@ public class IndexController extends Controller {
 
 	private final static String indexView = "index.html";
 	private final static String RETRIEVE_PAGE="retrieve.html";
+	private final static String REPASSWORD_PAGE="repassword.html";
 	protected Logger logger = LoggerFactory.getLogger(IndexController.class);
 
 	/**
@@ -141,18 +147,45 @@ public class IndexController extends Controller {
 	/**
 	 * 找回密码操作
 	 */
+	@Before(IndexValidator.class)
 	public void doretrieve(){
 		String username=getPara("username");
 		String email=getPara("email");
-		
-		User user=User.dao.findUserByAttr("username", username);
-		if(ValidateKit.isNullOrEmpty(user)){
-			
-		}
+		User user=User.dao.findFirstBy("`user`.username = ? AND `user`.deleted_at is null", username);
+		String body=AlertKit.getMailBody(user,getRequest().getHeader("Host")+getRequest().getContextPath()).toString();
+		AlertKit.sendEmail("找回密码！【一点通】",body,email);
+		redirect("/signin");
 	}
 	
-	public void getretrieve(){
+	@Before(IndexValidator.class)
+	public void repassword(){
+		String newValidCode=getPara("newValidCode");
+		String email=getPara("email");
+		setAttr("email",email);
+		setAttr("newValidCode",newValidCode);
+		System.out.println(newValidCode);
+		System.out.println(email);
+		render(REPASSWORD_PAGE);
+	}
+	
+	@Before(IndexValidator.class)
+	public void dorepassword(){
 		
+		String newValidCode=getPara("newValidCode");
+		String email=getPara("email");
+		String password=getPara("password");
+		
+		User user=User.dao.findFirstBy("`user`.email = ? AND `user`.deleted_at is null", email);
+		if(!ValidateKit.isNullOrEmpty(user)){
+			HasherInfo passwordInfo=HasherKit.hash(password,Hasher.DEFAULT);
+			user.set("password", passwordInfo.getHashResult());
+			user.set("hasher", passwordInfo.getHasher().value());
+			user.set("salt", passwordInfo.getSalt());
+			if(user.update()){
+				redirect("/signin");
+			}
+		}
+		redirect("/signin");
 	}
 
 }

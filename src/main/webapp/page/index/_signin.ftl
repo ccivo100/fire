@@ -4,7 +4,7 @@
 	
 	<div class="col-xs-7">
 		<div class="jumbotron">
-			<img src="/touxiang.jpg" height="440" width="500">
+			<img src="/dongtaitu.jpg" height="440" width="500">
 		</div>
 	</div>
 	<div class="col-xs-5">
@@ -29,11 +29,11 @@
 					<label>
 						<input type="checkbox" name="rememberMe" value="remember-me">记住我
 					</label>
-					<label><a href="${ContextPath}/retrieve">忘记密码</a></label>
+					<label><a href="${ContextPath}/retrieve">忘记密码?</a></label>
 				</div>
 				<@shiro.isLoginFailure name="shiroLoginFailure">
 			        <div class="alert alert-danger" style="background-image: none;">
-			          <@shiro.loginException name="shiroLoginFailure"/>
+			          <@resource.loginException name="shiroLoginFailure"/>
 			        </div>
 			    </@shiro.isLoginFailure>
 				<button class="btn btn-lg btn-primary btn-block" data-loading-text="正在提交..." type="submit">Sign in</button>

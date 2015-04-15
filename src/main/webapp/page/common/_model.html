@@ -2,7 +2,7 @@
 <div class="modal fade" id="contactMe" tabindex="-1" role="dialog" aria-labelledby="saveLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-    <form class="form-horizontal save" id="saveForm" role="form" action="/admin/contactMe" method="post">
+    <form class="form-horizontal save" id="saveForm" role="form" action="" method="post">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="saveLabel">建议</h4>
@@ -12,7 +12,7 @@
             <label class="col-sm-2 control-label">姓名</label>
 
             <div class="col-sm-8">
-              <input class="form-control" style="width: 60%" type="text" name="name" value="${(name)!}"
+              <input id="cname" class="form-control" style="width: 60%" type="text" name="name" value="${(name)!}"
                      placeholder="姓名" required>
             </div>
           </div>
@@ -20,7 +20,7 @@
             <label class="col-sm-2 control-label">联系电话:</label>
 
             <div class="col-sm-8">
-              <input class="form-control" style="width: 60%" type="text" name="phone" value="${(phone)!}"
+              <input id="cphone" class="form-control" style="width: 60%" type="text" name="phone" value="${(phone)!}"
                      placeholder="联系电话" required>
             </div>
           </div>
@@ -28,14 +28,14 @@
             <label class="col-sm-2 control-label">建议</label>
 
             <div class="col-sm-8">
-              <textarea id="context" name="context" class="form-control" placeholder="请输入建议内容..."   cols="80" rows="7"  required></textarea>
+              <textarea id="ccontext" name="context" class="form-control" placeholder="请输入建议内容..."   cols="80" rows="7"  required></textarea>
             </div>
           </div>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="submit" class="btn btn-primary ok">确定</button>
+        <button id="submit" type="submit" class="btn btn-primary ok">确定</button>
       </div>
       </form>
     </div>

@@ -5,13 +5,18 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
 
 import org.apache.commons.mail.EmailException;
 
 import cn.dreampie.ValidateKit;
+import cn.dreampie.encription.EncriptionKit;
 import cn.dreampie.mail.Mailer;
 
+import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.activerecord.Record;
+import com.poicom.function.system.model.Retrieve;
+import com.poicom.function.system.model.User;
 
 /**
  * @描述 发送邮件、短信工具类
@@ -58,6 +63,28 @@ public class AlertKit {
 		
 		return body;
 		
+	}
+	
+	public static StringBuffer getMailBody(User user,String context){
+		
+		String newValidCode=EncriptionKit.encrypt(user.getStr("email")+new Date());
+		new Retrieve()
+		.set("email", user.getStr("email"))
+		.set("random", newValidCode).save();
+		
+		String retrieve="http://"+context+"/repassword?email="+user.get("email")+"&newValidCode="+newValidCode;
+		
+		StringBuffer body=new StringBuffer();
+		body.append("亲爱的用户，"+user.getStr("full_name")+"，您好！<br/>")
+		.append("您在 "+DateKit.format(new Date(),DateKit.pattern_ymd_hms)+" 提交了密码重置的请求。")
+		.append("请您在24小时内点击下面的链接重置您的密码：<br/>")
+		.append("<br/>")
+		.append("请点击该链接<a href=\""+retrieve+"\"> 重置密码！</a>（该链接24小时有效）<br/>")
+		.append("<br/>")
+		.append("若您无法点击链接，也可复制以下地址到浏览器地址栏中：<br/>")
+		.append("<a href='"+retrieve+"'>"+retrieve+"</a>");
+		
+		return body;
 	}
 	
 	/**

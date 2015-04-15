@@ -14,6 +14,7 @@ import cn.dreampie.shiro.hasher.HasherKit;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.tx.Tx;
+import com.poicom.function.system.model.Contact;
 import com.poicom.function.system.model.User;
 import com.poicom.function.system.model.UserInfo;
 
@@ -77,6 +78,32 @@ public class UserController extends Controller {
 			setAttr("state", "falure");
 			render("/page/app/user/center.html");
 		}
+		
+	}
+	
+	public void contactMe(){
+		
+		User user=SubjectKit.getUser();
+		String name=getPara("name");
+		String phone=getPara("phone");
+		String context=getPara("context");
+		
+		System.out.println(name);
+		System.out.println(phone);
+		System.out.println(context);
+		
+		Contact contact=new Contact();
+		contact
+		.set("user_id", user.get("id"))
+		.set("name", name)
+		.set("phone", phone)
+		.set("context", context);
+		if(contact.save()){
+			renderJson("state", "提交成功");
+		}else{
+			renderJson("state", "提交失败");
+		}
+		
 		
 	}
 	

@@ -134,7 +134,7 @@ public class AppConfig extends JFinalConfig {
 		super.afterJFinalStart();
 		FreeMarkerRender.setProperties(loadPropertyFile("freemarker.properties"));
 		FreeMarkerRender.getConfiguration().setSharedVariable("shiro",new ShiroTags());
-		//FreeMarkerRender.getConfiguration().setSharedVariable("resource", new ResourceTags());
+		FreeMarkerRender.getConfiguration().setSharedVariable("resource", new ResourceTags());
 		
 		logger.info("afterJFinalStart 启动操作日志入库线程");
 		ThreadSysLog.startSaveDBThread();
