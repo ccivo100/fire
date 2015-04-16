@@ -1,6 +1,6 @@
 <div class="page-header">
 <ul class="nav nav-tabs">
-   <li ><a href="${ContextPath}/report/offer">故障申报列表</a></li>
+   <li ><a href="${ContextPath}/report/query">故障申报列表</a></li>
    <li class="active"><a href="#">故障申报</a></li>
 </ul>
 </div>
@@ -8,7 +8,7 @@
 	<input type="hidden" name="uuserid" value="${(uuserid)!}">
 	<input type="hidden" name="oorderid" value="${(oorderid)!}">
 	<input type="hidden" name="otypeid" value="${(otypeid)!}">
-
+	<input type="hidden" name="olevelid" value="${(olevelid)!}">
 	
 	<div class="form-group">
 	
@@ -26,7 +26,7 @@
 			<select id="selectType" name="selectType" class="form-control" required autofocus>
 			
 			</#if>
-						<option value="" selected="selected">请选择</option>
+						<option value="" selected="selected">请选择故障类型</option>
 				<#if otypeid??>
 					<#list typeList as type>
 						
@@ -42,6 +42,45 @@
 				<#else>
 					<#list typeList as type>
 						<option value="${type.id}">${type.name}</option>
+					</#list>
+				</#if>
+			
+			</select>
+		</div>
+	</div>
+	
+	<div class="form-group">
+	
+		<label class="col-sm-2 control-label">故障等级</label>
+
+		<div class="col-sm-4">
+			<#if olevelid??>
+				<#if olevelid="">
+				<select id="selectLevel" name="selectLevel" class="form-control"  required autofocus>
+				<#else>
+				<select id="selectLevel" name="selectLevel" class="form-control" disabled required autofocus>
+				</#if>
+			<#else>
+	
+			<select id="selectLevel" name="selectLevel" class="form-control" required autofocus>
+			
+			</#if>
+						<option value="" selected="selected">请选择故障等级</option>
+				<#if olevelid??>
+					<#list levelList as level>
+						
+						<option value="${level.id}"  
+							<#if olevelid="">
+							
+							<#elseif ((olevelid!'-1')?number)=level.id>
+								selected="selected"
+							</#if> >
+							${level.name}
+						</option>
+					</#list>
+				<#else>
+					<#list levelList as level>
+						<option value="${level.id}">${level.name}</option>
 					</#list>
 				</#if>
 			

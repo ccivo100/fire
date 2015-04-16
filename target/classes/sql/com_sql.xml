@@ -35,9 +35,10 @@
 		SELECT o.id oorderid,  t1.name tname,o.type otypeid,o.offer_user oofferid,
 		u1.full_name uoffername, u1.phone uofferphone,
 		o.description odescription,o.offer_at ooffertime,
-		o.status ostatus,o.deal_user odealid,
+		o.status ostatus,o.deal_user odealid,o.level olevelid,
 		u2.full_name udealname,u2.phone udealphone,
-		o.comment ocomment,o.deal_at odealtime,o.spend_time ospendtime
+		o.comment ocomment,o.deal_at odealtime,o.spend_time ospendtime,
+		o.created_at ocreatetime,o.deleted_at odeletetime
   	</sql>
 
   	<!-- 运维业务 -->
@@ -52,6 +53,33 @@
 		LEFT OUTER JOIN sec_user AS u1 ON o.offer_user = u1.id
 		LEFT OUTER JOIN sec_user AS u2 ON o.deal_user = u2.id
 		LEFT OUTER JOIN com_type AS t1 ON o.type=t1.id
+  	</sql>
+  	
+  	<sql id="findOfferQueryBySelect"><!-- /reporter/query故障查询 -->
+  	SELECT o.id, o.description, u1.bname off_branch,u1.full_name off_user,o.offer_at,  o.status,
+  		 u2.full_name deal_user ,o.deal_at , t1.name type_name,u2.bname deal_branch
+  	</sql>
+  	
+  	<sql id="findOfferQueryByFrom"><!-- /reporter/query故障查询 -->
+  	FROM com_order AS o 
+		LEFT OUTER JOIN 
+		(
+			select uu1.id id,uu1.full_name full_name, bb1.name bname
+			from sec_user_info as ssui
+						 left outer join sec_user as uu1 on ssui.user_id=uu1.id
+						 left outer join com_branch as bb1 on ssui.branch_id=bb1.id
+		) 
+			AS u1 ON o.offer_user = u1.id
+		LEFT OUTER JOIN 
+    (
+			select uu1.id id,uu1.full_name full_name, bb1.name bname
+			from sec_user_info as ssui
+						 left outer join sec_user as uu1 on ssui.user_id=uu1.id
+						 left outer join com_branch as bb1 on ssui.branch_id=bb1.id
+		) 
+			AS u2 ON o.deal_user = u2.id
+		LEFT OUTER JOIN com_type 
+			AS t1 ON o.type=t1.id
   	</sql>
   	
   </sqlGroup>

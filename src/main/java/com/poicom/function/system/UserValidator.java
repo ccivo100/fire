@@ -60,6 +60,14 @@ public class UserValidator extends Validator {
 				
 			}
 			
+		}else if(getActionKey().equals("/user/contactMe")){
+			if(ValidateKit.isNullOrEmpty(c.getPara("name"))){
+				addError("contactMsg","用户名不能为空");
+			}else if(!ValidateKit.isPhone(c.getPara("phone"))){
+				addError("contactMsg","电话号码格式不正确");
+			}else if(ValidateKit.isNullOrEmpty(c.getPara("context"))){
+				addError("contactMsg","提交建议不能为空");
+			}
 		}
 		
 	}
@@ -67,10 +75,13 @@ public class UserValidator extends Validator {
 	@Override
 	protected void handleError(Controller c) {
 		// TODO Auto-generated method stub
-		c.keepModel(User.class);
-		c.keepPara();
+		
 		if(getActionKey().equals("/user/updatePwd")){
+			c.keepModel(User.class);
+			c.keepPara();
 			c.render("pwd.html");
+		}else if(getActionKey().equals("/user/contactMe")){
+			c.renderJson("state", "提交内容出错！");
 		}
 		
 	}

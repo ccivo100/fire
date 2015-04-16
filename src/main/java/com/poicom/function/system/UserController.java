@@ -81,6 +81,7 @@ public class UserController extends Controller {
 		
 	}
 	
+	@Before({UserValidator.class,Tx.class})
 	public void contactMe(){
 		
 		User user=SubjectKit.getUser();

@@ -19,6 +19,7 @@ import com.jfinal.plugin.ehcache.EvictInterceptor;
 import com.poicom.common.controller.JFController;
 import com.poicom.common.kit.AlertKit;
 import com.poicom.function.app.model.ErrorType;
+import com.poicom.function.app.model.Level;
 import com.poicom.function.app.model.Order;
 import com.poicom.function.system.model.User;
 import com.poicom.function.system.model.UserInfo;
@@ -43,23 +44,23 @@ public class ReportController extends JFController{
 	/**
 	 * @描述 报障人员查询本账号申报的故障工单
 	 */
-	public void offer(){
+	public void query(){
 		User user=User.dao.getCurrentUser();
-		Page<Record> reportPage;
-		String orderby=" order by o.status desc ,o.offer_at asc ";
+		List<Record> reportList;
+		String orderby=" ORDER BY o.offer_at DESC LIMIT 10";
 		
 		if(ValidateKit.isNullOrEmpty(getPara("selectType"))){
-			String where=" o.offer_user=? ";
-			reportPage=Order.dao.getReportOrderPage(getParaToInt(0,1), 10,where,orderby,user.get("id"));
+			String where=" WHERE o.offer_user=? ";
+			reportList=Order.dao.findOfferQuery(where,orderby,user.get("id"));
 		}else{
-			String where=" o.offer_user=? and o.type=? ";
-			reportPage=Order.dao.getReportOrderPage(getParaToInt(0,1), 10,where,orderby,user.get("id"),getParaToInt("selectType"));
+			String where=" WHERE o.offer_user=? and o.type=? ";
+			reportList=Order.dao.findOfferQuery(where,orderby,user.get("id"),getParaToInt("selectType"));
 		}
 		
 		
-		Order.dao.format(reportPage,"description");
+		Order.dao.format(reportList,"description");
 		
-		setAttr("reportPage",reportPage);
+		setAttr("reportList",reportList);
 		setAttr("typeList",ErrorType.dao.getAllType());
 		setAttr("typeid",getPara("selectType"));
 		render("report.html");
@@ -70,13 +71,14 @@ public class ReportController extends JFController{
 	/**
 	 * @描述 进入新建故障工单页面
 	 */
-	public void add(){
+	public void offer(){
 		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
 		
 		setAttr(userinfo);
 		
 		setAttr("userinfo",userinfo);
 		setAttr("typeList",ErrorType.dao.getAllType());
+		setAttr("levelList",Level.dao.findAll());
 		render("add.html");
 	}
 	
@@ -84,14 +86,16 @@ public class ReportController extends JFController{
 	/**
 	 * @描述 新建故障工单 并发送邮件、短信通知
 	 */
-	@Before( {Tx.class,CommonValidator.class,EvictInterceptor.class})
-	@CacheName("/order/query")
+	//@Before( {Tx.class,CommonValidator.class,EvictInterceptor.class})
+	@Before( CommonValidator.class)
+	//@CacheName("/order/query")
 	public void save(){
 		
 		//获取表单数据，填充进Order
 		Order order=new Order().set("offer_user", getParaToInt("uuserid"))
 				.set("description", getPara("odescription"))
 				.set("type", getParaToInt("selectType"))
+				.set("level", getPara("selectLevel"))
 				.set("status", 1)
 				.set("offer_at", 
 						DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
@@ -128,7 +132,7 @@ public class ReportController extends JFController{
 		//AlertKit.sendSms(userinfo,phones.toArray(array));
 		
 		
-		redirect("/report/offer");
+		redirect("/report/query");
 	}
 	
 	/**
@@ -139,6 +143,8 @@ public class ReportController extends JFController{
 		
 		//故障类型
 		setAttr("typeList",ErrorType.dao.getAllType());
+		//
+		setAttr("levelList",Level.dao.findAll());
 		
 		String where="o.id=?";
 		//工单详细信息
@@ -160,8 +166,9 @@ public class ReportController extends JFController{
 	/**
 	 *  @描述 处理申报人员更新故障工单操作 
 	 */
-	@Before( {Tx.class,CommonValidator.class,EvictInterceptor.class})
-	@CacheName("/order/query")
+	//@Before( {Tx.class,CommonValidator.class,EvictInterceptor.class})
+	@Before( CommonValidator.class)
+	//@CacheName("/order/query")
 	public void update(){
 		//order_id
 		Integer orderid=getParaToInt("oorderid");
@@ -175,7 +182,7 @@ public class ReportController extends JFController{
 						DateTime.now().toString("yyyy-MM-dd HH:mm:ss"))
 				.update();
 
-		redirect("/report/offer");
+		redirect("/report/query");
 		
 	}
 	

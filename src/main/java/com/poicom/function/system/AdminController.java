@@ -177,6 +177,7 @@ public class AdminController extends Controller {
 	}
 	
 	public void ajaxgetper(){
+		System.out.println(getPara("roleid"));
 		List<Permission> permissions=Permission.dao.findPermissionsByPid(0);
 		for(Permission permission:permissions){
 			List<Permission> pchild=Permission.dao.findPermissionsByPid(permission.get("id"));

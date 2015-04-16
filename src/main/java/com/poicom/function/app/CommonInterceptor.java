@@ -15,7 +15,7 @@ public class CommonInterceptor implements Interceptor{
 		if(ai.getActionKey().equals("/")){
 			ai.invoke();
 			ai.getController().setAttr("back", backParamUrl(ai));
-		}else if(ai.getActionKey().equals("/report/offer")){
+		}else if(ai.getActionKey().equals("/report/query")){
 			ai.invoke();
 			ai.getController().setAttr("back", backParamUrl(ai));
 		}else if(ai.getActionKey().equals("/operate/deal")){

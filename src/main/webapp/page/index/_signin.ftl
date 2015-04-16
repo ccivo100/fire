@@ -27,7 +27,7 @@
 			  	</div>
 				<div class="checkbox">
 					<label>
-						<input type="checkbox" name="rememberMe" value="remember-me">记住我
+						<input type="checkbox" name="rememberMe" <#if rememberMe??><#if rememberMe="1">checked value="1"</#if></#if>>记住我
 					</label>
 					<label><a href="${ContextPath}/retrieve">忘记密码?</a></label>
 				</div>

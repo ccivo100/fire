@@ -63,6 +63,9 @@
     						<ul class="dropdown-menu" role="menu">
 	    						<li class="dropdown-header"><b>运维操作</b></li>
 								<li class="divider"></li>
+								<@shiro.hasPermission name="P_O_QUERY">
+    							<li><a href="${ContextPath}/operate/query">运维查询</a></li>
+    							</@shiro.hasPermission>
     							<@shiro.hasPermission name="P_O_DEAL">
     							<li><a href="${ContextPath}/operate/deal">故障处理</a></li>
     							</@shiro.hasPermission>
@@ -81,6 +84,9 @@
     						<ul class="dropdown-menu" role="menu">
 	    						<li class="dropdown-header"><b>报障操作</b></li>
 								<li class="divider"></li>
+								<@shiro.hasPermission name="P_R_QUERY">
+    							<li><a href="${ContextPath}/report/query">故障查询</a></li>
+    							</@shiro.hasPermission>
     							<@shiro.hasPermission name="P_R_OFFER">
     							<li><a href="${ContextPath}/report/offer">故障申报</a></li>
     							</@shiro.hasPermission>
@@ -118,7 +124,7 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 				<@shiro.authenticated>
-					<li><a href="${ContextPath}/user/center">${(session["PRINCIPALS_SESSION_KEY"].full_name)!}</a></li>
+					<li><p class="navbar-text">当前用户：</p><a href="${ContextPath}/user/center">${cuser!}</a></li>
 					<li><a href="${ContextPath}/signout">退出</a></li>
 					</@shiro.authenticated>
 				<@shiro.notAuthenticated>

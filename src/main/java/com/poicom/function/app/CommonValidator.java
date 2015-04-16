@@ -9,6 +9,7 @@ import cn.dreampie.ValidateKit;
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
 import com.poicom.function.app.model.ErrorType;
+import com.poicom.function.app.model.Level;
 
 public class CommonValidator extends Validator{
 	
@@ -40,12 +41,16 @@ public class CommonValidator extends Validator{
 		if(getActionKey().equals("/report/save")){
 			c.keepPara();
 			c.setAttr("typeList",ErrorType.dao.getAllType());
+			c.setAttr("levelList",Level.dao.findAll());
 			c.keepPara("uuserid");
 			if(!ValidateKit.isNullOrEmpty(c.getParaToInt("oorderid"))){
 				c.keepPara("oorderid");
 			}
 			if(!ValidateKit.isNullOrEmpty(c.getParaToInt("otypeid"))){
 				c.setAttr("otypeid", null);
+			}
+			if(!ValidateKit.isNullOrEmpty(c.getParaToInt("olevelid"))){
+				c.setAttr("olevelid", null);
 			}
 			
 			c.render("/page/app/report/add.html");
@@ -54,12 +59,16 @@ public class CommonValidator extends Validator{
 		if(getActionKey().equals("/report/update")){
 			c.keepPara();
 			c.setAttr("typeList",ErrorType.dao.getAllType());
+			c.setAttr("levelList",Level.dao.findAll());
 			c.keepPara("uuserid");
 			if(!ValidateKit.isNullOrEmpty(c.getParaToInt("oorderid"))){
 				c.keepPara("oorderid");
 			}
 			if(!ValidateKit.isNullOrEmpty(c.getParaToInt("otypeid"))){
 				c.keepPara("otypeid");
+			}
+			if(!ValidateKit.isNullOrEmpty(c.getParaToInt("otypeid"))){
+				c.keepPara("olevelid");
 			}
 			
 			c.render("/page/app/report/edit.html");

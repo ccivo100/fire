@@ -92,12 +92,12 @@ $(function(){
 			}
 		});
 	});
-	$(".ajaxrole").click(function(){
+	$("#ajaxrole").click(function(){
 		$("#per").html("");
 		$.ajax({
 			type:"post",
 			url:"/admin/ajaxgetper",
-			data:{roleid:1},
+			data:{roleid:$(this).attr("roleid")},
 			dataType:"json",
 			success:function(result){
 				getper(result);
@@ -120,7 +120,7 @@ $(function(){
 
 $(function(){
 	
-	$("#contactMe button#submit").click(function(){
+	$("#submit").click(function(){
 		
 		$.ajax({
 			type:"post",
@@ -131,7 +131,14 @@ $(function(){
 				context:$("#ccontext").val()},
 			dataType:"json",
 			success:function(result){
-				alert(result.state);
+				alert(result.state+2);
+				return;
+			},
+			error:function(result){
+				alert(result.state+1);
+				$('#contactMe').on('hiden.bs.modal', function () {
+					alert(result.contactMsg);});
+				return;
 			}
 		});
 		
