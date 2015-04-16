@@ -51,8 +51,8 @@ public class OperateController extends JFController{
 			render("operate.html");
 		}else{
 			String where=" o.type IN(SELECT cut.type_id  FROM com_user_type AS cut WHERE user_id=?) ";
-			String orderby=" ORDER BY o.status DESC,o.offer_at ASC ";
-			Page <Record> operatePage=Order.dao.getOperateOrderPage(getParaToInt(0,1), 10,where,orderby, user.get("id"));
+			String orderby=" ORDER BY o.offer_at DESC ";
+			Page <Record> operatePage=Order.dao.findOfferQuery(getParaToInt(0,1), 10,where,orderby, user.get("id"));
 			Order.dao.format(operatePage,"description");
 			setAttr("operatePage",operatePage);
 			render(OPERATE_PAGE);

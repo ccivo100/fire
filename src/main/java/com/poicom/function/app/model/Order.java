@@ -48,6 +48,14 @@ public class Order extends Model<Order> {
 				+ orderby, paras);
 	}
 	
+	public Page<Record> findOfferQuery(int pageNumber, int pageSize,String where,String orderby,
+			Object... paras) {
+		return Db.paginate(pageNumber,pageSize,
+				SqlKit.sql("order.findOfferQueryBySelect"),
+				SqlKit.sql("order.findOfferQueryByFrom") + getWhere(where)
+						+ orderby, paras);
+	}
+	
 	/**
 	 * 根据故障工单id，查询该工单的详细信息（报障人员、运维人员查询）
 	 * @param paras
@@ -104,7 +112,7 @@ public class Order extends Model<Order> {
 	public void format(Page<Record> page,String... paras){
 		for(Record record:page.getList()){
 			for(String attr:paras){
-				record.set(attr, StringUtils.abbreviate(record.getStr(attr), (new Random().nextInt(5)+26)));
+				record.set(attr, StringUtils.abbreviate(record.getStr(attr), (new Random().nextInt(5)+16)));
 			}
 			
 		}
@@ -113,7 +121,7 @@ public class Order extends Model<Order> {
 	public void format(List<Record> list,String... paras){
 		for(Record record:list){
 			for(String attr:paras){
-				record.set(attr, StringUtils.abbreviate(record.getStr(attr), (new Random().nextInt(5)+26)));
+				record.set(attr, StringUtils.abbreviate(record.getStr(attr), (new Random().nextInt(5)+16)));
 			}
 			
 		}

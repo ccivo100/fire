@@ -11,10 +11,12 @@
 		<thead>
 			<tr>
 				<th width="2%">序号</th>
-				<th width="15%">故障描述</th>
+				<th width="10%">故障描述</th>
+				<th width="5%">申报部门</th>
+				<th width="3%">申报人</th>
 				<th width="5%">申报时间</th>
-				<th width="5%">申报人</th>
-				<th width="4%">当前状态</th>
+				<th width="3%">处理人</th>
+				<th width="1%">当前状态</th>
 				<th width="5%">操作</th>
 			</tr>
 		</thead>
@@ -22,9 +24,11 @@
 			<#list operatePage.getList() as operate>
 			<tr class="<#if operate.status=0><#elseif operate.status=2>danger</#if>">
 				<td style="text-align:left;">${operate_index+1}</td>
-				<td style="text-align:left;">${operate.description}</td>
-				<td style="text-align:left;">${operate.offer_at}</td>
-				<td style="text-align:left;">${operate.offer_user}</td>
+				<td style="text-align:left;">${(operate.description)!}</td>
+				<td style="text-align:left;">${(operate.off_branch)!}</td>
+				<td style="text-align:left;">${(operate.off_user)!}</td>
+				<td style="text-align:left;">${(operate.offer_at)!}</td>
+				<td style="text-align:left;"><#if operate.deal_user??>${(operate.deal_user)!}<#else>暂无</#if></td>
 				<td >
 					<#if operate.status=0>
 					<span class="label label-success">已处理</span>
@@ -49,6 +53,8 @@
 				<#list 1..size as t>
 					<tr>
 						<td>${(operatePage.getList().size()+t)!}</td>
+						<td></td>
+						<td></td>
 						<td></td>
 						<td></td>
 						<td></td>

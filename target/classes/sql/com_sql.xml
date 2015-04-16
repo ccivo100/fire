@@ -57,7 +57,7 @@
   	
   	<sql id="findOfferQueryBySelect"><!-- /reporter/query故障查询 -->
   	SELECT o.id, o.description, u1.bname off_branch,u1.full_name off_user,o.offer_at,  o.status,
-  		 u2.full_name deal_user ,o.deal_at , t1.name type_name,u2.bname deal_branch
+  		 u2.full_name deal_user ,o.deal_at ,o.type tid, t1.name type_name,u2.bname deal_branch
   	</sql>
   	
   	<sql id="findOfferQueryByFrom"><!-- /reporter/query故障查询 -->

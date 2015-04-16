@@ -42,18 +42,18 @@ public class IndexController extends Controller {
 			redirect("/signin");
 		}else{
 			Page <Record> ordersPage;
-			String orderby=" order by o.offer_at desc ";
+			String orderby=" ORDER BY o.offer_at DESC";
 			if(ValidateKit.isNullOrEmpty(getPara("condition"))){
-				String where=" 1=1 and  o.status=0 ";
-				ordersPage=Order.dao.getOverOrdersPage(getParaToInt(0,1), 10, where,orderby);
+				String where=" 1=1 and o.deleted_at is null ";
+				ordersPage=Order.dao.findOfferQuery(getParaToInt(0,1), 10, where,orderby);
 				
 			}else{
 				String condition ="%"+getPara("condition").trim()+"%";
-				String where=" 1=1 and  o.status=0 and o.description like ?";
-				ordersPage=Order.dao.getOverOrdersPage(getParaToInt(0,1), 10, where,orderby, condition);
+				String where=" 1=1 and o.deleted_at is null and o.description like ?";
+				ordersPage=Order.dao.findOfferQuery(getParaToInt(0,1), 10, where,orderby, condition);
 			}
 			
-			Order.dao.format(ordersPage,"odescription");
+			Order.dao.format(ordersPage,"description");
 			setAttr("overOrderPage",ordersPage);
 			render(indexView);
 		}
