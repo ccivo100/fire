@@ -13,8 +13,8 @@
 				                  </a></li>
 </ul>
 </div>
-<!-- 
-  			<form class="bs-example bs-example-form" role="form" action="/report/offer" method="get">
+ 
+  			<form class="bs-example bs-example-form" role="form" action="/report/reports" method="get">
 		      	<div class="row">
 		      		
 				         <div class="col-lg-8">
@@ -47,7 +47,7 @@
 				            </div>
 				            
 				         </div>
-					 
+<!-- 					 
 		         		<div class="col-lg-2">
 							<div class="form-group">
 								<span class="input-group-btn">
@@ -60,9 +60,10 @@
 				               </span>
 							</div>
 					</div>
+-->
 		      	</div>
 		   </form>
--->
+
 	
 	<table class="table table-bordered table-hover">
 		<thead>
@@ -78,7 +79,7 @@
 			</tr>
 		</thead>
 				<tbody>
-			<#list reportList as report>
+			<#list reportPage.getList() as report>
 			<tr class="<#if report.status=0><#elseif report.status=2>danger</#if>">
 				<td style="text-align:left;">${report_index+1}</td>
 				<td style="text-align:left;">${(report.description)!}</td>
@@ -97,19 +98,19 @@
 				</td>
 				
 				<td style="text-align:left;">
-				<a class="btn btn-primary btn-xs"   href="${ContextPath}/order/query?id=${report.id}&back=${back!}"  >查看</a> 
+				<a class="btn btn-primary btn-xs"   href="${ContextPath}/report/report?id=${report.id}"  >查看</a> 
 				<#if report.status!=0>
-				<a class="btn btn-primary btn-xs"  href="${ContextPath}/report/edit?id=${report.id}&back=${back!}" >修改</a>
+				<a class="btn btn-primary btn-xs"  href="${ContextPath}/report/edit?id=${report.id}" >修改</a>
 				</#if>
 				</td>
 			</tr>
 			</#list>
 			
-			<#if reportList.size()!=10>
-			<#assign size=(10-reportList.size())>
+			<#if reportPage.getList().size()!=10>
+			<#assign size=(10-reportPage.getList().size())>
 				<#list 1..size as t>
 					<tr>
-						<td>${(reportList.size()+t)!}</td>
+						<td>${(reportPage.getList().size()+t)!}</td>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -122,5 +123,7 @@
 			</#if>
 		</tbody>
 	</table>
+	<#include "/page/common/_paginate.html" />
+	<@paginate currentPage=reportPage.pageNumber totalPage=reportPage.totalPage actionUrl="/report/reports/" />
 </div>
 </@layout>

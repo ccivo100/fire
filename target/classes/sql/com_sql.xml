@@ -35,10 +35,10 @@
 		SELECT o.id oorderid,  t1.name tname,o.type otypeid,o.offer_user oofferid,
 		u1.full_name uoffername, u1.phone uofferphone,
 		o.description odescription,o.offer_at ooffertime,
-		o.status ostatus,o.deal_user odealid,o.level olevelid,
+		o.status ostatus,o.deal_user odealid,l1.name lname,o.level olevelid,
 		u2.full_name udealname,u2.phone udealphone,
 		o.comment ocomment,o.deal_at odealtime,o.spend_time ospendtime,
-		o.created_at ocreatetime,o.deleted_at odeletetime
+		o.created_at ocreatetime,o.deleted_at odeletetime,o.flag oflag
   	</sql>
 
   	<!-- 运维业务 -->
@@ -53,6 +53,7 @@
 		LEFT OUTER JOIN sec_user AS u1 ON o.offer_user = u1.id
 		LEFT OUTER JOIN sec_user AS u2 ON o.deal_user = u2.id
 		LEFT OUTER JOIN com_type AS t1 ON o.type=t1.id
+		LEFT OUTER JOIN com_level AS l1 ON o.level=l1.id
   	</sql>
   	
   	<sql id="findOfferQueryBySelect"><!-- /reporter/query故障查询 -->

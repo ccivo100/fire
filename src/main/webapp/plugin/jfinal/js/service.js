@@ -146,6 +146,34 @@ $(function(){
 	
 });
 
+$(function(){
+	
+	$("#hasten1").click(function(){
+		
+		$.ajax({
+			type:"post",
+			url:"/report/hasten",
+			data:{
+				id:$("#cname").val(),
+				phone:$("#cphone").val(),
+				context:$("#ccontext").val()},
+			dataType:"json",
+			success:function(result){
+				alert(result.state+2);
+				return;
+			},
+			error:function(result){
+				alert(result.state+1);
+				$('#contactMe').on('hiden.bs.modal', function () {
+					alert(result.contactMsg);});
+				return;
+			}
+		});
+		
+	});
+	
+});
+
 /*$(document).ready(function(){
 	$("a.delete").click(function(){
 		$('#confirmModal').modal('show').on('shown.bs.modal',function(){

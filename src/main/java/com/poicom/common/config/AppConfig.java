@@ -21,6 +21,7 @@ import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
+import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.ext.interceptor.SessionInViewInterceptor;
 import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
 import com.jfinal.plugin.activerecord.dialect.AnsiSqlDialect;
@@ -66,7 +67,8 @@ public class AppConfig extends JFinalConfig {
 	@Override
 	public void configHandler(Handlers me) {
 		logger.info("configHandler 全局配置处理器，主要是记录日志和request域值处理");
-		me.add(new GlobalHandler());
+		//me.add(new GlobalHandler());
+		me.add(new ContextPathHandler("ContextPath"));
 	}
 
 	@Override
@@ -77,7 +79,7 @@ public class AppConfig extends JFinalConfig {
 		me.add(new ShiroInterceptor());
 		me.add(new SessionInViewInterceptor());
 		me.add(new UrlInterceptor());
-		me.add(new CommonInterceptor());
+		//me.add(new CommonInterceptor());
 		//me.add(new HSRInterceptor());
 	}
 
@@ -137,12 +139,12 @@ public class AppConfig extends JFinalConfig {
 		FreeMarkerRender.getConfiguration().setSharedVariable("resource", new ResourceTags());
 		
 		logger.info("afterJFinalStart 启动操作日志入库线程");
-		ThreadSysLog.startSaveDBThread();
+		//ThreadSysLog.startSaveDBThread();
 	}
 	
 	public void beforeJFinalStop(){
 		logger.info("beforeJFinalStop 释放日志入库线程");
-		ThreadSysLog.setThreadRun(false);
+		//ThreadSysLog.setThreadRun(false);
 	}
 	
 	public static void main(String[] args) {

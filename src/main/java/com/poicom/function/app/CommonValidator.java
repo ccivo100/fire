@@ -67,7 +67,7 @@ public class CommonValidator extends Validator{
 			if(!ValidateKit.isNullOrEmpty(c.getParaToInt("otypeid"))){
 				c.keepPara("otypeid");
 			}
-			if(!ValidateKit.isNullOrEmpty(c.getParaToInt("otypeid"))){
+			if(!ValidateKit.isNullOrEmpty(c.getParaToInt("olevelid"))){
 				c.keepPara("olevelid");
 			}
 			
@@ -77,6 +77,7 @@ public class CommonValidator extends Validator{
 		if(getActionKey().equals("/operate/update")){
 			c.keepPara();
 			c.setAttr("typeList",ErrorType.dao.getAllType());
+			c.setAttr("levelList",Level.dao.findAll());
 			c.keepPara("uuserid");
 			if(!ValidateKit.isNullOrEmpty(c.getParaToInt("oorderid"))){
 				c.keepPara("oorderid");
@@ -84,6 +85,10 @@ public class CommonValidator extends Validator{
 			if(!ValidateKit.isNullOrEmpty(c.getParaToInt("otypeid"))){
 				int otypeid=c.getParaToInt("otypeid");
 				c.setAttr("otypeid", otypeid);
+			}
+			if(!ValidateKit.isNullOrEmpty(c.getParaToInt("olevelid"))){
+				int olevelid=c.getParaToInt("olevelid");
+				c.setAttr("olevelid", olevelid);
 			}
 			
 			if(!ValidateKit.isNullOrEmpty(c.getPara("ostatus"))){

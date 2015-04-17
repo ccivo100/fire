@@ -21,6 +21,7 @@ import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.poicom.common.kit.AlertKit;
 import com.poicom.common.kit.DateKit;
+import com.poicom.function.app.model.Level;
 import com.poicom.function.app.model.Order;
 import com.poicom.function.system.model.User;
 
@@ -38,12 +39,17 @@ public class AlertJob implements Job{
 	@Before(Tx.class)
 	public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 		int time=PropKit.getInt("alert.time", 20);
+		//故障等级
+		List<Level>levelList=Level.dao.findAll();
+		
 		//获取status为1的工单，即未处理
 		List<Order> orders =Order.dao.findOrderByStatus(1);
 		Map<Long,Record> operatorMap=new HashMap<Long,Record>();
 		DateTime now=DateTime.now();
 		for(Order order:orders){
 			int t=DateKit.dateBetween(order.get("offer_at").toString(),now);
+			Level level=getLevel(levelList,order);
+			time=level.getInt("deadline");
 			if(t>time){
 				//设置Order的status为 2：已超时。
 				order.set("status", 2).update();
@@ -51,7 +57,19 @@ public class AlertJob implements Job{
 			}
 		}
 		logger.info(operatorMap.values().toString());
+		System.out.println("执行");
 		//doAlert(operatorMap);
+	}
+	
+	public static Level getLevel(List<Level> levelList,Order order){
+		Level level=null;
+		for(Level l:levelList){
+			if(l.get("id")==order.get("level")){
+				level=l;
+				break;
+			}
+		}		
+		return level;
 	}
 	
 	/**
@@ -76,8 +94,8 @@ public class AlertJob implements Job{
 				}
 			}
 			//发送短信
-			//String[] array =new String[phones.size()];
-			//AlertKit.sendSms(userinfo,phones.toArray(array));
+			String[] array =new String[phones.size()];
+			AlertKit.sendSms(new Object(),phones.toArray(array));
 		}
 	}
 	

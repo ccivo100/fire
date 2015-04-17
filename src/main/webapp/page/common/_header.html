@@ -63,8 +63,8 @@
     						<ul class="dropdown-menu" role="menu">
 	    						<li class="dropdown-header"><b>运维操作</b></li>
 								<li class="divider"></li>
-								<@shiro.hasPermission name="P_O_QUERY">
-    							<li><a href="${ContextPath}/operate/query">运维查询</a></li>
+								<@shiro.hasPermission name="P_O_OPERATES">
+    							<li><a href="${ContextPath}/operate/operates">运维查询</a></li>
     							</@shiro.hasPermission>
     							<@shiro.hasPermission name="P_O_DEAL">
     							<li><a href="${ContextPath}/operate/deal">故障处理</a></li>
@@ -84,8 +84,8 @@
     						<ul class="dropdown-menu" role="menu">
 	    						<li class="dropdown-header"><b>报障操作</b></li>
 								<li class="divider"></li>
-								<@shiro.hasPermission name="P_R_QUERY">
-    							<li><a href="${ContextPath}/report/query">故障查询</a></li>
+								<@shiro.hasPermission name="P_R_REPORTS">
+    							<li><a href="${ContextPath}/report/reports">故障查询</a></li>
     							</@shiro.hasPermission>
     							<@shiro.hasPermission name="P_R_OFFER">
     							<li><a href="${ContextPath}/report/offer">故障申报</a></li>

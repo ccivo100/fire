@@ -18,8 +18,10 @@ import com.jfinal.plugin.activerecord.tx.Tx;
 import com.jfinal.plugin.ehcache.CacheName;
 import com.jfinal.plugin.ehcache.EvictInterceptor;
 import com.poicom.common.controller.JFController;
+import com.poicom.common.kit.AlertKit;
 import com.poicom.common.kit.DateKit;
 import com.poicom.function.app.model.ErrorType;
+import com.poicom.function.app.model.Level;
 import com.poicom.function.app.model.Order;
 import com.poicom.function.system.model.User;
 import com.poicom.function.system.model.UserInfo;
@@ -35,6 +37,7 @@ public class OperateController extends JFController{
 	
 	private final static String OPERATE_PAGE="operate.html";
 	private final static String OPERATE_EDIT_PAGE="edit.html";
+	private final static String OPERATE_QUERY_PAGE="query.html";
 	private final static String ASSIGN_PAGE="assign.ftl";
 	private final static String OPERATE_TASK_PAGE="task.ftl";
 	
@@ -45,12 +48,12 @@ public class OperateController extends JFController{
 	/**
 	 * @描述 运维人员查询本账号处理范围内的故障工单
 	 */
-	public void deal(){
+	public void operates(){
 		User user=User.dao.getCurrentUser();
 		if(ValidateKit.isNullOrEmpty(user)){
 			render("operate.html");
 		}else{
-			String where=" o.type IN(SELECT cut.type_id  FROM com_user_type AS cut WHERE user_id=?) ";
+			String where=" 1=1 and o.deleted_at is null and o.type IN(SELECT cut.type_id  FROM com_user_type AS cut WHERE user_id=?) ";
 			String orderby=" ORDER BY o.offer_at DESC ";
 			Page <Record> operatePage=Order.dao.findOfferQuery(getParaToInt(0,1), 10,where,orderby, user.get("id"));
 			Order.dao.format(operatePage,"description");
@@ -60,12 +63,37 @@ public class OperateController extends JFController{
 		
 	}
 	
+	public void operate(){
+		String where="o.id=?";
+		Record order = Order.dao.getCommonOrder(where,getParaToInt("id"));
+
+		//获取工单申报者的分公司信息
+		Record offer=UserInfo.dao.getUserBranch(order.getLong("oofferid"));
+		//获取工单处理者的分公司信息
+		Record deal=UserInfo.dao.getUserBranch(order.getLong("odealid"));
+		
+		if(!ValidateKit.isNullOrEmpty(offer))
+			setAttr("offer_branch",offer.getStr("bname"));
+		if(!ValidateKit.isNullOrEmpty(deal))
+			setAttr("deal_branch",deal.getStr("bname"));
+		//工单详细信息
+		setAttr(order);
+		setAttr("order", order);
+		//故障类型
+		setAttr("typeList",Order.dao.getAllType());
+		setAttr("levelList",Level.dao.findAll());
+		
+		render(OPERATE_QUERY_PAGE);
+	}
+	
 	/**
 	 * @描述 进入故障工单处理页面
 	 */
 	public void edit(){
 		//故障类型
 		setAttr("typeList",ErrorType.dao.getAllType());
+		//
+		setAttr("levelList",Level.dao.findAll());
 		
 		String where="o.id=?";
 		//工单详细信息
@@ -101,7 +129,7 @@ public class OperateController extends JFController{
 		String comment=getPara("ocomment");
 		Order order=Order.dao.findById(orderid);
 		
-		int time=PropKit.getInt("alert.time", 20);
+		int time=Level.dao.findById(order.get("level")).get("deadline");
 		String offer_at=order.get("offer_at").toString();
 		DateTime now=DateTime.now();
 		int t =DateKit.dateBetween(offer_at, now);
@@ -120,7 +148,23 @@ public class OperateController extends JFController{
 			order.update();
 		}
 		
-		redirect("/operate/deal");
+		//故障工单提交人员
+		User offer=User.dao.findById(order.get("offer_user"));
+		User deal=User.dao.findById(order.get("deal_user"));
+		//获取邮件内容
+		String body=AlertKit.getMailBody(offer,deal,order).toString();
+		if(ValidateKit.isEmail(offer.getStr("email"))){
+			AlertKit.sendEmail("故障申报处理情况通知！",body,offer.getStr("email"));
+		}
+		//电话非空 
+		if(!ValidateKit.isNullOrEmpty(offer.getStr("phone"))){
+			if(ValidateKit.isPhone(offer.getStr("phone"))){
+				//发送短信
+				//AlertKit.sendSms(offer,deal,order);
+			}
+		}
+		
+		redirect("/operate/operates");
 	}
 	
 	/**

@@ -1,6 +1,6 @@
 <div class="page-header">
 <ul class="nav nav-tabs">
-   <li ><a href="${ContextPath}/report/query">故障申报列表</a></li>
+   <li ><a href="${ContextPath}/report/reports">故障申报列表</a></li>
    <li class="active"><a href="#">修改工单</a></li>
 </ul>
 </div>
@@ -123,7 +123,7 @@
 			<#if odeletetime?exists>
 			
 			<#else>
-			<button id="recall" value="撤回"  class="btn btn-success" data-loading-text="正在撤回...">撤回</button>
+			<a id="recall" value="撤回"  class="btn btn-success" href="${ContextPath}/report/recall?id=${(oorderid)!}" data-loading-text="正在撤回...">撤回</a>
 			</#if>
 			
 		</div>

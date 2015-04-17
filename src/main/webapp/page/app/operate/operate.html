@@ -3,7 +3,7 @@
 <div class="index-background">
 <div class="page-header">
 <ul class="nav nav-tabs">
-   <li class="active"><a href="#">故障列表</a></li>
+   <li class="active"><a href="#">故障处理列表</a></li>
 </ul>
 </div>
 	<input type="hidden" name="do" value="report">
@@ -40,9 +40,9 @@
 				</td>
 				
 				<td style="text-align:left;">
-				<a class="btn btn-primary btn-xs"   href="${ContextPath}/order/query?id=${operate.id}&back=${back!}"  >查看</a> 
+				<a class="btn btn-primary btn-xs"   href="${ContextPath}/operate/operate?id=${operate.id}"  >查看</a> 
 				<#if operate.status!=0>
-				<a class="btn btn-primary btn-xs"  href="${ContextPath}/operate/edit?id=${operate.id}&back=${back!}" >处理</a>
+				<a class="btn btn-primary btn-xs"  href="${ContextPath}/operate/edit?id=${operate.id}" >处理</a>
 				</#if>
 				</td>
 			</tr>
@@ -66,7 +66,7 @@
 		</tbody>
 	</table>
 	<#include "/page/common/_paginate.html" />
-	<@paginate currentPage=operatePage.pageNumber totalPage=operatePage.totalPage actionUrl="/operate/deal/" />
+	<@paginate currentPage=operatePage.pageNumber totalPage=operatePage.totalPage actionUrl="/operate/operates/" />
 
 </div>
 </@layout>

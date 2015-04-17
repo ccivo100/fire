@@ -1,6 +1,6 @@
 <div class="page-header">
 <ul class="nav nav-tabs">
-   <li ><a href="${ContextPath}/report/query">故障申报列表</a></li>
+   <li ><a href="${ContextPath}/report/reports">故障申报列表</a></li>
    <li class="active"><a href="#">故障申报</a></li>
 </ul>
 </div>

@@ -15,6 +15,7 @@ import cn.dreampie.mail.Mailer;
 
 import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.activerecord.Record;
+import com.poicom.function.app.model.Order;
 import com.poicom.function.system.model.Retrieve;
 import com.poicom.function.system.model.User;
 
@@ -44,7 +45,7 @@ public class AlertKit {
 	}
 	
 	/**
-	 * 邮件内容 body
+	 * @描述 报障员提交新故障工单时调用
 	 * @param offer
 	 * @param description
 	 * @param deal
@@ -65,6 +66,29 @@ public class AlertKit {
 		
 	}
 	
+	/**
+	 * @描述 报障员催办时使用
+	 * @param offer
+	 * @param deal
+	 * @param order
+	 * @return
+	 */
+	public static StringBuffer getMailBody(Record offer,Record deal,Order order){
+		StringBuffer body=new StringBuffer();
+		body.append("尊敬的 "+deal.getStr("fullname")+" 您好，")
+		.append("你有一条来自 "+offer.getStr("bname")+" 的 ")
+		.append(offer.getStr("ufullname")+"（"+offer.getStr("uphone")+")")
+		.append("于 "+DateKit.format(order.getDate("created_at"),DateKit.pattern_ymd_hms)+" ")
+		.append("发起的故障申告，现已超时，请尽快处理！");
+		return body;
+	}
+	
+	/**
+	 * @描述 用户重置密码时使用。
+	 * @param user
+	 * @param context
+	 * @return
+	 */
 	public static StringBuffer getMailBody(User user,String context){
 		
 		String newValidCode=EncriptionKit.encrypt(user.getStr("email")+new Date());
@@ -87,6 +111,20 @@ public class AlertKit {
 		return body;
 	}
 	
+	
+	public static StringBuffer getMailBody(User offer,User deal,Order order){
+		StringBuffer body=new StringBuffer();
+		body.append("尊敬的"+offer.getStr("full_name")+"，您好！<br/>")
+		.append("您在 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms))
+		.append(" 提交的故障工单，已由 "+deal.getStr("full_name")+"（"+deal.getStr("phone")+"）")
+		//.append("于 "+DateKit.format(order.getDate("deal_at"),DateKit.pattern_ymd_hms))
+		.append(" 处理完毕，感谢您使用故障申报系统，祝您生活愉快！");
+		
+		return body;
+	}
+	
+
+	
 	/**
 	 * @描述 电话数组格式化
 	 */
@@ -103,16 +141,12 @@ public class AlertKit {
 		
 	}
 	
+	/**
+	 * @描述 报障员提交新故障工单时调用
+	 * @param userinfo
+	 * @param phone
+	 */
 	public static void sendSms(Record userinfo,String... phone ){
-		
-		//电话列表...
-		String phones=phoneFormat(phone);
-		System.out.println(phones);
-		
-		String department="xx";
-		String name="xx";
-		String type="xx";
-		
 		
 		StringBuffer contt=new StringBuffer();
 		if(ValidateKit.isNullOrEmpty(userinfo)){
@@ -126,7 +160,81 @@ public class AlertKit {
 		}
 		
 		String content =contt.toString();
+		sendSms(content,phone);
+		
+	}
+	
+	/**
+	 * @描述 报障员催办时使用
+	 * @param userinfo
+	 * @param phone
+	 */
+	public static void sendSms(Record offer,Order order,String... phone ){
+		StringBuffer contt=new StringBuffer();
+		if(ValidateKit.isNullOrEmpty(offer)){
+			contt.append("null");
+		}else{
+			contt.append("您好，")
+			.append("你有一条来自 "+offer.getStr("bname")+" 的 ")
+			.append(offer.getStr("ufullname")+"（"+offer.getStr("uphone")+"）")
+			.append(" 于 "+DateKit.format(order.getDate("created_at"),DateKit.pattern_ymd_hms)+" ")
+			.append("发起的故障申告，现已超时，请尽快处理！【一点通】");
+		}
+		
+		String content =contt.toString();
+		sendSms(content,phone);
+	}
+	
+	/**
+	 * @描述 工单处理完反馈。
+	 * @param offer
+	 * @param deal
+	 * @param order
+	 */
+	public static void sendSms(User offer,User deal,Order order){
+		
+		StringBuffer contt=new StringBuffer();
+		if(ValidateKit.isNullOrEmpty(offer)){
+			contt.append("null");
+		}else{
+			contt.append("尊敬的"+offer.getStr("full_name")+"，您好！")
+			.append("您在 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms))
+			.append(" 提交的故障工单，已由 "+deal.getStr("full_name")+"（"+deal.getStr("phone")+"）")
+			//.append("于 "+DateKit.format(order.getDate("deal_at"),DateKit.pattern_ymd_hms))
+			.append(" 处理完毕，感谢您使用故障申报系统，祝您生活愉快！【一点通】");
+		}
+		
+		String content =contt.toString();
+		sendSms(content,offer.getStr("phone"));
+	}
+	
+	/**
+	 * @描述 提供定时提醒短信
+	 * @param phone
+	 */
+	public static void sendSms(Object paras,String... phone ){
+		
+		StringBuffer contt=new StringBuffer();
 
+		contt.append("您好，您所属故障类型工单已超时未处理，请及时处理。【一点通】");
+		
+		String content =contt.toString();
+		sendSms(content,phone);
+		
+	}
+	
+	/**
+	 * @描述 短信接口
+	 * @param content
+	 * @param phone
+	 */
+	public static void sendSms(String content,String... phone){
+		
+		//电话列表...
+		String phones=phoneFormat(phone);
+		String department="研发部";
+		String name="firetercel";
+		String type="2";
 		try {
 			
 			URL url=new URL("http://sms.poicom.net/postsms.php");
