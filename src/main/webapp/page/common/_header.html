@@ -124,7 +124,7 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 				<@shiro.authenticated>
-					<li><p class="navbar-text">当前用户：</p><a href="${ContextPath}/user/center">${cuser!}</a></li>
+					<li><p class="navbar-text">当前用户：</p><a href="${ContextPath}/user/center">${(session["org.apache.shiro.subject.support.DefaultSubjectContext_PRINCIPALS_SESSION_KEY"])!} </a></li>
 					<li><a href="${ContextPath}/signout">退出</a></li>
 					</@shiro.authenticated>
 				<@shiro.notAuthenticated>
