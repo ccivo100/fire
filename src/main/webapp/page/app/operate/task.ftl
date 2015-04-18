@@ -11,10 +11,11 @@
 		<thead>
 			<tr>
 				<th width="2%">序号</th>
-				<th width="5%">部门</th>
-				<th width="5%">姓名</th>
+				<th width="3%">单位</th>
+				<th width="3%">部门</th>
+				<th width="3%">姓名</th>
 				<th width="15%">类型</th>
-				<th width="8%">操作</th>
+				<th width="4%">操作</th>
 			</tr>
 		</thead>
 
@@ -23,6 +24,7 @@
 			<tr>
 				<td>${user_index+1}</td>
 				<td>${user.branch}</td>
+				<td>${user.aname}</td>
 				<td>${user.fullname}</td>
 				
 				<form class="form-horizontal" role="form" action="${ContextPath}/operate/doassign" method="post" >

@@ -49,10 +49,10 @@ public class UserInfo extends Model<UserInfo> {
 	 * @param paras
 	 * @return
 	 */
-	public Page<Record> getUserByBranch(int pageNumber,int pageSize,Object... paras){
+	public Page<Record> getUserByBranch(int pageNumber,int pageSize,String where,Object... paras){
 		return Db.paginate(pageNumber, pageSize,
 				SqlKit.sql("user.findBranchUserBySelect") + blank,
-				SqlKit.sql("user.findBranchUserByFrom"), 10);
+				SqlKit.sql("user.findBranchUserByFrom")+getWhere(where),paras);
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -172,7 +172,9 @@ public class OperateController extends JFController{
 	 */
 	public void task(){
 		//Branch_id 为10的用户。
-		Page<Record> userPage=UserInfo.dao.getUserByBranch(getParaToInt(0,1), 10);
+		String where=" userinfo.apartment_id=?";
+		
+		Page<Record> userPage=UserInfo.dao.getUserByBranch(getParaToInt(0,1), 10,where,2);
 		
 		for(int i=0;i<userPage.getList().size();i++){
 			List<Record> list= ErrorType.dao.getOperatorType(userPage.getList().get(i).get("userid"));
