@@ -124,11 +124,11 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 				<@shiro.authenticated>
-					<li><p class="navbar-text">当前用户：</p><a href="${ContextPath}/user/center">${(session["org.apache.shiro.subject.support.DefaultSubjectContext_PRINCIPALS_SESSION_KEY"].full_name)!} </a></li>
-					<li><a href="${ContextPath}/signout">退出</a></li>
+					<li><p class="navbar-text">当前用户：<a class="navbar-link" href="${ContextPath}/user/center">${(session["current_user"].full_name)!}</a></p></li>
+					<li><p class="navbar-text"><a class="navbar-link" href="${ContextPath}/signout">退出</a></p></li>
 					</@shiro.authenticated>
 				<@shiro.notAuthenticated>
-					<li><a href="${ContextPath}/signin">登录</a></li>
+					<li><p class="navbar-text"><a class="navbar-link" href="${ContextPath}/signin">登录</a></p></li>
 				</@shiro.notAuthenticated>
 				</ul>
 			</div>

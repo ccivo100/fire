@@ -8401,3 +8401,3087 @@ The failing instruction (print stack trace for 4 more):
 
 2015-04-20 17:51:43
 [INFO]-[Thread: qtp33350613-30]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [shiro-activeSessionCache]
+
+2015-04-20 20:04:45
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.Server.doStart()]: jetty-8.1.8.v20121106
+
+2015-04-20 20:04:46
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 20:04:46
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 20:04:46
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 20:04:46
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 20:04:46
+[INFO]-[Thread: main]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 20:04:47
+[INFO]-[Thread: main]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 20:04:47
+[INFO]-[Thread: main]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 20:04:47
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 1248 ms.
+
+2015-04-20 20:04:47
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 20:04:48
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 20:04:49
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 20:04:49
+[INFO]-[Thread: main]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 20:04:49
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 20:04:49
+[INFO]-[Thread: main]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 20:04:49
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 20:04:49
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 20:04:49
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 20:04:49
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 20:04:49
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 20:04:49
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 20:04:49
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.AbstractConnector.doStart()]: Started SelectChannelConnector@0.0.0.0:80
+
+2015-04-20 20:05:05
+[INFO]-[Thread: qtp32517802-35]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [shiro-activeSessionCache]
+
+2015-04-20 20:05:06
+[WARN]-[Thread: qtp32517802-35]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /report/reports
+
+2015-04-20 21:03:52
+[WARN]-[Thread: qtp32517802-32]-[org.eclipse.jetty.http.HttpGenerator.addContent()]: Ignoring extra content ?
+
+2015-04-20 21:22:33
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.beforeJFinalStop()]: beforeJFinalStop 释放日志入库线程
+
+2015-04-20 21:22:33
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutting down.
+
+2015-04-20 21:22:33
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.standby()]: Scheduler defaultScheduler_$_default paused.
+
+2015-04-20 21:22:33
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutdown complete.
+
+2015-04-20 21:22:33
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed
+
+2015-04-20 21:22:33
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Cleaning up Shiro Environment
+
+2015-04-20 21:22:33
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.servlet.listener.ELContextCleaner.contextDestroyed()]: javax.el.BeanELResolver purged
+
+2015-04-20 21:22:33
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.doStop()]: stopped o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:22:33
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:22:33
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:22:33
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 21:22:33
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 21:22:34
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 21:22:35
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 21:22:35
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 21:22:35
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 1498 ms.
+
+2015-04-20 21:22:35
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:22:37
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 21:22:38
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 21:22:38
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 21:22:38
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 21:22:38
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 21:22:38
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 21:22:38
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 21:22:38
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 21:22:38
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 21:22:38
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 21:22:38
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 21:23:06
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.Server.doStart()]: jetty-8.1.8.v20121106
+
+2015-04-20 21:23:07
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:23:07
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:23:07
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 21:23:07
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 21:23:08
+[INFO]-[Thread: main]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 21:23:09
+[WARN]-[Thread: main]-[net.sf.ehcache.store.disk.DiskStorageFactory.<init>()]: The index for data file C:\Users\DONGYU\AppData\Local\Temp\%002fadmin%002fpermission.data is out of date, probably due to an unclean shutdown. Deleting index file C:\Users\DONGYU\AppData\Local\Temp\%002fadmin%002fpermission.index
+
+2015-04-20 21:23:09
+[WARN]-[Thread: main]-[net.sf.ehcache.store.disk.DiskStorageFactory.<init>()]: The index for data file C:\Users\DONGYU\AppData\Local\Temp\%002fadmin%002ftype.data is out of date, probably due to an unclean shutdown. Deleting index file C:\Users\DONGYU\AppData\Local\Temp\%002fadmin%002ftype.index
+
+2015-04-20 21:23:09
+[WARN]-[Thread: main]-[net.sf.ehcache.store.disk.DiskStorageFactory.<init>()]: The index for data file C:\Users\DONGYU\AppData\Local\Temp\shiro-active%0053ession%0043ache.data is out of date, probably due to an unclean shutdown. Deleting index file C:\Users\DONGYU\AppData\Local\Temp\shiro-active%0053ession%0043ache.index
+
+2015-04-20 21:23:09
+[WARN]-[Thread: main]-[net.sf.ehcache.store.disk.DiskStorageFactory.<init>()]: The index for data file C:\Users\DONGYU\AppData\Local\Temp\%002fadmin%002frole.data is out of date, probably due to an unclean shutdown. Deleting index file C:\Users\DONGYU\AppData\Local\Temp\%002fadmin%002frole.index
+
+2015-04-20 21:23:09
+[WARN]-[Thread: main]-[net.sf.ehcache.store.disk.DiskStorageFactory.<init>()]: The index for data file C:\Users\DONGYU\AppData\Local\Temp\jdbc%0052ealm%002eauthorization%0043ache.data is out of date, probably due to an unclean shutdown. Deleting index file C:\Users\DONGYU\AppData\Local\Temp\jdbc%0052ealm%002eauthorization%0043ache.index
+
+2015-04-20 21:23:09
+[INFO]-[Thread: main]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 21:23:09
+[INFO]-[Thread: main]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 21:23:09
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 1821 ms.
+
+2015-04-20 21:23:09
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:23:11
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 21:23:13
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 21:23:13
+[INFO]-[Thread: main]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 21:23:13
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 21:23:13
+[INFO]-[Thread: main]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 21:23:13
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 21:23:13
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 21:23:13
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 21:23:13
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 21:23:13
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 21:23:13
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 21:23:14
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.AbstractConnector.doStart()]: Started SelectChannelConnector@0.0.0.0:80
+
+2015-04-20 21:23:24
+[INFO]-[Thread: qtp24910333-33]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [shiro-activeSessionCache]
+
+2015-04-20 21:24:58
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.beforeJFinalStop()]: beforeJFinalStop 释放日志入库线程
+
+2015-04-20 21:24:58
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutting down.
+
+2015-04-20 21:24:58
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.standby()]: Scheduler defaultScheduler_$_default paused.
+
+2015-04-20 21:24:58
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutdown complete.
+
+2015-04-20 21:24:58
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed
+
+2015-04-20 21:24:58
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Cleaning up Shiro Environment
+
+2015-04-20 21:24:58
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.servlet.listener.ELContextCleaner.contextDestroyed()]: javax.el.BeanELResolver purged
+
+2015-04-20 21:24:58
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.doStop()]: stopped o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:24:59
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:24:59
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:24:59
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 21:24:59
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 21:25:00
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 21:25:01
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 21:25:02
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 21:25:02
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 2242 ms.
+
+2015-04-20 21:25:02
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:25:04
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 21:25:05
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 21:25:05
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 21:25:05
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 21:25:05
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 21:25:05
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 21:25:05
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 21:25:05
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 21:25:05
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 21:25:05
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 21:25:05
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 21:25:13
+[INFO]-[Thread: qtp24910333-47]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [shiro-activeSessionCache]
+
+2015-04-20 21:35:24
+[WARN]-[Thread: qtp24910333-36]-[org.eclipse.jetty.servlet.ServletHandler.doHandle()]: /signin
+org.apache.shiro.cache.CacheException: java.lang.IllegalStateException: The shiro-activeSessionCache Cache is not alive (STATUS_SHUTDOWN)
+	at org.apache.shiro.cache.ehcache.EhCache.get(EhCache.java:85)
+	at org.apache.shiro.session.mgt.eis.CachingSessionDAO.getCachedSession(CachingSessionDAO.java:217)
+	at org.apache.shiro.session.mgt.eis.CachingSessionDAO.getCachedSession(CachingSessionDAO.java:202)
+	at org.apache.shiro.session.mgt.eis.CachingSessionDAO.readSession(CachingSessionDAO.java:259)
+	at org.apache.shiro.session.mgt.DefaultSessionManager.retrieveSessionFromDataSource(DefaultSessionManager.java:236)
+	at org.apache.shiro.session.mgt.DefaultSessionManager.retrieveSession(DefaultSessionManager.java:222)
+	at org.apache.shiro.session.mgt.AbstractValidatingSessionManager.doGetSession(AbstractValidatingSessionManager.java:118)
+	at org.apache.shiro.session.mgt.AbstractNativeSessionManager.lookupSession(AbstractNativeSessionManager.java:108)
+	at org.apache.shiro.session.mgt.AbstractNativeSessionManager.lookupRequiredSession(AbstractNativeSessionManager.java:112)
+	at org.apache.shiro.session.mgt.AbstractNativeSessionManager.getAttribute(AbstractNativeSessionManager.java:209)
+	at org.apache.shiro.session.mgt.DelegatingSession.getAttribute(DelegatingSession.java:141)
+	at org.apache.shiro.session.ProxiedSession.getAttribute(ProxiedSession.java:121)
+	at org.apache.shiro.session.ProxiedSession.getAttribute(ProxiedSession.java:121)
+	at org.apache.shiro.subject.support.DelegatingSubject.getRunAsPrincipalsStack(DelegatingSubject.java:469)
+	at org.apache.shiro.subject.support.DelegatingSubject.isRunAs(DelegatingSubject.java:441)
+	at org.apache.shiro.mgt.DefaultSubjectDAO.mergePrincipals(DefaultSubjectDAO.java:187)
+	at org.apache.shiro.mgt.DefaultSubjectDAO.saveToSession(DefaultSubjectDAO.java:166)
+	at org.apache.shiro.mgt.DefaultSubjectDAO.save(DefaultSubjectDAO.java:147)
+	at org.apache.shiro.mgt.DefaultSecurityManager.save(DefaultSecurityManager.java:383)
+	at org.apache.shiro.mgt.DefaultSecurityManager.createSubject(DefaultSecurityManager.java:350)
+	at org.apache.shiro.mgt.DefaultSecurityManager.createSubject(DefaultSecurityManager.java:183)
+	at org.apache.shiro.mgt.DefaultSecurityManager.login(DefaultSecurityManager.java:283)
+	at org.apache.shiro.subject.support.DelegatingSubject.login(DelegatingSubject.java:256)
+	at cn.dreampie.shiro.ShiroAuthenticatingFilter.executeLogin(ShiroAuthenticatingFilter.java:66)
+	at cn.dreampie.shiro.ShiroFormAuthenticationFilter.onAccessDenied(ShiroFormAuthenticationFilter.java:222)
+	at cn.dreampie.shiro.ShiroAccessControlFilter.onAccessDenied(ShiroAccessControlFilter.java:175)
+	at cn.dreampie.shiro.ShiroAccessControlFilter.onPreHandle(ShiroAccessControlFilter.java:204)
+	at org.apache.shiro.web.filter.PathMatchingFilter.isFilterChainContinued(PathMatchingFilter.java:203)
+	at org.apache.shiro.web.filter.PathMatchingFilter.preHandle(PathMatchingFilter.java:178)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:131)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:453)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:137)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:560)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:231)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1072)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:382)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:193)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1006)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:135)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116)
+	at org.eclipse.jetty.server.Server.handle(Server.java:365)
+	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:485)
+	at org.eclipse.jetty.server.AbstractHttpConnection.content(AbstractHttpConnection.java:937)
+	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.content(AbstractHttpConnection.java:998)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:856)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:240)
+	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.IllegalStateException: The shiro-activeSessionCache Cache is not alive (STATUS_SHUTDOWN)
+	at net.sf.ehcache.Cache$CacheStatus.checkAlive(Cache.java:4267)
+	at net.sf.ehcache.Cache.checkStatus(Cache.java:2701)
+	at net.sf.ehcache.Cache.get(Cache.java:1576)
+	at org.apache.shiro.cache.ehcache.EhCache.get(EhCache.java:73)
+	... 61 more
+
+2015-04-20 21:47:37
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.Server.doStart()]: jetty-8.1.8.v20121106
+
+2015-04-20 21:47:37
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:47:37
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:47:37
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 21:47:37
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 21:47:38
+[INFO]-[Thread: main]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 21:47:38
+[WARN]-[Thread: main]-[net.sf.ehcache.store.disk.DiskStorageFactory.<init>()]: The index for data file C:\Users\DONGYU\AppData\Local\Temp\shiro-active%0053ession%0043ache.data is out of date, probably due to an unclean shutdown. Deleting index file C:\Users\DONGYU\AppData\Local\Temp\shiro-active%0053ession%0043ache.index
+
+2015-04-20 21:47:38
+[INFO]-[Thread: main]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 21:47:39
+[INFO]-[Thread: main]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 21:47:39
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 1267 ms.
+
+2015-04-20 21:47:39
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:47:40
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 21:47:41
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 21:47:41
+[INFO]-[Thread: main]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 21:47:41
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 21:47:41
+[INFO]-[Thread: main]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 21:47:41
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 21:47:41
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 21:47:41
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 21:47:41
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 21:47:41
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 21:47:41
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 21:47:41
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.AbstractConnector.doStart()]: Started SelectChannelConnector@0.0.0.0:80
+
+2015-04-20 21:47:52
+[INFO]-[Thread: qtp25671574-31]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [shiro-activeSessionCache]
+
+2015-04-20 21:49:08
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.beforeJFinalStop()]: beforeJFinalStop 释放日志入库线程
+
+2015-04-20 21:49:08
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutting down.
+
+2015-04-20 21:49:08
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.standby()]: Scheduler defaultScheduler_$_default paused.
+
+2015-04-20 21:49:08
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutdown complete.
+
+2015-04-20 21:49:08
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed
+
+2015-04-20 21:49:08
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Cleaning up Shiro Environment
+
+2015-04-20 21:49:08
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.servlet.listener.ELContextCleaner.contextDestroyed()]: javax.el.BeanELResolver purged
+
+2015-04-20 21:49:08
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.doStop()]: stopped o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:49:08
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:49:08
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:49:08
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 21:49:08
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 21:49:08
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 21:49:09
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 21:49:09
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 21:49:09
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 1030 ms.
+
+2015-04-20 21:49:09
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:49:11
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 21:49:11
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 21:49:11
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 21:49:11
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 21:49:11
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 21:49:11
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 21:49:11
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 21:49:11
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 21:49:11
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 21:49:11
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 21:49:12
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 21:49:16
+[INFO]-[Thread: qtp25671574-31]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [shiro-activeSessionCache]
+
+2015-04-20 21:50:24
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.beforeJFinalStop()]: beforeJFinalStop 释放日志入库线程
+
+2015-04-20 21:50:24
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutting down.
+
+2015-04-20 21:50:24
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.standby()]: Scheduler defaultScheduler_$_default paused.
+
+2015-04-20 21:50:24
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutdown complete.
+
+2015-04-20 21:50:24
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed
+
+2015-04-20 21:50:24
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Cleaning up Shiro Environment
+
+2015-04-20 21:50:24
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.servlet.listener.ELContextCleaner.contextDestroyed()]: javax.el.BeanELResolver purged
+
+2015-04-20 21:50:24
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.doStop()]: stopped o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:50:24
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:50:24
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:50:24
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 21:50:24
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 21:50:24
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 21:50:25
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 21:50:25
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 21:50:25
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 1095 ms.
+
+2015-04-20 21:50:25
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:50:26
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 21:50:27
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 21:50:27
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 21:50:27
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 21:50:27
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 21:50:27
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 21:50:27
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 21:50:27
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 21:50:27
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 21:50:27
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 21:50:27
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 21:50:44
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.beforeJFinalStop()]: beforeJFinalStop 释放日志入库线程
+
+2015-04-20 21:50:44
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutting down.
+
+2015-04-20 21:50:44
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.standby()]: Scheduler defaultScheduler_$_default paused.
+
+2015-04-20 21:50:44
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutdown complete.
+
+2015-04-20 21:50:44
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed
+
+2015-04-20 21:50:44
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Cleaning up Shiro Environment
+
+2015-04-20 21:50:44
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.servlet.listener.ELContextCleaner.contextDestroyed()]: javax.el.BeanELResolver purged
+
+2015-04-20 21:50:44
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.doStop()]: stopped o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:50:44
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:50:44
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:50:44
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 21:50:44
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 21:50:44
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 21:50:45
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 21:50:45
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 21:50:45
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 845 ms.
+
+2015-04-20 21:50:45
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:50:46
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 21:50:47
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 21:50:47
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 21:50:47
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 21:50:47
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 21:50:47
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 21:50:47
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 21:50:47
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 21:50:47
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 21:50:48
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 21:50:48
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 21:51:14
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.beforeJFinalStop()]: beforeJFinalStop 释放日志入库线程
+
+2015-04-20 21:51:14
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutting down.
+
+2015-04-20 21:51:14
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.standby()]: Scheduler defaultScheduler_$_default paused.
+
+2015-04-20 21:51:14
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutdown complete.
+
+2015-04-20 21:51:14
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed
+
+2015-04-20 21:51:14
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Cleaning up Shiro Environment
+
+2015-04-20 21:51:14
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.servlet.listener.ELContextCleaner.contextDestroyed()]: javax.el.BeanELResolver purged
+
+2015-04-20 21:51:14
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.doStop()]: stopped o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:51:14
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:51:14
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:51:14
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 21:51:14
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 21:51:15
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 21:51:15
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 21:51:15
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 21:51:15
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 741 ms.
+
+2015-04-20 21:51:15
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:51:17
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 21:51:17
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 21:51:17
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 21:51:17
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 21:51:17
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 21:51:17
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 21:51:17
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 21:51:17
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 21:51:17
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 21:51:17
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 21:51:18
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 21:51:22
+[INFO]-[Thread: qtp25671574-34]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [shiro-activeSessionCache]
+
+2015-04-20 21:52:15
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.beforeJFinalStop()]: beforeJFinalStop 释放日志入库线程
+
+2015-04-20 21:52:15
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutting down.
+
+2015-04-20 21:52:15
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.standby()]: Scheduler defaultScheduler_$_default paused.
+
+2015-04-20 21:52:15
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutdown complete.
+
+2015-04-20 21:52:15
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed
+
+2015-04-20 21:52:15
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Cleaning up Shiro Environment
+
+2015-04-20 21:52:15
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.servlet.listener.ELContextCleaner.contextDestroyed()]: javax.el.BeanELResolver purged
+
+2015-04-20 21:52:15
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.doStop()]: stopped o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:52:15
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:52:15
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:52:15
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 21:52:15
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 21:52:15
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 21:52:16
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 21:52:16
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 21:52:16
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 748 ms.
+
+2015-04-20 21:52:16
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:52:17
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 21:52:18
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 21:52:18
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 21:52:18
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 21:52:18
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 21:52:18
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 21:52:18
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 21:52:18
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 21:52:18
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 21:52:18
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 21:52:18
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 21:52:20
+[INFO]-[Thread: qtp25671574-117]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [shiro-activeSessionCache]
+
+2015-04-20 21:52:55
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.beforeJFinalStop()]: beforeJFinalStop 释放日志入库线程
+
+2015-04-20 21:52:55
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutting down.
+
+2015-04-20 21:52:55
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.standby()]: Scheduler defaultScheduler_$_default paused.
+
+2015-04-20 21:52:55
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutdown complete.
+
+2015-04-20 21:52:55
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed
+
+2015-04-20 21:52:55
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Cleaning up Shiro Environment
+
+2015-04-20 21:52:55
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.servlet.listener.ELContextCleaner.contextDestroyed()]: javax.el.BeanELResolver purged
+
+2015-04-20 21:52:55
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.doStop()]: stopped o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:52:55
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:52:55
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:52:55
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 21:52:55
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 21:52:56
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 21:52:56
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 21:52:56
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 21:52:56
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 856 ms.
+
+2015-04-20 21:52:56
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:52:58
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 21:52:59
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 21:52:59
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 21:52:59
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 21:52:59
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 21:52:59
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 21:52:59
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 21:52:59
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 21:52:59
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 21:52:59
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 21:52:59
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 21:53:02
+[INFO]-[Thread: qtp25671574-36]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [shiro-activeSessionCache]
+
+2015-04-20 21:55:42
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.beforeJFinalStop()]: beforeJFinalStop 释放日志入库线程
+
+2015-04-20 21:55:42
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutting down.
+
+2015-04-20 21:55:42
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.standby()]: Scheduler defaultScheduler_$_default paused.
+
+2015-04-20 21:55:42
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutdown complete.
+
+2015-04-20 21:55:42
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed
+
+2015-04-20 21:55:42
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Cleaning up Shiro Environment
+
+2015-04-20 21:55:42
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.servlet.listener.ELContextCleaner.contextDestroyed()]: javax.el.BeanELResolver purged
+
+2015-04-20 21:55:42
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.doStop()]: stopped o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:55:42
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:55:42
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:55:42
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 21:55:42
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 21:55:42
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 21:55:44
+[ERROR]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialization failed
+org.apache.shiro.config.ConfigurationException: Unable to set property 'cacheManager' with value [org.apache.shiro.cache.ehcache.EhCacheManager@62cbc7] on object of type org.apache.shiro.web.mgt.DefaultWebSecurityManager.  If 'org.apache.shiro.cache.ehcache.EhCacheManager@62cbc7' is a reference to another (previously defined) object, prefix it with '$' to indicate that the referenced object should be used as the actual value.  For example, $org.apache.shiro.cache.ehcache.EhCacheManager@62cbc7
+	at org.apache.shiro.config.ReflectionBuilder.setProperty(ReflectionBuilder.java:501)
+	at org.apache.shiro.config.ReflectionBuilder.applyProperty(ReflectionBuilder.java:450)
+	at org.apache.shiro.config.ReflectionBuilder.applyProperty(ReflectionBuilder.java:562)
+	at org.apache.shiro.config.ReflectionBuilder.applySingleProperty(ReflectionBuilder.java:206)
+	at org.apache.shiro.config.ReflectionBuilder.applyProperty(ReflectionBuilder.java:167)
+	at org.apache.shiro.config.ReflectionBuilder.buildObjects(ReflectionBuilder.java:124)
+	at org.apache.shiro.config.IniSecurityManagerFactory.buildInstances(IniSecurityManagerFactory.java:161)
+	at org.apache.shiro.config.IniSecurityManagerFactory.createSecurityManager(IniSecurityManagerFactory.java:124)
+	at org.apache.shiro.config.IniSecurityManagerFactory.createSecurityManager(IniSecurityManagerFactory.java:102)
+	at org.apache.shiro.config.IniSecurityManagerFactory.createInstance(IniSecurityManagerFactory.java:88)
+	at org.apache.shiro.config.IniSecurityManagerFactory.createInstance(IniSecurityManagerFactory.java:46)
+	at org.apache.shiro.config.IniFactorySupport.createInstance(IniFactorySupport.java:123)
+	at org.apache.shiro.util.AbstractFactory.getInstance(AbstractFactory.java:47)
+	at org.apache.shiro.web.env.IniWebEnvironment.createWebSecurityManager(IniWebEnvironment.java:203)
+	at org.apache.shiro.web.env.IniWebEnvironment.configure(IniWebEnvironment.java:99)
+	at org.apache.shiro.web.env.IniWebEnvironment.init(IniWebEnvironment.java:92)
+	at org.apache.shiro.util.LifecycleUtils.init(LifecycleUtils.java:45)
+	at org.apache.shiro.util.LifecycleUtils.init(LifecycleUtils.java:40)
+	at org.apache.shiro.web.env.EnvironmentLoader.createEnvironment(EnvironmentLoader.java:221)
+	at org.apache.shiro.web.env.EnvironmentLoader.initEnvironment(EnvironmentLoader.java:133)
+	at org.apache.shiro.web.env.EnvironmentLoaderListener.contextInitialized(EnvironmentLoaderListener.java:58)
+	at org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized(ContextHandler.java:771)
+	at org.eclipse.jetty.servlet.ServletContextHandler.callContextInitialized(ServletContextHandler.java:424)
+	at org.eclipse.jetty.server.handler.ContextHandler.startContext(ContextHandler.java:763)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:249)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1250)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:706)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:492)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at com.jfinal.server.JettyServer$1.onChange(JettyServer.java:106)
+	at com.jfinal.server.Scanner.compare(Scanner.java:87)
+	at com.jfinal.server.Scanner.working(Scanner.java:56)
+	at com.jfinal.server.Scanner.access$000(Scanner.java:30)
+	at com.jfinal.server.Scanner$1.run(Scanner.java:93)
+	at java.util.TimerThread.mainLoop(Timer.java:555)
+	at java.util.TimerThread.run(Timer.java:505)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.commons.beanutils.PropertyUtilsBean.invokeMethod(PropertyUtilsBean.java:2116)
+	at org.apache.commons.beanutils.PropertyUtilsBean.setSimpleProperty(PropertyUtilsBean.java:2097)
+	at org.apache.commons.beanutils.PropertyUtilsBean.setNestedProperty(PropertyUtilsBean.java:1903)
+	at org.apache.commons.beanutils.PropertyUtilsBean.setProperty(PropertyUtilsBean.java:2010)
+	at org.apache.commons.beanutils.BeanUtilsBean.setProperty(BeanUtilsBean.java:1011)
+	at org.apache.commons.beanutils.BeanUtils.setProperty(BeanUtils.java:454)
+	at org.apache.shiro.config.ReflectionBuilder.setProperty(ReflectionBuilder.java:493)
+	... 35 more
+Caused by: org.apache.shiro.cache.CacheException: net.sf.ehcache.CacheException: java.lang.OutOfMemoryError: PermGen space
+	at org.apache.shiro.cache.ehcache.EhCacheManager.ensureCacheManager(EhCacheManager.java:224)
+	at org.apache.shiro.cache.ehcache.EhCacheManager.getCache(EhCacheManager.java:156)
+	at org.apache.shiro.realm.AuthorizingRealm.getAuthorizationCacheLazy(AuthorizingRealm.java:245)
+	at org.apache.shiro.realm.AuthorizingRealm.getAvailableAuthorizationCache(AuthorizingRealm.java:260)
+	at org.apache.shiro.realm.AuthorizingRealm.afterCacheManagerSet(AuthorizingRealm.java:226)
+	at org.apache.shiro.realm.CachingRealm.setCacheManager(CachingRealm.java:96)
+	at org.apache.shiro.mgt.RealmSecurityManager.applyCacheManagerToRealms(RealmSecurityManager.java:115)
+	at org.apache.shiro.mgt.RealmSecurityManager.afterCacheManagerSet(RealmSecurityManager.java:127)
+	at org.apache.shiro.mgt.SessionsSecurityManager.afterCacheManagerSet(SessionsSecurityManager.java:103)
+	at org.apache.shiro.mgt.CachingSecurityManager.setCacheManager(CachingSecurityManager.java:72)
+	... 46 more
+Caused by: net.sf.ehcache.CacheException: java.lang.OutOfMemoryError: PermGen space
+	at net.sf.ehcache.CacheManager.init(CacheManager.java:401)
+	at net.sf.ehcache.CacheManager.<init>(CacheManager.java:339)
+	at org.apache.shiro.cache.ehcache.EhCacheManager.ensureCacheManager(EhCacheManager.java:213)
+	... 55 more
+Caused by: java.lang.OutOfMemoryError: PermGen space
+	at java.lang.ClassLoader.defineClass1(Native Method)
+	at java.lang.ClassLoader.defineClass(ClassLoader.java:800)
+	at java.security.SecureClassLoader.defineClass(SecureClassLoader.java:142)
+	at java.net.URLClassLoader.defineClass(URLClassLoader.java:449)
+	at java.net.URLClassLoader.access$100(URLClassLoader.java:71)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:361)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at org.eclipse.jetty.webapp.WebAppClassLoader.loadClass(WebAppClassLoader.java:421)
+	at com.jfinal.server.JFinalClassLoader.loadClass(JFinalClassLoader.java:53)
+	at net.sf.ehcache.store.disk.DiskStore.<init>(DiskStore.java:102)
+	at net.sf.ehcache.store.disk.DiskStore.create(DiskStore.java:135)
+	at net.sf.ehcache.store.DiskBackedMemoryStore.createDiskStore(DiskBackedMemoryStore.java:61)
+	at net.sf.ehcache.store.DiskBackedMemoryStore.create(DiskBackedMemoryStore.java:49)
+	at net.sf.ehcache.Cache.initialise(Cache.java:1097)
+	at net.sf.ehcache.CacheManager.initializeEhcache(CacheManager.java:1306)
+	at net.sf.ehcache.CacheManager.addCacheNoCheck(CacheManager.java:1337)
+	at net.sf.ehcache.CacheManager.addConfiguredCaches(CacheManager.java:758)
+	at net.sf.ehcache.CacheManager.doInit(CacheManager.java:459)
+	at net.sf.ehcache.CacheManager.init(CacheManager.java:377)
+	at net.sf.ehcache.CacheManager.<init>(CacheManager.java:339)
+	at org.apache.shiro.cache.ehcache.EhCacheManager.ensureCacheManager(EhCacheManager.java:213)
+	at org.apache.shiro.cache.ehcache.EhCacheManager.getCache(EhCacheManager.java:156)
+	at org.apache.shiro.realm.AuthorizingRealm.getAuthorizationCacheLazy(AuthorizingRealm.java:245)
+	at org.apache.shiro.realm.AuthorizingRealm.getAvailableAuthorizationCache(AuthorizingRealm.java:260)
+	at org.apache.shiro.realm.AuthorizingRealm.afterCacheManagerSet(AuthorizingRealm.java:226)
+	at org.apache.shiro.realm.CachingRealm.setCacheManager(CachingRealm.java:96)
+	at org.apache.shiro.mgt.RealmSecurityManager.applyCacheManagerToRealms(RealmSecurityManager.java:115)
+	at org.apache.shiro.mgt.RealmSecurityManager.afterCacheManagerSet(RealmSecurityManager.java:127)
+	at org.apache.shiro.mgt.SessionsSecurityManager.afterCacheManagerSet(SessionsSecurityManager.java:103)
+	at org.apache.shiro.mgt.CachingSecurityManager.setCacheManager(CachingSecurityManager.java:72)
+
+2015-04-20 21:55:44
+[WARN]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.webapp.WebAppContext.doStart()]: Failed startup of context o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+org.apache.shiro.config.ConfigurationException: Unable to set property 'cacheManager' with value [org.apache.shiro.cache.ehcache.EhCacheManager@62cbc7] on object of type org.apache.shiro.web.mgt.DefaultWebSecurityManager.  If 'org.apache.shiro.cache.ehcache.EhCacheManager@62cbc7' is a reference to another (previously defined) object, prefix it with '$' to indicate that the referenced object should be used as the actual value.  For example, $org.apache.shiro.cache.ehcache.EhCacheManager@62cbc7
+	at org.apache.shiro.config.ReflectionBuilder.setProperty(ReflectionBuilder.java:501)
+	at org.apache.shiro.config.ReflectionBuilder.applyProperty(ReflectionBuilder.java:450)
+	at org.apache.shiro.config.ReflectionBuilder.applyProperty(ReflectionBuilder.java:562)
+	at org.apache.shiro.config.ReflectionBuilder.applySingleProperty(ReflectionBuilder.java:206)
+	at org.apache.shiro.config.ReflectionBuilder.applyProperty(ReflectionBuilder.java:167)
+	at org.apache.shiro.config.ReflectionBuilder.buildObjects(ReflectionBuilder.java:124)
+	at org.apache.shiro.config.IniSecurityManagerFactory.buildInstances(IniSecurityManagerFactory.java:161)
+	at org.apache.shiro.config.IniSecurityManagerFactory.createSecurityManager(IniSecurityManagerFactory.java:124)
+	at org.apache.shiro.config.IniSecurityManagerFactory.createSecurityManager(IniSecurityManagerFactory.java:102)
+	at org.apache.shiro.config.IniSecurityManagerFactory.createInstance(IniSecurityManagerFactory.java:88)
+	at org.apache.shiro.config.IniSecurityManagerFactory.createInstance(IniSecurityManagerFactory.java:46)
+	at org.apache.shiro.config.IniFactorySupport.createInstance(IniFactorySupport.java:123)
+	at org.apache.shiro.util.AbstractFactory.getInstance(AbstractFactory.java:47)
+	at org.apache.shiro.web.env.IniWebEnvironment.createWebSecurityManager(IniWebEnvironment.java:203)
+	at org.apache.shiro.web.env.IniWebEnvironment.configure(IniWebEnvironment.java:99)
+	at org.apache.shiro.web.env.IniWebEnvironment.init(IniWebEnvironment.java:92)
+	at org.apache.shiro.util.LifecycleUtils.init(LifecycleUtils.java:45)
+	at org.apache.shiro.util.LifecycleUtils.init(LifecycleUtils.java:40)
+	at org.apache.shiro.web.env.EnvironmentLoader.createEnvironment(EnvironmentLoader.java:221)
+	at org.apache.shiro.web.env.EnvironmentLoader.initEnvironment(EnvironmentLoader.java:133)
+	at org.apache.shiro.web.env.EnvironmentLoaderListener.contextInitialized(EnvironmentLoaderListener.java:58)
+	at org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized(ContextHandler.java:771)
+	at org.eclipse.jetty.servlet.ServletContextHandler.callContextInitialized(ServletContextHandler.java:424)
+	at org.eclipse.jetty.server.handler.ContextHandler.startContext(ContextHandler.java:763)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:249)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1250)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:706)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:492)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at com.jfinal.server.JettyServer$1.onChange(JettyServer.java:106)
+	at com.jfinal.server.Scanner.compare(Scanner.java:87)
+	at com.jfinal.server.Scanner.working(Scanner.java:56)
+	at com.jfinal.server.Scanner.access$000(Scanner.java:30)
+	at com.jfinal.server.Scanner$1.run(Scanner.java:93)
+	at java.util.TimerThread.mainLoop(Timer.java:555)
+	at java.util.TimerThread.run(Timer.java:505)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.commons.beanutils.PropertyUtilsBean.invokeMethod(PropertyUtilsBean.java:2116)
+	at org.apache.commons.beanutils.PropertyUtilsBean.setSimpleProperty(PropertyUtilsBean.java:2097)
+	at org.apache.commons.beanutils.PropertyUtilsBean.setNestedProperty(PropertyUtilsBean.java:1903)
+	at org.apache.commons.beanutils.PropertyUtilsBean.setProperty(PropertyUtilsBean.java:2010)
+	at org.apache.commons.beanutils.BeanUtilsBean.setProperty(BeanUtilsBean.java:1011)
+	at org.apache.commons.beanutils.BeanUtils.setProperty(BeanUtils.java:454)
+	at org.apache.shiro.config.ReflectionBuilder.setProperty(ReflectionBuilder.java:493)
+	... 35 more
+Caused by: org.apache.shiro.cache.CacheException: net.sf.ehcache.CacheException: java.lang.OutOfMemoryError: PermGen space
+	at org.apache.shiro.cache.ehcache.EhCacheManager.ensureCacheManager(EhCacheManager.java:224)
+	at org.apache.shiro.cache.ehcache.EhCacheManager.getCache(EhCacheManager.java:156)
+	at org.apache.shiro.realm.AuthorizingRealm.getAuthorizationCacheLazy(AuthorizingRealm.java:245)
+	at org.apache.shiro.realm.AuthorizingRealm.getAvailableAuthorizationCache(AuthorizingRealm.java:260)
+	at org.apache.shiro.realm.AuthorizingRealm.afterCacheManagerSet(AuthorizingRealm.java:226)
+	at org.apache.shiro.realm.CachingRealm.setCacheManager(CachingRealm.java:96)
+	at org.apache.shiro.mgt.RealmSecurityManager.applyCacheManagerToRealms(RealmSecurityManager.java:115)
+	at org.apache.shiro.mgt.RealmSecurityManager.afterCacheManagerSet(RealmSecurityManager.java:127)
+	at org.apache.shiro.mgt.SessionsSecurityManager.afterCacheManagerSet(SessionsSecurityManager.java:103)
+	at org.apache.shiro.mgt.CachingSecurityManager.setCacheManager(CachingSecurityManager.java:72)
+	... 46 more
+Caused by: net.sf.ehcache.CacheException: java.lang.OutOfMemoryError: PermGen space
+	at net.sf.ehcache.CacheManager.init(CacheManager.java:401)
+	at net.sf.ehcache.CacheManager.<init>(CacheManager.java:339)
+	at org.apache.shiro.cache.ehcache.EhCacheManager.ensureCacheManager(EhCacheManager.java:213)
+	... 55 more
+Caused by: java.lang.OutOfMemoryError: PermGen space
+	at java.lang.ClassLoader.defineClass1(Native Method)
+	at java.lang.ClassLoader.defineClass(ClassLoader.java:800)
+	at java.security.SecureClassLoader.defineClass(SecureClassLoader.java:142)
+	at java.net.URLClassLoader.defineClass(URLClassLoader.java:449)
+	at java.net.URLClassLoader.access$100(URLClassLoader.java:71)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:361)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at org.eclipse.jetty.webapp.WebAppClassLoader.loadClass(WebAppClassLoader.java:421)
+	at com.jfinal.server.JFinalClassLoader.loadClass(JFinalClassLoader.java:53)
+	at net.sf.ehcache.store.disk.DiskStore.<init>(DiskStore.java:102)
+	at net.sf.ehcache.store.disk.DiskStore.create(DiskStore.java:135)
+	at net.sf.ehcache.store.DiskBackedMemoryStore.createDiskStore(DiskBackedMemoryStore.java:61)
+	at net.sf.ehcache.store.DiskBackedMemoryStore.create(DiskBackedMemoryStore.java:49)
+	at net.sf.ehcache.Cache.initialise(Cache.java:1097)
+	at net.sf.ehcache.CacheManager.initializeEhcache(CacheManager.java:1306)
+	at net.sf.ehcache.CacheManager.addCacheNoCheck(CacheManager.java:1337)
+	at net.sf.ehcache.CacheManager.addConfiguredCaches(CacheManager.java:758)
+	at net.sf.ehcache.CacheManager.doInit(CacheManager.java:459)
+	at net.sf.ehcache.CacheManager.init(CacheManager.java:377)
+	at net.sf.ehcache.CacheManager.<init>(CacheManager.java:339)
+	at org.apache.shiro.cache.ehcache.EhCacheManager.ensureCacheManager(EhCacheManager.java:213)
+	at org.apache.shiro.cache.ehcache.EhCacheManager.getCache(EhCacheManager.java:156)
+	at org.apache.shiro.realm.AuthorizingRealm.getAuthorizationCacheLazy(AuthorizingRealm.java:245)
+	at org.apache.shiro.realm.AuthorizingRealm.getAvailableAuthorizationCache(AuthorizingRealm.java:260)
+	at org.apache.shiro.realm.AuthorizingRealm.afterCacheManagerSet(AuthorizingRealm.java:226)
+	at org.apache.shiro.realm.CachingRealm.setCacheManager(CachingRealm.java:96)
+	at org.apache.shiro.mgt.RealmSecurityManager.applyCacheManagerToRealms(RealmSecurityManager.java:115)
+	at org.apache.shiro.mgt.RealmSecurityManager.afterCacheManagerSet(RealmSecurityManager.java:127)
+	at org.apache.shiro.mgt.SessionsSecurityManager.afterCacheManagerSet(SessionsSecurityManager.java:103)
+	at org.apache.shiro.mgt.CachingSecurityManager.setCacheManager(CachingSecurityManager.java:72)
+
+2015-04-20 21:55:50
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.Server.doStart()]: jetty-8.1.8.v20121106
+
+2015-04-20 21:55:50
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:55:50
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:55:50
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 21:55:50
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 21:55:51
+[INFO]-[Thread: main]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 21:55:52
+[INFO]-[Thread: main]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 21:55:52
+[INFO]-[Thread: main]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 21:55:52
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 1338 ms.
+
+2015-04-20 21:55:52
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:55:53
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 21:55:54
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 21:55:54
+[INFO]-[Thread: main]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 21:55:54
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 21:55:54
+[INFO]-[Thread: main]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 21:55:54
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 21:55:54
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 21:55:54
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 21:55:54
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 21:55:54
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 21:55:54
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 21:55:55
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.AbstractConnector.doStart()]: Started SelectChannelConnector@0.0.0.0:80
+
+2015-04-20 21:56:01
+[INFO]-[Thread: qtp32517802-33]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [shiro-activeSessionCache]
+
+2015-04-20 21:56:01
+[ERROR]-[Thread: qtp32517802-33]-[com.jfinal.core.ActionHandler.handle()]: /
+java.lang.NullPointerException
+	at com.poicom.common.interceptor.SessionInterceptor.intercept(SessionInterceptor.java:20)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at com.poicom.function.app.CommonInterceptor.intercept(CommonInterceptor.java:16)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at cn.dreampie.web.interceptor.UrlInterceptor.intercept(UrlInterceptor.java:24)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at com.jfinal.ext.interceptor.SessionInViewInterceptor.intercept(SessionInViewInterceptor.java:44)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at cn.dreampie.shiro.core.ShiroInterceptor.intercept(ShiroInterceptor.java:41)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:73)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:47)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:72)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:453)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:137)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:560)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:231)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1072)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:382)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:193)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1006)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:135)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116)
+	at org.eclipse.jetty.server.Server.handle(Server.java:365)
+	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:485)
+	at org.eclipse.jetty.server.AbstractHttpConnection.headerComplete(AbstractHttpConnection.java:926)
+	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.headerComplete(AbstractHttpConnection.java:988)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:635)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235)
+	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543)
+	at java.lang.Thread.run(Thread.java:745)
+
+2015-04-20 21:57:16
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.beforeJFinalStop()]: beforeJFinalStop 释放日志入库线程
+
+2015-04-20 21:57:16
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutting down.
+
+2015-04-20 21:57:16
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.standby()]: Scheduler defaultScheduler_$_default paused.
+
+2015-04-20 21:57:16
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutdown complete.
+
+2015-04-20 21:57:16
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed
+
+2015-04-20 21:57:16
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Cleaning up Shiro Environment
+
+2015-04-20 21:57:16
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.servlet.listener.ELContextCleaner.contextDestroyed()]: javax.el.BeanELResolver purged
+
+2015-04-20 21:57:16
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.doStop()]: stopped o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:57:16
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:57:16
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:57:16
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 21:57:16
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 21:57:16
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 21:57:17
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 21:57:17
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 21:57:17
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 809 ms.
+
+2015-04-20 21:57:17
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:57:19
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 21:57:19
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 21:57:19
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 21:57:19
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 21:57:19
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 21:57:19
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 21:57:19
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 21:57:19
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 21:57:19
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 21:57:19
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 21:57:19
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 21:57:44
+[INFO]-[Thread: qtp32517802-33]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [shiro-activeSessionCache]
+
+2015-04-20 21:58:15
+[ERROR]-[Thread: qtp32517802-33]-[com.jfinal.core.ActionHandler.handle()]: /signin
+java.lang.NullPointerException
+	at com.poicom.common.interceptor.SessionInterceptor.intercept(SessionInterceptor.java:29)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at com.poicom.function.app.CommonInterceptor.intercept(CommonInterceptor.java:25)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at cn.dreampie.web.interceptor.UrlInterceptor.intercept(UrlInterceptor.java:24)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at com.jfinal.ext.interceptor.SessionInViewInterceptor.intercept(SessionInViewInterceptor.java:44)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at cn.dreampie.shiro.core.ShiroInterceptor.intercept(ShiroInterceptor.java:41)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:73)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:47)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:72)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:453)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:137)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:560)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:231)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1072)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:382)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:193)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1006)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:135)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116)
+	at org.eclipse.jetty.server.Server.handle(Server.java:365)
+	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:485)
+	at org.eclipse.jetty.server.AbstractHttpConnection.headerComplete(AbstractHttpConnection.java:926)
+	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.headerComplete(AbstractHttpConnection.java:988)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:635)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235)
+	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543)
+	at java.lang.Thread.run(Thread.java:745)
+
+2015-04-20 21:59:07
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.beforeJFinalStop()]: beforeJFinalStop 释放日志入库线程
+
+2015-04-20 21:59:07
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutting down.
+
+2015-04-20 21:59:07
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.standby()]: Scheduler defaultScheduler_$_default paused.
+
+2015-04-20 21:59:07
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutdown complete.
+
+2015-04-20 21:59:07
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed
+
+2015-04-20 21:59:07
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Cleaning up Shiro Environment
+
+2015-04-20 21:59:07
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.servlet.listener.ELContextCleaner.contextDestroyed()]: javax.el.BeanELResolver purged
+
+2015-04-20 21:59:07
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.doStop()]: stopped o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:59:07
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:59:07
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:59:07
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 21:59:07
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 21:59:08
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 21:59:08
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 21:59:08
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 21:59:08
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 864 ms.
+
+2015-04-20 21:59:08
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 21:59:10
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 21:59:10
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 21:59:10
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 21:59:10
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 21:59:10
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 21:59:10
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 21:59:10
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 21:59:10
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 21:59:10
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 21:59:10
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 21:59:11
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 21:59:14
+[INFO]-[Thread: qtp32517802-33]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [shiro-activeSessionCache]
+
+2015-04-20 22:00:01
+[ERROR]-[Thread: qtp32517802-34]-[freemarker.log._Log4JLoggerFactory$Log4JLogger.error()]: Error executing FreeMarker template
+FreeMarker template error:
+Can't convert boolean to string automatically, because the "boolean_format" setting was "true,false", which is the legacy default computer-language format, and hence isn't accepted.
+
+Tip: If you just want "true"/"false" result as you are generting computer-language output, use "?c", like ${myBool?c}.
+Tip: You can write myBool?string('yes', 'no') and like to specify boolean formatting in place.
+Tip: If you need the same two values on most places, the programmers should set the "boolean_format" setting to something like "yes,no".
+
+The failing instruction (FTL stack trace):
+----------
+==> ${(session["org.apache.shiro.subject...  [in template "page/common/_header.html" at line 127, column 114]
+    @shiro.authenticated  [in template "page/common/_header.html" at line 126, column 33]
+    #include "/page/common/_header.html"  [in template "page/common/_layout.html" in macro "layout" at line 14, column 9]
+    @layout activebar="center" html_title...  [in template "page/app/user/center.html" at line 5, column 1]
+----------
+
+Java stack trace (for programmers):
+----------
+freemarker.core._MiscTemplateException: [... Exception message was already printed; see it above ...]
+	at freemarker.core.Configurable.formatBoolean(Configurable.java:427)
+	at freemarker.core.EvalUtil.coerceModelToString(EvalUtil.java:396)
+	at freemarker.core.Expression.evalAndCoerceToString(Expression.java:115)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:76)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.MixedContent.accept(MixedContent.java:93)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.Environment$1.render(Environment.java:313)
+	at cn.dreampie.shiro.freemarker.SecureTag.renderBody(SecureTag.java:41)
+	at cn.dreampie.shiro.freemarker.AuthenticatedTag.render(AuthenticatedTag.java:37)
+	at cn.dreampie.shiro.freemarker.SecureTag.execute(SecureTag.java:17)
+	at freemarker.core.Environment.visit(Environment.java:341)
+	at freemarker.core.UnifiedCall.accept(UnifiedCall.java:136)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.MixedContent.accept(MixedContent.java:93)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.Environment.include(Environment.java:1712)
+	at freemarker.core.Include.accept(Include.java:172)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.MixedContent.accept(MixedContent.java:93)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.Macro$Context.runMacro(Macro.java:209)
+	at freemarker.core.Environment.visit(Environment.java:694)
+	at freemarker.core.UnifiedCall.accept(UnifiedCall.java:116)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.MixedContent.accept(MixedContent.java:93)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.Environment.process(Environment.java:243)
+	at freemarker.template.Template.process(Template.java:277)
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:128)
+	at com.poicom.common.freemarker.MyFreeMarkerRender.render(MyFreeMarkerRender.java:27)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:92)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:47)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:72)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:453)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:137)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:560)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:231)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1072)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:382)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:193)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1006)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:135)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116)
+	at org.eclipse.jetty.server.Server.handle(Server.java:365)
+	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:485)
+	at org.eclipse.jetty.server.AbstractHttpConnection.headerComplete(AbstractHttpConnection.java:926)
+	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.headerComplete(AbstractHttpConnection.java:988)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:635)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235)
+	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543)
+	at java.lang.Thread.run(Thread.java:745)
+
+2015-04-20 22:00:01
+[ERROR]-[Thread: qtp32517802-34]-[com.jfinal.core.ActionHandler.handle()]: /user/center
+com.jfinal.render.RenderException: freemarker.core._MiscTemplateException: Can't convert boolean to string automatically, because the "boolean_format" setting was "true,false", which is the legacy default computer-language format, and hence isn't accepted.
+
+Tip: If you just want "true"/"false" result as you are generting computer-language output, use "?c", like ${myBool?c}.
+Tip: You can write myBool?string('yes', 'no') and like to specify boolean formatting in place.
+Tip: If you need the same two values on most places, the programmers should set the "boolean_format" setting to something like "yes,no".
+
+The failing instruction (print stack trace for 3 more):
+==> ${(session["org.apache.shiro.subject...  [in template "page/common/_header.html" at line 127, column 114]
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:130)
+	at com.poicom.common.freemarker.MyFreeMarkerRender.render(MyFreeMarkerRender.java:27)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:92)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:47)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:72)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:453)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:137)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:560)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:231)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1072)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:382)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:193)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1006)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:135)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116)
+	at org.eclipse.jetty.server.Server.handle(Server.java:365)
+	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:485)
+	at org.eclipse.jetty.server.AbstractHttpConnection.headerComplete(AbstractHttpConnection.java:926)
+	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.headerComplete(AbstractHttpConnection.java:988)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:635)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235)
+	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: freemarker.core._MiscTemplateException: Can't convert boolean to string automatically, because the "boolean_format" setting was "true,false", which is the legacy default computer-language format, and hence isn't accepted.
+
+Tip: If you just want "true"/"false" result as you are generting computer-language output, use "?c", like ${myBool?c}.
+Tip: You can write myBool?string('yes', 'no') and like to specify boolean formatting in place.
+Tip: If you need the same two values on most places, the programmers should set the "boolean_format" setting to something like "yes,no".
+
+The failing instruction (print stack trace for 3 more):
+==> ${(session["org.apache.shiro.subject...  [in template "page/common/_header.html" at line 127, column 114]
+	at freemarker.core.Configurable.formatBoolean(Configurable.java:427)
+	at freemarker.core.EvalUtil.coerceModelToString(EvalUtil.java:396)
+	at freemarker.core.Expression.evalAndCoerceToString(Expression.java:115)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:76)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.MixedContent.accept(MixedContent.java:93)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.Environment$1.render(Environment.java:313)
+	at cn.dreampie.shiro.freemarker.SecureTag.renderBody(SecureTag.java:41)
+	at cn.dreampie.shiro.freemarker.AuthenticatedTag.render(AuthenticatedTag.java:37)
+	at cn.dreampie.shiro.freemarker.SecureTag.execute(SecureTag.java:17)
+	at freemarker.core.Environment.visit(Environment.java:341)
+	at freemarker.core.UnifiedCall.accept(UnifiedCall.java:136)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.MixedContent.accept(MixedContent.java:93)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.Environment.include(Environment.java:1712)
+	at freemarker.core.Include.accept(Include.java:172)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.MixedContent.accept(MixedContent.java:93)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.Macro$Context.runMacro(Macro.java:209)
+	at freemarker.core.Environment.visit(Environment.java:694)
+	at freemarker.core.UnifiedCall.accept(UnifiedCall.java:116)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.MixedContent.accept(MixedContent.java:93)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.Environment.process(Environment.java:243)
+	at freemarker.template.Template.process(Template.java:277)
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:128)
+	... 40 more
+
+2015-04-20 22:02:24
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.beforeJFinalStop()]: beforeJFinalStop 释放日志入库线程
+
+2015-04-20 22:02:24
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutting down.
+
+2015-04-20 22:02:24
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.standby()]: Scheduler defaultScheduler_$_default paused.
+
+2015-04-20 22:02:24
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutdown complete.
+
+2015-04-20 22:02:24
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed
+
+2015-04-20 22:02:24
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Cleaning up Shiro Environment
+
+2015-04-20 22:02:24
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.servlet.listener.ELContextCleaner.contextDestroyed()]: javax.el.BeanELResolver purged
+
+2015-04-20 22:02:24
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.doStop()]: stopped o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:02:24
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:02:24
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:02:24
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 22:02:24
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 22:02:25
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 22:02:25
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 22:02:25
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 22:02:25
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 789 ms.
+
+2015-04-20 22:02:25
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:02:27
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 22:02:28
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 22:02:28
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 22:02:28
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 22:02:28
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 22:02:28
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 22:02:28
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 22:02:28
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 22:02:28
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 22:02:28
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 22:02:28
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 22:02:31
+[INFO]-[Thread: qtp32517802-33]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [shiro-activeSessionCache]
+
+2015-04-20 22:02:43
+[ERROR]-[Thread: qtp32517802-32]-[com.jfinal.core.ActionHandler.handle()]: /user/center
+java.lang.ClassCastException: org.apache.shiro.subject.SimplePrincipalCollection cannot be cast to com.poicom.function.system.model.User
+	at com.poicom.common.interceptor.SessionInterceptor.intercept(SessionInterceptor.java:33)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at com.poicom.function.app.CommonInterceptor.intercept(CommonInterceptor.java:32)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at cn.dreampie.web.interceptor.UrlInterceptor.intercept(UrlInterceptor.java:24)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at com.jfinal.ext.interceptor.SessionInViewInterceptor.intercept(SessionInViewInterceptor.java:44)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at cn.dreampie.shiro.core.ShiroInterceptor.intercept(ShiroInterceptor.java:41)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:73)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:47)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:72)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:453)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:137)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:560)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:231)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1072)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:382)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:193)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1006)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:135)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116)
+	at org.eclipse.jetty.server.Server.handle(Server.java:365)
+	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:485)
+	at org.eclipse.jetty.server.AbstractHttpConnection.headerComplete(AbstractHttpConnection.java:926)
+	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.headerComplete(AbstractHttpConnection.java:988)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:635)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235)
+	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543)
+	at java.lang.Thread.run(Thread.java:745)
+
+2015-04-20 22:03:55
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.beforeJFinalStop()]: beforeJFinalStop 释放日志入库线程
+
+2015-04-20 22:03:55
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutting down.
+
+2015-04-20 22:03:55
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.standby()]: Scheduler defaultScheduler_$_default paused.
+
+2015-04-20 22:03:55
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutdown complete.
+
+2015-04-20 22:03:55
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed
+
+2015-04-20 22:03:55
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Cleaning up Shiro Environment
+
+2015-04-20 22:03:55
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.servlet.listener.ELContextCleaner.contextDestroyed()]: javax.el.BeanELResolver purged
+
+2015-04-20 22:03:55
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.doStop()]: stopped o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:03:55
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:03:55
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:03:55
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 22:03:55
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 22:03:55
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 22:03:56
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 22:03:56
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 22:03:56
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 828 ms.
+
+2015-04-20 22:03:56
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:03:58
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 22:03:59
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 22:03:59
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 22:03:59
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 22:03:59
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 22:03:59
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 22:03:59
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 22:03:59
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 22:03:59
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 22:03:59
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 22:03:59
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 22:04:02
+[INFO]-[Thread: qtp32517802-37]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [shiro-activeSessionCache]
+
+2015-04-20 22:05:27
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.Server.doStart()]: jetty-8.1.8.v20121106
+
+2015-04-20 22:05:28
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:05:28
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:05:28
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 22:05:28
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 22:05:28
+[INFO]-[Thread: main]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 22:05:29
+[WARN]-[Thread: main]-[net.sf.ehcache.store.disk.DiskStorageFactory.<init>()]: The index for data file C:\Users\DONGYU\AppData\Local\Temp\jdbc%0052ealm%002eauthorization%0043ache.data is out of date, probably due to an unclean shutdown. Deleting index file C:\Users\DONGYU\AppData\Local\Temp\jdbc%0052ealm%002eauthorization%0043ache.index
+
+2015-04-20 22:05:29
+[WARN]-[Thread: main]-[net.sf.ehcache.store.disk.DiskStorageFactory.<init>()]: The index for data file C:\Users\DONGYU\AppData\Local\Temp\shiro-active%0053ession%0043ache.data is out of date, probably due to an unclean shutdown. Deleting index file C:\Users\DONGYU\AppData\Local\Temp\shiro-active%0053ession%0043ache.index
+
+2015-04-20 22:05:29
+[INFO]-[Thread: main]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 22:05:29
+[INFO]-[Thread: main]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 22:05:29
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 1520 ms.
+
+2015-04-20 22:05:29
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:05:31
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 22:05:32
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 22:05:32
+[INFO]-[Thread: main]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 22:05:32
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 22:05:32
+[INFO]-[Thread: main]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 22:05:32
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 22:05:32
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 22:05:32
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 22:05:32
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 22:05:32
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 22:05:32
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 22:05:32
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.AbstractConnector.doStart()]: Started SelectChannelConnector@0.0.0.0:80
+
+2015-04-20 22:05:36
+[INFO]-[Thread: qtp6737131-37]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [shiro-activeSessionCache]
+
+2015-04-20 22:05:36
+[WARN]-[Thread: qtp6737131-37]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/center
+
+2015-04-20 22:11:23
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.beforeJFinalStop()]: beforeJFinalStop 释放日志入库线程
+
+2015-04-20 22:11:23
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutting down.
+
+2015-04-20 22:11:23
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.standby()]: Scheduler defaultScheduler_$_default paused.
+
+2015-04-20 22:11:23
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutdown complete.
+
+2015-04-20 22:11:23
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed
+
+2015-04-20 22:11:23
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Cleaning up Shiro Environment
+
+2015-04-20 22:11:23
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.servlet.listener.ELContextCleaner.contextDestroyed()]: javax.el.BeanELResolver purged
+
+2015-04-20 22:11:23
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.doStop()]: stopped o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:11:24
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:11:24
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:11:24
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 22:11:24
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 22:11:25
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 22:11:26
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 22:11:26
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 22:11:26
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 1743 ms.
+
+2015-04-20 22:11:26
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:11:28
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 22:11:28
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 22:11:28
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 22:11:28
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 22:11:28
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 22:11:28
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 22:11:28
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 22:11:28
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 22:11:28
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 22:11:28
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 22:11:28
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 22:11:30
+[ERROR]-[Thread: qtp6737131-37]-[com.jfinal.core.ActionHandler.handle()]: /user/center
+org.apache.shiro.cache.CacheException: java.lang.IllegalStateException: The shiro-activeSessionCache Cache is not alive (STATUS_SHUTDOWN)
+	at org.apache.shiro.cache.ehcache.EhCache.get(EhCache.java:85)
+	at org.apache.shiro.session.mgt.eis.CachingSessionDAO.getCachedSession(CachingSessionDAO.java:217)
+	at org.apache.shiro.session.mgt.eis.CachingSessionDAO.getCachedSession(CachingSessionDAO.java:202)
+	at org.apache.shiro.session.mgt.eis.CachingSessionDAO.readSession(CachingSessionDAO.java:259)
+	at org.apache.shiro.session.mgt.DefaultSessionManager.retrieveSessionFromDataSource(DefaultSessionManager.java:236)
+	at org.apache.shiro.session.mgt.DefaultSessionManager.retrieveSession(DefaultSessionManager.java:222)
+	at org.apache.shiro.session.mgt.AbstractValidatingSessionManager.doGetSession(AbstractValidatingSessionManager.java:118)
+	at org.apache.shiro.session.mgt.AbstractNativeSessionManager.lookupSession(AbstractNativeSessionManager.java:108)
+	at org.apache.shiro.session.mgt.AbstractNativeSessionManager.lookupRequiredSession(AbstractNativeSessionManager.java:112)
+	at org.apache.shiro.session.mgt.AbstractNativeSessionManager.getAttributeKeys(AbstractNativeSessionManager.java:201)
+	at org.apache.shiro.session.mgt.DelegatingSession.getAttributeKeys(DelegatingSession.java:134)
+	at org.apache.shiro.session.ProxiedSession.getAttributeKeys(ProxiedSession.java:114)
+	at org.apache.shiro.web.servlet.ShiroHttpSession.getKeyNames(ShiroHttpSession.java:145)
+	at org.apache.shiro.web.servlet.ShiroHttpSession.getAttributeNames(ShiroHttpSession.java:162)
+	at com.poicom.common.interceptor.SessionInterceptor.intercept(SessionInterceptor.java:32)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at com.poicom.function.app.CommonInterceptor.intercept(CommonInterceptor.java:32)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at cn.dreampie.web.interceptor.UrlInterceptor.intercept(UrlInterceptor.java:24)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at com.jfinal.ext.interceptor.SessionInViewInterceptor.intercept(SessionInViewInterceptor.java:44)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at cn.dreampie.shiro.core.ShiroInterceptor.intercept(ShiroInterceptor.java:41)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:73)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:47)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:72)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:453)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:137)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:560)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:231)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1072)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:382)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:193)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1006)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:135)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116)
+	at org.eclipse.jetty.server.Server.handle(Server.java:365)
+	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:485)
+	at org.eclipse.jetty.server.AbstractHttpConnection.headerComplete(AbstractHttpConnection.java:926)
+	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.headerComplete(AbstractHttpConnection.java:988)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:635)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235)
+	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.IllegalStateException: The shiro-activeSessionCache Cache is not alive (STATUS_SHUTDOWN)
+	at net.sf.ehcache.Cache$CacheStatus.checkAlive(Cache.java:4267)
+	at net.sf.ehcache.Cache.checkStatus(Cache.java:2701)
+	at net.sf.ehcache.Cache.get(Cache.java:1576)
+	at org.apache.shiro.cache.ehcache.EhCache.get(EhCache.java:73)
+	... 62 more
+
+2015-04-20 22:11:37
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.Server.doStart()]: jetty-8.1.8.v20121106
+
+2015-04-20 22:11:38
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:11:38
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:11:38
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 22:11:38
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 22:11:38
+[INFO]-[Thread: main]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 22:11:39
+[WARN]-[Thread: main]-[net.sf.ehcache.store.disk.DiskStorageFactory.<init>()]: The index for data file C:\Users\DONGYU\AppData\Local\Temp\jdbc%0052ealm%002eauthorization%0043ache.data is out of date, probably due to an unclean shutdown. Deleting index file C:\Users\DONGYU\AppData\Local\Temp\jdbc%0052ealm%002eauthorization%0043ache.index
+
+2015-04-20 22:11:39
+[WARN]-[Thread: main]-[net.sf.ehcache.store.disk.DiskStorageFactory.<init>()]: The index for data file C:\Users\DONGYU\AppData\Local\Temp\shiro-active%0053ession%0043ache.data is out of date, probably due to an unclean shutdown. Deleting index file C:\Users\DONGYU\AppData\Local\Temp\shiro-active%0053ession%0043ache.index
+
+2015-04-20 22:11:39
+[INFO]-[Thread: main]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 22:11:39
+[INFO]-[Thread: main]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 22:11:39
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 1409 ms.
+
+2015-04-20 22:11:39
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:11:41
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 22:11:42
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 22:11:42
+[INFO]-[Thread: main]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 22:11:42
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 22:11:42
+[INFO]-[Thread: main]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 22:11:42
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 22:11:42
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 22:11:42
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 22:11:42
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 22:11:42
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 22:11:42
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 22:11:42
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.AbstractConnector.doStart()]: Started SelectChannelConnector@0.0.0.0:80
+
+2015-04-20 22:11:48
+[INFO]-[Thread: qtp4032312-36]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [shiro-activeSessionCache]
+
+2015-04-20 22:12:41
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.beforeJFinalStop()]: beforeJFinalStop 释放日志入库线程
+
+2015-04-20 22:12:41
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutting down.
+
+2015-04-20 22:12:41
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.standby()]: Scheduler defaultScheduler_$_default paused.
+
+2015-04-20 22:12:41
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutdown complete.
+
+2015-04-20 22:12:41
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed
+
+2015-04-20 22:12:41
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Cleaning up Shiro Environment
+
+2015-04-20 22:12:41
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.servlet.listener.ELContextCleaner.contextDestroyed()]: javax.el.BeanELResolver purged
+
+2015-04-20 22:12:41
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.doStop()]: stopped o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:12:42
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:12:42
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:12:42
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 22:12:42
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 22:12:42
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 22:12:44
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 22:12:44
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 22:12:44
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 1632 ms.
+
+2015-04-20 22:12:44
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:12:45
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 22:12:46
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 22:12:46
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 22:12:46
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 22:12:46
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 22:12:46
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 22:12:46
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 22:12:46
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 22:12:46
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 22:12:46
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 22:12:46
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 22:12:47
+[ERROR]-[Thread: qtp4032312-34]-[com.jfinal.core.ActionHandler.handle()]: /user/center
+org.apache.shiro.cache.CacheException: java.lang.IllegalStateException: The shiro-activeSessionCache Cache is not alive (STATUS_SHUTDOWN)
+	at org.apache.shiro.cache.ehcache.EhCache.get(EhCache.java:85)
+	at org.apache.shiro.session.mgt.eis.CachingSessionDAO.getCachedSession(CachingSessionDAO.java:217)
+	at org.apache.shiro.session.mgt.eis.CachingSessionDAO.getCachedSession(CachingSessionDAO.java:202)
+	at org.apache.shiro.session.mgt.eis.CachingSessionDAO.readSession(CachingSessionDAO.java:259)
+	at org.apache.shiro.session.mgt.DefaultSessionManager.retrieveSessionFromDataSource(DefaultSessionManager.java:236)
+	at org.apache.shiro.session.mgt.DefaultSessionManager.retrieveSession(DefaultSessionManager.java:222)
+	at org.apache.shiro.session.mgt.AbstractValidatingSessionManager.doGetSession(AbstractValidatingSessionManager.java:118)
+	at org.apache.shiro.session.mgt.AbstractNativeSessionManager.lookupSession(AbstractNativeSessionManager.java:108)
+	at org.apache.shiro.session.mgt.AbstractNativeSessionManager.lookupRequiredSession(AbstractNativeSessionManager.java:112)
+	at org.apache.shiro.session.mgt.AbstractNativeSessionManager.getAttributeKeys(AbstractNativeSessionManager.java:201)
+	at org.apache.shiro.session.mgt.DelegatingSession.getAttributeKeys(DelegatingSession.java:134)
+	at org.apache.shiro.session.ProxiedSession.getAttributeKeys(ProxiedSession.java:114)
+	at org.apache.shiro.web.servlet.ShiroHttpSession.getKeyNames(ShiroHttpSession.java:145)
+	at org.apache.shiro.web.servlet.ShiroHttpSession.getAttributeNames(ShiroHttpSession.java:162)
+	at com.poicom.common.interceptor.SessionInterceptor.intercept(SessionInterceptor.java:32)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at com.poicom.function.app.CommonInterceptor.intercept(CommonInterceptor.java:32)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at cn.dreampie.web.interceptor.UrlInterceptor.intercept(UrlInterceptor.java:24)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at com.jfinal.ext.interceptor.SessionInViewInterceptor.intercept(SessionInViewInterceptor.java:44)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at cn.dreampie.shiro.core.ShiroInterceptor.intercept(ShiroInterceptor.java:41)
+	at com.jfinal.core.ActionInvocation.invoke(ActionInvocation.java:51)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:73)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:47)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:72)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:453)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:137)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:560)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:231)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1072)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:382)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:193)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1006)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:135)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116)
+	at org.eclipse.jetty.server.Server.handle(Server.java:365)
+	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:485)
+	at org.eclipse.jetty.server.AbstractHttpConnection.headerComplete(AbstractHttpConnection.java:926)
+	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.headerComplete(AbstractHttpConnection.java:988)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:635)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235)
+	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.IllegalStateException: The shiro-activeSessionCache Cache is not alive (STATUS_SHUTDOWN)
+	at net.sf.ehcache.Cache$CacheStatus.checkAlive(Cache.java:4267)
+	at net.sf.ehcache.Cache.checkStatus(Cache.java:2701)
+	at net.sf.ehcache.Cache.get(Cache.java:1576)
+	at org.apache.shiro.cache.ehcache.EhCache.get(EhCache.java:73)
+	... 62 more
+
+2015-04-20 22:12:53
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.Server.doStart()]: jetty-8.1.8.v20121106
+
+2015-04-20 22:12:54
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:12:54
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:12:54
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 22:12:54
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 22:12:54
+[INFO]-[Thread: main]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 22:12:55
+[WARN]-[Thread: main]-[net.sf.ehcache.store.disk.DiskStorageFactory.<init>()]: The index for data file C:\Users\DONGYU\AppData\Local\Temp\jdbc%0052ealm%002eauthorization%0043ache.data is out of date, probably due to an unclean shutdown. Deleting index file C:\Users\DONGYU\AppData\Local\Temp\jdbc%0052ealm%002eauthorization%0043ache.index
+
+2015-04-20 22:12:55
+[WARN]-[Thread: main]-[net.sf.ehcache.store.disk.DiskStorageFactory.<init>()]: The index for data file C:\Users\DONGYU\AppData\Local\Temp\shiro-active%0053ession%0043ache.data is out of date, probably due to an unclean shutdown. Deleting index file C:\Users\DONGYU\AppData\Local\Temp\shiro-active%0053ession%0043ache.index
+
+2015-04-20 22:12:55
+[INFO]-[Thread: main]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 22:12:55
+[INFO]-[Thread: main]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 22:12:55
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 1265 ms.
+
+2015-04-20 22:12:55
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:12:56
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 22:12:57
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 22:12:58
+[INFO]-[Thread: main]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 22:12:58
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 22:12:58
+[INFO]-[Thread: main]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 22:12:58
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 22:12:58
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 22:12:58
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 22:12:58
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 22:12:58
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 22:12:58
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 22:12:58
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.AbstractConnector.doStart()]: Started SelectChannelConnector@0.0.0.0:80
+
+2015-04-20 22:13:01
+[INFO]-[Thread: qtp19273519-35]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [shiro-activeSessionCache]
+
+2015-04-20 22:13:01
+[WARN]-[Thread: qtp19273519-35]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/center
+
+2015-04-20 22:13:21
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.Server.doStart()]: jetty-8.1.8.v20121106
+
+2015-04-20 22:13:22
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:13:22
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:13:22
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 22:13:22
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 22:13:22
+[INFO]-[Thread: main]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 22:13:23
+[INFO]-[Thread: main]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 22:13:23
+[INFO]-[Thread: main]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 22:13:23
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 1511 ms.
+
+2015-04-20 22:13:23
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:13:26
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 22:13:26
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 22:13:27
+[INFO]-[Thread: main]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 22:13:27
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 22:13:27
+[INFO]-[Thread: main]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 22:13:27
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 22:13:27
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 22:13:27
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 22:13:27
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 22:13:27
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 22:13:27
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 22:13:27
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.AbstractConnector.doStart()]: Started SelectChannelConnector@0.0.0.0:80
+
+2015-04-20 22:13:30
+[INFO]-[Thread: qtp18323220-36]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [shiro-activeSessionCache]
+
+2015-04-20 22:13:31
+[WARN]-[Thread: qtp18323220-36]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/center
+
+2015-04-20 22:17:32
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.Server.doStart()]: jetty-8.1.8.v20121106
+
+2015-04-20 22:17:32
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:17:32
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:17:32
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 22:17:32
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 22:17:32
+[INFO]-[Thread: main]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 22:17:33
+[INFO]-[Thread: main]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 22:17:34
+[INFO]-[Thread: main]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 22:17:34
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 1378 ms.
+
+2015-04-20 22:17:34
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:17:35
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 22:17:36
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 22:17:36
+[INFO]-[Thread: main]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 22:17:36
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 22:17:36
+[INFO]-[Thread: main]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 22:17:36
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 22:17:36
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 22:17:36
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 22:17:36
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 22:17:36
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 22:17:36
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 22:17:36
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.AbstractConnector.doStart()]: Started SelectChannelConnector@0.0.0.0:80
+
+2015-04-20 22:17:40
+[INFO]-[Thread: qtp19273519-30]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [shiro-activeSessionCache]
+
+2015-04-20 22:17:41
+[WARN]-[Thread: qtp19273519-30]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/center
+
+2015-04-20 22:28:35
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.Server.doStart()]: jetty-8.1.8.v20121106
+
+2015-04-20 22:28:36
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:28:36
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:28:36
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 22:28:36
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 22:28:36
+[INFO]-[Thread: main]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 22:28:37
+[INFO]-[Thread: main]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 22:28:37
+[INFO]-[Thread: main]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 22:28:37
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 1449 ms.
+
+2015-04-20 22:28:37
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:28:39
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 22:28:40
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 22:28:40
+[INFO]-[Thread: main]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 22:28:40
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 22:28:40
+[INFO]-[Thread: main]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 22:28:40
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 22:28:40
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 22:28:40
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 22:28:40
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 22:28:40
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 22:28:40
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 22:28:40
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.AbstractConnector.doStart()]: Started SelectChannelConnector@0.0.0.0:80
+
+2015-04-20 22:28:43
+[INFO]-[Thread: qtp6737131-38]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [shiro-activeSessionCache]
+
+2015-04-20 22:30:49
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.beforeJFinalStop()]: beforeJFinalStop 释放日志入库线程
+
+2015-04-20 22:30:49
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutting down.
+
+2015-04-20 22:30:49
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.standby()]: Scheduler defaultScheduler_$_default paused.
+
+2015-04-20 22:30:49
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.shutdown()]: Scheduler defaultScheduler_$_default shutdown complete.
+
+2015-04-20 22:30:49
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.close()]: {dataSource-1} closed
+
+2015-04-20 22:30:49
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Cleaning up Shiro Environment
+
+2015-04-20 22:30:49
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.servlet.listener.ELContextCleaner.contextDestroyed()]: javax.el.BeanELResolver purged
+
+2015-04-20 22:30:49
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.doStop()]: stopped o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:30:50
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:30:50
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:30:50
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-04-20 22:30:50
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-04-20 22:30:50
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-04-20 22:30:51
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-04-20 22:30:51
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-04-20 22:30:51
+[INFO]-[Thread: JFinal-Scanner]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 1672 ms.
+
+2015-04-20 22:30:51
+[INFO]-[Thread: JFinal-Scanner]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-04-20 22:30:53
+[ERROR]-[Thread: qtp6737131-36]-[com.jfinal.core.ActionHandler.handle()]: /signin
+com.jfinal.render.RenderException: java.lang.NullPointerException
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:130)
+	at com.poicom.common.freemarker.MyFreeMarkerRender.render(MyFreeMarkerRender.java:27)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:92)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:47)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:72)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:453)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:137)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:560)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:231)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1072)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:382)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:193)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1006)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:135)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116)
+	at org.eclipse.jetty.server.Server.handle(Server.java:365)
+	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:485)
+	at org.eclipse.jetty.server.AbstractHttpConnection.headerComplete(AbstractHttpConnection.java:926)
+	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.headerComplete(AbstractHttpConnection.java:988)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:635)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235)
+	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at org.apache.shiro.mgt.SessionsSecurityManager.start(SessionsSecurityManager.java:121)
+	at org.apache.shiro.subject.support.DelegatingSubject.getSession(DelegatingSubject.java:336)
+	at org.apache.shiro.subject.support.DelegatingSubject.getSession(DelegatingSubject.java:312)
+	at cn.dreampie.shiro.freemarker.IsLoginFailureTag.render(IsLoginFailureTag.java:26)
+	at cn.dreampie.shiro.freemarker.SecureTag.execute(SecureTag.java:17)
+	at freemarker.core.Environment.visit(Environment.java:341)
+	at freemarker.core.UnifiedCall.accept(UnifiedCall.java:136)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.MixedContent.accept(MixedContent.java:93)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.Environment.visit(Environment.java:487)
+	at freemarker.core.BodyInstruction.accept(BodyInstruction.java:93)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.MixedContent.accept(MixedContent.java:93)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.Macro$Context.runMacro(Macro.java:209)
+	at freemarker.core.Environment.visit(Environment.java:694)
+	at freemarker.core.UnifiedCall.accept(UnifiedCall.java:116)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.MixedContent.accept(MixedContent.java:93)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.Environment.process(Environment.java:243)
+	at freemarker.template.Template.process(Template.java:277)
+	at com.jfinal.render.FreeMarkerRender.render(FreeMarkerRender.java:128)
+	... 40 more
+
+2015-04-20 22:30:54
+[INFO]-[Thread: JFinal-Scanner]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-04-20 22:30:55
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-04-20 22:30:55
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-04-20 22:30:55
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-04-20 22:30:55
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-04-20 22:30:55
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-04-20 22:30:55
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-04-20 22:30:55
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-04-20 22:30:55
+[INFO]-[Thread: JFinal-Scanner]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-04-20 22:30:55
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-04-20 22:30:55
+[INFO]-[Thread: JFinal-Scanner]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-04-20 22:31:12
+[INFO]-[Thread: qtp6737131-36]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [shiro-activeSessionCache]

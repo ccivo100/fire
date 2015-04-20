@@ -21,13 +21,6 @@ public class CommonInterceptor implements Interceptor{
 		}else if(ai.getActionKey().equals("/operate/operates")){
 			ai.invoke();
 			ai.getController().setAttr("back", backParamUrl(ai));
-		}else if(ai.getActionKey().equals("/signin")){
-			ai.invoke();
-			//User user=SubjectKit.getUser();
-			//ai.getController().setSessionAttr("current_user", user);
-		}else if(ai.getActionKey().equals("/signout")){
-			//ai.getController().removeSessionAttr("current_user");
-			ai.invoke();
 		}else{
 			ai.invoke();
 		}

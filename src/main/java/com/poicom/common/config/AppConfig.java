@@ -31,6 +31,7 @@ import com.jfinal.render.FreeMarkerRender;
 import com.poicom.common.freemarker.FreeMarkerRenderFactory;
 import com.poicom.common.handler.GlobalHandler;
 import com.poicom.common.interceptor.HSRInterceptor;
+import com.poicom.common.interceptor.SessionInterceptor;
 import com.poicom.common.quartz.QuartzPlugin;
 import com.poicom.common.resource.ResourceTags;
 import com.poicom.common.routebind.RouteBind;
@@ -80,6 +81,7 @@ public class AppConfig extends JFinalConfig {
 		me.add(new SessionInViewInterceptor());
 		me.add(new UrlInterceptor());
 		//me.add(new CommonInterceptor());
+		me.add(new SessionInterceptor());
 		//me.add(new HSRInterceptor());
 	}
 
