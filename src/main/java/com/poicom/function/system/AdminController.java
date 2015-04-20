@@ -24,9 +24,11 @@ import com.jfinal.plugin.activerecord.tx.Tx;
 import com.jfinal.plugin.ehcache.CacheInterceptor;
 import com.jfinal.plugin.ehcache.CacheName;
 import com.jfinal.plugin.ehcache.EvictInterceptor;
+import com.poicom.function.app.model.Apartment;
 import com.poicom.function.app.model.Branch;
 import com.poicom.function.app.model.ErrorType;
 import com.poicom.function.app.model.Order;
+import com.poicom.function.app.model.Position;
 import com.poicom.function.system.model.Permission;
 import com.poicom.function.system.model.Role;
 import com.poicom.function.system.model.RolePermission;
@@ -44,9 +46,14 @@ public class AdminController extends Controller {
 	private final static String ROLE_ASSIGN_PAGE="role/assign.ftl";
 	private final static String PERMISSION_ADD_PAGE="permission/add.html";
 	private final static String PERMISSION_EDIT_PAGE="permission/edit.html";
-	private final static String USER_EDIT_PAGE="user/edit.ftl";
+	private final static String USER_ADD_PAGE="user/add.html";
+	private final static String USER_EDIT_PAGE="user/edit.html";
 	private final static String BRANCH_ADD_PAGE="branch/add.html";
 	private final static String BRANCH_EDIT_PAGE="branch/edit.html";
+	private final static String APARTMENT_ADD_PAGE="apartment/add.html";
+	private final static String APARTMENT_EDIT_PAGE="apartment/edit.html";
+	private final static String POSITION_ADD_PAGE="position/add.html";
+	private final static String POSITION_EDIT_PAGE="position/edit.html";
 	private final static String TYPE_ADD_PAGE="type/add.html";
 	private final static String TYPE_EDIT_PAGE="type/edit.html";
 	
@@ -268,7 +275,8 @@ public class AdminController extends Controller {
 	 * 用户管理
 	 */
 	public void user(){
-		Page<User> userPage=User.dao.getAllUserPage(getParaToInt(0,1), 10);
+		String orderby=" 1=1 ORDER BY user.id ";
+		Page<User> userPage=User.dao.getAllUserPage(getParaToInt(0,1), 10,orderby);
 		
 		for(int i=0;i<userPage.getList().size();i++){
 			List<Record> list=UserRole.dao.findUserRolesById(userPage.getList().get(i).get("uuserid"));
@@ -282,12 +290,55 @@ public class AdminController extends Controller {
 		setAttr("userPage",userPage);
 	}
 	
+	public void adduser(){
+		
+		
+		
+		setAttr("branchList",Branch.dao.getAllBranch());
+		setAttr("apartmentList",Apartment.dao.getAllApartment());
+		setAttr("positionList",Position.dao.getAllPosition());
+		render(USER_ADD_PAGE);
+	}
+	
+	/**
+	 * 新增用户
+	 */
+	@Before(AdminValidator.class)
+	public void doadduser(){
+		User user=getModel(User.class);
+		User subUser=SubjectKit.getUser();
+		boolean result=false;
+		HasherInfo hasher = HasherKit.hash("123456");
+		user.set("password", hasher.getHashResult())
+		.set("salt", hasher.getSalt())
+		.set("hasher", hasher.getHasher().value())
+		.set("providername", subUser.getStr("full_name"))
+		.set("full_name", user.getStr("first_name")+user.getStr("last_name"));
+		result=user.save();
+		if(result){
+			System.out.println(user.get("id")+"："+user.get("username"));
+			UserInfo userinfo=new UserInfo();
+			userinfo.set("user_id", user.get("id"))
+			.set("creator_id", subUser.get("id"))
+			.set("gender", getParaToInt("selectGender"))
+			.set("branch_id", getParaToInt("selectApartment"))
+			.set("apartment_id", getParaToInt("selectApartment"))
+			.set("position_id", getParaToInt("selectPosition"));
+			userinfo.save();
+		}
+		
+		redirect("/admin/user");
+	}
+	
 	public void edituser(){
 		String userid=getPara("id");
 		setAttr("userinfo",UserInfo.dao.getAllUserInfo(userid));
 		setAttr("userrole",UserRole.dao.findUserRolesById(userid));
 		setAttr("roleList",Role.dao.findAll());
 		setAttr("branchList",Branch.dao.getAllBranch());
+		setAttr("apartmentList",Apartment.dao.getAllApartment());
+		setAttr("positionList",Position.dao.getAllPosition());
+		
 		render(USER_EDIT_PAGE);
 	}
 	/**
@@ -414,6 +465,73 @@ public class AdminController extends Controller {
 	}
 	
 	/**
+	 * 部门管理
+	 */
+	public void apartment(){
+		List<Apartment> apartmentList=Apartment.dao.findAll();
+		setAttr("apartmentList",apartmentList);
+	}
+	public void addapartment(){
+		render(APARTMENT_ADD_PAGE);
+	}
+	@Before(AdminValidator.class)
+	public void doaddapartment(){
+		getModel(Apartment.class).save();
+		redirect("/admin/apartment");
+	}
+	public void editapartment(){
+		Apartment apartment=Apartment.dao.findById(getPara("id"));
+		setAttr("apartment",apartment);
+		render(APARTMENT_EDIT_PAGE);
+	}
+	@Before(AdminValidator.class)
+	public void doeditapartment(){
+		getModel(Apartment.class).update();
+		redirect("/admin/apartment");
+	}
+	public void onapartment(){
+		Apartment.dao.findById(getPara("id")).set("deleted_at", null).update();
+		redirect("/admin/apartment");
+	}
+	public void offapartment(){
+		Apartment.dao.findById(getPara("id")).set("deleted_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
+		redirect("/admin/apartment");
+	}
+	
+	/**
+	 * 职位管理
+	 */
+	public void position(){
+		List<Position> positionList=Position.dao.findAll();
+		setAttr("positionList",positionList);
+	}
+	public void addposition(){
+		render(POSITION_ADD_PAGE);
+	}
+	@Before(AdminValidator.class)
+	public void doaddposition(){
+		getModel(Position.class).save();
+		redirect("/admin/position");
+	}
+	public void editposition(){
+		Position position=Position.dao.findById(getPara("id"));
+		setAttr("position",position);
+		render(POSITION_EDIT_PAGE);
+	}
+	@Before(AdminValidator.class)
+	public void doeditposition(){
+		getModel(Position.class).update();
+		redirect("/admin/position");
+	}
+	public void onposition(){
+		Position.dao.findById(getPara("id")).set("deleted_at", null).update();
+		redirect("/admin/position");
+	}
+	public void offposition(){
+		Position.dao.findById(getPara("id")).set("deleted_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
+		redirect("/admin/position");
+	}
+	/**
 	 * 异常工单管理
 	 */
 	public void exception(){
@@ -491,7 +609,7 @@ public class AdminController extends Controller {
 			}else if(todo.equals("save")&&user.getLong("id")!=null){
 				HasherInfo hasher = HasherKit.hash(user.getStr("password"));
 				if(user.getStr("first_name")==null)
-					user.set("first_name", "三角").set("last_name", "中心");
+					user.set("first_name", "点通").set("last_name", "科技");
 				
 				user.set("password", hasher.getHashResult())
 				.set("salt", hasher.getSalt())

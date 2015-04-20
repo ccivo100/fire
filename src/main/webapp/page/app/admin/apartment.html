@@ -1,12 +1,12 @@
 <#include "/page/common/_layout.html"/>
-<@layout activebar="user" html_title="单位管理">
+<@layout activebar="user" html_title="部门管理">
 
 <div class="index-background">
 <div class="page-header">
 <ul class="nav nav-tabs">
    <li ><a href="${ContextPath}/admin/user">用户管理</a></li>
-   <li class="active"><a href="#">单位管理</a></li>
-   <li ><a href="${ContextPath}/admin/apartment">部门管理</a></li>
+   <li ><a href="${ContextPath}/admin/branch">单位管理</a></li>
+   <li class="active"><a href="#">部门管理</a></li>
    <li ><a href="${ContextPath}/admin/position">职位管理</a></li>
 </ul>
 </div>
@@ -15,8 +15,8 @@
 			<div class="col-sm-4 col-md-4 col-lg-4">
 				<div class="form-group">
 				<span class="input-group-btn">
-					<a  class="btn btn-success"  href="${ContextPath}/admin/addbranch">
-				     	新增单位
+					<a  class="btn btn-success"  href="${ContextPath}/admin/addapartment">
+				     	新增部门
 					</a>
 				</span>
 				</div>
@@ -34,17 +34,17 @@
 			</tr>
 		</thead>
 		<tbody>
-			<#list branchList as branch>
+			<#list apartmentList as apartment>
 			<tr>
-				<td>${(branch.id)!}</td>
-				<td> ${(branch.name)!}</td>
-				<td> ${(branch.created_at)!}</td>
-				<td><#if branch.deleted_at??><span class="glyphicon glyphicon-remove"></span>禁用<#else>正常</#if></td>
-				<td><a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/editbranch?id=${(branch.id)!}" >编辑</a>
-				<#if branch.deleted_at??>
-				<a class="btn btn-danger btn-xs"  href="${ContextPath}/admin/onbranch?id=${(branch.id)!}" >启用</a>
+				<td>${(apartment.id)!}</td>
+				<td> ${(apartment.name)!}</td>
+				<td> ${(apartment.created_at)!}</td>
+				<td><#if apartment.deleted_at??><span class="glyphicon glyphicon-remove"></span>禁用<#else>正常</#if></td>
+				<td><a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/editapartment?id=${(apartment.id)!}" >编辑</a>
+				<#if apartment.deleted_at??>
+				<a class="btn btn-danger btn-xs"  href="${ContextPath}/admin/onapartment?id=${(apartment.id)!}" >启用</a>
 				<#else>
-				<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/offbranch?id=${(branch.id)!}" >禁用</a>
+				<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/offapartment?id=${(apartment.id)!}" >禁用</a>
 				</#if>
 				
 				</td>

@@ -6,8 +6,23 @@
 <ul class="nav nav-tabs">
    <li class="active"><a href="#">用户管理</a></li>
    <li ><a href="${ContextPath}/admin/branch">单位管理</a></li>
+   <li ><a href="${ContextPath}/admin/apartment">部门管理</a></li>
+   <li ><a href="${ContextPath}/admin/position">职位管理</a></li>
 </ul>
 </div>
+<form class="bs-example bs-example-form" role="form" action="${ContextPath}/" method="get">
+	<div class="row">
+			<div class="col-sm-4 col-md-4 col-lg-4">
+				<div class="form-group">
+				<span class="input-group-btn">
+					<a  class="btn btn-success"  href="${ContextPath}/admin/adduser">
+				     	新增用户
+					</a>
+				</span>
+				</div>
+			</div>
+	</div>
+</form>
 	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>
@@ -28,7 +43,7 @@
 			<tr>
 				<td>${(user_index+1)!}</td>
 				<td>${(user.ufullname)!}</td>
-				<td><#if user.info_creatorid=1>*****<#else>${(user.uaccount)!}</#if></td>
+				<td><#if user.info_userid=1>*****<#else>${(user.uaccount)!}</#if></td>
 				<td>${(user.bname)!}</td>
 				<td>${(user.aname)!}</td>
 				<td>${(user.pname)!}</td>

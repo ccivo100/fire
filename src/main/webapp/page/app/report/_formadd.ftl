@@ -103,7 +103,7 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">所属单位</label>
 		<div class="col-sm-6">
-			<input type="text" class="form-control" name="bname" value="${(bname)!}" readonly />
+			<input type="text" class="form-control" name="bname" value="${(bname)!} ${(aname)!} ${(pname)!}" readonly />
 		</div>
 	</div>
 	<div class="form-group">

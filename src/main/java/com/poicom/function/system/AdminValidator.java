@@ -9,9 +9,13 @@ import cn.dreampie.ValidateKit;
 
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
+import com.poicom.function.app.model.Apartment;
+import com.poicom.function.app.model.Branch;
 import com.poicom.function.app.model.ErrorType;
+import com.poicom.function.app.model.Position;
 import com.poicom.function.system.model.Permission;
 import com.poicom.function.system.model.Role;
+import com.poicom.function.system.model.User;
 
 public class AdminValidator extends Validator{
 	
@@ -149,6 +153,34 @@ public class AdminValidator extends Validator{
 				}
 			}
 		}
+		//新增用户验证
+		else if(getActionKey().equals("/admin/doadduser")){
+			User user=User.dao.findFirstBy("username=?", c.getPara("user.username").trim());
+			if(!ValidateKit.isNullOrEmpty(user)){
+				addError("usernameMsg","该用户名已存在！");
+			}
+			if(ValidateKit.isNullOrEmpty(c.getPara("user.first_name"))||ValidateKit.isNullOrEmpty("user.last_name")){
+				addError("fullnameMsg","姓名不能为空！");
+			}
+			if(ValidateKit.isNullOrEmpty(c.getPara("selectGender"))){
+				addError("genderMsg","性别不能为空！");
+			}
+			if(!ValidateKit.isPhone(c.getPara("user.phone"))){
+				addError("phoneMsg","联系方式格式不正确！");
+			}
+			if(!ValidateKit.isEmail(c.getPara("user.email"))){
+				addError("emailMsg","邮箱格式不正确！");
+			}
+			if(ValidateKit.isNullOrEmpty(c.getPara("selectBranch"))){
+				addError("branchMsg","单位不能为空！");
+			}
+			if(ValidateKit.isNullOrEmpty(c.getPara("selectApartment"))){
+				addError("apartmentMsg","部门不能为空！");
+			}
+			if(ValidateKit.isNullOrEmpty(c.getPara("selectPosition"))){
+				addError("positionMsg","性别不能为空！");
+			}
+		}
 		
 		//故障类型验证
 		else if(getActionKey().equals("/admin/doaddtype")|getActionKey().equals("/admin/doedittype")){
@@ -168,6 +200,25 @@ public class AdminValidator extends Validator{
 				addError("nameMsg", "输入字数不少于4...");
 			}
 		}
+		//部门验证
+		else if(getActionKey().equals("/admin/doaddapartment")|getActionKey().equals("/admin/doeditapartment")){
+			if(ValidateKit.isNullOrEmpty("apartment.name")){
+				
+				addError("nameMsg", "输入内容不为空");
+			}else if(!ValidateKit.isLength(c.getPara("apartment.name"), 3, 15)){
+				addError("nameMsg", "输入字数不少于3...");
+			}
+		}
+		//职位验证
+		else if(getActionKey().equals("/admin/doaddposition")|getActionKey().equals("/admin/doeditposition")){
+			if(ValidateKit.isNullOrEmpty("position.name")){
+				
+				addError("nameMsg", "输入内容不为空");
+			}else if(!ValidateKit.isLength(c.getPara("position.name"), 3, 15)){
+				addError("nameMsg", "输入字数不少于3...");
+			}
+		}
+		
 
 	}
 
@@ -197,6 +248,16 @@ public class AdminValidator extends Validator{
 			c.keepModel(Permission.class);
 			c.render("/page/app/admin/permission/edit.html");
 		}
+		//新增用户跳转
+		else if(getActionKey().equals("/admin/doadduser")){
+			c.setAttr("branchList",Branch.dao.getAllBranch());
+			c.setAttr("apartmentList",Apartment.dao.getAllApartment());
+			c.setAttr("positionList",Position.dao.getAllPosition());
+			c.keepModel(User.class);
+			c.render("/page/app/admin/user/add.html");
+			
+			
+		}
 		//故障类型跳转
 		else if(getActionKey().equals("/admin/doaddtype")){
 			c.keepModel(ErrorType.class);
@@ -207,11 +268,27 @@ public class AdminValidator extends Validator{
 		}
 		//单位跳转
 		else if(getActionKey().equals("/admin/doaddbranch")){
-			c.keepModel(ErrorType.class);
+			c.keepModel(Branch.class);
 			c.render("/page/app/admin/branch/add.html");
 		}else if(getActionKey().equals("/admin/doeditbranch")){
-			c.keepModel(ErrorType.class);
+			c.keepModel(Branch.class);
 			c.render("/page/app/admin/branch/edit.html");
+		}
+		//部门跳转
+		else if(getActionKey().equals("/admin/doaddapartment")){
+			c.keepModel(Apartment.class);
+			c.render("/page/app/admin/apartment/add.html");
+		}else if(getActionKey().equals("/admin/doeditapartment")){
+			c.keepModel(Apartment.class);
+			c.render("/page/app/admin/apartment/edit.html");
+		}
+		//职位跳转
+		else if(getActionKey().equals("/admin/doaddposition")){
+			c.keepModel(Position.class);
+			c.render("/page/app/admin/position/add.html");
+		}else if(getActionKey().equals("/admin/doeditposition")){
+			c.keepModel(Position.class);
+			c.render("/page/app/admin/position/edit.html");
 		}
 	}
 

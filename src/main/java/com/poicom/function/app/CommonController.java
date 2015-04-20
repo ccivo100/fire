@@ -21,8 +21,7 @@ public class CommonController extends JFController{
 	/**
 	 * 查询故障工单详细内容
 	 */
-	@SuppressWarnings("deprecation")
-	public void query(){
+/*	public void query(){
 		String where="o.id=?";
 		Record order = Order.dao.getCommonOrder(where,getParaToInt("id"));
 
@@ -44,7 +43,7 @@ public class CommonController extends JFController{
 		setAttr("back",back);
 		
 		render(COMMON_QUERY_PAGE);
-	}
+	}*/
 	
 
 }

@@ -1,0 +1,15 @@
+﻿<#include "/page/common/_layout.html" />
+<@layout activebar="report" html_title="新增用户">
+<div class="index-background">
+<div class="page-header">
+<ul class="nav nav-tabs">
+   <li ><a href="${ContextPath}/admin/user">用户管理</a></li>
+   <li class="active"><a href="#">新增用户</a></li>
+</ul>
+</div>
+	<form class="form-horizontal" role="form"  action="${ContextPath}/admin/doadduser" method="post" >
+		<#include "_form.html" />
+	</form>
+	
+</div>
+</@layout>

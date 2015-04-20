@@ -3,25 +3,9 @@
 <div class="index-background">
 <div class="page-header">
 <ul class="nav nav-tabs">
-   <li class="active"><a href="#">故障处理列表</a></li>
+   <li class="active"><a href="#">未处理列表</a></li>
 </ul>
 </div>
-  			<form class="bs-example bs-example-form" role="form" action="" method="get">
-		      	<div class="row">
-		      		
-				         <div class="col-lg-4">
-				            <div class="input-group">
-				            	<span class="input-group-addon">关键字</span>
-								<input type="text" class="form-control"  name="uoffername" value="${(uoffername)!}" />
-								<span class="input-group-btn">
-									<button class="btn btn-default">
-					               <span class="glyphicon glyphicon-search"></span>Search
-					               </button>
-								</span>
-				            </div>
-				         </div>
-		      	</div>
-		   </form>
 	<input type="hidden" name="do" value="report">
 	<table class="table table-bordered table-hover ">
 		<thead>
@@ -56,10 +40,9 @@
 				</td>
 				
 				<td style="text-align:left;">
-				<a class="btn btn-primary btn-xs"   href="${ContextPath}/operate/operate?id=${operate.id}"  >查看</a> 
-				<#if operate.status=0>
-				<a class="btn btn-primary btn-xs"  href="${ContextPath}/operate/edit?id=${operate.id}" >补充</a>
-				</#if>
+
+				<a class="btn btn-primary btn-xs"  href="${ContextPath}/operate/edit?id=${operate.id}" >处理</a>
+
 				</td>
 			</tr>
 			</#list>
@@ -82,7 +65,7 @@
 		</tbody>
 	</table>
 	<#include "/page/common/_paginate.html" />
-	<@paginate currentPage=operatePage.pageNumber totalPage=operatePage.totalPage actionUrl="/operate/operates/" />
+	<@paginate currentPage=operatePage.pageNumber totalPage=operatePage.totalPage actionUrl="/operate/deal/" />
 
 </div>
 </@layout>

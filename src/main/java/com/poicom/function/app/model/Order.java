@@ -22,33 +22,17 @@ public class Order extends Model<Order> {
 	private static final long serialVersionUID = -3474341426070972713L;
 	public static Order dao = new Order();
 
+	
 	/**
-	 * 根据报障人员id，查询其申报的故障工单
+	 * @描述 查询Reports 分页
 	 * @param pageNumber
 	 * @param pageSize
-	 * @param paras
-	 * @return
-	 */
-	public Page<Record> getReportOrderPage(int pageNumber, int pageSize,String where,String orderby,
-			Object... paras) {
-		return Db.paginate(pageNumber, pageSize,
-				SqlKit.sql("order.findReportFullOffersBySelect") + blank,
-				SqlKit.sql("order.findOrdersByFrom")+ getWhere(where)+orderby, paras);
-	}
-	
-	/**
-	 * @描述 reporter query 方法。
 	 * @param where
+	 * @param orderby
 	 * @param paras
 	 * @return
 	 */
-	public List<Record> findOfferQuery(String where,String orderby,Object... paras){
-		return Db.find(SqlKit.sql("order.findOfferQueryBySelect") + blank
-				+ SqlKit.sql("order.findOfferQueryByFrom") + getWhere(where)
-				+ orderby, paras);
-	}
-	
-	public Page<Record> findOfferQuery(int pageNumber, int pageSize,String where,String orderby,
+	public Page<Record> findReportsByUserId(int pageNumber, int pageSize,String where,String orderby,
 			Object... paras) {
 		return Db.paginate(pageNumber,pageSize,
 				SqlKit.sql("order.findOfferQueryBySelect"),
@@ -57,30 +41,60 @@ public class Order extends Model<Order> {
 	}
 	
 	/**
-	 * 根据故障工单id，查询该工单的详细信息（报障人员、运维人员查询）
+	 * @描述 查询Report 详细内容
+	 * @param where
 	 * @param paras
 	 * @return
 	 */
-	public Record getCommonOrder(String where,Object... paras){
+	public Record findReportById(String where,Object... paras){
 		return Db.findFirst(SqlKit.sql("order.findReportOfferBySelect") + blank
 				+ SqlKit.sql("order.findOrdersByFrom")+getWhere(where), paras);
 	}
 	
 	/**
-	 * @描述 根据故障描述：description，查询相应的故障工单：完毕工单
+	 * @描述 查询Operates 分页
 	 * @param pageNumber
 	 * @param pageSize
+	 * @param where
+	 * @param orderby
 	 * @param paras
 	 * @return
 	 */
-	public Page<Record> getOverOrdersPage(int pageNumber, int pageSize,String where,String orderby,
+	public Page<Record> findOperatesByUserId(int pageNumber, int pageSize,String where,String orderby,
 			Object... paras) {
-		
-		return Db.paginate(pageNumber, pageSize,
-				SqlKit.sql("order.findReportOfferBySelect") + blank,
-				SqlKit.sql("order.findOrdersByFrom")+getWhere(where)+orderby, paras);
+		return Db.paginate(pageNumber,pageSize,
+				SqlKit.sql("order.findOfferQueryBySelect"),
+				SqlKit.sql("order.findOfferQueryByFrom") + getWhere(where)
+						+ orderby, paras);
 	}
 	
+	/**
+	 * @描述 查询Operate 详细内容
+	 * @param where
+	 * @param paras
+	 * @return
+	 */
+	public Record findOperateById(String where,Object... paras){
+		return Db.findFirst(SqlKit.sql("order.findReportOfferBySelect") + blank
+				+ SqlKit.sql("order.findOrdersByFrom")+getWhere(where), paras);
+	}
+	
+	/**
+	 * @描述 查询Orders 主页 分页
+	 * @param pageNumber
+	 * @param pageSize
+	 * @param where
+	 * @param orderby
+	 * @param paras
+	 * @return
+	 */
+	public Page<Record> findIndexOrders(int pageNumber, int pageSize,String where,String orderby,
+			Object... paras) {
+		return Db.paginate(pageNumber,pageSize,
+				SqlKit.sql("order.findOfferQueryBySelect"),
+				SqlKit.sql("order.findOfferQueryByFrom") + getWhere(where)
+						+ orderby, paras);
+	}
 	
 	/**
 	 * 获得所有故障类型（弃用）
@@ -89,19 +103,6 @@ public class Order extends Model<Order> {
 	@Deprecated
 	public List<Record> getAllType(){
 		return Db.find("select * from com_type");
-	}
-	
-	/**
-	 * 根据运维人员id，查询其处理范围的故障工单
-	 * @param pageNumber
-	 * @param pageSize
-	 * @param paras
-	 * @return
-	 */
-	public Page<Record> getOperateOrderPage(int pageNumber,int pageSize,String where,String orderby,Object... paras){
-		return Db.paginate(pageNumber, pageSize,
-				SqlKit.sql("order.findOperateFullBySelect") + blank,
-				SqlKit.sql("order.findOrdersByFrom")+getWhere(where)+orderby, paras);
 	}
 	
 	/**
@@ -145,5 +146,84 @@ public class Order extends Model<Order> {
 	public Page<Record> findExceptionOrders(int pageNumber,int pageSize,String where,Object... paras){
 		return Db.paginate(pageNumber, pageSize, SqlKit.sql("order.findReportOfferBySelect"), SqlKit.sql("order.findOrdersByFrom")+getWhere(where),paras);
 	}
+	
+	/**
+	 * 根据报障人员id，查询其申报的故障工单
+	 * @param pageNumber
+	 * @param pageSize
+	 * @param paras
+	 * @return
+	 */
+/*	public Page<Record> getReportOrderPage(int pageNumber, int pageSize,String where,String orderby,
+			Object... paras) {
+		return Db.paginate(pageNumber, pageSize,
+				SqlKit.sql("order.findReportFullOffersBySelect") + blank,
+				SqlKit.sql("order.findOrdersByFrom")+ getWhere(where)+orderby, paras);
+	}*/
+	
+	/**
+	 * @描述 reporter query 方法。
+	 * @param where
+	 * @param paras
+	 * @return
+	 */
+/*	public List<Record> findOfferQuery(String where,String orderby,Object... paras){
+		return Db.find(SqlKit.sql("order.findOfferQueryBySelect") + blank
+				+ SqlKit.sql("order.findOfferQueryByFrom") + getWhere(where)
+				+ orderby, paras);
+	}*/
+	
+/*	public Page<Record> findOfferQuery(int pageNumber, int pageSize,String where,String orderby,
+			Object... paras) {
+		return Db.paginate(pageNumber,pageSize,
+				SqlKit.sql("order.findOfferQueryBySelect"),
+				SqlKit.sql("order.findOfferQueryByFrom") + getWhere(where)
+						+ orderby, paras);
+	}*/
+	
+	
+	
+	/**
+	 * 根据故障工单id，查询该工单的详细信息（报障人员、运维人员查询）
+	 * @param paras
+	 * @return
+	 */
+/*	public Record getCommonOrder(String where,Object... paras){
+		return Db.findFirst(SqlKit.sql("order.findReportOfferBySelect") + blank
+				+ SqlKit.sql("order.findOrdersByFrom")+getWhere(where), paras);
+	}*/
+	
+	/**
+	 * @描述 根据故障描述：description，查询相应的故障工单：完毕工单
+	 * @param pageNumber
+	 * @param pageSize
+	 * @param paras
+	 * @return
+	 */
+/*	public Page<Record> getOverOrdersPage(int pageNumber, int pageSize,String where,String orderby,
+			Object... paras) {
+		
+		return Db.paginate(pageNumber, pageSize,
+				SqlKit.sql("order.findReportOfferBySelect") + blank,
+				SqlKit.sql("order.findOrdersByFrom")+getWhere(where)+orderby, paras);
+	}*/
+	
+	
+
+	
+	/**
+	 * 根据运维人员id，查询其处理范围的故障工单
+	 * @param pageNumber
+	 * @param pageSize
+	 * @param paras
+	 * @return
+	 */
+/*	public Page<Record> getOperateOrderPage(int pageNumber,int pageSize,String where,String orderby,Object... paras){
+		return Db.paginate(pageNumber, pageSize,
+				SqlKit.sql("order.findOperateFullBySelect") + blank,
+				SqlKit.sql("order.findOrdersByFrom")+getWhere(where)+orderby, paras);
+	}*/
+	
+
 
 }

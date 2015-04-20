@@ -55,10 +55,10 @@ public class ReportController extends JFController{
 		
 		if(ValidateKit.isNullOrEmpty(getPara("selectType"))){
 			String where=" WHERE o.offer_user=? ";
-			reportPage=Order.dao.findOfferQuery(getParaToInt(0,1), 10,where,orderby,user.get("id"));
+			reportPage=Order.dao.findReportsByUserId(getParaToInt(0,1), 10,where,orderby,user.get("id"));
 		}else{
 			String where=" WHERE o.offer_user=? and o.type=? ";
-			reportPage=Order.dao.findOfferQuery(getParaToInt(0,1), 10,where,orderby,user.get("id"),getParaToInt("selectType"));
+			reportPage=Order.dao.findReportsByUserId(getParaToInt(0,1), 10,where,orderby,user.get("id"),getParaToInt("selectType"));
 		}
 		
 		
@@ -75,22 +75,28 @@ public class ReportController extends JFController{
 	 */
 	public void report(){
 		String where="o.id=?";
-		Record order = Order.dao.getCommonOrder(where,getParaToInt("id"));
+		Record order = Order.dao.findReportById(where,getParaToInt("id"));
 
 		//获取工单申报者的分公司信息
 		Record offer=UserInfo.dao.getUserBranch(order.getLong("oofferid"));
 		//获取工单处理者的分公司信息
 		Record deal=UserInfo.dao.getUserBranch(order.getLong("odealid"));
 		
-		if(!ValidateKit.isNullOrEmpty(offer))
+		if(!ValidateKit.isNullOrEmpty(offer)){
 			setAttr("offer_branch",offer.getStr("bname"));
-		if(!ValidateKit.isNullOrEmpty(deal))
+			setAttr("offer",offer);
+		}
+		
+		if(!ValidateKit.isNullOrEmpty(deal)){
 			setAttr("deal_branch",deal.getStr("bname"));
+			setAttr("deal",deal);
+		}
+			
 		//工单详细信息
 		setAttr(order);
 		setAttr("order", order);
 		//故障类型
-		setAttr("typeList",Order.dao.getAllType());
+		setAttr("typeList",ErrorType.dao.findAll());
 		setAttr("levelList",Level.dao.findAll());
 
 		render(REPORT_QUERY_PAGE);
@@ -227,7 +233,7 @@ public class ReportController extends JFController{
 		
 		String where="o.id=?";
 		//工单详细信息
-		Record order = Order.dao.getCommonOrder(where,getParaToInt("id"));
+		Record order = Order.dao.findReportById(where,getParaToInt("id"));
 		setAttr(order);
 		setAttr("order", order);
 		

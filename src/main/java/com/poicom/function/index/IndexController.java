@@ -45,12 +45,12 @@ public class IndexController extends Controller {
 			String orderby=" ORDER BY o.offer_at DESC";
 			if(ValidateKit.isNullOrEmpty(getPara("condition"))){
 				String where=" 1=1 and o.deleted_at is null ";
-				ordersPage=Order.dao.findOfferQuery(getParaToInt(0,1), 10, where,orderby);
+				ordersPage=Order.dao.findIndexOrders(getParaToInt(0,1), 10, where,orderby);
 				
 			}else{
 				String condition ="%"+getPara("condition").trim()+"%";
 				String where=" 1=1 and o.deleted_at is null and o.description like ?";
-				ordersPage=Order.dao.findOfferQuery(getParaToInt(0,1), 10, where,orderby, condition);
+				ordersPage=Order.dao.findIndexOrders(getParaToInt(0,1), 10, where,orderby, condition);
 			}
 			
 			Order.dao.format(ordersPage,"description");

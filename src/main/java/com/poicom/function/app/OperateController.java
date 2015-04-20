@@ -36,6 +36,7 @@ public class OperateController extends JFController{
 	protected Logger logger=LoggerFactory.getLogger(getClass());
 	
 	private final static String OPERATE_PAGE="operate.html";
+	private final static String DEAL_PAGE="deal.html";
 	private final static String OPERATE_EDIT_PAGE="edit.html";
 	private final static String OPERATE_QUERY_PAGE="query.html";
 	private final static String ASSIGN_PAGE="assign.ftl";
@@ -46,7 +47,7 @@ public class OperateController extends JFController{
 	}
 	
 	/**
-	 * @描述 运维人员查询本账号处理范围内的故障工单
+	 * @描述 运维人员查询本账号处理范围内的故障工单，用于故障查询
 	 */
 	public void operates(){
 		User user=User.dao.getCurrentUser();
@@ -55,7 +56,7 @@ public class OperateController extends JFController{
 		}else{
 			String where=" 1=1 and o.deleted_at is null and o.type IN(SELECT cut.type_id  FROM com_user_type AS cut WHERE user_id=?) ";
 			String orderby=" ORDER BY o.offer_at DESC ";
-			Page <Record> operatePage=Order.dao.findOfferQuery(getParaToInt(0,1), 10,where,orderby, user.get("id"));
+			Page <Record> operatePage=Order.dao.findOperatesByUserId(getParaToInt(0,1), 10,where,orderby, user.get("id"));
 			Order.dao.format(operatePage,"description");
 			setAttr("operatePage",operatePage);
 			render(OPERATE_PAGE);
@@ -65,22 +66,26 @@ public class OperateController extends JFController{
 	
 	public void operate(){
 		String where="o.id=?";
-		Record order = Order.dao.getCommonOrder(where,getParaToInt("id"));
+		Record order = Order.dao.findOperateById(where,getParaToInt("id"));
 
 		//获取工单申报者的分公司信息
 		Record offer=UserInfo.dao.getUserBranch(order.getLong("oofferid"));
 		//获取工单处理者的分公司信息
 		Record deal=UserInfo.dao.getUserBranch(order.getLong("odealid"));
 		
-		if(!ValidateKit.isNullOrEmpty(offer))
+		if(!ValidateKit.isNullOrEmpty(offer)){
 			setAttr("offer_branch",offer.getStr("bname"));
-		if(!ValidateKit.isNullOrEmpty(deal))
+			setAttr("offer",offer);
+		}
+		if(!ValidateKit.isNullOrEmpty(deal)){
 			setAttr("deal_branch",deal.getStr("bname"));
+			setAttr("deal",deal);
+		}
 		//工单详细信息
 		setAttr(order);
 		setAttr("order", order);
 		//故障类型
-		setAttr("typeList",Order.dao.getAllType());
+		setAttr("typeList",ErrorType.dao.findAll());
 		setAttr("levelList",Level.dao.findAll());
 		
 		render(OPERATE_QUERY_PAGE);
@@ -97,7 +102,7 @@ public class OperateController extends JFController{
 		
 		String where="o.id=?";
 		//工单详细信息
-		Record order = Order.dao.getCommonOrder(where,getParaToInt("id"));
+		Record order = Order.dao.findOperateById(where,getParaToInt("id"));
 		setAttr(order);
 		setAttr("order", order);
 		
@@ -109,8 +114,12 @@ public class OperateController extends JFController{
 		//获取工单申报者的分公司信息
 		Record offer=UserInfo.dao.getUserBranch(order.getLong("oofferid"));
 
-		if(!ValidateKit.isNullOrEmpty(offer))
+		if(!ValidateKit.isNullOrEmpty(offer)){
 			setAttr("offer_branch",offer.getStr("bname"));
+			setAttr("offer_apartment",offer.getStr("aname"));
+			setAttr("offer_position",offer.getStr("pname"));
+		}
+			
 		
 		render(OPERATE_EDIT_PAGE);
 		
@@ -166,6 +175,28 @@ public class OperateController extends JFController{
 		
 		redirect("/operate/operates");
 	}
+	
+	/**
+	 * @描述 运维人员查询本账号处理范围内的故障工单，用于故障处理
+	 */
+	public void deal(){
+		User user=User.dao.getCurrentUser();
+		if(ValidateKit.isNullOrEmpty(user)){
+			render("operate.html");
+		}else{
+			String where=" 1=1 and o.deleted_at is null and o.status<>0 and o.type IN(SELECT cut.type_id  FROM com_user_type AS cut WHERE user_id=?) ";
+			String orderby=" ORDER BY o.offer_at DESC ";
+			Page <Record> operatePage=Order.dao.findOperatesByUserId(getParaToInt(0,1), 10,where,orderby, user.get("id"));
+			Order.dao.format(operatePage,"description");
+			setAttr("operatePage",operatePage);
+			render(DEAL_PAGE);
+		}
+	}
+	
+	public void addComment(){
+		
+	}
+	
 	
 	/**
 	 * @描述 任务分配

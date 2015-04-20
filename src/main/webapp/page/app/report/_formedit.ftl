@@ -99,7 +99,7 @@
 		<div class="col-sm-6">
 			<textarea id="area" name="odescription" class="form-control"
 				placeholder="故障描述，不少于25字。"  maxlength="250" cols="80" rows="7"
-				required>${(odescription)!}</textarea>
+				required <#if odeletetime?exists>readonly</#if>>${(odescription)!}</textarea>
 		</div>
 
 	</div>
@@ -119,10 +119,11 @@
 
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
-			<button id="submit" value="提交" type="submit" class="btn btn-primary save" data-loading-text="正在提交...">提交</button>
-			<#if odeletetime?exists>
 			
+			<#if odeletetime?exists>
+			<span class="label label-danger">已撤回</span>
 			<#else>
+			<button id="submit" value="提交" type="submit" class="btn btn-primary save" data-loading-text="正在提交...">提交</button>
 			<a id="recall" value="撤回"  class="btn btn-success" href="${ContextPath}/report/recall?id=${(oorderid)!}" data-loading-text="正在撤回...">撤回</a>
 			</#if>
 			

@@ -232,9 +232,9 @@ public class AlertKit {
 		
 		//电话列表...
 		String phones=phoneFormat(phone);
-		String department="研发部";
-		String name="firetercel";
-		String type="2";
+		String department="xx";
+		String name="xx";
+		String type="xx";
 		try {
 			
 			URL url=new URL("http://sms.poicom.net/postsms.php");
