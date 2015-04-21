@@ -88,7 +88,10 @@
 				<td style="text-align:left;">${(report.offer_at)!}</td>
 				<td style="text-align:left;"><#if report.deal_user??>${(report.deal_user)!}<#else>暂无</#if></td>
 				<td >
-					<#if report.status=0>
+				<#if report.deleted_at??>
+					<span class="label label-danger">已撤销</span>
+				
+					<#elseif report.status=0>
 					<span class="label label-success">已处理</span>
 					<#elseif report.status=1>
 					<span class="label label-default">未处理</span>

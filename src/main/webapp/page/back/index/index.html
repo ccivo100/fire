@@ -15,3 +15,44 @@
 		The window content.
 	</div>
 </@layout>
+
+
+<div class="form-group">
+	
+		<label class="col-sm-2 control-label">故障类型</label>
+
+		<div class="col-sm-2">
+			<#if otypeid??>
+				<#if otypeid="">
+				<select id="selectType" name="selectType" class="form-control"  required autofocus>
+				<#else>
+				<select id="selectType" name="selectType" class="form-control" disabled required autofocus>
+				</#if>
+			<#else>
+	
+			<select id="selectType" name="selectType" class="form-control" required autofocus>
+			
+			</#if>
+						<option value="" selected="selected">请选择故障类型</option>
+				<#if otypeid??>
+					<#list typeList as type>
+						
+						<option value="${type.id}"  
+							<#if otypeid="">
+							
+							<#elseif ((otypeid!'-1')?number)=type.id>
+								selected="selected"
+							</#if> >
+							${type.name}
+						</option>
+					</#list>
+				<#else>
+					<#list typeList as type>
+						<option value="${type.id}">${type.name}</option>
+					</#list>
+				</#if>
+			
+			</select>
+		</div>
+		
+	</div>

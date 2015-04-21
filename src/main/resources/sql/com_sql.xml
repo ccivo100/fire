@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <sqlRoot>
-  <sqlGroup name="order">
-  	<sql id="findReportOffersBySelect">
-  		SELECT ordr.*
-  	</sql>
-  	<sql id="findReportOffersByFrom">
-  		FROM com_order ordr 
-  		WHERE ordr.offer_user=?
-  	</sql>
-  	
-  	<!-- 根据运维人员id，获取处理故障类型列表 -->
+	<sqlGroup name="type">
+	  	<!-- 运维-分配 根据运维人员id，获取处理故障类型列表 -->
   	<sql id="findOperatorTypeBySelect">
   		SELECT ct.id id, ct.name typename
   	</sql>
@@ -20,48 +12,42 @@
       		SELECT cut.type_id 
       		FROM com_user_type AS cut 
       		WHERE cut.user_id=?)
-      	
   	</sql>
-  	
-  	<!-- 报障业务 -->
-  	<!-- 查询报障人员提交的所有故障单 多表查询order、user、user、type -->
-  	<sql id="findReportFullOffersBySelect">
-  		SELECT o.id, o.description, o.offer_at, u1.full_name off_user, o.status,
-  		 u2.full_name deal_user ,o.deal_at , t1.name type_name
-  	</sql>
-  	
+	</sqlGroup>
+	
+  	<sqlGroup name="order">
+
+  	<!-- 通用 -->
   	<!-- 根据工单id查询该工单的详细内容 多表查询 -->
-  	<sql id="findReportOfferBySelect">
-		SELECT o.id oorderid,  t1.name tname,o.type otypeid,o.offer_user oofferid,
-		u1.full_name uoffername, u1.phone uofferphone,
-		o.description odescription,o.offer_at ooffertime,
-		o.status ostatus,o.deal_user odealid,l1.name lname,o.level olevelid,
-		u2.full_name udealname,u2.phone udealphone,
-		o.comment ocomment,o.deal_at odealtime,o.spend_time ospendtime,
+  	<sql id="findOrderInfoBySelect">
+		SELECT o.id oorderid,  t1.name tname,o.type otypeid,l1.name lname,o.level olevelid,
+		o.offer_user oofferid,u1.full_name uoffername, u1.phone uofferphone,
+		o.description odescription,o.offer_at ooffertime,o.status ostatus,
+		o.deal_user odealid,  u2.full_name udealname,  u2.phone udealphone,
+		o.accept_user oacceptid,accept.full_name uacceptname,accept.phone uacceptphone,
+		o.accepted_at oacceptedtime,
+		o.comment ocomment,o.deal_at odealtime,o.accept_at oaccepttime,
+		o.addcomment oaddcomment,o.add_at oaddtime,
+		o.spend_time ospendtime,
 		o.created_at ocreatetime,o.deleted_at odeletetime,o.flag oflag
   	</sql>
 
-  	<!-- 运维业务 -->
-  	<!-- 查询运维人员处理范围的所有故障单 多表查询order、user、user、type  -->
-  	<sql id="findOperateFullBySelect">
-  		select o.id,o.description,o.offer_at ,u1.full_name offer_user,o.status,
-  		u2.full_name deal_user ,o.deal_at, t1.name type_name
-  	</sql>
-
-  	<sql id="findOrdersByFrom"><!-- 根据条件，查询工单 -->
+  	<sql id="findOrderInfoByFrom"><!-- 根据条件，查询工单 -->
   	  	FROM com_order AS o 
 		LEFT OUTER JOIN sec_user AS u1 ON o.offer_user = u1.id
 		LEFT OUTER JOIN sec_user AS u2 ON o.deal_user = u2.id
+		LEFT OUTER JOIN sec_user AS accept ON o.accept_user=accept.id
 		LEFT OUTER JOIN com_type AS t1 ON o.type=t1.id
 		LEFT OUTER JOIN com_level AS l1 ON o.level=l1.id
   	</sql>
   	
-  	<sql id="findOfferQueryBySelect"><!-- /reporter/query故障查询 -->
+  	<sql id="findOfferQueryBySelect"><!-- Reports-Operates-Orders 分页故障查询 -->
   	SELECT o.id, o.description, u1.bname off_branch,u1.full_name off_user,o.offer_at,  o.status,
-  		 u2.full_name deal_user ,o.deal_at ,o.type tid, t1.name type_name,u2.bname deal_branch
+  		 u2.full_name deal_user ,o.deal_at ,o.type tid, t1.name type_name,u2.bname deal_branch,
+  		 o.created_at,o.updated_at,o.deleted_at
   	</sql>
   	
-  	<sql id="findOfferQueryByFrom"><!-- /reporter/query故障查询 -->
+  	<sql id="findOfferQueryByFrom"><!-- Reports-Operates-Orders 分页故障查询 -->
   	FROM com_order AS o 
 		LEFT OUTER JOIN 
 		(

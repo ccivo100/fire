@@ -50,8 +50,8 @@ public class ErrorType extends Model<ErrorType>{
 	 * @return
 	 */
 	public List<Record> getOperatorType(Object... paras){
-		return Db.find(SqlKit.sql("order.findOperatorTypeBySelect") + blank
-				+ SqlKit.sql("order.findOperatorTypeByFrom"), paras);
+		return Db.find(SqlKit.sql("type.findOperatorTypeBySelect") + blank
+				+ SqlKit.sql("type.findOperatorTypeByFrom"), paras);
 	}
 
 }

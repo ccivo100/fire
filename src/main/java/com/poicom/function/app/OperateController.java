@@ -54,7 +54,7 @@ public class OperateController extends JFController{
 		if(ValidateKit.isNullOrEmpty(user)){
 			render("operate.html");
 		}else{
-			String where=" 1=1 and o.deleted_at is null and o.type IN(SELECT cut.type_id  FROM com_user_type AS cut WHERE user_id=?) ";
+			String where=" 1=1 and o.deleted_at is null and o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) ";
 			String orderby=" ORDER BY o.offer_at DESC ";
 			Page <Record> operatePage=Order.dao.findOperatesByUserId(getParaToInt(0,1), 10,where,orderby, user.get("id"));
 			Order.dao.format(operatePage,"description");
@@ -66,6 +66,11 @@ public class OperateController extends JFController{
 	
 	public void operate(){
 		String where="o.id=?";
+		
+		Order o=Order.dao.findById(getParaToInt("id"));
+		if(ValidateKit.isNullOrEmpty(o.get("accepted_at"))){
+			o.set("accepted_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
+		}
 		Record order = Order.dao.findOperateById(where,getParaToInt("id"));
 
 		//获取工单申报者的分公司信息
@@ -101,6 +106,10 @@ public class OperateController extends JFController{
 		setAttr("levelList",Level.dao.findAll());
 		
 		String where="o.id=?";
+		Order o=Order.dao.findById(getParaToInt("id"));
+		if(ValidateKit.isNullOrEmpty(o.get("accepted_at"))){
+			o.set("accepted_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
+		}
 		//工单详细信息
 		Record order = Order.dao.findOperateById(where,getParaToInt("id"));
 		setAttr(order);
@@ -184,7 +193,7 @@ public class OperateController extends JFController{
 		if(ValidateKit.isNullOrEmpty(user)){
 			render("operate.html");
 		}else{
-			String where=" 1=1 and o.deleted_at is null and o.status<>0 and o.type IN(SELECT cut.type_id  FROM com_user_type AS cut WHERE user_id=?) ";
+			String where=" 1=1 and o.deleted_at is null and o.status<>0 and o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) ";
 			String orderby=" ORDER BY o.offer_at DESC ";
 			Page <Record> operatePage=Order.dao.findOperatesByUserId(getParaToInt(0,1), 10,where,orderby, user.get("id"));
 			Order.dao.format(operatePage,"description");

@@ -23,6 +23,7 @@ import com.poicom.common.kit.DateKit;
 import com.poicom.function.app.model.ErrorType;
 import com.poicom.function.app.model.Level;
 import com.poicom.function.app.model.Order;
+import com.poicom.function.app.model.UserOrder;
 import com.poicom.function.system.model.User;
 import com.poicom.function.system.model.UserInfo;
 
@@ -113,7 +114,7 @@ public class ReportController extends JFController{
 		//当前用户详细信息
 		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
 		//运维人员列表
-		List<Record> dealList=User.dao.getOperatorList(order.get("type"));
+		List<Record> dealList=User.dao.getOperatorsList(order.get("type"));
 		List<String> phones=new ArrayList<String>();
 		//发送邮件
 		for (Record deal : dealList) {
@@ -166,6 +167,21 @@ public class ReportController extends JFController{
 		render("add.html");
 	}
 	
+	/**
+	 * @描述 新建工单，联动故障类型-相应处理人员
+	 */
+	public void handler(){
+		String type=getPara("type");
+		if(type.equals("type")){
+			List<ErrorType> typeList=ErrorType.dao.getAllType();
+			renderJson("typeList", typeList);
+		}else if(type.equals("dealler")){
+			System.out.println(getParaToInt("typeid"));
+			List<Record> dealList=User.dao.getOperatorsList(getParaToInt("typeid"));
+			renderJson("dealList",dealList);
+		}
+	}
+	
 	
 	/**
 	 * @描述 新建故障工单 并发送邮件、短信通知
@@ -181,41 +197,33 @@ public class ReportController extends JFController{
 				.set("type", getParaToInt("selectType"))
 				.set("level", getPara("selectLevel"))
 				.set("status", 1)
-				.set("offer_at", 
-						DateTime.now().toString("yyyy-MM-dd HH:mm:ss"))
+				.set("offer_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss"))
+				.set("accept_user", getParaToLong("selectDeal"))
 				.set("flag", 0);
-		if(order.save())
-			redirect("/report/offer");
-		else
-			System.out.println("userid:" + getParaToInt("uuserid") + " type:"
-					+ getParaToInt("selectType") + " des:"
-					+ getPara("odescription"));
+		order.save();
+		//保存用户-工单 对应关系表数据。
+		new UserOrder()
+		.set("user_id", getParaToLong("selectDeal"))
+		.set("order_id", order.get("id"))
+		.save();
 		
+		Order o=Order.dao.findById(order.get("id"));
 		//当前用户详细信息
 		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
-		//运维人员列表
-		List<Record> dealList=User.dao.getOperatorList(getParaToInt("selectType"));
-		List<String> phones=new ArrayList<String>();
-		//发送邮件
-		for (Record deal : dealList) {
-			//获取邮件内容
-			String body=AlertKit.getMailBody(userinfo,getPara("odescription"),deal.getStr("fullname")).toString();
-			//发送邮件通知
-			if(ValidateKit.isEmail(deal.getStr("useremail"))){
-				AlertKit.sendEmail("点通故障系统提醒您！",body,deal.getStr("useremail"));
-			}
-			//电话&&非空 then 保存电话列表
-			if(!ValidateKit.isNullOrEmpty(deal.getStr("userphone"))){
-				if(ValidateKit.isPhone(deal.getStr("userphone"))){
-					phones.add(deal.getStr("userphone"));
-				}
-			}
-			
-		}
-		//发送短信
-		String[] array =new String[phones.size()];
-		//AlertKit.sendSms(userinfo,phones.toArray(array));
 		
+		//运维人员详细信息
+		Record dealinfo=UserInfo.dao.getAllUserInfo(getParaToLong("selectDeal"));
+		
+		//邮件内容
+		String body=AlertKit.getMailBody(userinfo,dealinfo,o,getPara("odescription")).toString();
+		
+		//发送邮件
+		if(ValidateKit.isEmail(dealinfo.getStr("uemail"))){
+			AlertKit.sendEmail("点通故障系统提醒您！",body,dealinfo.getStr("uemail"));
+		}
+		if(ValidateKit.isPhone(dealinfo.getStr("uphone")))
+		//AlertKit.sendSms(null,userinfo,o,dealinfo.getStr("uphone"));
+
 		
 		redirect("/report/reports");
 	}
@@ -242,10 +250,6 @@ public class ReportController extends JFController{
 		setAttr(userinfo);
 		setAttr("userinfo",userinfo);
 		
-		//获取工单申报者的分公司信息
-		Record offer=UserInfo.dao.getUserBranch(order.getLong("offerid"));
-		if(!ValidateKit.isNullOrEmpty(offer))
-			setAttr("offer_branch",offer.getStr("branch"));
 	}
 	
 	/**

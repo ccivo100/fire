@@ -106,7 +106,7 @@ public class AlertJob implements Job{
 		//获取该Order的类型type
 		Long typeid=order.get("type");
 		//根据type，查询相应User的List  Record类型保存userid,useremail,userphone,firstname,lastname,fullname。
-		List<Record> operators=User.dao.getOperatorList(typeid);
+		List<Record> operators=User.dao.getOperatorsList(typeid);
 		for(Record operator:operators){
 			if(operatorMap.get(operator.getLong("userid"))==null){
 				operatorMap.put(operator.getLong("userid"), operator);

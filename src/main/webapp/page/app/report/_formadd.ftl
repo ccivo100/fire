@@ -10,50 +10,24 @@
 	<input type="hidden" name="otypeid" value="${(otypeid)!}">
 	<input type="hidden" name="olevelid" value="${(olevelid)!}">
 	
+	
 	<div class="form-group">
-	
-		<label class="col-sm-2 control-label">故障类型</label>
-
-		<div class="col-sm-4">
-			<#if otypeid??>
-				<#if otypeid="">
-				<select id="selectType" name="selectType" class="form-control"  required autofocus>
-				<#else>
-				<select id="selectType" name="selectType" class="form-control" disabled required autofocus>
-				</#if>
-			<#else>
-	
+		<label class="col-sm-2 control-label" >故障类型</label>
+		<div class="col-sm-2">
 			<select id="selectType" name="selectType" class="form-control" required autofocus>
-			
-			</#if>
-						<option value="" selected="selected">请选择故障类型</option>
-				<#if otypeid??>
-					<#list typeList as type>
-						
-						<option value="${type.id}"  
-							<#if otypeid="">
-							
-							<#elseif ((otypeid!'-1')?number)=type.id>
-								selected="selected"
-							</#if> >
-							${type.name}
-						</option>
-					</#list>
-				<#else>
-					<#list typeList as type>
-						<option value="${type.id}">${type.name}</option>
-					</#list>
-				</#if>
-			
+			</select>
+		</div>
+		<label class="col-sm-1 control-label">运维人员</label>
+		<div class="col-sm-2">
+			<select id="selectDeal" name="selectDeal" class="form-control" required>
 			</select>
 		</div>
 	</div>
 	
 	<div class="form-group">
-	
-		<label class="col-sm-2 control-label">故障等级</label>
+	<label class="col-sm-2 control-label">故障等级</label>
 
-		<div class="col-sm-4">
+		<div class="col-sm-5">
 			<#if olevelid??>
 				<#if olevelid="">
 				<select id="selectLevel" name="selectLevel" class="form-control"  required autofocus>
@@ -87,6 +61,7 @@
 			</select>
 		</div>
 	</div>
+	
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label">申报人</label>
@@ -135,3 +110,42 @@
 		</div>
 	</div>
 </div>
+<script>
+function select1() {
+	$.ajax(
+    {
+    	type: "post",
+    	url: "/report/handler",
+    	data: { "type": "type" },
+        success: function (msg) {
+        	$("#selectType").append("<option value=''>请选择故障类型</option>");
+        	for (var i = 0; i < msg.typeList.length; i++) {
+            	$("#selectType").append("<option value=" + msg.typeList[i].id + ">" + msg.typeList[i].name + "</option>");
+        	}
+            select2();
+        }
+	})
+};
+function select2() {
+	$("#selectDeal").html("");
+	$.ajax(
+	{
+		type: "post",
+		url: "/report/handler",
+		data: { "type": "dealler","typeid":$('#selectType').val() },
+		success: function (msg) {
+			$("#selectDeal").append("<option value=''>请选择运维人员</option>");
+			for (var i = 0; i < msg.dealList.length; i++) {
+				$("#selectDeal").append("<option value=" + msg.dealList[i].userid + ">" + msg.dealList[i].fullname + "</option>");
+			}
+		}
+	})
+};
+
+
+$(function(){
+	select1();
+	$('#selectType').bind("change", select2);
+});
+</script>
+

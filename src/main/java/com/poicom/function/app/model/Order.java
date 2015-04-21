@@ -47,8 +47,8 @@ public class Order extends Model<Order> {
 	 * @return
 	 */
 	public Record findReportById(String where,Object... paras){
-		return Db.findFirst(SqlKit.sql("order.findReportOfferBySelect") + blank
-				+ SqlKit.sql("order.findOrdersByFrom")+getWhere(where), paras);
+		return Db.findFirst(SqlKit.sql("order.findOrderInfoBySelect") + blank
+				+ SqlKit.sql("order.findOrderInfoByFrom")+getWhere(where), paras);
 	}
 	
 	/**
@@ -75,8 +75,8 @@ public class Order extends Model<Order> {
 	 * @return
 	 */
 	public Record findOperateById(String where,Object... paras){
-		return Db.findFirst(SqlKit.sql("order.findReportOfferBySelect") + blank
-				+ SqlKit.sql("order.findOrdersByFrom")+getWhere(where), paras);
+		return Db.findFirst(SqlKit.sql("order.findOrderInfoBySelect") + blank
+				+ SqlKit.sql("order.findOrderInfoByFrom")+getWhere(where), paras);
 	}
 	
 	/**
@@ -144,86 +144,10 @@ public class Order extends Model<Order> {
 	 * @return
 	 */
 	public Page<Record> findExceptionOrders(int pageNumber,int pageSize,String where,Object... paras){
-		return Db.paginate(pageNumber, pageSize, SqlKit.sql("order.findReportOfferBySelect"), SqlKit.sql("order.findOrdersByFrom")+getWhere(where),paras);
+		return Db.paginate(pageNumber, pageSize,
+				SqlKit.sql("order.findOrderInfoBySelect"),
+				SqlKit.sql("order.findOrderInfoByFrom") + getWhere(where), paras);
 	}
 	
-	/**
-	 * 根据报障人员id，查询其申报的故障工单
-	 * @param pageNumber
-	 * @param pageSize
-	 * @param paras
-	 * @return
-	 */
-/*	public Page<Record> getReportOrderPage(int pageNumber, int pageSize,String where,String orderby,
-			Object... paras) {
-		return Db.paginate(pageNumber, pageSize,
-				SqlKit.sql("order.findReportFullOffersBySelect") + blank,
-				SqlKit.sql("order.findOrdersByFrom")+ getWhere(where)+orderby, paras);
-	}*/
-	
-	/**
-	 * @描述 reporter query 方法。
-	 * @param where
-	 * @param paras
-	 * @return
-	 */
-/*	public List<Record> findOfferQuery(String where,String orderby,Object... paras){
-		return Db.find(SqlKit.sql("order.findOfferQueryBySelect") + blank
-				+ SqlKit.sql("order.findOfferQueryByFrom") + getWhere(where)
-				+ orderby, paras);
-	}*/
-	
-/*	public Page<Record> findOfferQuery(int pageNumber, int pageSize,String where,String orderby,
-			Object... paras) {
-		return Db.paginate(pageNumber,pageSize,
-				SqlKit.sql("order.findOfferQueryBySelect"),
-				SqlKit.sql("order.findOfferQueryByFrom") + getWhere(where)
-						+ orderby, paras);
-	}*/
-	
-	
-	
-	/**
-	 * 根据故障工单id，查询该工单的详细信息（报障人员、运维人员查询）
-	 * @param paras
-	 * @return
-	 */
-/*	public Record getCommonOrder(String where,Object... paras){
-		return Db.findFirst(SqlKit.sql("order.findReportOfferBySelect") + blank
-				+ SqlKit.sql("order.findOrdersByFrom")+getWhere(where), paras);
-	}*/
-	
-	/**
-	 * @描述 根据故障描述：description，查询相应的故障工单：完毕工单
-	 * @param pageNumber
-	 * @param pageSize
-	 * @param paras
-	 * @return
-	 */
-/*	public Page<Record> getOverOrdersPage(int pageNumber, int pageSize,String where,String orderby,
-			Object... paras) {
-		
-		return Db.paginate(pageNumber, pageSize,
-				SqlKit.sql("order.findReportOfferBySelect") + blank,
-				SqlKit.sql("order.findOrdersByFrom")+getWhere(where)+orderby, paras);
-	}*/
-	
-	
-
-	
-	/**
-	 * 根据运维人员id，查询其处理范围的故障工单
-	 * @param pageNumber
-	 * @param pageSize
-	 * @param paras
-	 * @return
-	 */
-/*	public Page<Record> getOperateOrderPage(int pageNumber,int pageSize,String where,String orderby,Object... paras){
-		return Db.paginate(pageNumber, pageSize,
-				SqlKit.sql("order.findOperateFullBySelect") + blank,
-				SqlKit.sql("order.findOrdersByFrom")+getWhere(where)+orderby, paras);
-	}*/
-	
-
 
 }

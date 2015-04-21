@@ -51,16 +51,20 @@
   	</sql>
   	
   	<!-- 根据故障类型，查找运维人员的信息 -->
-  	<sql id="findOperatorBySelect">
+  	<sql id="findOperatorsBySelect">
   		SELECT user.id userid,user.email useremail,user.phone userphone,
 		user.first_name firstname,user.last_name lastname,user.full_name fullname
   	</sql>
-  	<sql id="findOperatorByFrom">
+  	<sql id="findOperatorsByFrom">
   		FROM sec_user AS user
 		WHERE user.id 
 		IN(SELECT usertype.user_id 
 			 FROM com_user_type AS usertype 
 			 WHERE usertype.type_id=?)
+  	</sql>
+  	<sql id="findOperatorByFrom">
+  		FROM sec_user AS user
+		WHERE user.id =?
   	</sql>
   	
   	<!-- 根据部门id，查询部门人员 -->

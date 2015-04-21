@@ -44,11 +44,12 @@ public class User extends Model<User> {
 	 * @param paras
 	 * @return
 	 */
-	public List<Record> getOperatorList(Object... paras){
+	public List<Record> getOperatorsList(Object... paras){
 		return Db.find(
-				SqlKit.sql("user.findOperatorBySelect") + blank
-						+ SqlKit.sql("user.findOperatorByFrom"), paras);
+				SqlKit.sql("user.findOperatorsBySelect") + blank
+						+ SqlKit.sql("user.findOperatorsByFrom"), paras);
 	}
+	
 	
 	public Page<User> getAllUserPage(int pageNumber,int pageSize,String where,Object... paras){
 		return paginate(pageNumber, pageSize,
