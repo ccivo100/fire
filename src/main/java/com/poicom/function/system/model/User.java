@@ -50,7 +50,6 @@ public class User extends Model<User> {
 						+ SqlKit.sql("user.findOperatorsByFrom"), paras);
 	}
 	
-	
 	public Page<User> getAllUserPage(int pageNumber,int pageSize,String where,Object... paras){
 		return paginate(pageNumber, pageSize,
 				SqlKit.sql("user.findInfoBySelect"),

@@ -1,6 +1,6 @@
-﻿# Host: localhost  (Version: 5.6.23-log)
-# Date: 2015-04-21 18:07:35
-# Generator: MySQL-Front 5.3  (Build 4.89)
+﻿# Host: localhost  (Version: 5.6.22-log)
+# Date: 2015-04-21 23:36:05
+# Generator: MySQL-Front 5.3  (Build 4.198)
 
 /*!40101 SET NAMES utf8 */;
 
@@ -128,13 +128,13 @@ CREATE TABLE `com_order` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='工单';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='工单';
 
 #
 # Data for table "com_order"
 #
 
-INSERT INTO `com_order` VALUES (1,4,'2015-04-21 14:30:27','测试。',1,1,NULL,0,3,'2015-04-21 14:41:28',3,'2015-04-21 14:41:28','处理工单。','2015-04-21 16:39:00',NULL,NULL,NULL,0,'2015-04-21 14:30:27',NULL),(2,4,'2015-04-21 17:20:22','测试UserOrder表关联。',1,1,NULL,1,2,'2015-04-21 17:44:48',NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2015-04-21 17:20:22','2015-04-21 18:01:40');
+INSERT INTO `com_order` VALUES (1,4,'2015-04-21 14:30:27','测试。',1,1,NULL,0,2,'2015-04-21 14:41:28',3,'2015-04-21 14:41:28','处理工单。','2015-04-21 16:39:00',NULL,NULL,NULL,0,'2015-04-21 14:30:27',NULL),(2,4,'2015-04-21 17:20:22','测试UserOrder表关联。',1,1,NULL,1,2,'2015-04-21 17:44:48',NULL,'2015-04-21 23:34:36',NULL,NULL,NULL,NULL,NULL,0,'2015-04-21 17:20:22',NULL);
 
 #
 # Structure for table "com_position"
@@ -189,13 +189,13 @@ CREATE TABLE `com_user_order` (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='运维-工单';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='运维-工单';
 
 #
 # Data for table "com_user_order"
 #
 
-INSERT INTO `com_user_order` VALUES (1,2,2,'2015-04-21 17:20:22',NULL,NULL),(2,3,1,'2015-04-21 17:50:36',NULL,NULL);
+INSERT INTO `com_user_order` VALUES (1,2,2,'2015-04-21 17:20:22','2015-04-21 22:53:52',NULL),(2,3,1,'2015-04-21 17:50:36',NULL,NULL);
 
 #
 # Structure for table "com_user_type"
@@ -207,7 +207,7 @@ CREATE TABLE `com_user_type` (
   `user_id` bigint(20) DEFAULT NULL,
   `type_id` bigint(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8 COMMENT='运维故障';
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8 COMMENT='运维故障';
 
 #
 # Data for table "com_user_type"

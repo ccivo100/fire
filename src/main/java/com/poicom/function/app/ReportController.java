@@ -236,7 +236,7 @@ public class ReportController extends JFController{
 		
 		//故障类型
 		setAttr("typeList",ErrorType.dao.getAllType());
-		//
+		//故障等级
 		setAttr("levelList",Level.dao.findAll());
 		
 		String where="o.id=?";

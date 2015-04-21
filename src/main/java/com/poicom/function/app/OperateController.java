@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import cn.dreampie.ValidateKit;
 import cn.dreampie.routebind.ControllerKey;
+import cn.dreampie.shiro.core.SubjectKit;
 
 import com.jfinal.aop.Before;
 import com.jfinal.kit.PropKit;
@@ -65,12 +66,18 @@ public class OperateController extends JFController{
 	}
 	
 	public void operate(){
-		String where="o.id=?";
 		
 		Order o=Order.dao.findById(getParaToInt("id"));
 		if(ValidateKit.isNullOrEmpty(o.get("accepted_at"))){
 			o.set("accepted_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
 		}
+		if(o.getLong("accept_user")!=SubjectKit.getUser().getLong("id")){
+			if(ValidateKit.isNullOrEmpty(o.get("accept_at"))){
+				o.set("accept_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
+			}
+		}
+		
+		String where="o.id=?";
 		Record order = Order.dao.findOperateById(where,getParaToInt("id"));
 
 		//获取工单申报者的分公司信息
@@ -110,6 +117,11 @@ public class OperateController extends JFController{
 		if(ValidateKit.isNullOrEmpty(o.get("accepted_at"))){
 			o.set("accepted_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
 		}
+		if(o.getLong("accept_user")!=SubjectKit.getUser().getLong("id")){
+			if(ValidateKit.isNullOrEmpty(o.get("accept_at"))){
+				o.set("accept_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
+			}
+		}
 		//工单详细信息
 		Record order = Order.dao.findOperateById(where,getParaToInt("id"));
 		setAttr(order);
@@ -128,7 +140,11 @@ public class OperateController extends JFController{
 			setAttr("offer_apartment",offer.getStr("aname"));
 			setAttr("offer_position",offer.getStr("pname"));
 		}
-			
+		where=" userinfo.apartment_id=? and user.id<>?";
+		
+		//运维部人员
+		List<Record> dealList=UserInfo.dao.getUserByApartment(where,2,User.dao.getCurrentUser().get("id"));
+		setAttr("dealList",dealList);
 		
 		render(OPERATE_EDIT_PAGE);
 		

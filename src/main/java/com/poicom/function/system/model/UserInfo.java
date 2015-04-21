@@ -1,5 +1,7 @@
 package com.poicom.function.system.model;
 
+import java.util.List;
+
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
@@ -43,7 +45,7 @@ public class UserInfo extends Model<UserInfo> {
 	}
 	
 	/**
-	 * @描述 根据用户Branch_id，查找该部门用户详细信息
+	 * @描述 根据用户Branch_id，查找该部门用户详细信息 Page
 	 * @param pageNumber
 	 * @param pageSize
 	 * @param paras
@@ -52,6 +54,17 @@ public class UserInfo extends Model<UserInfo> {
 	public Page<Record> getUserByBranch(int pageNumber,int pageSize,String where,Object... paras){
 		return Db.paginate(pageNumber, pageSize,
 				SqlKit.sql("user.findBranchUserBySelect") + blank,
+				SqlKit.sql("user.findBranchUserByFrom")+getWhere(where),paras);
+	}
+	
+	/**
+	 * @描述 根据用户apartment_id，查找该部门用户详细信息 List
+	 * @param where
+	 * @param paras
+	 * @return
+	 */
+	public List<Record> getUserByApartment(String where,Object... paras){
+		return Db.find(SqlKit.sql("user.findBranchUserBySelect") +
 				SqlKit.sql("user.findBranchUserByFrom")+getWhere(where),paras);
 	}
 	
