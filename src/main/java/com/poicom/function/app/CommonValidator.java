@@ -1,15 +1,22 @@
 package com.poicom.function.app;
 
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cn.dreampie.ValidateKit;
+import cn.dreampie.shiro.core.SubjectKit;
 
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.validate.Validator;
 import com.poicom.function.app.model.ErrorType;
 import com.poicom.function.app.model.Level;
+import com.poicom.function.app.model.Order;
+import com.poicom.function.system.model.User;
+import com.poicom.function.system.model.UserInfo;
 
 public class CommonValidator extends Validator{
 	
@@ -26,9 +33,34 @@ public class CommonValidator extends Validator{
 			}
 		}
 		else if(getActionKey().equals("/operate/update")){
+			int orderid=c.getParaToInt("oorderid");
+			Order order=Order.dao.findById(orderid);
+			User cUser=SubjectKit.getUser();
 			if(!ValidateKit.isLength(c.getPara("ocomment"), 2, 250))
 			{
 				addError("commentMsg","处理意见应不少于2字！");
+			}else if(!ValidateKit.isNullOrEmpty(order.getLong("deal_user"))){
+				if(cUser.getLong("id").equals(order.getLong("accept_user"))){
+					addError("commentMsg","失败：工单已指派其他运维员处理");
+				}
+			}
+		}else if(getActionKey().equals("/operate/edit")){
+			int orderid=c.getParaToInt("id");
+			Order order=Order.dao.findById(orderid);
+			User cUser=SubjectKit.getUser();
+			if(order.getInt("status")==0){
+				addError("errorMsg","失败：工单已提交");
+			}else if(!ValidateKit.isNullOrEmpty(order.getLong("deal_user"))){
+				if(cUser.getLong("id").equals(order.getLong("accept_user"))){
+					addError("errorMsg","失败：工单已指派其他运维员处理");
+				}else if(!cUser.getLong("id").equals(order.getLong("deal_user"))){
+					addError("errorMsg","失败：工单非当前用户所属");
+				}
+				
+			}else if(ValidateKit.isNullOrEmpty(order.getLong("deal_user"))){
+				if(!cUser.getLong("id").equals(order.getLong("accept_user"))){
+					addError("errorMsg","失败：工单非当前用户所属");
+				}
 			}
 		}
 		
@@ -100,8 +132,14 @@ public class CommonValidator extends Validator{
 					c.setAttr("ostatus", 2);
 				}
 			}
+			String where=" userinfo.apartment_id=? and user.id<>?";
+			List<Record> dealList=UserInfo.dao.getUserByApartment(where,2,User.dao.getCurrentUser().get("id"));
+			c.setAttr("dealList",dealList);
 			
 			c.render("/page/app/operate/edit.html");
+		}
+		if(getActionKey().equals("/operate/edit")){
+			c.render("/page/app/errorMsg.html");
 		}
 		
 		

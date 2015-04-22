@@ -174,6 +174,9 @@ $(function(){
 	
 });
 
+
+
+
 /*$(document).ready(function(){
 	$("a.delete").click(function(){
 		$('#confirmModal').modal('show').on('shown.bs.modal',function(){

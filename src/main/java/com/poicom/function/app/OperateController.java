@@ -24,6 +24,7 @@ import com.poicom.common.kit.DateKit;
 import com.poicom.function.app.model.ErrorType;
 import com.poicom.function.app.model.Level;
 import com.poicom.function.app.model.Order;
+import com.poicom.function.app.model.UserOrder;
 import com.poicom.function.system.model.User;
 import com.poicom.function.system.model.UserInfo;
 
@@ -68,10 +69,13 @@ public class OperateController extends JFController{
 	public void operate(){
 		
 		Order o=Order.dao.findById(getParaToInt("id"));
+		//受理人第一次查询时，插入受理人处理时间
 		if(ValidateKit.isNullOrEmpty(o.get("accepted_at"))){
 			o.set("accepted_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
 		}
-		if(o.getLong("accept_user")!=SubjectKit.getUser().getLong("id")){
+		//如果受理人和当前用户不是同一人，同一人则只有一个受理时间accepted_at。
+		if(!o.getLong("accept_user").equals(SubjectKit.getUser().getLong("id"))){
+			//处理人第一次查询时，插入处理人受理时间
 			if(ValidateKit.isNullOrEmpty(o.get("accept_at"))){
 				o.set("accept_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
 			}
@@ -106,6 +110,7 @@ public class OperateController extends JFController{
 	/**
 	 * @描述 进入故障工单处理页面
 	 */
+	@Before({Tx.class,CommonValidator.class})
 	public void edit(){
 		//故障类型
 		setAttr("typeList",ErrorType.dao.getAllType());
@@ -114,25 +119,28 @@ public class OperateController extends JFController{
 		
 		String where="o.id=?";
 		Order o=Order.dao.findById(getParaToInt("id"));
+		//受理人第一次点击处理时，插入受理人处理时间
 		if(ValidateKit.isNullOrEmpty(o.get("accepted_at"))){
 			o.set("accepted_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
 		}
-		if(o.getLong("accept_user")!=SubjectKit.getUser().getLong("id")){
+		//如果受理人和当前用户不是同一人，同一人则只有一个受理时间accepted_at。
+		if(!o.getLong("accept_user").equals(SubjectKit.getUser().getLong("id"))){
 			if(ValidateKit.isNullOrEmpty(o.get("accept_at"))){
+				//处理人第一次点击处理时，插入处理人受理时间
 				o.set("accept_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
 			}
 		}
 		//工单详细信息
 		Record order = Order.dao.findOperateById(where,getParaToInt("id"));
 		setAttr(order);
-		setAttr("order", order);
+		//setAttr("order", order);
 		
 		//当前用户详细信息
 		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
 		setAttr(userinfo);
-		setAttr("userinfo",userinfo);
+		//setAttr("userinfo",userinfo);
 		
-		//获取工单申报者的分公司信息
+		//获取工单申报者的单位、部门、职位信息
 		Record offer=UserInfo.dao.getUserBranch(order.getLong("oofferid"));
 
 		if(!ValidateKit.isNullOrEmpty(offer)){
@@ -140,15 +148,38 @@ public class OperateController extends JFController{
 			setAttr("offer_apartment",offer.getStr("aname"));
 			setAttr("offer_position",offer.getStr("pname"));
 		}
-		where=" userinfo.apartment_id=? and user.id<>?";
 		
-		//运维部人员
+		//除当前用户以外的所有运维人员
+		where=" userinfo.apartment_id=? and user.id<>?";
 		List<Record> dealList=UserInfo.dao.getUserByApartment(where,2,User.dao.getCurrentUser().get("id"));
 		setAttr("dealList",dealList);
 		
 		render(OPERATE_EDIT_PAGE);
 		
 	}
+	
+	/**
+	 * 运维主管下发清单
+	 */
+	public void arrange(){
+		int dealid=getParaToInt("selectDeal");
+		int oorderid=getParaToInt("oorderid");
+		System.out.println("工单id："+oorderid+"，处理人id："+dealid);
+		
+		Order order=Order.dao.findById(oorderid);
+		UserOrder userorder=UserOrder.dao.findFirstBy(" order_id=?", oorderid);
+		if(ValidateKit.isNullOrEmpty(order.get("deal_user"))){
+			userorder.set("user_id", dealid);
+			if(userorder.update()){
+				order.set("deal_user", dealid).update();
+				renderJson("state","指派成功");
+			}else{
+				renderJson("state","指派失败");
+			}
+		}
+		else
+			renderJson("state","指派失败");
+	} 
 	
 	/**
 	 * @描述 提交故障处理建议
@@ -169,7 +200,10 @@ public class OperateController extends JFController{
 		int t =DateKit.dateBetween(offer_at, now);
 		
 		//设置基本内容：处理人，建议，处理时间，修改状态等。
-		order.set("deal_user", getParaToInt("uuserid"))
+		if(ValidateKit.isNullOrEmpty(order.get("deal_user"))){
+			order.set("deal_user", getParaToInt("uuserid"));
+		}
+		order
 		.set("comment", comment)
 		.set("deal_at", 
 				DateTime.now().toString("yyyy-MM-dd HH:mm:ss"))

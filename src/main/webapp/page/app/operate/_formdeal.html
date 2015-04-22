@@ -5,7 +5,7 @@
 </ul>
 </div>
 <div class="row" >
-	<input type="hidden" name="oorderid" value="${(oorderid)!}">
+	<input id="oorderid" type="hidden" name="oorderid" value="${(oorderid)!}">
 	<input type="hidden" name="uuserid" value="${(uuserid)!}">
 	<input type="hidden" name="otypeid" value="${(otypeid)!}">
 	<input type="hidden" name="olevelid" value="${(olevelid)!}">
@@ -100,9 +100,11 @@
 		<div class="col-sm-4">
 			<input type="text" class="form-control"  name="uacceptname" value="${(uacceptname)!}" readonly />
 		</div>
+		<#if udealname??>
+		<#else>
 		<@shiro.hasRole name="R_DEAL">
 		<div class="col-sm-4">
-			<select class="form-control">
+			<select id="selectDeal" class="form-control" name="selectDeal">
 				<option value="">请选择处理人员</option>
 				<#list dealList as deal>
 				<option value="${(deal.userid)!}">${(deal.fullname)!}</option>
@@ -110,19 +112,20 @@
 			</select>
 		</div>
 		<div class="col-sm-2">
-		<button class="btn btn-primary">指派</button>
+		<button id="arrange" class="btn btn-primary">指派</button>
 		</div>
 		</@shiro.hasRole>
+		</#if>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">受理时间</label>
-		<div class="col-sm-4">
+		<div class="col-sm-8">
 			<input type="text" class="form-control"  name="oacceptedtime" value="${(oacceptedtime)!}" readonly />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">处理人</label>
-		<div class="col-sm-4">
+		<div class="col-sm-8">
 		<#if udealname??>
 			<input type="text" class="form-control"  name="udealname" value="${(udealname)!}" readonly />
 		<#else>
@@ -130,14 +133,7 @@
 		</#if>
 		</div>
 	</div>
-	<#if oaccepttime??>
-	<div class="form-group">
-		<label class="col-sm-2 control-label">受理时间</label>
-		<div class="col-sm-4">
-			<input type="text" class="form-control"  name="oaccepttime" value="${(oaccepttime)!}" readonly />
-		</div>
-	</div>
-	</#if>
+
 	<div class="form-group">
 		<label class="col-sm-2 control-label">联系电话</label>
 		<div class="col-sm-8">
@@ -150,6 +146,14 @@
 			<input type="text"   class="form-control" name="bname" value="${(bname)!} ${(aname)!} ${(pname)!}" readonly />
 		</div>
 	</div>
+	<#if oaccepttime??>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">受理时间</label>
+		<div class="col-sm-8">
+			<input type="text" class="form-control"  name="oaccepttime" value="${(oaccepttime)!}" readonly />
+		</div>
+	</div>
+	</#if>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">处理时间</label>
 		<div class="col-sm-8">
@@ -192,6 +196,21 @@
 
 	</div>
 </div>
-
+<script>
+$(document).ready(function(){
+	$("#arrange").click(function(){
+		$.ajax({
+			type:"post",
+			url:"/operate/arrange",
+			data:{"oorderid":$('#oorderid').val(),"selectDeal":$('#selectDeal').val()},
+			success:function(msg){
+				$("#arrange").hide();
+				alert(msg.state);
+				window.history.back(-1); 
+			}
+		});
+	});
+});
+</script>
 
 

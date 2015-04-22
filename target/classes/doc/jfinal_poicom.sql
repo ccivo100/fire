@@ -1,6 +1,6 @@
-﻿# Host: localhost  (Version: 5.6.22-log)
-# Date: 2015-04-21 23:36:05
-# Generator: MySQL-Front 5.3  (Build 4.198)
+﻿# Host: localhost  (Version: 5.6.23-log)
+# Date: 2015-04-22 12:41:43
+# Generator: MySQL-Front 5.3  (Build 4.89)
 
 /*!40101 SET NAMES utf8 */;
 
@@ -128,13 +128,13 @@ CREATE TABLE `com_order` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='工单';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='工单';
 
 #
 # Data for table "com_order"
 #
 
-INSERT INTO `com_order` VALUES (1,4,'2015-04-21 14:30:27','测试。',1,1,NULL,0,2,'2015-04-21 14:41:28',3,'2015-04-21 14:41:28','处理工单。','2015-04-21 16:39:00',NULL,NULL,NULL,0,'2015-04-21 14:30:27',NULL),(2,4,'2015-04-21 17:20:22','测试UserOrder表关联。',1,1,NULL,1,2,'2015-04-21 17:44:48',NULL,'2015-04-21 23:34:36',NULL,NULL,NULL,NULL,NULL,0,'2015-04-21 17:20:22',NULL);
+INSERT INTO `com_order` VALUES (1,4,'2015-04-21 14:30:27','测试。',1,1,NULL,0,2,'2015-04-21 14:41:28',3,'2015-04-21 14:41:28','处理工单。','2015-04-21 16:39:00',NULL,NULL,NULL,0,'2015-04-21 14:30:27',NULL),(2,4,'2015-04-21 17:20:22','测试UserOrder表关联。',1,1,NULL,0,2,'2015-04-21 17:44:48',3,'2015-04-22 12:27:41','处理测试。','2015-04-22 12:30:50',NULL,NULL,19,0,'2015-04-21 17:20:22',NULL),(3,4,'2015-04-22 09:24:36','测试，运维员处理无指派功能。',2,2,NULL,1,3,'2015-04-22 09:24:52',NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2015-04-22 09:24:36',NULL);
 
 #
 # Structure for table "com_position"
@@ -189,13 +189,13 @@ CREATE TABLE `com_user_order` (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='运维-工单';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='运维-工单';
 
 #
 # Data for table "com_user_order"
 #
 
-INSERT INTO `com_user_order` VALUES (1,2,2,'2015-04-21 17:20:22','2015-04-21 22:53:52',NULL),(2,3,1,'2015-04-21 17:50:36',NULL,NULL);
+INSERT INTO `com_user_order` VALUES (1,3,2,'2015-04-21 17:20:22','2015-04-22 12:26:00',NULL),(2,3,1,'2015-04-21 17:50:36',NULL,NULL),(3,3,3,'2015-04-22 09:24:36',NULL,NULL);
 
 #
 # Structure for table "com_user_type"
@@ -391,10 +391,10 @@ CREATE TABLE `sec_user_role` (
   `user_id` bigint(20) NOT NULL,
   `role_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='用户-角色';
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='用户-角色';
 
 #
 # Data for table "sec_user_role"
 #
 
-INSERT INTO `sec_user_role` VALUES (1,1,1),(2,2,3),(3,3,4),(14,4,5),(15,7,5),(16,8,5),(17,9,5),(18,10,4);
+INSERT INTO `sec_user_role` VALUES (1,1,1),(2,2,3),(3,3,4),(14,4,5),(15,7,5),(16,8,5),(18,10,4),(19,9,4);
