@@ -193,6 +193,7 @@ public class ReportController extends JFController{
 		
 		//获取表单数据，填充进Order
 		Order order=new Order().set("offer_user", getParaToInt("uuserid"))
+				.set("title", getPara("otitle"))
 				.set("description", getPara("odescription"))
 				.set("type", getParaToInt("selectType"))
 				.set("level", getPara("selectLevel"))

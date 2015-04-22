@@ -30,6 +30,8 @@ public class CommonValidator extends Validator{
 			if(!ValidateKit.isLength(c.getPara("odescription"), 2, 250))
 			{
 				addError("descriptionMsg","故障描述应不少于2字！");
+			}else if(!ValidateKit.isLength(c.getPara("otitle"), 5, 30)){
+				addError("descriptionMsg","请用5至30个字描述故障情况！");
 			}
 		}
 		else if(getActionKey().equals("/operate/update")){

@@ -5,30 +5,7 @@
 	<br>
 </div>
 	<div class=" index-background">
-			<form class="bs-example bs-example-form" role="form" action="${ContextPath}/" method="post">
-		      	<div class="row">
-				         <div class="col-sm-6 col-md-5 col-lg-4">
-				            <div class="input-group">
-				            	<span class="input-group-addon">关键字</span>
-				               <input type="text"   class="form-control"  name="condition" value="${(condition)!}" placeholder="故障描述" maxlength="10" autofocus autocomplete="off"/>
-				               <span class="input-group-btn">
-				                  <button class="btn btn-default" type="submit">
-				                     <span class="glyphicon glyphicon-search"></span> 搜索
-				                  </button>
-				               </span>
-				            </div>
-				         </div>
-		         		<div class="col-sm-6 col-md-5 col-lg-4">
-							<div class="form-group">
-								<#if searchMsg??>
-							  	<div class="index-alert index-alert-danger" style="background-image: none;">
-					          		${(searchMsg)!}
-					        	</div>
-							  	</#if>
-							</div>
-					</div>
-		      	</div>
-		   </form>
+
 		<br>
 		
 		<table class="table table-bordered table-hover ">

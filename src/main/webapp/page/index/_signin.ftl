@@ -5,6 +5,31 @@
 	<div class="col-xs-7">
 		<div class="jumbotron">
 			<img src="/dongtaitu.jpg" height="440" width="500">
+			<div id="myCarousel" class="carousel slide">
+			   <!-- 轮播（Carousel）指标 -->
+			   <ol class="carousel-indicators">
+			      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			      <li data-target="#myCarousel" data-slide-to="1"></li>
+			      <li data-target="#myCarousel" data-slide-to="2"></li>
+			   </ol>   
+			   <!-- 轮播（Carousel）项目 -->
+			   <div class="carousel-inner">
+			      <div class="item active">
+			         <img src="/wp-content/uploads/2014/07/slide1.png" alt="First slide">
+			      </div>
+			      <div class="item">
+			         <img src="/wp-content/uploads/2014/07/slide2.png" alt="Second slide">
+			      </div>
+			      <div class="item">
+			         <img src="/wp-content/uploads/2014/07/slide3.png" alt="Third slide">
+			      </div>
+			   </div>
+			   <!-- 轮播（Carousel）导航 -->
+			   <a class="carousel-control left" href="#myCarousel" 
+			      data-slide="prev">&lsaquo;</a>
+			   <a class="carousel-control right" href="#myCarousel" 
+			      data-slide="next">&rsaquo;</a>
+			</div> 
 		</div>
 	</div>
 	<div class="col-xs-5">
@@ -36,7 +61,7 @@
 			          <@resource.loginException name="shiroLoginFailure"/>
 			        </div>
 			    </@shiro.isLoginFailure>
-				<button class="btn btn-lg btn-primary btn-block" data-loading-text="正在提交..." type="submit">Sign in</button>
+				<button class="btn btn-lg btn-primary btn-block" data-loading-text="正在提交..." type="submit">登录</button>
 			</form>
 	
 		</div>

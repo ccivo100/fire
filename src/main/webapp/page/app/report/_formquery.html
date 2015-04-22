@@ -4,10 +4,99 @@
    <li class="active"><a href="#">查看工单</a></li>
 </ul>
 </div>
+<div class="row">
+	<div class="col-xs-2">
+	</div>
+	<div class="col-xs-8">
+	
+		<div class="form-group">
+			<div >
+				<h4><span class="label label-primary ">报障人员信息</span></h4>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">申报人员：</label>
+			<div class="col-sm-2">
+				<label class=" control-label"><span class="label label-info ">${(uoffername)!}</span></label>
+			</div>
+			<label class="col-sm-2 control-label">联系电话：</label>
+			<div class="col-sm-2">
+				<label class=" control-label"><span class="label label-info ">${(uofferphone)!}</span></label>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">单位：</label>
+			<div class="col-sm-2">  
+				<label class=" control-label"><span class="label label-info ">${(offer.bname)!}</span></label>
+			</div>
+			<label class="col-sm-2 control-label">部门：</label>
+			<div class="col-sm-2">
+				<label class=" control-label"><span class="label label-info ">${(offer.aname)!}</span></label>
+			</div>
+			<label class="col-sm-2 control-label">职位：</label>
+			<div class="col-sm-2">
+				<label class=" control-label"><span class="label label-info ">${(offer.pname)!}</span></label>
+			</div>
+		</div>
+	
+		<hr>
+		<div class="form-group">
+			<div >
+				<h4><span class="label label-primary ">故障工单信息</span></h4>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label">标题：</label>
+			<div class="col-sm-2">
+				<label class=" control-label"><span class="label label-info ">${(otitle)!}</span></label>
+			</div>
+			<label class="col-sm-2 control-label">申报时间：</label>
+			<div class="col-sm-4">
+				<label class=" control-label"><span class="label label-info ">${(ooffertime)!}</span></label>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">故障类型：</label>
+			<div class="col-sm-2">
+				<label class=" control-label"><span class="label label-info ">${(otitle)!}</span></label>
+			</div>
+			<label class="col-sm-2 control-label">故障等级：</label>
+			<div class="col-sm-2">
+				<label class=" control-label"><span class="label label-info ">${(otitle)!}</span></label>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">故障描述：</label>
+			<div class="col-sm-2">
+				<label class=" control-label"><span class="label label-info ">${(odescription)!}</span></label>
+			</div>
+			
+		</div>
+		
+		<hr>
+		<div class="form-group">
+			<div >
+				<h4><span class="label label-primary ">处理人员信息</span></h4>
+			</div>
+		</div>
+		
+	</div>
+	<div class="col-xs-2">
+	</div>
+
+</div>
+
 <div class="row" >
 	<div class="col-sm-6 col-md-6 col-lg-6">
 	<div >
 		<h3><span class="label label-primary ">故障描述</span></h3>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">标题</label>
+		<div class="col-sm-8">
+			<input type="text" class="form-control"  name="otitle" value="${(otitle)!}" readonly/>
+		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">故障类型</label>

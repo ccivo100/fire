@@ -1,5 +1,5 @@
 ﻿<#include "/page/common/_layout.html" />
-<@layout activebar="report" html_title="任务分配">
+<@layout activebar="task" html_title="任务分配">
 
 <div class="index-background">
 <div class="page-header">

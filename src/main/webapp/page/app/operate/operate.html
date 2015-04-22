@@ -1,5 +1,5 @@
 <#include "/page/common/_layout.html"/>
-<@layout activebar="user" html_title="运维管理">
+<@layout activebar="operates" html_title="运维管理">
 <div class="index-background">
 <div class="page-header">
 <ul class="nav nav-tabs">
@@ -27,7 +27,7 @@
 		<thead>
 			<tr>
 				<th width="2%">序号</th>
-				<th width="10%">故障描述</th>
+				<th width="10%">标题</th>
 				<th width="5%">申报部门</th>
 				<th width="3%">申报人</th>
 				<th width="5%">申报时间</th>
@@ -40,7 +40,7 @@
 			<#list operatePage.getList() as operate>
 			<tr class="<#if operate.status=0><#elseif operate.status=2>danger</#if>">
 				<td style="text-align:left;">${operate_index+1}</td>
-				<td style="text-align:left;">${(operate.description)!}</td>
+				<td style="text-align:left;">${(operate.title)!}</td>
 				<td style="text-align:left;">${(operate.off_branch)!}</td>
 				<td style="text-align:left;">${(operate.off_user)!}</td>
 				<td style="text-align:left;">${(operate.offer_at)!}</td>

@@ -25,7 +25,7 @@
 		o.description odescription,o.offer_at ooffertime,o.status ostatus,
 		o.deal_user odealid,  u2.full_name udealname,  u2.phone udealphone,
 		o.accept_user oacceptid,accept.full_name uacceptname,accept.phone uacceptphone,
-		o.accepted_at oacceptedtime,
+		o.accepted_at oacceptedtime,o.title otitle,
 		o.comment ocomment,o.deal_at odealtime,o.accept_at oaccepttime,
 		o.addcomment oaddcomment,o.add_at oaddtime,
 		o.spend_time ospendtime,
@@ -44,7 +44,7 @@
   	<sql id="findOfferQueryBySelect"><!-- Reports-Operates-Orders 分页故障查询 -->
   	SELECT o.id, o.description, u1.bname off_branch,u1.full_name off_user,o.offer_at,  o.status,
   		 u2.full_name deal_user ,o.deal_at ,o.type tid, t1.name type_name,u2.bname deal_branch,
-  		 o.created_at,o.updated_at,o.deleted_at
+  		 o.created_at,o.updated_at,o.deleted_at,o.title
   	</sql>
   	
   	<sql id="findOfferQueryByFrom"><!-- Reports-Operates-Orders 分页故障查询 -->
