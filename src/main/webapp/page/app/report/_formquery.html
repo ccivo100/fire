@@ -42,7 +42,7 @@
 		<hr>
 		<div class="form-group">
 			<div >
-				<h4><span class="label label-primary ">故障工单信息</span></h4>
+				<h4><span class="label label-primary ">工单申报信息</span></h4>
 			</div>
 		</div>
 		
@@ -51,19 +51,56 @@
 			<div class="col-sm-2">
 				<label class=" control-label"><span class="label label-info ">${(otitle)!}</span></label>
 			</div>
+		</div>
+		<div class="form-group">
 			<label class="col-sm-2 control-label">申报时间：</label>
 			<div class="col-sm-4">
 				<label class=" control-label"><span class="label label-info ">${(ooffertime)!}</span></label>
 			</div>
+			
+			
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">状态：</label>
+			<div class="col-sm-4">
+				<label class=" control-label">
+				
+				<#if ostatus=0>
+				<span class="label label-success">已处理</span>
+				<#elseif ostatus=1>
+				<span class="label label-default">未处理</span>
+				<#elseif ostatus=2>
+				<span class="label label-danger">超时未处理</span>
+				</#if>
+				
+				</label>
+			</div>
+			<label class="col-sm-2 control-label">标识：</label>
+			<div class="col-sm-4">
+				<label class=" control-label">
+				
+				<#if odeletetime??>
+				<span class="label label-danger">已撤销</span>
+				<#else>
+				<span class="label label-primary ">正常</span>
+				</#if> 
+				
+				</label>
+			</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-2 control-label">故障类型：</label>
-			<div class="col-sm-2">
-				<label class=" control-label"><span class="label label-info ">${(otitle)!}</span></label>
+			<div class="col-sm-4">
+				<label class=" control-label"><span class="label label-info ">${(tname)!}</span></label>
 			</div>
 			<label class="col-sm-2 control-label">故障等级：</label>
-			<div class="col-sm-2">
-				<label class=" control-label"><span class="label label-info ">${(otitle)!}</span></label>
+			<div class="col-sm-4">
+				<label class=" control-label">
+				<span class="label label-info ">
+				<span class="glyphicon glyphicon-exclamation-sign">
+				${(lname)!}</span>
+				</span>
+				</label>
 			</div>
 		</div>
 		<div class="form-group">
@@ -71,14 +108,90 @@
 			<div class="col-sm-2">
 				<label class=" control-label"><span class="label label-info ">${(odescription)!}</span></label>
 			</div>
-			
 		</div>
 		
 		<hr>
 		<div class="form-group">
 			<div >
-				<h4><span class="label label-primary ">处理人员信息</span></h4>
+				<h4><span class="label label-primary ">受理人员信息</span></h4>
 			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label">受理人：</label>
+			<div class="col-sm-2">
+				<label class=" control-label"><span class="label label-info ">${(uacceptname)!}</span></label>
+			</div>
+			<#if oacceptedtime??>
+			<label class="col-sm-2 control-label">受理时间：</label>
+			<div class="col-sm-2">
+				<label class=" control-label"><span class="label label-info ">${(oacceptedtime)!}</span></label>
+			</div>
+			</#if>
+		</div>
+		<hr>
+		<div class="form-group">
+			<div >
+				<h4><span class="label label-primary ">工单处理信息</span></h4>
+			</div>
+		</div>
+		<div class="form-group">
+			<#if udealname??>
+			<label class="col-sm-2 control-label">处理人：</label>
+			<div class="col-sm-2">
+				<label class=" control-label"><span class="label label-info ">${(udealname)!}</span></label>
+			</div>
+			</#if>
+			<#if udealphone??>
+			<label class="col-sm-2 control-label">联系方式：</label>
+			<div class="col-sm-2">
+				<label class=" control-label"><span class="label label-info ">${(udealphone)!}</span></label>
+			</div>
+			</#if>
+			
+			
+		</div>
+		<div class="form-group">
+			<#if (deal.bname)??>
+			<label class="col-sm-2 control-label">单位：</label>
+			<div class="col-sm-2">  
+				<label class=" control-label"><span class="label label-info ">${(deal.bname)!}</span></label>
+			</div>
+			</#if>
+			<#if (deal.aname)??>
+			<label class="col-sm-2 control-label">部门：</label>
+			<div class="col-sm-2">
+				<label class=" control-label"><span class="label label-info ">${(deal.aname)!}</span></label>
+			</div>
+			</#if>
+			<#if (deal.pname)??>
+			<label class="col-sm-2 control-label">职位：</label>
+			<div class="col-sm-2">
+				<label class=" control-label"><span class="label label-info ">${(deal.pname)!}</span></label>
+			</div>
+			</#if>
+		</div>
+		<div class="form-group">
+			<#if oaccepttime??>
+			<label class="col-sm-2 control-label">受理时间：</label>
+			<div class="col-sm-2">
+				<label class=" control-label"><span class="label label-info ">${(oaccepttime)!}</span></label>
+			</div>
+			</#if>
+			<#if odealtime??>
+			<label class="col-sm-2 control-label">处理时间：</label>
+			<div class="col-sm-2">
+				<label class=" control-label"><span class="label label-info ">${(odealtime)!}</span></label>
+			</div>
+			</#if>
+		</div>
+		<div class="form-group">
+			<#if ocomment??>
+			<label class="col-sm-2 control-label">处理意见：</label>
+			<div class="col-sm-2">
+				<label class=" control-label"><span class="label label-info ">${(ocomment)!}</span></label>
+			</div>
+			</#if>
 		</div>
 		
 	</div>
@@ -87,7 +200,7 @@
 
 </div>
 
-<div class="row" >
+<!-- <div class="row" >
 	<div class="col-sm-6 col-md-6 col-lg-6">
 	<div >
 		<h3><span class="label label-primary ">故障描述</span></h3>
@@ -239,4 +352,4 @@
 		</div>
 	</div>
 	</div>
-</div>
+</div> -->

@@ -75,13 +75,13 @@
 		<div class="col-sm-8">
 			<#if olevelid??>
 				<#if olevelid="">
-				<select id="selectLevel" name="selectLevel" class="form-control"  required autofocus>
+				<select id="selectLevel" name="selectLevel" class="form-control"  required >
 				<#else>
-				<select id="selectLevel" name="selectLevel" class="form-control" disabled required autofocus>
+				<select id="selectLevel" name="selectLevel" class="form-control" disabled required >
 				</#if>
 			<#else>
 	
-			<select id="selectLevel" name="selectLevel" class="form-control" required autofocus>
+			<select id="selectLevel" name="selectLevel" class="form-control" required >
 			
 			</#if>
 						<option value="" selected="selected">请选择故障等级</option>
