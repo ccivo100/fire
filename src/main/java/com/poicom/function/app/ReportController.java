@@ -263,16 +263,53 @@ public class ReportController extends JFController{
 		//order_id
 		Integer orderid=getParaToInt("oorderid");
 		//description
-		//String description=getPara("odescription");
+		String title=getPara("otitle");
+		String description=getPara("odescription");
 		
-		Order.dao
-				.findById(orderid)
-				.set("description", getPara("odescription"))
+		Order order=Order.dao
+				.findById(orderid);
+		order.set("title", title)
+				.set("description",description)
 				.set("updated_at",
-						DateTime.now().toString("yyyy-MM-dd HH:mm:ss"))
-				.update();
+						DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
+		
+		if(order.update()){
+			redirect("/report/reports");
+		}
 
-		redirect("/report/reports");
+		
+		
+	}
+	
+	public void upup(){
+		//order_id
+		Integer orderid=getParaToInt("orderid");
+		//description
+		String description=getPara("description").trim();
+		String title=getPara("title").trim();
+		
+		if(!ValidateKit.isLength(description, 2, 250))
+		{
+			renderJson("state","故障描述应不少于2字！");
+		}else if(ValidateKit.isLength(getPara("otitle"), 5, 30)){
+			renderJson("state","故障单标题应为5至30个字！");
+		}else{
+			Order order=Order.dao
+					.findById(orderid);
+			order.set("description",description)
+					.set("updated_at",
+							DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
+			
+			if(order.update()){
+				renderJson("state","更新故障工单成功！");
+			}
+			else {
+				renderJson("state","操作失败！");
+			}
+		}
+		
+		
+		
 		
 	}
 	

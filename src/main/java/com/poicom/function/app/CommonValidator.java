@@ -26,13 +26,12 @@ public class CommonValidator extends Validator{
 	protected void validate(Controller c) {
 		
 		if(getActionKey().equals("/report/save")|getActionKey().equals("/report/update")){
-			
-			if(!ValidateKit.isLength(c.getPara("odescription"), 2, 250))
+			if(!ValidateKit.isLength(c.getPara("otitle"), 5, 30)){
+				addError("descriptionMsg","故障单标题应为5至30个字！");
+			}else if(!ValidateKit.isLength(c.getPara("odescription"), 2, 250))
 			{
 				addError("descriptionMsg","故障描述应不少于2字！");
-			}else if(!ValidateKit.isLength(c.getPara("otitle"), 5, 30)){
-				addError("descriptionMsg","请用5至30个字描述故障情况！");
-			}
+			} 
 		}
 		else if(getActionKey().equals("/operate/update")){
 			int orderid=c.getParaToInt("oorderid");
@@ -125,7 +124,7 @@ public class CommonValidator extends Validator{
 				c.setAttr("olevelid", olevelid);
 			}
 			
-			if(!ValidateKit.isNullOrEmpty(c.getPara("ostatus"))){
+			/*if(!ValidateKit.isNullOrEmpty(c.getPara("ostatus"))){
 				if(c.getPara("ostatus").equals("已处理")){
 					c.setAttr("ostatus", 0);
 				}else if(c.getPara("ostatus").equals("未处理")){
@@ -133,7 +132,7 @@ public class CommonValidator extends Validator{
 				}else if(c.getPara("ostatus").equals("超时未处理")){
 					c.setAttr("ostatus", 2);
 				}
-			}
+			}*/
 			String where=" userinfo.apartment_id=? and user.id<>?";
 			List<Record> dealList=UserInfo.dao.getUserByApartment(where,2,User.dao.getCurrentUser().get("id"));
 			c.setAttr("dealList",dealList);

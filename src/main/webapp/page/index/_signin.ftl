@@ -57,7 +57,7 @@
 					<label><a href="${ContextPath}/retrieve">忘记密码?</a></label>
 				</div>
 				<@shiro.isLoginFailure name="shiroLoginFailure">
-			        <div class="alert alert-danger" style="background-image: none;">
+			        <div class="alert alert-danger alert-dismissable" style="background-image: none;">
 			          <@resource.loginException name="shiroLoginFailure"/>
 			        </div>
 			    </@shiro.isLoginFailure>

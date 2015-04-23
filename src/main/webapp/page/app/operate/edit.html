@@ -1,10 +1,268 @@
 ﻿<#include "/page/common/_layout.html" />
 <@layout activebar="deal" html_title="处理工单">
+
 <div class="index-background">
-	<!-- 代表上写文、/blog代表控制器、/save代表控制器中的方法 -->
+<div class="page-header">
+<ul class="nav nav-tabs">
+   <li><a href="${ContextPath}/operate/deal">未处理列表</a></li>
+   <li class="active"><a href="#">处理工单</a></li>
+</ul>
+</div>
+</div>
+	<input id="oorderid" type="hidden" name="oorderid" value="${(oorderid)!}">
+	<input id="uuserid" type="hidden" name="uuserid" value="${(uuserid)!}">
+	<input id="otypeid" type="hidden" name="otypeid" value="${(otypeid)!}">
+	<input id="olevelid"  type="hidden" name="olevelid" value="${(olevelid)!}">
+	<input id="ostatus" type="hidden" name="ostatus" value="${(ostatus)!}">
+<div class="row">
+	<div class="col-md-9">
+		<div class="jf_panel">
+			<div class="jf_header ">
+				故障内容
+			</div>
+			<div class="jf_header jf_topic_header">
+				<#if (ostatus?number)=0>
+				<span class="label label-success">已处理</span>
+				<#elseif (ostatus?number)=1>
+				<span class="label label-default">未处理</span>
+				<#elseif (ostatus?number)=2>
+				<span class="label label-danger">超时未处理</span>
+				</#if>
+				<span>
+				
+				</span>
+				
+				<span class="jf_topic_full_title">${(otitle)!}</span>
+				<span style="display: inline-block; float: right;">
+					<h4>
+					<#if odeletetime??>
+					<span class="label label-danger">已撤销</span>
+					<#else>
+					<span class="label label-primary ">正常</span>
+					</#if> 
+					</h4>
+				</span>
+
+				<br></br>
+				<span class="changes">
+					<span>•故障类型：<span class="label label-info ">${(tname)!}</span></span>
+					<span>•故障等级：<span class="label label-info ">${(lname)!}</span></span>
+					<span>•申报时间：<span class="label label-info ">${(ooffertime)!}</span></span>
+					<span></span>
+				</span>
+			</div>
+			<div class="jf_inner jf_topic">
+				<div style="margin: 30px;">
+				
+				<h3>${(odescription)!}</h3>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3 hidden-xs hidden-sm" style="padding-left: 0px;">
+		<div id="jf_sidebar" class="hidden-xs">
+			<div class="jf_panel">
+    			<div class="jf_header">
+        			申报人员信息
+    			</div>
+    			<div class="jf_inner">
+    				<div>
+    					<div style="margin-top: 2px;">
+    						<span>姓名：<span class="label label-info ">${(uoffername)!}</span></span>
+    					</div>
+    					<div style="margin-top: 2px;">
+    						<span>电话：<span class="label label-info ">${(uofferphone)!}</span></span>
+    					</div>
+    					<div style="margin-top: 2px;">
+    						<span>单位：<span class="label label-info ">${(offer_branch)!}</span></span>
+    					</div>
+    					<div style="margin-top: 2px;">
+    						<span>部门：<span class="label label-info ">${(offer_apartment)!}</span></span>
+    					</div>
+    					<div style="margin-top: 2px;">
+    						<span>职位：<span class="label label-info ">${(offer_position)!}</span></span>
+    					</div>
+    				</div>
+    			</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-9">
+		<!-- 处理情况panel -->
+		<div class="jf_panel">
+			<div class="jf_header ">
+				处理情况
+			</div>
+			<div class="jf_header jf_topic_header">
+				<div >
+					<h4><span class="label label-default ">受理人员信息</span></h4>
+				</div>
+					<span class="changes">
+    						<span style="margin: 15px;">受理人：<span class="label label-info ">${(uacceptname)!}</span></span>
+    						<#if oacceptedtime??>
+    						<span style="margin: 15px;">受理时间：<span class="label label-info ">${(oacceptedtime)!}</span></span>
+    						</#if>
+    				</span>
+	    			<div>
+	    			
+	    			</div>
+				<hr>
+				<div >
+					<h4><span class="label label-default ">处理人员信息</span></h4>
+				</div>
+					<span class="changes">
+						<#if udealname??>
+    						<span style="margin: 15px;">处理人：<span class="label label-info ">${(udealname)!}</span></span>
+    						<#if oaccepttime??>
+    						<span style="margin: 15px;">受理时间：<span class="label label-info ">${(oaccepttime)!}</span></span>
+    						</#if>
+    						<br></br>
+    						<span style="margin: 15px;">电话：<span class="label label-info ">${(uphone)!}</span></span>
+    						<span style="margin: 15px;">单位：<span class="label label-info ">${(bname)!}</span></span>
+    						<span style="margin: 15px;">部门：<span class="label label-info ">${(aname)!}</span></span>
+    						<span style="margin: 15px;">职位：<span class="label label-info ">${(pname)!}</span></span>
+    					<#else>
+    						<span style="margin: 15px;">处理人：<span class="label label-info ">${(ufullname)!}</span></span>
+    						<#if oaccepttime??>
+    						<span style="margin: 15px;">受理时间：<span class="label label-info ">${(oaccepttime)!}</span></span>
+    						</#if>
+    						<br></br>
+    						<span style="margin: 15px;">电话：<span class="label label-info ">${(uphone)!}</span></span>
+    						<span style="margin: 15px;">单位：<span class="label label-info ">${(bname)!}</span></span>
+    						<span style="margin: 15px;">部门：<span class="label label-info ">${(aname)!}</span></span>
+    						<span style="margin: 15px;">职位：<span class="label label-info ">${(pname)!}</span></span>
+    					</#if>
+    				</span>
+				<hr>
+				
+				<div >
+					<h4><span class="label label-default ">处理意见</span></h4>
+				</div>
+				<span class="changes">
+					<#if odealtime??>
+					<span>处理时间：<span class="label label-info ">${(odealtime)!}</span></span>
+					</#if>
+				</span>
+			</div>
+			<div class="jf_inner jf_topic">
+				<div style="margin: 30px;">
+					
+					<h3>${(ocomment)!}</h3>
+					
+				</div>
+			</div>
+		</div>
+		
+		<!-- 处理panel -->
+		<div class="jf_panel">
+			<div class="jf_header ">
+				处理
+			</div>
+			<div class="jf_header jf_topic_header">
+				<div>
+					<span class="changes">
+						<span>处理时间：<input id="deal_at" type="datetime-local" required></span>
+					</span>
+				</div>
+				<br>
+				
+				<div class="row">
+					<#if udealname??>
+					<#else>
+					<@shiro.hasRole name="R_DEAL">
+					
+					<div class="col-xs-4">
+					<div class="input-group">
+					<span class="input-group-addon">处理</span>
+						<select id="selectDeal" class="form-control" name="selectDeal">
+							<option value="">请选择处理人员</option>
+							<#list dealList as deal>
+							<option value="${(deal.userid)!}">${(deal.fullname)!}</option>
+							</#list>
+						</select>
+						<span class="input-group-btn">
+						<button id="arrange" class="btn btn-default">指派</button>
+						</span>
+						 </div>
+					</div>
+					</@shiro.hasRole>
+					</#if>
+				</div>
+				<br>
+				
+				<div>
+					<textarea id="ocomment" name="ocomment" class="form-control"
+							placeholder="处理意见，不少于25字。" maxlength="250" cols="80" rows="7"
+							 >${(ocomment)!}</textarea>
+				</div>
+				<div>
+				<#if commentMsg??>
+					<div class="alert alert-danger alert-dismissable" role="alert">
+					<button type="button" class="close" data-dismiss="alert"
+				      aria-hidden="true">
+				      &times;
+				   </button>
+		  				${commentMsg!}
+					</div>
+				</#if>
+				</div>
+				<br>
+				<div>
+					<button id="operateupdate" name="submit" value="提交"  class="btn btn-primary save"  data-loading-text="正在提交..."
+		                    data-complete-text="提交成功!">
+		                    提交
+		            </button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+$(document).ready(function(){
+	$("#arrange").click(function(){
+		$.ajax({
+			type:"post",
+			url:"${ContextPath}/operate/arrange",
+			data:{"oorderid":$('#oorderid').val(),"selectDeal":$('#selectDeal').val()},
+			success:function(msg){
+				$("#arrange").hide();
+				alert(msg.state);
+				if(msg.state=='指派成功'){
+					window.location.href='${ContextPath}/operate/operates'
+				}
+				
+			}
+			
+		});
+	});
+	
+	$("#operateupdate").click(function(){
+		$.ajax({
+			type:"post",
+			url:"${ContextPath}/operate/update",
+			data:{"oorderid":$('#oorderid').val(),"uuserid":$('#uuserid').val(),"deal_at":$('#deal_at').val(),"ocomment":$('#ocomment').val()},
+			success:function(msg){
+				alert(msg.state);
+				if(msg.state=='提交成功！'){
+					window.location.href='${ContextPath}/operate/operates'
+				}
+				
+			}
+		});
+	});
+	
+});
+</script>
+<!-- <div class="index-background">
+	代表上写文、/blog代表控制器、/save代表控制器中的方法
 	<form class="form-horizontal" role="form" action="${ContextPath}/operate/update" method="post" >
 		<#include "_formdeal.html" />
 	</form>
 	
-</div>
+</div> -->
 </@layout>

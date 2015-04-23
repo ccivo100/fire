@@ -9,10 +9,16 @@
 	</div>
 	<div class="col-xs-8">
 	
-	<input type="hidden" name="uuserid" value="${(uuserid)!}">
-	<input type="hidden" name="oorderid" value="${(oorderid)!}">
-	<input type="hidden" name="otypeid" value="${(otypeid)!}">
-	<input type="hidden" name="olevelid" value="${(olevelid)!}">
+	<input id="uuserid" type="hidden" name="uuserid" value="${(uuserid)!}">
+	<input id="oorderid"  type="hidden" name="oorderid" value="${(oorderid)!}">
+	<input id="otypeid" type="hidden" name="otypeid" value="${(otypeid)!}">
+	<input id="olevelid" type="hidden" name="olevelid" value="${(olevelid)!}">
+	
+	<input id="ufullname" type="hidden" name="ufullname" value="${(ufullname)!}">
+	<input id="uphone"  type="hidden" name="uphone" value="${(uphone)!}">
+	<input id="bname" type="hidden" name="bname" value="${(bname)!}">
+	<input id="aname" type="hidden" name="aname" value="${(aname)!}">
+	<input id="pname" type="hidden" name="pname" value="${(pname)!}">
 	
 	<div class="form-group">
 		<div >
@@ -54,7 +60,7 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label" >标题：</label>
 		<div class="col-sm-8">
-			<input type="text" class="form-control" placeholder="故障工单标题" maxlength="30" name="otitle" value="${(otitle)!}" autofocus disabled required autocomplete="off"/>
+			<input id="otitle" type="text" class="form-control" placeholder="故障工单标题" maxlength="30" name="otitle" value="${(otitle)!}" autofocus  required autocomplete="off"/>
 		</div>
 	</div>
 	<div class="form-group">
@@ -124,7 +130,7 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">故障描述：</label>
 		<div class="col-sm-8">
-			<textarea id="area" name="odescription" class="form-control"
+			<textarea id="odescription" name="odescription" class="form-control"
 				placeholder="故障描述，不少于25字。"  maxlength="250" cols="80" rows="7"
 				required <#if odeletetime?exists>readonly</#if>>${(odescription)!}</textarea>
 		</div>
@@ -149,7 +155,7 @@
 			<#if odeletetime?exists>
 			<h3><span class="label label-danger">已撤回</span></h3>
 			<#else>
-			<button id="submit" value="提交" type="submit" class="btn btn-primary save" data-loading-text="正在提交...">提交</button>
+			<button id="reportupdate" value="提交" type="submit" class="btn btn-primary save" data-loading-text="正在提交...">提交</button>
 			<a id="recall" value="撤回"  class="btn btn-danger" href="${ContextPath}/report/recall?id=${(oorderid)!}" data-loading-text="正在撤回...">撤回</a>
 			</#if>
 			
@@ -159,3 +165,18 @@
 	</div>
 </div>
 </div>
+
+<script>
+$(document).ready(function(){
+	$("#reportupdate1").click(function(){
+		$.ajax({
+			type:"post",
+			url:"${ContextPath}/report/upup",
+			data:{"orderid":$('#oorderid').val(),"title":$('#otitle').val(),"description":$('#odescription').val()},
+			success:function(msg){
+				alert(msg.state);
+			}
+		});
+	});
+});
+</script>

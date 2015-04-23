@@ -14,6 +14,12 @@
 	<input type="hidden" name="otypeid" value="${(otypeid)!}">
 	<input type="hidden" name="olevelid" value="${(olevelid)!}">
 	
+	<input id="ufullname" type="hidden" name="ufullname" value="${(ufullname)!}">
+	<input id="uphone"  type="hidden" name="uphone" value="${(uphone)!}">
+	<input id="bname" type="hidden" name="bname" value="${(bname)!}">
+	<input id="aname" type="hidden" name="aname" value="${(aname)!}">
+	<input id="pname" type="hidden" name="pname" value="${(pname)!}">
+	
 	<div class="form-group">
 		<div >
 			<h4><span class="label label-primary ">个人信息</span></h4>
@@ -146,7 +152,7 @@ function select1() {
 	$.ajax(
     {
     	type: "post",
-    	url: "/report/handler",
+    	url: "${ContextPath}/report/handler",
     	data: { "type": "type" },
         success: function (msg) {
         	$("#selectType").append("<option value=''>请选择故障类型</option>");
@@ -162,7 +168,7 @@ function select2() {
 	$.ajax(
 	{
 		type: "post",
-		url: "/report/handler",
+		url: "${ContextPath}/report/handler",
 		data: { "type": "dealler","typeid":$('#selectType').val() },
 		success: function (msg) {
 			$("#selectDeal").append("<option value=''>请选择运维人员</option>");
