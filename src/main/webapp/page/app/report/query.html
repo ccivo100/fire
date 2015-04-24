@@ -140,13 +140,27 @@
 					
 				</div>
 			</div>
+			<#if oaddcomment??>
+			<div class="jf_header jf_topic_header">
+				<div >
+					<h4><span class="label label-default ">补充意见</span></h4>
+				</div>
+				<span class="changes">
+					<#if oaddtime??>
+					<span>处理时间：<span class="label label-info ">${(oaddtime)!}</span></span>
+					</#if>
+				</span>
+			</div>
+			<div class="jf_inner jf_topic">
+				<div style="margin: 30px;">
+					
+					<h3>${(oaddcomment)!}</h3>
+					
+				</div>
+			</div>
+			</#if>
 		</div>
 	</div>
 </div>
-<!-- <div class="index-background">
-	<form class="form-horizontal" role="form" action="${ContextPath}/report/save" method="post" >
-		<#include "_formquery.html" />
-	</form>
-	
-</div> -->
+
 </@layout>

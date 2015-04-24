@@ -29,6 +29,28 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<label class="col-sm-2 control-label">部门</label>
+				<div class="col-sm-4">
+					<select id="selectType" name="selectApartment" class="form-control"  required autofocus>
+						<option value="" selected="selected">请选择</option>
+						<#list apartmentList as apartment>
+						<option value="${(apartment.id)!}" <#if (userinfo.info_apartmentid)=apartment.id>selected="selected"<#else></#if>>${(apartment.name)!}	</option>
+						</#list>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">职位</label>
+				<div class="col-sm-4">
+					<select id="selectType" name="selectPosition" class="form-control"  required autofocus>
+						<option value="" selected="selected">请选择</option>
+						<#list positionList as position>
+						<option value="${(position.id)!}" <#if (userinfo.info_positionid)=position.id>selected="selected"<#else></#if>>${(position.name)!}	</option>
+						</#list>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
 				<label class="col-sm-2 control-label">角色类型</label>
 				<div class="col-sm-4">
 						<#list roleList as role>

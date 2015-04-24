@@ -15,7 +15,7 @@
 		user.first_name ufirstname,user.last_name ulastname,user.full_name ufullname,
 		user.created_at ucreatetime,user.updated_at uupdatetime,user.deleted_at udeletetime,
 		userinfo.id info_id,userinfo.user_id info_userid,userinfo.branch_id info_branchid,userinfo.creator_id info_creatorid,
-		userinfo.gender info_gender,
+		userinfo.gender info_gender,userinfo.apartment_id info_apartmentid,userinfo.position_id info_positionid,
     	userinfo.created_at info_createtime,userinfo.updated_at info_updatetime,userinfo.deleted_at info_deletetime,
 		branch.id bid,branch.name bname,apartment.id aid,apartment.name aname,position.id pid,position.name pname,
     	branch.created_at bcreatetime,branch.updated_at bupdatetime,branch.deleted_at bdeletetime

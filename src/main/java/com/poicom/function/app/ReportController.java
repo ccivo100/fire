@@ -151,6 +151,21 @@ public class ReportController extends JFController{
 		redirect("/report/reports");
 		
 	}
+	
+	/**
+	 * 删除撤回工单
+	 */
+	@Before(Tx.class)
+	public void delete(){
+		int id=getParaToInt("id");
+		Order order=Order.dao.findById(id);
+		UserOrder userorder=UserOrder.dao.findFirstBy(" order_id=?", order.get("id"));
+		
+		if(order.delete()){
+			userorder.delete();
+		}
+		redirect("/report/reports");
+	}
 
 	
 	/**

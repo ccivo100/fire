@@ -406,10 +406,19 @@ public class AdminController extends Controller {
 		logger.error(getPara("selectBranch"));
 		UserInfo userinfo=UserInfo.dao.get("user_id", getParaToLong("userid"));
 		if(userinfo.get("branch_id")!=getPara("selectBranch")){
-			userinfo.set("branch_id", getPara("selectBranch")).update();
+			userinfo.set("branch_id", getPara("selectBranch"));
+		}
+		if(userinfo.get("apartment_id")!=getPara("selectApartment")){
+			userinfo.set("apartment_id", getPara("selectApartment"));
+		}
+		if(userinfo.get("position_id")!=getPara("selectPosition")){
+			userinfo.set("position_id", getPara("selectPosition"));
+		}
+		if(userinfo.update()){
+			redirect("/admin/user");
 		}
 		
-		redirect("/admin/user");
+		
 	}
 	
 	public void migrateuser(){

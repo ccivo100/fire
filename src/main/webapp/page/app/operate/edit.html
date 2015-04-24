@@ -155,9 +155,31 @@
 					
 				</div>
 			</div>
+			<#if oaddcomment??>
+			<div class="jf_header jf_topic_header">
+				<div >
+					<h4><span class="label label-default ">补充意见</span></h4>
+				</div>
+				<span class="changes">
+					<#if oaddtime??>
+					<span>处理时间：<span class="label label-info ">${(oaddtime)!}</span></span>
+					</#if>
+				</span>
+			</div>
+			<div class="jf_inner jf_topic">
+				<div style="margin: 30px;">
+					
+					<h3>${(oaddcomment)!}</h3>
+					
+				</div>
+			</div>
+			</#if>
 		</div>
 		
 		<!-- 处理panel -->
+		<#if ocomment??>
+		
+		<#else>
 		<div class="jf_panel">
 			<div class="jf_header ">
 				处理
@@ -165,7 +187,10 @@
 			<div class="jf_header jf_topic_header">
 				<div>
 					<span class="changes">
-						<span>处理时间：<input id="deal_at" type="datetime-local" required></span>
+						<span>处理时间：
+							
+								<input id="deal_at" type="text" class="datetimepicker" readonly ><span class="add-on"><i class="icon-th"></i></span>
+						</span>
 					</span>
 				</div>
 				<br>
@@ -177,15 +202,15 @@
 					
 					<div class="col-xs-4">
 					<div class="input-group">
-					<span class="input-group-addon">处理</span>
+					<span class="input-group-addon">指派</span>
 						<select id="selectDeal" class="form-control" name="selectDeal">
-							<option value="">请选择处理人员</option>
+							<option value="-1">请指派处理人员</option>
 							<#list dealList as deal>
 							<option value="${(deal.userid)!}">${(deal.fullname)!}</option>
 							</#list>
 						</select>
 						<span class="input-group-btn">
-						<button id="arrange" class="btn btn-default">指派</button>
+						<button id="arrange" class="btn btn-default">确定</button>
 						</span>
 						 </div>
 					</div>
@@ -219,6 +244,45 @@
 				</div>
 			</div>
 		</div>
+		</#if>
+		
+		<#if addcomment??>
+		
+		<#elseif ocomment??>
+		
+		<!-- 补充意见 -->
+		<div class="jf_panel">
+			<div class="jf_header ">
+				补充意见
+			</div>
+			<div class="jf_header jf_topic_header">
+				<div>
+					<span class="changes">
+						<span>处理时间：
+								<input id="add_at" type="text" class="datetimepicker" readonly >
+						</span>
+					</span>
+				</div>
+				<br>
+				
+				
+				<div>
+					<textarea id="addcomment" name="addcomment" class="form-control"
+							placeholder="处理意见，不少于25字。" maxlength="250" cols="80" rows="7"
+							 >${(addcomment)!}</textarea>
+				</div>
+				<br>
+				<div>
+					<button id="operateaddupdate" name="submit" value="提交"  class="btn btn-primary save"  data-loading-text="正在提交..."
+		                    data-complete-text="提交成功!">
+		                    提交
+		            </button>
+				</div>
+			</div>
+		</div>
+		</#if>
+		
+		
 	</div>
 </div>
 
@@ -230,9 +294,10 @@ $(document).ready(function(){
 			url:"${ContextPath}/operate/arrange",
 			data:{"oorderid":$('#oorderid').val(),"selectDeal":$('#selectDeal').val()},
 			success:function(msg){
-				$("#arrange").hide();
+				
 				alert(msg.state);
 				if(msg.state=='指派成功'){
+					$("#arrange").hide();
 					window.location.href='${ContextPath}/operate/operates'
 				}
 				
@@ -245,7 +310,11 @@ $(document).ready(function(){
 		$.ajax({
 			type:"post",
 			url:"${ContextPath}/operate/update",
-			data:{"oorderid":$('#oorderid').val(),"uuserid":$('#uuserid').val(),"deal_at":$('#deal_at').val(),"ocomment":$('#ocomment').val()},
+			data:{
+				"oorderid":$('#oorderid').val(),
+				"uuserid":$('#uuserid').val(),
+				"deal_at":$('#deal_at').val(),
+				"ocomment":$('#ocomment').val()},
 			success:function(msg){
 				alert(msg.state);
 				if(msg.state=='提交成功！'){
@@ -256,13 +325,33 @@ $(document).ready(function(){
 		});
 	});
 	
+	$("#operateaddupdate").click(function(){
+		$.ajax({
+			type:"post",
+			url:"${ContextPath}/operate/addupdate",
+			data:{
+				"oorderid":$('#oorderid').val(),
+				"uuserid":$('#uuserid').val(),
+				"add_at":$('#add_at').val(),
+				"addcomment":$('#addcomment').val()},
+			success:function(msg){
+				alert(msg.state);
+				if(msg.state=='提交成功！'){
+					window.location.href='${ContextPath}/operate/operates'
+				}
+				
+			}
+		});
+	});
+	
+	$("#deal_at").datetimepicker({
+		format: 'yyyy-mm-dd HH:ii:ss',
+		
+	});
+	$("#add_at").datetimepicker({
+		format: 'yyyy-mm-dd HH:ii:ss',
+		
+	});
 });
 </script>
-<!-- <div class="index-background">
-	代表上写文、/blog代表控制器、/save代表控制器中的方法
-	<form class="form-horizontal" role="form" action="${ContextPath}/operate/update" method="post" >
-		<#include "_formdeal.html" />
-	</form>
-	
-</div> -->
 </@layout>

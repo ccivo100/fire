@@ -50,7 +50,9 @@ public class CommonValidator extends Validator{
 			Order order=Order.dao.findById(orderid);
 			User cUser=SubjectKit.getUser();
 			if(order.getInt("status")==0){
-				addError("errorMsg","失败：工单已提交");
+				if(!ValidateKit.isNullOrEmpty(order.get("addcomment"))){
+					addError("errorMsg","失败：工单已提交");
+				}
 			}else if(!ValidateKit.isNullOrEmpty(order.getLong("deal_user"))){
 				if(cUser.getLong("id").equals(order.getLong("accept_user"))){
 					addError("errorMsg","失败：工单已指派其他运维员处理");

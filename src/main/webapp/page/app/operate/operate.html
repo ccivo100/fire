@@ -58,7 +58,10 @@
 				<td style="text-align:left;">
 				<a class="btn btn-primary btn-xs"   href="${ContextPath}/operate/operate?id=${operate.id}"  >查看</a> 
 				<#if operate.status=0>
-				<a class="btn btn-primary btn-xs"  href="${ContextPath}/operate/edit?id=${operate.id}" >补充</a>
+					<#if operate.addcomment??>
+					<#else>
+					<a class="btn btn-primary btn-xs"  href="${ContextPath}/operate/edit?id=${operate.id}" >补充</a>
+					</#if>
 				</#if>
 				</td>
 			</tr>

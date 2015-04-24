@@ -1,5 +1,6 @@
 package com.poicom.function.app;
 
+import java.util.Date;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -164,11 +165,13 @@ public class OperateController extends JFController{
 	public void arrange(){
 		int dealid=getParaToInt("selectDeal");
 		int oorderid=getParaToInt("oorderid");
-		System.out.println("工单id："+oorderid+"，处理人id："+dealid);
 		
 		Order order=Order.dao.findById(oorderid);
 		UserOrder userorder=UserOrder.dao.findFirstBy(" order_id=?", oorderid);
-		if(ValidateKit.isNullOrEmpty(order.get("deal_user"))){
+		if(dealid==-1){
+			renderJson("state","请选择指派人员");
+		}
+		else if(ValidateKit.isNullOrEmpty(order.get("deal_user"))){
 			userorder.set("user_id", dealid);
 			if(userorder.update()){
 				order.set("deal_user", dealid).update();
@@ -191,14 +194,21 @@ public class OperateController extends JFController{
 		Integer orderid=getParaToInt("oorderid");
 		//comment
 		String comment=getPara("ocomment");
+		//deal_at
+		String deal_at=getPara("deal_at");
+		
 		Order order=Order.dao.findById(orderid);
 		User cUser=SubjectKit.getUser();
-		
-		if(!ValidateKit.isLength(comment, 2, 250))
+		if(!ValidateKit.isDateTime(deal_at)){
+			renderJson("state","请选择处理时间！");
+		}else if(DateKit.isDateBefore(deal_at, DateTime.now().toString("yyyy-MM-dd HH:mm:ss"))){
+			renderJson("state","所选时间不可早于当前时间！");
+		}
+		else if(!ValidateKit.isLength(comment, 15, 250))
 		{
-			renderJson("state","处理意见应不少于2字！");
+			renderJson("state","处理意见应不少于15字！");
 		}else if(!ValidateKit.isNullOrEmpty(order.getLong("deal_user"))){
-			if(order.getInt("status")==0){
+			if(!ValidateKit.isNullOrEmpty(order.get("comment"))){
 				renderJson("state","失败：工单已提交");
 			}else if(cUser.getLong("id").equals(order.getLong("accept_user"))){
 				renderJson("state","失败：工单已指派其他运维员处理");
@@ -216,8 +226,7 @@ public class OperateController extends JFController{
 			}
 			order
 			.set("comment", comment)
-			.set("deal_at", 
-					DateTime.now().toString("yyyy-MM-dd HH:mm:ss"))
+			.set("deal_at", deal_at)
 			.set("status", 0);
 			
 			//若处理时间超时，则
@@ -245,6 +254,66 @@ public class OperateController extends JFController{
 			}else{
 				renderJson("state","提交失败！");
 			}
+		}
+	}
+	
+	/**
+	 * 添加补充意见
+	 */
+	public void addupdate(){
+		//order_id
+		Integer orderid = getParaToInt("oorderid");
+		// addcomment
+		String addcomment = getPara("addcomment");
+		//add_at
+		String add_at = getPara("add_at");
+
+		Order order = Order.dao.findById(orderid);
+		User cUser = SubjectKit.getUser();
+		
+		String deal_at=order.get("deal_at").toString();
+		DateTime now=DateTime.now();
+		int t =DateKit.dateBetween(deal_at, now);
+		if(t>72){
+			renderJson("state", "该故障单时间过去太久，不提供补充意见功能！");
+		}
+		else if (!ValidateKit.isDateTime(add_at)) {
+			renderJson("state", "请选择处理时间！");
+		} else if (DateKit.isDateBefore(add_at,
+				DateTime.now().toString("yyyy-MM-dd HH:mm:ss"))) {
+			renderJson("state", "所选时间不可早于当前时间！");
+		} else if (!ValidateKit.isLength(addcomment, 15, 250)) {
+			renderJson("state", "处理意见应不少于15字！");
+		}else if(!ValidateKit.isNullOrEmpty(order.get("addcomment"))){
+				renderJson("state","失败：工单已提交");
+		
+		}else{
+			order
+				.set("addcomment", addcomment)
+				.set("add_at", add_at);
+			
+			if(order.update()){
+				//故障工单提交人员
+				User offer=User.dao.findById(order.get("offer_user"));
+				User deal=User.dao.findById(order.get("deal_user"));
+				//获取邮件内容
+				//String body=AlertKit.getMailBody(offer,deal,order).toString();
+				if(ValidateKit.isEmail(offer.getStr("email"))){
+					//AlertKit.sendEmail("故障申报补充处理情况通知！",body,offer.getStr("email"));
+				}
+				//电话非空 
+				if(!ValidateKit.isNullOrEmpty(offer.getStr("phone"))){
+					if(ValidateKit.isPhone(offer.getStr("phone"))){
+						//发送短信
+						//AlertKit.sendSms(offer,deal,order);
+					}
+				}
+				
+				renderJson("state","提交成功！");
+			}else{
+				renderJson("state","提交失败！");
+			}
+			
 		}
 		
 		

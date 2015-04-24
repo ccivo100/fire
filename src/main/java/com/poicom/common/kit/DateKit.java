@@ -18,6 +18,7 @@ import org.joda.time.Days;
 import org.joda.time.Hours;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -157,6 +158,24 @@ public class DateKit {
 
 		return sb.toString();
 	}
+	
+	/**
+	 * 比较两个时间先后
+	 * @param date1
+	 * @param date2
+	 * @return
+	 */
+	public static  boolean isDateBefore(String date1,String date2){
+		
+		try{
+	        DateFormat df = DateFormat.getDateTimeInstance();
+	        return df.parse(date1).before(df.parse(date2));
+	       }catch(ParseException e){
+	        return false;
+	       }
+	}
+	
+	
 	
 	/**
 	 * 返回两个日期之间隔了多少小时
