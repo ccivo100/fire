@@ -342,12 +342,14 @@ $(document).ready(function(){
 	});
 	
 	$("#deal_at").datetimepicker({
-		format: 'yyyy-mm-dd HH:ii:ss',
+		format: 'yyyy-mm-dd hh:ii:ss',
+		startDate: new Date(),
 		autoclose: true,
 		pickerPosition: "bottom-left"
 	});
 	$("#add_at").datetimepicker({
-		format: 'yyyy-mm-dd HH:ii:ss',
+		format: 'yyyy-mm-dd hh:ii:ss',
+		startDate: new Date(),
 		autoclose: true,
 		pickerPosition: "bottom-left"
 	});

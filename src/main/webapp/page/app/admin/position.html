@@ -24,7 +24,7 @@
 			<div class="col-xs-4" >
 				<div class="input-group">
 					<span class="input-group-addon">关键字</span> 
-					<input class="form-control-search" id="position" name="position" value="${(position)!}" placeholder="职位名称" type="text" autocomplete="off">
+					<input class="form-control" id="position" name="position" value="${(position)!}" placeholder="职位名称" type="text" autocomplete="off">
 					<span class="input-group-btn">
 						<button class="btn btn-default">
 							<span class="glyphicon glyphicon-search"></span>Search
@@ -45,9 +45,9 @@
 			</tr>
 		</thead>
 		<tbody>
-			<#list positionList as position>
+			<#list positionPage.getList() as position>
 			<tr>
-				<td>${(position.id)!}</td>
+				<td>${(position_index+1)!}</td>
 				<td> ${(position.name)!}</td>
 				<td> ${(position.created_at)!}</td>
 				<td><#if position.deleted_at??><span class="glyphicon glyphicon-remove"></span>禁用<#else>正常</#if></td>
@@ -57,13 +57,24 @@
 				<#else>
 				<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/offposition?id=${(position.id)!}" >禁用</a>
 				</#if>
-				
 				</td>
 			</tr>
-
 			</#list>
+			<#if positionPage.getList().size()!=10>
+			<#assign size=(10-positionPage.getList().size())>
+				<#list 1..size as t>
+					<tr>
+						<td>${(positionPage.getList().size()+t)!}</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</#list>
+			</#if>
 		</tbody>
-	
 	</table>
+	<#include "/page/common/_paginate.html" />
+	<@paginate currentPage=positionPage.pageNumber totalPage=positionPage.totalPage actionUrl="/admin/position/" />
 </div>
 </@layout>

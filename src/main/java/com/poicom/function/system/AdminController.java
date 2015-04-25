@@ -450,8 +450,18 @@ public class AdminController extends Controller {
 	 * 单位管理
 	 */
 	public void branch(){
-		List<Branch> branchList=Branch.dao.findAll();
-		setAttr("branchList",branchList);
+		Page<Branch> branchPage;
+		String orderby=" ORDER BY branch.id ";
+		if(ValidateKit.isNullOrEmpty(getPara("branch"))){
+			String where = " 1=1 ";
+			branchPage=Branch.dao.findBranchPage(getParaToInt(0,1), 10, where, orderby);
+		}else{
+			String where=" branch.name like ?  ";
+			String condition ="%"+getPara("branch").trim()+"%";
+			branchPage=Branch.dao.findBranchPage(getParaToInt(0,1), 10, where, orderby, condition);
+			setAttr("branch",getPara("branch").trim());
+		}
+		setAttr("branchPage",branchPage);
 	}
 	
 	public void addbranch(){
@@ -487,8 +497,20 @@ public class AdminController extends Controller {
 	 * 部门管理
 	 */
 	public void apartment(){
-		List<Apartment> apartmentList=Apartment.dao.findAll();
-		setAttr("apartmentList",apartmentList);
+		
+		Page<Apartment> apartmentPage;
+		String orderby=" ORDER BY apartment.id ";
+		if(ValidateKit.isNullOrEmpty(getPara("apartment"))){
+			String where = " 1=1 ";
+			apartmentPage=Apartment.dao.findApartmentPage(getParaToInt(0,1), 10, where, orderby);
+		}else{
+			String where=" apartment.name like ?  ";
+			String condition ="%"+getPara("apartment").trim()+"%";
+			apartmentPage=Apartment.dao.findApartmentPage(getParaToInt(0,1), 10, where, orderby, condition);
+			setAttr("apartment",getPara("apartment").trim());
+		}
+		setAttr("apartmentPage",apartmentPage);
+		
 	}
 	public void addapartment(){
 		render(APARTMENT_ADD_PAGE);
@@ -521,8 +543,19 @@ public class AdminController extends Controller {
 	 * 职位管理
 	 */
 	public void position(){
-		List<Position> positionList=Position.dao.findAll();
-		setAttr("positionList",positionList);
+		
+		Page<Position> positionPage;
+		String orderby=" ORDER BY position.id ";
+		if(ValidateKit.isNullOrEmpty(getPara("position"))){
+			String where = " 1=1 ";
+			positionPage=Position.dao.findPositionPage(getParaToInt(0,1), 10, where, orderby);
+		}else{
+			String where=" position.name like ?  ";
+			String condition ="%"+getPara("position").trim()+"%";
+			positionPage=Position.dao.findPositionPage(getParaToInt(0,1), 10, where, orderby, condition);
+			setAttr("position",getPara("position").trim());
+		}
+		setAttr("positionPage",positionPage);
 	}
 	public void addposition(){
 		render(POSITION_ADD_PAGE);
@@ -562,12 +595,20 @@ public class AdminController extends Controller {
 	/**
 	 * 故障类型管理
 	 */
-	@Before(CacheInterceptor.class)
-	@CacheName("/admin/type")
 	public void type(){
-		List<ErrorType> typeList=ErrorType.dao.findAll();
-		setAttr("typeList",typeList);
-		render("type.html");
+		
+		Page<ErrorType> errorTypePage;
+		String orderby=" ORDER BY errorType.id ";
+		if(ValidateKit.isNullOrEmpty(getPara("errorType"))){
+			String where = " 1=1 ";
+			errorTypePage=ErrorType.dao.findErrorTypePage(getParaToInt(0,1), 10, where, orderby);
+		}else{
+			String where=" errorType.name like ?  ";
+			String condition ="%"+getPara("errorType").trim()+"%";
+			errorTypePage=ErrorType.dao.findErrorTypePage(getParaToInt(0,1), 10, where, orderby, condition);
+			setAttr("errorType",getPara("errorType").trim());
+		}
+		setAttr("errorTypePage",errorTypePage);
 	}
 	
 	public void addtype(){

@@ -55,6 +55,7 @@ public class OperateController extends JFController{
 	public void operates(){
 		User user=User.dao.getCurrentUser();
 		Page <Record> operatePage;
+		String condition;
 		if(ValidateKit.isNullOrEmpty(user)){
 			render("operate.html");
 		}else{

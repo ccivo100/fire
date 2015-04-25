@@ -2,6 +2,8 @@ package com.poicom.function.app.model;
 
 import java.util.List;
 
+import com.jfinal.plugin.activerecord.Page;
+
 import cn.dreampie.tablebind.TableBind;
 import cn.dreampie.web.model.Model;
 
@@ -13,6 +15,11 @@ public class Position extends Model<Position> {
 	
 	public List<Position> getAllPosition(){
 		return find("select * from com_position where deleted_at is null");
+	}
+	
+	public Page<Position> findPositionPage(int pageNumber, int pageSize,String where,String orderby,
+			Object... paras){
+		return paginateBy(pageNumber, pageSize, where+orderby, paras);
 	}
 
 }

@@ -24,7 +24,7 @@
 			<div class="col-xs-4" >
 				<div class="input-group">
 					<span class="input-group-addon">关键字</span> 
-					<input class="form-control-search" id="apartment" name="apartment" value="${(apartment)!}" placeholder="部门名称" type="text" autocomplete="off">
+					<input class="form-control" id="apartment" name="apartment" value="${(apartment)!}" placeholder="部门名称" type="text" autocomplete="off">
 					<span class="input-group-btn">
 						<button class="btn btn-default">
 							<span class="glyphicon glyphicon-search"></span>Search
@@ -45,9 +45,9 @@
 			</tr>
 		</thead>
 		<tbody>
-			<#list apartmentList as apartment>
+			<#list apartmentPage.getList() as apartment>
 			<tr>
-				<td>${(apartment.id)!}</td>
+				<td>${(apartment_index+1)!}</td>
 				<td> ${(apartment.name)!}</td>
 				<td> ${(apartment.created_at)!}</td>
 				<td><#if apartment.deleted_at??><span class="glyphicon glyphicon-remove"></span>禁用<#else>正常</#if></td>
@@ -57,13 +57,24 @@
 				<#else>
 				<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/offapartment?id=${(apartment.id)!}" >禁用</a>
 				</#if>
-				
 				</td>
 			</tr>
-
 			</#list>
+			<#if apartmentPage.getList().size()!=10>
+			<#assign size=(10-apartmentPage.getList().size())>
+				<#list 1..size as t>
+					<tr>
+						<td>${(apartmentPage.getList().size()+t)!}</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</#list>
+			</#if>
 		</tbody>
-	
 	</table>
+	<#include "/page/common/_paginate.html" />
+	<@paginate currentPage=apartmentPage.pageNumber totalPage=apartmentPage.totalPage actionUrl="/admin/apartment/" />
 </div>
 </@layout>

@@ -3,6 +3,7 @@ package com.poicom.function.app.model;
 import java.util.List;
 
 import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 
 import cn.dreampie.sqlinxml.SqlKit;
@@ -52,6 +53,11 @@ public class ErrorType extends Model<ErrorType>{
 	public List<Record> getOperatorType(Object... paras){
 		return Db.find(SqlKit.sql("type.findOperatorTypeBySelect") + blank
 				+ SqlKit.sql("type.findOperatorTypeByFrom"), paras);
+	}
+	
+	public Page<ErrorType> findErrorTypePage(int pageNumber, int pageSize,String where,String orderby,
+			Object... paras){
+		return paginateBy(pageNumber, pageSize, where+orderby, paras);
 	}
 
 }

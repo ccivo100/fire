@@ -7,15 +7,26 @@
    <li class="active"><a href="#">类型管理</a></li>
 </ul>
 </div>
-<form class="bs-example bs-example-form" role="form" action="${ContextPath}/" method="get">
+<form class="bs-example bs-example-form" role="form" action="${ContextPath}/admin/type" method="post">
 	<div class="row">
-			<div class="col-sm-4 col-md-4 col-lg-4">
+			<div class="col-xs-1" >
 				<div class="form-group">
 				<span class="input-group-btn">
 					<a  class="btn btn-success"  href="${ContextPath}/admin/addtype">
 				     	新增类型
 					</a>
 				</span>
+				</div>
+			</div>
+			<div class="col-xs-4" >
+				<div class="input-group">
+					<span class="input-group-addon">关键字</span> 
+					<input class="form-control" id="errorType" name="errorType" value="${(errorType)!}" placeholder="故障类型名称" type="text" autocomplete="off">
+					<span class="input-group-btn">
+						<button class="btn btn-default">
+							<span class="glyphicon glyphicon-search"></span> 查询
+						</button>
+					</span>
 				</div>
 			</div>
 	</div>
@@ -31,9 +42,9 @@
 			</tr>
 		</thead>
 		<tbody>
-			<#list typeList as type>
+			<#list errorTypePage.getList() as type>
 			<tr>
-				<td>${(type.id)!}</td>
+				<td>${(type_index+1)!}</td>
 				<td> ${(type.name)!}</td>
 				<td> ${(type.created_at)!}</td>
 				<td><#if type.deleted_at??><span class="glyphicon glyphicon-remove"></span>禁用<#else>正常</#if></td>
@@ -43,15 +54,25 @@
 				<#else>
 				<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/offtype?id=${(type.id)!}" >禁用</a>
 				</#if>
-				
 				</td>
 			</tr>
-
 			</#list>
+			<#if errorTypePage.getList().size()!=10>
+			<#assign size=(10-errorTypePage.getList().size())>
+				<#list 1..size as t>
+					<tr>
+						<td>${(errorTypePage.getList().size()+t)!}</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</#list>
+			</#if>
 		</tbody>
-	
 	</table>
-
+	<#include "/page/common/_paginate.html" />
+	<@paginate currentPage=errorTypePage.pageNumber totalPage=errorTypePage.totalPage actionUrl="/admin/type/" />
 </div>
       
 </@layout>
