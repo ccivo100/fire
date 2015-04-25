@@ -10,15 +10,26 @@
    <li ><a href="${ContextPath}/admin/position">职位管理</a></li>
 </ul>
 </div>
-<form class="bs-example bs-example-form" role="form" action="${ContextPath}/" method="get">
+<form class="bs-example bs-example-form" role="form" action="${ContextPath}/admin/branch" method="post">
 	<div class="row">
-			<div class="col-sm-4 col-md-4 col-lg-4">
+			<div class="col-xs-1">
 				<div class="form-group">
 				<span class="input-group-btn">
 					<a  class="btn btn-success"  href="${ContextPath}/admin/addbranch">
 				     	新增单位
 					</a>
 				</span>
+				</div>
+			</div>
+			<div class="col-xs-4" >
+				<div class="input-group">
+					<span class="input-group-addon">关键字</span> 
+					<input class="form-control-search" id="branch" name="branch" value="${(branch)!}" placeholder="单位名称" type="text" autocomplete="off">
+					<span class="input-group-btn">
+						<button class="btn btn-default">
+							<span class="glyphicon glyphicon-search"></span>Search
+						</button>
+					</span>
 				</div>
 			</div>
 	</div>

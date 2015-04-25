@@ -59,38 +59,8 @@
 				
 			</div>
 		</div>
-	</div>
-	<div class="col-md-3 hidden-xs hidden-sm" style="padding-left: 0px;">
-		<div id="jf_sidebar" class="hidden-xs">
-			<div class="jf_panel">
-    			<div class="jf_header">
-        			申报人员信息
-    			</div>
-    			<div class="jf_inner">
-    				<div>
-    					<div style="margin-top: 2px;">
-    						<span>姓名：<span class="label label-info ">${(uoffername)!}</span></span>
-    					</div>
-    					<div style="margin-top: 2px;">
-    						<span>电话：<span class="label label-info ">${(uofferphone)!}</span></span>
-    					</div>
-    					<div style="margin-top: 2px;">
-    						<span>单位：<span class="label label-info ">${(offer.bname)!}</span></span>
-    					</div>
-    					<div style="margin-top: 2px;">
-    						<span>部门：<span class="label label-info ">${(offer.aname)!}</span></span>
-    					</div>
-    					<div style="margin-top: 2px;">
-    						<span>职位：<span class="label label-info ">${(offer.pname)!}</span></span>
-    					</div>
-    				</div>
-    			</div>
-			</div>
-		</div>
-	</div>
-</div>
- <div class="row">
-	<div class="col-md-9">
+		
+		<!-- 处理情况panel -->
 		<div class="jf_panel">
 			<div class="jf_header ">
 				处理情况
@@ -159,6 +129,34 @@
 				</div>
 			</div>
 			</#if>
+		</div>
+	</div>
+	<div class="col-md-3 hidden-xs hidden-sm" style="padding-left: 0px;">
+		<div id="jf_sidebar" class="hidden-xs" data-spy="affix" data-offset-top="125">
+			<div class="jf_panel">
+    			<div class="jf_header">
+        			申报人员信息
+    			</div>
+    			<div class="jf_inner">
+    				<div>
+    					<div style="margin-top: 2px;">
+    						<span>姓名：<span class="label label-info ">${(uoffername)!}</span></span>
+    					</div>
+    					<div style="margin-top: 2px;">
+    						<span>电话：<span class="label label-info ">${(uofferphone)!}</span></span>
+    					</div>
+    					<div style="margin-top: 2px;">
+    						<span>单位：<span class="label label-info ">${(offer.bname)!}</span></span>
+    					</div>
+    					<div style="margin-top: 2px;">
+    						<span>部门：<span class="label label-info ">${(offer.aname)!}</span></span>
+    					</div>
+    					<div style="margin-top: 2px;">
+    						<span>职位：<span class="label label-info ">${(offer.pname)!}</span></span>
+    					</div>
+    				</div>
+    			</div>
+			</div>
 		</div>
 	</div>
 </div>

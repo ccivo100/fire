@@ -173,7 +173,7 @@ function select2() {
 		success: function (msg) {
 			$("#selectDeal").append("<option value=''>请选择运维人员</option>");
 			for (var i = 0; i < msg.dealList.length; i++) {
-				$("#selectDeal").append("<option value=" + msg.dealList[i].userid + ">" + msg.dealList[i].fullname + "</option>");
+				$("#selectDeal").append("<option value=" + msg.dealList[i].userid + ">" + "<"+msg.dealList[i].pname+">"+msg.dealList[i].fullname + "</option>");
 			}
 		}
 	})

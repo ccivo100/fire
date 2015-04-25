@@ -68,6 +68,10 @@ public class Order extends Model<Order> {
 						+ orderby, paras);
 	}
 	
+	public List<Record>findOperatesByUserId(String where,String orderby,Object...  paras){
+		return Db.find(SqlKit.sql("order.findOfferQueryBySelect")+SqlKit.sql("order.findOfferQueryByFrom") + getWhere(where)+ orderby, paras);
+	}
+	
 	/**
 	 * @描述 查询Operate 详细内容
 	 * @param where
@@ -113,7 +117,7 @@ public class Order extends Model<Order> {
 	public void format(Page<Record> page,String... paras){
 		for(Record record:page.getList()){
 			for(String attr:paras){
-				record.set(attr, StringUtils.abbreviate(record.getStr(attr), (new Random().nextInt(5)+16)));
+				record.set(attr, StringUtils.abbreviate(record.getStr(attr), (new Random().nextInt(2)+22)));
 			}
 			
 		}
@@ -122,7 +126,7 @@ public class Order extends Model<Order> {
 	public void format(List<Record> list,String... paras){
 		for(Record record:list){
 			for(String attr:paras){
-				record.set(attr, StringUtils.abbreviate(record.getStr(attr), (new Random().nextInt(5)+16)));
+				record.set(attr, StringUtils.abbreviate(record.getStr(attr), (new Random().nextInt(2)+22)));
 			}
 			
 		}

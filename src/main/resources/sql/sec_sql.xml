@@ -53,14 +53,16 @@
   	<!-- 根据故障类型，查找运维人员的信息 -->
   	<sql id="findOperatorsBySelect">
   		SELECT user.id userid,user.email useremail,user.phone userphone,
-		user.first_name firstname,user.last_name lastname,user.full_name fullname
+		user.first_name firstname,user.last_name lastname,user.full_name fullname,
+		branch.name bname,apartment.name aname,position.name pname
   	</sql>
   	<sql id="findOperatorsByFrom">
-  		FROM sec_user AS user
-		WHERE user.id 
-		IN(SELECT usertype.user_id 
-			 FROM com_user_type AS usertype 
-			 WHERE usertype.type_id=?)
+  		FROM sec_user_info AS userinfo
+		LEFT OUTER JOIN com_branch AS branch ON userinfo.branch_id=branch.id
+		LEFT OUTER JOIN com_apartment AS apartment ON userinfo.apartment_id=apartment.id
+		LEFT OUTER JOIN com_position AS position ON userinfo.position_id=position.id
+		LEFT OUTER JOIN sec_user AS user ON userinfo.user_id=user.id 
+		WHERE user.id in(SELECT usertype.user_id FROM com_user_type AS usertype WHERE usertype.type_id=?)
   	</sql>
   	<sql id="findOperatorByFrom">
   		FROM sec_user AS user

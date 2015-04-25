@@ -275,8 +275,18 @@ public class AdminController extends Controller {
 	 * 用户管理
 	 */
 	public void user(){
-		String orderby=" 1=1 ORDER BY user.id ";
-		Page<User> userPage=User.dao.getAllUserPage(getParaToInt(0,1), 10,orderby);
+		
+		Page<User> userPage;
+		String orderby="  ORDER BY user.id ";
+		if(ValidateKit.isNullOrEmpty(getPara("username"))){
+			String where=" 1=1 ";
+			userPage=User.dao.getAllUserPage(getParaToInt(0,1), 10,where+orderby);
+		}else{
+			String condition ="%"+getPara("username").trim()+"%";
+			String where=" user.full_name like ?  ";
+			userPage=User.dao.getAllUserPage(getParaToInt(0,1), 10,where+orderby,condition);
+			setAttr("username",getPara("username").trim());
+		}
 		
 		for(int i=0;i<userPage.getList().size();i++){
 			List<Record> list=UserRole.dao.findUserRolesById(userPage.getList().get(i).get("uuserid"));

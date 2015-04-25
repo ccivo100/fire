@@ -17,13 +17,13 @@
   			<form class="bs-example bs-example-form" role="form" action="/report/reports" method="get">
 		      	<div class="row">
 		      		
-				         <div class="col-lg-8">
+				         <div class="col-lg-4">
 				         
 				            <div class="input-group">
-				            	<span class="input-group-addon">故障类型</span>
+				            	<span class="input-group-addon">关键字</span>
 				               	<select id="selectType" name="selectType" class="form-control"   autofocus>
 				               		
-				               		<option value="" selected="selected">请选择</option>
+				               		<option value="" selected="selected">== 故障类型 ==</option>
 				               		<#list typeList as type>
 								         <option value="${type.id}"  
 								         	<#if typeid??>

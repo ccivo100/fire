@@ -72,6 +72,8 @@
     color:#000
 }
 
+
+
 /* 主页搜索警告框 */
 .index-alert {
 	padding: 8px;
@@ -108,6 +110,8 @@ textarea{
 	resize: none;
 }
 
+
+
 /* 系统的页脚 */
 .footer{
   padding: 40px 0;
@@ -122,7 +126,9 @@ textarea{
   margin-bottom: 0;
 }
 
-/* reporter查询工单、提交工单，operator查询工单、回复工单 */
+
+
+/** reporter查询工单、提交工单，operator查询工单、回复工单 */
 
 @media (min-width: 992px)
 #jf_sidebar {
@@ -287,6 +293,30 @@ a.dark {
 }
 
 
+
+/** 回到顶部的UI  贴边 */
+
+#backtotop:hover {
+	background-color: #fff;
+    
+    color: #666;
+}
+#backtotop {
+    width: 24px;
+    color: gray;
+    padding: 12px 0 12px 5px;
+    display: none;
+    position: fixed;
+    cursor: pointer;
+    text-align: center;
+    z-index: 20;
+    background-color: #5bc0de;
+    border-radius: 12px 0 0 12px;
+}
+
+
+
+/** 回到顶部的UI  飞机 */
 .goto-top:hover {
     background-color: #5bc0de;
     color: #666;

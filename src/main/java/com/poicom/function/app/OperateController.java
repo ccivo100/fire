@@ -54,17 +54,33 @@ public class OperateController extends JFController{
 	 */
 	public void operates(){
 		User user=User.dao.getCurrentUser();
+		Page <Record> operatePage;
 		if(ValidateKit.isNullOrEmpty(user)){
 			render("operate.html");
 		}else{
 			String where=" 1=1 and o.deleted_at is null and o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) ";
 			String orderby=" ORDER BY o.offer_at DESC ";
-			Page <Record> operatePage=Order.dao.findOperatesByUserId(getParaToInt(0,1), 10,where,orderby, user.get("id"));
-			Order.dao.format(operatePage,"description");
+			operatePage=Order.dao.findOperatesByUserId(getParaToInt(0,1), 10,where,orderby, user.get("id"));
+			Order.dao.format(operatePage,"title");
 			setAttr("operatePage",operatePage);
 			render(OPERATE_PAGE);
 		}
 		
+	}
+	
+	public void testoperates(){
+		User user=User.dao.getCurrentUser();
+		List <Record> operateList;
+		if(ValidateKit.isNullOrEmpty(user)){
+			renderJson("operate.html");
+		}else{
+			String where=" 1=1 and o.deleted_at is null and o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) ";
+			String orderby=" ORDER BY o.offer_at DESC ";
+			operateList=Order.dao.findOperatesByUserId(where,orderby, user.get("id"));
+			Order.dao.format(operateList,"title");
+			renderJson(operateList);
+			
+		}
 	}
 	
 	public void operate(){
