@@ -1,5 +1,6 @@
 package com.poicom.function.app;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -55,7 +56,11 @@ public class OperateController extends JFController{
 	public void operates(){
 		User user=User.dao.getCurrentUser();
 		Page <Record> operatePage;
-		String condition;
+		//String condition;
+		//拼接where语句
+		StringBuffer whereadd=new StringBuffer();
+		//保存condition条件
+		List<Object> conditions=new ArrayList<Object>();
 		String title=getPara("title");
 		String branch=getPara("branch");
 		String offeruser=getPara("offeruser");
@@ -69,25 +74,57 @@ public class OperateController extends JFController{
 				&&ValidateKit.isNullOrEmpty(offertime)
 				&&ValidateKit.isNullOrEmpty(dealuser)){
 			
-			String where=" 1=1 and o.deleted_at is null and o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) or o.accept_user=? ";
+			String where=" 1=1 and o.deleted_at is null and (o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) or o.accept_user=?) ";
 			String orderby=" ORDER BY o.offer_at DESC ";
 			operatePage=Order.dao.findOperatesByUserId(getParaToInt(0,1), 10,where,orderby, user.get("id"),user.get("id"));
 			Order.dao.format(operatePage,"title");
 			setAttr("operatePage",operatePage);
 			
-		}
-		//查询申报时间
-		else if(!ValidateKit.isNullOrEmpty(offertime)){
-			String where=" 1=1 and o.deleted_at is null and (o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) or o.accept_user=?) and o.offer_at like ?";
+		}else{
+			
+			conditions.add(user.get("id"));
+			conditions.add(user.get("id"));
+			//查询运维人
+			if(!ValidateKit.isNullOrEmpty(dealuser)){
+				whereadd.append(" and u2.full_name like ? ");
+				conditions.add("%"+getPara("dealuser").trim()+"%");
+				setAttr("dealuser",dealuser);
+			}
+			//查询申报人
+			if(!ValidateKit.isNullOrEmpty(offeruser)){
+				whereadd.append(" and u1.full_name like ? ");
+				conditions.add("%"+getPara("offeruser").trim()+"%");
+				setAttr("offeruser",offeruser);
+			}
+			//查询申报人公司
+			if(!ValidateKit.isNullOrEmpty(branch)){
+				whereadd.append(" and u1.bname like ? ");
+				conditions.add("%"+getPara("branch").trim()+"%");
+				setAttr("branch",branch);
+			}
+			//查询标题
+			if(!ValidateKit.isNullOrEmpty(title)){
+				whereadd.append(" and o.title like ? ");
+				conditions.add("%"+getPara("title").trim()+"%");
+				setAttr("title",title);
+			}
+			//查询申报时间
+			if(!ValidateKit.isNullOrEmpty(offertime)){
+				whereadd.append(" and o.offer_at like ? ");
+				conditions.add(getPara("offertime").trim()+"%");
+			}
+			String where=" 1=1 and o.deleted_at is null and (o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) or o.accept_user=?) "+whereadd.toString();
 			String orderby=" ORDER BY o.offer_at DESC ";
-			condition=getPara("offertime").trim()+"%";
-			operatePage=Order.dao.findOperatesByUserId(getParaToInt(0,1), 10,where,orderby, user.get("id"),user.get("id"),condition);
+			Object[] condition= new Object[conditions.size()];
+			conditions.toArray(condition);
+			operatePage=Order.dao.findOperatesByUserId(getParaToInt(0,1), 10,where,orderby,condition);
 			Order.dao.format(operatePage,"title");
-			setAttr("offertime",offertime);
 			setAttr("operatePage",operatePage);
+			
 		}
+
 		//查询运维人
-		else if(!ValidateKit.isNullOrEmpty(dealuser)){
+		/*else if(!ValidateKit.isNullOrEmpty(dealuser)){
 			String where=" 1=1 and o.deleted_at is null and (o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) or o.accept_user=?) and u2.full_name like ?";
 			String orderby=" ORDER BY o.offer_at DESC ";
 			condition="%"+getPara("dealuser").trim()+"%";
@@ -95,9 +132,9 @@ public class OperateController extends JFController{
 			Order.dao.format(operatePage,"title");
 			setAttr("dealuser",dealuser);
 			setAttr("operatePage",operatePage);
-		}
+		}*/
 		//查询申报人
-		else if(!ValidateKit.isNullOrEmpty(offeruser)){
+		/*else if(!ValidateKit.isNullOrEmpty(offeruser)){
 			String where=" 1=1 and o.deleted_at is null and (o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) or o.accept_user=?) and u1.full_name like ?";
 			String orderby=" ORDER BY o.offer_at DESC ";
 			condition="%"+getPara("offeruser").trim()+"%";
@@ -105,9 +142,9 @@ public class OperateController extends JFController{
 			Order.dao.format(operatePage,"title");
 			setAttr("offeruser",offeruser);
 			setAttr("operatePage",operatePage);
-		}
+		}*/
 		//查询申报人公司
-		else if(!ValidateKit.isNullOrEmpty(branch)){
+		/*else if(!ValidateKit.isNullOrEmpty(branch)){
 			String where=" 1=1 and o.deleted_at is null and (o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) or o.accept_user=?) and u1.bname like ?";
 			String orderby=" ORDER BY o.offer_at DESC ";
 			condition="%"+getPara("branch").trim()+"%";
@@ -115,9 +152,9 @@ public class OperateController extends JFController{
 			Order.dao.format(operatePage,"title");
 			setAttr("branch",branch);
 			setAttr("operatePage",operatePage);
-		}
+		}*/
 		//查询标题
-		else if(!ValidateKit.isNullOrEmpty(title)){
+		/*else if(!ValidateKit.isNullOrEmpty(title)){
 			String where=" 1=1 and o.deleted_at is null and (o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) or o.accept_user=?) and o.title like ?";
 			String orderby=" ORDER BY o.offer_at DESC ";
 			condition="%"+getPara("title").trim()+"%";
@@ -125,8 +162,17 @@ public class OperateController extends JFController{
 			Order.dao.format(operatePage,"title");
 			setAttr("title",title);
 			setAttr("operatePage",operatePage);
-		}
-
+		}*/
+		//查询申报时间
+		/*else if(!ValidateKit.isNullOrEmpty(offertime)){
+			String where=" 1=1 and o.deleted_at is null and (o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) or o.accept_user=?) and o.offer_at like ?";
+			String orderby=" ORDER BY o.offer_at DESC ";
+			condition=getPara("offertime").trim()+"%";
+			operatePage=Order.dao.findOperatesByUserId(getParaToInt(0,1), 10,where,orderby, user.get("id"),user.get("id"),condition);
+			Order.dao.format(operatePage,"title");
+			setAttr("offertime",offertime);
+			setAttr("operatePage",operatePage);
+		}*/
 		render(OPERATE_PAGE);
 		
 	}

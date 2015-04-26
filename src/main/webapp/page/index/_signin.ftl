@@ -1,4 +1,4 @@
-﻿<#include "/page/common/_layout.html"/>
+﻿<#include "/page/common/_layoutsign.html"/>
 <@layout activebar="signin" html_title="登录">
 <div class="row">
 	
