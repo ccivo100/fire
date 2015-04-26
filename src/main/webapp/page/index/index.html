@@ -27,7 +27,7 @@
 				<td style="text-align:left;">${(order.off_branch)!}</td>
 				<td style="text-align:left;">${(order.off_user)!}</td>
 				<td style="text-align:left;">${(order.offer_at)!}</td>
-				<td style="text-align:left;"><#if order.deal_user??>${(order.deal_user)!}<#else>暂无</#if></td>
+				<td style="text-align:left;"><#if order.deal_user??>${(order.deal_user)!}<#else>-</#if></td>
 				<td >
 					<#if order.status=0>
 					<span class="label label-success">已处理</span>

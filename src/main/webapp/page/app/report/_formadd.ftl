@@ -139,7 +139,7 @@
 
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
-			<button id="submit" value="提交" type="submit" class="btn btn-primary save" data-loading-text="正在提交...">提交</button>
+			<button id="offersubmit" value="提交" type="submit" class="btn btn-primary save" data-loading-text="正在提交...">提交</button>
 		</div>
 	</div>
 	
@@ -184,5 +184,7 @@ $(function(){
 	select1();
 	$('#selectType').bind("change", select2);
 });
+
+
 </script>
 

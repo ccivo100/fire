@@ -32,23 +32,21 @@
 			<div class="form-group">
 				<div class="input-group">
 					<div class="input-group-addon">关键字</div>
-					<input class="form-control-search" name="title" value="${(title)!}"  placeholder="故障描述" type="text">
+					<input class="form-control" name="title" value="${(title)!}"  placeholder="故障描述" type="text">
 				</div>
 			</div>
 			<div class="form-group">
-				<input class="form-control-search" id="apartment" name="apartment" value="${(apartment)!}" placeholder="申报部门" type="text" >
+				<input class="form-control" id="branch" name="branch" value="${(branch)!}" placeholder="申报单位" type="text" >
 			</div>
 			<div class="form-group">
-				<input class="form-control-search" id="offer_user" name="offeruser" value="${(offeruser)!}" placeholder="申报人员" type="text">
+				<input class="form-control" id="offeruser" name="offeruser" value="${(offeruser)!}" placeholder="申报人员" type="text">
 			</div>
 			<div class="form-group">
-				<input class="form-control-search" id="deal_user" name="dealuser" value="${(dealuser)!}" placeholder="处理人员" type="text">
+				<input class="form-control" id="dealuser" name="dealuser" value="${(dealuser)!}" placeholder="处理人员" type="text">
 			</div>
 			<div class="form-group">
-				<input class="form-control-search" id="offer_at" name="offertime" value="${(offertime)!}" placeholder="申报时间" type="text">
-			</div>
-			<div class="form-group">
-				<input class="form-control-search" id="status" name="status" value="${(status)!}" placeholder="状态" type="text">
+				<input id="offertime" name="offertime" type="text" value="${(offertime)!}" class="datetimepicker" placeholder="申报时间" readonly >
+				<span class="add-on"><i class="icon-remove"></i></span>
 			</div>
 			<span class="form-group">
 				<button class="btn btn-default">
@@ -122,6 +120,15 @@
 	<#include "/page/common/_paginate.html" />
 	<@paginate currentPage=operatePage.pageNumber totalPage=operatePage.totalPage actionUrl="/operate/operates/" />
 
+<script>
+$("#offertime").datetimepicker({
+	format: 'yyyy-mm-dd',
+	autoclose: true,
+	todayBtn: true,
+	pickerPosition: "bottom-left"
+});
+</script>
+
 	<div id="custom-toolbar">
 		<div class="form-inline" role="form">
 			<div class="form-group">
@@ -158,7 +165,5 @@
 	        </tr>
 	    </thead>
 	</table>
-	
-
 </div>
 </@layout>
