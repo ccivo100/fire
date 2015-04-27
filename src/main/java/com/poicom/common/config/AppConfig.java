@@ -36,6 +36,7 @@ import com.poicom.common.quartz.QuartzPlugin;
 import com.poicom.common.resource.ResourceTags;
 import com.poicom.common.routebind.RouteBind;
 import com.poicom.common.shiro.MyJdbcAuthzService;
+import com.poicom.common.thread.ThreadAlert;
 import com.poicom.common.thread.ThreadSysLog;
 import com.poicom.function.*;
 import com.poicom.function.app.CommonInterceptor;
@@ -142,11 +143,15 @@ public class AppConfig extends JFinalConfig {
 		
 		logger.info("afterJFinalStart 启动操作日志入库线程");
 		//ThreadSysLog.startSaveDBThread();
+		//启动进程
+		logger.info("afterJFinalStart 启动操作发送邮件、短信线程");
+		//ThreadAlert.startSendEmailAndSmsThread();
 	}
 	
 	public void beforeJFinalStop(){
 		logger.info("beforeJFinalStop 释放日志入库线程");
 		//ThreadSysLog.setThreadRun(false);
+		//ThreadAlert.setThreadRun(false);
 	}
 	
 	public static void main(String[] args) {

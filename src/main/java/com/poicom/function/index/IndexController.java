@@ -17,6 +17,7 @@ import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.poicom.common.kit.AlertKit;
+import com.poicom.common.thread.ThreadAlert;
 import com.poicom.function.app.model.Order;
 import com.poicom.function.system.model.User;
 
@@ -152,8 +153,21 @@ public class IndexController extends Controller {
 		String username=getPara("username");
 		String email=getPara("email");
 		User user=User.dao.findFirstBy("`user`.username = ? AND `user`.deleted_at is null", username);
+		AlertKit alertKit=new AlertKit();
 		String body=AlertKit.getMailBody(user,getRequest().getHeader("Host")+getRequest().getContextPath()).toString();
-		AlertKit.sendEmail("找回密码！【一点通】",body,email);
+		if(ValidateKit.isEmail(email)){
+			alertKit.setEmailTitle("找回密码！【一点通】").setEmailBody(body).setEmailAdd(email);
+		}
+		if(!ValidateKit.isNullOrEmpty(user.getStr("phone"))){
+			if(ValidateKit.isPhone(user.getStr("phone"))){
+				//短信内容
+				String smsBody="找回密码，重置密码的链接（24小时内有效）已经发到您邮箱，让及时登录处理【一点通】";
+				alertKit.setSmsContext(smsBody).setSmsPhone(user.getStr("phone"));
+			}
+		}
+		//加入进程
+		logger.info("日志添加到入库队列 ---> 找回密码");
+		ThreadAlert.add(alertKit);
 		redirect("/signin");
 	}
 	

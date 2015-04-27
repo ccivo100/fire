@@ -26,7 +26,77 @@ import com.poicom.function.system.model.User;
  */
 public class AlertKit {
 	
+	//邮件标题
+	private String EmailTitle;
+	//邮件内容
+	private String EmailBody;
+	//收件人邮箱
+	private String emailAdd;
 	
+	//短信内容
+	private String smsContext;
+	//接收人手机号码
+	private String[] smsPhone;
+	
+	
+	
+	public String getEmailTitle() {
+		return EmailTitle;
+	}
+
+	public AlertKit setEmailTitle(String emailTitle) {
+		EmailTitle = emailTitle;
+		return this;
+	}
+
+	public String getEmailBody() {
+		return EmailBody;
+	}
+
+	public AlertKit setEmailBody(String emailBody) {
+		EmailBody = emailBody;
+		return this;
+	}
+
+	public String getEmailAdd() {
+		return emailAdd;
+	}
+
+	public AlertKit setEmailAdd(String emailAdd) {
+		this.emailAdd = emailAdd;
+		return this;
+	}
+
+	public String getSmsContext() {
+		return smsContext;
+	}
+
+	public AlertKit setSmsContext(String smsContext) {
+		this.smsContext = smsContext;
+		return this;
+	}
+
+	public String[] getSmsPhone() {
+		return smsPhone;
+	}
+
+	public AlertKit setSmsPhone(String... smsPhone) {
+		this.smsPhone = smsPhone;
+		return this;
+	}
+	
+	//发送邮件
+	public void sendEmail(){
+		AlertKit alertKit=new AlertKit();
+		sendEmail(alertKit.getEmailTitle(),alertKit.getEmailBody(),alertKit.getEmailAdd());
+	}
+	
+	//发送短信
+	public void sendSms(){
+		AlertKit alertKit=new AlertKit();
+		sendSms(alertKit.getSmsContext(),alertKit.getSmsPhone());
+	}
+
 	/**
 	 * @描述 发送邮件通知
 	 *            主题        subject
@@ -36,8 +106,9 @@ public class AlertKit {
 	public static void sendEmail(String subject,String body,String... paras){
 		
 		try {
+			System.out.println("进入发送邮件通知主方法！");
 			Mailer.sendHtml(subject, body, paras);
-		} catch (EmailException e) {
+		} catch (EmailException e) { 
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -97,6 +168,24 @@ public class AlertKit {
 	}
 	
 	/**
+	 * @描述 报障员撤回工单时使用
+	 * @param offer
+	 * @param deal
+	 * @param order
+	 * @return
+	 */
+	public static StringBuffer getMailBodyRecall(Record offer,Record deal,Order order){
+		StringBuffer body=new StringBuffer();
+		body.append("【撤回通知】尊敬的 "+deal.getStr("ufullname")+" 您好，")
+		.append(offer.getStr("bname")+" 的 ")
+		.append(offer.getStr("ufullname")+"（"+offer.getStr("uphone")+"）")
+		.append("撤回于 "+DateKit.format(order.getDate("created_at"),DateKit.pattern_ymd_hms)+" ")
+		.append("发起的故障申告！");
+		return body;
+		
+	}
+	
+	/**
 	 * @描述 用户重置密码时使用。
 	 * @param user
 	 * @param context
@@ -124,7 +213,26 @@ public class AlertKit {
 		return body;
 	}
 	
+	public static StringBuffer getMailBodyArrange(Record offeruser,Record acceptuser,Record dealuser,Order order){
+		StringBuffer body=new StringBuffer();
+		body.append("亲爱的用户，"+offeruser.getStr("ufullname")+"，您好！<br/>")
+		.append("您在"+DateKit.format(order.getDate("created_at"),DateKit.pattern_ymd_hms))
+		.append("提交的关于“"+order.get("title")+"”的故障工单已由")
+		.append(acceptuser.getStr("ufullname")+"（"+acceptuser.getStr("uphone")+"）")
+		.append("指派给"+dealuser.getStr("ufullname")+"（"+dealuser.getStr("uphone")+"）")
+		.append("处理。<br/>")
+		.append("感谢您使用点通科技故障申报系统，祝您生活愉快！");
+		
+		return body;
+	}
 	
+	/**
+	 * @描述 运维人员处理完毕。
+	 * @param offer
+	 * @param deal
+	 * @param order
+	 * @return
+	 */
 	public static StringBuffer getMailBody(User offer,User deal,Order order){
 		StringBuffer body=new StringBuffer();
 		body.append("尊敬的"+offer.getStr("full_name")+"，您好！<br/>")
@@ -159,7 +267,7 @@ public class AlertKit {
 	 * @param userinfo
 	 * @param phone
 	 */
-	public static void sendSms(Object obj,Record userinfo,Order order,String... phone ){
+	public static String setSmsContext(Object obj,Record userinfo,Order order ){
 		
 		StringBuffer contt=new StringBuffer();
 		if(ValidateKit.isNullOrEmpty(userinfo)){
@@ -173,9 +281,9 @@ public class AlertKit {
 			.append("提交了故障工单，请尽快处理。【一点通】");
 		}
 		
-		String content =contt.toString();
-		sendSms(content,phone);
-		
+		//String content =contt.toString();
+		//sendSms(content,phone);
+		return contt.toString();
 	}
 	
 	/**
@@ -183,7 +291,7 @@ public class AlertKit {
 	 * @param userinfo
 	 * @param phone
 	 */
-	public static void sendSms(Record offer,Order order,String... phone ){
+	public static String getSmsBody(Record offer,Order order){
 		StringBuffer contt=new StringBuffer();
 		if(ValidateKit.isNullOrEmpty(offer)){
 			contt.append("null");
@@ -195,8 +303,50 @@ public class AlertKit {
 			.append("发起的故障申告，现已超时，请尽快处理！【一点通】");
 		}
 		
-		String content =contt.toString();
-		sendSms(content,phone);
+		//String content =contt.toString();
+		//sendSms(content,phone);
+		return contt.toString();
+	}
+	
+	/**
+	 * @描述 申报员撤回故障工单通知
+	 * @param offer
+	 * @param order
+	 * @return
+	 */
+	public static String getSmsBodyRecall(Record offer,Order order){
+		StringBuffer contt=new StringBuffer();
+		if(ValidateKit.isNullOrEmpty(offer)){
+			contt.append("null");
+		}else{
+			contt.append("您好，")
+			.append(offer.getStr("bname")+" 的 ")
+			.append(offer.getStr("ufullname")+"（"+offer.getStr("uphone")+"）")
+			.append("撤回于 "+DateKit.format(order.getDate("created_at"),DateKit.pattern_ymd_hms)+" ")
+			.append("发起的故障申告！【一点通】");
+		}
+		return contt.toString();
+	}
+	
+	/**
+	 * @描述 运维人员指派通知
+	 * @param offeruser
+	 * @param acceptuser
+	 * @param dealuser
+	 * @param order
+	 * @return
+	 */
+	public static String getSmsBodyArrange(Record offeruser,Record acceptuser,Record dealuser,Order order){
+		StringBuffer contt=new StringBuffer();
+		
+		contt.append("亲爱的 "+offeruser.getStr("ufullname")+"，您好！")
+		.append("您在"+DateKit.format(order.getDate("created_at"),DateKit.pattern_ymd_hms))
+		.append("提交的，关于“"+order.get("title")+"”的故障工单，已由")
+		.append(acceptuser.getStr("ufullname")+"（"+acceptuser.getStr("uphone")+"）")
+		.append("指派给"+dealuser.getStr("ufullname")+"（"+dealuser.getStr("uphone")+"）")
+		.append("处理。【一点通】");
+		
+		return contt.toString();
 	}
 	
 	/**
@@ -205,7 +355,7 @@ public class AlertKit {
 	 * @param deal
 	 * @param order
 	 */
-	public static void sendSms(User offer,User deal,Order order){
+	public static String getSmsBody(User offer,User deal,Order order){
 		
 		StringBuffer contt=new StringBuffer();
 		if(ValidateKit.isNullOrEmpty(offer)){
@@ -218,8 +368,9 @@ public class AlertKit {
 			.append(" 处理完毕，感谢您使用故障申报系统，祝您生活愉快！【一点通】");
 		}
 		
-		String content =contt.toString();
-		sendSms(content,offer.getStr("phone"));
+		//String content =contt.toString();
+		//sendSms(content,offer.getStr("phone"));
+		return contt.toString();
 	}
 	
 	/**
@@ -244,6 +395,7 @@ public class AlertKit {
 	 */
 	public static void sendSms(String content,String... phone){
 		
+		System.out.println("进入发送短信主方法");
 		//电话列表...
 		String phones=phoneFormat(phone);
 		String department="研发部";

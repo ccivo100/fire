@@ -8,6 +8,7 @@
 </ul>
 </div>
 </div>
+<input id="oorderid"  type="hidden" name="oorderid" value="${(oorderid)!}">
 <div class="row">
 	<div class="col-md-9">
 		<div class="jf_panel">
@@ -38,7 +39,7 @@
 				</span>
 				<#if ostatus=2>
 					<#if oflag=0>
-					<a id="hasten" class="btn btn-xs btn-danger" href="${ContextPath}/report/hasten?id=${(oorderid)!}">催办</a>
+					<a id="hasten" class="btn btn-xs btn-danger" >催办</a>
 					<#elseif oflag=1>
 					<a id="hasten" class="btn btn-xs btn-default" disabled>已催办</a>
 					</#if>
@@ -161,4 +162,24 @@
 	</div>
 </div>
 
+<script>
+$(document).ready(function(){
+	$("#hasten").click(function(){
+		$.ajax({
+			type:"post",
+			url:"${ContextPath}/report/hasten",
+			data:{
+				"oorderid":$('#oorderid').val()
+			},
+			dataType : "json",
+			success:function(msg){
+				alert(msg.state);
+				if(msg.state=='催办成功！'){
+					window.location.reload();
+				}
+			}
+		});
+	});
+});
+</script>
 </@layout>

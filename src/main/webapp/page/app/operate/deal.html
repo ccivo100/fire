@@ -28,7 +28,7 @@
 				<td style="text-align:left;">${(operate.off_branch)!}</td>
 				<td style="text-align:left;">${(operate.off_user)!}</td>
 				<td style="text-align:left;">${(operate.offer_at)!}</td>
-				<td style="text-align:left;"><#if operate.deal_user??>${(operate.deal_user)!}<#else>暂无</#if></td>
+				<td style="text-align:left;"><#if operate.deal_user??>${(operate.deal_user)!}<#else>-</#if></td>
 				<td >
 					<#if operate.status=0>
 					<span class="label label-success">已处理</span>

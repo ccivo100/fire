@@ -66,12 +66,7 @@ $(document).ready(function() {
 			btn.button('reset');
 		}, 3000);
 	});
-	$('#offersubmit[data-loading-text]').click(function() {
-		var btn = $(this).button('loading');
-		setTimeout(function() {
-			btn.button('reset');
-		}, 7000);
-	});
+	
 });
 
 

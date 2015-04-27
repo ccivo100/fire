@@ -4,7 +4,6 @@
 	
 	<div class="col-xs-7">
 		<div class="jumbotron">
-			<img src="/dongtaitu.jpg" height="440" width="500">
 			<div id="myCarousel" class="carousel slide">
 			   <!-- 轮播（Carousel）指标 -->
 			   <ol class="carousel-indicators">
@@ -15,13 +14,13 @@
 			   <!-- 轮播（Carousel）项目 -->
 			   <div class="carousel-inner">
 			      <div class="item active">
-			         <img src="/wp-content/uploads/2014/07/slide1.png" alt="First slide">
+			         <img src="${ContextPath}/res/background/main-bg1.jpg" alt="First slide">
 			      </div>
 			      <div class="item">
-			         <img src="/wp-content/uploads/2014/07/slide2.png" alt="Second slide">
+			         <img src="${ContextPath}/res/background/main-bg2.jpg" alt="Second slide">
 			      </div>
 			      <div class="item">
-			         <img src="/wp-content/uploads/2014/07/slide3.png" alt="Third slide">
+			         <img src="${ContextPath}/res/background/main-bg3.jpg" alt="Third slide">
 			      </div>
 			   </div>
 			   <!-- 轮播（Carousel）导航 -->
@@ -54,7 +53,7 @@
 					<label>
 						<input type="checkbox" name="rememberMe" <#if rememberMe??><#if rememberMe="1">checked value="1"</#if></#if>>记住我
 					</label>
-					<label><a href="${ContextPath}/retrieve">忘记密码?</a></label>
+					<label ><a href="${ContextPath}/retrieve">忘记密码?</a></label>
 				</div>
 				<@shiro.isLoginFailure name="shiroLoginFailure">
 			        <div class="alert alert-danger alert-dismissable" style="background-image: none;">

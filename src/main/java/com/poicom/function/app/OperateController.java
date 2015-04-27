@@ -23,6 +23,7 @@ import com.jfinal.plugin.ehcache.EvictInterceptor;
 import com.poicom.common.controller.JFController;
 import com.poicom.common.kit.AlertKit;
 import com.poicom.common.kit.DateKit;
+import com.poicom.common.thread.ThreadAlert;
 import com.poicom.function.app.model.ErrorType;
 import com.poicom.function.app.model.Level;
 import com.poicom.function.app.model.Order;
@@ -177,7 +178,7 @@ public class OperateController extends JFController{
 		
 	}
 	
-	public void testoperates(){
+	/*public void testoperates(){
 		User user=User.dao.getCurrentUser();
 		List <Record> operateList;
 		if(ValidateKit.isNullOrEmpty(user)){
@@ -190,7 +191,7 @@ public class OperateController extends JFController{
 			renderJson(operateList);
 			
 		}
-	}
+	}*/
 	
 	public void operate(){
 		
@@ -300,6 +301,30 @@ public class OperateController extends JFController{
 			userorder.set("user_id", dealid);
 			if(userorder.update()){
 				order.set("deal_user", dealid).update();
+				
+				//发送邮件、短信线程
+				AlertKit alertKit=new AlertKit();
+				//申报人员信息
+				Record offeruser=UserInfo.dao.getAllUserInfo(order.get("offer_user"));
+				//受理人员信息
+				Record acceptuser=UserInfo.dao.getAllUserInfo(order.get("accept_user"));
+				//处理人员信息
+				Record dealuser=UserInfo.dao.getAllUserInfo(order.get("deal_user"));
+				//获取邮件内容
+				String body=AlertKit.getMailBodyArrange(offeruser,acceptuser,dealuser,order).toString();
+				//发送邮件通知
+				if(ValidateKit.isEmail(offeruser.getStr("uemail"))){
+					alertKit.setEmailTitle("【指派通知】故障申报人员指派通知！").setEmailBody(body).setEmailAdd(offeruser.getStr("uemail"));
+				}
+				if(ValidateKit.isPhone(offeruser.getStr("uphone"))){
+					//短信内容
+					String smsBody=AlertKit.getSmsBodyArrange(offeruser,acceptuser,dealuser,order);
+					alertKit.setSmsContext(smsBody).setSmsPhone(offeruser.getStr("uphone"));
+				}
+				//加入进程
+				logger.info("日志添加到入库队列 ---> 指派处理人员");
+				ThreadAlert.add(alertKit);
+				
 				renderJson("state","指派成功");
 			}else{
 				renderJson("state","指派失败");
@@ -337,6 +362,53 @@ public class OperateController extends JFController{
 				renderJson("state","失败：工单已提交");
 			}else if(cUser.getLong("id").equals(order.getLong("accept_user"))){
 				renderJson("state","失败：工单已指派其他运维员处理");
+			}else{
+				int time=Level.dao.findById(order.get("level")).get("deadline");
+				String offer_at=order.get("offer_at").toString();
+				DateTime now=DateTime.now();
+				int t =DateKit.dateBetween(offer_at, now);
+				
+				//设置基本内容：处理人，建议，处理时间，修改状态等。
+				if(ValidateKit.isNullOrEmpty(order.get("deal_user"))){
+					order.set("deal_user", getParaToInt("uuserid"));
+				}
+				order
+				.set("comment", comment)
+				.set("deal_at", deal_at)
+				.set("status", 0);
+				
+				//若处理时间超时，则
+				if(t>time){
+					order.set("spend_time", t);
+				}
+				
+				if(order.update()){
+					//故障工单提交人员
+					User offer=User.dao.findById(order.get("offer_user"));
+					User deal=User.dao.findById(order.get("deal_user"));
+					//获取邮件内容
+					String body=AlertKit.getMailBody(offer,deal,order).toString();
+					AlertKit alertKit=new AlertKit();
+					if(ValidateKit.isEmail(offer.getStr("email"))){
+						
+						alertKit.setEmailTitle("故障申报处理情况通知！").setEmailBody(body).setEmailAdd(offer.getStr("email"));
+						//AlertKit.sendEmail("故障申报处理情况通知！",body,offer.getStr("email"));
+					}
+					//电话非空 
+					if(!ValidateKit.isNullOrEmpty(offer.getStr("phone"))){
+						if(ValidateKit.isPhone(offer.getStr("phone"))){
+							//短信内容
+							String smsBody=AlertKit.getSmsBody(offer,deal,order);
+							alertKit.setSmsContext(smsBody).setSmsPhone(offer.getStr("phone"));
+						}
+					}
+					//加入进程
+					logger.info("日志添加到入库队列 ---> 处理故障工单");
+					ThreadAlert.add(alertKit);
+					renderJson("state","提交成功！");
+				}else{
+					renderJson("state","提交失败！");
+				}
 			}
 		}else{
 
@@ -365,16 +437,23 @@ public class OperateController extends JFController{
 				User deal=User.dao.findById(order.get("deal_user"));
 				//获取邮件内容
 				String body=AlertKit.getMailBody(offer,deal,order).toString();
+				AlertKit alertKit=new AlertKit();
 				if(ValidateKit.isEmail(offer.getStr("email"))){
-					AlertKit.sendEmail("故障申报处理情况通知！",body,offer.getStr("email"));
+					
+					alertKit.setEmailTitle("故障申报处理情况通知！").setEmailBody(body).setEmailAdd(offer.getStr("email"));
+					//AlertKit.sendEmail("故障申报处理情况通知！",body,offer.getStr("email"));
 				}
 				//电话非空 
 				if(!ValidateKit.isNullOrEmpty(offer.getStr("phone"))){
 					if(ValidateKit.isPhone(offer.getStr("phone"))){
-						//发送短信
-						//AlertKit.sendSms(offer,deal,order);
+						//短信内容
+						String smsBody=AlertKit.getSmsBody(offer,deal,order);
+						alertKit.setSmsContext(smsBody).setSmsPhone(offer.getStr("phone"));
 					}
 				}
+				//加入进程
+				logger.info("日志添加到入库队列 ---> 处理故障工单");
+				ThreadAlert.add(alertKit);
 				renderJson("state","提交成功！");
 			}else{
 				renderJson("state","提交失败！");

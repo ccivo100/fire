@@ -153,9 +153,9 @@
 		<div class="col-sm-offset-2 col-sm-10">
 			<button id="reportupdate" value="提交" type="submit" class="btn btn-primary save" data-loading-text="正在提交...">提交</button>
 			<#if odeletetime?exists>
-			<a id="delete" value="删除"  class="btn btn-danger" href="${ContextPath}/report/delete?id=${(oorderid)!}" data-loading-text="正在删除...">删除</a>
+			<a id="delete" value="删除"  class="btn btn-danger"  data-loading-text="正在删除...">删除</a>
 			<#else>
-			<a id="recall" value="撤回"  class="btn btn-danger" href="${ContextPath}/report/recall?id=${(oorderid)!}" data-loading-text="正在撤回...">撤回</a>
+			<a id="recall" value="撤回"  class="btn btn-danger"  data-loading-text="正在撤回...">撤回</a>
 			</#if>
 			
 		</div>
@@ -177,5 +177,41 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
+	$("#recall").click(function(){
+		$.ajax({
+			type:"post",
+			url:"${ContextPath}/report/recall",
+			data:{
+				"oorderid":$('#oorderid').val()
+			},
+			dataType : "json",
+			success:function(msg){
+				alert(msg.state);
+				if(msg.state=='撤回成功！'){
+					window.location.reload();
+				}
+			}
+		});
+	});
+	
+	$("#delete").click(function(){
+		$.ajax({
+			type:"post",
+			url:"${ContextPath}/report/delete",
+			data:{
+				"oorderid":$('#oorderid').val()
+			},
+			dataType : "json",
+			success:function(msg){
+				alert(msg.state);
+				if(msg.state=='删除成功！'){
+					window.location.href='${ContextPath}/report/reports'
+				}
+			}
+		});
+	});
+	
+	
 });
 </script>
