@@ -3,7 +3,7 @@
 <div class="row">
 	
 	<div class="col-xs-7">
-		<div class="jumbotron">
+		<div class="jumbotron-sign">
 			<div id="myCarousel" class="carousel slide">
 			   <!-- 轮播（Carousel）指标 -->
 			   <ol class="carousel-indicators">
@@ -31,8 +31,10 @@
 			</div> 
 		</div>
 	</div>
-	<div class="col-xs-5">
-		<div class="jumbotron">
+	<div class="col-xs-1">
+	</div>
+	<div class="col-xs-4">
+		<div class="jumbotron-sign">
 	
 			<form class="form-signin" role="form" method="post" action="${ContextPath}/signin">
 				<h2 class="form-signin-heading">请登录</h2>

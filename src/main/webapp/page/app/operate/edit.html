@@ -193,6 +193,7 @@
 					<textarea id="ocomment" name="ocomment" class="form-control"
 							placeholder="处理意见，不少于25字。" maxlength="250" cols="80" rows="7"
 							 >${(ocomment)!}</textarea>
+					<textarea style="height: 250px; margin: 5px 0px 5px 0px;" name="content" id="content"></textarea>
 				</div>
 				<div>
 				<#if commentMsg??>
@@ -240,6 +241,7 @@
 					<textarea id="addcomment" name="addcomment" class="form-control"
 							placeholder="处理意见，不少于25字。" maxlength="250" cols="80" rows="7"
 							 >${(addcomment)!}</textarea>
+					
 				</div>
 				<br>
 				<div>
@@ -311,7 +313,7 @@ $(document).ready(function(){
 				"oorderid":$('#oorderid').val(),
 				"uuserid":$('#uuserid').val(),
 				"deal_at":$('#deal_at').val(),
-				"ocomment":$('#ocomment').val()},
+				"ocomment":ue.getContent()},
 			success:function(msg){
 				alert(msg.state);
 				if(msg.state=='提交成功！'){
@@ -353,5 +355,8 @@ $(document).ready(function(){
 		pickerPosition: "bottom-left"
 	});
 });
+
+var ue = UE.getEditor('content');
+
 </script>
 </@layout>

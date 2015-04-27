@@ -340,6 +340,47 @@ a.dark {
 
 /** 登陆页面UI */
 
+.jumbotron-sign {
+	padding: 30px 15px;
+	margin-top: 15px;
+	margin-bottom: 30px;
+	color: inherit;
+	background-color: #eee
+}
 
+.jumbotron-sign h1,.jumbotron-sign .h1 {
+	color: inherit
+}
+
+.jumbotron-sign p {
+	margin-bottom: 15px;
+	font-size: 21px;
+	font-weight: 200
+}
+
+.jumbotron-sign>hr {
+	border-top-color: #d5d5d5
+}
+
+.container .jumbotron-sign,.container-fluid .jumbotron-sign {
+	border-radius: 6px
+}
+
+.jumbotron-sign .container {
+	max-width: 100%
+}
+
+@media screen and (min-width:768px) {
+	.jumbotron-sign {
+		padding: 3px 0
+	}
+	.container .jumbotron-sign {
+		padding-right: 3px;
+		padding-left: 3px
+	}
+	.jumbotron-sign h1,.jumbotron-sign .h1 {
+		font-size: 63px
+	}
+}
 
 
