@@ -29,6 +29,8 @@
 				<span class="label label-default">未处理</span>
 				<#elseif (ostatus?number)=2>
 				<span class="label label-danger">超时未处理</span>
+				<#elseif (ostatus?number)=3>
+				<span class="label label-warning">处理中</span>
 				</#if>
 				<span>
 				
@@ -96,15 +98,6 @@
     						<span style="margin: 15px;">部门：<span class="label label-info ">${(aname)!}</span></span>
     						<span style="margin: 15px;">职位：<span class="label label-info ">${(pname)!}</span></span>
     					<#else>
-    						<span style="margin: 15px;">处理人：<span class="label label-info ">${(ufullname)!}</span></span>
-    						<#if oaccepttime??>
-    						<span style="margin: 15px;">受理时间：<span class="label label-info ">${(oaccepttime)!}</span></span>
-    						</#if>
-    						<br></br>
-    						<span style="margin: 15px;">电话：<span class="label label-info ">${(uphone)!}</span></span>
-    						<span style="margin: 15px;">单位：<span class="label label-info ">${(bname)!}</span></span>
-    						<span style="margin: 15px;">部门：<span class="label label-info ">${(aname)!}</span></span>
-    						<span style="margin: 15px;">职位：<span class="label label-info ">${(pname)!}</span></span>
     					</#if>
     				</span>
 				<hr>
@@ -191,9 +184,8 @@
 				
 				<div>
 					<textarea id="ocomment" name="ocomment" class="form-control"
-							placeholder="处理意见，不少于25字。" maxlength="250" cols="80" rows="7"
+							placeholder="提交处理意见……" maxlength="250" cols="80" rows="7"
 							 >${(ocomment)!}</textarea>
-					<textarea style="height: 250px; margin: 5px 0px 5px 0px;" name="content" id="content"></textarea>
 				</div>
 				<div>
 				<#if commentMsg??>
@@ -239,7 +231,7 @@
 				
 				<div>
 					<textarea id="addcomment" name="addcomment" class="form-control"
-							placeholder="处理意见，不少于25字。" maxlength="250" cols="80" rows="7"
+							placeholder="提交补充意见……" maxlength="250" cols="80" rows="7"
 							 >${(addcomment)!}</textarea>
 					
 				</div>
@@ -313,7 +305,7 @@ $(document).ready(function(){
 				"oorderid":$('#oorderid').val(),
 				"uuserid":$('#uuserid').val(),
 				"deal_at":$('#deal_at').val(),
-				"ocomment":ue.getContent()},
+				"ocomment":$('#ocomment').val()},
 			success:function(msg){
 				alert(msg.state);
 				if(msg.state=='提交成功！'){
@@ -346,17 +338,19 @@ $(document).ready(function(){
 		format: 'yyyy-mm-dd hh:ii:ss',
 		startDate: new Date(),
 		autoclose: true,
-		pickerPosition: "bottom-left"
+		todayBtn: true,
+		pickerPosition: "bottom-left",
+		language:'zh-CN',
 	});
 	$("#add_at").datetimepicker({
 		format: 'yyyy-mm-dd hh:ii:ss',
 		startDate: new Date(),
 		autoclose: true,
-		pickerPosition: "bottom-left"
+		todayBtn: true,
+		pickerPosition: "bottom-left",
+		language:'zh-CN',
 	});
 });
-
-var ue = UE.getEditor('content');
 
 </script>
 </@layout>

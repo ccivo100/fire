@@ -81,7 +81,7 @@ public class UserController extends Controller {
 		
 	}
 	
-	@Before({UserValidator.class,Tx.class})
+	@Before({Tx.class})
 	public void contactMe(){
 		
 		User user=SubjectKit.getUser();
@@ -89,21 +89,27 @@ public class UserController extends Controller {
 		String phone=getPara("phone");
 		String context=getPara("context");
 		
-		System.out.println(name);
-		System.out.println(phone);
-		System.out.println(context);
-		
-		Contact contact=new Contact();
-		contact
-		.set("user_id", user.get("id"))
-		.set("name", name)
-		.set("phone", phone)
-		.set("context", context);
-		if(contact.save()){
-			renderJson("state", "提交成功");
+		if(ValidateKit.isNullOrEmpty(name)){
+			renderJson("state", "姓名不能为空");
+		}else if(!ValidateKit.isPhone(phone)){
+			renderJson("state", "电话格式不正确");
+		}else if(ValidateKit.isNullOrEmpty(context)){
+			renderJson("state", "提交意见不能为空");
 		}else{
-			renderJson("state", "提交失败");
+			Contact contact=new Contact();
+			contact
+			.set("user_id", user.get("id"))
+			.set("name", name)
+			.set("phone", phone)
+			.set("context", context);
+			if(contact.save()){
+				renderJson("state", "提交成功");
+			}else{
+				renderJson("state", "提交失败");
+			}
 		}
+		
+		
 		
 		
 	}

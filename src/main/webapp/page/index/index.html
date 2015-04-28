@@ -10,7 +10,7 @@
 		<thead>
 			<tr>
 				<th width="2%">序号</th>
-				<th width="10%">故障描述</th>
+				<th width="10%">标题</th>
 				<th width="5%">申报部门</th>
 				<th width="3%">申报人</th>
 				<th width="5%">申报时间</th>
@@ -23,7 +23,7 @@
 			<#list overOrderPage.getList() as order>
 			<tr >
 				<td style="text-align:left;">${order_index+1}</td>
-				<td style="text-align:left;">${(order.description)!}</td>
+				<td style="text-align:left;">${(order.title)!}</td>
 				<td style="text-align:left;">${(order.off_branch)!}</td>
 				<td style="text-align:left;">${(order.off_user)!}</td>
 				<td style="text-align:left;">${(order.offer_at)!}</td>
@@ -35,6 +35,8 @@
 					<span class="label label-default">未处理</span>
 					<#elseif order.status=2>
 					<span class="label label-danger">超时未处理</span>
+					<#elseif order.status=3>
+					<span class="label label-warning">处理中</span>
 					</#if>
 				</td>
 			</tr>

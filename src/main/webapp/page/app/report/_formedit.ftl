@@ -151,10 +151,11 @@
 
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
-			<button id="reportupdate" value="提交" type="submit" class="btn btn-primary save" data-loading-text="正在提交...">提交</button>
+			
 			<#if odeletetime?exists>
 			<a id="delete" value="删除"  class="btn btn-danger"  data-loading-text="正在删除...">删除</a>
 			<#else>
+			<button id="reportupdate" value="提交" type="submit" class="btn btn-primary save" data-loading-text="正在提交...">提交</button>
 			<a id="recall" value="撤回"  class="btn btn-danger"  data-loading-text="正在撤回...">撤回</a>
 			</#if>
 			

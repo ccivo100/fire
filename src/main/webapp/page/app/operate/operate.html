@@ -87,6 +87,8 @@
 					<span class="label label-default">未处理</span>
 					<#elseif operate.status=2>
 					<span class="label label-danger">超时未处理</span>
+					<#elseif operate.status=3>
+					<span class="label label-warning">处理中</span>
 					</#if>
 				</td>
 				

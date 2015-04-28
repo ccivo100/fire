@@ -11,6 +11,7 @@
 				</button>
 				<a class="navbar-brand" href="${ContextPath}/">点通科技故障申报系统</a>
 			</div>
+<!--
 			<@shiro.authenticated>
 			<div>
 		      <p class="navbar-text navbar-right">联系我 
@@ -19,6 +20,18 @@
 		      </p>
 		   </div>
 		   </@shiro.authenticated>
+-->
+		   <@shiro.authenticated>
+			<div>
+				<p class="navbar-text navbar-right"><a class="navbar-link" href="${ContextPath}/signout">退出</a></p>
+				<p class="navbar-text navbar-right">当前用户：
+		    		  <a class="navbar-link" href="${ContextPath}/user/center">${(session["current_user"].full_name)!}</a>
+		    	</p>
+		    </div>
+		    </@shiro.authenticated>
+		    <@shiro.notAuthenticated>
+		    	<p class="navbar-text navbar-right"><a class="navbar-link" href="${ContextPath}/signin">登录</a></p>
+		    </@shiro.notAuthenticated>
 			<div id="example-navbar-collapse" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<@shiro.hasPermission name="P_INDEX">	
@@ -57,7 +70,7 @@
       				
 					<@shiro.hasPermission name="P_O_OPERATES">
 						<li class="<#if activebar='operates'>active</#if>">
-							<a href="${ContextPath}/operate/operates">运维查询</a>
+							<a href="${ContextPath}/operate/operates">运维记录</a>
 						</li>
     				</@shiro.hasPermission>
     				<@shiro.hasPermission name="P_O_DEAL">
@@ -109,15 +122,6 @@
 						</ul>
 					</li>
 					</@shiro.hasPermission>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-				<@shiro.authenticated>
-					<li><p class="navbar-text">当前用户：<a class="navbar-link" href="${ContextPath}/user/center">${(session["current_user"].full_name)!}</a></p></li>
-					<li><p class="navbar-text"><a class="navbar-link" href="${ContextPath}/signout">退出</a></p></li>
-					</@shiro.authenticated>
-				<@shiro.notAuthenticated>
-					<li><p class="navbar-text"><a class="navbar-link" href="${ContextPath}/signin">登录</a></p></li>
-				</@shiro.notAuthenticated>
 				</ul>
 			</div>
 		</div>

@@ -44,7 +44,6 @@
 				
 				</td>
 				<td>
-					<a href="${ContextPath}/operate/assign?id=${user.userid}">分配</a>
 					<button value="提交" type="submit" class="btn btn-primary btn-xs " data-loading-text="正在提交...">提交</button>
 				</td>
 				</form>

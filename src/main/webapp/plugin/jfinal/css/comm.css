@@ -383,4 +383,45 @@ a.dark {
 	}
 }
 
+/** 修改密码页面UI */
 
+.jumbotron-pwd {
+	padding: 30px 15px;
+	margin-top: 15px;
+	margin-bottom: 30px;
+	color: inherit;
+}
+
+.jumbotron-pwd h1,.jumbotron-pwd .h1 {
+	color: inherit
+}
+
+.jumbotron-pwd p {
+	margin-bottom: 15px;
+	font-size: 21px;
+	font-weight: 200
+}
+
+.jumbotron-pwd>hr {
+	border-top-color: #d5d5d5
+}
+
+.container .jumbotron-pwd,.container-fluid .jumbotron-pwd {
+	border-radius: 6px
+}
+
+.jumbotron-sign .container {
+	max-width: 100%
+}
+@media screen and (min-width:768px) {
+	.jumbotron-pwd {
+		padding: 48px 0
+	}
+	.container .jumbotron-pwd {
+		padding-right: 15px;
+		padding-left: 15px
+	}
+	.jumbotron-pwd h1,.jumbotron-pwd .h1 {
+		font-size: 63px
+	}
+}

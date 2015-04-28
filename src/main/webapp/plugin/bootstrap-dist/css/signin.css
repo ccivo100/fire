@@ -8,6 +8,10 @@ body {
 
 /** 登陆页面UI  */
 
+.div-center{
+	margin:0 auto;   
+}
+
 .form-signin {
   max-width: 330px;
   padding: 3px;

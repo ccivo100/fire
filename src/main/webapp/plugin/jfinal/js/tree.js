@@ -176,14 +176,7 @@ $(function() {
 			},
 			dataType : "json",
 			success : function(result) {
-				alert(result.state + 2);
-				return;
-			},
-			error : function(result) {
-				alert(result.state + 1);
-				$('#contactMe').on('hiden.bs.modal', function() {
-					alert(result.contactMsg);
-				});
+				alert(result.state);
 				return;
 			}
 		});

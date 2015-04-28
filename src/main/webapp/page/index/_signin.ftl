@@ -1,5 +1,7 @@
 ﻿<#include "/page/common/_layoutsign.html"/>
 <@layout activebar="signin" html_title="登录">
+
+<div class="div-center" style=' height:105px;line-height:105px;overflow:hidden;'></div>
 <div class="row">
 	
 	<div class="col-xs-7">
@@ -55,7 +57,7 @@
 					<label>
 						<input type="checkbox" name="rememberMe" <#if rememberMe??><#if rememberMe="1">checked value="1"</#if></#if>>记住我
 					</label>
-					<label ><a href="${ContextPath}/retrieve">忘记密码?</a></label>
+					<label style="float:right;"><a href="${ContextPath}/retrieve">忘记密码?</a></label>
 				</div>
 				<@shiro.isLoginFailure name="shiroLoginFailure">
 			        <div class="alert alert-danger alert-dismissable" style="background-image: none;">

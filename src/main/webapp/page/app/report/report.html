@@ -13,57 +13,57 @@
 				                  </a></li>
 </ul>
 </div>
- 
-  			<form class="bs-example bs-example-form" role="form" action="/report/reports" method="get">
-		      	<div class="row">
-		      		
-				         <div class="col-lg-4">
-				         
-				            <div class="input-group">
-				            	<span class="input-group-addon">关键字</span>
-				               	<select id="selectType" name="selectType" class="form-control"   autofocus>
-				               		
-				               		<option value="" selected="selected">== 故障类型 ==</option>
-				               		<#list typeList as type>
-								         <option value="${type.id}"  
-								         	<#if typeid??>
-								         		<#if typeid="">
-								         		
-								         		<#elseif typeid?number=type.id>
-								         			selected="selected"
-												</#if>
-								         	</#if>
-								         >
-											${type.name}
-										</option>
-									</#list>
-								</select>
-							
-								<span class="input-group-btn">
-									<button class="btn btn-default">
-					               <span class="glyphicon glyphicon-search"></span>Search
-					               </button>
-								</span>
-				            </div>
-				            
-				         </div>
-<!-- 					 
-		         		<div class="col-lg-2">
-							<div class="form-group">
-								<span class="input-group-btn">
-				                  <a  class="btn btn-success popover-toggle"  href="/report/add" 
-				                  	title="温馨提示"  data-container="body" 
-      								data-toggle="popover" data-placement="top" 
-      								data-content="点击新建故障工单">
-				                      故障申报
-				                  </a>
-				               </span>
-							</div>
-					</div>
--->
-		      	</div>
-		   </form>
-
+	<form class="bs-example bs-example-form" role="form" action="/report/reports" method="post">
+		<div class="row">
+				<div class="col-xs-2">
+				
+				</div>
+				<div class="col-xs-2">
+				
+				</div>
+				<div class="col-xs-2">
+				
+				</div>
+				<div class="col-xs-2">
+				
+				</div>
+				<div class="col-xs-2">
+				
+				</div>
+				<div class="col-xs-2">
+				
+				</div>
+		</div>
+		<div class="form-inline" role="form">
+			
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon">关键字</div>
+					<input class="form-control" name="title" value="${(title)!}"  placeholder="故障描述" type="text" autocomplete="off">
+				</div>
+			</div>
+			<div class="form-group">
+				<input class="form-control" id="branch" name="branch" value="${(branch)!}" placeholder="申报单位" type="text" autocomplete="off">
+			</div>
+			<div class="form-group">
+				<input class="form-control" id="offeruser" name="offeruser" value="${(offeruser)!}" placeholder="申报人员" type="text" autocomplete="off">
+			</div>
+			<div class="form-group">
+				<input class="form-control" id="dealuser" name="dealuser" value="${(dealuser)!}" placeholder="处理人员" type="text" autocomplete="off">
+			</div>
+			<div class="form-group">
+				<div class="input-append date form_datetime">
+				<input id="offertime" name="offertime" type="text" value="${(offertime)!}" class="datetimepicker" placeholder="申报时间" readonly autocomplete="off">
+				<span class="add-on"><i class="icon-remove"></i></span>
+				</div>
+			</div>
+			<span class="form-group">
+				<button class="btn btn-default">
+					<span class="glyphicon glyphicon-search"></span>查询
+				</button>
+			</span>
+		</div>
+	</form>
 	
 	<table class="table table-bordered table-hover">
 		<thead>
@@ -80,7 +80,7 @@
 		</thead>
 				<tbody>
 			<#list reportPage.getList() as report>
-			<tr class="<#if report.status=0><#elseif report.status=2>danger</#if>">
+			<tr >
 				<td style="text-align:left;">${report_index+1}</td>
 				<td style="text-align:left;">${(report.title)!}</td>
 				<td style="text-align:left;">${(report.off_branch)!}</td>
@@ -97,6 +97,8 @@
 					<span class="label label-default">未处理</span>
 					<#elseif report.status=2>
 					<span class="label label-danger">超时未处理</span>
+					<#elseif report.status=3>
+					<span class="label label-warning">处理中</span>
 					</#if>
 				</td>
 				
@@ -128,5 +130,16 @@
 	</table>
 	<#include "/page/common/_paginate.html" />
 	<@paginate currentPage=reportPage.pageNumber totalPage=reportPage.totalPage actionUrl="/report/reports/" />
+<script>
+$("#offertime").datetimepicker({
+	format: 'yyyy-mm-dd',
+	autoclose: true,
+	todayBtn: true,
+	pickerPosition: "bottom-left",
+	language:'zh-CN',
+    minView: 2,
+	
+});
+</script>
 </div>
 </@layout>

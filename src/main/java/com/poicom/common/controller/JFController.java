@@ -76,7 +76,7 @@ public class JFController extends Controller{
 	/**
 	 * 重写getPara，进行二次decode解码
 	 */
-	@Override
+	/*@Override
 	public String getPara(String name) {
 		String value = getRequest().getParameter(name);
 		if(null != value && !value.isEmpty()){
@@ -88,7 +88,7 @@ public class JFController extends Controller{
 			}
 		}
 		return value;
-	}
+	}*/
 	
 	/**
 	 * 获取checkbox值，数组

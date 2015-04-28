@@ -53,7 +53,73 @@ public class ReportController extends JFController{
 	public void reports(){
 		User user=User.dao.getCurrentUser();
 		Page<Record> reportPage;
-		String orderby=" ORDER BY o.offer_at DESC ";
+		
+		//拼接where语句
+		StringBuffer whereadd=new StringBuffer();
+		//保存condition条件
+		List<Object> conditions=new ArrayList<Object>();
+		String title=getPara("title");
+		String branch=getPara("branch");
+		String offeruser=getPara("offeruser");
+		String offertime=getPara("offertime");
+		String dealuser=getPara("dealuser");
+		
+		//若无查询条件 则按正常查询。
+		if(ValidateKit.isNullOrEmpty(title)
+				&&ValidateKit.isNullOrEmpty(branch)
+				&&ValidateKit.isNullOrEmpty(offeruser)
+				&&ValidateKit.isNullOrEmpty(offertime)
+				&&ValidateKit.isNullOrEmpty(dealuser)){
+			
+			String where=" WHERE o.offer_user=? ";
+			String orderby=" ORDER BY o.status desc, o.offer_at DESC ";
+			reportPage=Order.dao.findReportsByUserId(getParaToInt(0,1), 10,where,orderby, user.get("id"));
+			Order.dao.format(reportPage,"title");
+			setAttr("reportPage",reportPage);
+			
+		}else{
+			
+			conditions.add(user.get("id"));
+			//查询运维人
+			if(!ValidateKit.isNullOrEmpty(dealuser)){
+				whereadd.append(" and u2.full_name like ? ");
+				conditions.add("%"+getPara("dealuser").trim()+"%");
+				setAttr("dealuser",dealuser);
+			}
+			//查询申报人
+			if(!ValidateKit.isNullOrEmpty(offeruser)){
+				whereadd.append(" and u1.full_name like ? ");
+				conditions.add("%"+getPara("offeruser").trim()+"%");
+				setAttr("offeruser",offeruser);
+			}
+			//查询申报人公司
+			if(!ValidateKit.isNullOrEmpty(branch)){
+				whereadd.append(" and u1.bname like ? ");
+				conditions.add("%"+getPara("branch").trim()+"%");
+				setAttr("branch",branch);
+			}
+			//查询标题
+			if(!ValidateKit.isNullOrEmpty(title)){
+				whereadd.append(" and o.title like ? ");
+				conditions.add("%"+getPara("title").trim()+"%");
+				setAttr("title",title);
+			}
+			//查询申报时间
+			if(!ValidateKit.isNullOrEmpty(offertime)){
+				whereadd.append(" and o.offer_at like ? ");
+				conditions.add(getPara("offertime").trim()+"%");
+			}
+			String where=" WHERE o.offer_user=? "+whereadd.toString();
+			String orderby=" ORDER BY o.status desc, o.offer_at DESC ";
+			Object[] condition= new Object[conditions.size()];
+			conditions.toArray(condition);
+			reportPage=Order.dao.findReportsByUserId(getParaToInt(0,1), 10,where,orderby,condition);
+			Order.dao.format(reportPage,"title");
+			setAttr("reportPage",reportPage);
+			
+		}
+		
+		/*String orderby=" ORDER BY o.status desc, o.offer_at DESC ";
 		
 		if(ValidateKit.isNullOrEmpty(getPara("selectType"))){
 			String where=" WHERE o.offer_user=? ";
@@ -68,7 +134,7 @@ public class ReportController extends JFController{
 		
 		setAttr("reportPage",reportPage);
 		setAttr("typeList",ErrorType.dao.getAllType());
-		setAttr("typeid",getPara("selectType"));
+		setAttr("typeid",getPara("selectType"));*/
 		render("report.html");
 	}
 	

@@ -75,7 +75,7 @@ public class OperateController extends JFController{
 				&&ValidateKit.isNullOrEmpty(offertime)
 				&&ValidateKit.isNullOrEmpty(dealuser)){
 			
-			String where=" 1=1 and o.deleted_at is null and (o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) or o.accept_user=?) ";
+			String where=" 1=1 and o.deleted_at is null and o.status=0 and (o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) or o.accept_user=?) ";
 			String orderby=" ORDER BY o.offer_at DESC ";
 			operatePage=Order.dao.findOperatesByUserId(getParaToInt(0,1), 10,where,orderby, user.get("id"),user.get("id"));
 			Order.dao.format(operatePage,"title");
@@ -114,7 +114,7 @@ public class OperateController extends JFController{
 				whereadd.append(" and o.offer_at like ? ");
 				conditions.add(getPara("offertime").trim()+"%");
 			}
-			String where=" 1=1 and o.deleted_at is null and (o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) or o.accept_user=?) "+whereadd.toString();
+			String where=" 1=1 and o.deleted_at is null and o.status=0 and (o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) or o.accept_user=?) "+whereadd.toString();
 			String orderby=" ORDER BY o.offer_at DESC ";
 			Object[] condition= new Object[conditions.size()];
 			conditions.toArray(condition);
@@ -334,6 +334,20 @@ public class OperateController extends JFController{
 			renderJson("state","指派失败");
 	} 
 	
+	public void begindeal(){
+		User user=User.dao.getCurrentUser();
+		Integer orderid=getParaToInt("oorderid");
+		
+		Order order=Order.dao.findById(orderid);
+		if(ValidateKit.isNullOrEmpty(getPara("progress"))){
+			renderJson("state","请选择处理进度！");
+		}else{
+			order.set("status", 3);
+		}
+		
+		
+	}
+	
 	/**
 	 * @描述 提交故障处理建议
 	 */
@@ -351,12 +365,10 @@ public class OperateController extends JFController{
 		User cUser=SubjectKit.getUser();
 		if(!ValidateKit.isDateTime(deal_at)){
 			renderJson("state","请选择处理时间！");
-		}else if(DateKit.isDateBefore(deal_at, DateTime.now().toString("yyyy-MM-dd HH:mm:ss"))){
-			renderJson("state","所选时间不可早于当前时间！");
 		}
-		else if(!ValidateKit.isLength(comment, 15, 250))
+		else if(ValidateKit.isNullOrEmpty(comment))
 		{
-			renderJson("state","处理意见应不少于15字！");
+			renderJson("state","处理意见不为空！");
 		}else if(!ValidateKit.isNullOrEmpty(order.getLong("deal_user"))){
 			if(!ValidateKit.isNullOrEmpty(order.get("comment"))){
 				renderJson("state","失败：工单已提交");
@@ -486,8 +498,8 @@ public class OperateController extends JFController{
 		} else if (DateKit.isDateBefore(add_at,
 				DateTime.now().toString("yyyy-MM-dd HH:mm:ss"))) {
 			renderJson("state", "所选时间不可早于当前时间！");
-		} else if (!ValidateKit.isLength(addcomment, 15, 250)) {
-			renderJson("state", "处理意见应不少于15字！");
+		} else if (ValidateKit.isNullOrEmpty(addcomment)) {
+			renderJson("state", "处理意见应不为空！");
 		}else if(!ValidateKit.isNullOrEmpty(order.get("addcomment"))){
 				renderJson("state","失败：工单已提交");
 		
