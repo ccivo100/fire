@@ -68,9 +68,9 @@
 			<select id="selectType" name="selectType" class="form-control" required >
 			</select>
 		</div>
-		<label class="col-sm-2 control-label">运维人员：</label>
+		<label class="col-sm-2 control-label">运维部门：</label>
 		<div class="col-sm-3">
-			<select id="selectDeal" name="selectDeal" class="form-control" required>
+			<select id="selectApartment" name="selectApartment" class="form-control" required>
 			</select>
 		</div>
 	</div>
@@ -164,16 +164,16 @@ function select1() {
 	})
 };
 function select2() {
-	$("#selectDeal").html("");
+	$("#selectApartment").html("");
 	$.ajax(
 	{
 		type: "post",
 		url: "${ContextPath}/report/handler",
-		data: { "type": "dealler","typeid":$('#selectType').val() },
+		data: { "type": "apartment","typeid":$('#selectType').val() },
 		success: function (msg) {
-			$("#selectDeal").append("<option value=''>请选择运维人员</option>");
-			for (var i = 0; i < msg.dealList.length; i++) {
-				$("#selectDeal").append("<option value=" + msg.dealList[i].userid + ">" + "<"+msg.dealList[i].pname+">"+msg.dealList[i].fullname + "</option>");
+			$("#selectApartment").append("<option value=''>请选择运维部门</option>");
+			for (var i = 0; i < msg.apartmentList.length; i++) {
+				$("#selectApartment").append("<option value=" + msg.apartmentList[i].id + ">" +msg.apartmentList[i].name + "</option>");
 			}
 		}
 	})

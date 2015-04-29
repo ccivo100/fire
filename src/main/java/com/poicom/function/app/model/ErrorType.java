@@ -55,6 +55,16 @@ public class ErrorType extends Model<ErrorType>{
 				+ SqlKit.sql("type.findOperatorTypeByFrom"), paras);
 	}
 	
+	/**
+	 * @描述 获取运维部门 处理的故障类型列表
+	 * @param paras
+	 * @return
+	 */
+	public List<Record> findApartmentType(Object... paras){
+		return Db.find(SqlKit.sql("type.findApartmentTypeBySelect")+blank
+				+SqlKit.sql("type.findApartmentTypeByFrom"), paras);
+	}
+	
 	public Page<ErrorType> findErrorTypePage(int pageNumber, int pageSize,String where,String orderby,
 			Object... paras){
 		return paginateBy(pageNumber, pageSize, where+orderby, paras);

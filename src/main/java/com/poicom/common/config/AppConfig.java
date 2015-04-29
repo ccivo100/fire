@@ -150,7 +150,8 @@ public class AppConfig extends JFinalConfig {
 	
 	public void beforeJFinalStop(){
 		logger.info("beforeJFinalStop 释放日志入库线程");
-		//ThreadSysLog.setThreadRun(false);
+		ThreadSysLog.setThreadRun(false);
+		logger.info("beforeJFinalStop 释放发送邮件、短信线程");
 		//ThreadAlert.setThreadRun(false);
 	}
 	

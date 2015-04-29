@@ -24,6 +24,7 @@ import com.poicom.common.controller.JFController;
 import com.poicom.common.kit.AlertKit;
 import com.poicom.common.kit.DateKit;
 import com.poicom.common.thread.ThreadAlert;
+import com.poicom.function.app.model.Comment;
 import com.poicom.function.app.model.ErrorType;
 import com.poicom.function.app.model.Level;
 import com.poicom.function.app.model.Order;
@@ -124,113 +125,28 @@ public class OperateController extends JFController{
 			
 		}
 
-		//查询运维人
-		/*else if(!ValidateKit.isNullOrEmpty(dealuser)){
-			String where=" 1=1 and o.deleted_at is null and (o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) or o.accept_user=?) and u2.full_name like ?";
-			String orderby=" ORDER BY o.offer_at DESC ";
-			condition="%"+getPara("dealuser").trim()+"%";
-			operatePage=Order.dao.findOperatesByUserId(getParaToInt(0,1), 10,where,orderby, user.get("id"),user.get("id"),condition);
-			Order.dao.format(operatePage,"title");
-			setAttr("dealuser",dealuser);
-			setAttr("operatePage",operatePage);
-		}*/
-		//查询申报人
-		/*else if(!ValidateKit.isNullOrEmpty(offeruser)){
-			String where=" 1=1 and o.deleted_at is null and (o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) or o.accept_user=?) and u1.full_name like ?";
-			String orderby=" ORDER BY o.offer_at DESC ";
-			condition="%"+getPara("offeruser").trim()+"%";
-			operatePage=Order.dao.findOperatesByUserId(getParaToInt(0,1), 10,where,orderby, user.get("id"),user.get("id"),condition);
-			Order.dao.format(operatePage,"title");
-			setAttr("offeruser",offeruser);
-			setAttr("operatePage",operatePage);
-		}*/
-		//查询申报人公司
-		/*else if(!ValidateKit.isNullOrEmpty(branch)){
-			String where=" 1=1 and o.deleted_at is null and (o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) or o.accept_user=?) and u1.bname like ?";
-			String orderby=" ORDER BY o.offer_at DESC ";
-			condition="%"+getPara("branch").trim()+"%";
-			operatePage=Order.dao.findOperatesByUserId(getParaToInt(0,1), 10,where,orderby, user.get("id"),user.get("id"),condition);
-			Order.dao.format(operatePage,"title");
-			setAttr("branch",branch);
-			setAttr("operatePage",operatePage);
-		}*/
-		//查询标题
-		/*else if(!ValidateKit.isNullOrEmpty(title)){
-			String where=" 1=1 and o.deleted_at is null and (o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) or o.accept_user=?) and o.title like ?";
-			String orderby=" ORDER BY o.offer_at DESC ";
-			condition="%"+getPara("title").trim()+"%";
-			operatePage=Order.dao.findOperatesByUserId(getParaToInt(0,1), 10,where,orderby, user.get("id"),user.get("id"),condition);
-			Order.dao.format(operatePage,"title");
-			setAttr("title",title);
-			setAttr("operatePage",operatePage);
-		}*/
-		//查询申报时间
-		/*else if(!ValidateKit.isNullOrEmpty(offertime)){
-			String where=" 1=1 and o.deleted_at is null and (o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) or o.accept_user=?) and o.offer_at like ?";
-			String orderby=" ORDER BY o.offer_at DESC ";
-			condition=getPara("offertime").trim()+"%";
-			operatePage=Order.dao.findOperatesByUserId(getParaToInt(0,1), 10,where,orderby, user.get("id"),user.get("id"),condition);
-			Order.dao.format(operatePage,"title");
-			setAttr("offertime",offertime);
-			setAttr("operatePage",operatePage);
-		}*/
 		render(OPERATE_PAGE);
 		
 	}
 	
-	/*public void testoperates(){
-		User user=User.dao.getCurrentUser();
-		List <Record> operateList;
-		if(ValidateKit.isNullOrEmpty(user)){
-			renderJson("operate.html");
-		}else{
-			String where=" 1=1 and o.deleted_at is null and o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) ";
-			String orderby=" ORDER BY o.offer_at DESC ";
-			operateList=Order.dao.findOperatesByUserId(where,orderby, user.get("id"));
-			Order.dao.format(operateList,"title");
-			renderJson(operateList);
-			
-		}
-	}*/
 	
 	public void operate(){
 		
-		Order o=Order.dao.findById(getParaToInt("id"));
-		//受理人第一次查询时，插入受理人处理时间
-		if(ValidateKit.isNullOrEmpty(o.get("accepted_at"))){
-			o.set("accepted_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
-		}
-		//如果受理人和当前用户不是同一人，同一人则只有一个受理时间accepted_at。
-		if(!o.getLong("accept_user").equals(SubjectKit.getUser().getLong("id"))){
-			//处理人第一次查询时，插入处理人受理时间
-			if(ValidateKit.isNullOrEmpty(o.get("accept_at"))){
-				o.set("accept_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
-			}
-		}
-		
+		//工单详细信息
 		String where="o.id=?";
 		Record order = Order.dao.findOperateById(where,getParaToInt("id"));
-
+		setAttr(order);
+		
 		//获取工单申报者的分公司信息
 		Record offer=UserInfo.dao.getUserBranch(order.getLong("oofferid"));
-		//获取工单处理者的分公司信息
-		Record deal=UserInfo.dao.getUserBranch(order.getLong("odealid"));
+		
+		//获取工单处理意见
+		List<Record> commentList=Comment.dao.findCommentsByOrderId(" comments.order_id=? order by comments.add_at asc ",order.getLong("oorderid"));
+		setAttr("commentList",commentList);
 		
 		if(!ValidateKit.isNullOrEmpty(offer)){
-			setAttr("offer_branch",offer.getStr("bname"));
 			setAttr("offer",offer);
 		}
-		if(!ValidateKit.isNullOrEmpty(deal)){
-			setAttr("deal_branch",deal.getStr("bname"));
-			setAttr("deal",deal);
-		}
-		//工单详细信息
-		setAttr(order);
-		setAttr("order", order);
-		//故障类型
-		setAttr("typeList",ErrorType.dao.findAll());
-		setAttr("levelList",Level.dao.findAll());
-		
 		render(OPERATE_QUERY_PAGE);
 	}
 	
@@ -239,47 +155,25 @@ public class OperateController extends JFController{
 	 */
 	@Before({Tx.class,CommonValidator.class})
 	public void edit(){
-		//故障类型
-		setAttr("typeList",ErrorType.dao.getAllType());
-		//
-		setAttr("levelList",Level.dao.findAll());
 		
-		String where="o.id=?";
-		Order o=Order.dao.findById(getParaToInt("id"));
-		//受理人第一次点击处理时，插入受理人处理时间
-		if(ValidateKit.isNullOrEmpty(o.get("accepted_at"))){
-			o.set("accepted_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
-		}
-		//如果受理人和当前用户不是同一人，同一人则只有一个受理时间accepted_at。
-		if(!o.getLong("accept_user").equals(SubjectKit.getUser().getLong("id"))){
-			if(ValidateKit.isNullOrEmpty(o.get("accept_at"))){
-				//处理人第一次点击处理时，插入处理人受理时间
-				o.set("accept_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
-			}
-		}
 		//工单详细信息
+		String where="o.id=?";
 		Record order = Order.dao.findOperateById(where,getParaToInt("id"));
 		setAttr(order);
-		//setAttr("order", order);
 		
 		//当前用户详细信息
 		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
 		setAttr(userinfo);
-		//setAttr("userinfo",userinfo);
 		
 		//获取工单申报者的单位、部门、职位信息
 		Record offer=UserInfo.dao.getUserBranch(order.getLong("oofferid"));
 
 		if(!ValidateKit.isNullOrEmpty(offer)){
-			setAttr("offer_branch",offer.getStr("bname"));
-			setAttr("offer_apartment",offer.getStr("aname"));
-			setAttr("offer_position",offer.getStr("pname"));
+			setAttr("offer",offer);
 		}
 		
-		//除当前用户以外的所有运维人员
-		where=" userinfo.apartment_id=? and user.id<>?";
-		List<Record> dealList=UserInfo.dao.getUserByApartment(where,2,User.dao.getCurrentUser().get("id"));
-		setAttr("dealList",dealList);
+		List<Record> commentList=Comment.dao.findCommentsByOrderId(" comments.order_id=? order by comments.add_at asc ",order.getLong("oorderid"));
+		setAttr("commentList",commentList);
 		
 		render(OPERATE_EDIT_PAGE);
 		
@@ -288,6 +182,7 @@ public class OperateController extends JFController{
 	/**
 	 * 运维主管下发清单
 	 */
+	@Deprecated
 	public void arrange(){
 		int dealid=getParaToInt("selectDeal");
 		int oorderid=getParaToInt("oorderid");
@@ -334,19 +229,6 @@ public class OperateController extends JFController{
 			renderJson("state","指派失败");
 	} 
 	
-	public void begindeal(){
-		User user=User.dao.getCurrentUser();
-		Integer orderid=getParaToInt("oorderid");
-		
-		Order order=Order.dao.findById(orderid);
-		if(ValidateKit.isNullOrEmpty(getPara("progress"))){
-			renderJson("state","请选择处理进度！");
-		}else{
-			order.set("status", 3);
-		}
-		
-		
-	}
 	
 	/**
 	 * @描述 提交故障处理建议
@@ -360,181 +242,82 @@ public class OperateController extends JFController{
 		String comment=getPara("ocomment");
 		//deal_at
 		String deal_at=getPara("deal_at");
+		//处理进度
+		int selectProgress=getParaToInt("progress");
 		
 		Order order=Order.dao.findById(orderid);
 		User cUser=SubjectKit.getUser();
 		if(!ValidateKit.isDateTime(deal_at)){
 			renderJson("state","请选择处理时间！");
+		}else if(selectProgress==-1){
+			renderJson("state","请选择处理进度！");
 		}
 		else if(ValidateKit.isNullOrEmpty(comment))
 		{
 			renderJson("state","处理意见不为空！");
-		}else if(!ValidateKit.isNullOrEmpty(order.getLong("deal_user"))){
-			if(!ValidateKit.isNullOrEmpty(order.get("comment"))){
-				renderJson("state","失败：工单已提交");
-			}else if(cUser.getLong("id").equals(order.getLong("accept_user"))){
-				renderJson("state","失败：工单已指派其他运维员处理");
-			}else{
-				int time=Level.dao.findById(order.get("level")).get("deadline");
-				String offer_at=order.get("offer_at").toString();
-				DateTime now=DateTime.now();
-				int t =DateKit.dateBetween(offer_at, now);
-				
-				//设置基本内容：处理人，建议，处理时间，修改状态等。
-				if(ValidateKit.isNullOrEmpty(order.get("deal_user"))){
-					order.set("deal_user", getParaToInt("uuserid"));
-				}
-				order
-				.set("comment", comment)
-				.set("deal_at", deal_at)
-				.set("status", 0);
-				
-				//若处理时间超时，则
-				if(t>time){
-					order.set("spend_time", t);
-				}
-				
-				if(order.update()){
-					//故障工单提交人员
-					User offer=User.dao.findById(order.get("offer_user"));
-					User deal=User.dao.findById(order.get("deal_user"));
-					//获取邮件内容
-					String body=AlertKit.getMailBody(offer,deal,order).toString();
-					AlertKit alertKit=new AlertKit();
-					if(ValidateKit.isEmail(offer.getStr("email"))){
-						
-						alertKit.setEmailTitle("故障申报处理情况通知！").setEmailBody(body).setEmailAdd(offer.getStr("email"));
-						//AlertKit.sendEmail("故障申报处理情况通知！",body,offer.getStr("email"));
-					}
-					//电话非空 
-					if(!ValidateKit.isNullOrEmpty(offer.getStr("phone"))){
-						if(ValidateKit.isPhone(offer.getStr("phone"))){
-							//短信内容
-							String smsBody=AlertKit.getSmsBody(offer,deal,order);
-							alertKit.setSmsContext(smsBody).setSmsPhone(offer.getStr("phone"));
-						}
-					}
-					//加入进程
-					logger.info("日志添加到入库队列 ---> 处理故障工单");
-					ThreadAlert.add(alertKit);
-					renderJson("state","提交成功！");
-				}else{
-					renderJson("state","提交失败！");
-				}
-			}
 		}else{
 
-			int time=Level.dao.findById(order.get("level")).get("deadline");
-			String offer_at=order.get("offer_at").toString();
-			DateTime now=DateTime.now();
-			int t =DateKit.dateBetween(offer_at, now);
-			
-			//设置基本内容：处理人，建议，处理时间，修改状态等。
-			if(ValidateKit.isNullOrEmpty(order.get("deal_user"))){
-				order.set("deal_user", getParaToInt("uuserid"));
+			// 设置基本内容：处理人，建议，处理时间，修改状态等。
+			Comment com=new Comment();
+			com.set("order_id", orderid).set("user_id", cUser.get("id")).set("context", comment).set("add_at", deal_at);
+			com.save();
+
+			//开始处理
+			if(selectProgress==0){
+				//设置状态为 3 及处理中
+				order.set("status", 3).update();
+				renderJson("state","故障工单开始处理！");
 			}
-			order
-			.set("comment", comment)
-			.set("deal_at", deal_at)
-			.set("status", 0);
-			
-			//若处理时间超时，则
-			if(t>time){
-				order.set("spend_time", t);
+			//继续处理
+			else if(selectProgress==1){
+				renderJson("state","故障工单继续处理！");
 			}
-			
-			if(order.update()){
-				//故障工单提交人员
-				User offer=User.dao.findById(order.get("offer_user"));
-				User deal=User.dao.findById(order.get("deal_user"));
-				//获取邮件内容
-				String body=AlertKit.getMailBody(offer,deal,order).toString();
-				AlertKit alertKit=new AlertKit();
-				if(ValidateKit.isEmail(offer.getStr("email"))){
-					
-					alertKit.setEmailTitle("故障申报处理情况通知！").setEmailBody(body).setEmailAdd(offer.getStr("email"));
-					//AlertKit.sendEmail("故障申报处理情况通知！",body,offer.getStr("email"));
+			//处理完毕
+			else if(selectProgress==2){
+				//设置状态为 0 及已处理
+				order.set("status", 0);
+				
+				int time = Level.dao.findById(order.get("level")).get("deadline");
+				String offer_at = order.get("offer_at").toString();
+				DateTime now = DateTime.now();
+				int t = DateKit.dateBetween(offer_at, now);
+				
+				// 若处理时间超时，则
+				if (t > time) {
+					order.set("spend_time", t);
 				}
-				//电话非空 
-				if(!ValidateKit.isNullOrEmpty(offer.getStr("phone"))){
-					if(ValidateKit.isPhone(offer.getStr("phone"))){
-						//短信内容
-						String smsBody=AlertKit.getSmsBody(offer,deal,order);
-						alertKit.setSmsContext(smsBody).setSmsPhone(offer.getStr("phone"));
+				if (order.update()) {
+					// 故障工单提交人员
+					User offer = User.dao.findById(order.get("offer_user"));
+					// 获取邮件内容
+					String body = AlertKit.getMailBody(offer, cUser, order)
+							.toString();
+					AlertKit alertKit = new AlertKit();
+					if (ValidateKit.isEmail(offer.getStr("email"))) {
+						alertKit.setEmailTitle("故障申报处理情况通知！").setEmailBody(body)
+								.setEmailAdd(offer.getStr("email"));
 					}
+					// 电话非空
+					if (!ValidateKit.isNullOrEmpty(offer.getStr("phone"))) {
+						if (ValidateKit.isPhone(offer.getStr("phone"))) {
+							// 短信内容
+							String smsBody = AlertKit
+									.getSmsBody(offer, cUser, order);
+							alertKit.setSmsContext(smsBody).setSmsPhone(
+									offer.getStr("phone"));
+						}
+					}
+					// 加入进程
+					logger.info("日志添加到入库队列 ---> 处理故障工单");
+					ThreadAlert.add(alertKit);
+					renderJson("state", "故障工单处理完毕！");
+				} else {
+					renderJson("state", "提交失败！");
 				}
-				//加入进程
-				logger.info("日志添加到入库队列 ---> 处理故障工单");
-				ThreadAlert.add(alertKit);
-				renderJson("state","提交成功！");
-			}else{
-				renderJson("state","提交失败！");
 			}
 		}
 	}
 	
-	/**
-	 * 添加补充意见
-	 */
-	public void addupdate(){
-		//order_id
-		Integer orderid = getParaToInt("oorderid");
-		// addcomment
-		String addcomment = getPara("addcomment");
-		//add_at
-		String add_at = getPara("add_at");
-
-		Order order = Order.dao.findById(orderid);
-		User cUser = SubjectKit.getUser();
-		
-		String deal_at=order.get("deal_at").toString();
-		DateTime now=DateTime.now();
-		int t =DateKit.dateBetween(deal_at, now);
-		if(t>72){
-			renderJson("state", "该故障单时间过去太久，不提供补充意见功能！");
-		}
-		else if (!ValidateKit.isDateTime(add_at)) {
-			renderJson("state", "请选择处理时间！");
-		} else if (DateKit.isDateBefore(add_at,
-				DateTime.now().toString("yyyy-MM-dd HH:mm:ss"))) {
-			renderJson("state", "所选时间不可早于当前时间！");
-		} else if (ValidateKit.isNullOrEmpty(addcomment)) {
-			renderJson("state", "处理意见应不为空！");
-		}else if(!ValidateKit.isNullOrEmpty(order.get("addcomment"))){
-				renderJson("state","失败：工单已提交");
-		
-		}else{
-			order
-				.set("addcomment", addcomment)
-				.set("add_at", add_at);
-			
-			if(order.update()){
-				//故障工单提交人员
-				User offer=User.dao.findById(order.get("offer_user"));
-				User deal=User.dao.findById(order.get("deal_user"));
-				//获取邮件内容
-				//String body=AlertKit.getMailBody(offer,deal,order).toString();
-				if(ValidateKit.isEmail(offer.getStr("email"))){
-					//AlertKit.sendEmail("故障申报补充处理情况通知！",body,offer.getStr("email"));
-				}
-				//电话非空 
-				if(!ValidateKit.isNullOrEmpty(offer.getStr("phone"))){
-					if(ValidateKit.isPhone(offer.getStr("phone"))){
-						//发送短信
-						//AlertKit.sendSms(offer,deal,order);
-					}
-				}
-				
-				renderJson("state","提交成功！");
-			}else{
-				renderJson("state","提交失败！");
-			}
-			
-		}
-		
-		
-		
-	}
 	
 	/**
 	 * @描述 运维人员查询本账号处理范围内的故障工单，用于故障处理
@@ -551,10 +334,6 @@ public class OperateController extends JFController{
 			setAttr("operatePage",operatePage);
 			render(DEAL_PAGE);
 		}
-	}
-	
-	public void addComment(){
-		
 	}
 	
 	
@@ -586,6 +365,7 @@ public class OperateController extends JFController{
 	/**
 	 * @描述 分配操作
 	 */
+	@Deprecated
 	public void assign(){
 		String userid=getPara("id");
 		setAttr("userinfo",UserInfo.dao.getAllUserInfo(userid));
@@ -597,6 +377,7 @@ public class OperateController extends JFController{
 	/**
 	 * @描述 执行分配操作
 	 */
+	@Deprecated
 	@Before(Tx.class)
 	public void doassign(){
 		//前台选中的 类型s

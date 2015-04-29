@@ -18,6 +18,7 @@ import cn.dreampie.shiro.hasher.HasherKit;
 
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
@@ -25,6 +26,7 @@ import com.jfinal.plugin.ehcache.CacheInterceptor;
 import com.jfinal.plugin.ehcache.CacheName;
 import com.jfinal.plugin.ehcache.EvictInterceptor;
 import com.poicom.function.app.model.Apartment;
+import com.poicom.function.app.model.ApartmentType;
 import com.poicom.function.app.model.Branch;
 import com.poicom.function.app.model.ErrorType;
 import com.poicom.function.app.model.Order;
@@ -52,10 +54,12 @@ public class AdminController extends Controller {
 	private final static String BRANCH_EDIT_PAGE="branch/edit.html";
 	private final static String APARTMENT_ADD_PAGE="apartment/add.html";
 	private final static String APARTMENT_EDIT_PAGE="apartment/edit.html";
+	
 	private final static String POSITION_ADD_PAGE="position/add.html";
 	private final static String POSITION_EDIT_PAGE="position/edit.html";
 	private final static String TYPE_ADD_PAGE="type/add.html";
 	private final static String TYPE_EDIT_PAGE="type/edit.html";
+	private final static String TYPE_TASK_PAGE="type/task.html";
 	
 	public void index(){
 		setAttr("userPage", User.dao.getUserPage(getParaToInt(0, 1), 10));
@@ -537,6 +541,91 @@ public class AdminController extends Controller {
 	public void offapartment(){
 		Apartment.dao.findById(getPara("id")).set("deleted_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
 		redirect("/admin/apartment");
+	}
+	
+	/**
+	 * @描述 对运维部 二级部门分配运维任务。
+	 */
+	public void apartmentType(){
+		String where=" apartment.pid=?  ";
+		String orderby=" ORDER BY apartment.id ";
+		//父id为2 即为运维中心的子部门
+		int pid =2;
+		Page<Apartment> apartmentPage=Apartment.dao.findApartmentPage(getParaToInt(0,1), 10, where, orderby, pid);
+		
+		for(int i=0;i<apartmentPage.getList().size();i++){
+			List <Record> list=ErrorType.dao.findApartmentType(apartmentPage.getList().get(i).get("id"));
+			apartmentPage.getList().get(i).set("remark", list);
+		}
+		
+		setAttr("apartmentPage",apartmentPage);
+		setAttr("typeList",ErrorType.dao.getAllType());
+		
+		render(TYPE_TASK_PAGE);
+	}
+	
+	/**
+	 * @描述 执行分配操作
+	 */
+	@Before(Tx.class)
+	public void doassign(){
+		
+		//前台选中的 类型s
+		String[] types =getParaValues("types");
+		
+		List<ApartmentType> apartmenttype=ApartmentType.dao.findBy("apartmentType.apartment_id=?",getParaToLong("id"));
+		
+		if(ValidateKit.isNullOrEmpty(types)){
+			for(int i=0;i<apartmenttype.size();i++){
+				System.out.println(apartmenttype.get(i).getLong("type_id")+" 已取消，执行删除操作！");
+				apartmenttype.get(i).delete();
+			}
+		}else if(ValidateKit.isNullOrEmpty(apartmenttype)){
+			for(int i=0;i<types.length;i++){
+				System.out.println(types[i]+" 不存在，执行新增操作！");
+				ApartmentType at=new ApartmentType().set("apartment_id",  getPara("id")).set("type_id", types[i]);
+				at.save();
+			}
+			
+		}else{
+			//需要处理该故障类型?，不存在则新增。
+			for(int i=0;i<types.length;i++){
+				boolean flag=false;
+				for(int j=0;j<apartmenttype.size();j++){
+					if(Integer.parseInt(types[i])==apartmenttype.get(j).getLong("type_id")){
+						flag=true;
+						break;
+					}
+				}
+				if(flag){
+					System.out.println(types[i]+" 存在，保留不删除！");
+				}else if(!flag){
+					System.out.println(types[i]+" 不存在，执行新增操作！");
+					ApartmentType at=new ApartmentType().set("apartment_id",  getPara("id")).set("type_id", types[i]);
+					at.save();
+				}
+			}
+			
+			//需要保留该故障类型?，不保留则删除
+			for(int i=0;i<apartmenttype.size();i++){
+				boolean flag=false;
+				for(int j=0;j<types.length;j++){
+					if(apartmenttype.get(i).getLong("type_id")==Integer.parseInt(types[j])){
+						flag=true;
+						break;
+					}
+				}
+				if(flag){
+					System.out.println(apartmenttype.get(i).getLong("type_id")+" 未取消，保留不删除！");
+				}else if(!flag){
+					System.out.println(apartmenttype.get(i).getLong("type_id")+" 已取消，执行删除操作！");
+					apartmenttype.get(i).delete();
+				}
+			}
+			
+		}
+		redirect("/admin/apartmentType");
+		
 	}
 	
 	/**

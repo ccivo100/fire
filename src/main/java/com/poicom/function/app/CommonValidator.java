@@ -50,6 +50,9 @@ public class CommonValidator extends Validator{
 			Order order=Order.dao.findById(orderid);
 			User cUser=SubjectKit.getUser();
 			if(order.getInt("status")==0){
+				addError("errorMsg","失败：工单已提交");
+			}
+			/*if(order.getInt("status")==0){
 				if(!ValidateKit.isNullOrEmpty(order.get("addcomment"))){
 					addError("errorMsg","失败：工单已提交");
 				}
@@ -64,7 +67,7 @@ public class CommonValidator extends Validator{
 				if(!cUser.getLong("id").equals(order.getLong("accept_user"))){
 					addError("errorMsg","失败：工单非当前用户所属");
 				}
-			}
+			}*/
 		}
 		
 	}

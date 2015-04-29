@@ -3,7 +3,8 @@
 <div class="index-background">
 <div class="page-header">
 <ul class="nav nav-tabs">
-   <li class="active"><a href="#">未处理列表</a></li>
+	<li ><a href="${ContextPath}/operate/operates">故障处理列表</a></li>
+   	<li class="active"><a href="#">未处理列表</a></li>
 </ul>
 </div>
 	<input type="hidden" name="do" value="report">
@@ -15,7 +16,6 @@
 				<th width="5%">申报部门</th>
 				<th width="3%">申报人</th>
 				<th width="5%">申报时间</th>
-				<th width="3%">处理人</th>
 				<th width="1%">当前状态</th>
 				<th width="5%">操作</th>
 			</tr>
@@ -28,7 +28,6 @@
 				<td style="text-align:left;">${(operate.off_branch)!}</td>
 				<td style="text-align:left;">${(operate.off_user)!}</td>
 				<td style="text-align:left;">${(operate.offer_at)!}</td>
-				<td style="text-align:left;"><#if operate.deal_user??>${(operate.deal_user)!}<#else>-</#if></td>
 				<td >
 					<#if operate.status=0>
 					<span class="label label-success">已处理</span>
@@ -54,7 +53,6 @@
 				<#list 1..size as t>
 					<tr>
 						<td>${(operatePage.getList().size()+t)!}</td>
-						<td></td>
 						<td></td>
 						<td></td>
 						<td></td>

@@ -21,6 +21,8 @@ import com.poicom.common.controller.JFController;
 import com.poicom.common.kit.AlertKit;
 import com.poicom.common.kit.DateKit;
 import com.poicom.common.thread.ThreadAlert;
+import com.poicom.function.app.model.Apartment;
+import com.poicom.function.app.model.Comment;
 import com.poicom.function.app.model.ErrorType;
 import com.poicom.function.app.model.Level;
 import com.poicom.function.app.model.Order;
@@ -119,22 +121,6 @@ public class ReportController extends JFController{
 			
 		}
 		
-		/*String orderby=" ORDER BY o.status desc, o.offer_at DESC ";
-		
-		if(ValidateKit.isNullOrEmpty(getPara("selectType"))){
-			String where=" WHERE o.offer_user=? ";
-			reportPage=Order.dao.findReportsByUserId(getParaToInt(0,1), 10,where,orderby,user.get("id"));
-		}else{
-			String where=" WHERE o.offer_user=? and o.type=? ";
-			reportPage=Order.dao.findReportsByUserId(getParaToInt(0,1), 10,where,orderby,user.get("id"),getParaToInt("selectType"));
-		}
-		
-		
-		Order.dao.format(reportPage,"description");
-		
-		setAttr("reportPage",reportPage);
-		setAttr("typeList",ErrorType.dao.getAllType());
-		setAttr("typeid",getPara("selectType"));*/
 		render("report.html");
 	}
 	
@@ -147,25 +133,16 @@ public class ReportController extends JFController{
 
 		//获取工单申报者的分公司信息
 		Record offer=UserInfo.dao.getUserBranch(order.getLong("oofferid"));
-		//获取工单处理者的分公司信息
-		Record deal=UserInfo.dao.getUserBranch(order.getLong("odealid"));
 		
 		if(!ValidateKit.isNullOrEmpty(offer)){
-			setAttr("offer_branch",offer.getStr("bname"));
 			setAttr("offer",offer);
 		}
-		
-		if(!ValidateKit.isNullOrEmpty(deal)){
-			setAttr("deal_branch",deal.getStr("bname"));
-			setAttr("deal",deal);
-		}
+		//获取工单处理意见
+		List<Record> commentList=Comment.dao.findCommentsByOrderId(" comments.order_id=? order by comments.add_at asc ",order.getLong("oorderid"));
+		setAttr("commentList",commentList);
 			
 		//工单详细信息
 		setAttr(order);
-		setAttr("order", order);
-		//故障类型
-		setAttr("typeList",ErrorType.dao.findAll());
-		setAttr("levelList",Level.dao.findAll());
 
 		render(REPORT_QUERY_PAGE);
 	}
@@ -191,12 +168,10 @@ public class ReportController extends JFController{
 				//运维人员列表
 				List<Record> dealList=new ArrayList<Record>();
 				//运维人员详细信息-接收
-				Record accept_user=UserInfo.dao.getAllUserInfo(order.get("accept_user"));
-				dealList.add(accept_user);
-				//运维人员详细信息-处理（如果存在则添加）
-				if(!ValidateKit.isNullOrEmpty(order.get("deal_user"))){
-					Record deal_user=UserInfo.dao.getAllUserInfo(order.get("deal_user"));
-					dealList.add(deal_user);
+				List<UserOrder> userOrderList=UserOrder.dao.findBy(" order_id=?", id);
+				for(UserOrder userorder:userOrderList){
+					Record accept_user=UserInfo.dao.getAllUserInfo(userorder.get("user_id"));
+					dealList.add(accept_user);
 				}
 				
 				List<String> phones=new ArrayList<String>();
@@ -221,7 +196,7 @@ public class ReportController extends JFController{
 					}
 					//加入进程
 					logger.info("日志添加到入库队列 ---> 超时工单催办处理");
-					//ThreadAlert.add(alertKit);
+					ThreadAlert.add(alertKit);
 					renderJson("state","催办成功！");
 				}
 			}
@@ -246,13 +221,11 @@ public class ReportController extends JFController{
 				Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
 				//运维人员列表
 				List<Record> dealList=new ArrayList<Record>();
-				//运维人员详细信息-接收
-				Record accept_user=UserInfo.dao.getAllUserInfo(order.get("accept_user"));
-				dealList.add(accept_user);
-				//运维人员详细信息-处理（如果存在则添加）
-				if(!ValidateKit.isNullOrEmpty(order.get("deal_user"))){
-					Record deal_user=UserInfo.dao.getAllUserInfo(order.get("deal_user"));
-					dealList.add(deal_user);
+				
+				List<UserOrder> userOrderList=UserOrder.dao.findBy(" order_id=?", id);
+				for(UserOrder userorder:userOrderList){
+					Record accept_user=UserInfo.dao.getAllUserInfo(userorder.get("user_id"));
+					dealList.add(accept_user);
 				}
 				
 				List<String> phones=new ArrayList<String>();
@@ -293,14 +266,14 @@ public class ReportController extends JFController{
 	public void delete(){
 		int id=getParaToInt("oorderid");
 		Order order=Order.dao.findById(id);
-		UserOrder userorder=UserOrder.dao.findFirstBy(" order_id=?", order.get("id"));
+		
+		List<UserOrder> userOrderList=UserOrder.dao.findBy(" order_id=?", id);
 		
 		if(order.delete()){
-			if(userorder.delete()){
-				renderJson("state","删除成功！");
-			}else{
-				renderJson("state","删除失败！");
+			for(UserOrder userorder:userOrderList){
+				userorder.delete();
 			}
+			renderJson("state","删除成功！");
 		}else{
 			renderJson("state","删除失败！");
 		}
@@ -329,10 +302,10 @@ public class ReportController extends JFController{
 		if(type.equals("type")){
 			List<ErrorType> typeList=ErrorType.dao.getAllType();
 			renderJson("typeList", typeList);
-		}else if(type.equals("dealler")){
+		}else if(type.equals("apartment")){
 			System.out.println(getParaToInt("typeid"));
-			List<Record> dealList=User.dao.getOperatorsList(getParaToInt("typeid"));
-			renderJson("dealList",dealList);
+			List<Apartment> apartmentList=Apartment.dao.getApartmentsList(getParaToInt("typeid"));
+			renderJson("apartmentList",apartmentList);
 		}
 	}
 	
@@ -353,12 +326,48 @@ public class ReportController extends JFController{
 				.set("level", getPara("selectLevel"))
 				.set("status", 1)
 				.set("offer_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss"))
-				.set("accept_user", getParaToLong("selectDeal"))
+				//.set("accept_user", getParaToLong("selectDeal"))
 				.set("flag", 0);
 		order.save();
+		
+		//选中部门
+		long selectApartment=getParaToLong("selectApartment");
+		//根据部门id，获取该部门人员
+		List<Record> selectDealList=UserInfo.dao.getUserByApartment(" apartment.id=?",selectApartment);
+		
+		Order o=Order.dao.findById(order.get("id"));
+		
+		for(Record selectDeal:selectDealList){
+			UserOrder userorder=new UserOrder()
+			.set("user_id", selectDeal.get("userid"))
+			.set("order_id", order.get("id"));
+			userorder.save();
+			
+			//当前用户详细信息
+			Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
+			
+			//邮件内容
+			String body=AlertKit.getMailBody(userinfo,selectDeal,o,getPara("odescription")).toString();
+			//发送邮件、短信线程
+			AlertKit alertKit=new AlertKit();
+			//发送邮件
+			if(ValidateKit.isEmail(selectDeal.getStr("useremail"))){
+				alertKit.setEmailTitle("点通故障系统提醒您！").setEmailBody(body).setEmailAdd(selectDeal.getStr("useremail"));
+			}
+			if(ValidateKit.isPhone(selectDeal.getStr("userphone"))){
+				//短信内容
+				String smsBody=AlertKit.setSmsContext(null,userinfo,o);
+				alertKit.setSmsContext(smsBody).setSmsPhone(selectDeal.getStr("userphone"));
+			}
+			//加入进程
+			logger.info("日志添加到入库队列 ---> 新建故障工单");
+			ThreadAlert.add(alertKit);
+		}
+		
+		
 		//保存用户-工单 对应关系表数据。
-		new UserOrder()
-		.set("user_id", getParaToLong("selectDeal"))
+		/*new UserOrder()
+		.set("user_id", getParaToLong("selectApartment"))
 		.set("order_id", order.get("id"))
 		.save();
 		
@@ -367,7 +376,7 @@ public class ReportController extends JFController{
 		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
 		
 		//运维人员详细信息
-		Record dealinfo=UserInfo.dao.getAllUserInfo(getParaToLong("selectDeal"));
+		Record dealinfo=UserInfo.dao.getAllUserInfo(getParaToLong("selectApartment"));
 		
 		//邮件内容
 		String body=AlertKit.getMailBody(userinfo,dealinfo,o,getPara("odescription")).toString();
@@ -385,7 +394,7 @@ public class ReportController extends JFController{
 		}
 		//加入进程
 		logger.info("日志添加到入库队列 ---> 新建故障工单");
-		ThreadAlert.add(alertKit);
+		ThreadAlert.add(alertKit);*/
 		
 		redirect("/report/reports");
 	}

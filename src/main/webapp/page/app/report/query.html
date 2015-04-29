@@ -68,67 +68,27 @@
 			<div class="jf_header ">
 				处理情况
 			</div>
-			<div class="jf_header jf_topic_header">
-				<div >
-					<h4><span class="label label-default ">受理人员信息</span></h4>
-				</div>
-					<span class="changes">
-    						<span style="margin: 5px;">受理人：<span class="label label-info ">${(uacceptname)!}</span></span>
-    						<#if oacceptedtime??>
-    						<span style="margin: 5px;">受理时间：<span class="label label-info ">${(oacceptedtime)!}</span></span>
-    						</#if>
-    				</span>
-				<hr>
-				<div >
-					<h4><span class="label label-default ">处理人员信息</span></h4>
-				</div>
-					<span class="changes">
-						<#if udealname??>
-    						<span style="margin: 5px;">处理人：<span class="label label-info ">${(udealname)!}</span></span>
-    						<#if oaccepttime??>
-    						<span style="margin: 5px;">受理时间：<span class="label label-info ">${(oaccepttime)!}</span></span>
-    						</#if>
+			<#list commentList as comments>
+			<div class="jf_inner jf_topic">
+				<span class="changes">
+    						<span style="margin: 15px;">处理人：<span class="label label-info ">${(comments.ufull_name)!}</span></span>
+    						<span style="margin: 15px;">电话：<span class="label label-info ">${(comments.uphone)!}</span></span>
+    						<span style="margin: 15px;">单位：<span class="label label-info ">${(comments.bname)!}</span></span>
+    						<span style="margin: 15px;">部门：<span class="label label-info ">${(comments.aname)!}</span></span>
+    						<span style="margin: 15px;">职位：<span class="label label-info ">${(comments.pname)!}</span></span>
     						<br></br>
-    						<span style="margin: 5px;">电话：<span class="label label-info ">${(udealphone)!}</span></span>
-    						<span style="margin: 5px;">单位：<span class="label label-info ">${(deal.bname)!}</span></span>
-    						<span style="margin: 5px;">部门：<span class="label label-info ">${(deal.aname)!}</span></span>
-    						<span style="margin: 5px;">职位：<span class="label label-info ">${(deal.pname)!}</span></span>
-    					</#if>
-    				</span>
-				<hr>
-				
-				<div >
-					<h4><span class="label label-default ">处理意见</span></h4>
+    						<span>处理时间：<span class="label label-info ">${(comments.add_at)!}</span></span>
+    			</span>
+				<div style="margin: 30px;">
+					<h3>${(comments.context)!}</h3>
 				</div>
-				<span class="changes">
-					<#if odealtime??>
-					<span>处理时间：<span class="label label-info ">${(odealtime)!}</span></span>
-					</#if>
-				</span>
 			</div>
+			</#list>
+			<#if commentList?has_content>
+			<#else>
 			<div class="jf_inner jf_topic">
 				<div style="margin: 30px;">
-					
-					<h3>${(ocomment)!}</h3>
-					
-				</div>
-			</div>
-			<#if oaddcomment??>
-			<div class="jf_header jf_topic_header">
-				<div >
-					<h4><span class="label label-default ">补充意见</span></h4>
-				</div>
-				<span class="changes">
-					<#if oaddtime??>
-					<span>处理时间：<span class="label label-info ">${(oaddtime)!}</span></span>
-					</#if>
-				</span>
-			</div>
-			<div class="jf_inner jf_topic">
-				<div style="margin: 30px;">
-					
-					<h3>${(oaddcomment)!}</h3>
-					
+					<h3>暂无</h3>
 				</div>
 			</div>
 			</#if>

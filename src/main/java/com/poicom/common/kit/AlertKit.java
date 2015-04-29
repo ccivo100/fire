@@ -139,10 +139,10 @@ public class AlertKit {
 	
 	public static StringBuffer getMailBody(Record offer,Record deal,Order order,String description){
 		StringBuffer body=new StringBuffer();
-		body.append("尊敬的 "+deal.getStr("ufullname")+"，您好：<br/>")
+		body.append("尊敬的 "+deal.getStr("fullname")+"，您好：<br/>")
 		.append(offer.getStr("bname") + " 的 "+ offer.getStr("ufullname"))
 		.append(" （"+ offer.getStr("uphone") + "）")
-		.append(" 于 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms)+" ")
+		//.append(" 于 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms)+" ")
 		.append("发来故障工单。<br/>")
 		.append("故障内容为："+description+"<br/>")
 		.append("请及时处理。【一点通】");
@@ -277,7 +277,7 @@ public class AlertKit {
 			.append(userinfo.getStr("bname")+"的 ")
 			.append(userinfo.getStr("ufullname"))
 			.append("（"+userinfo.getStr("uphone")+"） ")
-			.append("于 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms))
+			//.append("于 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms))
 			.append("提交了故障工单，请尽快处理。【一点通】");
 		}
 		
