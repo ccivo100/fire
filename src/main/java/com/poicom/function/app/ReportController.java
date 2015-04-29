@@ -64,14 +64,12 @@ public class ReportController extends JFController{
 		String branch=getPara("branch");
 		String offeruser=getPara("offeruser");
 		String offertime=getPara("offertime");
-		String dealuser=getPara("dealuser");
 		
 		//若无查询条件 则按正常查询。
 		if(ValidateKit.isNullOrEmpty(title)
 				&&ValidateKit.isNullOrEmpty(branch)
 				&&ValidateKit.isNullOrEmpty(offeruser)
-				&&ValidateKit.isNullOrEmpty(offertime)
-				&&ValidateKit.isNullOrEmpty(dealuser)){
+				&&ValidateKit.isNullOrEmpty(offertime)){
 			
 			String where=" WHERE o.offer_user=? ";
 			String orderby=" ORDER BY o.status desc, o.offer_at DESC ";
@@ -82,12 +80,6 @@ public class ReportController extends JFController{
 		}else{
 			
 			conditions.add(user.get("id"));
-			//查询运维人
-			if(!ValidateKit.isNullOrEmpty(dealuser)){
-				whereadd.append(" and u2.full_name like ? ");
-				conditions.add("%"+getPara("dealuser").trim()+"%");
-				setAttr("dealuser",dealuser);
-			}
 			//查询申报人
 			if(!ValidateKit.isNullOrEmpty(offeruser)){
 				whereadd.append(" and u1.full_name like ? ");

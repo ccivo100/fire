@@ -78,15 +78,10 @@
     					<a href="${ContextPath}/operate/deal">故障处理</a>
     				</li>
     				</@shiro.hasPermission>
-    				<@shiro.hasPermission name="P_O_TASK">
-    				<li class="<#if activebar='task'>active</#if>">
-    					<a href="${ContextPath}/operate/task">任务分配</a>
-    				</li>
-    				</@shiro.hasPermission>
     				
 					<@shiro.hasPermission name="P_R_REPORTS">
 					<li class="<#if activebar='reports'>active</#if>">
-						<a href="${ContextPath}/report/reports">故障查询</a>
+						<a href="${ContextPath}/report/reports">申报记录</a>
 					</li>
     				</@shiro.hasPermission>
     				<@shiro.hasPermission name="P_R_OFFER">

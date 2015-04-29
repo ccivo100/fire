@@ -67,31 +67,22 @@ public class OperateController extends JFController{
 		String branch=getPara("branch");
 		String offeruser=getPara("offeruser");
 		String offertime=getPara("offertime");
-		String dealuser=getPara("dealuser");
 		
 		//若无查询条件 则按正常查询。
 		if(ValidateKit.isNullOrEmpty(title)
 				&&ValidateKit.isNullOrEmpty(branch)
 				&&ValidateKit.isNullOrEmpty(offeruser)
-				&&ValidateKit.isNullOrEmpty(offertime)
-				&&ValidateKit.isNullOrEmpty(dealuser)){
+				&&ValidateKit.isNullOrEmpty(offertime)){
 			
-			String where=" 1=1 and o.deleted_at is null and o.status=0 and (o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) or o.accept_user=?) ";
+			String where=" 1=1 and o.deleted_at is null and o.status=0 and o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?)  ";
 			String orderby=" ORDER BY o.offer_at DESC ";
-			operatePage=Order.dao.findOperatesByUserId(getParaToInt(0,1), 10,where,orderby, user.get("id"),user.get("id"));
+			operatePage=Order.dao.findOperatesByUserId(getParaToInt(0,1), 10,where,orderby, user.get("id"));
 			Order.dao.format(operatePage,"title");
 			setAttr("operatePage",operatePage);
 			
 		}else{
 			
 			conditions.add(user.get("id"));
-			conditions.add(user.get("id"));
-			//查询运维人
-			if(!ValidateKit.isNullOrEmpty(dealuser)){
-				whereadd.append(" and u2.full_name like ? ");
-				conditions.add("%"+getPara("dealuser").trim()+"%");
-				setAttr("dealuser",dealuser);
-			}
 			//查询申报人
 			if(!ValidateKit.isNullOrEmpty(offeruser)){
 				whereadd.append(" and u1.full_name like ? ");
@@ -115,7 +106,7 @@ public class OperateController extends JFController{
 				whereadd.append(" and o.offer_at like ? ");
 				conditions.add(getPara("offertime").trim()+"%");
 			}
-			String where=" 1=1 and o.deleted_at is null and o.status=0 and (o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) or o.accept_user=?) "+whereadd.toString();
+			String where=" 1=1 and o.deleted_at is null and o.status=0 and o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?)  "+whereadd.toString();
 			String orderby=" ORDER BY o.offer_at DESC ";
 			Object[] condition= new Object[conditions.size()];
 			conditions.toArray(condition);

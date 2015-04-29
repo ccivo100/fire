@@ -255,6 +255,10 @@ textarea{
     padding: 10px;
     border-top: 1px solid #e5e5e5;
 }
+.jf_inner.jf_topic .changes{
+    font-size: 12px;
+    color: #838383;
+}
 
 .jf_author_content .jf_user_avatar {
     display: inline-block;
