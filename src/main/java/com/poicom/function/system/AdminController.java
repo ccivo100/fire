@@ -360,78 +360,102 @@ public class AdminController extends Controller {
 	 */
 	@Before(Tx.class)
 	public void doedituser(){
-		//前台选中的 角色s
-		String[] roles=getParaValues("roles");
 		
-		//用户-角色 中间表
-		List<Record> sur=UserRole.dao.findUserRolesById(getParaToLong("userid"));
+		long userid=getParaToLong("userid");
+		String uphone=getPara("uphone");
+		String uemail=getPara("uemail");
+		long selectBranch=getParaToLong("selectBranch");
+		long selectApartment=getParaToLong("selectApartment");
+		long selectPosition=getParaToLong("selectPosition");
 		
-		//1、用户有角色，取消所有角色
-		if(ValidateKit.isNullOrEmpty(roles)){
-			for(int i=0;i<sur.size();i++){
-				logger.error(sur.get(i).getLong("roleid")+" 已取消，执行删除操作！");
-				UserRole.dao.findById(sur.get(i).getLong("id")).delete();
-			}
-		}
-		//2、用户无角色，新增角色
-		else if(ValidateKit.isNullOrEmpty(sur)){
-			for(int i=0;i<roles.length;i++){
-				logger.error(roles[i]+" 不存在，执行新增操作！");
-				new UserRole().set("user_id", getPara("userid")).set("role_id", roles[i]).save();
-			}
-		}
-		//3、用户有角色
-		else{
-			//需要分配该角色?，不存在则新增。
-			for(int i=0;i<roles.length;i++){
-				boolean flag=false;
-				for(int j=0;j<sur.size();j++){
-					if(Integer.parseInt(roles[i])==sur.get(j).getLong("roleid")){
-						flag=true;
-						break;
-					}
-				}
-				if(flag){
-					logger.error(roles[i]+" 存在，保留不删除！");
-				}else if(!flag){
-					logger.error(roles[i]+" 不存在，执行新增操作！");
-					new UserRole().set("user_id", getPara("userid")).set("role_id", roles[i]).save();
-				}
-			}
+		if(!ValidateKit.isPhone(uphone)){
+			renderJson("state","电话格式不正确！");
+		}else if(!ValidateKit.isEmail(uemail)){
+			renderJson("state","邮箱格式不正确！");
+		}else if(selectBranch==-1){
+			renderJson("state","请选择单位名称！");
+		}else if(selectApartment==-1){
+			renderJson("state","请选择部门名称！");
+		}else if(selectPosition==-1){
+			renderJson("state","请选择职位名称！");
+		}else{
+			//前台选中的 角色s
+			String[] roles=getParaValues("roles[]");
 			
-			//需要保留该角色?，不保留则删除
-			for(int i=0;i<sur.size();i++){
-				boolean flag=false;
-				for(int j=0;j<roles.length;j++){
-					if(sur.get(i).getLong("roleid")==Integer.parseInt(roles[j])){
-						flag=true;
-						break;
-					}
-				}
-				if(flag){
-					logger.error(sur.get(i).getLong("roleid")+" 未取消，保留不删除！");
-				}else if(!flag){
+			User user=User.dao.findById(userid);
+			user.set("phone", uphone).set("email", uemail).update();
+			
+			//用户-角色 中间表
+			List<Record> sur=UserRole.dao.findUserRolesById(getParaToLong("userid"));
+			
+			//1、用户有角色，取消所有角色
+			if(ValidateKit.isNullOrEmpty(roles)){
+				for(int i=0;i<sur.size();i++){
 					logger.error(sur.get(i).getLong("roleid")+" 已取消，执行删除操作！");
 					UserRole.dao.findById(sur.get(i).getLong("id")).delete();
 				}
 			}
+			//2、用户无角色，新增角色
+			else if(ValidateKit.isNullOrEmpty(sur)){
+				for(int i=0;i<roles.length;i++){
+					logger.error(roles[i]+" 不存在，执行新增操作！");
+					new UserRole().set("user_id", getPara("userid")).set("role_id", roles[i]).save();
+				}
+			}
+			//3、用户有角色
+			else{
+				//需要分配该角色?，不存在则新增。
+				for(int i=0;i<roles.length;i++){
+					boolean flag=false;
+					for(int j=0;j<sur.size();j++){
+						if(Integer.parseInt(roles[i])==sur.get(j).getLong("roleid")){
+							flag=true;
+							break;
+						}
+					}
+					if(flag){
+						logger.error(roles[i]+" 存在，保留不删除！");
+					}else if(!flag){
+						logger.error(roles[i]+" 不存在，执行新增操作！");
+						new UserRole().set("user_id", getPara("userid")).set("role_id", roles[i]).save();
+					}
+				}
+				
+				//需要保留该角色?，不保留则删除
+				for(int i=0;i<sur.size();i++){
+					boolean flag=false;
+					for(int j=0;j<roles.length;j++){
+						if(sur.get(i).getLong("roleid")==Integer.parseInt(roles[j])){
+							flag=true;
+							break;
+						}
+					}
+					if(flag){
+						logger.error(sur.get(i).getLong("roleid")+" 未取消，保留不删除！");
+					}else if(!flag){
+						logger.error(sur.get(i).getLong("roleid")+" 已取消，执行删除操作！");
+						UserRole.dao.findById(sur.get(i).getLong("id")).delete();
+					}
+				}
+			}
+			
+			logger.error(getPara("selectBranch"));
+			UserInfo userinfo=UserInfo.dao.get("user_id", getParaToLong("userid"));
+			if(userinfo.get("branch_id")!=getPara("selectBranch")){
+				userinfo.set("branch_id", getPara("selectBranch"));
+			}
+			if(userinfo.get("apartment_id")!=getPara("selectApartment")){
+				userinfo.set("apartment_id", getPara("selectApartment"));
+			}
+			if(userinfo.get("position_id")!=getPara("selectPosition")){
+				userinfo.set("position_id", getPara("selectPosition"));
+			}
+			if(userinfo.update()){
+				renderJson("state","提交成功！");
+			}else{
+				renderJson("state","提交失败！");
+			}
 		}
-		
-		logger.error(getPara("selectBranch"));
-		UserInfo userinfo=UserInfo.dao.get("user_id", getParaToLong("userid"));
-		if(userinfo.get("branch_id")!=getPara("selectBranch")){
-			userinfo.set("branch_id", getPara("selectBranch"));
-		}
-		if(userinfo.get("apartment_id")!=getPara("selectApartment")){
-			userinfo.set("apartment_id", getPara("selectApartment"));
-		}
-		if(userinfo.get("position_id")!=getPara("selectPosition")){
-			userinfo.set("position_id", getPara("selectPosition"));
-		}
-		if(userinfo.update()){
-			redirect("/admin/user");
-		}
-		
 		
 	}
 	
@@ -502,7 +526,15 @@ public class AdminController extends Controller {
 	 */
 	public void apartment(){
 		
-		Page<Apartment> apartmentPage;
+		List<Apartment> apartments=Apartment.dao.findApartmentsByPid(0);
+		
+		for(Apartment apartment:apartments){
+			List<Apartment> achild=Apartment.dao.findApartmentsByPid(apartment.get("id"));
+			apartment.setChildren(achild);
+		}
+		setAttr("apartmentTree",apartments);
+		
+		/*Page<Apartment> apartmentPage;
 		String orderby=" ORDER BY apartment.id ";
 		if(ValidateKit.isNullOrEmpty(getPara("apartment"))){
 			String where = " 1=1 ";
@@ -513,10 +545,16 @@ public class AdminController extends Controller {
 			apartmentPage=Apartment.dao.findApartmentPage(getParaToInt(0,1), 10, where, orderby, condition);
 			setAttr("apartment",getPara("apartment").trim());
 		}
-		setAttr("apartmentPage",apartmentPage);
+		setAttr("apartmentPage",apartmentPage);*/
 		
 	}
 	public void addapartment(){
+		if(ValidateKit.isNullOrEmpty(getPara("id"))){
+
+		}else{
+			System.out.println(getParaToLong("id"));
+			setAttr("pid",getParaToLong("id"));
+		}
 		render(APARTMENT_ADD_PAGE);
 	}
 	@Before(AdminValidator.class)

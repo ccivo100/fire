@@ -13,6 +13,23 @@
 			</#if>
 		</div>
 	</div>
+		<div class="form-group">
+		<label class="col-sm-2 control-label">父节点</label>
+		<div class="col-sm-4">
+			<#if pid??>
+			<input type="text" class="form-control" name="apartment.pid" value="${pid}" readonly  required />
+			<#else>
+			<input type="text" class="form-control" name="apartment.pid" <#if apartment?? > value="${(apartment.pid)!}" <#else>value="0" readonly</#if> <#if (apartment.pid)?? && apartment.pid=0>readonly</#if>  required/>
+			</#if>
+		</div>
+		<div class="col-sm-4">
+			<#if pidMsg??>
+			<div class="index-alert index-alert-danger" style="background-image:none;">
+				${(pidMsg)!}
+			</div>
+			</#if>
+		</div>
+	</div>
 
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">

@@ -69,7 +69,11 @@ $(document).ready(function() {
 	
 });
 
-
+/**
+ * 字符处理
+ * @param str
+ * @return
+ */
 function trim(str) {
 	return str.replace(/(^\s*)|(\s*$)/g, "");
 }
@@ -100,7 +104,7 @@ $(document).ready(function() {
 });
 
 
-/** 测试*/
+/** 用于获得角色-权限等。（测试用）*/
 function gettree(result) {
 	$.each(result.permissionList, function(i, item) {
 		$("#myDiv3").append(
@@ -161,11 +165,9 @@ $(function() {
 	});
 });
 
-/** 提交建议使用AJAX */
+/** 提交建议使用AJAX （不再使用） */
 $(function() {
-
 	$("#submit").click(function() {
-
 		$.ajax( {
 			type : "post",
 			url : "/user/contactMe",
@@ -180,14 +182,11 @@ $(function() {
 				return;
 			}
 		});
-
 	});
-
 });
 
 
 $(function() {
-
 	$("#hasten1").click(function() {
 
 		$.ajax( {
@@ -216,43 +215,42 @@ $(function() {
 
 });
 
-Date.prototype.toRelativeTime = function(now_threshold) {
-	  var delta = new Date() - this;
-	 
-	  now_threshold = parseInt(now_threshold, 10);
-	 
-	  if (isNaN(now_threshold)) {
-	    now_threshold = 0;
-	  }
-	 
-	  if (delta <= now_threshold) {
-	    return '刚刚';
-	  }
-	 
-	  var units = null;
-	  var conversions = {
-	    '毫秒': 1, // ms    -> ms
-	    '秒': 1000,   // ms    -> sec
-	    '分钟': 60,     // sec   -> min
-	    '小时':   60,     // min   -> hour
-	    '天':    24,     // hour  -> day
-	    '月':  30,     // day   -> month (roughly)
-	    '年':   12      // month -> year
-	  };
-	 
-	  for (var key in conversions) {
-	    if (delta < conversions[key]) {
-	      break;
-	    } else {
-	      units = key; // keeps track of the selected key over the iteration
-	      delta = delta / conversions[key];
-	    }
-	  }
-	 
-	  // pluralize a unit when the difference is greater than 1.
-	  delta = Math.floor(delta);
-	  return [delta, units].join(" ");
-	};
+/**
+ * 时间格式化，将时间转为 xx之前
+ * @param datetime
+ * @return
+ */
+function formatDateTime(datetime) {
+    //datetime = datetime.replace("-", "/");
+    var current_date = new Date().getTime();
+    var _date = datetime.split(" ")[0];
+    var _time = datetime.split(" ")[1];
+    var date = new Date();
+    date.setFullYear(_date.split("-")[0]);
+    date.setMonth(_date.split("-")[1] - 1);
+    date.setDate(_date.split("-")[2]);
+    date.setHours(_time.split(":")[0]);
+    date.setMinutes(_time.split(":")[1]);
+    date.setSeconds(_time.split(":")[2]);
+    var mul = current_date - date.getTime();
+    var time = parseInt(mul / 1000);
+    if (time < 60) {
+        return "刚刚";
+    } else if (time < 3600) {
+        return parseInt(time / 60) + " 分钟前";
+    } else if (time < 86400) {
+        return parseInt(time / 3600) + " 小时前";
+    } else if (time < 604800) {
+        return parseInt(time / 86400) + " 天前";
+    } else if (time < 2419200) {
+        return parseInt(time / 604800) + " 周前";
+    } else if (time < 31536000) {
+        return parseInt(time / 2592000) + " 个月前";
+    } else {
+        return parseInt(time / 31536000) + " 年前";
+    }
+    return datetime;
+}
 
 /*
  * $(document).ready(function(){ $("a.delete").click(function(){

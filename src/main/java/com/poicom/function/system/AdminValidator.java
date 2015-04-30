@@ -200,13 +200,71 @@ public class AdminValidator extends Validator{
 				addError("nameMsg", "输入字数不少于4...");
 			}
 		}
-		//部门验证
-		else if(getActionKey().equals("/admin/doaddapartment")|getActionKey().equals("/admin/doeditapartment")){
+		
+		/*else if(getActionKey().equals("/admin/doaddapartment")|getActionKey().equals("/admin/doeditapartment")){
 			if(ValidateKit.isNullOrEmpty("apartment.name")){
 				
 				addError("nameMsg", "输入内容不为空");
 			}else if(!ValidateKit.isLength(c.getPara("apartment.name"), 3, 15)){
 				addError("nameMsg", "输入字数不少于3...");
+			}
+		}*/
+		//新增部门验证
+		else if(getActionKey().equals("/admin/doaddapartment")){
+			if(ValidateKit.isNullOrEmpty(c.getPara("apartment.name").trim())){
+				addError("nameMsg", "部门名称不可为空");
+			}
+			List<Apartment> apartments=Apartment.dao.findApartmentsByPid(0);
+			
+			if(ValidateKit.isNullOrEmpty(c.getPara("apartment.id"))&ValidateKit.isNullOrEmpty(c.getPara("pid"))){
+				if(c.getParaToLong("apartment.pid")!=0){
+					addError("pidMsg","父节点应该为0");
+				}
+			}else if(!ValidateKit.isNullOrEmpty(c.getPara("pid"))){
+				boolean flag=false;
+				StringBuffer str=new StringBuffer();
+				for(Apartment apartment:apartments){
+					str.append(apartment.get("id")+" ");
+					if(apartment.getLong("id")==c.getParaToLong("pid")){
+						
+						flag=true;
+					}
+				}
+				if(!flag){
+					addError("pidMsg","父节点应为："+str.toString());
+				}
+			}
+			
+		}
+		//更新部门验证
+		else if(getActionKey().equals("/admin/doeditapartment")){
+			if(ValidateKit.isNullOrEmpty(c.getPara("apartment.name").trim())){
+				addError("nameMsg", "部门名称不可为空");
+			}
+			if(ValidateKit.isNullOrEmpty(c.getPara("apartment.pid").trim())){
+				addError("pidMsg","父节点不可为空");
+				
+			}else{
+				Apartment apartment=Apartment.dao.findById(c.getParaToInt("apartment.id"));
+				if(apartment.getLong("pid")==0&c.getParaToLong("apartment.pid")!=apartment.getLong("pid")){
+					addError("pidMsg","根节点不可修改");
+				}else if(apartment.getLong("pid")!=0&c.getParaToLong("apartment.pid")==0){
+					addError("pidMsg","子节点不可修改为根节点");
+				}
+				else if(c.getParaToLong("apartment.pid")!=0){
+					List<Apartment> apartments=Apartment.dao.findApartmentsByPid(0);
+					boolean flag=false;
+					StringBuffer str=new StringBuffer();
+					for(Apartment a:apartments){
+						str.append(a.get("id")+" ");
+						if(c.getParaToLong("apartment.pid")==a.getLong("id")){
+							flag=true;
+						}
+					}
+					if(!flag){
+						addError("pidMsg","父节点应为："+str.toString());
+					}
+				}
 			}
 		}
 		//职位验证
@@ -276,7 +334,11 @@ public class AdminValidator extends Validator{
 		}
 		//部门跳转
 		else if(getActionKey().equals("/admin/doaddapartment")){
-			c.keepModel(Apartment.class);
+			if(ValidateKit.isNullOrEmpty(c.getPara("apartment.id"))&ValidateKit.isNullOrEmpty(c.getPara("pid"))){
+				c.keepPara("apartment.pid");
+			}else if(!ValidateKit.isNullOrEmpty(c.getPara("pid"))){
+				c.keepPara("pid");
+			}
 			c.render("/page/app/admin/apartment/add.html");
 		}else if(getActionKey().equals("/admin/doeditapartment")){
 			c.keepModel(Apartment.class);

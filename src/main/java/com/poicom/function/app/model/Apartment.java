@@ -57,6 +57,15 @@ public class Apartment extends Model<Apartment> implements TreeNode<Apartment>{
 		return find(SqlKit.sql("apartment.findApartmentBySelect") + blank
 				+ SqlKit.sql("apartment.findApartmentByFrom"), paras);
 	}
+	
+	/**
+	 * @描述 获取根部门
+	 * @param paras
+	 * @return
+	 */
+	public List<Apartment> findApartmentsByPid(Object... paras){
+		return findBy(" pid=? ", paras);
+	}
 
 	
 

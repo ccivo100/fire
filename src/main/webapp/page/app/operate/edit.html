@@ -74,7 +74,7 @@
 				<span class="changes">
     						<span style="margin: 15px;">处理人：<span class="label label-info ">${(comments.ufull_name)!}</span></span>
     						<span style="margin: 15px;">电话：<span class="label label-info ">${(comments.uphone)!}</span></span>
-    						<span style="margin: 5px;float:right;">处理时间：${(comments.add_at)!}</span>
+    						<span style="margin: 5px;float:right;" title="${(comments.add_at)!}">处理时间：<script >document.write(formatDateTime('${(comments.add_at)!}'))</script></span>
     						<br>
     						<span style="margin: 15px;">单位：<span class="label label-info ">${(comments.bname)!}</span></span>
     						<span style="margin: 15px;">部门：<span class="label label-info ">${(comments.aname)!}</span></span>

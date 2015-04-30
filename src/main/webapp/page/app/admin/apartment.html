@@ -21,17 +21,6 @@
 				</span>
 				</div>
 			</div>
-			<div class="col-xs-4" >
-				<div class="input-group">
-					<span class="input-group-addon">关键字</span> 
-					<input class="form-control" id="apartment" name="apartment" value="${(apartment)!}" placeholder="部门名称" type="text" autocomplete="off">
-					<span class="input-group-btn">
-						<button class="btn btn-default">
-							<span class="glyphicon glyphicon-search"></span>Search
-						</button>
-					</span>
-				</div>
-			</div>
 	</div>
 </form>
 <table class="table table-bordered table-hover">
@@ -39,19 +28,38 @@
 			<tr>
 				<th width="2%">序号</th>
 				<th width="10%">单位名称</th>
+				<th width="4%">父节点编号</th>
 				<th width="5%">创建时间</th>
 				<th width="4%">状态</th>
 				<th width="4%">操作</th>
 			</tr>
 		</thead>
 		<tbody>
-			<#list apartmentPage.getList() as apartment>
+			<#list apartmentTree as apartments>
 			<tr>
-				<td>${(apartment_index+1)!}</td>
-				<td> ${(apartment.name)!}</td>
-				<td> ${(apartment.created_at)!}</td>
+				<td>${(apartments.id)!}</td>
+				<td> ${(apartments.name)!}</td>
+				<td>${(apartments.pid)!}</td>
+				<td>${(apartments.created_at)!}</td>
+				<td><#if apartments.deleted_at??><span class="glyphicon glyphicon-remove"></span>禁用<#else>正常</#if></td>
+				<td><a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/editapartment?id=${(apartments.id)!}" >编辑</a>
+				<#if apartments.deleted_at??>
+				<a class="btn btn-danger btn-xs"  href="${ContextPath}/admin/onapartment?id=${(apartments.id)!}" >启用</a>
+				<#else>
+				<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/offapartment?id=${(apartments.id)!}" >禁用</a>
+				</#if>
+				<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/addapartment?id=${(apartments.id)!}" >添加</a>
+				</td>
+			</tr>
+			<#list apartments.children as apartment>
+				<tr>
+				<td>${(apartment.id)!}</td>
+				<td><span class="glyphicon glyphicon-minus-sign"></span>     ${(apartment.name)!}</td>
+				<td>${(apartment.pid)!}</td>
+				<td>${(apartment.created_at)!}</td>
 				<td><#if apartment.deleted_at??><span class="glyphicon glyphicon-remove"></span>禁用<#else>正常</#if></td>
-				<td><a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/editapartment?id=${(apartment.id)!}" >编辑</a>
+				<td>
+				<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/editapartment?id=${(apartment.id)!}" >编辑</a>
 				<#if apartment.deleted_at??>
 				<a class="btn btn-danger btn-xs"  href="${ContextPath}/admin/onapartment?id=${(apartment.id)!}" >启用</a>
 				<#else>
@@ -60,21 +68,10 @@
 				</td>
 			</tr>
 			</#list>
-			<#if apartmentPage.getList().size()!=10>
-			<#assign size=(10-apartmentPage.getList().size())>
-				<#list 1..size as t>
-					<tr>
-						<td>${(apartmentPage.getList().size()+t)!}</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</#list>
-			</#if>
+			</#list>
 		</tbody>
+	
 	</table>
-	<#include "/page/common/_paginate.html" />
-	<@paginate currentPage=apartmentPage.pageNumber totalPage=apartmentPage.totalPage actionUrl="/admin/apartment/" />
+
 </div>
 </@layout>

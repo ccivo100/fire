@@ -8,20 +8,46 @@
    <li class="active"><a href="#">编辑用户</a></li>
 </ul>
 </div>
-	<form class="form-horizontal" role="form" action="${ContextPath}/admin/doedituser" method="post" >
+	<form class="form-horizontal" role="form" action="" method="post" >
 		<div class="row">
-			<input type="hidden" name="userid" value="${(userinfo.uuserid)}">
+			<input id="userid" type="hidden" name="userid" value="${(userinfo.uuserid)}">
 			<div class="form-group">
 				<label class="col-sm-2 control-label">姓名</label>
 				<div class="col-sm-4">
-					<input type="text" class="form-control"  name="offer_user" value="${(userinfo.ufullname)!}" readonly/>
+					<input type="text" class="form-control"  name="ufullname" value="${(userinfo.ufullname)!}" readonly/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">联系方式</label>
+				<div class="col-sm-4">
+					<input id="uphone" type="text" class="form-control"  name="uphone" value="${(userinfo.uphone)!}"  autofocus/>
+				</div>
+				<div class="col-xs-4">
+				<#if phoneMsg??>
+					<div class="index-alert index-alert-danger" style="background-image:none;">
+					${(phoneMsg)!}
+					</div>
+				</#if>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">邮箱地址</label>
+				<div class="col-sm-4">
+					<input id="uemail" type="text" class="form-control"  name="uemail" value="${(userinfo.uemail)!}" />
+				</div>
+				<div class="col-xs-4">
+				<#if emailMsg??>
+					<div class="index-alert index-alert-danger" style="background-image:none;">
+					${(emailMsg)!}
+					</div>
+				</#if>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">单位</label>
 				<div class="col-sm-4">
-					<select id="selectType" name="selectBranch" class="form-control"  required autofocus>
-						<option value="" selected="selected">请选择</option>
+					<select id="selectBranch" name="selectBranch" class="form-control"  required >
+						<option value="-1" selected="selected">请选择</option>
 						<#list branchList as branch>
 						<option value="${(branch.id)!}" <#if (userinfo.info_branchid)=branch.id>selected="selected"<#else></#if>>${(branch.name)!}	</option>
 						</#list>
@@ -31,8 +57,8 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">部门</label>
 				<div class="col-sm-4">
-					<select id="selectType" name="selectApartment" class="form-control"  required autofocus>
-						<option value="" selected="selected">请选择</option>
+					<select id="selectApartment" name="selectApartment" class="form-control"  required >
+						<option value="-1" selected="selected">请选择</option>
 						<#list apartmentList as apartment>
 						<option value="${(apartment.id)!}" <#if (userinfo.info_apartmentid)=apartment.id>selected="selected"<#else></#if>>${(apartment.name)!}	</option>
 						</#list>
@@ -42,8 +68,8 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">职位</label>
 				<div class="col-sm-4">
-					<select id="selectType" name="selectPosition" class="form-control"  required autofocus>
-						<option value="" selected="selected">请选择</option>
+					<select id="selectPosition" name="selectPosition" class="form-control"  required >
+						<option value="-1" selected="selected">请选择</option>
 						<#list positionList as position>
 						<option value="${(position.id)!}" <#if (userinfo.info_positionid)=position.id>selected="selected"<#else></#if>>${(position.name)!}	</option>
 						</#list>
@@ -55,7 +81,7 @@
 				<div class="col-sm-4">
 						<#list roleList as role>
 						    <label class="checkbox inline">
-						    <input type="checkbox" id="inlineCheckbox1" name="roles" value="${(role.id)!}"
+						    <input id="roles" type="checkbox"  name="roles" value="${(role.id)!}"
 							    <#list userrole as r>
 							    	<#if r.roleid=role.id>
 							    	 checked
@@ -68,15 +94,46 @@
 
 				</div>
 			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<button value="提交" type="submit" class="btn btn-primary save" data-loading-text="正在提交...">提交</button>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button id="edituser" name="edituser" value="提交"  class="btn btn-primary save" data-loading-text="正在提交...">提交</button>
+					</div>
 				</div>
-			</div>
 		</div>
-		
-		
 	</form>
-	
+
 </div>
+<script>
+$(document).ready(function(){
+	
+
+	$("#edituser").click(function(){
+		var roles = new Array();
+		$("input[name='roles']:checked").each(function(){ 
+			roles.push($(this).val());
+		});  
+		$.ajax({
+			type:"post",
+			url:"${ContextPath}/admin/doedituser",
+			data:{
+				"userid":$('#userid').val(),
+				"uphone":$('#uphone').val(),
+				"uemail":$('#uemail').val(),
+				"roles":roles,
+				"selectBranch":$('#selectBranch').val(),
+				"selectApartment":$('#selectApartment').val(),
+				"selectPosition":$('#selectPosition').val()},
+			success:function(msg){
+				alert(msg.state);
+				if(msg.state=='提交成功！'){
+					window.location.href='${ContextPath}/admin/user'
+				}
+			}
+		});
+	});
+	
+});
+
+</script>
+
 </@layout>
