@@ -89,20 +89,19 @@
 					<#elseif report.status=0>
 					<span class="label label-success">已处理</span>
 					<#elseif report.status=1>
-					<span class="label label-default">未处理</span>
-					<#elseif report.status=2>
-					<span class="label label-danger">超时未处理</span>
-					<#elseif report.status=3>
 					<span class="label label-warning">处理中</span>
+					<#elseif report.status=2>
+					<span class="label label-default">未处理</span>
 					</#if>
 				</td>
 				
 				<td style="text-align:left;">
 				<a class="btn btn-primary btn-xs"   href="${ContextPath}/report/report?id=${report.id}"  >查看</a> 
-				<#if report.status==1 || report.status==2>
+				<#if report.status==2 >
+				<#if report.deleted_at??>
+				<#else>
 				<a class="btn btn-primary btn-xs"  href="${ContextPath}/report/edit?id=${report.id}" >修改</a>
-				<#elseif report.deleted_at??>
-				<a class="btn btn-primary btn-xs"  href="${ContextPath}/report/edit?id=${report.id}" >修改</a>
+				</#if>
 				</#if>
 				</td>
 			</tr>

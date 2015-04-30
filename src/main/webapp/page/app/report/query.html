@@ -16,34 +16,26 @@
 				故障内容
 			</div>
 			<div class="jf_header jf_topic_header">
-				<#if ostatus=0>
+				<#if odeletetime??>
+				<span class="label label-danger">已撤销</span>
+				<#elseif ostatus=0>
 				<span class="label label-success">已处理</span>
 				<#elseif ostatus=1>
-				<span class="label label-default">未处理</span>
-				<#elseif ostatus=2>
-				<span class="label label-danger">超时未处理</span>
-				<#elseif ostatus=3>
 				<span class="label label-warning">处理中</span>
+				<#elseif ostatus=2>
+				<span class="label label-default">未处理</span>
+				
 				</#if>
 				<span>
 				
 				</span>
 				
 				<span class="jf_topic_full_title">${(otitle)!}</span>
-				<span style="display: inline-block; float: right;">
-					<h4>
-					<#if odeletetime??>
-					<span class="label label-danger">已撤销</span>
-					<#else>
-					<span class="label label-primary ">正常</span>
-					</#if> 
-					</h4>
-				</span>
-				<#if ostatus=2>
+				<#if ostatus=3>
 					<#if oflag=0>
-					<a id="hasten" class="btn btn-xs btn-danger" >催办</a>
+					<!-- <a id="hasten" class="btn btn-xs btn-danger" >催办</a> -->
 					<#elseif oflag=1>
-					<a id="hasten" class="btn btn-xs btn-default" disabled>已催办</a>
+					<!-- <a id="hasten" class="btn btn-xs btn-default" disabled>已催办</a> -->
 					</#if>
 				</#if>
 				<br></br>

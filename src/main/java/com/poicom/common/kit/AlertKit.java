@@ -377,15 +377,13 @@ public class AlertKit {
 	 * @描述 提供定时提醒短信
 	 * @param phone
 	 */
-	public static void sendSms(Object paras,String... phone ){
+	public static String getSmsBodyOuttime( ){
 		
 		StringBuffer contt=new StringBuffer();
-
 		contt.append("您好，您所属故障类型工单已超时未处理，请及时处理。【一点通】");
-		
-		String content =contt.toString();
-		sendSms(content,phone);
-		
+		//String content =contt.toString();
+		//sendSms(content,phone);
+		return contt.toString();
 	}
 	
 	/**

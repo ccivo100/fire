@@ -26,11 +26,9 @@
 				<#if (ostatus?number)=0>
 				<span class="label label-success">已处理</span>
 				<#elseif (ostatus?number)=1>
-				<span class="label label-default">未处理</span>
-				<#elseif (ostatus?number)=2>
-				<span class="label label-danger">超时未处理</span>
-				<#elseif (ostatus?number)=3>
 				<span class="label label-warning">处理中</span>
+				<#elseif (ostatus?number)=2>
+				<span class="label label-default">未处理</span>
 				</#if>
 				<span>
 				
@@ -120,11 +118,11 @@
 						<span class="input-group-addon">进度</span>
 						<select id="selectProgress" class="form-control" name="selectProgress">
 							<option value="-1">请选中处理进度</option>
-							<#if ostatus==3>
+							<#if ostatus==1>
 							<#else>
 							<option value="0">开始处理</option>
 							</#if>
-							<#if ostatus==3>
+							<#if ostatus==1>
 							<option value="1">继续处理</option>
 							</#if>
 							<option value="2">处理完毕</option>
@@ -212,7 +210,6 @@ $(document).ready(function(){
 	
 	$("#deal_at").datetimepicker({
 		format: 'yyyy-mm-dd hh:ii:ss',
-		startDate: new Date(),
 		autoclose: true,
 		todayBtn: true,
 		pickerPosition: "bottom-left",

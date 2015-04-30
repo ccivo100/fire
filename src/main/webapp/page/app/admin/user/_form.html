@@ -92,15 +92,16 @@
 		</#if>
 		</div>
 	</div>
+
 	<div class="form-group">
 		<label class="col-xs-2 control-label">部门</label>
-		<div class="col-xs-4">
-				<select id="selectApartment" name="selectApartment" class="form-control"  required>
-					<option value="" selected="selected">请选择</option>
-					<#list apartmentList as apartment>
-					<option value="${(apartment.id)!}" >${(apartment.name)!}	</option>
-					</#list>
-				</select>
+		<div class="col-sm-2">
+			<select id="selectFapartment" name="selectFapartment" class="form-control" required >
+			</select>
+		</div>
+		<div class="col-sm-2">
+			<select id="selectApartment" name="selectApartment" class="form-control" required>
+			</select>
 		</div>
 		<div class="col-xs-4">
 		<#if apartmentMsg??>
@@ -135,3 +136,43 @@
 		</div>
 	</div>
 </div>
+
+<script>
+function select1() {
+	$.ajax(
+    {
+    	type: "post",
+    	url: "${ContextPath}/admin/handler",
+    	data: { "type": "afacher" },
+        success: function (msg) {
+        	$("#selectFapartment").append("<option value=''>请选择一级部门</option>");
+        	for (var i = 0; i < msg.afacherList.length; i++) {
+            	$("#selectFapartment").append("<option value=" + msg.afacherList[i].id + ">" + msg.afacherList[i].name + "</option>");
+        	}
+            select2();
+        }
+	})
+};
+function select2() {
+	$("#selectApartment").html("");
+	$.ajax(
+	{
+		type: "post",
+		url: "${ContextPath}/admin/handler",
+		data: { "type": "achilren","typeid":$('#selectFapartment').val() },
+		success: function (msg) {
+			$("#selectApartment").append("<option value=''>请选择二级部门</option>");
+			for (var i = 0; i < msg.achilrenList.length; i++) {
+				$("#selectApartment").append("<option value=" + msg.achilrenList[i].id + ">" +msg.achilrenList[i].name + "</option>");
+			}
+		}
+	})
+};
+
+$(function(){
+	select1();
+	$('#selectFapartment').bind("change", select2);
+});
+
+
+</script>

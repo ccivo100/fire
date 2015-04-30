@@ -255,8 +255,8 @@ public class OperateController extends JFController{
 
 			//开始处理
 			if(selectProgress==0){
-				//设置状态为 3 及处理中
-				order.set("status", 3).update();
+				//设置状态为 1 及处理中
+				order.set("status", 1).update();
 				renderJson("state","故障工单开始处理！");
 			}
 			//继续处理

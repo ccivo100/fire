@@ -72,7 +72,7 @@ public class ReportController extends JFController{
 				&&ValidateKit.isNullOrEmpty(offertime)){
 			
 			String where=" WHERE o.offer_user=? ";
-			String orderby=" ORDER BY o.status desc, o.offer_at DESC ";
+			String orderby=" ORDER BY o.deleted_at ASC,o.status DESC, o.offer_at DESC ";
 			reportPage=Order.dao.findReportsByUserId(getParaToInt(0,1), 10,where,orderby, user.get("id"));
 			Order.dao.format(reportPage,"title");
 			setAttr("reportPage",reportPage);
@@ -104,7 +104,7 @@ public class ReportController extends JFController{
 				conditions.add(getPara("offertime").trim()+"%");
 			}
 			String where=" WHERE o.offer_user=? "+whereadd.toString();
-			String orderby=" ORDER BY o.status desc, o.offer_at DESC ";
+			String orderby=" ORDER BY o.deleted_at ASC,o.status DESC, o.offer_at DESC ";
 			Object[] condition= new Object[conditions.size()];
 			conditions.toArray(condition);
 			reportPage=Order.dao.findReportsByUserId(getParaToInt(0,1), 10,where,orderby,condition);
@@ -316,7 +316,7 @@ public class ReportController extends JFController{
 				.set("description", getPara("odescription"))
 				.set("type", getParaToInt("selectType"))
 				.set("level", getPara("selectLevel"))
-				.set("status", 1)
+				.set("status", 2)
 				.set("offer_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss"))
 				//.set("accept_user", getParaToLong("selectDeal"))
 				.set("flag", 0);

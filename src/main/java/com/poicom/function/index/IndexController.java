@@ -82,7 +82,7 @@ public class IndexController extends Controller {
 	}
 
 	public void signin() {
-		render("_signin.ftl");
+		render("_signin.html");
 	}
 
 	/**

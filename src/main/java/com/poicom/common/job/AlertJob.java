@@ -21,9 +21,12 @@ import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.poicom.common.kit.AlertKit;
 import com.poicom.common.kit.DateKit;
+import com.poicom.common.thread.ThreadAlert;
 import com.poicom.function.app.model.Level;
 import com.poicom.function.app.model.Order;
+import com.poicom.function.app.model.UserOrder;
 import com.poicom.function.system.model.User;
+import com.poicom.function.system.model.UserInfo;
 
 /**
  * 定时器，定时扫面com_order表中
@@ -58,7 +61,7 @@ public class AlertJob implements Job{
 		}
 		logger.info(operatorMap.values().toString());
 		System.out.println("执行");
-		//doAlert(operatorMap);
+		doAlert(operatorMap);
 	}
 	
 	public static Level getLevel(List<Level> levelList,Order order){
@@ -81,21 +84,29 @@ public class AlertJob implements Job{
 			Set<Long> keys=operatorMap.keySet();
 			List<String> phones=new ArrayList<String>();
 			for(Long key:keys){
+				//发送邮件、短信线程
+				AlertKit alertKit=new AlertKit();
+				
 				Record operator=operatorMap.get(key);
 				String body="您好，您所属故障类型工单已超时未处理，请及时处理。";
-				if(ValidateKit.isEmail(operator.getStr("useremail"))){
-					AlertKit.sendEmail("点通故障系统提醒您！",body,operator.getStr("useremail"));
+				if(ValidateKit.isEmail(operator.getStr("uemail"))){
+					AlertKit.sendEmail("点通故障系统提醒您！",body,operator.getStr("uemail"));
+					alertKit.setEmailTitle("【超时通知】点通故障系统提醒您！").setEmailBody(body).setEmailAdd(operator.getStr("uemail"));
 				}
 				//电话&&非空 then 保存电话列表
-				if(!ValidateKit.isNullOrEmpty(operator.getStr("userphone"))){
-					if(ValidateKit.isPhone(operator.getStr("userphone"))){
-						phones.add(operator.getStr("userphone"));
+				if(!ValidateKit.isNullOrEmpty(operator.getStr("uphone"))){
+					if(ValidateKit.isPhone(operator.getStr("uphone"))){
+						//短信内容
+						String smsBody=AlertKit.getSmsBodyOuttime();
+						alertKit.setSmsContext(smsBody).setSmsPhone(operator.getStr("uphone"));
+						phones.add(operator.getStr("uphone"));
 					}
 				}
+				//加入进程
+				logger.info("日志添加到入库队列 ---> 工单超时通知");
+				ThreadAlert.add(alertKit);
 			}
-			//发送短信
-			String[] array =new String[phones.size()];
-			AlertKit.sendSms(new Object(),phones.toArray(array));
+			
 		}
 	}
 	
@@ -104,14 +115,21 @@ public class AlertJob implements Job{
 	 */
 	public void getAlertOperator(Map<Long,Record> operatorMap,Order order){
 		//获取该Order的类型type
-		Long typeid=order.get("type");
+		//Long typeid=order.get("type");
 		//根据type，查询相应User的List  Record类型保存userid,useremail,userphone,firstname,lastname,fullname。
-		List<Record> operators=User.dao.getOperatorsList(typeid);
+		
+		List<UserOrder> userOrderList=UserOrder.dao.findBy(" order_id=?", order.get("id"));
+		for(UserOrder userorder:userOrderList){
+			Record accept_user=UserInfo.dao.getAllUserInfo(userorder.get("user_id"));
+			operatorMap.put(accept_user.getLong("uuserid"), accept_user);
+		}
+		
+		/*List<Record> operators=User.dao.getOperatorsList(typeid);
 		for(Record operator:operators){
 			if(operatorMap.get(operator.getLong("userid"))==null){
 				operatorMap.put(operator.getLong("userid"), operator);
 			}
-		}
+		}*/
 	}
 	
 

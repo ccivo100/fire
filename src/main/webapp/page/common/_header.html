@@ -68,15 +68,15 @@
     					</li>
       				</@shiro.hasPermission>
       				
+      				<@shiro.hasPermission name="P_O_DEAL">
+    				<li class="<#if activebar='deal'>active</#if>">
+    					<a href="${ContextPath}/operate/deal">故障处理</a>
+    				</li>
+    				</@shiro.hasPermission>
 					<@shiro.hasPermission name="P_O_OPERATES">
 						<li class="<#if activebar='operates'>active</#if>">
 							<a href="${ContextPath}/operate/operates">运维记录</a>
 						</li>
-    				</@shiro.hasPermission>
-    				<@shiro.hasPermission name="P_O_DEAL">
-    				<li class="<#if activebar='deal'>active</#if>">
-    					<a href="${ContextPath}/operate/deal">故障处理</a>
-    				</li>
     				</@shiro.hasPermission>
     				
 					<@shiro.hasPermission name="P_R_REPORTS">

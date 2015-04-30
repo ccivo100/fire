@@ -306,12 +306,26 @@ public class AdminController extends Controller {
 	
 	public void adduser(){
 		
-		
-		
 		setAttr("branchList",Branch.dao.getAllBranch());
 		setAttr("apartmentList",Apartment.dao.getAllApartment());
 		setAttr("positionList",Position.dao.getAllPosition());
 		render(USER_ADD_PAGE);
+	}
+	
+	/**
+	 * @描述 部门选择 一级、二级。
+	 */
+	public void handler(){
+		String type=getPara("type");
+		
+		if(type.equals("afacher")){
+			List<Apartment> afacherList=Apartment.dao.findApartmentsByPid(0);
+			renderJson("afacherList", afacherList);
+		}else if(type.equals("achilren")){
+			System.out.println(getParaToInt("typeid"));
+			List<Apartment> achilrenList=Apartment.dao.findApartmentsByPid(getParaToInt("typeid"));
+			renderJson("achilrenList", achilrenList);
+		}
 	}
 	
 	/**
@@ -391,14 +405,14 @@ public class AdminController extends Controller {
 			//1、用户有角色，取消所有角色
 			if(ValidateKit.isNullOrEmpty(roles)){
 				for(int i=0;i<sur.size();i++){
-					logger.error(sur.get(i).getLong("roleid")+" 已取消，执行删除操作！");
+					logger.info(sur.get(i).getLong("roleid")+" 已取消，执行删除操作！");
 					UserRole.dao.findById(sur.get(i).getLong("id")).delete();
 				}
 			}
 			//2、用户无角色，新增角色
 			else if(ValidateKit.isNullOrEmpty(sur)){
 				for(int i=0;i<roles.length;i++){
-					logger.error(roles[i]+" 不存在，执行新增操作！");
+					logger.info(roles[i]+" 不存在，执行新增操作！");
 					new UserRole().set("user_id", getPara("userid")).set("role_id", roles[i]).save();
 				}
 			}
@@ -414,9 +428,9 @@ public class AdminController extends Controller {
 						}
 					}
 					if(flag){
-						logger.error(roles[i]+" 存在，保留不删除！");
+						logger.info(roles[i]+" 存在，保留不删除！");
 					}else if(!flag){
-						logger.error(roles[i]+" 不存在，执行新增操作！");
+						logger.info(roles[i]+" 不存在，执行新增操作！");
 						new UserRole().set("user_id", getPara("userid")).set("role_id", roles[i]).save();
 					}
 				}
@@ -431,15 +445,15 @@ public class AdminController extends Controller {
 						}
 					}
 					if(flag){
-						logger.error(sur.get(i).getLong("roleid")+" 未取消，保留不删除！");
+						logger.info(sur.get(i).getLong("roleid")+" 未取消，保留不删除！");
 					}else if(!flag){
-						logger.error(sur.get(i).getLong("roleid")+" 已取消，执行删除操作！");
+						logger.info(sur.get(i).getLong("roleid")+" 已取消，执行删除操作！");
 						UserRole.dao.findById(sur.get(i).getLong("id")).delete();
 					}
 				}
 			}
 			
-			logger.error(getPara("selectBranch"));
+			logger.info(getPara("selectBranch"));
 			UserInfo userinfo=UserInfo.dao.get("user_id", getParaToLong("userid"));
 			if(userinfo.get("branch_id")!=getPara("selectBranch")){
 				userinfo.set("branch_id", getPara("selectBranch"));

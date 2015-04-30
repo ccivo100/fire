@@ -3,8 +3,8 @@
 <div class="index-background">
 <div class="page-header">
 <ul class="nav nav-tabs">
-	<li ><a href="${ContextPath}/operate/operates">故障处理列表</a></li>
    	<li class="active"><a href="#">未处理列表</a></li>
+   	<li ><a href="${ContextPath}/operate/operates">故障处理列表</a></li>
 </ul>
 </div>
 	<input type="hidden" name="do" value="report">
@@ -32,11 +32,9 @@
 					<#if operate.status=0>
 					<span class="label label-success">已处理</span>
 					<#elseif operate.status=1>
-					<span class="label label-default">未处理</span>
-					<#elseif operate.status=2>
-					<span class="label label-danger">超时未处理</span>
-					<#elseif operate.status=3>
 					<span class="label label-warning">处理中</span>
+					<#elseif operate.status=2>
+					<span class="label label-default">未处理</span>
 					</#if>
 				</td>
 				

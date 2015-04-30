@@ -3,8 +3,8 @@
 <div class="index-background">
 <div class="page-header">
 <ul class="nav nav-tabs">
-   <li class="active"><a href="#">故障处理列表</a></li>
    <li ><a href="${ContextPath}/operate/deal">未处理列表</a></li>
+   <li class="active"><a href="#">故障处理列表</a></li>
 </ul>
 </div>
 	<form class="bs-example bs-example-form" role="form" action="${ContextPath}/operate/operates" method="post">
@@ -80,11 +80,9 @@
 					<#if operate.status=0>
 					<span class="label label-success">已处理</span>
 					<#elseif operate.status=1>
-					<span class="label label-default">未处理</span>
+					<span class="label label-default">处理中</span>
 					<#elseif operate.status=2>
-					<span class="label label-danger">超时未处理</span>
-					<#elseif operate.status=3>
-					<span class="label label-warning">处理中</span>
+					<span class="label label-danger">未处理</span>
 					</#if>
 				</td>
 				
