@@ -17,6 +17,8 @@ body.sign-body{
     padding: 0;
     margin: 0;
   	font-family: inherit;
+  	height:100%;
+  	width:100%; 
 }
 
 /** 登陆页面UI  */
@@ -71,7 +73,7 @@ body.sign-body{
 }
 
 #loginbox {
-    height: 375px;
+	min-height:315px;
 	background: #ffffff;
     box-shadow: 0 0 4px #000000;
     border-radius: 7px;
@@ -123,17 +125,29 @@ body.sign-body{
 	/*padding 上,右，下，左边*/
 	padding: 10px 115px 15px;
 	width:auto;
-	margin-top: 180px;
+	margin-top: 210px;
  	height:60px;
 	background-color: #f5f5f5;
   	border-top: 1px solid #e5e5e5; 
 }
 .input-group{
-	margin-bottom: 12px;
+	/* margin-bottom: 12px; */
 	width: 250px;
 	float: left;
 	margin-left: 80px;
 }
+.input-sign{
+	margin-bottom: 12px;
+}
+.sign-alert{
+	padding: 6px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #a94442;
+	background-color: #f2dede;
+	border-color: #ebccd1
+}
+
 .input-captcha{
 	margin-bottom: 12px;
 	float: left;
@@ -142,6 +156,12 @@ body.sign-body{
 .font-size-span{
 	padding-top:6px; display:inline-block;font-size: 15px; font-weight: bold;
 }
+
+.div-sign{
+	 min-height:796px; 
+}
+
+
 @media (max-width: 480px){
     #logo, #loginbox {
         width: 80%; 

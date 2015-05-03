@@ -20730,3 +20730,218 @@ Caused by: java.io.FileNotFoundException: Template "/page/index/_signin.ftl" not
 
 2015-05-03 12:03:13
 [WARN]-[Thread: qtp29109766-129]-[org.eclipse.jetty.http.HttpGenerator.addContent()]: Ignoring extra content ?
+
+2015-05-03 20:26:14
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.Server.doStart()]: jetty-8.1.8.v20121106
+
+2015-05-03 20:26:15
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-05-03 20:26:15
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-05-03 20:26:15
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler$Context.log()]: Initializing Shiro environment
+
+2015-05-03 20:26:15
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Starting Shiro environment initialization.
+
+2015-05-03 20:26:15
+[INFO]-[Thread: main]-[org.apache.shiro.config.ReflectionBuilder.createNewInstance()]: An instance with name 'authc' already exists.  Redefining this object as a new instance of type cn.dreampie.shiro.ShiroFormAuthenticationFilter
+
+2015-05-03 20:26:16
+[WARN]-[Thread: main]-[net.sf.ehcache.store.disk.DiskStorageFactory.<init>()]: The index for data file C:\Users\DONGYU\AppData\Local\Temp\shiro-active%0053ession%0043ache.data is out of date, probably due to an unclean shutdown. Deleting index file C:\Users\DONGYU\AppData\Local\Temp\shiro-active%0053ession%0043ache.index
+
+2015-05-03 20:26:16
+[INFO]-[Thread: main]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [jdbcRealm.authorizationCache]
+
+2015-05-03 20:26:16
+[INFO]-[Thread: main]-[org.apache.shiro.config.IniSecurityManagerFactory.isAutoApplyRealms()]: Realms have been explicitly set on the SecurityManager instance - auto-setting of realms will not occur.
+
+2015-05-03 20:26:16
+[INFO]-[Thread: main]-[org.apache.shiro.web.env.EnvironmentLoader.initEnvironment()]: Shiro environment initialized in 1439 ms.
+
+2015-05-03 20:26:16
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized()]: started o.e.j.w.WebAppContext{/,file:/E:/eclipse-kepler/workspace/fire/src/main/webapp/}
+
+2015-05-03 20:26:18
+[INFO]-[Thread: main]-[com.alibaba.druid.pool.DruidDataSource.init()]: {dataSource-1} inited
+
+2015-05-03 20:26:21
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Using default implementation for ThreadExecutor
+
+2015-05-03 20:26:21
+[INFO]-[Thread: main]-[org.quartz.core.SchedulerSignalerImpl.<init>()]: Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+2015-05-03 20:26:21
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.<init>()]: Quartz Scheduler v.2.2.1 created.
+
+2015-05-03 20:26:21
+[INFO]-[Thread: main]-[org.quartz.simpl.RAMJobStore.initialize()]: RAMJobStore initialized.
+
+2015-05-03 20:26:21
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.initialize()]: Scheduler meta-data: Quartz Scheduler (v2.2.1) 'defaultScheduler' with instanceId 'default'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+2015-05-03 20:26:21
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler 'defaultScheduler' initialized from an externally provided properties instance.
+
+2015-05-03 20:26:21
+[INFO]-[Thread: main]-[org.quartz.impl.StdSchedulerFactory.instantiate()]: Quartz scheduler version: 2.2.1
+
+2015-05-03 20:26:21
+[INFO]-[Thread: main]-[org.quartz.core.QuartzScheduler.start()]: Scheduler defaultScheduler_$_default started.
+
+2015-05-03 20:26:21
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.configHandler()]: configHandler 全局配置处理器，主要是记录日志和request域值处理
+
+2015-05-03 20:26:21
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作日志入库线程
+
+2015-05-03 20:26:21
+[INFO]-[Thread: main]-[com.poicom.common.config.AppConfig.afterJFinalStart()]: afterJFinalStart 启动操作发送邮件、短信线程
+
+2015-05-03 20:26:21
+[INFO]-[Thread: main]-[org.eclipse.jetty.server.AbstractConnector.doStart()]: Started SelectChannelConnector@0.0.0.0:80
+
+2015-05-03 20:27:08
+[INFO]-[Thread: qtp29109766-32]-[org.apache.shiro.cache.ehcache.EhCacheManager.getCache()]: Using existing EHCache named [shiro-activeSessionCache]
+
+2015-05-03 20:38:02
+[WARN]-[Thread: qtp29109766-31]-[org.eclipse.jetty.http.HttpGenerator.addContent()]: Ignoring extra content ?
+
+2015-05-03 20:46:46
+[WARN]-[Thread: qtp29109766-55]-[org.eclipse.jetty.http.HttpGenerator.addContent()]: Ignoring extra content ?
+
+2015-05-03 20:47:01
+[WARN]-[Thread: qtp29109766-51]-[org.eclipse.jetty.http.HttpGenerator.addContent()]: Ignoring extra content ?
+
+2015-05-03 20:47:12
+[WARN]-[Thread: qtp29109766-51]-[org.eclipse.jetty.http.HttpGenerator.addContent()]: Ignoring extra content ?
+
+2015-05-03 20:52:23
+[WARN]-[Thread: qtp29109766-60]-[org.eclipse.jetty.http.HttpGenerator.addContent()]: Ignoring extra content ?
+
+2015-05-03 20:54:10
+[WARN]-[Thread: qtp29109766-64]-[org.eclipse.jetty.http.HttpGenerator.addContent()]: Ignoring extra content ?
+
+2015-05-03 21:00:41
+[WARN]-[Thread: qtp29109766-57]-[org.eclipse.jetty.http.HttpGenerator.addContent()]: Ignoring extra content ?
+
+2015-05-03 21:11:39
+[WARN]-[Thread: qtp29109766-63]-[org.eclipse.jetty.http.HttpGenerator.addContent()]: Ignoring extra content ?
+
+2015-05-03 22:19:01
+[ERROR]-[Thread: qtp29109766-99]-[com.jfinal.core.ActionHandler.handle()]: /captcha?width=128&height=45&fontsize=30&time=22:18:56
+java.lang.RuntimeException: org.eclipse.jetty.io.EofException
+	at cn.dreampie.captcha.CaptchaRender.render(CaptchaRender.java:197)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:92)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:47)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:72)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:453)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:137)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:560)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:231)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1072)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:382)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:193)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1006)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:135)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116)
+	at org.eclipse.jetty.server.Server.handle(Server.java:365)
+	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:485)
+	at org.eclipse.jetty.server.AbstractHttpConnection.headerComplete(AbstractHttpConnection.java:926)
+	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.headerComplete(AbstractHttpConnection.java:988)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:635)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235)
+	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.eclipse.jetty.io.EofException
+	at org.eclipse.jetty.http.HttpGenerator.flushBuffer(HttpGenerator.java:914)
+	at org.eclipse.jetty.http.AbstractGenerator.flush(AbstractGenerator.java:443)
+	at org.eclipse.jetty.server.HttpOutput.flush(HttpOutput.java:100)
+	at org.eclipse.jetty.server.AbstractHttpConnection$Output.flush(AbstractHttpConnection.java:1078)
+	at javax.imageio.stream.FileCacheImageOutputStream.close(FileCacheImageOutputStream.java:238)
+	at javax.imageio.ImageIO.write(ImageIO.java:1580)
+	at cn.dreampie.captcha.CaptchaRender.render(CaptchaRender.java:195)
+	... 39 more
+Caused by: java.io.IOException: 您的主机中的软件中止了一个已建立的连接。
+	at sun.nio.ch.SocketDispatcher.write0(Native Method)
+	at sun.nio.ch.SocketDispatcher.write(SocketDispatcher.java:51)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:93)
+	at sun.nio.ch.IOUtil.write(IOUtil.java:51)
+	at sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:487)
+	at org.eclipse.jetty.io.nio.ChannelEndPoint.flush(ChannelEndPoint.java:293)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.flush(SelectChannelEndPoint.java:362)
+	at org.eclipse.jetty.http.HttpGenerator.flushBuffer(HttpGenerator.java:850)
+	... 45 more
+
+2015-05-03 22:19:01
+[ERROR]-[Thread: qtp29109766-99]-[com.jfinal.core.JFinalFilter.doFilter()]: /captcha?width=128&height=45&fontsize=30&time=22:18:56
+java.lang.IllegalStateException: STREAM
+	at org.eclipse.jetty.server.Response.getWriter(Response.java:699)
+	at javax.servlet.ServletResponseWrapper.getWriter(ServletResponseWrapper.java:152)
+	at com.jfinal.render.ErrorRender.render(ErrorRender.java:59)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:125)
+	at com.jfinal.ext.handler.ContextPathHandler.handle(ContextPathHandler.java:47)
+	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:72)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:383)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:453)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:137)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:560)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:231)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1072)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:382)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:193)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1006)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:135)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116)
+	at org.eclipse.jetty.server.Server.handle(Server.java:365)
+	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:485)
+	at org.eclipse.jetty.server.AbstractHttpConnection.headerComplete(AbstractHttpConnection.java:926)
+	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.headerComplete(AbstractHttpConnection.java:988)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:635)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235)
+	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543)
+	at java.lang.Thread.run(Thread.java:745)
