@@ -140,7 +140,7 @@ public class AppConfig extends JFinalConfig {
 		FreeMarkerRender.setProperties(loadPropertyFile("freemarker.properties"));
 		FreeMarkerRender.getConfiguration().setSharedVariable("shiro",new ShiroTags());
 		FreeMarkerRender.getConfiguration().setSharedVariable("resource", new ResourceTags());
-		
+		 
 		logger.info("afterJFinalStart 启动操作日志入库线程");
 		//ThreadSysLog.startSaveDBThread();
 		//启动进程
@@ -150,7 +150,7 @@ public class AppConfig extends JFinalConfig {
 	
 	public void beforeJFinalStop(){
 		logger.info("beforeJFinalStop 释放日志入库线程");
-		ThreadSysLog.setThreadRun(false);
+		//ThreadSysLog.setThreadRun(false);
 		logger.info("beforeJFinalStop 释放发送邮件、短信线程");
 		//ThreadAlert.setThreadRun(false);
 	}
