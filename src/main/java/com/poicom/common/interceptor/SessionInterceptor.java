@@ -34,13 +34,11 @@ public class SessionInterceptor implements Interceptor {
 				if(name.equals("org.apache.shiro.subject.support.DefaultSubjectContext_PRINCIPALS_SESSION_KEY")){
 					SimplePrincipalCollection obj=(SimplePrincipalCollection) hs.getAttribute(name);
 					User user=(User) obj.getPrimaryPrincipal();
-					System.out.println(user.get("full_name"));
 					if(c.getSessionAttr("current_user")==null){
 						c.setSessionAttr("current_user", user);
 					}
 					
 				}
-				System.out.println(name);
 			}
 		}else{
 			c.removeSessionAttr("current_user");

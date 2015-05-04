@@ -411,10 +411,7 @@ textarea{
   margin-bottom: 0;
 }
 
-
-
 /** reporter查询工单、提交工单，operator查询工单、回复工单 */
-
 @media (min-width: 992px)
 #jf_sidebar {
     width: 280px;

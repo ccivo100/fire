@@ -145,14 +145,14 @@ public class AppConfig extends JFinalConfig {
 		//ThreadSysLog.startSaveDBThread();
 		//启动进程
 		logger.info("afterJFinalStart 启动操作发送邮件、短信线程");
-		//ThreadAlert.startSendEmailAndSmsThread();
+		ThreadAlert.startSendEmailAndSmsThread();
 	}
 	
 	public void beforeJFinalStop(){
 		logger.info("beforeJFinalStop 释放日志入库线程");
 		//ThreadSysLog.setThreadRun(false);
 		logger.info("beforeJFinalStop 释放发送邮件、短信线程");
-		//ThreadAlert.setThreadRun(false);
+		ThreadAlert.setThreadRun(false);
 	}
 	
 	public static void main(String[] args) {

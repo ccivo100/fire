@@ -1,5 +1,7 @@
 package com.poicom.function.index;
 
+import java.io.File;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +16,7 @@ import cn.dreampie.shiro.hasher.HasherKit;
 
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
+import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.poicom.common.kit.AlertKit;
@@ -59,8 +62,6 @@ public class IndexController extends Controller {
 			render(indexView);
 		}
 		
-		
-
 	}
 
 	/**
@@ -200,6 +201,22 @@ public class IndexController extends Controller {
 			}
 		}
 		redirect("/signin");
+	}
+	
+	public void help(){
+		try{
+			File downfile=new File(PathKit.getWebRootPath() +"/res/doc/操作帮助文档.doc");
+			if(downfile.exists()){
+				renderFile(downfile);
+				return ;
+			}else{
+				renderError(404);;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 }
