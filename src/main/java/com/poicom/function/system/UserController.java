@@ -81,7 +81,7 @@ public class UserController extends Controller {
 		
 	}
 	
-	@Before({Tx.class})
+	/*@Before({Tx.class})
 	public void contactMe(){
 		
 		User user=SubjectKit.getUser();
@@ -109,10 +109,7 @@ public class UserController extends Controller {
 			}
 		}
 		
-		
-		
-		
-	}
+	}*/
 	
 	/**
 	 * 测试权限管理

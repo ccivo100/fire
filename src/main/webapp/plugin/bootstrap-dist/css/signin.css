@@ -5,6 +5,10 @@ body {
   padding-bottom: 40px; */
   background-color: #eee;
 }
+html,body{
+    height: 100%;
+    width: 100%;
+}
 
 body.sign-body{
 	background-color: #c4eaf7;
@@ -134,12 +138,13 @@ body.sign-body{
 	/* margin-bottom: 12px; */
 	width: 250px;
 	float: left;
-	margin-left: 80px;
+	
 }
 .input-sign{
 	margin-bottom: 12px;
+	margin-left: 80px;
 }
-.sign-alert{
+.alert-sign{
 	padding: 6px;
 	border: 1px solid transparent;
 	border-radius: 4px;
@@ -157,8 +162,13 @@ body.sign-body{
 	padding-top:6px; display:inline-block;font-size: 15px; font-weight: bold;
 }
 
-.div-sign{
-	 min-height:796px; 
+.sign-div{
+	width:450px;  
+   	height:320px;  
+   	position:absolute;  
+   	left:50%;  
+   	top:50%;  
+   	margin:-210px 0 0 -250px 
 }
 
 
@@ -390,6 +400,13 @@ textarea{
   background-color: #f9f9f9;
   border-top: 1px solid #e5e5e5;
 }
+#footer {
+	position: relative;
+    margin-top: -60px; 
+    height: 60px;
+    clear:both;
+    background:#369;
+ }
 .footer p:last-child {
   margin-bottom: 0;
 }

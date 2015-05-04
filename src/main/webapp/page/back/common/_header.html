@@ -1,0 +1,126 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#example-navbar-collapse" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> 
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="${ContextPath}/admin">点通科技故障申报系统</a>
+			</div>
+<!--
+			<@shiro.authenticated>
+			<div>
+		      <p class="navbar-text navbar-right">联系我 
+		         <a href="#" class="navbar-link" data-toggle="modal" 
+		        		   data-target="#contactMe">POICOM</a>
+		      </p>
+		   </div>
+		   </@shiro.authenticated>
+-->
+		   <@shiro.authenticated>
+			<div>
+				<p class="navbar-text navbar-right"><a class="navbar-link" href="${ContextPath}/signout">退出</a></p>
+				<p class="navbar-text navbar-right">当前用户：
+		    		  <a class="navbar-link" href="${ContextPath}/admin/center">${(session["current_user"].full_name)!}</a>
+		    	</p>
+		    </div>
+		    </@shiro.authenticated>
+		    <@shiro.notAuthenticated>
+		    	<p class="navbar-text navbar-right"><a class="navbar-link" href="${ContextPath}/signin">登录</a></p>
+		    </@shiro.notAuthenticated>
+			<div id="example-navbar-collapse" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+
+					<@shiro.hasPermission name="P_INDEX">	
+					<li class="<#if activebar='admin-index'>active</#if>">
+						<a  href="${ContextPath}/admin"><span class="glyphicon glyphicon-home"></span> 首页</a>
+					</li>
+					</@shiro.hasPermission>
+					
+					<@shiro.hasPermission name="P_A_ROLE">
+					<li class="<#if activebar='admin-role'>active</#if>">
+						
+						<a href="${ContextPath}/admin/role"><span class="glyphicon glyphicon-th-list"></span> &nbsp;角色管理</a>
+					</li>
+					</@shiro.hasPermission>
+					<@shiro.hasPermission name="P_A_PERMISSION">
+					<li class="<#if activebar='admin-permission'>active</#if>">
+						<a href="${ContextPath}/admin/permission"><span class="glyphicon glyphicon-th-list"></span> &nbsp;权限管理</a>
+					</li>
+					</@shiro.hasPermission>
+					<@shiro.hasPermission name="P_A_TYPE">
+					<li class="<#if activebar='admin-type'>active</#if>">
+						<a href="${ContextPath}/admin/type"><span class="glyphicon glyphicon-th-list"></span> &nbsp;类型管理</a>
+					</li>
+					</@shiro.hasPermission>
+					<@shiro.hasPermission name="P_A_USER">
+					<li class="<#if activebar='admin-user'>active</#if>">
+						<a href="${ContextPath}/admin/user"><span class="glyphicon glyphicon-th-list"></span> &nbsp;用户管理</a>
+					</li>
+					</@shiro.hasPermission>
+					
+<!-- 
+					<@shiro.hasPermission name="P_A_EXCEPTION">
+					<li><a href="${ContextPath}/admin/exception">异常管理</a></li>
+					</@shiro.hasPermission> 
+-->
+      				
+      				<!-- 运维管理 -->
+      				<@shiro.hasPermission name="P_O_DEAL">
+    				<li class="<#if activebar='deal'>active</#if>">
+    					<a href="${ContextPath}/operate/deal">故障处理</a>
+    				</li>
+    				</@shiro.hasPermission>
+					<@shiro.hasPermission name="P_O_OPERATES">
+						<li class="<#if activebar='operates'>active</#if>">
+							<a href="${ContextPath}/operate/operates">运维记录</a>
+						</li>
+    				</@shiro.hasPermission>
+    				
+    				<!-- 报障管理 -->
+					<@shiro.hasPermission name="P_R_REPORTS">
+					<li class="<#if activebar='reports'>active</#if>">
+						<a href="${ContextPath}/report/reports">申报记录</a>
+					</li>
+    				</@shiro.hasPermission>
+    				<@shiro.hasPermission name="P_R_OFFER">
+    				<li class="<#if activebar='offer'>active</#if>">
+    					<a href="${ContextPath}/report/offer">故障申报</a>
+    				</li>
+    				</@shiro.hasPermission>
+      				
+  					<@shiro.hasPermission name="P_USER">
+					<li class="dropdown">
+					<a href="${ContextPath}/bootstrap"	class="dropdown-toggle" data-toggle="dropdown">
+					<span class="glyphicon glyphicon-user"></span> 用户管理<span	class="caret"></span>
+					</a>
+						<ul class="dropdown-menu" role="menu">
+							<li class="dropdown-header"><b>用户操作</b></li>
+							<li class="divider"></li>
+							
+								<@shiro.hasPermission name="P_U_CENTER">
+      								<li><a href="${ContextPath}/admin/center">个人中心</a></li>
+      							</@shiro.hasPermission>
+      							
+      							<@shiro.hasPermission name="P_U_PWD">
+      								<li><a href="${ContextPath}/admin/pwdPage">修改密码</a></li>
+      							</@shiro.hasPermission>
+      						
+<!--							<li class="divider"></li>
+							<li><a href="${ContextPath}/bootstrap">Bootstrap主页</a></li>
+							<li><a href="${ContextPath}/bootstrap/tree">树形菜单</a></li>
+							<li><a href="${ContextPath}/bootstrap/school">Bootstrap学校</a></li>
+							<li><a href="${ContextPath}/autho">权限树</a></li>
+							<li><a href="${ContextPath}/bootstrap/dash">DASH</a></li>
+-->
+						</ul>
+					</li>
+					</@shiro.hasPermission>
+				</ul>
+			</div>
+		</div>
+	</nav>

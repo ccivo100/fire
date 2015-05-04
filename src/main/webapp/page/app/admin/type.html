@@ -1,5 +1,5 @@
-<#include "/page/common/_layout.html"/>
-<@layout activebar="user" html_title="故障类型管理">
+<#include "/page/back/common/_layoutadmin.html"/>
+<@layout indexbar="admin-type" activebar="admin-type" html_title="故障类型管理">
 
 <div class="index-background">
 <div class="page-header">
@@ -75,5 +75,4 @@
 	<#include "/page/common/_paginate.html" />
 	<@paginate currentPage=errorTypePage.pageNumber totalPage=errorTypePage.totalPage actionUrl="/admin/type/" />
 </div>
-      
 </@layout>

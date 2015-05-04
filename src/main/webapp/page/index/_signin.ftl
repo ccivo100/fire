@@ -30,7 +30,7 @@
 		
 		<@shiro.isLoginFailure name="shiroLoginFailure">
 		<div class="input-group input-sign">
-	        <div class="sign-alert" style="background-image: none;">
+	        <div class="alert-sign" style="background-image: none;">
 	          <@resource.loginException name="shiroLoginFailure"/>
 	        </div>
 	    </div>

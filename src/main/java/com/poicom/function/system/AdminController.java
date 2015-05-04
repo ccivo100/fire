@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import cn.dreampie.ValidateKit;
 import cn.dreampie.routebind.ControllerKey;
 import cn.dreampie.shiro.core.SubjectKit;
+import cn.dreampie.shiro.hasher.Hasher;
 import cn.dreampie.shiro.hasher.HasherInfo;
 import cn.dreampie.shiro.hasher.HasherKit;
 
@@ -43,6 +44,8 @@ public class AdminController extends Controller {
 	
 	protected Logger logger=LoggerFactory.getLogger(AdminController.class);
 	
+	private final static String INDEX_PAGE="index/index.html";
+	
 	private final static String ROLE_ADD_PAGE="role/add.html";
 	private final static String ROLE_EDIT_PAGE="role/edit.html";
 	private final static String ROLE_ASSIGN_PAGE="role/assign.ftl";
@@ -61,9 +64,18 @@ public class AdminController extends Controller {
 	private final static String TYPE_EDIT_PAGE="type/edit.html";
 	private final static String TYPE_TASK_PAGE="type/task.html";
 	
+	private final static String CENTER_INFO_PAGE="center/center.html";
+	private final static String CENTER_PWD_PAGE="center/pwd.html";
+	
 	public void index(){
-		setAttr("userPage", User.dao.getUserPage(getParaToInt(0, 1), 10));
-		render("user.html");
+		Page <Record> ordersPage;
+		String orderby=" ORDER BY o.offer_at DESC";
+		String where=" 1=1 and o.deleted_at is null ";
+		ordersPage=Order.dao.findIndexOrders(getParaToInt(0,1), 10, where,orderby);
+		Order.dao.format(ordersPage,"title");
+		setAttr("overOrderPage",ordersPage);
+		
+		render(INDEX_PAGE);
 	}
 	
 	/**
@@ -785,6 +797,56 @@ public class AdminController extends Controller {
 		redirect("/admin/type");
 	}
 	
+	
+	/**
+	 * 进入修改用户密码页面
+	 */
+	public void center(){
+		User user=SubjectKit.getUser();
+		if(!ValidateKit.isNullOrEmpty(user)){
+			setAttr("userInfo",UserInfo.dao.getAllUserInfo(user.get("id")));
+			setSessionAttr("current_user", user);
+		}
+		render(CENTER_INFO_PAGE);
+		
+	}
+	
+	/**
+	 * 
+	 */
+	public void pwdPage(){
+		User user=SubjectKit.getUser();
+		if(!ValidateKit.isNullOrEmpty(user)){
+			setAttr("user", user);
+		}
+		render(CENTER_PWD_PAGE);
+	}
+	
+	/**
+	 * 修改用户密码
+	 */
+	@Before({AdminValidator.class,Tx.class})
+	public void updatePwd(){
+		keepModel(User.class);
+		User upUser=getModel(User.class);
+		User user=SubjectKit.getUser();
+		upUser.set("id", user.get("id"));
+		HasherInfo passwordInfo=HasherKit.hash(upUser.getStr("password"),Hasher.DEFAULT);
+		upUser.set("password", passwordInfo.getHashResult());
+		upUser.set("hasher", passwordInfo.getHasher().value());
+		upUser.set("salt", passwordInfo.getSalt());
+		
+		if (upUser.update()) {
+			SubjectKit.getSubject().logout();
+			setAttr("state", "success");
+			redirect("/tosignin");
+			return;
+		}else {
+			setAttr("state", "falure");
+			render("/page/app/admin/center.html");
+		}
+		
+	}
 	
 	
 	public void add(){}

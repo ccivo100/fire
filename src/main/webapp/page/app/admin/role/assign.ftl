@@ -1,11 +1,5 @@
-﻿<#include "/page/common/_layout.html" />
-<@layout activebar="report" html_title="权限分配">
-<div class="page-header">
-<ul class="nav nav-tabs">
-   <li><a href="${ContextPath}/admin/role">角色管理</a></li>
-   <li class="active"><a href="#">权限分配</a></li>
-</ul>
-</div>
+﻿<#include "/page/back/common/_layoutadmin.html"/>
+<@layout indexbar='admin-role' activebar="admin-role" html_title="权限分配">
 <div class="tree">
 <form class="form-horizontal" role="form" action="${ContextPath}/admin/doassignrole" method="post" >
 	<div class="row">
