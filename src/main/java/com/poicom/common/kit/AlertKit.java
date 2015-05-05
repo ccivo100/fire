@@ -278,7 +278,7 @@ public class AlertKit {
 			.append(userinfo.getStr("ufullname"))
 			.append("（"+userinfo.getStr("uphone")+"） ")
 			//.append("于 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms))
-			.append("提交了故障工单，请尽快处理。【一点通】");
+			.append("提交了故障工单，请尽快处理。");
 		}
 		
 		//String content =contt.toString();
@@ -300,7 +300,7 @@ public class AlertKit {
 			.append("你有一条来自 "+offer.getStr("bname")+" 的 ")
 			.append(offer.getStr("ufullname")+"（"+offer.getStr("uphone")+"）")
 			.append(" 于 "+DateKit.format(order.getDate("created_at"),DateKit.pattern_ymd_hms)+" ")
-			.append("发起的故障申告，现已超时，请尽快处理！【一点通】");
+			.append("发起的故障申告，现已超时，请尽快处理！");
 		}
 		
 		//String content =contt.toString();
@@ -323,7 +323,7 @@ public class AlertKit {
 			.append(offer.getStr("bname")+" 的 ")
 			.append(offer.getStr("ufullname")+"（"+offer.getStr("uphone")+"）")
 			.append("撤回于 "+DateKit.format(order.getDate("created_at"),DateKit.pattern_ymd_hms)+" ")
-			.append("发起的故障申告！【一点通】");
+			.append("发起的故障申告！");
 		}
 		return contt.toString();
 	}
@@ -344,7 +344,7 @@ public class AlertKit {
 		.append("提交的，关于“"+order.get("title")+"”的故障工单，已由")
 		.append(acceptuser.getStr("ufullname")+"（"+acceptuser.getStr("uphone")+"）")
 		.append("指派给"+dealuser.getStr("ufullname")+"（"+dealuser.getStr("uphone")+"）")
-		.append("处理。【一点通】");
+		.append("处理。");
 		
 		return contt.toString();
 	}
@@ -365,7 +365,7 @@ public class AlertKit {
 			.append("您在 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms))
 			.append(" 提交的故障工单，已由 "+deal.getStr("full_name")+"（"+deal.getStr("phone")+"）")
 			//.append("于 "+DateKit.format(order.getDate("deal_at"),DateKit.pattern_ymd_hms))
-			.append(" 处理完毕，感谢您使用故障申报系统，祝您生活愉快！【一点通】");
+			.append(" 处理完毕，感谢您使用故障申报系统，祝您生活愉快！");
 		}
 		
 		//String content =contt.toString();
@@ -396,9 +396,9 @@ public class AlertKit {
 		System.out.println("进入发送短信主方法");
 		//电话列表...
 		String phones=phoneFormat(phone);
-		String department="研发部";
-		String name="firetercel";
-		String type="2";
+		String department="XX";
+		String name="XX";
+		String type="XX";
 		try {
 			
 			URL url=new URL("http://sms.poicom.net/postsms.php");

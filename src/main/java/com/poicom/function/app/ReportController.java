@@ -142,6 +142,7 @@ public class ReportController extends JFController{
 	/**
 	 * 超时工单催办处理
 	 */
+	@Deprecated
 	public void hasten(){
 		int id=getParaToInt("oorderid");
 		
@@ -254,6 +255,7 @@ public class ReportController extends JFController{
 	/**
 	 * 删除撤回工单
 	 */
+	@Deprecated
 	@Before(Tx.class)
 	public void delete(){
 		int id=getParaToInt("oorderid");
@@ -295,9 +297,15 @@ public class ReportController extends JFController{
 			List<ErrorType> typeList=ErrorType.dao.getAllType();
 			renderJson("typeList", typeList);
 		}else if(type.equals("apartment")){
-			System.out.println(getParaToInt("typeid"));
 			List<Apartment> apartmentList=Apartment.dao.getApartmentsList(getParaToInt("typeid"));
 			renderJson("apartmentList",apartmentList);
+		}else if(type.equals("effective")){
+			List<UserInfo> userinfoList=UserInfo.dao.findBy(" apartment_id=?", getParaToInt("apartmentid"));
+			if(userinfoList.size()==0){
+				renderJson("state","error");
+			}else{
+				renderJson("state","success");
+			}
 		}
 	}
 	
@@ -356,38 +364,6 @@ public class ReportController extends JFController{
 			ThreadAlert.add(alertKit);
 		}
 		
-		
-		//保存用户-工单 对应关系表数据。
-		/*new UserOrder()
-		.set("user_id", getParaToLong("selectApartment"))
-		.set("order_id", order.get("id"))
-		.save();
-		
-		Order o=Order.dao.findById(order.get("id"));
-		//当前用户详细信息
-		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
-		
-		//运维人员详细信息
-		Record dealinfo=UserInfo.dao.getAllUserInfo(getParaToLong("selectApartment"));
-		
-		//邮件内容
-		String body=AlertKit.getMailBody(userinfo,dealinfo,o,getPara("odescription")).toString();
-		
-		//发送邮件、短信线程
-		AlertKit alertKit=new AlertKit();
-		//发送邮件
-		if(ValidateKit.isEmail(dealinfo.getStr("uemail"))){
-			alertKit.setEmailTitle("点通故障系统提醒您！").setEmailBody(body).setEmailAdd(dealinfo.getStr("uemail"));
-		}
-		if(ValidateKit.isPhone(dealinfo.getStr("uphone"))){
-			//短信内容
-			String smsBody=AlertKit.setSmsContext(null,userinfo,o);
-			alertKit.setSmsContext(smsBody).setSmsPhone(dealinfo.getStr("uphone"));
-		}
-		//加入进程
-		logger.info("日志添加到入库队列 ---> 新建故障工单");
-		ThreadAlert.add(alertKit);*/
-		
 		redirect("/report/reports");
 	}
 	
@@ -439,8 +415,6 @@ public class ReportController extends JFController{
 			redirect("/report/reports");
 		}
 
-		
-		
 	}
 	
 	public void upup(){
@@ -470,83 +444,8 @@ public class ReportController extends JFController{
 			}
 		}
 		
-		
-		
-		
 	}
 	
-	/**
-	 * @描述 电话数组格式化
-	 */
-	/*private String phoneFormat(String... phone){
-		StringBuffer p=new StringBuffer();
-		for(int i=0;i<phone.length;i++){
-			if(i==(phone.length-1)){
-				p.append(phone[i]);
-			}else
-				p.append(phone[i]).append(",");
-		}
-		//电话列表...
-		return p.toString();
-		
-	}*/
-	
-	/**
-	 * @描述 发送短信通知
-	 * @param userinfo
-	 * @param phone
-	 */
-	/*public void sendSms(Record userinfo,String... phone ){
-		//电话列表...
-		String phones=phoneFormat(phone);
-		System.out.println(phones);
-		
-		String department="XX";
-		String name="XX";
-		String type="XX";
-		
-		
-		StringBuffer contt=new StringBuffer();
-		contt.append("您好，")
-				.append(userinfo.getStr("bname")+"的 ")
-				.append(userinfo.getStr("ufullname"))
-				.append(" ("+userinfo.getStr("uphone")+") ")
-				.append("提交了故障工单，请尽快处理。");
-		String content =contt.toString();
-
-		try {
-			
-			URL url=new URL("http://sms.poicom.net/postsms.php");
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("POST");// 提交模式
-			
-			conn.setDoOutput(true);// 是否输入参数
-			
-			StringBuffer params = new StringBuffer();
-	        // 表单参数与get形式一样
-	        params.append("phones").append("=").append(phones).append("&")
-	              .append("department").append("=").append(department).append("&")
-	              .append("name").append("=").append(name).append("&")
-	              .append("type").append("=").append(type).append("&")
-	              .append("content").append("=").append(content);
-	        byte[] bypes = params.toString().getBytes();
-	        OutputStream outStream= conn.getOutputStream();
-	        outStream.write(bypes);// 输入参数
-	        outStream.flush();
-	        outStream.close();
-	        
-	        System.out.println(conn.getResponseCode()); //响应代码 200表示成功
-
-			
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}*/
 	
 	
 

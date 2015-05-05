@@ -11,6 +11,8 @@
 	<div class="form-horizontal"  >
 		<div class="row">
 			<input id="userid" type="hidden" name="userid" value="${(userinfo.uuserid)}">
+			<input id="papartid" type="hidden" name="papartid" value="${(papartment.id)}">
+			<input id="apartid" type="hidden" name="apartid" value="${(userinfo.info_apartmentid)}">
 			<div class="form-group">
 				<label class="col-sm-2 control-label">姓名</label>
 				<div class="col-sm-4">
@@ -54,17 +56,7 @@
 					</select>
 				</div>
 			</div>
-<!-- 			<div class="form-group">
-				<label class="col-sm-2 control-label">部门</label>
-				<div class="col-sm-4">
-					<select id="selectApartment" name="selectApartment" class="form-control"  required >
-						<option value="-1" selected="selected">请选择</option>
-						<#list apartmentList as apartment>
-						<option value="${(apartment.id)!}" <#if (userinfo.info_apartmentid)=apartment.id>selected="selected"<#else></#if>>${(apartment.name)!}	</option>
-						</#list>
-					</select>
-				</div>
-			</div> -->
+
 			<div class="form-group">
 				<label class="col-xs-2 control-label">部门</label>
 				<div class="col-sm-2">
@@ -145,21 +137,28 @@ $(document).ready(function(){
 });
 
 function select1() {
+	var papartid=$('#papartid').val();
 	$.ajax(
     {
     	type: "post",
     	url: "${ContextPath}/admin/handler",
     	data: { "type": "afacher" },
         success: function (msg) {
-        	$("#selectFapartment").append("<option value=''>请选择一级部门</option>");
+        	$("#selectFapartment").append("<option value='-1'>请选择一级部门</option>");
         	for (var i = 0; i < msg.afacherList.length; i++) {
-            	$("#selectFapartment").append("<option value=" + msg.afacherList[i].id + ">" + msg.afacherList[i].name + "</option>");
+            	
+            	if(msg.afacherList[i].id==papartid){
+            		$("#selectFapartment").append("<option value=" + msg.afacherList[i].id + " selected='selected'>" + msg.afacherList[i].name +"</option>");
+            	}else{
+            		$("#selectFapartment").append("<option value=" + msg.afacherList[i].id + ">" + msg.afacherList[i].name +"</option>");
+            	}
         	}
             select2();
         }
 	})
 };
 function select2() {
+	var apartid=$('#apartid').val();
 	$("#selectApartment").html("");
 	$.ajax(
 	{
@@ -167,9 +166,14 @@ function select2() {
 		url: "${ContextPath}/admin/handler",
 		data: { "type": "achilren","typeid":$('#selectFapartment').val() },
 		success: function (msg) {
-			$("#selectApartment").append("<option value=''>请选择二级部门</option>");
+			$("#selectApartment").append("<option value='-1'>请选择二级部门</option>");
 			for (var i = 0; i < msg.achilrenList.length; i++) {
-				$("#selectApartment").append("<option value=" + msg.achilrenList[i].id + ">" +msg.achilrenList[i].name + "</option>");
+				
+				if(msg.achilrenList[i].id==apartid){
+					$("#selectApartment").append("<option value=" + msg.achilrenList[i].id + " selected='selected'>" +msg.achilrenList[i].name +"</option>");
+				}else{
+					$("#selectApartment").append("<option value=" + msg.achilrenList[i].id + ">" +msg.achilrenList[i].name + "</option>");
+				}
 			}
 		}
 	})

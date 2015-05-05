@@ -11,19 +11,9 @@
 				</button>
 				<a class="navbar-brand" href="${ContextPath}/admin">点通科技故障申报系统</a>
 			</div>
-<!--
-			<@shiro.authenticated>
-			<div>
-		      <p class="navbar-text navbar-right">联系我 
-		         <a href="#" class="navbar-link" data-toggle="modal" 
-		        		   data-target="#contactMe">POICOM</a>
-		      </p>
-		   </div>
-		   </@shiro.authenticated>
--->
 		   <@shiro.authenticated>
-			<div>
-				<p class="navbar-text navbar-right"><a class="navbar-link" href="${ContextPath}/signout">退出</a></p>
+			<div style="margin-right:30px">
+				<p class="navbar-text navbar-right" ><a class="navbar-link" href="${ContextPath}/signout">退出</a></p>
 				<p class="navbar-text navbar-right">当前用户：
 		    		  <a class="navbar-link" href="${ContextPath}/admin/center">${(session["current_user"].full_name)!}</a>
 		    	</p>
@@ -62,12 +52,6 @@
 						<a href="${ContextPath}/admin/user"><span class="glyphicon glyphicon-th-list"></span> &nbsp;用户管理</a>
 					</li>
 					</@shiro.hasPermission>
-					
-<!-- 
-					<@shiro.hasPermission name="P_A_EXCEPTION">
-					<li><a href="${ContextPath}/admin/exception">异常管理</a></li>
-					</@shiro.hasPermission> 
--->
       				
       				<!-- 运维管理 -->
       				<@shiro.hasPermission name="P_O_DEAL">

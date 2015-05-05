@@ -162,7 +162,7 @@ public class IndexController extends Controller {
 		if(!ValidateKit.isNullOrEmpty(user.getStr("phone"))){
 			if(ValidateKit.isPhone(user.getStr("phone"))){
 				//短信内容
-				String smsBody="找回密码，重置密码的链接（24小时内有效）已经发到您邮箱，让及时登录处理【一点通】";
+				String smsBody="找回密码，重置密码的链接（24小时内有效）已经发到您邮箱，让及时登录处理";
 				alertKit.setSmsContext(smsBody).setSmsPhone(user.getStr("phone"));
 			}
 		}

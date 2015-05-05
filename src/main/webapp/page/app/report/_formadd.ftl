@@ -178,11 +178,26 @@ function select2() {
 		}
 	})
 };
+function select3(){
+	$.ajax(
+	{
+		type: "post",
+		url: "${ContextPath}/report/handler",
+		data: { "type": "effective","apartmentid":$('#selectApartment').val() },
+		success: function (msg) {
+			if(msg.state=="error"){
+				alert("该分组无运维人员，请选择其他运维组!");
+				select2();
+			}
+		}
+	})
+}
 
 
 $(function(){
 	select1();
 	$('#selectType').bind("change", select2);
+	$('#selectApartment').bind("change", select3);
 });
 
 

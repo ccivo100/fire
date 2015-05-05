@@ -334,7 +334,6 @@ public class AdminController extends Controller {
 			List<Apartment> afacherList=Apartment.dao.findApartmentsByPid(0);
 			renderJson("afacherList", afacherList);
 		}else if(type.equals("achilren")){
-			System.out.println(getParaToInt("typeid"));
 			List<Apartment> achilrenList=Apartment.dao.findApartmentsByPid(getParaToInt("typeid"));
 			renderJson("achilrenList", achilrenList);
 		}
@@ -372,11 +371,14 @@ public class AdminController extends Controller {
 	
 	public void edituser(){
 		String userid=getPara("id");
-		setAttr("userinfo",UserInfo.dao.getAllUserInfo(userid));
+		Record userinfo=UserInfo.dao.getAllUserInfo(userid);
+		Apartment papartment=Apartment.dao.findById(Apartment.dao.findById(userinfo.get("info_apartmentid")).get("pid"));
+		setAttr("userinfo",userinfo);
 		setAttr("userrole",UserRole.dao.findUserRolesById(userid));
 		setAttr("roleList",Role.dao.findAll());
 		setAttr("branchList",Branch.dao.getAllBranch());
 		setAttr("apartmentList",Apartment.dao.getAllApartment());
+		setAttr("papartment",papartment);
 		setAttr("positionList",Position.dao.getAllPosition());
 		
 		render(USER_EDIT_PAGE);
