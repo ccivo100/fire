@@ -87,28 +87,22 @@
 
 
 
-<!-- modal test -->
-<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="testModalLabel" aria-hidden="true">
+<!-- modal alert -->
+<div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="testModalLabel" aria-hidden="true" >
 	<div class="modal-dialog">
-	<form action="/report/print" >
 		<div class="modal-content">
+		
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"><span >&times;</span></button>
-				<h4 class="modal-title">测试</h4>
-			</div>
-			<div class="modal-body">
-				<input type="hidden" name="do" value="TEST">
-
-				<a class="btn btn-primary" href="">确认</a>
+				<h4 class="modal-title" id="modal-title-content"></h4>
 			</div>
 			
+			<div class="modal-body" id="modal-body-content"></div>
+			
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-				<button type="submit" class="btn btn-primary ">确定</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
 			</div>
 		</div>
-	</form>
-	
 	</div>
 </div>
 

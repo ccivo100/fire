@@ -194,7 +194,8 @@ $(document).ready(function(){
 				"progress":$('#selectProgress').val(),
 				"ocomment":$('#ocomment').val()},
 			success:function(msg){
-				alert(msg.state);
+				alertModal(msg.state);
+				$('#alertModal').modal();
 				if(msg.state=='故障工单处理完毕！'){
 					window.location.href='${ContextPath}/operate/operates'
 				}
@@ -217,5 +218,11 @@ $(document).ready(function(){
 	});
 });
 
+function alertModal(msg){
+	$("#modal-title-content").html("提示!");  
+	$("#modal-body-content").html(msg);  
+}
+
 </script>
+<#include "_model.html" />
 </@layout>

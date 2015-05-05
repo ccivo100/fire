@@ -416,7 +416,7 @@ public class ReportController extends JFController{
 		}
 
 	}
-	
+	@Before(Tx.class)
 	public void upup(){
 		//order_id
 		Integer orderid=getParaToInt("orderid");
@@ -424,11 +424,11 @@ public class ReportController extends JFController{
 		String description=getPara("description").trim();
 		String title=getPara("title").trim();
 		
-		if(!ValidateKit.isLength(description, 2, 250))
+		if(ValidateKit.isNullOrEmpty(description))
 		{
-			renderJson("state","故障描述应不少于2字！");
-		}else if(ValidateKit.isLength(getPara("otitle"), 5, 30)){
-			renderJson("state","故障单标题应为5至30个字！");
+			renderJson("state","故障单描述不能为空！");
+		}else if(ValidateKit.isNullOrEmpty(title)){
+			renderJson("state","故障单标题不能为空！");
 		}else{
 			Order order=Order.dao
 					.findById(orderid);

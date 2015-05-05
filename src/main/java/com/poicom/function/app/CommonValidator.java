@@ -26,11 +26,11 @@ public class CommonValidator extends Validator{
 	protected void validate(Controller c) {
 		
 		if(getActionKey().equals("/report/save")|getActionKey().equals("/report/update")){
-			if(!ValidateKit.isLength(c.getPara("otitle"), 5, 30)){
-				addError("descriptionMsg","故障单标题应为5至30个字！");
-			}else if(!ValidateKit.isLength(c.getPara("odescription"), 2, 250))
+			if(ValidateKit.isNullOrEmpty(c.getPara("otitle"))){
+				addError("descriptionMsg","故障单标题不能为空！");
+			}else if(ValidateKit.isNullOrEmpty(c.getPara("odescription")))
 			{
-				addError("descriptionMsg","故障描述应不少于2字！");
+				addError("descriptionMsg","故障单描述不能为空！");
 			} 
 		}
 		else if(getActionKey().equals("/operate/update")){

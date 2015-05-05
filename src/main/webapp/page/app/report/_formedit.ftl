@@ -154,7 +154,7 @@
 			
 			<#if odeletetime?exists>
 			<#else>
-			<button id="reportupdate" value="提交" type="submit" class="btn btn-primary save" data-loading-text="正在提交...">提交</button>
+			<a id="reportupdate" value="提交" type="submit" class="btn btn-primary save" data-loading-text="正在提交...">提交</a>
 			<a id="recall" value="撤回"  class="btn btn-danger"  data-loading-text="正在撤回...">撤回</a>
 			</#if>
 			
@@ -167,13 +167,22 @@
 
 <script>
 $(document).ready(function(){
-	$("#reportupdate1").click(function(){
+	$("#reportupdate").click(function(){
 		$.ajax({
 			type:"post",
 			url:"${ContextPath}/report/upup",
-			data:{"orderid":$('#oorderid').val(),"title":$('#otitle').val(),"description":$('#odescription').val()},
+			data:{"orderid":$('#oorderid').val(),
+					"title":$('#otitle').val(),
+					"description":$('#odescription').val(),
+			},
 			success:function(msg){
-				alert(msg.state);
+				alertModal(msg.state);
+				$('#alertModal').modal();
+				$('#alertModal').on('hidden.bs.modal', function () {
+					if(msg.state=='更新故障工单成功！'){
+						window.location.href='${ContextPath}/report/reports'
+					}
+				});
 			}
 		});
 	});
@@ -187,10 +196,14 @@ $(document).ready(function(){
 			},
 			dataType : "json",
 			success:function(msg){
-				alert(msg.state);
-				if(msg.state=='撤回成功！'){
-					window.location.href='${ContextPath}/report/reports'
-				}
+				alertModal(msg.state);
+				$('#alertModal').modal();
+				$('#alertModal').on('hidden.bs.modal', function () {
+					if(msg.state=='撤回成功！'){
+						window.location.href='${ContextPath}/report/reports'
+					}
+				});
+				
 			}
 		});
 	});
@@ -204,14 +217,22 @@ $(document).ready(function(){
 			},
 			dataType : "json",
 			success:function(msg){
-				alert(msg.state);
-				if(msg.state=='删除成功！'){
-					window.location.href='${ContextPath}/report/reports'
-				}
+				alertModal(msg.state);
+				$('#alertModal').modal();
+				$('#alertModal').on('hidden.bs.modal', function () {
+					if(msg.state=='删除成功！'){
+						window.location.href='${ContextPath}/report/reports'
+					}
+				});
+				
 			}
 		});
 	});
-	
-	
 });
+
+function alertModal(msg){
+	$("#modal-title-content").html("提示!");  
+	$("#modal-body-content").html(msg);  
+}
 </script>
+<#include "_model.html" />

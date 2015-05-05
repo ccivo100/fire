@@ -186,7 +186,8 @@ function select3(){
 		data: { "type": "effective","apartmentid":$('#selectApartment').val() },
 		success: function (msg) {
 			if(msg.state=="error"){
-				alert("该分组无运维人员，请选择其他运维组!");
+				alertModal("该分组无运维人员，请选择其他运维组!");
+				$('#alertModal').modal();
 				select2();
 			}
 		}
@@ -200,6 +201,11 @@ $(function(){
 	$('#selectApartment').bind("change", select3);
 });
 
+function alertModal(msg){
+	$("#modal-title-content").html("提示!");  
+	$("#modal-body-content").html(msg);  
+}
 
 </script>
 
+<#include "_model.html" />

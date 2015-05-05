@@ -162,7 +162,7 @@ public class AlertKit {
 		body.append("尊敬的 "+deal.getStr("fullname")+" 您好，")
 		.append("你有一条来自 "+offer.getStr("bname")+" 的 ")
 		.append(offer.getStr("ufullname")+"（"+offer.getStr("uphone")+"）")
-		.append("于 "+DateKit.format(order.getDate("created_at"),DateKit.pattern_ymd_hms)+" ")
+		.append("于 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms)+" ")
 		.append("发起的故障申告，现已超时，请尽快处理！");
 		return body;
 	}
@@ -179,7 +179,7 @@ public class AlertKit {
 		body.append("【撤回通知】尊敬的 "+deal.getStr("ufullname")+" 您好，")
 		.append(offer.getStr("bname")+" 的 ")
 		.append(offer.getStr("ufullname")+"（"+offer.getStr("uphone")+"）")
-		.append("撤回于 "+DateKit.format(order.getDate("created_at"),DateKit.pattern_ymd_hms)+" ")
+		.append("撤回于 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms)+" ")
 		.append("发起的故障申告！");
 		return body;
 		
@@ -216,7 +216,7 @@ public class AlertKit {
 	public static StringBuffer getMailBodyArrange(Record offeruser,Record acceptuser,Record dealuser,Order order){
 		StringBuffer body=new StringBuffer();
 		body.append("亲爱的用户，"+offeruser.getStr("ufullname")+"，您好！<br/>")
-		.append("您在"+DateKit.format(order.getDate("created_at"),DateKit.pattern_ymd_hms))
+		.append("您在"+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms))
 		.append("提交的关于“"+order.get("title")+"”的故障工单已由")
 		.append(acceptuser.getStr("ufullname")+"（"+acceptuser.getStr("uphone")+"）")
 		.append("指派给"+dealuser.getStr("ufullname")+"（"+dealuser.getStr("uphone")+"）")
@@ -299,7 +299,7 @@ public class AlertKit {
 			contt.append("您好，")
 			.append("你有一条来自 "+offer.getStr("bname")+" 的 ")
 			.append(offer.getStr("ufullname")+"（"+offer.getStr("uphone")+"）")
-			.append(" 于 "+DateKit.format(order.getDate("created_at"),DateKit.pattern_ymd_hms)+" ")
+			.append(" 于 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms)+" ")
 			.append("发起的故障申告，现已超时，请尽快处理！");
 		}
 		
@@ -322,7 +322,7 @@ public class AlertKit {
 			contt.append("您好，")
 			.append(offer.getStr("bname")+" 的 ")
 			.append(offer.getStr("ufullname")+"（"+offer.getStr("uphone")+"）")
-			.append("撤回于 "+DateKit.format(order.getDate("created_at"),DateKit.pattern_ymd_hms)+" ")
+			.append("撤回于 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms)+" ")
 			.append("发起的故障申告！");
 		}
 		return contt.toString();
@@ -340,7 +340,7 @@ public class AlertKit {
 		StringBuffer contt=new StringBuffer();
 		
 		contt.append("亲爱的 "+offeruser.getStr("ufullname")+"，您好！")
-		.append("您在"+DateKit.format(order.getDate("created_at"),DateKit.pattern_ymd_hms))
+		.append("您在"+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms))
 		.append("提交的，关于“"+order.get("title")+"”的故障工单，已由")
 		.append(acceptuser.getStr("ufullname")+"（"+acceptuser.getStr("uphone")+"）")
 		.append("指派给"+dealuser.getStr("ufullname")+"（"+dealuser.getStr("uphone")+"）")
