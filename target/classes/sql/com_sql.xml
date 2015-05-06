@@ -90,8 +90,8 @@
   <sqlGroup name="comment">
   
   	<sql id="findCommentsBySelect">
-  	SELECT comments.id, comments.context ,comments.add_at ,user1.uid,user1.ufull_name,user1.uphone,
-	user1.bname,user1.apartmentid,user1.apartmentpid,user1.aname,user1.pname
+  	SELECT comments.id, comments.context ,comments.add_at ,comments.created_at,user1.uid,user1.ufull_name,user1.uphone,
+	user1.bname,user1.apartmentid,user1.apartmentpid,user1.aname,user1.pname 
   	</sql>
   	<sql id="findCommentsByFrom">
   	FROM com_comment AS comments

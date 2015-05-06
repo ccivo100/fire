@@ -47,6 +47,7 @@
 		<jfinal-ext.version>3.1.3</jfinal-ext.version> <!-- 周扒皮的ext包 -->
 		<druid.version>1.0.9</druid.version> <!-- 阿里巴巴数据库连接池 -->
 		<jfinal-quartz.version>0.2</jfinal-quartz.version><!-- 定时器 -->
+		<commons-net.version>3.3</commons-net.version>
 	</properties>
 
 
@@ -58,12 +59,12 @@
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.jfinal</groupId>
 			<artifactId>jetty-server</artifactId>
 			<version>8.1.8</version>
 			<scope>provided</scope>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>com.jfinal</groupId>
 			<artifactId>jfinal</artifactId>
@@ -130,6 +131,12 @@
 		  <artifactId>jfinal-quartz</artifactId>
 		  <version>${jfinal-quartz.version}</version>
 		</dependency>
+		
+		<dependency>
+	      <groupId>commons-net</groupId>
+	      <artifactId>commons-net</artifactId>
+	      <version>${commons-net.version}</version>
+	    </dependency>
 		
 
 		<dependency><!-- jetty-server-8.1.8 开发时JSP 支持 -->

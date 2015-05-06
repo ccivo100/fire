@@ -201,12 +201,13 @@ public class ReportController extends JFController{
 	/**
 	 * @描述 对提交故障工单进行撤回
 	 */
+	@Before(Tx.class)
 	public void recall(){
 		int id=getParaToInt("oorderid");
-		if(ValidateKit.isNullOrEmpty(getParaToInt("oorderid"))){
-			renderJson("state","id错误！");
+		Order order=Order.dao.findById(id);
+		if(order.getInt("status")!=2){
+			renderJson("state","工单已处理，撤回失败！");
 		}else{
-			Order order=Order.dao.findById(id);
 			order.set("deleted_at", DateKit.format(new Date(),DateKit.pattern_ymd_hms));
 			
 			if(order.update()){
@@ -371,6 +372,7 @@ public class ReportController extends JFController{
 	 * @描述 申报人员可以修改未被处理的工单
 	 *            此时不会再次发送邮件、短信通知。
 	 */
+	@Before(CommonValidator.class)
 	public void edit(){
 		
 		//故障类型
@@ -420,18 +422,23 @@ public class ReportController extends JFController{
 	public void upup(){
 		//order_id
 		Integer orderid=getParaToInt("orderid");
+		Order order=Order.dao.findById(orderid);
 		//description
 		String description=getPara("description").trim();
 		String title=getPara("title").trim();
 		
-		if(ValidateKit.isNullOrEmpty(description))
-		{
+		if(order.getInt("status")==1){
+			renderJson("state","失败：工单正在处理，无法修改。");
+		}else if(order.getInt("status")==0){
+			renderJson("state","失败：工单已处理，无法修改。");
+		}else if(!ValidateKit.isNullOrEmpty(order.get("deleted_at"))){
+			renderJson("state","失败：工单已撤销，无法修改。");
+		}
+		else if(ValidateKit.isNullOrEmpty(description)){
 			renderJson("state","故障单描述不能为空！");
 		}else if(ValidateKit.isNullOrEmpty(title)){
 			renderJson("state","故障单标题不能为空！");
 		}else{
-			Order order=Order.dao
-					.findById(orderid);
 			order.set("description",description)
 					.set("updated_at",
 							DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));

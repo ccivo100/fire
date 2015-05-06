@@ -246,11 +246,20 @@ public class OperateController extends JFController{
 		else if(ValidateKit.isNullOrEmpty(comment))
 		{
 			renderJson("state","处理意见不为空！");
-		}else{
+		}
+		else if(!ValidateKit.isNullOrEmpty(order.get("deleted_at"))){
+			renderJson("state","失败：工单已撤销，无法提交。");
+		}
+		else{
 
 			// 设置基本内容：处理人，建议，处理时间，修改状态等。
 			Comment com=new Comment();
-			com.set("order_id", orderid).set("user_id", cUser.get("id")).set("context", comment).set("add_at", deal_at);
+			com.set("order_id", orderid)
+					.set("user_id", cUser.get("id"))
+					.set("context", comment)
+					.set("add_at", deal_at)
+					.set("created_at",
+							DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
 			com.save();
 
 			//开始处理

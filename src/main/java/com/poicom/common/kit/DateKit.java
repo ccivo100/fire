@@ -1,5 +1,8 @@
 package com.poicom.common.kit;
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -13,6 +16,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.net.ntp.NTPUDPClient;
+import org.apache.commons.net.ntp.TimeInfo;
+import org.apache.commons.net.ntp.TimeStamp;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.Hours;
@@ -28,10 +34,13 @@ public class DateKit {
 	
 	public static DateTimeFormatter format;
 	
+	public static final String TIME_SERVER_URL="time-nw.nist.gov";
+	
 	public static final String pattern_ymd = "yyyy-MM-dd"; // pattern_ymd
 	public static final String pattern_ymd_hms = "yyyy-MM-dd HH:mm:ss"; // pattern_ymdtime
 	public static final String pattern_ymd_hms_s = "yyyy-MM-dd HH:mm:ss:SSS"; // pattern_ymdtimeMillisecond
 	public static final String pattern_bt_hms_s = "yyyy-MM-dd HH:mm:ss.SS"; 
+	
 	public static int dateBetween(String offer,DateTime now){
 		format = DateTimeFormat .forPattern(pattern_bt_hms_s);
 		DateTime offer_at=DateTime.parse(offer,format);
@@ -450,6 +459,55 @@ public class DateKit {
 		calendar.set(Calendar.SECOND, second);   
 		calendar.set(Calendar.MILLISECOND, millisecond);  
 		return calendar.getTime();
+	}
+	
+	/**
+	 * @描述 获取网络时间，若无则
+	 * @param def
+	 * @return
+	 */
+	public static String getNTPDate(String def){
+		try {  
+	        NTPUDPClient timeClient = new NTPUDPClient();  
+	        InetAddress timeServerAddress = InetAddress.getByName(TIME_SERVER_URL);  
+	        TimeInfo timeInfo = timeClient.getTime(timeServerAddress);  
+	        TimeStamp timeStamp = timeInfo.getMessage().getTransmitTimeStamp();  
+	        String date=format(timeStamp.getDate(),pattern_ymd_hms);
+	        //System.out.println(format(timeStamp.getDate(),pattern_ymd_hms));  
+	        if(date!=null){
+	        	return date;
+	        }else{
+	        	return def;
+	        }
+	    } catch (UnknownHostException e) {  
+	        e.printStackTrace();  
+	        logger.error("无法连接网络，TIME_SERVER_URL："+TIME_SERVER_URL);
+	    } catch (IOException e) {  
+	        e.printStackTrace();  
+	    }
+		return def;  
+	}
+	
+	public static String getNTPDate(){
+		try {  
+	        NTPUDPClient timeClient = new NTPUDPClient();  
+	        InetAddress timeServerAddress = InetAddress.getByName(TIME_SERVER_URL);  
+	        TimeInfo timeInfo = timeClient.getTime(timeServerAddress);  
+	        TimeStamp timeStamp = timeInfo.getMessage().getTransmitTimeStamp();  
+	        String date=format(timeStamp.getDate(),pattern_ymd_hms);
+	        //System.out.println(format(timeStamp.getDate(),pattern_ymd_hms));  
+	        if(date!=null){
+	        	return date;
+	        }else{
+	        	return "";
+	        }
+	    } catch (UnknownHostException e) {  
+	        e.printStackTrace();  
+	        logger.error("无法连接网络，TIME_SERVER_URL："+TIME_SERVER_URL);
+	    } catch (IOException e) {  
+	        e.printStackTrace();  
+	    }
+		return "";  
 	}
 
 }

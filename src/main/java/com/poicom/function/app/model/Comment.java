@@ -17,7 +17,7 @@ public class Comment extends Model<Comment> {
 	public final static Comment dao=new Comment();
 	
 	public List<Record> findCommentsByOrderId(String where,Object... paras){
-		return Db.find(SqlKit.sql("comment.findCommentsBySelect")+SqlKit.sql("comment.findCommentsByFrom")+getWhere(where), paras);
+		return Db.find(SqlKit.sql("comment.findCommentsBySelect")+SqlKit.sql("comment.findCommentsByFrom")+getWhere(where), paras); 
 	}
 
 }

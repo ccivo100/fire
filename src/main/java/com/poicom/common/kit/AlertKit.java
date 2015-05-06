@@ -291,6 +291,7 @@ public class AlertKit {
 	 * @param userinfo
 	 * @param phone
 	 */
+	@Deprecated
 	public static String getSmsBody(Record offer,Order order){
 		StringBuffer contt=new StringBuffer();
 		if(ValidateKit.isNullOrEmpty(offer)){
@@ -336,6 +337,7 @@ public class AlertKit {
 	 * @param order
 	 * @return
 	 */
+	@Deprecated
 	public static String getSmsBodyArrange(Record offeruser,Record acceptuser,Record dealuser,Order order){
 		StringBuffer contt=new StringBuffer();
 		
@@ -365,7 +367,7 @@ public class AlertKit {
 			.append("您在 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms))
 			.append(" 提交的故障工单，已由 "+deal.getStr("full_name")+"（"+deal.getStr("phone")+"）")
 			//.append("于 "+DateKit.format(order.getDate("deal_at"),DateKit.pattern_ymd_hms))
-			.append(" 处理完毕，感谢您使用故障申报系统，祝您生活愉快！");
+			.append(" 处理完毕！");
 		}
 		
 		//String content =contt.toString();
@@ -377,10 +379,11 @@ public class AlertKit {
 	 * @描述 提供定时提醒短信
 	 * @param phone
 	 */
+	@Deprecated
 	public static String getSmsBodyOuttime( ){
 		
 		StringBuffer contt=new StringBuffer();
-		contt.append("您好，您所属故障类型工单已超时未处理，请及时处理。【一点通】");
+		contt.append("您好，您所属故障类型工单已超时未处理，请及时处理。");
 		//String content =contt.toString();
 		//sendSms(content,phone);
 		return contt.toString();

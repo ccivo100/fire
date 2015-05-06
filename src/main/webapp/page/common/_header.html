@@ -62,23 +62,23 @@
       				
       				<@shiro.hasPermission name="P_O_DEAL">
     				<li class="<#if activebar='deal'>active</#if>">
-    					<a href="${ContextPath}/operate/deal">故障处理</a>
+    					<a href="${ContextPath}/operate/deal"><span class="glyphicon glyphicon-th-list"></span> &nbsp;故障处理</a>
     				</li>
     				</@shiro.hasPermission>
 					<@shiro.hasPermission name="P_O_OPERATES">
 						<li class="<#if activebar='operates'>active</#if>">
-							<a href="${ContextPath}/operate/operates">运维记录</a>
+							<a href="${ContextPath}/operate/operates"><span class="glyphicon glyphicon-th-list"></span> &nbsp;运维记录</a>
 						</li>
     				</@shiro.hasPermission>
     				
 					<@shiro.hasPermission name="P_R_REPORTS">
 					<li class="<#if activebar='reports'>active</#if>">
-						<a href="${ContextPath}/report/reports">申报记录</a>
+						<a href="${ContextPath}/report/reports"><span class="glyphicon glyphicon-th-list"></span> &nbsp;申报记录</a>
 					</li>
     				</@shiro.hasPermission>
     				<@shiro.hasPermission name="P_R_OFFER">
     				<li class="<#if activebar='offer'>active</#if>">
-    					<a href="${ContextPath}/report/offer">故障申报</a>
+    					<a href="${ContextPath}/report/offer"><span class="glyphicon glyphicon-th-list"></span> &nbsp;故障申报</a>
     				</li>
     				</@shiro.hasPermission>
       				
@@ -92,11 +92,11 @@
 							<li class="divider"></li>
 							
 								<@shiro.hasPermission name="P_U_CENTER">
-      								<li><a href="${ContextPath}/user/center">个人中心</a></li>
+      								<li><a href="${ContextPath}/user/center"><span class="glyphicon glyphicon-th-list"></span> &nbsp;个人中心</a></li>
       							</@shiro.hasPermission>
       							
       							<@shiro.hasPermission name="P_U_PWD">
-      								<li><a href="${ContextPath}/user/pwdPage">修改密码</a></li>
+      								<li><a href="${ContextPath}/user/pwdPage"><span class="glyphicon glyphicon-th-list"></span> &nbsp;修改密码</a></li>
       							</@shiro.hasPermission>
       						
 <!--							<li class="divider"></li>
