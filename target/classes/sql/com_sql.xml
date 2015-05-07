@@ -42,6 +42,7 @@
 			from com_apartment_type as apartmenttype
 			where apartmenttype.type_id=?
 		)
+		and apartment.deleted_at is null
 	</sql>
 	</sqlGroup>
 	

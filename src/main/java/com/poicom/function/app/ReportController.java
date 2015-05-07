@@ -20,6 +20,7 @@ import com.jfinal.plugin.ehcache.EvictInterceptor;
 import com.poicom.common.controller.JFController;
 import com.poicom.common.kit.AlertKit;
 import com.poicom.common.kit.DateKit;
+import com.poicom.common.kit.WebKit;
 import com.poicom.common.thread.ThreadAlert;
 import com.poicom.function.app.model.Apartment;
 import com.poicom.function.app.model.Comment;
@@ -321,8 +322,8 @@ public class ReportController extends JFController{
 		
 		//获取表单数据，填充进Order
 		Order order=new Order().set("offer_user", getParaToInt("uuserid"))
-				.set("title", getPara("otitle"))
-				.set("description", getPara("odescription"))
+				.set("title",WebKit.getHTMLToString(getPara("otitle")))
+				.set("description", WebKit.getHTMLToString(getPara("odescription")))
 				.set("type", getParaToInt("selectType"))
 				.set("level", getPara("selectLevel"))
 				.set("status", 2)
@@ -409,7 +410,7 @@ public class ReportController extends JFController{
 		Order order=Order.dao
 				.findById(orderid);
 		order.set("title", title)
-				.set("description",description)
+				.set("description",WebKit.getHTMLToString(description))
 				.set("updated_at",
 						DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
 		
@@ -439,7 +440,8 @@ public class ReportController extends JFController{
 		}else if(ValidateKit.isNullOrEmpty(title)){
 			renderJson("state","故障单标题不能为空！");
 		}else{
-			order.set("description",description)
+			order.set("title", WebKit.getHTMLToString(title))
+					.set("description",WebKit.getHTMLToString(description))
 					.set("updated_at",
 							DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
 			

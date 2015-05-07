@@ -23,6 +23,7 @@ import com.jfinal.plugin.ehcache.EvictInterceptor;
 import com.poicom.common.controller.JFController;
 import com.poicom.common.kit.AlertKit;
 import com.poicom.common.kit.DateKit;
+import com.poicom.common.kit.WebKit;
 import com.poicom.common.thread.ThreadAlert;
 import com.poicom.function.app.model.Comment;
 import com.poicom.function.app.model.ErrorType;
@@ -251,12 +252,12 @@ public class OperateController extends JFController{
 			renderJson("state","失败：工单已撤销，无法提交。");
 		}
 		else{
-
+			
 			// 设置基本内容：处理人，建议，处理时间，修改状态等。
 			Comment com=new Comment();
 			com.set("order_id", orderid)
 					.set("user_id", cUser.get("id"))
-					.set("context", comment)
+					.set("context", WebKit.getHTMLToString(comment))
 					.set("add_at", deal_at)
 					.set("created_at",
 							DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));

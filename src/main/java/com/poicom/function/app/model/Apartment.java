@@ -63,8 +63,8 @@ public class Apartment extends Model<Apartment> implements TreeNode<Apartment>{
 	 * @param paras
 	 * @return
 	 */
-	public List<Apartment> findApartmentsByPid(Object... paras){
-		return findBy(" pid=? ", paras);
+	public List<Apartment> findApartmentsByPid(String where,Object... paras){
+		return findBy(where, paras);
 	}
 
 	

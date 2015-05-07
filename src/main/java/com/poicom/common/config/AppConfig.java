@@ -30,6 +30,7 @@ import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.FreeMarkerRender;
 import com.poicom.common.freemarker.FreeMarkerRenderFactory;
 import com.poicom.common.handler.GlobalHandler;
+import com.poicom.common.interceptor.AttrsInterceptor;
 import com.poicom.common.interceptor.HSRInterceptor;
 import com.poicom.common.interceptor.SessionInterceptor;
 import com.poicom.common.quartz.QuartzPlugin;

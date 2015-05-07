@@ -206,7 +206,7 @@ public class IndexController extends Controller {
 	
 	public void help(){
 		try{
-			File downfile=new File(PathKit.getWebRootPath() +"/res/doc/操作帮助文档.doc");
+			File downfile=new File(PathKit.getWebRootPath() +"/res/doc/网络故障申报系统操作指引.doc");
 			if(downfile.exists()){
 				renderFile(downfile);
 				return ;

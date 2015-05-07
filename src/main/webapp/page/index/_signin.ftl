@@ -66,7 +66,7 @@ function createXHR(){
 
 function ref_captcha(){
 	var timestamp = new Date().getTime();
-	var url="/captcha?width=128&height=45&fontsize=30&time="+timestamp;
+	var url="${ContextPath}/captcha?width=128&height=45&fontsize=30&time="+timestamp;
 	func_get(url,function(){
 		if(xmlhttp.readyState==4&&xmlhttp.status==200){
 			var captchaText=xmlhttp.responseText;

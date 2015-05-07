@@ -26,6 +26,7 @@ import com.jfinal.plugin.activerecord.tx.Tx;
 import com.jfinal.plugin.ehcache.CacheInterceptor;
 import com.jfinal.plugin.ehcache.CacheName;
 import com.jfinal.plugin.ehcache.EvictInterceptor;
+import com.poicom.common.kit.WebKit;
 import com.poicom.function.app.model.Apartment;
 import com.poicom.function.app.model.ApartmentType;
 import com.poicom.function.app.model.Branch;
@@ -112,7 +113,9 @@ public class AdminController extends Controller {
 	@Before({AdminValidator.class,EvictInterceptor.class})
 	@CacheName("/admin/role")
 	public void doadd(){
-		getModel(Role.class).save();
+		Role role=getModel(Role.class);
+		role.set("name", WebKit.delHTMLTag(role.getStr("name"))).set("value", WebKit.delHTMLTag(role.getStr("value")));
+		role.save();
 		redirect("/admin/role");
 	}
 	
@@ -130,7 +133,9 @@ public class AdminController extends Controller {
 	@Before({AdminValidator.class,EvictInterceptor.class})
 	@CacheName("/admin/role")
 	public void doedit(){
-		getModel(Role.class).update();
+		Role role=getModel(Role.class);
+		role.set("name", WebKit.delHTMLTag(role.getStr("name"))).set("value", WebKit.delHTMLTag(role.getStr("value")));
+		role.update();
 		redirect("/admin/role");
 	}
 	
@@ -242,7 +247,9 @@ public class AdminController extends Controller {
 	@Before({AdminValidator.class,EvictInterceptor.class})
 	@CacheName("/admin/permission")
 	public void doaddpermission(){
-		getModel(Permission.class).save();
+		Permission permission=getModel(Permission.class);
+		permission.set("name", WebKit.delHTMLTag(permission.getStr("name"))).set("value", WebKit.delHTMLTag(permission.getStr("value"))).set("url", WebKit.delHTMLTag(permission.getStr("url")));
+		permission.save();
 		redirect("/admin/permission");
 	}
 	
@@ -260,7 +267,9 @@ public class AdminController extends Controller {
 	@Before({AdminValidator.class,EvictInterceptor.class})
 	@CacheName("/admin/permission")
 	public void doeditpermission(){
-		getModel(Permission.class).update();
+		Permission permission=getModel(Permission.class);
+		permission.set("name", WebKit.delHTMLTag(permission.getStr("name"))).set("value", WebKit.delHTMLTag(permission.getStr("value"))).set("url", WebKit.delHTMLTag(permission.getStr("url")));
+		permission.update();
 		redirect("/admin/permission");
 	}
 	
@@ -331,10 +340,10 @@ public class AdminController extends Controller {
 		String type=getPara("type");
 		
 		if(type.equals("afacher")){
-			List<Apartment> afacherList=Apartment.dao.findApartmentsByPid(0);
+			List<Apartment> afacherList=Apartment.dao.findApartmentsByPid(" deleted_at is null and pid=? ",0);
 			renderJson("afacherList", afacherList);
 		}else if(type.equals("achilren")){
-			List<Apartment> achilrenList=Apartment.dao.findApartmentsByPid(getParaToInt("typeid"));
+			List<Apartment> achilrenList=Apartment.dao.findApartmentsByPid(" deleted_at is null and pid=?",getParaToInt("typeid"));
 			renderJson("achilrenList", achilrenList);
 		}
 	}
@@ -345,6 +354,7 @@ public class AdminController extends Controller {
 	@Before(AdminValidator.class)
 	public void doadduser(){
 		User user=getModel(User.class);
+		user.set("username", WebKit.delHTMLTag(user.getStr("username")));
 		User subUser=SubjectKit.getUser();
 		boolean result=false;
 		HasherInfo hasher = HasherKit.hash("123456");
@@ -352,7 +362,7 @@ public class AdminController extends Controller {
 		.set("salt", hasher.getSalt())
 		.set("hasher", hasher.getHasher().value())
 		.set("providername", subUser.getStr("full_name"))
-		.set("full_name", user.getStr("first_name")+user.getStr("last_name"));
+		.set("full_name", WebKit.delHTMLTag(user.getStr("first_name"))+WebKit.delHTMLTag(user.getStr("last_name")));
 		result=user.save();
 		if(result){
 			System.out.println(user.get("id")+"："+user.get("username"));
@@ -525,7 +535,9 @@ public class AdminController extends Controller {
 	}
 	@Before(AdminValidator.class)
 	public void doaddbranch(){
-		getModel(Branch.class).save();
+		Branch branch=getModel(Branch.class);
+		branch.set("name", WebKit.delHTMLTag(branch.getStr("name")));
+		branch.save();
 		redirect("/admin/branch");
 	}
 	
@@ -536,7 +548,9 @@ public class AdminController extends Controller {
 	}
 	@Before(AdminValidator.class)
 	public void doeditbranch(){
-		getModel(Branch.class).update();
+		Branch branch=getModel(Branch.class);
+		branch.set("name", WebKit.delHTMLTag(branch.getStr("name")));
+		branch.update();
 		redirect("/admin/branch");
 	}
 	
@@ -554,10 +568,10 @@ public class AdminController extends Controller {
 	 */
 	public void apartment(){
 		
-		List<Apartment> apartments=Apartment.dao.findApartmentsByPid(0);
+		List<Apartment> apartments=Apartment.dao.findApartmentsByPid(" pid=? ",0);
 		
 		for(Apartment apartment:apartments){
-			List<Apartment> achild=Apartment.dao.findApartmentsByPid(apartment.get("id"));
+			List<Apartment> achild=Apartment.dao.findApartmentsByPid(" pid=? ",apartment.get("id"));
 			apartment.setChildren(achild);
 		}
 		setAttr("apartmentTree",apartments);
@@ -587,7 +601,9 @@ public class AdminController extends Controller {
 	}
 	@Before(AdminValidator.class)
 	public void doaddapartment(){
-		getModel(Apartment.class).save();
+		Apartment apartment=getModel(Apartment.class);
+		apartment.set("name", WebKit.delHTMLTag(apartment.getStr("name")));
+		apartment.save();
 		redirect("/admin/apartment");
 	}
 	public void editapartment(){
@@ -597,7 +613,9 @@ public class AdminController extends Controller {
 	}
 	@Before(AdminValidator.class)
 	public void doeditapartment(){
-		getModel(Apartment.class).update();
+		Apartment apartment=getModel(Apartment.class);
+		apartment.set("name", WebKit.delHTMLTag(apartment.getStr("name")));
+		apartment.update();
 		redirect("/admin/apartment");
 	}
 	public void onapartment(){
@@ -717,7 +735,9 @@ public class AdminController extends Controller {
 	}
 	@Before(AdminValidator.class)
 	public void doaddposition(){
-		getModel(Position.class).save();
+		Position position=getModel(Position.class);
+		position.set("name", WebKit.delHTMLTag(position.getStr("name")));
+		position.save();
 		redirect("/admin/position");
 	}
 	public void editposition(){
@@ -727,7 +747,9 @@ public class AdminController extends Controller {
 	}
 	@Before(AdminValidator.class)
 	public void doeditposition(){
-		getModel(Position.class).update();
+		Position position=getModel(Position.class);
+		position.set("name", WebKit.delHTMLTag(position.getStr("name")));
+		position.update();
 		redirect("/admin/position");
 	}
 	public void onposition(){
@@ -772,7 +794,9 @@ public class AdminController extends Controller {
 	@Before({AdminValidator.class,EvictInterceptor.class})
 	@CacheName("/admin/type")
 	public void doaddtype(){
-		getModel(ErrorType.class).save();
+		ErrorType errorType=getModel(ErrorType.class);
+		errorType.set("name", WebKit.delHTMLTag(errorType.getStr("name")));
+		errorType.save();
 		redirect("/admin/type");
 	}
 	public void edittype(){
@@ -783,7 +807,9 @@ public class AdminController extends Controller {
 	@Before({AdminValidator.class,EvictInterceptor.class})
 	@CacheName("/admin/type")
 	public void doedittype(){
-		getModel(ErrorType.class).update();
+		ErrorType errorType=getModel(ErrorType.class);
+		errorType.set("name", WebKit.delHTMLTag(errorType.getStr("name")));
+		errorType.update();
 		redirect("/admin/type");
 	}
 	@Before({EvictInterceptor.class})
