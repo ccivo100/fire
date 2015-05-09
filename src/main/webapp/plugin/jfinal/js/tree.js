@@ -90,6 +90,18 @@ $(document).ready(function() {
 	});
 });
 
+/**
+ * 登陆框透明效果
+ */
+$(document).ready(function(){
+	$('.sign-div-top').mouseenter(function(){
+		$('.sign-div').css({"opacity":"1","filter":"alpha(opacity=100)"});
+	});
+	$('.sign-div-top').mouseleave(function(){
+		$('.sign-div').css({"opacity":"0.3","filter":"alpha(opacity=30)"});
+	});
+	
+});
 
 /**
  * 提示牌 点击申报。
@@ -185,7 +197,9 @@ $(function() {
 	});
 });
 
-
+/**
+ * 测试方法
+ */
 $(function() {
 	$("#hasten1").click(function() {
 
