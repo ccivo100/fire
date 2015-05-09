@@ -1,3 +1,8 @@
+
+html,body{
+    height: 100%;
+    width: 100%;
+}
 body {
 	/* 如果 _header.html的nav使用了 .navbar-static-top则要去掉这两个样式
 		如果 _header.html的nav使用了 .navbar-fixed-top则需要这两个样式*/
@@ -5,13 +10,7 @@ body {
   padding-bottom: 40px; */
   background-color: #eee;
 }
-html,body{
-    height: 100%;
-    width: 100%;
-}
-
 body.sign-body{
-	background-color: #c4eaf7;
 	background-image: -webkit-gradient(linear, 0 0%, 0 100%, from(#cbe8f9), to(#c5c1f5));
 	background-image: -webkit-linear-gradient(top, #cbe8f9 0%, #c5c1f5 100%);
     background-image: -moz-linear-gradient(top, #cbe8f9 0%, #c5c1f5 100%);
@@ -72,6 +71,7 @@ body.sign-body{
 /* 登陆UI-2 */
 #loginbox {
     width: 450px;
+    min-height:425px;
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -79,7 +79,6 @@ body.sign-body{
 }
 
 #loginbox {
-	min-height:315px;
     border-radius: 7px;
     overflow: hidden !important;
     text-align: center;
@@ -134,8 +133,8 @@ body.sign-body{
 	/*padding 上,右，下，左边*/
 	padding: 10px 115px 15px;
 	width:auto;
-	margin-top: 210px;
- 	height:60px;
+	margin-top: 305px;
+ 	height:80px;
 	
 }
 .form-line-split-color{
@@ -145,21 +144,24 @@ body.sign-body{
 
 .input-group{
 	/* margin-bottom: 12px; */
-	width: 250px;
+	width: 280px;
+	height: auto;
 	float: left;
-	
 }
 .input-sign{
 	margin-bottom: 12px;
 	margin-left: 80px;
 }
 .alert-sign{
-	padding: 6px;
+	padding: 11px;
 	border: 1px solid transparent;
 	border-radius: 4px;
 	color: #a94442;
 	background-color: #f2dede;
 	border-color: #ebccd1
+}
+.form-height{
+	height: 50px;
 }
 
 .input-captcha{
@@ -176,7 +178,7 @@ body.sign-body{
 
 .sign-div{
 	width:450px;  
-   	height:320px;  
+   	height:425px;  
    	position:absolute;  
    	left:50%;  
    	top:50%;  
@@ -187,7 +189,7 @@ body.sign-body{
 }
 .sign-div-top{
 	width:450px;  
-   	height:320px;  
+   	height:425px;  
    	position:absolute;  
    	left:50%;  
    	top:50%;  
@@ -197,13 +199,13 @@ body.sign-body{
 
 .carousel-sign {
 	width:680px;  
+	height:320px;  
 	left:50%;  
    	top:50%;  
    	margin:210px 0 0 -230px ;
 	position:absolute;  
 	z-index:2;
 }
-
 
 @media (max-width: 480px){
     #logo, #loginbox {
@@ -421,7 +423,25 @@ textarea{
 	resize: none;
 }
 
-
+/* 系统的页头 */
+.header{
+	position:absolute;
+	width:100%;  
+	min-height:44px;
+	padding: 4px 0;
+	z-index:3;
+	float: left;
+}
+.filter-opacity{
+	background-color: #f9f9f9;
+	border-top: 1px solid #e5e5e5;
+	opacity: 0.6;
+  	filter:alpha(opacity=80) ;
+  	z-index:2;
+}
+.buttom{
+	bottom: 0;
+}
 
 /* 系统的页脚 */
 .footer{

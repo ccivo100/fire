@@ -1,8 +1,33 @@
 ﻿<#include "/page/sign/_layoutsign.html"/>
-<@layout activebar="signin" html_title="欢迎登陆点通科技故障申报系统">
-
+<@layout activebar="signin" html_title="欢迎登陆故障申报系统 - 点通科技">
+	<div class="header">
+		<div class="row">
+			<div class="col-xs-1">
+				
+			</div>
+			<div class="col-xs-4">
+				<div>
+				<div><img src="${ContextPath}/res/img/logo.jpg"></div>
+				<div><h1>点通申报系统</h1></div>
+				</div>
+			</div>
+			<div class="col-xs-4">
+				
+			</div>
+			<div class="col-xs-1">
+			</div>
+		</div>
+	</div>
+	<!-- 遮罩 -->
+	<div class="header filter-opacity">
+	</div>
+	
+	<div class="header filter-opacity buttom">
+	</div>
+	
+	
 	<div class="row">
-		<div class="col-xs-7">
+		<div class="col-xs-6">
 			<div class="carousel-sign">
 			<div id="myCarousel" class="carousel slide">
 			   <!-- 轮播（Carousel）指标 -->
@@ -14,25 +39,23 @@
 			   <!-- 轮播（Carousel）项目 -->
 			   <div class="carousel-inner">
 			      <div class="item active">
-			         <img src="${ContextPath}/res/bg/1.jpg" alt="First slide">
+			         <img src="${ContextPath}/res/sign/lomo风格1.jpg" width="680" alt="First slide">
 			      </div>
 			      <div class="item">
-			         <img src="${ContextPath}/res/bg/1.jpg" alt="Second slide">
+			         <img src="${ContextPath}/res/sign/lomo风格2.jpg" width="680" alt="Second slide">
 			      </div>
 			      <div class="item">
-			         <img src="${ContextPath}/res/bg/1.jpg" alt="Third slide">
+			         <img src="${ContextPath}/res/sign/lomo风格3.jpg" width="680" alt="Third slide">
 			      </div>
 			   </div>
 			   <!-- 轮播（Carousel）导航 -->
-			   <a class="carousel-control left" href="#myCarousel" 
-			      data-slide="prev">&lsaquo;</a>
-			   <a class="carousel-control right" href="#myCarousel" 
-			      data-slide="next">&rsaquo;</a>
+			   <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+			   <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 			</div> 
 		</div>
 		</div>
 		
-		<div class="col-xs-5">
+		<div class="col-xs-6">
 			<!--登陆控件-->
 			<div class="sign-div-top">
 			<div id="loginbox">
@@ -40,41 +63,41 @@
 					<h3 class="form-signin-heading" style="opacity: 0">登陆</h3>
 					<div class="input-group input-sign">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-						<input class="form-control" type="text" name="username" value="${(username)!}" placeholder="用户名" required autofocus autocomplete="off">
+						<input class="form-control form-height" type="text" name="username" value="${(username)!}" placeholder="用户名" required autofocus autocomplete="off">
 					</div>
 					
 					<div class="input-group input-sign">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-						<input class="form-control" type="password" name="password" value="${(password)!}" placeholder="密码" required >
+						<input class="form-control form-height" type="password" name="password" value="${(password)!}" placeholder="密码" required >
 					</div>
 					
 				    <div class="input-group input-sign">
 				    	<span class="input-group-addon"><i class="glyphicon glyphicon-repeat"></i></span>
-				      	<input type="text" name="captcha" value="" class="form-control captcha" ng-minlength="4" ng-maxlength="4"
-				             placeholder="验证码" required autocomplete="off" style="width:80px">
+				      	<input type="text" name="captcha" value="" class="form-control captcha form-height" ng-minlength="4" ng-maxlength="4"
+				             placeholder="验证码" required autocomplete="off" style="width:90px">
 				        <a style="float:right;" href="javascript:ref_captcha()">
-				    	<img id="captcha" style="height:34px" class="captcha" src="${ContextPath}/captcha?width=128&height=45&fontsize=30&time=${.now?time}">
+				    	<img id="captcha" class="captcha form-height" src="${ContextPath}/captcha?width=128&height=45&fontsize=30&time=${.now?time}">
 				      	</a>
 				    </div>
 				    <div class="input-group input-sign" >
-				    	<span class="font-size-span" style="float:right;height:15px;"> 
+				    	<span class="font-size-span" style="float:right;height:35px;"> 
 							<a href="${ContextPath}/retrieve">忘记密码?</a>
 						</span>
 					</div>
 					
 					<@shiro.isLoginFailure name="shiroLoginFailure">
 					<div class="input-group input-sign">
-				        <div class="alert-sign" style="background-image: none;">
+				        <div class="alert-sign " style="background-image: none;">
 				          <@resource.loginException name="shiroLoginFailure"/>
 				        </div>
 				    </div>
 				    </@shiro.isLoginFailure>
 				    <div class="form-actions form-line-split">
 				    	<span class="pull-center">
-							<button type="reset" class="btn btn-primary" style="width: 116px;"  value="重置"  />重 置</button>
+							<button type="reset" class="btn btn-primary" style="width: 136px;"  value="重置"  />重 置</button>
 						</span>
 						<span class="pull-center">
-							<button type="submit" class="btn btn-primary" style="width: 116px;" value="登 录" data-loading-text="正在提交..." />登 录</button>
+							<button type="submit" class="btn btn-primary" style="width: 136px;" value="登 录" data-loading-text="正在提交..." />登 录</button>
 						</span>
 				    </div>
 				</form>
@@ -95,9 +118,9 @@
 
 	<!--替换背景-->
 	<div id="pt-main" class="pt-perspective">
-		<div class="pt-page pt-page-1"><h1>欢迎您登录系统</h1></div>
-		<div class="pt-page pt-page-2"><h1>欢迎您登录系统</h1></div>
-		<div class="pt-page pt-page-3"><h1>欢迎您登录系统</h1></div>
+		<div class="pt-page pt-page-4"><h1>欢迎您登录系统</h1></div>
+		<div class="pt-page pt-page-5"><h1>欢迎您登录系统</h1></div>
+		<div class="pt-page pt-page-6"><h1>欢迎您登录系统</h1></div>
 		<div class="pt-page pt-page-4"><h1>欢迎您登录系统</h1></div>
 		<div class="pt-page pt-page-5"><h1>欢迎您登录系统</h1></div>
 		<div class="pt-page pt-page-6"><h1>欢迎您登录系统</h1></div>
@@ -107,6 +130,8 @@
 	</div>
 	<script src="${ContextPath}/plugin/page-transitions/js/jquery.dlmenu.js"></script>
 	<script src="${ContextPath}/plugin/page-transitions/js/pagetransitions.js"></script>
+
+
 <script>
 var xmlhttp;
 function func_get(url,cfunc){
@@ -135,10 +160,6 @@ function ref_captcha(){
 		}
 	
 	});
-
 }
-
 </script>
-
-
 </@layout>

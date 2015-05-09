@@ -93,7 +93,7 @@ $(document).ready(function() {
 /**
  * 登陆框透明效果
  */
-$(document).ready(function(){
+/*$(document).ready(function(){
 	$('.sign-div-top').mouseenter(function(){
 		$('.sign-div').css({"opacity":"1","filter":"alpha(opacity=100)"});
 	});
@@ -101,7 +101,7 @@ $(document).ready(function(){
 		$('.sign-div').css({"opacity":"0.3","filter":"alpha(opacity=30)"});
 	});
 	
-});
+});*/
 
 /**
  * 提示牌 点击申报。

@@ -307,3 +307,9 @@ Caused by: java.sql.SQLException: Access denied for user 'root'@'localhost' (usi
 
 2015-05-08 18:53:55
 [WARN]-[Thread: main]-[net.sf.ehcache.store.disk.DiskStorageFactory.<init>()]: The index for data file C:\Users\poicom7\AppData\Local\Temp\shiro-active%0053ession%0043ache.data is out of date, probably due to an unclean shutdown. Deleting index file C:\Users\poicom7\AppData\Local\Temp\shiro-active%0053ession%0043ache.index
+
+2015-05-09 15:01:53
+[WARN]-[Thread: qtp16581326-36]-[org.eclipse.jetty.http.HttpGenerator.addContent()]: Ignoring extra content ?
+
+2015-05-09 15:20:32
+[WARN]-[Thread: qtp16581326-37]-[org.eclipse.jetty.http.HttpGenerator.addContent()]: Ignoring extra content ?
