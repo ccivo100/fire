@@ -165,3 +165,127 @@ h6, .h6 {
 .blog-footer p:last-child {
   margin-bottom: 0;
 }
+/*
+ * 废弃css 2015-05-11
+ */
+
+/** 登陆页面UI  */
+
+.div-center{
+	margin:0 auto;   
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 3px;
+  margin: 0 auto;
+  
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/** 登陆页面UI */
+
+.jumbotron-sign {
+	padding: 30px 15px;
+	margin-top: 15px;
+	margin-bottom: 30px;
+	color: inherit;
+	background-color: #eee
+}
+
+.jumbotron-sign h1,.jumbotron-sign .h1 {
+	color: inherit
+}
+
+.jumbotron-sign p {
+	margin-bottom: 15px;
+	font-size: 21px;
+	font-weight: 200
+}
+
+.jumbotron-sign>hr {
+	border-top-color: #d5d5d5
+}
+
+.container .jumbotron-sign,.container-fluid .jumbotron-sign {
+	border-radius: 6px
+}
+
+.jumbotron-sign .container {
+	max-width: 100%
+}
+
+@media screen and (min-width:768px) {
+	.jumbotron-sign {
+		padding: 3px 0
+	}
+	.container .jumbotron-sign {
+		padding-right: 3px;
+		padding-left: 3px
+	}
+	.jumbotron-sign h1,.jumbotron-sign .h1 {
+		font-size: 63px
+	}
+}
+
+/* 主页搜索警告框 */
+.index-alert {
+	padding: 8px;
+ 	border: 1px solid transparent;
+	border-radius: 3px
+}
+.index-alert-danger {
+	color: #a94442;
+	background-color: #f2dede;
+	border-color: #ebccd1
+}
+
+.index-title{
+	margin-top:35px;
+}
+
+/*  */
+textarea{
+	resize: none;
+}
+
+/* 系统的页脚 */
+#footer {
+	position: relative;
+    margin-top: -60px; 
+    height: 60px;
+    clear:both;
+    background:#369;
+ }
+.footer p:last-child {
+  margin-bottom: 0;
+}

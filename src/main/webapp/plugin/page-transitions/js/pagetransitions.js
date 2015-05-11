@@ -49,6 +49,8 @@ var PageTransitions = (function() {
 		} );
 
 	}
+	
+	
 
 	function nextPage( animation ) {
 
@@ -378,6 +380,7 @@ var PageTransitions = (function() {
 	}
 
 	init();
+	
 
 	return { init : init };
 

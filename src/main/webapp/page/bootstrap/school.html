@@ -158,24 +158,29 @@ function loadXMLText(){
 
 </script>
 <div class="tree well">
-<label for="uname">用户名:</label>
+<!-- <label for="uname">用户名:</label>
 <input type="text" name="username" id="uname" onkeyup="loadXMLDoc()" >
-<div class="tree " id="myDiv"><h2>使用 AJAX 修改该文本内容</h2></div>
+<div class="tree " id="myDiv"><h2>使用 AJAX 修改该文本内容</h2></div> -->
 
 <!-- <button class="btn btn-primary" id="submitBtn" type="button" onclick="loadXMLDoc()">修改TEXT</button> -->
 <div class="tree" id="myDiv2"></div>
 <button class="btn btn-primary" id="submit" type="button" onclick="loadXMLText()">修改XML</button>
-
 </div>
 
 <div class="tree well">
 <div class="tree" id="myDiv3"></div>
 <button class="btn btn-primary" id="ajaxgetBtn" type="button" >AjaxGet</button><br>
-<textarea id="ajaxresult" rows="14" cols="100"></textarea>
+
 </div>
+
 <div class="tree well">
 <div class="tree" id="myDiv3"></div>
 <a class="btn btn-primary" id="ajaxJsonBtn" type="button" href="${ContextPath}/bootstrap/testJson">Json</a><br>
+</div>
+<div class="tree well">
+	<div>
+		<p class="fancy">hello</p>
+	</div>
 </div>
 
 

@@ -11,6 +11,7 @@ body {
   background-color: #eee;
 }
 body.sign-body{
+    background-image: url(/res/bg/sign-bgi.jpg);
 	background-image: -webkit-gradient(linear, 0 0%, 0 100%, from(#cbe8f9), to(#c5c1f5));
 	background-image: -webkit-linear-gradient(top, #cbe8f9 0%, #c5c1f5 100%);
     background-image: -moz-linear-gradient(top, #cbe8f9 0%, #c5c1f5 100%);
@@ -24,51 +25,8 @@ body.sign-body{
   	width:100%; 
 }
 
-/** 登陆页面UI  */
 
-.div-center{
-	margin:0 auto;   
-}
-
-.form-signin {
-  max-width: 330px;
-  padding: 3px;
-  margin: 0 auto;
-  
-}
-
-.form-signin .form-signin-heading,
-.form-signin .checkbox {
-  margin-bottom: 10px;
-}
-.form-signin .checkbox {
-  font-weight: normal;
-}
-.form-signin .form-control {
-  position: relative;
-  height: auto;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-  padding: 10px;
-  font-size: 16px;
-}
-.form-signin .form-control:focus {
-  z-index: 2;
-}
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
-
-/* 登陆UI-2 */
+/* 登陆UI */
 #loginbox {
     width: 450px;
     min-height:425px;
@@ -129,6 +87,10 @@ body.sign-body{
 .form-vertical, .form-actions {
     margin-bottom: 0;
 }
+.form-signin-heading{
+	font-size: 30px;
+	margin:25px;
+}
 .form-line-split{
 	/*padding 上,右，下，左边*/
 	padding: 10px 115px 15px;
@@ -144,6 +106,7 @@ body.sign-body{
 
 .input-group{
 	/* margin-bottom: 12px; */
+  
 	width: 280px;
 	height: auto;
 	float: left;
@@ -151,6 +114,9 @@ body.sign-body{
 .input-sign{
 	margin-bottom: 12px;
 	margin-left: 80px;
+}
+.margin-buttom{
+	margin-bottom: 0;
 }
 .alert-sign{
 	padding: 11px;
@@ -161,7 +127,7 @@ body.sign-body{
 	border-color: #ebccd1
 }
 .form-height{
-	height: 50px;
+	height: 48px;
 }
 
 .input-captcha{
@@ -170,7 +136,7 @@ body.sign-body{
 }
  
 .font-size-span {
-	padding-top: 6px;
+	padding-top: 3px;
 	display: inline-block;
 	font-size: 15px;
 	font-weight: bold;
@@ -184,8 +150,8 @@ body.sign-body{
    	top:50%;  
    	margin:210px 0 0 -230px ;
    	z-index:1;
-   	opacity: 0.3;
-  	filter:alpha(opacity=30) ;
+   	opacity: 0.4;
+  	filter:alpha(opacity=40) ;
 }
 .sign-div-top{
 	width:450px;  
@@ -198,19 +164,32 @@ body.sign-body{
 }
 
 .carousel-sign {
-	width:680px;  
-	height:320px;  
-	left:50%;  
-   	top:50%;  
-   	margin:210px 0 0 -230px ;
-	position:absolute;  
-	z-index:2;
+	padding:3px;
+	width: 680px;
+	height: 428px;
+	left: 50%;
+	top: 50%;
+	margin: 210px 0 0 -230px;
+	position: absolute;
+	z-index: 2;
+}
+.radius{
+  border-radius: 10px;
+  -moz-border-radius:5px;
 }
 
 @media (max-width: 480px){
     #logo, #loginbox {
         width: 80%; 
     }    
+}
+
+.sidder{
+  left: 50%;
+  top: 50%;
+	height: 409px;
+  width: 546px;
+  margin: 210px 0 0 230px;
 }
 
 /** 找回密码UI  */
@@ -248,6 +227,50 @@ body.sign-body{
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+/** 修改密码页面UI */
+
+.jumbotron-pwd {
+	padding: 30px 15px;
+	margin-top: 15px;
+	margin-bottom: 30px;
+	color: inherit;
+}
+
+.jumbotron-pwd h1,.jumbotron-pwd .h1 {
+	color: inherit
+}
+
+.jumbotron-pwd p {
+	margin-bottom: 15px;
+	font-size: 21px;
+	font-weight: 200
+}
+
+.jumbotron-pwd>hr {
+	border-top-color: #d5d5d5
+}
+
+.container .jumbotron-pwd,.container-fluid .jumbotron-pwd {
+	border-radius: 6px
+}
+
+.jumbotron-sign .container {
+	max-width: 100%
+}
+@media screen and (min-width:768px) {
+	.jumbotron-pwd {
+		padding: 48px 0
+	}
+	.container .jumbotron-pwd {
+		padding-right: 15px;
+		padding-left: 15px
+	}
+	.jumbotron-pwd h1,.jumbotron-pwd .h1 {
+		font-size: 63px
+	}
+}
+
 
 /*combined*/
 .tabs-below>.nav-tabs, .tabs-right>.nav-tabs, .tabs-left>.nav-tabs {
@@ -388,16 +411,6 @@ body.sign-body{
 
 
 /* 主页搜索警告框 */
-.index-alert {
-	padding: 8px;
- 	border: 1px solid transparent;
-	border-radius: 3px
-}
-.index-alert-danger {
-	color: #a94442;
-	background-color: #f2dede;
-	border-color: #ebccd1
-}
 
 .index-background{
 	min-height:10px;
@@ -413,15 +426,8 @@ body.sign-body{
     box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05)
 }
 
-.index-title{
-	margin-top:35px;
-}
 
 
-/*  */
-textarea{
-	resize: none;
-}
 
 /* 系统的页头 */
 .header{
@@ -435,8 +441,8 @@ textarea{
 .filter-opacity{
 	background-color: #f9f9f9;
 	border-top: 1px solid #e5e5e5;
-	opacity: 0.6;
-  	filter:alpha(opacity=80) ;
+	opacity: 0.2;
+  	filter:alpha(opacity=20) ;
   	z-index:2;
 }
 .buttom{
@@ -453,16 +459,7 @@ textarea{
   background-color: #f9f9f9;
   border-top: 1px solid #e5e5e5;
 }
-#footer {
-	position: relative;
-    margin-top: -60px; 
-    height: 60px;
-    clear:both;
-    background:#369;
- }
-.footer p:last-child {
-  margin-bottom: 0;
-}
+
 
 /** reporter查询工单、提交工单，operator查询工单、回复工单 */
 @media (min-width: 992px)
@@ -677,90 +674,14 @@ a.dark {
     background: #428bca;
 }
 
-/** 登陆页面UI */
+p.fancy{
 
-.jumbotron-sign {
-	padding: 30px 15px;
-	margin-top: 15px;
-	margin-bottom: 30px;
-	color: inherit;
-	background-color: #eee
+  background-color: #fff;
+  background-image: url(/res/img/logo.png);
+  background-repeat: no-repeat;
+  padding: 15px;
+  background-position: center;
+  background-attachment: fixed;
+
 }
 
-.jumbotron-sign h1,.jumbotron-sign .h1 {
-	color: inherit
-}
-
-.jumbotron-sign p {
-	margin-bottom: 15px;
-	font-size: 21px;
-	font-weight: 200
-}
-
-.jumbotron-sign>hr {
-	border-top-color: #d5d5d5
-}
-
-.container .jumbotron-sign,.container-fluid .jumbotron-sign {
-	border-radius: 6px
-}
-
-.jumbotron-sign .container {
-	max-width: 100%
-}
-
-@media screen and (min-width:768px) {
-	.jumbotron-sign {
-		padding: 3px 0
-	}
-	.container .jumbotron-sign {
-		padding-right: 3px;
-		padding-left: 3px
-	}
-	.jumbotron-sign h1,.jumbotron-sign .h1 {
-		font-size: 63px
-	}
-}
-
-/** 修改密码页面UI */
-
-.jumbotron-pwd {
-	padding: 30px 15px;
-	margin-top: 15px;
-	margin-bottom: 30px;
-	color: inherit;
-}
-
-.jumbotron-pwd h1,.jumbotron-pwd .h1 {
-	color: inherit
-}
-
-.jumbotron-pwd p {
-	margin-bottom: 15px;
-	font-size: 21px;
-	font-weight: 200
-}
-
-.jumbotron-pwd>hr {
-	border-top-color: #d5d5d5
-}
-
-.container .jumbotron-pwd,.container-fluid .jumbotron-pwd {
-	border-radius: 6px
-}
-
-.jumbotron-sign .container {
-	max-width: 100%
-}
-@media screen and (min-width:768px) {
-	.jumbotron-pwd {
-		padding: 48px 0
-	}
-	.container .jumbotron-pwd {
-		padding-right: 15px;
-		padding-left: 15px
-	}
-	.jumbotron-pwd h1,.jumbotron-pwd .h1 {
-		font-size: 63px
-	}
-}

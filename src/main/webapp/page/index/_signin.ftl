@@ -7,8 +7,8 @@
 			</div>
 			<div class="col-xs-4">
 				<div>
-				<div><img src="${ContextPath}/res/img/logo.jpg"></div>
-				<div><h1>点通申报系统</h1></div>
+				<div><img src="${ContextPath}/res/img/logo.png"></div>
+				
 				</div>
 			</div>
 			<div class="col-xs-4">
@@ -28,31 +28,39 @@
 	
 	<div class="row">
 		<div class="col-xs-6">
-			<div class="carousel-sign">
+			<!--
+			<div class="carousel-sign ">
+			
 			<div id="myCarousel" class="carousel slide">
-			   <!-- 轮播（Carousel）指标 -->
+			   
 			   <ol class="carousel-indicators">
-			      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			      <li data-target="#myCarousel" data-slide-to="0" class="active "></li>
 			      <li data-target="#myCarousel" data-slide-to="1"></li>
 			      <li data-target="#myCarousel" data-slide-to="2"></li>
+			      <li data-target="#myCarousel" data-slide-to="3"></li>
 			   </ol>   
-			   <!-- 轮播（Carousel）项目 -->
+			  
 			   <div class="carousel-inner">
 			      <div class="item active">
-			         <img src="${ContextPath}/res/sign/lomo风格1.jpg" width="680" alt="First slide">
+			         <img class="radius" src="${ContextPath}/res/sign/lomo1.jpg" width="680" alt="First slide">
 			      </div>
 			      <div class="item">
-			         <img src="${ContextPath}/res/sign/lomo风格2.jpg" width="680" alt="Second slide">
+			         <img class="radius" src="${ContextPath}/res/sign/lomo2.jpg" width="680" alt="Second slide">
 			      </div>
 			      <div class="item">
-			         <img src="${ContextPath}/res/sign/lomo风格3.jpg" width="680" alt="Third slide">
+			         <img class="radius" src="${ContextPath}/res/sign/lomo3.jpg" width="680" alt="Third slide">
+			      </div>
+			      <div class="item">
+			         <img class="radius" src="${ContextPath}/res/sign/lomo3.jpg" width="680" alt="Forth slide">
 			      </div>
 			   </div>
-			   <!-- 轮播（Carousel）导航 -->
-			   <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-			   <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+			  
+			   <a class="carousel-control left radius" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+			   <a class="carousel-control right radius" href="#myCarousel" data-slide="next">&rsaquo;</a>
 			</div> 
+			
 		</div>
+		-->
 		</div>
 		
 		<div class="col-xs-6">
@@ -60,7 +68,8 @@
 			<div class="sign-div-top">
 			<div id="loginbox">
 				<form id="loginform" class="form-vertical"  method="post" action="${ContextPath}/signin">
-					<h3 class="form-signin-heading" style="opacity: 0">登陆</h3>
+					<h3 class="form-signin-heading" >用户登陆</h3>
+					
 					<div class="input-group input-sign">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 						<input class="form-control form-height" type="text" name="username" value="${(username)!}" placeholder="用户名" required autofocus autocomplete="off">
@@ -79,7 +88,7 @@
 				    	<img id="captcha" class="captcha form-height" src="${ContextPath}/captcha?width=128&height=45&fontsize=30&time=${.now?time}">
 				      	</a>
 				    </div>
-				    <div class="input-group input-sign" >
+				    <div class="input-group input-sign margin-buttom" >
 				    	<span class="font-size-span" style="float:right;height:35px;"> 
 							<a href="${ContextPath}/retrieve">忘记密码?</a>
 						</span>
@@ -104,6 +113,7 @@
 			</div>
 			</div>
 			<!--遮盖层-->
+			
 			<div class="sign-div">
 				<div id="loginbox" class="loginbox-color">
 					<form id="loginform" class="form-vertical"  >
@@ -113,17 +123,17 @@
 					</form>
 				</div>
 			</div>
+			
 		</div>
 	</div>
 
 	<!--替换背景-->
 	<div id="pt-main" class="pt-perspective">
-		<div class="pt-page pt-page-4"><h1>欢迎您登录系统</h1></div>
-		<div class="pt-page pt-page-5"><h1>欢迎您登录系统</h1></div>
-		<div class="pt-page pt-page-6"><h1>欢迎您登录系统</h1></div>
-		<div class="pt-page pt-page-4"><h1>欢迎您登录系统</h1></div>
-		<div class="pt-page pt-page-5"><h1>欢迎您登录系统</h1></div>
-		<div class="pt-page pt-page-6"><h1>欢迎您登录系统</h1></div>
+		<div class="pt-page pt-page-5"><img src="${ContextPath}/res/sign/slide1.png" class="sidder" alt=""></div>
+		<div class="pt-page pt-page-2"><img src="${ContextPath}/res/sign/header-social-media.png" class="sidder" alt=""></div>
+		<div class="pt-page pt-page-3"><img src="${ContextPath}/res/sign/slide4.png" class="sidder" alt=""></div>
+		<div class="pt-page pt-page-4"><img src="${ContextPath}/res/sign/slide3.png" class="sidder" alt=""></div>
+		
 	</div>
 	<div class="pt-message">
 		<p>亲，你的浏览器不支持 CSS 动画，请使用 Chrome,Firefox,Safari 等浏览器浏览.</p>
