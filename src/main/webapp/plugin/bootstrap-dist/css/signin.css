@@ -148,7 +148,7 @@ body.sign-body{
    	position:absolute;  
    	left:50%;  
    	top:50%;  
-   	margin:210px 0 0 -230px ;
+   	margin:180px 0 0 -230px ;
    	z-index:1;
    	opacity: 0.4;
   	filter:alpha(opacity=40) ;
@@ -159,7 +159,7 @@ body.sign-body{
    	position:absolute;  
    	left:50%;  
    	top:50%;  
-   	margin:210px 0 0 -230px ;
+   	margin:180px 0 0 -230px ;
    	z-index:2;
 }
 
@@ -187,9 +187,11 @@ body.sign-body{
 .sidder{
   left: 50%;
   top: 50%;
-	height: 409px;
+  position:absolute;  
+  height: 409px;
   width: 546px;
-  margin: 210px 0 0 230px;
+  margin: 180px 0 0 -200px;
+  
 }
 
 /** 找回密码UI  */

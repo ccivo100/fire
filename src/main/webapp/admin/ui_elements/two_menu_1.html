@@ -1,0 +1,70 @@
+<#include "/admin/common/layout/__twomenumainlayout1.html">
+<#assign pageJavascript>
+<!-- inline scripts related to this page -->
+		<script type="text/javascript">
+			jQuery(function($) {
+			   $('#sidebar2').insertBefore('.page-content');
+			   
+			   $('.navbar-toggle[data-target="#sidebar2"]').insertAfter('#menu-toggler');
+			   
+			   
+			   $(document).on('settings.ace.two_menu', function(e, event_name, event_val) {
+				 if(event_name == 'sidebar_fixed') {
+					 if( $('#sidebar').hasClass('sidebar-fixed') ) {
+						$('#sidebar2').addClass('sidebar-fixed');
+						$('#navbar').addClass('h-navbar');
+					 }
+					 else {
+						$('#sidebar2').removeClass('sidebar-fixed')
+						$('#navbar').removeClass('h-navbar');
+					 }
+				 }
+			   }).triggerHandler('settings.ace.two_menu', ['sidebar_fixed' ,$('#sidebar').hasClass('sidebar-fixed')]);
+			})
+		</script>
+</#assign>
+ <@mainlayout pageJavascript=pageJavascript currentMenu="UIFlag-layoutFlag-twoMenuFlag1">
+<!-- pageHeader BEGAIN -->
+<div class="page-header">
+	<h1>Two menu</h1>
+</div>
+<!-- pageHeader END -->
+
+<!-- pageContent BEGAIN -->
+<div class="row">
+	<div class="col-xs-12">
+		<!-- PAGE CONTENT BEGINS -->
+		<div class="hidden">
+			<button data-target="#sidebar2" data-toggle="collapse" type="button"
+				class="pull-left navbar-toggle collapsed">
+				<span class="sr-only">Toggle sidebar</span> <i
+					class="ace-icon fa fa-dashboard white bigger-125"></i>
+			</button>
+
+			<div id="sidebar2" class="sidebar h-sidebar navbar-collapse collapse">
+				<#include "/admin/common/inc/_topbar.html">
+			</div>
+			<!-- .sidebar -->
+		</div>
+
+		<div class="hidden-sm hidden-xs">
+			<button type="button"
+				class="sidebar-collapse btn btn-white btn-primary"
+				data-target="#sidebar2">
+				<i class="ace-icon fa fa-angle-double-up"
+					data-icon1="ace-icon fa fa-angle-double-up"
+					data-icon2="ace-icon fa fa-angle-double-down"></i> Collapse/Expand
+				Menu
+			</button>
+		</div>
+
+		<div class="hidden-md hidden-lg">
+			<div class="well well-sm">You can place multiple toggle buttons
+				for multiple menus anywhere inside navbar!</div>
+		</div>
+		<!-- PAGE CONTENT ENDS -->
+	</div>
+	<!-- /.col -->
+</div>
+<!-- pageContent END -->
+</@mainlayout >

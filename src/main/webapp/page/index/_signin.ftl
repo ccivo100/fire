@@ -128,13 +128,36 @@
 	</div>
 
 	<!--替换背景-->
+
 	<div id="pt-main" class="pt-perspective">
-		<div class="pt-page pt-page-5"><img src="${ContextPath}/res/sign/slide1.png" class="sidder" alt=""></div>
-		<div class="pt-page pt-page-2"><img src="${ContextPath}/res/sign/header-social-media.png" class="sidder" alt=""></div>
-		<div class="pt-page pt-page-3"><img src="${ContextPath}/res/sign/slide4.png" class="sidder" alt=""></div>
-		<div class="pt-page pt-page-4"><img src="${ContextPath}/res/sign/slide3.png" class="sidder" alt=""></div>
+		<div class="pt-page pt-page-1">
+			<div class="row">
+				<div class="col-xs-6"><img src="${ContextPath}/res/sign/slide5.png" class="sidder" alt=""></div>
+				<div class="col-xs-6"></div>
+			</div>
+		</div>
+		<div class="pt-page pt-page-2">
+			<div class="row">
+				<div class="col-xs-6"><img src="${ContextPath}/res/sign/header-social-media.png" class="sidder" alt=""></div>
+				<div class="col-xs-6"></div>
+			</div>
+		</div>
+		<div class="pt-page pt-page-3">
+			<div class="row">
+				<div class="col-xs-6"><img src="${ContextPath}/res/sign/slide1.png" class="sidder" alt=""></div>
+				<div class="col-xs-6"></div>
+			</div>
+		</div>
+		<div class="pt-page pt-page-4">
+			<div class="row">
+				<div class="col-xs-6"><img src="${ContextPath}/res/sign/slide4.png" class="sidder" alt=""></div>
+				<div class="col-xs-6"></div>
+			</div>
+		</div>
 		
 	</div>
+		
+
 	<div class="pt-message">
 		<p>亲，你的浏览器不支持 CSS 动画，请使用 Chrome,Firefox,Safari 等浏览器浏览.</p>
 	</div>

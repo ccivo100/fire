@@ -1,0 +1,60 @@
+<#macro mainlayout pageTitle="Jfinal-Ace-Admin-Jfinal" pageCss="" pageJavascript="" pageBreadCrumbs="" currentMenu="">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta charset="utf-8" />
+<title>${pageTitle}</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<!-- Css BEGAIN -->
+		<#include "/admin/common/inc/_css.html">
+<!-- Css END -->
+</head>
+
+<body class="no-skin">
+
+	<!-- navbar BEGAIN -->
+	<#include "/admin/common/inc/_navbar.html">
+	<!-- navbar END-->
+
+
+	<!-- main-container BEGAIN-->
+	<div class="main-container" id="main-container">
+
+		<!-- sidebar BEGAIN -->
+		<#include "/admin/common/inc/_sidebar.html">
+		<!-- sidebar END -->
+
+		<!-- maincontent BEGAIN-->
+		<div class="main-content">
+			<div class="main-content-inner">
+
+				<!-- pagecontent  BEGAIN-->
+				<div class="page-content">
+				   <!-- settingbox  BEGAIN -->
+				   	<#include "/admin/common/inc/_settingbox.html">
+					<!-- settingbox END -->
+					
+					<!-- PAGE CONTENT BEGINS -->
+							<#nested>
+					<!-- PAGE CONTENT ENDS -->
+				</div>
+				<!-- pagecontent  END-->
+			</div>
+		</div>
+		<!-- maincontent END-->
+
+		<!-- maincontent FOOT-->
+		<#include "/admin/common/inc/_footer.html">
+		<!-- maincontent END-->
+	</div>
+	<!-- main-container END-->
+
+	<!-- JavaScript BEGAIN -->
+	<#include "/admin/common/inc/_js.html">
+	<!-- JavaScript END -->
+</body>
+</html>
+</#macro>	
+
