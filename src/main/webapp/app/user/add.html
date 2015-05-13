@@ -1,0 +1,13 @@
+﻿<#include "/page/common/_layout.html" />
+<@layout activebar="user" html_title="新增用户">
+<div class="page-header">
+<h2>用户管理 ---&gt; 创建用户
+</h2>
+</div>
+<div class="form_box">
+	<!-- 代表上写文、/blog代表控制器、/save代表控制器中的方法 -->
+	<form action="/admin/control" method="post">
+		<#include "_form.html" />
+	</form>
+</div>
+</@layout>

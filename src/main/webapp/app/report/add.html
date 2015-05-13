@@ -1,0 +1,75 @@
+﻿<#include "/app/common/layout/__frontmainlayout.html"/>
+
+<#assign pageJavascript>
+<script type="text/javascript">
+
+function select1() {
+	$.ajax(
+    {
+    	type: "post",
+    	url: "${ContextPath}/report/handler",
+    	data: { "type": "type" },
+        success: function (msg) {
+        	$("#selectType").append("<option value=''>请选择故障类型</option>");
+        	for (var i = 0; i < msg.typeList.length; i++) {
+            	$("#selectType").append("<option value=" + msg.typeList[i].id + ">" + msg.typeList[i].name + "</option>");
+        	}
+            select2();
+        }
+	})
+};
+function select2() {
+	$("#selectApartment").html("");
+	$.ajax(
+	{
+		type: "post",
+		url: "${ContextPath}/report/handler",
+		data: { "type": "apartment","typeid":$('#selectType').val() },
+		success: function (msg) {
+			$("#selectApartment").append("<option value=''>请选择运维部门</option>");
+			for (var i = 0; i < msg.apartmentList.length; i++) {
+				$("#selectApartment").append("<option value=" + msg.apartmentList[i].id + ">" +msg.apartmentList[i].name + "</option>");
+			}
+		}
+	})
+};
+function select3(){
+	$.ajax(
+	{
+		type: "post",
+		url: "${ContextPath}/report/handler",
+		data: { "type": "effective","apartmentid":$('#selectApartment').val() },
+		success: function (msg) {
+			if(msg.state=="error"){
+				alertModal("该分组无运维人员，请选择其他运维组!");
+				$('#alertModal').modal();
+				select2();
+			}
+		}
+	})
+}
+
+
+$(function(){
+	select1();
+	$('#selectType').bind("change", select2);
+	$('#selectApartment').bind("change", select3);
+});
+
+function alertModal(msg){
+	$("#modal-title-content").html("提示!");  
+	$("#modal-body-content").html(msg);  
+}
+
+</script>
+
+</#assign>
+
+<@mainlayout pageJavascript=pageJavascript>
+<div class="index-background">
+	<!-- 代表上写文、/blog代表控制器、/save代表控制器中的方法 -->
+	<form class="form-horizontal" role="form"  action="${ContextPath}/report/save" method="post" >
+		<#include "_formadd.html" />
+	</form>
+</div>
+</@mainlayout>

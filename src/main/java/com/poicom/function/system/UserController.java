@@ -18,7 +18,7 @@ import com.poicom.function.system.model.Contact;
 import com.poicom.function.system.model.User;
 import com.poicom.function.system.model.UserInfo;
 
-@ControllerKey(value="/user",path="/page/app/user")
+@ControllerKey(value="/user",path="/app/user")
 public class UserController extends Controller {
 	
 	protected Logger logger=LoggerFactory.getLogger(UserController.class);

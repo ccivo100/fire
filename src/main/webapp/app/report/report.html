@@ -1,0 +1,124 @@
+<#include "/app/common/layout/__frontmainlayout.html"/>
+
+<#assign pageJavascript>
+<script>
+	jQuery(function($){
+		$("#offertime").datetimepicker({
+			format: 'yyyy-mm-dd',
+			autoclose: true,
+			pickerPosition: "bottom-left",
+			language:'zh-CN',
+		    minView: 2,
+			
+		});
+	});
+
+</script>
+</#assign>
+
+<@mainlayout pageJavascript=pageJavascript>
+<div class="page-header">
+	<h1>
+		申报记录 
+	</h1>
+</div>
+
+	<form class="bs-example bs-example-form" role="form" action="/report/reports" method="post">
+		<div class="form-inline" role="form">
+			
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon">关键字</div>
+					<input class="form-control" name="title" value="${(title)!}"  placeholder="故障描述" type="text" autocomplete="off">
+				</div>
+			</div>
+			<div class="form-group">
+				<input class="form-control" id="branch" name="branch" value="${(branch)!}" placeholder="申报单位" type="text" autocomplete="off">
+			</div>
+			<div class="form-group">
+				<input class="form-control" id="offeruser" name="offeruser" value="${(offeruser)!}" placeholder="申报人员" type="text" autocomplete="off">
+			</div>
+			<div class="form-group">
+				<div class="input-append date form_datetime">
+				<input id="offertime" name="offertime" type="text" value="${(offertime)!}" class="datetimepicker" placeholder="申报时间" readonly autocomplete="off">
+				<span class="add-on"><i class="icon-remove"></i></span>
+				</div>
+			</div>
+			<span class="form-group">
+				<button class="btn btn-sm btn-default ">
+					<span class="glyphicon glyphicon-search"></span>查询
+				</button>
+			</span>
+		</div>
+	</form>
+<div class="row">
+	<div class="col-xs-12">
+		<div class="center">
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th width="2%">序号</th>
+				<th width="10%">标题</th>
+				<th width="5%">申报部门</th>
+				<th width="3%">申报人</th>
+				<th width="5%">申报时间</th>
+				<th width="1%">当前状态</th>
+				<th width="5%">操作</th>
+			</tr>
+		</thead>
+				<tbody>
+			<#list reportPage.getList() as report>
+			<tr >
+				<td >${report_index+1}</td>
+				<td style="text-align:left;">${(report.title)!}</td>
+				<td style="text-align:left;">${(report.off_branch)!}</td>
+				<td style="text-align:left;">${(report.off_user)!}</td>
+				<td style="text-align:left;">${(report.offer_at)!}</td>
+				<td >
+				<#if report.deleted_at??>
+					<span class="label label-danger">已撤销</span>
+				
+					<#elseif report.status=0>
+					<span class="label label-success">已处理</span>
+					<#elseif report.status=1>
+					<span class="label label-warning">处理中</span>
+					<#elseif report.status=2>
+					<span class="label label-default">未处理</span>
+					</#if>
+				</td>
+				
+				<td style="text-align:left;">
+				<a class="btn btn-minier btn-primary "   href="${ContextPath}/report/report?id=${report.id}"  >查看</a> 
+				<#if report.status==2 >
+				<#if report.deleted_at??>
+				<#else>
+				<a class="btn btn-minier btn-primary "  href="${ContextPath}/report/edit?id=${report.id}" >修改</a>
+				</#if>
+				</#if>
+				</td>
+			</tr>
+			</#list>
+			
+			<#if reportPage.getList().size()!=10>
+			<#assign size=(10-reportPage.getList().size())>
+				<#list 1..size as t>
+					<tr>
+						<td style="text-align:left;">${(reportPage.getList().size()+t)!}</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</#list>
+			</#if>
+		</tbody>
+	</table>
+	<#include "/page/common/_paginate.html" />
+	<@paginate currentPage=reportPage.pageNumber totalPage=reportPage.totalPage actionUrl="/report/reports/" />
+		</div>
+	</div>
+</div>
+
+</@mainlayout>

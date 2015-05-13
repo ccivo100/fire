@@ -1,0 +1,107 @@
+<#include "/page/back/common/_layoutadmin.html"/>
+<@layout indexbar="admin-user" activebar="admin-user" html_title="用户管理">
+
+<div class="index-background">
+<div class="page-header">
+<ul class="nav nav-tabs">
+   <li class="active"><a href="#">用户管理</a></li>
+   <li ><a href="${ContextPath}/admin/branch">单位管理</a></li>
+   <li ><a href="${ContextPath}/admin/apartment">部门管理</a></li>
+   <li ><a href="${ContextPath}/admin/position">职位管理</a></li>
+</ul>
+</div>
+<form class="bs-example bs-example-form" role="form" action="${ContextPath}/admin/user" method="post">
+	<div class="row">
+			<div class="col-xs-1">
+				<div class="form-group">
+				<span class="input-group-btn">
+					<a  class="btn btn-success"  href="${ContextPath}/admin/adduser">
+				     	新增用户
+					</a>
+				</span>
+				</div>
+			</div>
+			<div class="col-xs-4" >
+				<div class="input-group">
+					<span class="input-group-addon">关键字</span> 
+					<input class="form-control" id="username" name="username" value="${(username)!}" placeholder="姓名" type="text" autocomplete="off">
+					<span class="input-group-btn">
+						<button class="btn btn-default">
+							<span class="glyphicon glyphicon-search"></span>Search
+						</button>
+					</span>
+				</div>
+			</div>
+		</div>
+</form>
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th width="2%">编号</th>
+				<th width="4%">姓名</th>
+				<th width="4%">账号</th>
+				<th width="6%">单位</th>
+				<th width="4%">部门</th>
+				<th width="4%">职位</th>
+				<th width="4%">联系电话</th>
+				<th width="16%">角色</th>
+				<th width="4%">状态</th>
+				<th width="5%">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list userPage.getList() as user>
+			<tr>
+				<td>${(user_index+1)!}</td>
+				<td>${(user.ufullname)!}</td>
+				<td><#if user.info_userid=1>*****<#else>${(user.uaccount)!}</#if></td>
+				<td>${(user.bname)!}</td>
+				<td>${(user.aname)!}</td>
+				<td>${(user.pname)!}</td>
+				<td>${(user.uphone)!}</td>
+				<td>${(user.remark)!}</td>
+				<td>
+				<#if user.udeletetime??>
+				<span class="glyphicon glyphicon-remove"></span>禁用
+				<#else>
+				正常
+				</#if>
+				</td>
+				<td>
+					<#if (user.uuserid?number)==1>
+					<#else>
+						<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/edituser?id=${(user.uuserid)!}" >设置</a>
+						<#if user.udeletetime??>
+						<a class="btn btn-danger btn-xs"  href="${ContextPath}/admin/onuser?id=${(user.uuserid)!}" >启用</a>
+						<#else>
+						<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/offuser?id=${(user.uuserid)!}" >禁用</a>
+						</#if>
+					</#if>
+				
+					
+				</td>
+			</tr>
+			</#list>
+			<#if userPage.getList().size()!=10>
+			<#assign size=(10-userPage.getList().size())>
+				<#list 1..size as t>
+					<tr>
+						<td>${(userPage.getList().size()+t)!}</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</#list>
+			</#if>
+		</tbody>
+	</table>
+	<#include "/page/back/common/_paginate.html" />
+	<@paginate currentPage=userPage.pageNumber totalPage=userPage.totalPage actionUrl="/admin/user/" />
+</div>
+</@layout>

@@ -38,7 +38,7 @@ import com.poicom.function.system.model.UserInfo;
  * @author poicom7
  *
  */
-@ControllerKey(value="/operate",path="/page/app/operate")
+@ControllerKey(value="/operate",path="/app/operate")
 public class OperateController extends JFController{
 	protected Logger logger=LoggerFactory.getLogger(getClass());
 	

@@ -60,6 +60,12 @@ public class AceAdminController extends Controller{
 	//calendar-日期控件
 	private final static String ACE_CALENDAR_PAGE="calendar/calendar.html";
 	
+	private final static String FRONT_PAGE="front/blank.html";
+	
+	
+	public void front(){
+		render(FRONT_PAGE);
+	}
 	
 	/**
 	 * index-主页

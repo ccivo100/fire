@@ -36,7 +36,7 @@ import com.poicom.function.system.model.UserInfo;
  * @author poicom7
  *
  */
-@ControllerKey(value = "/report", path = "/page/app/report")
+@ControllerKey(value = "/report", path = "/app/report")
 public class ReportController extends JFController{
 	
 	protected Logger logger=LoggerFactory.getLogger(ReportController.class);

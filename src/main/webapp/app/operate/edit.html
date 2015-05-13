@@ -1,0 +1,234 @@
+﻿<#include "/app/common/layout/__frontmainlayout.html"/>
+
+<#assign pageCss>
+<link rel="stylesheet" href="${ContextPath}/admin/assets/css/bootstrap-datetimepicker.css" />
+<link rel="stylesheet" href="${ContextPath}/admin/assets/css/signin.css" />
+</#assign>
+<#assign pageJavascript>
+<!-- tree scripts -->
+<script>
+$(document).ready(function(){
+	
+	$("#operateupdate").click(function(){
+		$.ajax({
+			type:"post",
+			url:"${ContextPath}/operate/update",
+			data:{
+				"oorderid":$('#oorderid').val(),
+				"uuserid":$('#uuserid').val(),
+				"deal_at":$('#deal_at').val(),
+				"progress":$('#selectProgress').val(),
+				"ocomment":$('#ocomment').val()},
+			success:function(msg){
+				alertModal(msg.state);
+				$('#alertModal').modal();
+				if(msg.state=='故障工单处理完毕！'){
+					window.location.href='${ContextPath}/operate/operates'
+				}
+				else if(msg.state=='故障工单开始处理！'){
+					window.location.href='${ContextPath}/operate/deal'
+				}
+				else if(msg.state=='故障工单继续处理！'){
+					window.location.href='${ContextPath}/operate/deal'
+				}
+			}
+		});
+	});
+	
+	$("#deal_at").datetimepicker({
+		format: 'yyyy-mm-dd hh:ii:ss',
+		autoclose: true,
+		todayBtn: true,
+		pickerPosition: "bottom-left",
+		language:'zh-CN',
+		minView: 2,
+	});
+});
+
+function alertModal(msg){
+	$("#modal-title-content").html("提示!");  
+	$("#modal-body-content").html(msg);  
+}
+
+</script>
+</#assign>
+
+<@mainlayout pageJavascript=pageJavascript pageCss=pageCss>
+<div class="page-header">
+	<h1>
+		<a href="${ContextPath}/operate/deal">未处理故障</a>
+		<small> <i class="ace-icon fa fa-angle-double-right"></i> 处理工单</small>
+	</h1>
+</div>
+	<input id="oorderid" type="hidden" name="oorderid" value="${(oorderid)!}">
+	<input id="uuserid" type="hidden" name="uuserid" value="${(uuserid)!}">
+	<input id="otypeid" type="hidden" name="otypeid" value="${(otypeid)!}">
+	<input id="olevelid"  type="hidden" name="olevelid" value="${(olevelid)!}">
+	<input id="ostatus" type="hidden" name="ostatus" value="${(ostatus)!}">
+<div class="row">
+	<div class="col-md-9">
+		
+		<!-- 故障描述 -->
+		<div class="jf_panel">
+			<div class="jf_header ">
+				故障内容
+			</div>
+			<div class="jf_header jf_topic_header">
+				<#if (ostatus?number)=0>
+				<span class="label label-success">已处理</span>
+				<#elseif (ostatus?number)=1>
+				<span class="label label-warning">处理中</span>
+				<#elseif (ostatus?number)=2>
+				<span class="label label-default">未处理</span>
+				</#if>
+				
+				<span class="jf_topic_full_title">${(otitle)!}</span>
+				<span style="display: inline-block; float: right;">
+					<h4>
+					<#if odeletetime??>
+					<span class="label label-danger">已撤销</span>
+					<#else>
+					<span class="label label-primary ">正常</span>
+					</#if> 
+					</h4>
+				</span>
+
+				<br>
+				<span class="changes">
+					<span>•故障类型：<span class="label label-info ">${(tname)!}</span></span>
+					<span>•故障等级：<span class="label label-info ">${(lname)!}</span></span>
+					<span>•申报时间：<span class="label label-info ">${(ooffertime)!}</span></span>
+					<span></span>
+				</span>
+			</div>
+			<div class="jf_inner jf_topic">
+				<div style="margin: 30px;">
+				
+				<h3>${(odescription)!}</h3>
+				</div>
+				
+			</div>
+		</div>
+		
+		<!-- 处理情况panel -->
+		<div class="jf_panel">
+			<div class="jf_header ">
+				#${(commentList.size())!} 处理意见
+			</div>
+			<#list commentList as comments>
+			<div class="jf_inner jf_topic">
+				<span class="changes">
+    						<span style="margin: 15px;">处理人：<span class="label label-info ">${(comments.ufull_name)!}</span></span>
+    						<span style="margin: 15px;">电话：<span class="label label-info ">${(comments.uphone)!}</span></span>
+    						<span style="margin: 15px;" title="${(comments.add_at)!}">处理时间：<span class="label label-info ">${(comments.add_at)!}</span></span>
+    						<span style="margin: 5px;float:right;"  title="${(comments.created_at)!}"><script>document.write(formatDateTime('${(comments.created_at)!}'))</script></span>
+    						<br>
+    						<span style="margin: 15px;">单位：<span class="label label-info ">${(comments.bname)!}</span></span>
+    						<span style="margin: 15px;">部门：<span class="label label-info ">${(comments.aname)!}</span></span>
+    						<span style="margin: 15px;">职位：<span class="label label-info ">${(comments.pname)!}</span></span>
+    						
+    			</span>
+				<div style="margin: 30px;">
+					<h3>${(comments.context)!}</h3>
+				</div>
+			</div>
+			</#list>
+			<#if commentList?has_content>
+			<#else>
+			<div class="jf_inner jf_topic">
+				<div style="margin: 30px;">
+					<h3>暂无</h3>
+				</div>
+			</div>
+			</#if>
+		</div>
+		
+		<!-- 处理 操作 panel -->
+		<div class="jf_panel">
+			<div class="jf_header ">
+				处理
+			</div>
+			<div class="jf_header jf_topic_header">
+				
+				<div class="row">
+					<div class="col-xs-4">
+					<div>
+						<span class="changes">
+							<span>处理时间：
+								
+									<input id="deal_at" type="text" class="datetimepicker" readonly ><span class="add-on"><i class="icon-th"></i></span>
+							</span>
+						</span>
+					</div>
+					</div>
+					
+					<div class="col-xs-4">
+					<div class="input-group">
+						<span class="input-group-addon">进度</span>
+						<select id="selectProgress" class="form-control" name="selectProgress">
+							<option value="-1">请选中处理进度</option>
+							<#if ostatus==1>
+							<#else>
+							<option value="0">开始处理</option>
+							</#if>
+							<#if ostatus==1>
+							<option value="1">继续处理</option>
+							</#if>
+							<option value="2">处理完毕</option>
+						</select>
+						 </div>
+					</div>
+				</div>
+				<br>
+				
+				<div>
+					<textarea id="ocomment" name="ocomment" class="form-control"
+							placeholder="提交处理意见……" maxlength="250" cols="80" rows="7"
+							 >${(ocomment)!}</textarea>
+				</div>
+				<br>
+				
+				<div>
+					<button id="operateupdate" name="submit" value="提交"  class="btn btn-primary save"  data-loading-text="正在提交..."
+		                    data-complete-text="提交成功!">
+		                    提交
+		            </button>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<div class="col-md-3 hidden-xs hidden-sm" style="padding-left: 0px;">
+		<div id="jf_sidebar" class="hidden-xs" data-spy="affix" data-offset-top="125">
+			<div class="jf_panel">
+    			<div class="jf_header">
+        			申报人员信息
+    			</div>
+    			<div class="jf_inner">
+    				<div>
+    					<div style="margin-top: 2px;">
+    						<span>姓名：<span class="label label-info ">${(uoffername)!}</span></span>
+    					</div>
+    					<div style="margin-top: 2px;">
+    						<span>电话：<span class="label label-info ">${(uofferphone)!}</span></span>
+    					</div>
+    					<div style="margin-top: 2px;">
+    						<span>单位：<span class="label label-info ">${(offer.bname)!}</span></span>
+    					</div>
+    					<div style="margin-top: 2px;">
+    						<span>部门：<span class="label label-info ">${(offer.aname)!}</span></span>
+    					</div>
+    					<div style="margin-top: 2px;">
+    						<span>职位：<span class="label label-info ">${(offer.pname)!}</span></span>
+    					</div>
+    				</div>
+    			</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<#include "_model.html" />
+</@mainlayout>

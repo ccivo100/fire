@@ -1,0 +1,63 @@
+<#macro mainlayout pageTitle="JfinalACEAdmin" pageCss="" pageJavascript="" pageBreadCrumbs="" currentMenu="">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta charset="utf-8" />
+<title>${pageTitle}</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+<!-- Css 开始 -->
+		<#include "/app/common/inc/_css.html">
+<!-- Css 结束 -->
+
+</head>
+
+<body class="no-skin">
+	<!-- navbar 导航栏开始 -->
+	<#include "/app/common/inc/_navbar.html">
+	<!-- navbar 导航栏结束-->
+	
+	<!-- main-container 内容开始-->
+	<div class="main-container" id="main-container">
+		
+		<!-- sidebar 侧边栏开始 -->
+		<#include "/app/common/inc/_sidebar.html">
+		<!-- sidebar 侧边栏结束 -->
+		
+		<!-- maincontent 主要内容开始-->
+		<div class="main-content">
+			<div class="main-content-inner">
+			
+				<!-- breadcrumbs 搜索框开始 -->
+				<#include "/app/common/inc/_breadcrumbs.html">
+				<!-- breadcrumbs 搜索框结束 -->
+			
+				<!-- pagecontent  页面开始-->
+				<div class="page-content">
+				   <!-- settingbox  设置盒子开始 -->
+				   	<#include "/app/common/inc/_settingbox.html">
+					<!-- settingbox 设置盒子结束 -->		
+					
+					<!-- PAGE CONTENT 具体页面开始 -->
+							<#nested>
+					<!-- PAGE CONTENT 具体页面结束 -->
+				</div>
+				<!-- pagecontent  页面结束-->
+			</div>
+		</div>
+		<!-- maincontent 主要内容结束-->
+		
+		<!-- maincontent 页脚开始-->
+		<#include "/app/common/inc/_footer.html">
+		<!-- maincontent 页脚结束-->
+	</div>
+	<!-- main-container 内容结束-->
+
+	<!-- JavaScript 加载JS文件开始 -->
+	<#include "/app/common/inc/_js.html">
+	<!-- JavaScript 加载JS文件结束 -->
+</body>
+</html>
+</#macro>	

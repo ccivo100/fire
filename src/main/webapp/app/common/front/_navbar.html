@@ -1,0 +1,44 @@
+		<div id="navbar" class="navbar navbar-default    navbar-collapse       h-navbar">
+			<script type="text/javascript">
+				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+			</script>
+			
+			<div class="navbar-container" id="navbar-container">
+				<div class="navbar-header pull-left">
+					<!-- #section:basics/navbar.layout.brand -->
+					<a href="${ContextPath}/" class="navbar-brand">
+						<small>
+							<i class="fa fa-leaf"></i>
+							${pageTitle!}
+						</small>
+					</a>
+
+					<!-- /section:basics/navbar.layout.brand -->
+
+					<!-- #section:basics/navbar.toggle -->
+					<button class="pull-right navbar-toggle navbar-toggle-img collapsed" type="button" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">
+						<span class="sr-only">Toggle user menu</span>
+
+						<img src="${ContextPath}/admin/assets/avatars/user.jpg" alt="Jason's Photo" />
+					</button>
+
+					<button class="pull-right navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#sidebar">
+						<span class="sr-only">Toggle sidebar</span>
+
+						<span class="icon-bar"></span>
+
+						<span class="icon-bar"></span>
+
+						<span class="icon-bar"></span>
+					</button>
+
+					<!-- /section:basics/navbar.toggle -->
+				</div>
+				
+				<!-- #section:basics/navbar.dropdown -->
+				<#include "/app/common/front/_navbardropdown.html">
+				<!-- /section:basics/navbar.dropdown -->
+				
+			</div><!-- /.navbar-container -->
+		</div>
+					

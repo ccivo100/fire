@@ -1,0 +1,63 @@
+<#include "/page/common/_layout.html"/>
+<@layout activebar="user" html_title="用户管理">
+
+<div class="page-header">
+<h3>用户管理&nbsp;&nbsp;
+</h3>
+</div>
+<form class="form-inline branch" role="form" action="/admin/branch" method="get">
+
+  &nbsp;
+	<div class="form-group pull-right">
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#saveModal">新用户</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#testModal">测试</button>
+  	</div>
+</form>
+  &nbsp;
+
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th width="10%">姓名</th>
+				<th width="10%">工号</th>
+				<th width="15%">联系电话</th>
+				<th width="15%">状态</th>
+				<th width="10%">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list userPage.getList() as user>
+			<tr>
+				<td style="text-align:left;">${user.full_name}</td>
+				<td style="text-align:left;">${user.username}</td>
+				<td style="text-align:left;">${user.phone!(0)}</td>
+				<td >
+					<#if user.deleted_at??>
+					已删除
+					<#else>
+					正常
+					</#if>
+				</td>
+				<@shiro.hasPermission name="P_A_USER">
+				<td style="text-align:left;">
+				&nbsp;&nbsp;<a class="update" username="${user.username}" userid="${user.id}" href="/admin/edit/${user.id}" data-toggle="modal">修改</a> 
+						    <!-- <a class="update" username="${user.username}" userid="${user.id}" href="#updateModal" data-toggle="modal">修改</a> -->
+					<#if user.deleted_at??>
+						
+					<#else>
+						&nbsp;&nbsp;<a class="delete" userid="${user.id}" href="#confirmModal" data-toggle="modal" data-label="删除" data-content="确认删除？">删除</a>
+					</#if>
+
+				</td>
+				</@shiro.hasPermission>
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+	<#include "/page/common/_paginate.html" />
+	<@paginate currentPage=userPage.pageNumber totalPage=userPage.totalPage actionUrl="/admin/" />
+
+
+<#include "/page/app/user/_model.html"/>
+
+</@layout>

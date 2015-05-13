@@ -1,0 +1,525 @@
+<div id="sidebar" class="sidebar                  responsive">
+				<script type="text/javascript">
+					try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+				</script>
+
+				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+						<button class="btn btn-success">
+							<i class="ace-icon fa fa-signal"></i>
+						</button>
+
+						<button class="btn btn-info">
+							<i class="ace-icon fa fa-pencil"></i>
+						</button>
+
+						<!-- #section:basics/sidebar.layout.shortcuts -->
+						<button class="btn btn-warning">
+							<i class="ace-icon fa fa-users"></i>
+						</button>
+
+						<button class="btn btn-danger">
+							<i class="ace-icon fa fa-cogs"></i>
+						</button>
+
+						<!-- /section:basics/sidebar.layout.shortcuts -->
+					</div>
+
+					<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+						<span class="btn btn-success"></span>
+
+						<span class="btn btn-info"></span>
+
+						<span class="btn btn-warning"></span>
+
+						<span class="btn btn-danger"></span>
+					</div>
+				</div><!-- /.sidebar-shortcuts -->
+
+				<ul class="nav nav-list">
+					<li class="" id="dashBoardFlag">
+						<a href="${ContextPath}/aceAdmin/">
+							<i class="menu-icon fa fa-tachometer"></i>
+							<span class="menu-text">仪表板</span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+
+					<li class="" id="UIFlag">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-desktop"></i>
+							<span class="menu-text">
+							界面元素
+							</span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="" id="layoutFlag">
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-caret-right"></i>
+
+								布局实例
+									<b class="arrow fa fa-angle-down"></b>
+								</a>
+
+								<b class="arrow"></b>
+
+								<ul class="submenu">
+									<li class="" id="twoMenuFlag">
+										<a href="${ContextPath}/aceAdmin/top_menu">
+											<i class="menu-icon fa fa-caret-right"></i>
+										顶部菜单布局
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+
+									<li class="" id="twoMenuFlag1">
+										<a href="${ContextPath}/aceAdmin/two_menu_1">
+											<i class="menu-icon fa fa-caret-right"></i>
+										两列菜单布局1
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+
+									<li class="" id="twoMenuFlag2">
+										<a href="${ContextPath}/aceAdmin/two_menu_2">
+											<i class="menu-icon fa fa-caret-right"></i>
+									两列菜单布局2	
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+
+									<li class="" id="defaultMobileMenuFlag">
+										<a href="${ContextPath}/aceAdmin/default_mobile_menu">
+											<i class="menu-icon fa fa-caret-right"></i>
+										默认手机菜单布局
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+
+									<li class="" id="mobileMenu2">
+										<a href="${ContextPath}/aceAdmin/mobile_menu_1">
+											<i class="menu-icon fa fa-caret-right"></i>
+											手机菜单布局1
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+
+									<li class="" id="mobileMenu3">
+										<a href="${ContextPath}/aceAdmin/mobile_menu_2">
+											<i class="menu-icon fa fa-caret-right"></i>
+											手机菜单布局2
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+								</ul>
+							</li>
+
+							<li class="" id="typographyFlag">
+								<a href="${ContextPath}/aceAdmin/typography">
+									<i class="menu-icon fa fa-caret-right"></i>
+									页面排版
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="" id="elementsFlag">
+								<a href="${ContextPath}/aceAdmin/elements">
+									<i class="menu-icon fa fa-caret-right"></i>
+								界面元素
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="" id="buttonsFlag">
+								<a href="${ContextPath}/aceAdmin/buttons_icons">
+									<i class="menu-icon fa fa-caret-right"></i>
+									按钮&amp;图标
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="" id="contentSliderFlag">
+								<a href="${ContextPath}/aceAdmin/content_slider">
+									<i class="menu-icon fa fa-caret-right"></i>
+									滑块元素
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="" id="treeViewFlag">
+								<a href="${ContextPath}/aceAdmin/treeview">
+									<i class="menu-icon fa fa-caret-right"></i>
+									属性视图
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="" id="jqueryUIFlag">
+								<a href="${ContextPath}/aceAdmin/jquery_ui">
+									<i class="menu-icon fa fa-caret-right"></i>
+									jQuery 用户界面
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="" id="nestableListFlag">
+								<a href="${ContextPath}/aceAdmin/nestable_list">
+									<i class="menu-icon fa fa-caret-right"></i>
+									嵌套列表视图
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="" id="thirdLevelFlag">
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-caret-right"></i>
+
+									三级菜单示例
+									<b class="arrow fa fa-angle-down"></b>
+								</a>
+
+								<b class="arrow"></b>
+
+								<ul class="submenu">
+									<li class="" id="item1Flag">
+										<a href="#">
+											<i class="menu-icon fa fa-leaf green"></i>
+											菜单选项 #1
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+
+									<li class="" id="forthFlag">
+										<a href="#" class="dropdown-toggle">
+											<i class="menu-icon fa fa-pencil orange"></i>
+
+											四级菜单视图
+											<b class="arrow fa fa-angle-down"></b>
+										</a>
+
+										<b class="arrow"></b>
+
+										<ul class="submenu">
+											<li class="" id="productFlag">
+												<a href="#">
+													<i class="menu-icon fa fa-plus purple"></i>
+													添加商品
+												</a>
+
+												<b class="arrow"></b>
+											</li>
+
+											<li class="">
+												<a href="#" id="viewMoreFlag">
+													<i class="menu-icon fa fa-eye pink"></i>
+													查看产品详情
+												</a>
+												<b class="arrow"></b>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+
+					<li class="" id="tableFlag">
+						<a href="#" class="dropdown-toggle" >
+							<i class="menu-icon fa fa-list"></i>
+							<span class="menu-text">表格</span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="" id="simpleTableFlag">
+								<a href="${ContextPath}/aceAdmin/simpleDynamic">
+									<i class="menu-icon fa fa-caret-right" ></i>
+									简易表格 &amp; 动态表格
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="" id="jqGridFlag">
+								<a href="${ContextPath}/aceAdmin/jqGridPlugin">
+									<i class="menu-icon fa fa-caret-right"></i>
+									jqGrid 插件
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+						</ul>
+					</li>
+
+					<li class="" id="formFlag">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-pencil-square-o"></i>
+							<span class="menu-text"> 表单元素 </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="" id="formElementFlag">
+								<a href="${ContextPath}/aceAdmin/form_elements">
+									<i class="menu-icon fa fa-caret-right"></i>
+									基础表单元素
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="" id="formElementFlag2">
+								<a href="${ContextPath}/aceAdmin/form_elements2">
+									<i class="menu-icon fa fa-caret-right"></i>
+									高级表单元素
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="" id="formWizardFlag">
+								<a href="${ContextPath}/aceAdmin/wizard_validation">
+									<i class="menu-icon fa fa-caret-right"></i>
+									向导 &amp; 校验
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="" id="formEditorFlag">
+								<a href="${ContextPath}/aceAdmin/wysiwyg_markdown">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Wysiwyg &amp; Markdown
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="" id="formFileFlag">
+								<a href="${ContextPath}/aceAdmin/dropzone_file_upload">
+									<i class="menu-icon fa fa-caret-right"></i>
+									拖拽式文件上传
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+						</ul>
+					</li>
+
+					<li class="" id="widgetsFlag">
+						<a href="${ContextPath}/aceAdmin/widgets">
+							<i class="menu-icon fa fa-list-alt"></i>
+							<span class="menu-text"> 辅助小部件 </span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+
+					<li class="" id="calendarFlag">
+						<a href="${ContextPath}/aceAdmin/calendar">
+							<i class="menu-icon fa fa-calendar"></i>
+
+							<span class="menu-text">
+								日历控件
+
+								<!-- #section:basics/sidebar.layout.badge -->
+								<span class="badge badge-transparent tooltip-error" title="2 Important Events">
+									<i class="ace-icon fa fa-exclamation-triangle red bigger-130"></i>
+								</span>
+
+								<!-- /section:basics/sidebar.layout.badge -->
+							</span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+
+					<li class="" id="galleryFlag">
+						<a href="${ContextPath}/aceAdmin/gallery">
+							<i class="menu-icon fa fa-picture-o"></i>
+							<span class="menu-text">图片相册</span>
+						</a>
+
+						<b class="arrow"></b>
+					</li>
+
+					<li class="" id="morePageFlag">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-tag"></i>
+							<span class="menu-text"> 页面展示</span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="" id="profileFlag">
+								<a href="${ContextPath}/aceAdmin/profile">
+									<i class="menu-icon fa fa-caret-right"></i>
+									用户详情
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="" id="inboxFlag">
+								<a href="${ContextPath}/aceAdmin/inbox">
+									<i class="menu-icon fa fa-caret-right"></i>
+									收件箱
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="" id="pricingTableFlag">
+								<a href="${ContextPath}/aceAdmin/pricingTable">
+									<i class="menu-icon fa fa-caret-right"></i>
+									价格表
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="" id="invoiceFlag">
+								<a href="${ContextPath}/aceAdmin/invoice">
+									<i class="menu-icon fa fa-caret-right"></i>
+									通知
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="" id="timelineFlag">
+								<a href="${ContextPath}/aceAdmin/timeline">
+									<i class="menu-icon fa fa-caret-right"></i>
+									时间轴
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<!-- <li class="">
+								<a href="email.html">
+									<i class="menu-icon fa fa-caret-right"></i>
+									电子邮件模板
+								</a>
+
+								<b class="arrow"></b>
+							</li> -->
+
+							<li class="" id="loginFlag">
+								<a href="${ContextPath}/aceAdmin/login">
+									<i class="menu-icon fa fa-caret-right"></i>
+									登录 &amp;注册
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+						</ul>
+					</li>
+
+					<li class="" id="otherPageFlag">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-file-o"></i>
+
+							<span class="menu-text">
+								其他页面
+
+								<!-- #section:basics/sidebar.layout.badge -->
+								<span class="badge badge-primary">5</span>
+
+								<!-- /section:basics/sidebar.layout.badge -->
+							</span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="" id="faqFlag">
+								<a href="${ContextPath}/aceAdmin/faq">
+									<i class="menu-icon fa fa-caret-right"></i>
+									你问我答
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="" id="error404Flag">
+								<a href="${ContextPath}/aceAdmin/error404">
+									<i class="menu-icon fa fa-caret-right"></i>
+									404页面
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="" id="error500Flag">
+								<a href="${ContextPath}/aceAdmin/error500">
+									<i class="menu-icon fa fa-caret-right"></i>
+									500页面
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="" id="gridFlag">
+								<a href="${ContextPath}/aceAdmin/grid">
+									<i class="menu-icon fa fa-caret-right"></i>
+									网格展示
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+
+							<li class="" id="blankFlag">
+								<a href="${ContextPath}/aceAdmin/blank">
+									<i class="menu-icon fa fa-caret-right"></i>
+									空白页面
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+						</ul>
+					</li>
+				</ul><!-- /.nav-list -->
+
+				<!-- #section:basics/sidebar.layout.minimize -->
+				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+					<i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+				</div>
+
+				<!-- /section:basics/sidebar.layout.minimize -->
+				<script type="text/javascript">
+					try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+				</script>
+			</div/>
+           

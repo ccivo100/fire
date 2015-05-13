@@ -28,7 +28,7 @@ import com.poicom.function.system.model.User;
 /**
  * IndexController
  */
-@ControllerKey(value = "/", path = "/page/index")
+@ControllerKey(value = "/", path = "/app/index")
 public class IndexController extends Controller {
 
 	private final static String indexView = "index.html";

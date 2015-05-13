@@ -40,7 +40,7 @@ import com.poicom.function.system.model.User;
 import com.poicom.function.system.model.UserInfo;
 import com.poicom.function.system.model.UserRole;
 
-@ControllerKey(value="/admin",path="/page/app/admin")
+@ControllerKey(value="/admin",path="/app/admin")
 public class AdminController extends Controller {
 	
 	protected Logger logger=LoggerFactory.getLogger(AdminController.class);

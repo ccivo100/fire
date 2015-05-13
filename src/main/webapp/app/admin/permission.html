@@ -1,0 +1,98 @@
+<#include "/page/back/common/_layoutadmin.html"/>
+<@layout indexbar="admin-permission" activebar="admin-permission" html_title="权限管理">
+
+	<div class="index-background">
+		<div class="page-header">
+			<ul class="nav nav-tabs">
+			   <li class="active"><a href="#">权限管理</a></li>
+			</ul>
+		</div>
+		<form class="bs-example bs-example-form" role="form" action="${ContextPath}/" method="get">
+			<div class="row">
+					<div class="col-lg-2">
+						<div class="form-group">
+						<span class="input-group-btn">
+							<a  class="btn btn-success"  href="${ContextPath}/admin/addpermission">
+						     	新增权限
+							</a>
+						</span>
+						</div>
+					</div>
+			</div>
+		</form>
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th width="3%">权限编号</th>
+					<th width="4%">权限名称</th>
+					<th width="4%">权限代码</th>
+					<th width="4%">URL</th>
+					<th width="3%">父节点</th>
+					<th width="5%">创建时间</th>
+					<th width="3%">状态</th>
+					<th width="5%">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<#list permissionTree as permissions>
+				<tr>
+					<td>${(permissions.id)!}</td>
+					<td>${(permissions.name)!}</td>
+					<td>${(permissions.value)!}</td>
+					<td>${(permissions.url)!}</td>
+					<td>${(permissions.pid)!}</td>
+					<td>${(permissions.created_at)!}</td>
+					<td><#if permissions.deleted_at??><span class="glyphicon glyphicon-remove"></span> 禁用<#else>正常</#if></td>
+					<td><a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/editpermission?id=${(permissions.id)!}" >编辑</a>
+					<#if permissions.deleted_at??>
+					<a class="btn btn-danger btn-xs"  href="${ContextPath}/admin/onpermission?id=${(permissions.id)!}" >启用</a>
+					<#else>
+					<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/offpermission?id=${(permissions.id)!}" >禁用</a>
+					</#if>
+					<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/addpermission?id=${(permissions.id)!}" >添加</a>
+					</td>
+				</tr>
+				<#list permissions.children as permission>
+					<tr>
+					<td>${(permission.id)!}</td>
+					<td><span class="glyphicon glyphicon-minus-sign"></span>     ${(permission.name)!}</td>
+					<td>${(permission.value)!}</td>
+					<td>${(permission.url)!}</td>
+					<td>${(permission.pid)!}</td>
+					<td>${(permission.created_at)!}</td>
+					<td><#if permission.deleted_at??><span class="glyphicon glyphicon-remove"></span> 禁用<#else>正常</#if></td>
+					<td>
+					<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/editpermission?id=${(permission.id)!}" >编辑</a>
+					<#if permission.deleted_at??>
+					<a class="btn btn-danger btn-xs"  href="${ContextPath}/admin/onpermission?id=${(permission.id)!}" >启用</a>
+					<#else>
+					<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/offpermission?id=${(permission.id)!}" >禁用</a>
+					</#if>
+					</td>
+				</tr>
+				</#list>
+				</#list>
+			</tbody>
+		</table>
+	</div>
+	 <div class="tree ">
+		<div class="row">
+			<div class="col-sm-4 col-md-4 col-lg-4">
+				<ul>
+					<#list permissionTree as permissions>
+						<li>
+							<span><i class="glyphicon glyphicon-folder-open"></i> ${(permissions.name)!}</span>
+							<ul>
+							    <#list permissions.children as permission>
+							    	<li>
+							        	<span><i class="glyphicon glyphicon-minus-sign"></i> ${(permission.name)!}</span> 
+							    	</li>
+							    </#list>
+							</ul>
+						</li>
+					</#list>
+				</ul>
+			</div>
+		</div>
+	</div>
+</@layout>

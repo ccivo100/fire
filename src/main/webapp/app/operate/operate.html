@@ -1,0 +1,113 @@
+<#include "/app/common/layout/__frontmainlayout.html"/>
+<#assign pageJavascript>
+<script>
+$("#offertime").datepicker({
+	format: 'yyyy-mm-dd',
+	autoclose: true,
+	todayBtn: true,
+	pickerPosition: "bottom-left",
+	language:'zh-CN',
+    minView: 2,
+});
+</script>
+</#assign>
+
+<@mainlayout pageJavascript=pageJavascript>
+<div class="page-header">
+	<h1>
+		处理记录 
+	</h1>
+</div>
+
+	<form class="bs-example bs-example-form" role="form" action="${ContextPath}/operate/operates" method="post">
+		<div class="form-inline" role="form">
+			
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon">关键字</div>
+					<input class="form-control" name="title" value="${(title)!}"  placeholder="故障描述" type="text" autocomplete="off">
+				</div>
+			</div>
+			<div class="form-group">
+				<input class="form-control" id="branch" name="branch" value="${(branch)!}" placeholder="申报单位" type="text" autocomplete="off">
+			</div>
+			<div class="form-group">
+				<input class="form-control" id="offeruser" name="offeruser" value="${(offeruser)!}" placeholder="申报人员" type="text" autocomplete="off">
+			</div>
+			<div class="form-group">
+				<div class="input-append date form_datetime">
+				<input id="offertime" name="offertime" type="text" value="${(offertime)!}" class="datetimepicker" placeholder="申报时间" readonly autocomplete="off">
+				<span class="add-on"><i class="icon-remove"></i></span>
+				</div>
+			</div>
+			<span class="form-group">
+				<button class="btn btn-sm btn-default">
+					<span class="glyphicon glyphicon-search"></span>查询
+				</button>
+			</span>
+		</div>
+	</form>
+<div class="row">
+	<div class="col-xs-12">
+		<div class="center">
+	<input type="hidden" name="do" value="operates">
+	<table  class="table table-bordered table-hover ">
+		<thead>
+			<tr>
+				<th width="2%">序号</th>
+				<th width="10%">标题</th>
+				<th width="5%">申报部门</th>
+				<th width="3%">申报人</th>
+				<th width="5%">申报时间</th>
+				<th width="1%">当前状态</th>
+				<th width="5%">操作</th>
+			</tr>
+		</thead>
+				<tbody>
+			<#list operatePage.getList() as operate>
+			<tr class="<#if operate.status=0><#elseif operate.status=2>danger</#if>">
+				<td >${operate_index+1}</td>
+				<td style="text-align:left;">${(operate.title)!}</td>
+				<td style="text-align:left;">${(operate.off_branch)!}</td>
+				<td style="text-align:left;">${(operate.off_user)!}</td>
+				<td style="text-align:left;">${(operate.offer_at)!}</td>
+				<td >
+					<#if operate.status=0>
+					<span class="label label-success">已处理</span>
+					<#elseif operate.status=1>
+					<span class="label label-default">处理中</span>
+					<#elseif operate.status=2>
+					<span class="label label-danger">未处理</span>
+					</#if>
+				</td>
+				
+				<td style="text-align:left;">
+				<a class="btn btn-minier btn-primary "   href="${ContextPath}/operate/operate?id=${operate.id}"  >查看</a> 
+				</td>
+			</tr>
+			</#list>
+			
+			<#if operatePage.getList().size()!=10>
+			<#assign size=(10-operatePage.getList().size())>
+				<#list 1..size as t>
+					<tr>
+						<td>${(operatePage.getList().size()+t)!}</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</#list>
+			</#if>
+		</tbody>
+	</table>
+	<#include "/page/common/_paginate.html" />
+	<@paginate currentPage=operatePage.pageNumber totalPage=operatePage.totalPage actionUrl="/operate/operates/" />
+		</div>
+	</div>
+</div>
+
+
+</@mainlayout>
