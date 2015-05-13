@@ -1,28 +1,12 @@
-<#include "/page/back/common/_layoutadmin.html"/>
-<@layout indexbar="admin-user" activebar="admin-apartment" html_title="部门管理">
+<#include "/app/common/layout/__backstagemainlayout.html"/>
+<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="organizationFlag-apartmentFlag-apartmentsListFlag">
 
-<div class="index-background">
 <div class="page-header">
-<ul class="nav nav-tabs">
-   <li ><a href="${ContextPath}/admin/user">用户管理</a></li>
-   <li ><a href="${ContextPath}/admin/branch">单位管理</a></li>
-   <li class="active"><a href="#">部门管理</a></li>
-   <li ><a href="${ContextPath}/admin/position">职位管理</a></li>
-</ul>
+	<h1>
+		部门管理 
+		<small> <i class="ace-icon fa fa-angle-double-right"></i> 部门列表</small>
+	</h1>
 </div>
-<form class="bs-example bs-example-form" role="form" action="${ContextPath}/admin/apartment" method="post">
-	<div class="row">
-			<div class="col-xs-1">
-				<div class="form-group">
-				<span class="input-group-btn">
-					<a  class="btn btn-success"  href="${ContextPath}/admin/addapartment">
-				     	新增部门
-					</a>
-				</span>
-				</div>
-			</div>
-	</div>
-</form>
 <table class="table table-bordered table-hover">
 		<thead>
 			<tr>
@@ -42,13 +26,13 @@
 				<td>${(apartments.pid)!}</td>
 				<td>${(apartments.created_at)!}</td>
 				<td><#if apartments.deleted_at??><span class="glyphicon glyphicon-remove"></span>禁用<#else>正常</#if></td>
-				<td><a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/editapartment?id=${(apartments.id)!}" >编辑</a>
+				<td><a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/editapartment?id=${(apartments.id)!}" >编辑</a>
 				<#if apartments.deleted_at??>
-				<a class="btn btn-danger btn-xs"  href="${ContextPath}/admin/onapartment?id=${(apartments.id)!}" >启用</a>
+				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/onapartment?id=${(apartments.id)!}" >启用</a>
 				<#else>
-				<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/offapartment?id=${(apartments.id)!}" >禁用</a>
+				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/offapartment?id=${(apartments.id)!}" >禁用</a>
 				</#if>
-				<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/addapartment?id=${(apartments.id)!}" >添加</a>
+				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/addapartment?id=${(apartments.id)!}" >添加</a>
 				</td>
 			</tr>
 			<#list apartments.children as apartment>
@@ -59,11 +43,11 @@
 				<td>${(apartment.created_at)!}</td>
 				<td><#if apartment.deleted_at??><span class="glyphicon glyphicon-remove"></span>禁用<#else>正常</#if></td>
 				<td>
-				<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/editapartment?id=${(apartment.id)!}" >编辑</a>
+				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/editapartment?id=${(apartment.id)!}" >编辑</a>
 				<#if apartment.deleted_at??>
-				<a class="btn btn-danger btn-xs"  href="${ContextPath}/admin/onapartment?id=${(apartment.id)!}" >启用</a>
+				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/onapartment?id=${(apartment.id)!}" >启用</a>
 				<#else>
-				<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/offapartment?id=${(apartment.id)!}" >禁用</a>
+				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/offapartment?id=${(apartment.id)!}" >禁用</a>
 				</#if>
 				</td>
 			</tr>
@@ -73,5 +57,4 @@
 	
 	</table>
 
-</div>
-</@layout>
+</@mainlayout>

@@ -1,10 +1,10 @@
 ﻿<#include "/app/common/layout/__backstagemainlayout.html"/>
-<@mainlayout pageJavascript=pageJavascript pageCss=pageCss>
-<div class=" index-background">
+<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="adminFlag">
 <div class="page-header">
-<ul class="nav nav-tabs">
-   <li class="active"><a href="#">故障申报列表</a></li>
-</ul>
+	<h1>
+		主页 
+		<small> <i class="ace-icon fa fa-angle-double-right"></i> 故障申报记录</small>
+	</h1>
 </div>
 		<table class="table table-bordered table-hover ">
 		<thead>
@@ -54,6 +54,4 @@
 	</table>
 	<#include "/page/back/common/_paginate.html" />
 	<@paginate currentPage=overOrderPage.pageNumber totalPage=overOrderPage.totalPage actionUrl="/admin/" />
-</div>
-
 </@mainlayout>

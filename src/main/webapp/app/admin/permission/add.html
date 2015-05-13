@@ -1,0 +1,13 @@
+﻿<#include "/app/common/layout/__backstagemainlayout.html"/>
+<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="permissionFlag-addPermissionFlag">
+<div class="page-header">
+	<h1>
+		<a href="${ContextPath}/admin/permission">权限管理</a>
+		<small> <i class="ace-icon fa fa-angle-double-right"></i> 新增权限</small>
+	</h1>
+</div>
+<form class="form-horizontal" role="form"  action="${ContextPath}/admin/doaddpermission" method="post" >
+	<#include "_form.ftl" />
+</form>
+	
+</@mainlayout>

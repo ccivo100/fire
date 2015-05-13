@@ -1,0 +1,14 @@
+﻿<#include "/app/common/layout/__backstagemainlayout.html"/>
+<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="organizationFlag-positionFlag-addPositionFlag">
+
+<div class="page-header">
+	<h1>
+		<a href="${ContextPath}/admin/position">职位管理</a>
+		<small> <i class="ace-icon fa fa-angle-double-right"></i> 新增职位</small>
+	</h1>
+</div>
+	<form class="form-horizontal" role="form"  action="${ContextPath}/admin/doaddposition" method="post" >
+		<#include "_form.html" />
+	</form>
+	
+</@mainlayout>

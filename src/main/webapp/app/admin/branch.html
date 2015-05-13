@@ -1,32 +1,20 @@
-<#include "/page/back/common/_layoutadmin.html"/>
-<@layout indexbar="admin-user" activebar="admin-branch" html_title="单位管理">
+<#include "/app/common/layout/__backstagemainlayout.html"/>
+<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="organizationFlag-branchFlag-branchsListFlag">
 
-<div class="index-background">
 <div class="page-header">
-<ul class="nav nav-tabs">
-   <li ><a href="${ContextPath}/admin/user">用户管理</a></li>
-   <li class="active"><a href="#">单位管理</a></li>
-   <li ><a href="${ContextPath}/admin/apartment">部门管理</a></li>
-   <li ><a href="${ContextPath}/admin/position">职位管理</a></li>
-</ul>
+	<h1>
+		单位管理 
+		<small> <i class="ace-icon fa fa-angle-double-right"></i> 单位列表</small>
+	</h1>
 </div>
 <form class="bs-example bs-example-form" role="form" action="${ContextPath}/admin/branch" method="post">
 	<div class="row">
-			<div class="col-xs-1">
-				<div class="form-group">
-				<span class="input-group-btn">
-					<a  class="btn btn-success"  href="${ContextPath}/admin/addbranch">
-				     	新增单位
-					</a>
-				</span>
-				</div>
-			</div>
 			<div class="col-xs-4" >
 				<div class="input-group">
 					<span class="input-group-addon">关键字</span> 
 					<input class="form-control" id="branch" name="branch" value="${(branch)!}" placeholder="单位名称" type="text" autocomplete="off">
 					<span class="input-group-btn">
-						<button class="btn btn-default">
+						<button class="btn btn-sm btn-default">
 							<span class="glyphicon glyphicon-search"></span> 查询
 						</button>
 					</span>
@@ -51,11 +39,11 @@
 				<td> ${(branch.name)!}</td>
 				<td> ${(branch.created_at)!}</td>
 				<td><#if branch.deleted_at??><span class="glyphicon glyphicon-remove"></span>禁用<#else>正常</#if></td>
-				<td><a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/editbranch?id=${(branch.id)!}" >编辑</a>
+				<td><a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/editbranch?id=${(branch.id)!}" >编辑</a>
 				<#if branch.deleted_at??>
-				<a class="btn btn-danger btn-xs"  href="${ContextPath}/admin/onbranch?id=${(branch.id)!}" >启用</a>
+				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/onbranch?id=${(branch.id)!}" >启用</a>
 				<#else>
-				<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/offbranch?id=${(branch.id)!}" >禁用</a>
+				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/offbranch?id=${(branch.id)!}" >禁用</a>
 				</#if>
 				
 				</td>
@@ -77,5 +65,4 @@
 	</table>
 	<#include "/page/back/common/_paginate.html" />
 	<@paginate currentPage=branchPage.pageNumber totalPage=branchPage.totalPage actionUrl="/admin/branch/" />
-</div>
-</@layout>
+</@mainlayout>

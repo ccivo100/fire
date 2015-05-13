@@ -1,0 +1,13 @@
+﻿<#include "/app/common/layout/__backstagemainlayout.html"/>
+<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="typeFlag-typesListFlag">
+<div class="page-header">
+	<h1>
+		<a href="${ContextPath}/admin/type">类型管理</a>
+		<small> <i class="ace-icon fa fa-angle-double-right"></i> 编辑类型</small>
+	</h1>
+</div>
+<form class="form-horizontal" role="form"  action="${ContextPath}/admin/doedittype" method="post" >
+	<#include "_form.html" />
+</form>
+	
+</@mainlayout>

@@ -1,35 +1,24 @@
-<#include "/page/back/common/_layoutadmin.html"/>
-<@layout indexbar="admin-type" activebar="admin-type" html_title="故障类型管理">
+<#include "/app/common/layout/__backstagemainlayout.html"/>
+<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="typeFlag-typesListFlag">
 
-<div class="index-background">
 <div class="page-header">
-<ul class="nav nav-tabs">
-   <li class="active"><a href="#">类型管理</a></li>
-   <li><a href="${ContextPath}/admin/apartmentType">任务分配</a></li>
-</ul>
+	<h1>
+		类型管理
+	</h1>
 </div>
 <form class="bs-example bs-example-form" role="form" action="${ContextPath}/admin/type" method="post">
 	<div class="row">
-			<div class="col-xs-1" >
-				<div class="form-group">
+		<div class="col-xs-4" >
+			<div class="input-group">
+				<span class="input-group-addon">关键字</span> 
+				<input class="form-control" id="errorType" name="errorType" value="${(errorType)!}" placeholder="故障类型名称" type="text" autocomplete="off">
 				<span class="input-group-btn">
-					<a  class="btn btn-success"  href="${ContextPath}/admin/addtype">
-				     	新增类型
-					</a>
+					<button class="btn btn-sm btn-default">
+						<span class="glyphicon glyphicon-search"></span> 查询
+					</button>
 				</span>
-				</div>
 			</div>
-			<div class="col-xs-4" >
-				<div class="input-group">
-					<span class="input-group-addon">关键字</span> 
-					<input class="form-control" id="errorType" name="errorType" value="${(errorType)!}" placeholder="故障类型名称" type="text" autocomplete="off">
-					<span class="input-group-btn">
-						<button class="btn btn-default">
-							<span class="glyphicon glyphicon-search"></span> 查询
-						</button>
-					</span>
-				</div>
-			</div>
+		</div>
 	</div>
 </form>
 	<table class="table table-bordered table-hover">
@@ -49,11 +38,11 @@
 				<td> ${(type.name)!}</td>
 				<td> ${(type.created_at)!}</td>
 				<td><#if type.deleted_at??><span class="glyphicon glyphicon-remove"></span>禁用<#else>正常</#if></td>
-				<td><a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/edittype?id=${(type.id)!}" >编辑</a>
+				<td><a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/edittype?id=${(type.id)!}" >编辑</a>
 				<#if type.deleted_at??>
-				<a class="btn btn-danger btn-xs"  href="${ContextPath}/admin/ontype?id=${(type.id)!}" >启用</a>
+				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/ontype?id=${(type.id)!}" >启用</a>
 				<#else>
-				<a class="btn btn-primary btn-xs"  href="${ContextPath}/admin/offtype?id=${(type.id)!}" >禁用</a>
+				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/offtype?id=${(type.id)!}" >禁用</a>
 				</#if>
 				</td>
 			</tr>
@@ -74,5 +63,4 @@
 	</table>
 	<#include "/page/back/common/_paginate.html" />
 	<@paginate currentPage=errorTypePage.pageNumber totalPage=errorTypePage.totalPage actionUrl="/admin/type/" />
-</div>
-</@layout>
+</@mainlayout>
