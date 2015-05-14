@@ -9612,3 +9612,6 @@ Caused by: java.io.IOException: 您的主机中的软件中止了一个已建立
 
 2015-05-14 16:57:43
 [WARN]-[Thread: main]-[net.sf.ehcache.store.disk.DiskStorageFactory.<init>()]: The index for data file C:\Users\poicom7\AppData\Local\Temp\%002fadmin%002frole.data is out of date, probably due to an unclean shutdown. Deleting index file C:\Users\poicom7\AppData\Local\Temp\%002fadmin%002frole.index
+
+2015-05-14 18:28:41
+[WARN]-[Thread: qtp16581326-37]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /operate/edit?id=7
