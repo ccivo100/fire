@@ -3,6 +3,16 @@
 <#assign pageCss>
 <link rel="stylesheet" href="${ContextPath}/admin/assets/css/signin.css" />
 </#assign>
+<#assign pageJavascript>
+<script src="${ContextPath}/admin/assets/js/tree.js"></script>
+<script type="text/javascript">
+jQuery(function($){
+	var $created_at=$(".created_at").attr("title");
+	var $format_time=formatDateTime($created_at);
+	$(".created_at").html($format_time);
+});
+</script>
+</#assign>
 <@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="reportsFlag">
 <div class="page-header">
 	<h1>
@@ -75,7 +85,7 @@
     						<span style="margin: 15px;">处理人：<span class="label label-info ">${(comments.ufull_name)!}</span></span>
     						<span style="margin: 15px;">电话：<span class="label label-info ">${(comments.uphone)!}</span></span>
     						<span style="margin: 15px;" title="${(comments.add_at)!}">处理时间：<span class="label label-info ">${(comments.add_at)!}</span></span>
-    						<span style="margin: 5px;float:right;" title="${(comments.created_at)!}"><script>document.write(formatDateTime('${(comments.created_at)!}'))</script></span>
+    						<span class="created_at" style="margin: 5px;float:right;" title="${(comments.created_at)!}"></span>
     						<br>
     						<span style="margin: 15px;">单位：<span class="label label-info ">${(comments.bname)!}</span></span>
     						<span style="margin: 15px;">部门：<span class="label label-info ">${(comments.aname)!}</span></span>

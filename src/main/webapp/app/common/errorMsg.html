@@ -1,0 +1,27 @@
+<#include "/app/common/layout/__frontmainlayout.html"/>
+<@mainlayout pageJavascript=pageJavascript currentMenu="ERRORMSG">
+<div class="row">
+	<div class="col-xs-12">
+		<!-- pageContent BEGINS -->
+		<div class="error-container">
+			<div class="well">
+				<h1 class="grey lighter smaller">
+					<span class="blue bigger-125"> <i
+						class="ace-icon fa fa-random"></i>  ${(errorMsg)!}
+					</span>
+				</h1>
+
+				<hr />
+
+				<div class="center">
+					<a href="javascript:history.back()" class="btn btn-grey"> <i
+						class="ace-icon fa fa-arrow-left"></i> 返回
+					</a> 
+				</div>
+			</div>
+		</div>
+		<!-- pageContent ENDS -->
+	</div>
+</div>
+
+</@mainlayout>

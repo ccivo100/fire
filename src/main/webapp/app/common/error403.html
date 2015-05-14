@@ -1,0 +1,30 @@
+<#include "/app/common/layout/__frontmainlayout.html"/> 
+<#assign pageBreadCrumbs>
+<li><a href="#">Other Pages</a></li>
+<li class="active">403页面</li>
+</#assign>
+<@mainlayout pageBreadCrumbs=pageBreadCrumbs  currentMenu="otherPageFlag-error403Flag">
+<div class="row">
+	<div class="col-xs-12">
+		<!-- pageContent BEGINS -->
+		<div class="error-container">
+			<div class="well">
+				<h1 class="grey lighter smaller">
+					<span class="blue bigger-125"> <i
+						class="ace-icon fa fa-random"></i>  无法获取此权限！
+					</span>
+				</h1>
+
+				<hr />
+
+				<div class="center">
+					<a href="javascript:history.back()" class="btn btn-grey"> <i
+						class="ace-icon fa fa-arrow-left"></i> 返回
+					</a> 
+				</div>
+			</div>
+		</div>
+		<!-- pageContent ENDS -->
+	</div>
+</div>
+</@mainlayout>

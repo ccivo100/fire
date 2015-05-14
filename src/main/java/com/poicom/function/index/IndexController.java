@@ -10,6 +10,7 @@ import cn.dreampie.captcha.CaptchaRender;
 import cn.dreampie.encription.EncriptionKit;
 import cn.dreampie.routebind.ControllerKey;
 import cn.dreampie.shiro.core.SubjectKit;
+import cn.dreampie.shiro.freemarker.HasRoleTag;
 import cn.dreampie.shiro.hasher.Hasher;
 import cn.dreampie.shiro.hasher.HasherInfo;
 import cn.dreampie.shiro.hasher.HasherKit;
@@ -47,7 +48,11 @@ public class IndexController extends Controller {
 		User user=SubjectKit.getUser();
 		if(ValidateKit.isNullOrEmpty(user)){
 			redirect("/signin");
-		}else{
+		}
+		else if(SubjectKit.getSubject().hasRole("R_ADMIN")){
+			redirect("/admin");
+		}
+		else{
 			Page <Record> ordersPage;
 			String orderby=" ORDER BY o.offer_at DESC";
 			if(ValidateKit.isNullOrEmpty(getPara("condition"))){

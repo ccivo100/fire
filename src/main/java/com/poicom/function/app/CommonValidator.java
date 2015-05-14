@@ -40,7 +40,10 @@ public class CommonValidator extends Validator{
 		else if(getActionKey().equals("/report/edit")){
 			int orderid=c.getParaToInt("id");
 			Order order=Order.dao.findById(orderid);
-			if(order.getInt("status")==1){
+			if(ValidateKit.isNullOrEmpty(order)){
+				addError("errorMsg","失败：无法查询到该工单。");
+			}
+			else if(order.getInt("status")==1){
 				addError("errorMsg","失败：工单正在处理，无法修改。");
 			}else if(order.getInt("status")==0){
 				addError("errorMsg","失败：工单已处理，无法修改。");
@@ -64,7 +67,10 @@ public class CommonValidator extends Validator{
 			int orderid=c.getParaToInt("id");
 			Order order=Order.dao.findById(orderid);
 			User cUser=SubjectKit.getUser();
-			if(order.getInt("status")==0){
+			if(ValidateKit.isNullOrEmpty(order)){
+				addError("errorMsg","失败：无法查询到该工单。");
+			}
+			else if(order.getInt("status")==0){
 				addError("errorMsg","失败：工单已提交");
 			}else if(!ValidateKit.isNullOrEmpty(order.get("deleted_at"))){
 				addError("errorMsg","失败：工单已被撤销");
@@ -129,7 +135,7 @@ public class CommonValidator extends Validator{
 			c.render("/page/app/report/edit.html");
 		}
 		if(getActionKey().equals("/report/edit")){
-			c.render("/page/app/errorMsg.html");
+			c.render("/app/common/errorMsg.html");
 		}
 		//处理工单验证
 		if(getActionKey().equals("/operate/update")){
@@ -165,7 +171,7 @@ public class CommonValidator extends Validator{
 			c.render("/page/app/operate/edit.html");
 		}
 		if(getActionKey().equals("/operate/edit")){
-			c.render("/page/app/errorMsg.html");
+			c.render("/app/common/errorMsg.html");
 		}
 		
 		

@@ -19,7 +19,7 @@
 					<button class="pull-right navbar-toggle navbar-toggle-img collapsed" type="button" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">
 						<span class="sr-only">Toggle user menu</span>
 
-						<img src="${ContextPath}/admin/assets/avatars/user.jpg" alt="Jason's Photo" />
+						<img src="${ContextPath}${(session["current_user"].avatar_url)!}" alt="Jason's Photo" />
 					</button>
 
 					<button class="pull-right navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#sidebar">

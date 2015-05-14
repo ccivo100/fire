@@ -6,7 +6,14 @@
 </#assign>
 <#assign pageJavascript>
 <!-- tree scripts -->
+<script src="${ContextPath}/admin/assets/js/tree.js"></script>
 <script>
+jQuery(function($){
+	var $created_at=$(".created_at").attr("title");
+	var $format_time=formatDateTime($created_at);
+	$(".created_at").html($format_time);
+});
+
 $(document).ready(function(){
 	
 	$("#operateupdate").click(function(){
@@ -112,7 +119,7 @@ function alertModal(msg){
     						<span style="margin: 15px;">处理人：<span class="label label-info ">${(comments.ufull_name)!}</span></span>
     						<span style="margin: 15px;">电话：<span class="label label-info ">${(comments.uphone)!}</span></span>
     						<span style="margin: 15px;" title="${(comments.add_at)!}">处理时间：<span class="label label-info ">${(comments.add_at)!}</span></span>
-    						<span style="margin: 5px;float:right;"  title="${(comments.created_at)!}"><script>document.write(formatDateTime('${(comments.created_at)!}'))</script></span>
+    						<span class="created_at" style="margin: 5px;float:right;"  title="${(comments.created_at)!}"></span>
     						<br>
     						<span style="margin: 15px;">单位：<span class="label label-info ">${(comments.bname)!}</span></span>
     						<span style="margin: 15px;">部门：<span class="label label-info ">${(comments.aname)!}</span></span>

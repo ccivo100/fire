@@ -66,6 +66,7 @@ public class AppConfig extends JFinalConfig {
 		//Logger.setLoggerFactory(new Slf4jLogFactory());
 		//设置异常跳转视图
 		me.setError401View("/app/index/_signin.ftl");
+		me.setError403View("/app/common/error403.html");
 		me.setError404View("/app/common/error404.html");
 		me.setError500View("/app/common/error500.html");
 		
