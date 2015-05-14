@@ -10,7 +10,7 @@ import com.poicom.function.system.model.Syslog;
 
 /**
  * 操作日志入库处理
- * @author poicom7
+ * @author 唐东宇
  *
  */
 public class ThreadSysLog {

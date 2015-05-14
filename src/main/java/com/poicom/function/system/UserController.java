@@ -17,7 +17,11 @@ import com.jfinal.plugin.activerecord.tx.Tx;
 import com.poicom.function.system.model.Contact;
 import com.poicom.function.system.model.User;
 import com.poicom.function.system.model.UserInfo;
-
+/**
+ * 
+ * @author 唐东宇
+ *
+ */
 @ControllerKey(value="/user",path="/app/user")
 public class UserController extends Controller {
 	

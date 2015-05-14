@@ -8,7 +8,11 @@ import com.jfinal.plugin.activerecord.Record;
 import cn.dreampie.sqlinxml.SqlKit;
 import cn.dreampie.tablebind.TableBind;
 import cn.dreampie.web.model.Model;
-
+/**
+ * 
+ * @author 唐东宇
+ *
+ */
 @TableBind(tableName = "sec_user_role")
 public class UserRole extends Model<UserRole> {
 	/**

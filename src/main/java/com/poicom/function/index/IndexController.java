@@ -26,7 +26,9 @@ import com.poicom.function.app.model.Order;
 import com.poicom.function.system.model.User;
 
 /**
- * IndexController
+ * 
+ * @author 唐东宇
+ *
  */
 @ControllerKey(value = "/", path = "/app/index")
 public class IndexController extends Controller {

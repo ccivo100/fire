@@ -19,7 +19,7 @@ import com.poicom.function.system.model.Syslog;
 
 /**
  * 全局Handler，设置一些通用功能
- * @author poicom7
+ * @author 唐东宇
  *
  */
 public class GlobalHandler extends Handler{

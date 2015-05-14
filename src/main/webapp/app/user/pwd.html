@@ -1,4 +1,8 @@
 ﻿<#include "/app/common/layout/__frontmainlayout.html"/>
+<#assign pageCss>
+<link rel="stylesheet"
+	href="${ContextPath}/admin/assets/css/signin.css" />
+</#assign>
 <@mainlayout pageJavascript=pageJavascript>
 <div class="page-header">
 	<h1>
@@ -43,7 +47,9 @@
 	          <label class="col-sm-2 control-label"></label>
 	
 	          <div class="col-sm-8">
-	            <span class="error" style="color: red">${user_passwordMsg!}</span>
+	            	<#if user_passwordMsg??>
+		            <div class="index-alert index-alert-danger" style="background-image:none;">${user_passwordMsg!}</div>
+					</#if>
 	          </div>
 	        </div>
 	

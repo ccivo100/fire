@@ -1,6 +1,6 @@
 <li class="light-blue "><a data-toggle="dropdown" href="#"
 	class="dropdown-toggle"> <img class="nav-user-photo"
-		src="${ContextPath}/admin/assets/avatars/user.jpg" alt="Jason's Photo" />
+		src="${ContextPath}${(session["current_user"].avatar_url)!}" alt="Jason's Photo" />
 		<span class="user-info"> <small>欢迎你,</small>
 			${(session["current_user"].full_name)!}
 	</span> <i class="ace-icon fa fa-caret-down"></i>

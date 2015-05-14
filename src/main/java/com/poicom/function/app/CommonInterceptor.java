@@ -7,7 +7,11 @@ import cn.dreampie.shiro.core.SubjectKit;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.core.ActionInvocation;
 import com.poicom.function.system.model.User;
-
+/**
+ * 
+ * @author 唐东宇
+ *
+ */
 public class CommonInterceptor implements Interceptor{
 
 	@Override

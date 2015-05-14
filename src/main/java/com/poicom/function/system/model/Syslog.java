@@ -5,7 +5,11 @@ import org.slf4j.LoggerFactory;
 
 import cn.dreampie.tablebind.TableBind;
 import cn.dreampie.web.model.Model;
-
+/**
+ * 
+ * @author 唐东宇
+ *
+ */
 @TableBind(tableName="sec_syslog")
 public class Syslog extends Model<Syslog>{
 

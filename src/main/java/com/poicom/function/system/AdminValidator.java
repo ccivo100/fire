@@ -20,6 +20,11 @@ import com.poicom.function.system.model.Permission;
 import com.poicom.function.system.model.Role;
 import com.poicom.function.system.model.User;
 
+/**
+ * 
+ * @author 唐东宇
+ *
+ */
 public class AdminValidator extends Validator{
 	
 	protected Logger logger=LoggerFactory.getLogger(getClass());
@@ -333,10 +338,10 @@ public class AdminValidator extends Validator{
 			}else if(!ValidateKit.isNullOrEmpty(c.getPara("pid"))){
 				c.keepPara("pid");
 			}
-			c.render("/page/app/admin/role/add.html");
+			c.render("/app/admin/role/add.html");
 		}else if(getActionKey().equals("/admin/doedit")){
 			c.keepModel(Role.class);
-			c.render("/page/app/admin/role/edit.html");
+			c.render("/app/admin/role/edit.html");
 		}
 		
 		else if(getActionKey().equals("/admin/doaddpermission")){
@@ -345,10 +350,10 @@ public class AdminValidator extends Validator{
 			}else if(!ValidateKit.isNullOrEmpty(c.getPara("pid"))){
 				c.keepPara("pid");
 			}
-			c.render("/page/app/admin/permission/add.html");
+			c.render("/app/admin/permission/add.html");
 		}else if(getActionKey().equals("/admin/doeditpermission")){
 			c.keepModel(Permission.class);
-			c.render("/page/app/admin/permission/edit.html");
+			c.render("/app/admin/permission/edit.html");
 		}
 		//新增用户跳转
 		else if(getActionKey().equals("/admin/doadduser")){
@@ -356,25 +361,25 @@ public class AdminValidator extends Validator{
 			c.setAttr("apartmentList",Apartment.dao.getAllApartment());
 			c.setAttr("positionList",Position.dao.getAllPosition());
 			c.keepModel(User.class);
-			c.render("/page/app/admin/user/add.html");
+			c.render("/app/admin/user/add.html");
 			
 			
 		}
 		//故障类型跳转
 		else if(getActionKey().equals("/admin/doaddtype")){
 			c.keepModel(ErrorType.class);
-			c.render("/page/app/admin/type/add.html");
+			c.render("/app/admin/type/add.html");
 		}else if(getActionKey().equals("/admin/doedittype")){
 			c.keepModel(ErrorType.class);
-			c.render("/page/app/admin/type/edit.html");
+			c.render("/app/admin/type/edit.html");
 		}
 		//单位跳转
 		else if(getActionKey().equals("/admin/doaddbranch")){
 			c.keepModel(Branch.class);
-			c.render("/page/app/admin/branch/add.html");
+			c.render("/app/admin/branch/add.html");
 		}else if(getActionKey().equals("/admin/doeditbranch")){
 			c.keepModel(Branch.class);
-			c.render("/page/app/admin/branch/edit.html");
+			c.render("/app/admin/branch/edit.html");
 		}
 		//部门跳转
 		else if(getActionKey().equals("/admin/doaddapartment")){
@@ -383,23 +388,23 @@ public class AdminValidator extends Validator{
 			}else if(!ValidateKit.isNullOrEmpty(c.getPara("pid"))){
 				c.keepPara("pid");
 			}
-			c.render("/page/app/admin/apartment/add.html");
+			c.render("/app/admin/apartment/add.html");
 		}else if(getActionKey().equals("/admin/doeditapartment")){
 			c.keepModel(Apartment.class);
-			c.render("/page/app/admin/apartment/edit.html");
+			c.render("/app/admin/apartment/edit.html");
 		}
 		//职位跳转
 		else if(getActionKey().equals("/admin/doaddposition")){
 			c.keepModel(Position.class);
-			c.render("/page/app/admin/position/add.html");
+			c.render("/app/admin/position/add.html");
 		}else if(getActionKey().equals("/admin/doeditposition")){
 			c.keepModel(Position.class);
-			c.render("/page/app/admin/position/edit.html");
+			c.render("/app/admin/position/edit.html");
 		}
 		else if(getActionKey().equals("/admin/updatePwd")){
 			c.keepModel(User.class);
 			c.keepPara();
-			c.render("/page/app/admin/center/pwd.html");
+			c.render("/app/admin/center/pwd.html");
 		}
 	}
 

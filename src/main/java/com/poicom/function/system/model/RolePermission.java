@@ -6,7 +6,11 @@ import com.jfinal.plugin.activerecord.Db;
 
 import cn.dreampie.tablebind.TableBind;
 import cn.dreampie.web.model.Model;
-
+/**
+ * 
+ * @author 唐东宇
+ *
+ */
 @TableBind(tableName = "sec_role_permission")
 public class RolePermission extends Model<RolePermission> {
 	/**

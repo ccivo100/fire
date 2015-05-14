@@ -2,7 +2,11 @@ package com.poicom.function.system.model;
 
 import cn.dreampie.tablebind.TableBind;
 import cn.dreampie.web.model.Model;
-
+/**
+ * 
+ * @author 唐东宇
+ *
+ */
 @TableBind(tableName="add_retrieve")
 public class Retrieve extends Model<Retrieve>{
 

@@ -14,7 +14,11 @@ import com.jfinal.core.Controller;
 import com.jfinal.kit.StrKit;
 import com.poicom.common.kit.ClassSearchKit;
 import com.poicom.common.kit.CollectionKit;
-
+/**
+ * 
+ * @author 唐东宇
+ *
+ */
 public class RouteBind extends Routes {
 	
 	private boolean autoScan=true;

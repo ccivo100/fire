@@ -12,10 +12,10 @@ $("#offertime").datepicker({
 </script>
 </#assign>
 
-<@mainlayout pageJavascript=pageJavascript>
+<@mainlayout pageJavascript=pageJavascript currentMenu="operatesFlag">
 <div class="page-header">
 	<h1>
-		处理记录 
+		运维记录 
 	</h1>
 </div>
 
@@ -103,11 +103,9 @@ $("#offertime").datepicker({
 			</#if>
 		</tbody>
 	</table>
-	<#include "/page/common/_paginate.html" />
+	<#include "/app/common/inc/_paginate.html" />
 	<@paginate currentPage=operatePage.pageNumber totalPage=operatePage.totalPage actionUrl="/operate/operates/" />
 		</div>
 	</div>
 </div>
-
-
 </@mainlayout>

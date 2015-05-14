@@ -46,6 +46,7 @@
 						<b class="arrow"></b>
 					</li>
 					
+					<@shiro.hasPermission name="P_A_ROLE">
 					<li class="" id="roleFlag">
 						<a href="#" class="dropdown-toggle" >
 							<i class="menu-icon fa fa-list"></i>
@@ -76,10 +77,12 @@
 							</li>
 						</ul>
 					</li>
+					</@shiro.hasPermission>
 					
+					<@shiro.hasPermission name="P_A_PERMISSION">
 					<li class="" id="permissionFlag">
 						<a href="#" class="dropdown-toggle" >
-							<i class="menu-icon fa fa-list"></i>
+							<i class="menu-icon fa fa-pencil-square-o"></i>
 							<span class="menu-text">权限管理</span>
 
 							<b class="arrow fa fa-angle-down"></b>
@@ -107,10 +110,12 @@
 							</li>
 						</ul>
 					</li>
+					</@shiro.hasPermission>
 					
+					<@shiro.hasPermission name="P_A_TYPE">
 					<li class="" id="typeFlag">
 						<a href="#" class="dropdown-toggle" >
-							<i class="menu-icon fa fa-list"></i>
+							<i class="menu-icon fa fa-list-alt"></i>
 							<span class="menu-text">类型管理</span>
 
 							<b class="arrow fa fa-angle-down"></b>
@@ -146,6 +151,7 @@
 							</li>
 						</ul>
 					</li>
+					</@shiro.hasPermission>
 					
 					<li class="" id="organizationFlag">
 						<a href="#" class="dropdown-toggle" >
@@ -158,6 +164,7 @@
 						<b class="arrow"></b>
 
 						<ul class="submenu">
+							<@shiro.hasPermission name="P_A_BRANCH">
 							<li class="" id="branchFlag">
 								<a href="#" class="dropdown-toggle">
 									<i class="menu-icon fa fa-caret-right"></i>
@@ -184,6 +191,8 @@
 									</li>
 								</ul>
 							</li>
+							</@shiro.hasPermission>
+							<@shiro.hasPermission name="P_A_APARTMENT">
 							<li class="" id="apartmentFlag">
 								<a href="#" class="dropdown-toggle">
 									<i class="menu-icon fa fa-caret-right"></i>
@@ -210,6 +219,8 @@
 									</li>
 								</ul>
 							</li>
+							</@shiro.hasPermission>
+							<@shiro.hasPermission name="P_A_POSITION">
 							<li class="" id="positionFlag">
 								<a href="#" class="dropdown-toggle">
 									<i class="menu-icon fa fa-caret-right"></i>
@@ -236,6 +247,8 @@
 									</li>
 								</ul>
 							</li>
+							</@shiro.hasPermission>
+							<@shiro.hasPermission name="P_A_USER">
 							<li class="" id="userFlag">
 								<a href="#" class="dropdown-toggle">
 									<i class="menu-icon fa fa-caret-right"></i>
@@ -262,11 +275,13 @@
 									</li>
 								</ul>
 							</li>
+							</@shiro.hasPermission>
+							
 						</ul>
 					</li>
 					
 					
-					<li class="" id="UIFlag">
+					<!-- <li class="" id="UIFlag">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-desktop"></i>
 							<span class="menu-text">
@@ -461,7 +476,7 @@
 								</ul>
 							</li>
 						</ul>
-					</li>
+					</li> -->
 
 					
 				</ul><!-- /.nav-list -->

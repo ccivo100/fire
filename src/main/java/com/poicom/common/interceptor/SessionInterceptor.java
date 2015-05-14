@@ -10,7 +10,11 @@ import com.jfinal.aop.Interceptor;
 import com.jfinal.core.ActionInvocation;
 import com.jfinal.core.Controller;
 import com.poicom.function.system.model.User;
-
+/**
+ * 
+ * @author 唐东宇
+ *
+ */
 public class SessionInterceptor implements Interceptor {
 	
 	private boolean createSession = false;

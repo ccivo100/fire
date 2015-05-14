@@ -11,7 +11,11 @@ import cn.dreampie.shiro.hasher.HasherKit;
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
 import com.poicom.function.system.model.User;
-
+/**
+ * 
+ * @author 唐东宇
+ *
+ */
 public class UserValidator extends Validator {
 	
 	protected Logger logger=LoggerFactory.getLogger(getClass());

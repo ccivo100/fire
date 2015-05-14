@@ -53,7 +53,7 @@ function alertModal(msg){
 </script>
 </#assign>
 
-<@mainlayout pageJavascript=pageJavascript pageCss=pageCss>
+<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="dealFlag">
 <div class="page-header">
 	<h1>
 		<a href="${ContextPath}/operate/deal">未处理故障</a>
@@ -83,15 +83,6 @@ function alertModal(msg){
 				</#if>
 				
 				<span class="jf_topic_full_title">${(otitle)!}</span>
-				<span style="display: inline-block; float: right;">
-					<h4>
-					<#if odeletetime??>
-					<span class="label label-danger">已撤销</span>
-					<#else>
-					<span class="label label-primary ">正常</span>
-					</#if> 
-					</h4>
-				</span>
 
 				<br>
 				<span class="changes">

@@ -7,7 +7,7 @@ import com.jfinal.render.FreeMarkerRender;
 
 /**
  * 实现视图耗时的计算
- * @author poicom7
+ * @author 唐东宇
  *
  */
 public class MyFreeMarkerRender extends FreeMarkerRender {

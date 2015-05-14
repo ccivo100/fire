@@ -11,7 +11,11 @@ import cn.dreampie.shiro.core.SubjectKit;
 import cn.dreampie.sqlinxml.SqlKit;
 import cn.dreampie.tablebind.TableBind;
 import cn.dreampie.web.model.Model;
-
+/**
+ * 
+ * @author 唐东宇
+ *
+ */
 @TableBind(tableName="sec_user")
 public class User extends Model<User> {
 	

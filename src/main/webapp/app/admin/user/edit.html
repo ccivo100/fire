@@ -88,6 +88,7 @@ $(function(){
 		<small> <i class="ace-icon fa fa-angle-double-right"></i> 编辑用户</small>
 	</h1>
 </div>
+
 	<div class="form-horizontal"  >
 		<div class="row">
 			<input id="userid" type="hidden" name="userid" value="${(userinfo.uuserid)}">
@@ -160,12 +161,13 @@ $(function(){
 					</select>
 				</div>
 			</div>
-			<div class="form-group">
+			<div class="control-group">
 				<label class="col-sm-2 control-label">角色类型</label>
 				<div class="col-sm-4">
 						<#list roleList as role>
+							<div class="checkbox">
 						    <label class="checkbox inline">
-						    <input id="roles" type="checkbox"  name="roles" value="${(role.id)!}"
+						    <input id="roles"   type="checkbox"  name="roles" value="${(role.id)!}"
 							    <#list userrole as r>
 							    	<#if r.roleid=role.id>
 							    	 checked
@@ -174,13 +176,14 @@ $(function(){
 						    
 						    > ${(role.name)!}
 						    </label>
+						    </div>
 					    </#list>
 
 				</div>
 			</div>
-				<div class="form-group">
+				<div class="control-group">
 					<div class="col-sm-offset-2 col-sm-10">
-						<button id="doedituser" name="edituser" value="提交"  class="btn btn-primary save" data-loading-text="正在提交...">提交</button>
+						<button id="doedituser" name="edituser" value="提交"  class="btn btn-sm btn-primary save" data-loading-text="正在提交...">提交</button>
 					</div>
 				</div>
 		</div>

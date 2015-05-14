@@ -7,7 +7,11 @@ import com.jfinal.plugin.activerecord.Page;
 
 import cn.dreampie.tablebind.TableBind;
 import cn.dreampie.web.model.Model;
-
+/**
+ * 
+ * @author 唐东宇
+ *
+ */
 @TableBind(tableName="com_branch")
 public class Branch extends Model<Branch>{
 	/**

@@ -40,6 +40,11 @@ import com.poicom.function.system.model.User;
 import com.poicom.function.system.model.UserInfo;
 import com.poicom.function.system.model.UserRole;
 
+/**
+ * 
+ * @author 唐东宇
+ *
+ */
 @ControllerKey(value="/admin",path="/app/admin")
 public class AdminController extends Controller {
 	
@@ -363,6 +368,11 @@ public class AdminController extends Controller {
 		.set("hasher", hasher.getHasher().value())
 		.set("providername", subUser.getStr("full_name"))
 		.set("full_name", WebKit.delHTMLTag(user.getStr("first_name"))+WebKit.delHTMLTag(user.getStr("last_name")));
+		if(getParaToInt("selectGender")==1){
+			user.set("avatar_url", "/admin/assets/avatars/avatar3.png");
+		}else{
+			user.set("avatar_url", "/admin/assets/avatars/avatar4.png");
+		}
 		result=user.save();
 		if(result){
 			System.out.println(user.get("id")+"："+user.get("username"));

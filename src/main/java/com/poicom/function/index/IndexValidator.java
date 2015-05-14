@@ -12,7 +12,11 @@ import com.jfinal.validate.Validator;
 import com.poicom.common.kit.DateKit;
 import com.poicom.function.system.model.Retrieve;
 import com.poicom.function.system.model.User;
-
+/**
+ * 
+ * @author 唐东宇
+ *
+ */
 public class IndexValidator extends Validator{
 	
 	protected Logger logger=LoggerFactory.getLogger(getClass());

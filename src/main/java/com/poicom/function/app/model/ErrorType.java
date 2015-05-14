@@ -13,7 +13,7 @@ import cn.dreampie.web.model.Model;
 
 /**
  * @描述 故障类型Model
- * @author poicom7
+ * @author 唐东宇
  *
  */
 @TableBind(tableName = "com_type")

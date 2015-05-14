@@ -7,7 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.poicom.common.kit.AlertKit;
-
+/**
+ * 
+ * @author 唐东宇
+ *
+ */
 public class ThreadAlert {
 	
 	protected static Logger logger=LoggerFactory.getLogger(ThreadAlert.class);

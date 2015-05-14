@@ -8,7 +8,11 @@ import cn.dreampie.sqlinxml.SqlKit;
 import cn.dreampie.tablebind.TableBind;
 import cn.dreampie.tree.TreeNode;
 import cn.dreampie.web.model.Model;
-
+/**
+ * 
+ * @author 唐东宇
+ *
+ */
 @TableBind(tableName = "com_apartment")
 public class Apartment extends Model<Apartment> implements TreeNode<Apartment>{
 

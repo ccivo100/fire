@@ -9,7 +9,7 @@ import com.jfinal.render.Render;
 
 /**
  * 实现视图耗时计算
- * @author poicom7
+ * @author 唐东宇
  *
  */
 public class FreeMarkerRenderFactory implements IMainRenderFactory{

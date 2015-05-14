@@ -12,7 +12,11 @@ import com.jfinal.plugin.activerecord.Record;
 import cn.dreampie.sqlinxml.SqlKit;
 import cn.dreampie.tablebind.TableBind;
 import cn.dreampie.web.model.Model;
-
+/**
+ * 
+ * @author 唐东宇
+ *
+ */
 @TableBind(tableName = "com_order")
 public class Order extends Model<Order> {
 

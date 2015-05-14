@@ -41,7 +41,11 @@ import com.poicom.common.thread.ThreadAlert;
 import com.poicom.common.thread.ThreadSysLog;
 import com.poicom.function.*;
 import com.poicom.function.app.CommonInterceptor;
-
+/**
+ * 
+ * @author 唐东宇
+ *
+ */
 public class AppConfig extends JFinalConfig {
 	
 	private static Logger logger =LoggerFactory.getLogger(AppConfig.class);
@@ -61,9 +65,9 @@ public class AppConfig extends JFinalConfig {
 		me.setMainRenderFactory(new FreeMarkerRenderFactory());
 		//Logger.setLoggerFactory(new Slf4jLogFactory());
 		//设置异常跳转视图
-		me.setError401View("/page/index/_signin.ftl");
-		me.setError403View("/page/app/error403.html");
-		me.setError404View("/page/app/error404.html");
+		me.setError401View("/app/index/_signin.ftl");
+		me.setError404View("/app/common/error404.html");
+		me.setError500View("/app/common/error500.html");
 		
 	}
 

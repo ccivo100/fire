@@ -2,7 +2,11 @@ package com.poicom.function.app.model;
 
 import cn.dreampie.tablebind.TableBind;
 import cn.dreampie.web.model.Model;
-
+/**
+ * 
+ * @author 唐东宇
+ *
+ */
 @TableBind(tableName = "com_level")
 public class Level extends Model<Level> {
 

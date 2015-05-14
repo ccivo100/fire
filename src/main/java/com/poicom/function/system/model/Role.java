@@ -9,7 +9,11 @@ import cn.dreampie.sqlinxml.SqlKit;
 import cn.dreampie.tablebind.TableBind;
 import cn.dreampie.tree.TreeNode;
 import cn.dreampie.web.model.Model;
-
+/**
+ * 
+ * @author 唐东宇
+ *
+ */
 @TableBind(tableName="sec_role")
 public class Role extends Model<Role> implements TreeNode<Role>{
 	/**

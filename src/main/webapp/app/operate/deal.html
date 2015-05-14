@@ -1,5 +1,5 @@
 <#include "/app/common/layout/__frontmainlayout.html"/>
-<@mainlayout pageJavascript=pageJavascript>
+<@mainlayout pageJavascript=pageJavascript currentMenu="dealFlag">
 <div class="page-header">
 	<h1>
 		未处理故障 
@@ -63,7 +63,7 @@
 			</#if>
 		</tbody>
 	</table>
-	<#include "/page/common/_paginate.html" />
+	<#include "/app/common/inc/_paginate.html" />
 	<@paginate currentPage=operatePage.pageNumber totalPage=operatePage.totalPage actionUrl="/operate/deal/" />
 		</div>
 	</div>

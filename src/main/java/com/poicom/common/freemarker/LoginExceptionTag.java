@@ -15,7 +15,7 @@ import freemarker.template.TemplateException;
 
 /**
  * 自定义登陆验证
- * @author poicom7
+ * @author 唐东宇
  *
  */
 public class LoginExceptionTag extends SecureTag{

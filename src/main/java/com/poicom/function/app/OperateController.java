@@ -35,7 +35,7 @@ import com.poicom.function.system.model.UserInfo;
 
 /**
  * @描述 运维管理
- * @author poicom7
+ * @author 唐东宇
  *
  */
 @ControllerKey(value="/operate",path="/app/operate")

@@ -13,7 +13,11 @@ import cn.dreampie.routebind.ControllerKey;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Record;
 import com.poicom.function.system.model.Syslog;
-
+/**
+ * 
+ * @author 唐东宇
+ *
+ */
 @ControllerKey(value="/jf")
 public class JFController extends Controller{
 	

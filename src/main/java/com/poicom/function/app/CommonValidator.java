@@ -17,7 +17,11 @@ import com.poicom.function.app.model.Level;
 import com.poicom.function.app.model.Order;
 import com.poicom.function.system.model.User;
 import com.poicom.function.system.model.UserInfo;
-
+/**
+ * 
+ * @author 唐东宇
+ *
+ */
 public class CommonValidator extends Validator{
 	
 	protected Logger logger=LoggerFactory.getLogger(getClass());
