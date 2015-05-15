@@ -58,7 +58,7 @@ $("#offertime").datetimepicker({
 				<th width="5%">申报部门</th>
 				<th width="3%">申报人</th>
 				<th width="5%">申报时间</th>
-				<th width="1%">当前状态</th>
+				<th width="2%">当前状态</th>
 				<th width="5%">操作</th>
 			</tr>
 		</thead>
@@ -71,13 +71,15 @@ $("#offertime").datetimepicker({
 				<td style="text-align:left;">${(operate.off_user)!}</td>
 				<td style="text-align:left;">${(operate.offer_at)!}</td>
 				<td >
+					<b>
 					<#if operate.status=0>
-					<span class="label label-success">已处理</span>
+					<span class="green">已处理</span>
 					<#elseif operate.status=1>
-					<span class="label label-default">处理中</span>
+					<span class="orange">处理中</span>
 					<#elseif operate.status=2>
-					<span class="label label-danger">未处理</span>
+					<span class="gray">未处理</span>
 					</#if>
+					</b>
 				</td>
 				
 				<td style="text-align:left;">

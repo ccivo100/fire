@@ -38,7 +38,14 @@
 				<td>${(branch_index+1)!}</td>
 				<td> ${(branch.name)!}</td>
 				<td> ${(branch.created_at)!}</td>
-				<td><#if branch.deleted_at??><span class="glyphicon glyphicon-remove"></span>禁用<#else>正常</#if></td>
+				<td><#if branch.deleted_at??>
+					<b>
+					<span class="red">禁用</span>
+					<#else>
+					<span class="gray">正常</span>
+					</#if>
+					</b>
+				</td>
 				<td><a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/editbranch?id=${(branch.id)!}" >编辑</a>
 				<#if branch.deleted_at??>
 				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/onbranch?id=${(branch.id)!}" >启用</a>

@@ -4,7 +4,7 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">权限名称</label>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" name="permission.name" value="${(permission.name)!}"  required autocomplete="off"/>
+			<input type="text" class="form-control" name="permission.name" value="${(permission.name)!}" placeholder="名称"  required autocomplete="off"/>
 		</div>
 		<div class="col-sm-4">
 			<#if nameMsg??>
@@ -17,7 +17,7 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">权限代码</label>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" name="permission.value" value="${(permission.value)!}" required autocomplete="off" />
+			<input type="text" class="form-control" name="permission.value" value="${(permission.value)!}" placeholder="如：P_**" required autocomplete="off" />
 		</div>
 		<div class="col-sm-4">
 			<#if valueMsg??>
@@ -30,7 +30,7 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">URL</label>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" name="permission.url" value="${(permission.url)!}" required autocomplete="off" />
+			<input type="text" class="form-control" name="permission.url" value="${(permission.url)!}" placeholder="如：/admin/**" required autocomplete="off" />
 		</div>
 		<div class="col-sm-4">
 			<#if urlMsg??>

@@ -33,6 +33,16 @@
 					</li>
     				</@shiro.hasPermission>
     				
+    				<@shiro.hasPermission name="P_R_OFFER">
+    				<li class="hover" id="offerFlag">
+						<a href="${ContextPath}/report/offer">
+							<i class="menu-icon fa fa-pencil-square-o"></i>
+							<span class="menu-text"> 故障申报 </span>
+						</a>
+						<b class="arrow"></b>
+					</li>
+					</@shiro.hasPermission>
+					
     				<@shiro.hasPermission name="P_R_REPORTS">
     				<li class="hover" id="reportsFlag">
 						<a href="${ContextPath}/report/reports">
@@ -43,16 +53,7 @@
 						<b class="arrow"></b>
 					</li>
 					</@shiro.hasPermission>
-    				<@shiro.hasPermission name="P_R_OFFER">
-    				<li class="hover" id="offerFlag">
-						<a href="${ContextPath}/report/offer">
-							<i class="menu-icon fa fa-pencil-square-o"></i>
-							<span class="menu-text"> 故障申报 </span>
-						</a>
-						<b class="arrow"></b>
-					</li>
-					</@shiro.hasPermission>
-
+    				
 				</ul><!-- /.nav-list -->
 				
 				<!-- #section:basics/sidebar.layout.minimize -->

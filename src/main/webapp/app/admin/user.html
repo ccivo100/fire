@@ -50,10 +50,12 @@
 				<td>${(user.remark)!}</td>
 				<td>
 				<#if user.udeletetime??>
-				<span class="glyphicon glyphicon-remove"></span>禁用
-				<#else>
-				正常
-				</#if>
+					<b>
+					<span class="red">禁用</span>
+					<#else>
+					<span class="gray">正常</span>
+					</#if>
+					</b>
 				</td>
 				<td>
 					<#if (user.uuserid?number)==1>

@@ -25,7 +25,14 @@
 				<td> ${(apartments.name)!}</td>
 				<td>${(apartments.pid)!}</td>
 				<td>${(apartments.created_at)!}</td>
-				<td><#if apartments.deleted_at??><span class="glyphicon glyphicon-remove"></span>禁用<#else>正常</#if></td>
+				<td><#if apartments.deleted_at??>
+					<b>
+					<span class="red">禁用</span>
+					<#else>
+					<span class="gray">正常</span>
+					</#if>
+					</b>
+				</td>
 				<td><a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/editapartment?id=${(apartments.id)!}" >编辑</a>
 				<#if apartments.deleted_at??>
 				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/onapartment?id=${(apartments.id)!}" >启用</a>
@@ -41,7 +48,14 @@
 				<td><span class="glyphicon glyphicon-minus-sign"></span>     ${(apartment.name)!}</td>
 				<td>${(apartment.pid)!}</td>
 				<td>${(apartment.created_at)!}</td>
-				<td><#if apartment.deleted_at??><span class="glyphicon glyphicon-remove"></span>禁用<#else>正常</#if></td>
+				<td><#if apartment.deleted_at??>
+					<b>
+					<span class="red">禁用</span>
+					<#else>
+					<span class="gray">正常</span>
+					</#if>
+					</b>
+				</td>
 				<td>
 				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/editapartment?id=${(apartment.id)!}" >编辑</a>
 				<#if apartment.deleted_at??>

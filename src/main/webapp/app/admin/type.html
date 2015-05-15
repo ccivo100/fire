@@ -11,7 +11,7 @@
 		<div class="col-xs-4" >
 			<div class="input-group">
 				<span class="input-group-addon">关键字</span> 
-				<input class="form-control" id="errorType" name="errorType" value="${(errorType)!}" placeholder="故障类型名称" type="text" autocomplete="off">
+				<input class="form-control" id="errorType" name="errorType" value="${(errorType)!}" placeholder="请输入故障名称……" type="text" autocomplete="off">
 				<span class="input-group-btn">
 					<button class="btn btn-sm btn-default">
 						<span class="glyphicon glyphicon-search"></span> 查询
@@ -37,7 +37,14 @@
 				<td>${(type_index+1)!}</td>
 				<td> ${(type.name)!}</td>
 				<td> ${(type.created_at)!}</td>
-				<td><#if type.deleted_at??><span class="glyphicon glyphicon-remove"></span>禁用<#else>正常</#if></td>
+				<td><#if type.deleted_at??>
+					<b>
+					<span class="red">禁用</span>
+					<#else>
+					<span class="gray">正常</span>
+					</#if>
+					</b>
+				</td>
 				<td><a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/edittype?id=${(type.id)!}" >编辑</a>
 				<#if type.deleted_at??>
 				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/ontype?id=${(type.id)!}" >启用</a>

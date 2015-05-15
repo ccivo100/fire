@@ -25,7 +25,14 @@
 					<td>${(roles.value)!}</td>
 					<td>${(roles.pid)!}</td>
 					<td>${(roles.created_at)!}</td>
-					<td><#if roles.deleted_at??><span class="glyphicon glyphicon-remove"></span>禁用<#else>正常</#if></td>
+					<td><#if roles.deleted_at??>
+						<b>
+						<span class="red">禁用</span>
+						<#else>
+						<span class="gray">正常</span>
+						</#if>
+						</b>
+					</td>
 					<td><a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/editrole?id=${(roles.id)!}" >编辑</a>
 					<a class="btn btn-minier btn-primary btn-sm"   href="${ContextPath}/admin/assignrole?id=${(roles.id)!}"  >分配</a> 
 					<#if roles.deleted_at??>
@@ -43,7 +50,14 @@
 					<td>${(role.value)!}</td>
 					<td>${(role.pid)!}</td>
 					<td>${(role.created_at)!}</td>
-					<td><#if role.deleted_at??><span class="glyphicon glyphicon-remove"></span>禁用<#else>正常</#if></td>
+					<td><#if role.deleted_at??>
+						<b>
+						<span class="red">禁用</span>
+						<#else>
+						<span class="gray">正常</span>
+						</#if>
+						</b>
+					</td>
 					<td>
 					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/editrole?id=${(role.id)!}" >编辑</a>
 					<a class="btn btn-minier btn-primary btn-sm"   href="${ContextPath}/admin/assignrole?id=${(role.id)!}"  >分配</a>

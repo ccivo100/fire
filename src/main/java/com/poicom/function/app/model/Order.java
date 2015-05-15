@@ -105,6 +105,19 @@ public class Order extends Model<Order> {
 	}
 	
 	/**
+	 * @描述 查询Orders 管理员 不分页
+	 * @param where
+	 * @param orderby
+	 * @param paras
+	 * @return
+	 */
+	public List<Record> findAdminOrders(String where,String orderby,Object... paras){
+		return Db.find(SqlKit.sql("order.findOfferQueryBySelect"),
+				SqlKit.sql("order.findOfferQueryByFrom") + getWhere(where)
+						+ orderby, paras);
+	}
+	
+	/**
 	 * 获得所有故障类型（弃用）
 	 * @return
 	 */

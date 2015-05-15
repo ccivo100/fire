@@ -1,8 +1,11 @@
 ﻿<#include "/app/common/layout/__frontmainlayout.html"/>
 
+<#assign pageCss>
+<link rel="stylesheet" href="${ContextPath}/admin/assets/css/signin.css" />
+</#assign>
+
 <#assign pageJavascript>
 <script type="text/javascript">
-
 function select1() {
 	$.ajax(
     {
@@ -65,7 +68,7 @@ function alertModal(msg){
 
 </#assign>
 
-<@mainlayout pageJavascript=pageJavascript currentMenu="offerFlag">
+<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="offerFlag">
 <div class="index-background">
 	<!-- 代表上写文、/blog代表控制器、/save代表控制器中的方法 -->
 	<form class="form-horizontal" role="form"  action="${ContextPath}/report/save" method="post" >

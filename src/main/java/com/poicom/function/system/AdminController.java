@@ -19,6 +19,7 @@ import cn.dreampie.shiro.hasher.HasherKit;
 
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
+import com.jfinal.kit.JsonKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
@@ -72,6 +73,8 @@ public class AdminController extends Controller {
 	
 	private final static String CENTER_INFO_PAGE="center/center.html";
 	private final static String CENTER_PWD_PAGE="center/pwd.html";
+	
+	private final static String ORDER_QUERY_PAGE="order/query.html";
 	
 	public void index(){
 		Page <Record> ordersPage;
@@ -884,6 +887,19 @@ public class AdminController extends Controller {
 			render("/page/app/admin/center.html");
 		}
 		
+	}
+	
+	public void order(){
+		
+	}
+	
+	public void loadOrder(){
+		List<Record> ordersList;
+		String where="";
+		String orderby="";
+		ordersList=Order.dao.findAdminOrders(where, orderby);
+		
+		JsonKit.toJson(ordersList);
 	}
 	
 	

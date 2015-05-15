@@ -27,7 +27,14 @@
 					<td>${(permissions.url)!}</td>
 					<td>${(permissions.pid)!}</td>
 					<td>${(permissions.created_at)!}</td>
-					<td><#if permissions.deleted_at??><span class="glyphicon glyphicon-remove"></span> 禁用<#else>正常</#if></td>
+					<td><#if permissions.deleted_at??>
+						<b>
+						<span class="red">禁用</span>
+						<#else>
+						<span class="gray">正常</span>
+						</#if>
+						</b>
+					</td>
 					<td><a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/editpermission?id=${(permissions.id)!}" >编辑</a>
 					<#if permissions.deleted_at??>
 					<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/onpermission?id=${(permissions.id)!}" >启用</a>
@@ -45,7 +52,14 @@
 					<td>${(permission.url)!}</td>
 					<td>${(permission.pid)!}</td>
 					<td>${(permission.created_at)!}</td>
-					<td><#if permission.deleted_at??><span class="glyphicon glyphicon-remove"></span> 禁用<#else>正常</#if></td>
+					<td><#if permission.deleted_at??>
+						<b>
+						<span class="red">禁用</span>
+						<#else>
+						<span class="gray">正常</span>
+						</#if>
+						</b>
+					</td>
 					<td>
 					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/editpermission?id=${(permission.id)!}" >编辑</a>
 					<#if permission.deleted_at??>

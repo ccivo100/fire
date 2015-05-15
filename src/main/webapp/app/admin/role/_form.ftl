@@ -6,7 +6,7 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">角色名称</label>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" name="role.name" value="${(role.name)!}"  required autocomplete="off"/>
+			<input type="text" class="form-control" name="role.name" value="${(role.name)!}" placeholder="名称" required autocomplete="off"/>
 		</div>
 		<div class="col-sm-4">
 			<#if nameMsg??>
@@ -19,7 +19,7 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">角色代码</label>
 		<div class="col-sm-4">
-			<input type="text" class="form-control" name="role.value" value="${(role.value)!}" required autocomplete="off"/>
+			<input type="text" class="form-control" name="role.value" value="${(role.value)!}" placeholder="如：R_**" required autocomplete="off"/>
 		</div>
 		<div class="col-sm-4">
 			<#if valueMsg??>

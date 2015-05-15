@@ -26,13 +26,15 @@
 				<td style="text-align:left;">${(order.off_user)!}</td>
 				<td style="text-align:left;">${(order.offer_at)!}</td>
 				<td >
+					<b>
 					<#if order.status=0>
-					<span class="label label-success">已处理</span>
+					<span class="green">已处理</span>
 					<#elseif order.status=1>
-					<span class="label label-warning">处理中</span>
+					<span class="orange">处理中</span>
 					<#elseif order.status=2>
-					<span class="label label-default">未处理</span>
+					<span class="gray">未处理</span>
 					</#if>
+					</b>
 				</td>
 			</tr>
 			</#list>

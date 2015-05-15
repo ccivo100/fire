@@ -38,7 +38,14 @@
 				<td>${(position_index+1)!}</td>
 				<td> ${(position.name)!}</td>
 				<td> ${(position.created_at)!}</td>
-				<td><#if position.deleted_at??><span class="glyphicon glyphicon-remove"></span>禁用<#else>正常</#if></td>
+				<td><#if position.deleted_at??>
+					<b>
+					<span class="red">禁用</span>
+					<#else>
+					<span class="gray">正常</span>
+					</#if>
+					</b>
+				</td>
 				<td><a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/editposition?id=${(position.id)!}" >编辑</a>
 				<#if position.deleted_at??>
 				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/onposition?id=${(position.id)!}" >启用</a>

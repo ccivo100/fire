@@ -1,5 +1,5 @@
 ﻿<#include "/page/sign/_layoutsign.html"/>
-<@layout activebar="signin" html_title="中山点通故障申报系统">
+<@layout activebar="signin" html_title="欢迎登陆故障申报系统 - 点通科技">
 	<div class="header">
 		<div class="row">
 			<div class="col-xs-1">
@@ -26,16 +26,50 @@
 	<div class="header filter-opacity buttom">
 	</div>
 	
-	<div class="container">
+	
 	<div class="row">
-		<div class="col-xs-6"></div>
+		<div class="col-xs-6">
+			<!--
+			<div class="carousel-sign ">
+			
+			<div id="myCarousel" class="carousel slide">
+			   
+			   <ol class="carousel-indicators">
+			      <li data-target="#myCarousel" data-slide-to="0" class="active "></li>
+			      <li data-target="#myCarousel" data-slide-to="1"></li>
+			      <li data-target="#myCarousel" data-slide-to="2"></li>
+			      <li data-target="#myCarousel" data-slide-to="3"></li>
+			   </ol>   
+			  
+			   <div class="carousel-inner">
+			      <div class="item active">
+			         <img class="radius" src="${ContextPath}/res/sign/lomo1.jpg" width="680" alt="First slide">
+			      </div>
+			      <div class="item">
+			         <img class="radius" src="${ContextPath}/res/sign/lomo2.jpg" width="680" alt="Second slide">
+			      </div>
+			      <div class="item">
+			         <img class="radius" src="${ContextPath}/res/sign/lomo3.jpg" width="680" alt="Third slide">
+			      </div>
+			      <div class="item">
+			         <img class="radius" src="${ContextPath}/res/sign/lomo3.jpg" width="680" alt="Forth slide">
+			      </div>
+			   </div>
+			  
+			   <a class="carousel-control left radius" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+			   <a class="carousel-control right radius" href="#myCarousel" data-slide="next">&rsaquo;</a>
+			</div> 
+			
+		</div>
+		-->
+		</div>
 		
 		<div class="col-xs-12 col-sm-6">
 			<!--登陆控件-->
 			<div class="sign-div-top">
 			<div id="loginbox">
 				<form id="loginform" class="form-vertical"  method="post" action="${ContextPath}/signin">
-					<h3 class="form-signin-heading  smaller lighter grey" >用户登陆</h3>
+					<h3 class="form-signin-heading" >用户登陆</h3>
 					
 					<div class="input-group input-sign">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -68,7 +102,7 @@
 				        </div>
 				    </div>
 				    </@shiro.isLoginFailure>
-				    <div class="form-actions form-line-split radius">
+				    <div class="form-actions form-line-split">
 				    	<span class="pull-center">
 							<button type="reset" class="btn btn-primary" style="width: 136px;"  value="重置"  />重 置</button>
 						</span>
@@ -79,13 +113,13 @@
 				</form>
 			</div>
 			</div>
-			
 			<!--遮盖层-->
+			
 			<div class="sign-div">
 				<div id="loginbox" class="loginbox-color">
 					<form id="loginform" class="form-vertical"  >
 						<h3 class="form-signin-heading" style="opacity: 0">登陆</h3>
-						<div class="form-actions form-line-split radius form-line-split-color">
+						<div class="form-actions form-line-split form-line-split-color">
 			    		</div>
 					</form>
 				</div>
@@ -93,41 +127,32 @@
 			
 		</div>
 	</div>
-	</div>
+
 	<!--替换背景-->
-	
-	
+
 	<div id="pt-main" class="pt-perspective">
-		<div class="pt-page pt-page-3">
-			<div class="container">
-			<div class="row">
-				<div class="hidden-xs  col-sm-6"><img src="${ContextPath}/res/sign/slide1.png" class="sidder" alt=""></div>
-				<div class="col-xs-6"></div>
-			</div>
-			</div>
-		</div>
-		<div class="pt-page pt-page-2">
-			<div class="container">
-			<div class="row">
-				<div class="hidden-xs  col-sm-6"><img src="${ContextPath}/res/sign/slide2.png" class="sidder" alt=""></div>
-				<div class="col-xs-6"></div>
-			</div>
-			</div>
-		</div>
 		<div class="pt-page pt-page-1">
-			<div class="container">
 			<div class="row">
 				<div class="hidden-xs  col-sm-6"><img src="${ContextPath}/res/sign/slide5.png" class="sidder" alt=""></div>
 				<div class="col-xs-6"></div>
 			</div>
+		</div>
+		<div class="pt-page pt-page-2">
+			<div class="row">
+				<div class="hidden-xs  col-sm-6"><img src="${ContextPath}/res/sign/header-social-media.png" class="sidder" alt=""></div>
+				<div class="col-xs-6"></div>
+			</div>
+		</div>
+		<div class="pt-page pt-page-3">
+			<div class="row">
+				<div class="hidden-xs  col-sm-6"><img src="${ContextPath}/res/sign/slide1.png" class="sidder" alt=""></div>
+				<div class="col-xs-6"></div>
 			</div>
 		</div>
 		<div class="pt-page pt-page-4">
-			<div class="container">
 			<div class="row">
 				<div class="hidden-xs  col-sm-6"><img src="${ContextPath}/res/sign/slide4.png" class="sidder" alt=""></div>
 				<div class="col-xs-6"></div>
-			</div>
 			</div>
 		</div>
 		
