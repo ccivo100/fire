@@ -33,7 +33,9 @@
 						</#if>
 						</b>
 					</td>
-					<td><a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/editrole?id=${(roles.id)!}" >编辑</a>
+					<td>
+					<div class="action-buttons">
+					<a class="btn btn-minier btn-primary btn-xs "  href="${ContextPath}/admin/editrole?id=${(roles.id)!}" >编辑</a>
 					<a class="btn btn-minier btn-primary btn-sm"   href="${ContextPath}/admin/assignrole?id=${(roles.id)!}"  >分配</a> 
 					<#if roles.deleted_at??>
 					<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/onrole?id=${(roles.id)!}" >启用</a>
@@ -41,6 +43,7 @@
 					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/offrole?id=${(roles.id)!}" >禁用</a>
 					</#if>
 					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/addrole?id=${(roles.id)!}" >添加</a>
+					</div>
 					</td>
 				</tr>
 				<#list roles.children as role>
@@ -59,6 +62,7 @@
 						</b>
 					</td>
 					<td>
+					<div class="action-buttons">
 					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/editrole?id=${(role.id)!}" >编辑</a>
 					<a class="btn btn-minier btn-primary btn-sm"   href="${ContextPath}/admin/assignrole?id=${(role.id)!}"  >分配</a>
 					<#if role.deleted_at??>
@@ -66,6 +70,7 @@
 					<#else>
 					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/offrole?id=${(role.id)!}" >禁用</a>
 					</#if>
+					</div>
 					</td>
 				</tr>
 				</#list>

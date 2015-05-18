@@ -45,12 +45,15 @@
 					</#if>
 					</b>
 				</td>
-				<td><a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/edittype?id=${(type.id)!}" >编辑</a>
+				<td>
+				<div class="action-buttons">
+				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/edittype?id=${(type.id)!}" >编辑</a>
 				<#if type.deleted_at??>
 				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/ontype?id=${(type.id)!}" >启用</a>
 				<#else>
 				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/offtype?id=${(type.id)!}" >禁用</a>
 				</#if>
+				</div>
 				</td>
 			</tr>
 			</#list>

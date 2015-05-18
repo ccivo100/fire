@@ -164,6 +164,9 @@ public class AdminValidator extends Validator{
 		//新增用户验证
 		else if(getActionKey().equals("/admin/doadduser")){
 			User user=User.dao.findFirstBy("username=?", c.getPara("user.username").trim());
+			if(!ValidateKit.isLength(c.getPara("user.username"), 2, 16)){
+				addError("usernameMsg","用户名长度应2~16个字符！");
+			}
 			if(!ValidateKit.isNullOrEmpty(user)){
 				addError("usernameMsg","该用户名已存在！");
 			}
@@ -180,7 +183,13 @@ public class AdminValidator extends Validator{
 				addError("emailMsg","邮箱格式不正确！");
 			}
 			if(ValidateKit.isNullOrEmpty(c.getPara("selectBranch"))){
-				addError("branchMsg","单位不能为空！");
+				
+				if(SubjectKit.getSubject().hasRole("R_ADMIN")){
+					addError("branchMsg","单位不能为空！");
+				}else{
+					
+				}
+				
 			}
 			if(ValidateKit.isNullOrEmpty(c.getPara("selectApartment"))){
 				addError("apartmentMsg","部门不能为空！");
@@ -361,6 +370,7 @@ public class AdminValidator extends Validator{
 			c.setAttr("apartmentList",Apartment.dao.getAllApartment());
 			c.setAttr("positionList",Position.dao.getAllPosition());
 			c.keepModel(User.class);
+			c.keepPara("branchid");
 			c.render("/app/admin/user/add.html");
 			
 			

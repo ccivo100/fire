@@ -7,9 +7,11 @@
 <script src="${ContextPath}/admin/assets/js/tree.js"></script>
 <script type="text/javascript">
 jQuery(function($){
-	var $created_at=$(".created_at").attr("title");
-	var $format_time=formatDateTime($created_at);
-	$(".created_at").html($format_time);
+	$(".created_at").each(function(){
+		var $created_at=$(this).attr("title");
+		var $format_time=formatDateTime($created_at);
+		$(this).html($format_time);
+	});
 });
 </script>
 </#assign>

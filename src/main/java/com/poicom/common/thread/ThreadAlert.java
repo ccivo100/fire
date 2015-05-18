@@ -66,7 +66,7 @@ public class ThreadAlert {
 								AlertKit alertKit=getAlertKit();
 								if(null==alertKit){
 									logger.info("提示--暂无任务（30秒后重新启动）...");
-									Thread.sleep(1000*60);
+									Thread.sleep(1000*5);
 								}else{
 									logger.info("启动--发送邮件/短信提醒功能...");
 									alertKit.sendEmail(alertKit.getEmailTitle(),alertKit.getEmailBody(),alertKit.getEmailAdd());

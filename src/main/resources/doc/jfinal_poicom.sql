@@ -1,5 +1,5 @@
 ﻿# Host: 192.168.166.215:9884  (Version: 5.1.73)
-# Date: 2015-05-15 18:28:38
+# Date: 2015-05-18 18:29:47
 # Generator: MySQL-Front 5.3  (Build 4.89)
 
 /*!40101 SET NAMES utf8 */;
@@ -57,13 +57,13 @@ CREATE TABLE `com_apartment` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='部门';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='部门';
 
 #
 # Data for table "com_apartment"
 #
 
-INSERT INTO `com_apartment` VALUES (1,'研发中心',0,NULL,'2015-04-18 11:06:39','2015-04-30 12:30:54',NULL),(2,'运维中心',0,NULL,'2015-04-18 11:06:47','2015-04-30 12:30:53',NULL),(3,'财务中心',0,NULL,'2015-04-20 12:01:44','2015-04-30 12:30:49',NULL),(4,'运维一组',2,NULL,'2015-04-28 12:28:01','2015-04-30 12:30:52',NULL),(5,'运维二组',2,NULL,'2015-04-28 12:28:12','2015-04-30 12:30:51',NULL),(6,'会计一组',3,NULL,'2015-04-28 17:55:55','2015-04-30 12:38:18',NULL),(7,'会计二组',3,NULL,'2015-04-28 17:56:06',NULL,NULL),(8,'人资行政中心',0,NULL,'2015-04-30 12:39:13',NULL,NULL),(9,'研发部',1,NULL,'2015-04-30 14:47:24',NULL,NULL),(10,'培训部',8,NULL,'2015-05-04 11:13:49','2015-05-04 11:23:02',NULL);
+INSERT INTO `com_apartment` VALUES (1,'研发中心',0,NULL,'2015-04-18 11:06:39','2015-04-30 12:30:54',NULL),(2,'运维中心',0,NULL,'2015-04-18 11:06:47','2015-04-30 12:30:53',NULL),(3,'财务中心',0,NULL,'2015-04-20 12:01:44','2015-04-30 12:30:49',NULL),(4,'运维一组',2,NULL,'2015-04-28 12:28:01','2015-04-30 12:30:52',NULL),(5,'运维二组',2,NULL,'2015-04-28 12:28:12','2015-04-30 12:30:51',NULL),(6,'会计一组',3,NULL,'2015-04-28 17:55:55','2015-04-30 12:38:18',NULL),(7,'会计二组',3,NULL,'2015-04-28 17:56:06',NULL,NULL),(8,'人资行政中心',0,NULL,'2015-04-30 12:39:13',NULL,NULL),(9,'研发部',1,NULL,'2015-04-30 14:47:24',NULL,NULL),(10,'培训部',8,NULL,'2015-05-04 11:13:49','2015-05-04 11:23:02',NULL),(11,'客服中心',0,NULL,'2015-05-18 14:10:51',NULL,NULL),(12,'客服部',11,NULL,'2015-05-18 14:11:25',NULL,NULL);
 
 #
 # Structure for table "com_apartment_type"
@@ -140,13 +140,13 @@ CREATE TABLE `com_comment` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='评论';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='评论';
 
 #
 # Data for table "com_comment"
 #
 
-INSERT INTO `com_comment` VALUES (1,1,3,'xcv&nbsp;dcv&nbsp;sdgf&nbsp;sdf','2015-05-15 15:35:21','2015-05-08 10:38:40',NULL,NULL),(2,1,3,'fg&nbsp;dfg&nbsp;dfg&nbsp;','2015-05-08 11:55:40','2015-05-08 10:38:54',NULL,NULL),(3,2,3,'纯粹测试一下','2015-05-12 17:38:55','2015-05-12 17:39:09',NULL,NULL),(4,2,3,'纯粹测试两下','2015-05-31 17:39:13','2015-05-12 17:39:47',NULL,NULL),(5,2,3,'测试完毕了','2015-07-31 17:39:52','2015-05-12 17:40:15',NULL,NULL),(6,1,3,'test<br>的','2015-05-13 17:04:36','2015-05-13 17:05:01',NULL,NULL),(7,1,3,'处理完毕。','2015-05-19 17:10:34','2015-05-13 17:10:52',NULL,NULL),(8,1,3,'kljsflfkjsld<br>','2015-05-13 11:03:18','2015-05-14 11:03:29',NULL,NULL),(9,4,3,'测试工单！2','2015-05-13 11:53:44','2015-05-14 11:53:59',NULL,NULL),(10,4,3,'测试工单！3','2015-04-30 11:54:01','2015-05-14 11:54:42',NULL,NULL),(11,1,3,'继续处理','2015-05-27 12:41:00','2015-05-14 12:40:29',NULL,NULL),(12,5,3,'11111111111111','2015-05-14 14:15:36','2015-05-14 14:15:02',NULL,NULL),(13,5,3,'222222222222','2015-05-14 14:16:05','2015-05-14 14:15:34',NULL,NULL),(14,5,3,'333333333333333333','2015-05-20 10:07:26','2015-05-15 10:06:53',NULL,NULL),(15,4,3,'11111111111111111111','2015-06-03 10:14:19','2015-05-15 10:14:04',NULL,NULL),(16,8,2,'f&nbsp;gdfg&nbsp;df','2015-05-15 10:31:17','2015-05-15 10:33:14',NULL,NULL),(17,8,2,'fg&nbsp;dfg&nbsp;','2015-05-08 10:31:30','2015-05-15 10:33:26',NULL,NULL),(18,9,3,'!@#$%^&amp;*(((()_+|','2015-05-26 17:47:35','2015-05-15 17:47:09',NULL,NULL);
+INSERT INTO `com_comment` VALUES (1,3,10,'正在处理','2015-05-18 15:05:02','2015-05-18 15:04:18',NULL,NULL),(2,3,10,'处理ok','2015-05-18 15:21:33','2015-05-18 15:20:46',NULL,NULL),(3,3,2,'再处理一下。','2015-05-18 18:11:02','2015-05-18 18:10:08',NULL,NULL);
 
 #
 # Structure for table "com_level"
@@ -187,13 +187,13 @@ CREATE TABLE `com_order` (
   `created_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='工单';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='工单';
 
 #
 # Data for table "com_order"
 #
 
-INSERT INTO `com_order` VALUES (1,'test',4,'2015-05-08 10:36:12','test',1,1,NULL,1,126,0,NULL,NULL),(2,'无聊测一测',4,'2015-05-12 17:38:05','无聊测一测',1,1,NULL,0,NULL,0,NULL,NULL),(3,'提交测试工单',4,'2015-05-13 15:53:43','提交测试工单。',1,1,NULL,2,NULL,0,NULL,'2015-05-13 16:21:24'),(4,'测试工单！',4,'2015-05-14 11:46:50','测试工单！1',1,1,'2015-05-14 11:50:48',1,NULL,0,NULL,NULL),(5,'测试工单申报时间！',4,'2015-05-14 14:11:06','测试工单申报时1间！',1,1,'2015-05-14 14:11:49',1,NULL,0,NULL,NULL),(6,'故障申报，看看有没有问题',4,'2015-05-14 17:19:22','故障申报，看看有没有问题',2,1,'2015-05-15 16:11:56',2,NULL,0,NULL,NULL),(7,'测试是家居',4,'2015-05-14 18:08:48','淡淡的淡淡的。',1,2,'2015-05-15 16:12:09',2,NULL,0,NULL,NULL),(8,'sdf&nbsp;sdf&nbsp;sdf',4,'2015-05-15 10:31:59','f&nbsp;sf&nbsp;sf&nbsp;sf',1,1,NULL,0,NULL,0,NULL,NULL),(9,'!@#$%^&amp;*(((()_+|',4,'2015-05-15 17:46:12','!@#$%^&amp;*(((()_+|',1,1,NULL,1,NULL,0,NULL,NULL),(10,'报障测试！',4,'2015-05-15 17:53:14','报障测试！2015-5-15&nbsp;17:53:58',1,1,NULL,2,NULL,0,NULL,NULL);
+INSERT INTO `com_order` VALUES (1,'不能上网',13,'2015-05-18 14:43:01','不能上网',3,1,NULL,2,NULL,0,NULL,'2015-05-18 14:44:32'),(2,'测试-话机无法拨打',13,'2015-05-18 14:48:29','话机打不了，修改描述',1,2,'2015-05-18 14:55:01',2,NULL,0,NULL,NULL),(3,'电脑无法上网了。',7,'2015-05-18 15:04:19','电脑开机后，网络连接位置一直显示断开连接，无法上网，麻烦处理一下。',5,1,NULL,1,NULL,0,NULL,NULL),(4,'电脑不能上网',12,'2015-05-18 17:05:53','测试',3,1,NULL,2,NULL,0,NULL,NULL);
 
 #
 # Structure for table "com_position"
@@ -248,13 +248,13 @@ CREATE TABLE `com_user_order` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='运维-工单';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='运维-工单';
 
 #
 # Data for table "com_user_order"
 #
 
-INSERT INTO `com_user_order` VALUES (1,3,1,'2015-05-08 12:36:12',NULL,NULL),(2,3,2,'2015-05-12 19:37:32',NULL,NULL),(3,3,3,'2015-05-13 17:53:05',NULL,NULL),(4,3,4,'2015-05-14 13:46:08',NULL,NULL),(5,2,4,'2015-05-14 13:46:08',NULL,NULL),(6,3,5,'2015-05-14 16:11:06',NULL,NULL),(7,2,5,'2015-05-14 16:11:06',NULL,NULL),(8,3,6,'2015-05-14 19:19:22',NULL,NULL),(9,2,6,'2015-05-14 19:19:22',NULL,NULL),(10,3,7,'2015-05-14 20:08:48',NULL,NULL),(11,2,7,'2015-05-14 20:08:48',NULL,NULL),(12,3,8,'2015-05-15 12:31:59',NULL,NULL),(13,2,8,'2015-05-15 12:31:59',NULL,NULL),(14,3,9,'2015-05-15 19:46:12',NULL,NULL),(15,2,9,'2015-05-15 19:46:12',NULL,NULL),(16,3,10,'2015-05-15 19:53:14',NULL,NULL),(17,2,10,'2015-05-15 19:53:14',NULL,NULL);
+INSERT INTO `com_user_order` VALUES (1,3,1,'2015-05-18 16:43:01',NULL,NULL),(2,2,1,'2015-05-18 16:43:01',NULL,NULL),(3,10,1,'2015-05-18 16:43:01',NULL,NULL),(4,11,2,'2015-05-18 16:48:29',NULL,NULL),(5,3,3,'2015-05-18 17:03:14',NULL,NULL),(6,2,3,'2015-05-18 17:03:14',NULL,NULL),(7,10,3,'2015-05-18 17:03:14',NULL,NULL),(8,3,4,'2015-05-18 19:05:53',NULL,NULL),(9,2,4,'2015-05-18 19:05:53',NULL,NULL),(10,10,4,'2015-05-18 19:05:53',NULL,NULL);
 
 #
 # Structure for table "com_user_type"
@@ -289,7 +289,7 @@ CREATE TABLE `sec_permission` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='权限';
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='权限';
 
 #
 # Data for table "sec_permission"
@@ -330,13 +330,13 @@ CREATE TABLE `sec_role_permission` (
   `role_id` bigint(20) NOT NULL,
   `permission_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=466 DEFAULT CHARSET=utf8 COMMENT='角色-权限';
+) ENGINE=InnoDB AUTO_INCREMENT=494 DEFAULT CHARSET=utf8 COMMENT='角色-权限';
 
 #
 # Data for table "sec_role_permission"
 #
 
-INSERT INTO `sec_role_permission` VALUES (379,3,8),(380,3,9),(381,3,13),(382,3,14),(383,3,17),(384,3,16),(385,3,7),(386,3,12),(428,2,4),(429,2,5),(430,2,6),(431,2,15),(432,2,20),(433,2,13),(434,2,14),(435,2,1),(436,2,12),(437,4,11),(438,4,19),(439,4,13),(440,4,14),(441,4,17),(442,4,16),(443,4,10),(444,4,12),(455,1,2),(456,1,3),(457,1,4),(458,1,5),(459,1,6),(460,1,15),(461,1,20),(462,1,22),(463,1,23),(464,1,24),(465,1,1);
+INSERT INTO `sec_role_permission` VALUES (379,3,8),(380,3,9),(381,3,13),(382,3,14),(383,3,17),(384,3,16),(385,3,7),(386,3,12),(437,4,11),(438,4,19),(439,4,13),(440,4,14),(441,4,17),(442,4,16),(443,4,10),(444,4,12),(455,1,2),(456,1,3),(457,1,4),(458,1,5),(459,1,6),(460,1,15),(461,1,20),(462,1,22),(463,1,23),(464,1,24),(465,1,1),(487,2,4),(488,2,22),(489,2,23),(490,2,13),(491,2,14),(492,2,1),(493,2,12);
 
 #
 # Structure for table "sec_syslog"
@@ -406,13 +406,13 @@ CREATE TABLE `sec_user` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='用户';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='用户';
 
 #
 # Data for table "sec_user"
 #
 
-INSERT INTO `sec_user` VALUES (1,'admin','admin','fireterceltong@poicom.net','15900088260','$shiro1$SHA-256$500000$JLkvnVWIG7NOeBQfy0te+g==$JodziUFGUjtAn3UVm3h4+KtN4WpL0yqT8Qetmvr62/o=','default_hasher','','/admin/assets/avatars/avatar4.png','科技','点通','点通科技',NULL,'2015-03-11 10:46:12','2015-05-04 12:22:57',NULL),(2,'deal','admin','dantechan@poicom.net','18476467556','$shiro1$SHA-256$500000$o/aFEzJOSlJxqFL+a04+Tg==$iJfedksd5GXgvtuz50A4XL2p0X9YyPFe58Lzgb26NsQ=','default_hasher','','/admin/assets/avatars/avatar4.png','科技','点通','运维主管',NULL,'2015-03-10 14:48:05','2015-04-24 15:37:28',NULL),(3,'dealler','admin','fireterceltong@poicom.net','15900088260','$shiro1$SHA-256$500000$isKccerRU240Azacspdskg==$Ule6DgNHCziF5XQtj74ZGrXdBYfn38bdDwzZdNvVsXg=','default_hasher','','/admin/assets/avatars/avatar4.png','张','三','运维员',NULL,'2015-03-10 15:35:38','2015-04-28 10:07:06',NULL),(4,'reporter','admin','dantechan@poicom.net','18924518660','$shiro1$SHA-256$500000$i4QvMSYM3zqTWDTZIhmuQQ==$SmHZUvxg5/Wlnfwi+ZC/stVBSQ0sJRt+PI7QFrC0F+8=','default_hasher','','/admin/assets/avatars/avatar4.png','李','四','李四',NULL,'2015-03-11 10:40:18','2015-04-28 10:07:03',NULL),(7,'firetercel','运维员','fireterceltong@poicom.net','15900088260','$shiro1$SHA-256$500000$rAgxXUH872pkuCyOloC8iA==$WeWMk2Z5OK/7urcqotCBrT5MiezJRnz9ScqbWp3xNjo=','default_hasher','','/admin/assets/avatars/avatar4.png','唐','东宇','唐东宇',NULL,'2015-05-07 17:32:02',NULL,NULL),(8,'tangguoguo','点通科技','283784513@qq.com','15900088260','$shiro1$SHA-256$500000$NLcUgmJoLBQJ16B48xyboQ==$4AAA6YPkbHdRMTAxcyPWUYXrD92eTxP2BDB/HmkpRZg=','default_hasher','','/admin/assets/avatars/avatar3.png','唐','果果','唐果果',NULL,'2015-05-14 14:30:59',NULL,NULL);
+INSERT INTO `sec_user` VALUES (1,'admin','admin','fireterceltong@poicom.net','15900088260','$shiro1$SHA-256$500000$JLkvnVWIG7NOeBQfy0te+g==$JodziUFGUjtAn3UVm3h4+KtN4WpL0yqT8Qetmvr62/o=','default_hasher','','/admin/assets/avatars/avatar4.png','科技','点通','管理员',NULL,'2015-03-11 10:46:12','2015-05-04 12:22:57',NULL),(2,'deal','admin','dantechan@poicom.net','18476467556','$shiro1$SHA-256$500000$o/aFEzJOSlJxqFL+a04+Tg==$iJfedksd5GXgvtuz50A4XL2p0X9YyPFe58Lzgb26NsQ=','default_hasher','','/admin/assets/avatars/avatar4.png','科技','点通','运维主管',NULL,'2015-03-10 14:48:05','2015-04-24 15:37:28',NULL),(3,'dealler','admin','fireterceltong@poicom.net','15900088260','$shiro1$SHA-256$500000$isKccerRU240Azacspdskg==$Ule6DgNHCziF5XQtj74ZGrXdBYfn38bdDwzZdNvVsXg=','default_hasher','','/admin/assets/avatars/avatar4.png','张','三','运维员',NULL,'2015-03-10 15:35:38','2015-04-28 10:07:06',NULL),(4,'reporter','admin','dantechan@poicom.net','18924518660','$shiro1$SHA-256$500000$i4QvMSYM3zqTWDTZIhmuQQ==$SmHZUvxg5/Wlnfwi+ZC/stVBSQ0sJRt+PI7QFrC0F+8=','default_hasher','','/admin/assets/avatars/avatar4.png','陈','宇佳','陈宇佳',NULL,'2015-03-11 10:40:18','2015-04-28 10:07:03',NULL),(7,'firetercel','运维员','fireterceltong@poicom.net','15900088260','$shiro1$SHA-256$500000$rAgxXUH872pkuCyOloC8iA==$WeWMk2Z5OK/7urcqotCBrT5MiezJRnz9ScqbWp3xNjo=','default_hasher','','/admin/assets/avatars/avatar4.png','唐','东宇','唐东宇',NULL,'2015-05-07 17:32:02',NULL,NULL),(9,'hardyleung','管理员','hardyleung@poicom.net','13715657082','$shiro1$SHA-256$500000$d6idmCJqKa2J5svJXXaHfA==$4XFsiUXiiWECe4XOaKLU9P/Pr8CY/SCehXROArUvu0o=','default_hasher','','/admin/assets/avatars/avatar4.png','梁','润河','梁润河',NULL,'2015-05-18 16:04:11',NULL,NULL),(10,'douglaswong','管理员','douglaswong@poicom.net','18825371670','$shiro1$SHA-256$500000$yUmNMQFUnbLdwOMBtvNoDQ==$GCcjbVtm51O9JacQbH5lp/ebu0iJ4Vte1W2cdESSFPo=','default_hasher','','/admin/assets/avatars/avatar4.png','黄','德赏','黄德赏',NULL,'2015-05-18 16:11:25',NULL,NULL),(11,'mansonng','管理员','mansonng@poicom.net','13726076826','$shiro1$SHA-256$500000$YCwZ+bqcBVXIATr5iu3xCg==$RH2RR4ZNfrInxwzHdoSZftNvVfaUvZ5P9+hZNWyiKUo=','default_hasher','','/admin/assets/avatars/avatar4.png','吴','明桂','吴明桂',NULL,'2015-05-18 16:14:06',NULL,NULL),(12,'joewong','管理员','joewong@poicom.net','13813138138','$shiro1$SHA-256$500000$EOdqU8VVihKMbaJ8JID8QA==$M/+4etYhvvnBSOKRkDOUsZ+EICEuCdiLuBXa/TU3/uw=','default_hasher','','/admin/assets/avatars/avatar4.png','黄','卓辉','黄卓辉',NULL,'2015-05-18 16:14:47',NULL,NULL),(13,'stevenshen','管理员','stevenshen@poicom.net','15907640488','$shiro1$SHA-256$500000$fAeMe/KMPpYV5h4qQanlDQ==$4jH2eyYbBRhqAa2RRE1n9x3i3NFtXHXgif/bnkVX6QU=','default_hasher','','/admin/assets/avatars/avatar4.png','沈','金龙','沈金龙',NULL,'2015-05-18 16:15:30',NULL,NULL);
 
 #
 # Structure for table "sec_user_info"
@@ -431,13 +431,13 @@ CREATE TABLE `sec_user_info` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='用户-信息';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='用户-信息';
 
 #
 # Data for table "sec_user_info"
 #
 
-INSERT INTO `sec_user_info` VALUES (1,1,0,0,1,9,1,'2015-03-11 10:42:24','2015-04-30 14:47:39',NULL),(2,4,1,0,2,9,5,'2015-03-13 15:35:03','2015-04-30 14:47:50',NULL),(3,3,1,0,1,4,4,'2015-03-16 12:18:29','2015-04-29 11:06:31',NULL),(4,2,1,0,1,4,2,'2015-03-16 17:18:17','2015-04-29 11:06:31',NULL),(7,7,3,0,1,9,5,'2015-05-07 17:32:02',NULL,NULL),(8,8,1,1,9,9,6,'2015-05-14 14:30:59',NULL,NULL);
+INSERT INTO `sec_user_info` VALUES (1,1,0,0,1,9,1,'2015-03-11 10:42:24','2015-04-30 14:47:39',NULL),(2,4,1,0,1,9,5,'2015-03-13 15:35:03','2015-04-30 14:47:50',NULL),(3,3,1,0,1,4,4,'2015-03-16 12:18:29','2015-04-29 11:06:31',NULL),(4,2,1,0,1,4,2,'2015-03-16 17:18:17','2015-04-29 11:06:31',NULL),(7,7,3,0,1,9,5,'2015-05-07 17:32:02',NULL,NULL),(9,9,1,0,1,9,1,'2015-05-18 16:04:11',NULL,NULL),(10,10,1,0,4,4,5,'2015-05-18 16:11:25',NULL,NULL),(11,11,1,0,5,5,5,'2015-05-18 16:14:06',NULL,NULL),(12,12,1,0,1,12,5,'2015-05-18 16:14:47',NULL,NULL),(13,13,1,0,1,12,5,'2015-05-18 16:15:30',NULL,NULL);
 
 #
 # Structure for table "sec_user_role"
@@ -449,10 +449,10 @@ CREATE TABLE `sec_user_role` (
   `user_id` bigint(20) NOT NULL,
   `role_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COMMENT='用户-角色';
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8 COMMENT='用户-角色';
 
 #
 # Data for table "sec_user_role"
 #
 
-INSERT INTO `sec_user_role` VALUES (1,1,1),(14,4,4),(26,3,3),(30,7,2),(33,2,3),(34,8,4);
+INSERT INTO `sec_user_role` VALUES (1,1,1),(14,4,4),(26,3,3),(34,8,4),(35,9,2),(36,7,4),(37,10,3),(38,11,3),(39,12,4),(41,13,4),(43,2,3);

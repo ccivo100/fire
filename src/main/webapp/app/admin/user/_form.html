@@ -1,8 +1,9 @@
 <div class="row">
 	<input type="hidden" name="branch.id" value="${(branch.id)!}" />
+	<input type="hidden" name="branchid" value="${(branchid)!}" />
 	
 	<div class="form-group">
-		<label class="col-xs-2 control-label">用户名</label>
+		<label class="col-xs-2 control-label">账号</label>
 		<div class="col-xs-4">
 			<input type="text" class="form-control" name="user.username" value="${(user.username)!}" placeholder="用户名" autofocus  required autocomplete="off"/>
 		</div>
@@ -74,6 +75,7 @@
 		</#if>
 		</div>
 	</div>
+	<@shiro.hasRole name="R_ADMIN">
 	<div class="form-group">
 		<label class="col-xs-2 control-label">单位</label>
 		<div class="col-xs-4">
@@ -92,6 +94,20 @@
 		</#if>
 		</div>
 	</div>
+	</@shiro.hasRole>
+	<@shiro.hasRole name="R_MANAGER">
+	<div class="form-group">
+		<label class="col-xs-2 control-label">单位</label>
+		<div class="col-xs-4">
+				<select id="selectBranch" name="selectBranch" class="form-control"  required disabled>
+					<option value="" selected="selected">请选择</option>
+					<#list branchList as branch>
+					<option value="${(branch.id)!}" <#if (branchid?number)=branch.id>selected="selected"<#else></#if>>${(branch.name)!}	</option>
+					</#list>
+				</select>
+		</div>
+	</div>
+	</@shiro.hasRole>
 
 	<div class="form-group">
 		<label class="col-xs-2 control-label">部门</label>

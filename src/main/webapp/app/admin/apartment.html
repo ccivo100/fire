@@ -33,13 +33,16 @@
 					</#if>
 					</b>
 				</td>
-				<td><a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/editapartment?id=${(apartments.id)!}" >编辑</a>
+				<td>
+				<div class="action-buttons">
+				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/editapartment?id=${(apartments.id)!}" >编辑</a>
 				<#if apartments.deleted_at??>
 				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/onapartment?id=${(apartments.id)!}" >启用</a>
 				<#else>
 				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/offapartment?id=${(apartments.id)!}" >禁用</a>
 				</#if>
 				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/addapartment?id=${(apartments.id)!}" >添加</a>
+				</div>
 				</td>
 			</tr>
 			<#list apartments.children as apartment>
@@ -57,12 +60,14 @@
 					</b>
 				</td>
 				<td>
+				<div class="action-buttons">
 				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/editapartment?id=${(apartment.id)!}" >编辑</a>
 				<#if apartment.deleted_at??>
 				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/onapartment?id=${(apartment.id)!}" >启用</a>
 				<#else>
 				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/offapartment?id=${(apartment.id)!}" >禁用</a>
 				</#if>
+				</div>
 				</td>
 			</tr>
 			</#list>

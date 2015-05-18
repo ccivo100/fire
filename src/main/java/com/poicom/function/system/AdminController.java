@@ -308,15 +308,23 @@ public class AdminController extends Controller {
 	 * 用户管理
 	 */
 	public void user(){
+		String w = "";
+		if(SubjectKit.getSubject().hasRole("R_ADMIN")){
+			
+		}else{
+			User cUser=SubjectKit.getUser();
+			long branchid=UserInfo.dao.get("user_id",cUser.get("id")).getLong("branch_id");
+			w=" and branch.id="+branchid;
+		}
 		
 		Page<User> userPage;
 		String orderby="  ORDER BY user.id ";
 		if(ValidateKit.isNullOrEmpty(getPara("username"))){
-			String where=" 1=1 ";
+			String where=" 1=1 "+w;
 			userPage=User.dao.getAllUserPage(getParaToInt(0,1), 10,where+orderby);
 		}else{
 			String condition ="%"+getPara("username").trim()+"%";
-			String where=" user.full_name like ?  ";
+			String where=" user.full_name like ?  "+w;
 			userPage=User.dao.getAllUserPage(getParaToInt(0,1), 10,where+orderby,condition);
 			setAttr("username",getPara("username").trim());
 		}
@@ -334,6 +342,14 @@ public class AdminController extends Controller {
 	}
 	
 	public void adduser(){
+		
+		if(SubjectKit.getSubject().hasRole("R_ADMIN")){
+			
+		}else{
+			User subUser=SubjectKit.getUser();
+			long branchid=UserInfo.dao.get("user_id",subUser.get("id")).getLong("branch_id");
+			setAttr("branchid",branchid);
+		}
 		
 		setAttr("branchList",Branch.dao.getAllBranch());
 		setAttr("apartmentList",Apartment.dao.getAllApartment());
@@ -361,9 +377,20 @@ public class AdminController extends Controller {
 	 */
 	@Before(AdminValidator.class)
 	public void doadduser(){
+		
+		User subUser=SubjectKit.getUser();
+		long branchid;
+		
+		if(SubjectKit.getSubject().hasRole("R_ADMIN")){
+			branchid=getParaToInt("selectBranch");
+		}else{
+			branchid=UserInfo.dao.get("user_id",subUser.get("id")).getLong("branch_id");
+		}
+		
+		
 		User user=getModel(User.class);
 		user.set("username", WebKit.delHTMLTag(user.getStr("username")));
-		User subUser=SubjectKit.getUser();
+		
 		boolean result=false;
 		HasherInfo hasher = HasherKit.hash("123456");
 		user.set("password", hasher.getHashResult())
@@ -383,7 +410,7 @@ public class AdminController extends Controller {
 			userinfo.set("user_id", user.get("id"))
 			.set("creator_id", subUser.get("id"))
 			.set("gender", getParaToInt("selectGender"))
-			.set("branch_id", getParaToInt("selectApartment"))
+			.set("branch_id", branchid)
 			.set("apartment_id", getParaToInt("selectApartment"))
 			.set("position_id", getParaToInt("selectPosition"));
 			userinfo.save();
@@ -889,17 +916,22 @@ public class AdminController extends Controller {
 		
 	}
 	
+	
 	public void order(){
-		
+		List<Record> ordersList;
+		String where=" 1=1 ";
+		String orderby=" ORDER BY o.offer_at DESC";
+		ordersList=Order.dao.findAdminOrders(where, orderby);
+		setAttr("ordersList",ordersList);
 	}
 	
 	public void loadOrder(){
 		List<Record> ordersList;
-		String where="";
-		String orderby="";
+		String where=" 1=1 ";
+		String orderby=" ORDER BY o.offer_at DESC";
 		ordersList=Order.dao.findAdminOrders(where, orderby);
 		
-		JsonKit.toJson(ordersList);
+		renderJson(ordersList);
 	}
 	
 	

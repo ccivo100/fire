@@ -64,7 +64,7 @@ $(document).ready(function() {
 		var btn = $(this).button('loading');
 		setTimeout(function() {
 			btn.button('reset');
-		}, 3000);
+		}, 2000);
 	});
 	
 });

@@ -11013,7 +11013,8 @@
 				 *      } );
 				 *    } );
 				 */
-				"sNext": "Next",
+				/*"sNext": "Next",*/
+				"sNext": "下一页",
 	
 	
 				/**
@@ -11036,7 +11037,8 @@
 				 *      } );
 				 *    } );
 				 */
-				"sPrevious": "Previous"
+				/*"sPrevious": "Previous"*/
+				"sPrevious": "上一页"
 			},
 	
 			/**
@@ -11059,7 +11061,8 @@
 			 *      } );
 			 *    } );
 			 */
-			"sEmptyTable": "No data available in table",
+			/*"sEmptyTable": "No data available in table",*/
+			"sEmptyTable": "表格数据为空",
 	
 	
 			/**
@@ -11091,7 +11094,8 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+			/*"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",*/
+			"sInfo": "第 _START_ 至 _END_ 条记录，共 _TOTAL_ 条",
 	
 	
 			/**
@@ -11112,7 +11116,8 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoEmpty": "Showing 0 to 0 of 0 entries",
+			/*"sInfoEmpty": "Showing 0 to 0 of 0 entries",*/
+			"sInfoEmpty": "第 0 至 0 条记录，共 0 条",
 	
 	
 			/**
@@ -11134,7 +11139,8 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoFiltered": "(filtered from _MAX_ total entries)",
+			/*"sInfoFiltered": "(filtered from _MAX_ total entries)",*/
+			"sInfoFiltered": "(总共 _MAX_ 条)",
 	
 	
 			/**
@@ -11276,7 +11282,8 @@
 			 *      } );
 			 *    } );
 			 */
-			"sLoadingRecords": "Loading...",
+			/*"sLoadingRecords": "Loading...",*/
+			"sLoadingRecords": "载入中...",
 	
 	
 			/**
@@ -11297,7 +11304,8 @@
 			 *      } );
 			 *    } );
 			 */
-			"sProcessing": "Processing...",
+			/*"sProcessing": "Processing...",*/
+			"sProcessing": "处理中...",
 	
 	
 			/**
@@ -11332,7 +11340,8 @@
 			 *      } );
 			 *    } );
 			 */
-			"sSearch": "Search:",
+			/*"sSearch": "Search:",*/
+			"sSearch": "查询:",
 	
 	
 			/**
@@ -11390,7 +11399,8 @@
 			 *      } );
 			 *    } );
 			 */
-			"sZeroRecords": "No matching records found"
+			/*"sZeroRecords": "No matching records found"*/
+			"sZeroRecords": "查询不到该记录"
 		},
 	
 	

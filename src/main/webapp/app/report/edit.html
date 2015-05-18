@@ -26,7 +26,11 @@ $(document).ready(function(){
 		});
 	});
 	
-	$("#recall").click(function(){
+	$('#recall').click(function(){
+		$('#sureModal').modal();
+	});
+		
+	$("#sure").click(function(){
 		$.ajax({
 			type:"post",
 			url:"${ContextPath}/report/recall",
@@ -35,6 +39,7 @@ $(document).ready(function(){
 			},
 			dataType : "json",
 			success:function(msg){
+				$('#sureModal').modal('hide');
 				alertModal(msg.state);
 				$('#alertModal').modal();
 				$('#alertModal').on('hidden.bs.modal', function () {
@@ -73,6 +78,9 @@ function alertModal(msg){
 	$("#modal-title-content").html("提示!");  
 	$("#modal-body-content").html(msg);  
 }
+
+
+
 </script>
 </#assign>
 

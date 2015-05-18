@@ -112,7 +112,7 @@ public class Order extends Model<Order> {
 	 * @return
 	 */
 	public List<Record> findAdminOrders(String where,String orderby,Object... paras){
-		return Db.find(SqlKit.sql("order.findOfferQueryBySelect"),
+		return Db.find(SqlKit.sql("order.findOfferQueryBySelect")+
 				SqlKit.sql("order.findOfferQueryByFrom") + getWhere(where)
 						+ orderby, paras);
 	}

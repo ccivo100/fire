@@ -46,12 +46,15 @@
 					</#if>
 					</b>
 				</td>
-				<td><a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/editposition?id=${(position.id)!}" >编辑</a>
+				<td>
+				<div class="action-buttons">
+				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/editposition?id=${(position.id)!}" >编辑</a>
 				<#if position.deleted_at??>
 				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/onposition?id=${(position.id)!}" >启用</a>
 				<#else>
 				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/offposition?id=${(position.id)!}" >禁用</a>
 				</#if>
+				</div>
 				</td>
 			</tr>
 			</#list>

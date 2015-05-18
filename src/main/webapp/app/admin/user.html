@@ -60,11 +60,13 @@
 				<td>
 					<#if (user.uuserid?number)==1>
 					<#else>
+						<div class="action-buttons">
 						<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/edituser?id=${(user.uuserid)!}" >设置</a>
 						<#if user.udeletetime??>
 						<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/onuser?id=${(user.uuserid)!}" >启用</a>
 						<#else>
 						<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/offuser?id=${(user.uuserid)!}" >禁用</a>
+						</div>
 						</#if>
 					</#if>
 				
