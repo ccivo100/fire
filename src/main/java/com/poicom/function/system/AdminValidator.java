@@ -12,6 +12,7 @@ import cn.dreampie.shiro.hasher.HasherKit;
 
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
+import com.poicom.common.kit.ValiKit;
 import com.poicom.function.app.model.Apartment;
 import com.poicom.function.app.model.Branch;
 import com.poicom.function.app.model.ErrorType;
@@ -164,8 +165,8 @@ public class AdminValidator extends Validator{
 		//新增用户验证
 		else if(getActionKey().equals("/admin/doadduser")){
 			User user=User.dao.findFirstBy("username=?", c.getPara("user.username").trim());
-			if(!ValidateKit.isLength(c.getPara("user.username"), 2, 16)){
-				addError("usernameMsg","用户名长度应2~16个字符！");
+			if(!ValidateKit.isGeneral(c.getPara("user.username"), 2, 16)){
+				addError("usernameMsg","用户名为英文字母 、数字和下划线，2~16个字符！");
 			}
 			if(!ValidateKit.isNullOrEmpty(user)){
 				addError("usernameMsg","该用户名已存在！");
@@ -176,7 +177,7 @@ public class AdminValidator extends Validator{
 			if(ValidateKit.isNullOrEmpty(c.getPara("selectGender"))){
 				addError("genderMsg","性别不能为空！");
 			}
-			if(!ValidateKit.isPhone(c.getPara("user.phone"))){
+			if(!ValiKit.isPhone(c.getPara("user.phone"))){
 				addError("phoneMsg","联系方式格式不正确！");
 			}
 			if(!ValidateKit.isEmail(c.getPara("user.email"))){

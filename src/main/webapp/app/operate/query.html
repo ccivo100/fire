@@ -2,16 +2,39 @@
 
 <#assign pageCss>
 <link rel="stylesheet" href="${ContextPath}/admin/assets/css/signin.css" />
+<link rel="stylesheet" href="${ContextPath}/admin/assets/css/jquery-ui.css" />
 </#assign>
 <#assign pageJavascript>
+<script src="${ContextPath}/admin/assets/js/jquery-ui.js"></script>
+<script src="${ContextPath}/admin/assets/js/jquery.ui.touch-punch.js"></script>
 <script src="${ContextPath}/admin/assets/js/tree.js"></script>
 <script type="text/javascript">
 jQuery(function($){
 	$(".created_at").each(function(){
 		var $created_at=$(this).attr("title");
 		var $format_time=formatDateTime($created_at);
-		$(this).html($format_time);
+		$(this).html('<i class="ace-icon fa fa-clock-o bigger-110"></i> '+$format_time);
+		$(this).tooltip({
+			show: {
+				effect: "slideDown",
+				delay: 250
+			}
+		});
 	});
+});
+
+$(document).ready(function() {
+	$('.timeline-info').mouseenter(function() {
+		$(this).popover('show');
+	});
+	$('.timeline-info').mouseleave(function() {
+		$(this).popover('hide');
+	});
+});
+
+
+$(function () { 
+	$("[data-toggle='popover']").popover({html : true });
 });
 </script>
 </#assign>
@@ -23,8 +46,7 @@ jQuery(function($){
 	</h1>
 </div>
  <div class="row">
-	<div class="col-md-9">
-	
+	<div class="col-md-8 col-sm-offset-1">
 		<!-- 故障描述 -->
 		<div class="jf_panel">
 			<div class="jf_header ">
@@ -39,8 +61,7 @@ jQuery(function($){
 				<span class="label label-danger">未处理</span>
 				</#if>
 				
-				<span class="jf_topic_full_title"><h1>${(otitle)!}</h1></span>
-				
+				<span class="jf_topic_full_title">${(otitle)!}</span>
 				
 				<br></br>
 				<span class="changes">
@@ -52,40 +73,13 @@ jQuery(function($){
 			</div>
 			<div class="jf_inner jf_topic">
 				<div style="margin: 30px;">
-				
-				<h3>${(odescription)!}</h3>
-				</div>
-				
-			</div>
-		</div>
-		
-		<!-- 处理情况 -->
-		<div class="jf_panel">
-			<div class="jf_header ">
-				处理情况
-			</div>
-			<#list commentList as comments>
-			<div class="jf_inner jf_topic">
-				<span class="changes">
-    						<span style="margin: 15px;">处理人：<span class="label label-info ">${(comments.ufull_name)!}</span></span>
-    						<span style="margin: 15px;">电话：<span class="label label-info ">${(comments.uphone)!}</span></span>
-    						<span style="margin: 15px;" title="${(comments.add_at)!}">处理时间：<span class="label label-info ">${(comments.add_at)!}</span></span>
-    						<span class="created_at" style="margin: 5px;float:right;" title="${(comments.created_at)!}"></span>
-    						<br>
-    						<span style="margin: 15px;">单位：<span class="label label-info ">${(comments.bname)!}</span></span>
-    						<span style="margin: 15px;">部门：<span class="label label-info ">${(comments.aname)!}</span></span>
-    						<span style="margin: 15px;">职位：<span class="label label-info ">${(comments.pname)!}</span></span>
-    						
-    			</span>
-				<div style="margin: 30px;">
-					<h3>${(comments.context)!}</h3>
+					<h3>${(odescription)!}</h3>
 				</div>
 			</div>
-			</#list>
 		</div>
+		<div class="hr hr-12 hr-double"></div>
 	</div>
-	
-	<div class="col-md-3 hidden-xs hidden-sm" style="padding-left: 0px;">
+	<div class="col-md-3 hidden-xs hidden-sm" style="padding-left: 0px;" >
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="widget-box transparent">
@@ -140,6 +134,57 @@ jQuery(function($){
 		</div>
 	</div>
 </div>
+<div class="row">
+	<div class="col-xs-12 col-sm-8 col-sm-offset-1">
+		<div class="timeline-container">
+			<div class="timeline-label">
+				<span class="label label-primary arrowed-in-right label-lg">处理情况</span>
+			</div>
+			<div class="timeline-items">
+				<#list commentList as comments>
+				<div class="timeline-item clearfix">
+					<div class="timeline-info" title="个人信息"  data-container="body" data-toggle="popover" data-placement="left" 
+    							data-content="电话：${(comments.uphone)!}<br/>单位：${(comments.bname)!}<br/>部门：${(comments.aname)!}<br/>职位：${(comments.pname)!}">
+						<img src="${ContextPath}${(comments.uavatar)!}" alt="Susan't Avatar"></img>
+					</div>
+					<div class="widget-box transparent">
+						<div class="widget-header widget-header-small">
+							<h5 class="widget-title smaller">
+								${(comments.ufull_name)!}
+								<span class="grey"></span>
+							</h5>
+							<span class="created_at widget-toolbar no-border" title="${(comments.created_at)!}"><i class="ace-icon fa fa-clock-o bigger-110"></i> 1天前</span>
+						</div>
+						<div class="widget-body">
+							<div class="widget-main">
+							处理时间：<span class="red">${(comments.add_at)!} </span>
+							<div class="space-6"></div>
+							处理意见：<span class="green">${(comments.context)!}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				</#list>
+			</div>
+			<#if commentList?has_content>
+			<#else>
+			<div class="timeline-items">
+				<div class="timeline-item clearfix">
+					<div class="widget-box transparent">
+						<div class="widget-header widget-header-small">
+						</div>
+						<div class="widget-body">
+							<div class="widget-main">
+							<span class="red "><h4>空空如也~~</h4></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</#if>
+		</div>
+	</div>
 
+</div>
 
 </@mainlayout>

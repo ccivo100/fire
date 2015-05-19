@@ -11331,3 +11331,111 @@ The failing instruction (print stack trace for 5 more):
 
 2015-05-18 18:19:01
 [WARN]-[Thread: qtp14054561-33]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 09:58:03
+[WARN]-[Thread: qtp21692478-30]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 09:58:20
+[WARN]-[Thread: qtp21692478-28]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 10:26:48
+[WARN]-[Thread: qtp21692478-28]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /admin/order
+
+2015-05-19 10:26:52
+[WARN]-[Thread: qtp21692478-28]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 11:35:47
+[WARN]-[Thread: qtp21692478-30]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 11:38:55
+[WARN]-[Thread: qtp21692478-30]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 11:39:09
+[WARN]-[Thread: qtp21692478-28]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 12:20:52
+[WARN]-[Thread: main]-[net.sf.ehcache.store.disk.DiskStorageFactory.<init>()]: The index for data file C:\Users\poicom7\AppData\Local\Temp\shiro-active%0053ession%0043ache.data is out of date, probably due to an unclean shutdown. Deleting index file C:\Users\poicom7\AppData\Local\Temp\shiro-active%0053ession%0043ache.index
+
+2015-05-19 12:20:52
+[WARN]-[Thread: main]-[net.sf.ehcache.store.disk.DiskStorageFactory.<init>()]: The index for data file C:\Users\poicom7\AppData\Local\Temp\jdbc%0052ealm%002eauthorization%0043ache.data is out of date, probably due to an unclean shutdown. Deleting index file C:\Users\poicom7\AppData\Local\Temp\jdbc%0052ealm%002eauthorization%0043ache.index
+
+2015-05-19 12:21:23
+[WARN]-[Thread: qtp5694614-31]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 12:25:02
+[WARN]-[Thread: qtp5694614-36]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 12:25:31
+[WARN]-[Thread: qtp16581326-33]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 12:27:43
+[WARN]-[Thread: qtp16581326-32]-[com.jfinal.core.ActionHandler.handle()]: 403 Forbidden: /user/center
+
+2015-05-19 12:27:59
+[WARN]-[Thread: qtp16581326-27]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 12:28:19
+[WARN]-[Thread: qtp16581326-33]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 12:30:15
+[WARN]-[Thread: qtp16581326-31]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 12:30:39
+[WARN]-[Thread: qtp16581326-31]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 12:32:42
+[WARN]-[Thread: qtp16581326-29]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 15:40:10
+[WARN]-[Thread: qtp16581326-47]-[org.eclipse.jetty.http.HttpGenerator.addContent()]: Ignoring extra content ?
+
+2015-05-19 16:48:58
+[WARN]-[Thread: qtp16581326-99]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 16:49:34
+[WARN]-[Thread: qtp16581326-99]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 16:49:35
+[WARN]-[Thread: qtp16581326-97]-[org.eclipse.jetty.http.HttpGenerator.addContent()]: Ignoring extra content ?
+
+2015-05-19 16:49:40
+[WARN]-[Thread: qtp16581326-89]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 16:49:41
+[WARN]-[Thread: qtp16581326-55]-[org.eclipse.jetty.http.HttpGenerator.addContent()]: Ignoring extra content ?
+
+2015-05-19 16:49:50
+[WARN]-[Thread: qtp16581326-102]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 17:11:35
+[WARN]-[Thread: qtp16581326-99]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 17:11:35
+[WARN]-[Thread: qtp16581326-105]-[org.eclipse.jetty.http.HttpGenerator.addContent()]: Ignoring extra content ?
+
+2015-05-19 17:11:43
+[WARN]-[Thread: qtp16581326-99]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 17:11:43
+[WARN]-[Thread: qtp16581326-89]-[org.eclipse.jetty.http.HttpGenerator.addContent()]: Ignoring extra content ?
+
+2015-05-19 17:11:49
+[WARN]-[Thread: qtp16581326-105]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 17:12:33
+[WARN]-[Thread: qtp16581326-99]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 17:12:33
+[WARN]-[Thread: qtp16581326-105]-[org.eclipse.jetty.http.HttpGenerator.addContent()]: Ignoring extra content ?
+
+2015-05-19 17:12:39
+[WARN]-[Thread: qtp16581326-107]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 17:49:13
+[WARN]-[Thread: qtp16581326-107]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 17:56:20
+[WARN]-[Thread: qtp16581326-107]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe
+
+2015-05-19 17:58:36
+[WARN]-[Thread: qtp16581326-105]-[com.jfinal.core.ActionHandler.handle()]: 401 Unauthorized: /user/contactMe

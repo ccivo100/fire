@@ -92,7 +92,7 @@
   
   	<sql id="findCommentsBySelect">
   	SELECT comments.id, comments.context ,comments.add_at ,comments.created_at,user1.uid,user1.ufull_name,user1.uphone,
-	user1.bname,user1.apartmentid,user1.apartmentpid,user1.aname,user1.pname 
+	user1.bname,user1.apartmentid,user1.apartmentpid,user1.aname,user1.pname ,user1.uavatar
   	</sql>
   	<sql id="findCommentsByFrom">
   	FROM com_comment AS comments
@@ -100,7 +100,7 @@
 		SELECT 
 		user.id uid,user.full_name ufull_name,user.phone uphone,
 		branch.name bname,apartment.id apartmentid,apartment.pid apartmentpid,
-		apartment.name aname,position.name pname
+		apartment.name aname,position.name pname,user.avatar_url uavatar
 		FROM sec_user_info AS userinfo
 		LEFT OUTER JOIN  sec_user AS user ON userinfo.user_id=user.id
 		LEFT OUTER JOIN  com_branch AS branch ON userinfo.branch_id=branch.id

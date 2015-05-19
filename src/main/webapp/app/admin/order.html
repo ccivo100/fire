@@ -5,6 +5,7 @@
 <!-- page specific plugin scripts -->
 		<script src="${ContextPath}/admin/assets/js/jquery.dataTables.js"></script>
 		<script src="${ContextPath}/admin/assets/js/jquery.dataTables.bootstrap.js"></script>
+		<script src="${ContextPath}/admin/assets/js/data-tables/dataTables.tableTools.js"></script>
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
 			jQuery(function($) {
@@ -75,7 +76,9 @@
 				};
 			});
 			
+			
 			$(document).ready(function(){
+				TableTools.DEFAULTS.aButtons = ["csv", "xls"];
 			    $('#orders').dataTable({
 			    	"bPaginate": true,
 			    	"language": {
@@ -86,13 +89,19 @@
 			             '<option value="-1">全部</option>'+
 			             '</select> 条记录'
 			         },
+			         "iDisplayLength": 10,
+			         "dom": 'T<"clear">lfrtip',
+			         "tableTools":{
+			         	"sSwfPath": "../../Content/CSS/copy_csv_xls_pdf.swf"
+			         },
 			    });
-			
 			});
 			
 		</script>
 </#assign>
-
+<#assign pageCss>
+<link rel="stylesheet" href="${ContextPath}/admin/assets/css/data-tables/dataTables.tableTools.css" />
+</#assign>
 
 <@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="orderFlag-simplesListFlag">
 

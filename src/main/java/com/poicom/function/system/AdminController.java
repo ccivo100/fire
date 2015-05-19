@@ -27,6 +27,7 @@ import com.jfinal.plugin.activerecord.tx.Tx;
 import com.jfinal.plugin.ehcache.CacheInterceptor;
 import com.jfinal.plugin.ehcache.CacheName;
 import com.jfinal.plugin.ehcache.EvictInterceptor;
+import com.poicom.common.kit.ValiKit;
 import com.poicom.common.kit.WebKit;
 import com.poicom.function.app.model.Apartment;
 import com.poicom.function.app.model.ApartmentType;
@@ -446,7 +447,7 @@ public class AdminController extends Controller {
 		long selectApartment=getParaToLong("selectApartment");
 		long selectPosition=getParaToLong("selectPosition");
 		
-		if(!ValidateKit.isPhone(uphone)){
+		if(!ValiKit.isPhone(uphone)){
 			renderJson("state","电话格式不正确！");
 		}else if(!ValidateKit.isEmail(uemail)){
 			renderJson("state","邮箱格式不正确！");

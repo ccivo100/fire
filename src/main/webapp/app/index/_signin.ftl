@@ -39,17 +39,17 @@
 					
 					<div class="input-group input-sign">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-						<input id="username" class="form-control form-height" type="text" name="username" value="${(username)!}" placeholder="用户名" required autofocus autocomplete="off">
+						<input  class="form-control form-height" type="text" name="username" value="${(username)!}" placeholder="用户名" required autofocus autocomplete="off">
 					</div>
 					
 					<div class="input-group input-sign">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-						<input id="password" class="form-control form-height" type="password" name="password" value="${(password)!}" placeholder="密码" required >
+						<input  class="form-control form-height" type="password" name="password" value="${(password)!}" placeholder="密码" required >
 					</div>
 					
 				    <div class="input-group input-sign">
 				    	<span class="input-group-addon"><i class="glyphicon glyphicon-repeat"></i></span>
-				      	<input id="captcha" type="text" name="captcha" value="" class="form-control captcha form-height" ng-minlength="4" ng-maxlength="4"
+				      	<input  type="text" name="captcha" value="" class="form-control captcha form-height" ng-minlength="4" ng-maxlength="4"
 				             placeholder="验证码" required autocomplete="off" style="width:90px">
 				        <a style="float:right;" href="javascript:ref_captcha()">
 				    	<img id="captcha" class="captcha form-height" src="${ContextPath}/captcha?width=128&height=45&fontsize=30&time=${.now?time}">
@@ -171,24 +171,7 @@ function ref_captcha(){
 	});
 }
 
-$(document).ready(function(){
 
-	var username=$("#username").val();
-	var password=$("#password").val();
-	var captcha=$("#captcha").val();
-	username = $.trim(username);
-	password = $.trim(password);
-	captcha = $.trim(captcha);
-	$("#username").click(function(){
-		if(username.length>1){
-			$("#submit").attr("data-loading-text","正在提交...");
-		}
-	});
-	
-	
-	
-	
-}
 
 </script>
 </@layout>
