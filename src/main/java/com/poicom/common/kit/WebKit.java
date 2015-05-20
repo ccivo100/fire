@@ -231,9 +231,9 @@ public class WebKit {
 		sourcestr = sourcestr.replaceAll("\\x20", "&nbsp;");// 空格
 		sourcestr = sourcestr.replaceAll("\\x22", "&quot;");// "
 
-		sourcestr = sourcestr.replaceAll("\r\n", "<br>");// 回车换行
-		sourcestr = sourcestr.replaceAll("\r", "<br>");// 回车
-		sourcestr = sourcestr.replaceAll("\n", "<br>");// 换行
+		//sourcestr = sourcestr.replaceAll("\r\n", "<br>");// 回车换行
+		//sourcestr = sourcestr.replaceAll("\r", "<br>");// 回车
+		//sourcestr = sourcestr.replaceAll("\n", "<br>");// 换行
 		return sourcestr;
 	}
 	

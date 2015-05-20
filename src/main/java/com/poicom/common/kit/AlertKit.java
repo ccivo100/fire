@@ -131,7 +131,7 @@ public class AlertKit {
 						+ offer.getStr("ufullname") + " ("
 						+ offer.getStr("uphone") + ") 发来故障工单。<br/>")
 		.append("故障内容："+description+"<br/>")
-		.append("请及时处理。【一点通】");
+		.append("请及时处理。");
 		
 		return body;
 		
@@ -145,7 +145,7 @@ public class AlertKit {
 		//.append(" 于 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms)+" ")
 		.append("发来故障工单。<br/>")
 		.append("故障内容为："+description+"<br/>")
-		.append("请及时处理。【一点通】");
+		.append("请及时处理。");
 		
 		return body;
 	}

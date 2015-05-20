@@ -926,6 +926,14 @@ public class AdminController extends Controller {
 		setAttr("ordersList",ordersList);
 	}
 	
+	public void jqorder(){
+		List<Record> ordersList;
+		String where=" 1=1 ";
+		String orderby=" ORDER BY o.offer_at DESC";
+		ordersList=Order.dao.findAdminOrders(where, orderby);
+		setAttr("ordersList",ordersList);
+	}
+	
 	public void loadOrder(){
 		List<Record> ordersList;
 		String where=" 1=1 ";
@@ -933,6 +941,10 @@ public class AdminController extends Controller {
 		ordersList=Order.dao.findAdminOrders(where, orderby);
 		
 		renderJson(ordersList);
+	}
+	
+	public void deleteOrder(){
+		
 	}
 	
 	

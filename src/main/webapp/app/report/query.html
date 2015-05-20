@@ -154,7 +154,7 @@ $(function () {
 							<div class="widget-box transparent">
 								<div class="widget-header widget-header-small">
 									<h5 class="widget-title smaller">
-										${(comments.ufull_name)!}
+										${(comments_index+1)!}楼：${(comments.ufull_name)!}
 										<span class="grey"></span>
 									</h5>
 									<span class="created_at widget-toolbar no-border" title="${(comments.created_at)!}"><i class="ace-icon fa fa-clock-o bigger-110"></i> 1天前</span>
@@ -163,7 +163,7 @@ $(function () {
 									<div class="widget-main">
 									处理时间：<span class="red">${(comments.add_at)!} </span>
 									<div class="space-6"></div>
-									处理意见：<span class="green">${(comments.context)!}</span>
+									处理意见：<div style="word-wrap:break-word;"><span class="green">${(comments.context)!}</span></div>
 									</div>
 								</div>
 							</div>

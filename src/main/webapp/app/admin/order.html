@@ -103,7 +103,7 @@
 <link rel="stylesheet" href="${ContextPath}/admin/assets/css/data-tables/dataTables.tableTools.css" />
 </#assign>
 
-<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="orderFlag-simplesListFlag">
+<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="orderFlag-ordersListFlag">
 
 <div class="page-header">
 	<h1>
@@ -144,7 +144,10 @@
 
 								<td class="hidden-480">
 									<b>
-									<#if order.status=0>
+									<#if order.deleted_at??>
+									<span class="red">已撤销</span>
+									
+									<#elseif order.status=0>
 									<span class="green">已处理</span>
 									<#elseif order.status=1>
 									<span class="orange">处理中</span>

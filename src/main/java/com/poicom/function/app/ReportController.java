@@ -349,7 +349,7 @@ public class ReportController extends JFController{
 			Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
 			
 			//邮件内容
-			String body=AlertKit.getMailBody(userinfo,selectDeal,o,getPara("odescription")).toString();
+			String body=AlertKit.getMailBody(userinfo,selectDeal,o,WebKit.getHTMLToString(getPara("odescription"))).toString();
 			//发送邮件、短信线程
 			AlertKit alertKit=new AlertKit();
 			//发送邮件
