@@ -395,7 +395,7 @@ public class AlertKit {
 	 * @param phone
 	 */
 	public static void sendSms(String content,String... phone){
-		
+		 
 		System.out.println("进入发送短信主方法");
 		//电话列表...
 		String phones=phoneFormat(phone);
