@@ -3,101 +3,69 @@
 
 <#assign pageJavascript>
 <!-- page specific plugin scripts -->
-		<script src="${ContextPath}/admin/assets/js/jquery.dataTables.js"></script>
-		<script src="${ContextPath}/admin/assets/js/jquery.dataTables.bootstrap.js"></script>
-		<script src="${ContextPath}/admin/assets/js/data-tables/dataTables.tableTools.js"></script>
-		<!-- inline scripts related to this page -->
-		<script type="text/javascript">
-			jQuery(function($) {
-				var oTable1 = 
-				$('#sample-table-2')
-				//.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
-				.dataTable( {
-					bAutoWidth: false,
-					"aoColumns": [
-					  { "bSortable": false },
-					  null, null,null, null, null,
-					  { "bSortable": false }
-					],
-					"aaSorting": [],
-			
-					//,
-					//"sScrollY": "200px",
-					//"bPaginate": false,
-			
-					//"sScrollX": "100%",
-					//"sScrollXInner": "120%",
-					//"bScrollCollapse": true,
-					//Note: if you are applying horizontal scrolling (sScrollX) on a ".table-bordered"
-					//you may want to wrap the table inside a "div.dataTables_borderWrap" element
-			
-					//"iDisplayLength": 50
-			    } );
-				/**
-				var tableTools = new $.fn.dataTable.TableTools( oTable1, {
-					"sSwfPath": "../../copy_csv_xls_pdf.swf",
-			        "buttons": [
-			            "copy",
-			            "csv",
-			            "xls",
-						"pdf",
-			            "print"
-			        ]
-			    } );
-			    $( tableTools.fnContainer() ).insertBefore('#sample-table-2');
-				*/
-				
-				
-				//oTable1.fnAdjustColumnSizing();
-			
-			
-				$(document).on('click', 'th input:checkbox' , function(){
-					var that = this;
-					$(this).closest('table').find('tr > td:first-child input:checkbox')
-					.each(function(){
-						this.checked = that.checked;
-						$(this).closest('tr').toggleClass('selected');
-					});
-				});
-			
-			
-				$('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-				function tooltip_placement(context, source) {
-					var $source = $(source);
-					var $parent = $source.closest('table')
-					var off1 = $parent.offset();
-					var w1 = $parent.width();
-			
-					var off2 = $source.offset();
-					//var w2 = $source.width();
-			
-					if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-					return 'left';
-				};
-			});
-			
-			
-			$(document).ready(function(){
-				TableTools.DEFAULTS.aButtons = ["csv", "xls"];
-			    $('#orders').dataTable({
-			    	"bPaginate": true,
-			    	"language": {
-			           "lengthMenu": '每页 <select>'+
-			             '<option value="10">10</option>'+
-			             '<option value="20">20</option>'+
-			             '<option value="50">50</option>'+
-			             '<option value="-1">全部</option>'+
-			             '</select> 条记录'
-			         },
-			         "iDisplayLength": 10,
-			         "dom": 'T<"clear">lfrtip',
-			         "tableTools":{
-			         	"sSwfPath": "../../Content/CSS/copy_csv_xls_pdf.swf"
-			         },
-			    });
-			});
-			
-		</script>
+<script src="${ContextPath}/admin/assets/js/jquery.dataTables.js"></script>
+<script src="${ContextPath}/admin/assets/js/jquery.dataTables.bootstrap.js"></script>
+<script src="${ContextPath}/admin/assets/js/data-tables/dataTables.tableTools.js"></script>
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+	
+$(document).ready(function(){
+	TableTools.DEFAULTS.aButtons = ["csv", "xls"];
+    $('#orders').dataTable({
+    	"bPaginate": true,
+    	"language": {
+           "lengthMenu": '每页 <select>'+
+             '<option value="10">10</option>'+
+             '<option value="20">20</option>'+
+             '<option value="50">50</option>'+
+             '<option value="-1">全部</option>'+
+             '</select> 条记录'
+         },
+         "iDisplayLength": 10,
+         "dom": 'T<"clear">lfrtip',
+         "tableTools":{
+         	//"sSwfPath": "../../Content/CSS/copy_csv_xls_pdf.swf"
+         },
+    });
+});
+
+$(".query").click(function(){
+  	$("#queryModal").modal();
+   });
+    
+$(".delete").click(function(){
+	var orderid=$(this).attr("orderid");
+	alertModal(orderid);
+	$("#alertModal").modal();
+	$("#orderid").attr("value",orderid);
+});
+    
+ $("#sure").click(function(){
+	$.ajax({
+		type:"post",
+		url:"${ContextPath}/admin/deleteOrder",
+		data:{
+			"orderid":$("#orderid").attr("value")
+		},
+		dataType:"json",
+		success:function(result){
+			location.reload();
+		},
+		error:function(){
+			alert("error"+$("#orderid").attr("value"));
+		}
+	
+	});
+});
+
+function alertModal(msg){
+	$("#modal-title-order").html("提示!");  
+	$("#modal-body-order").html("是否确定删除"+msg+"号工单？");  
+}
+	
+	
+	
+</script>
 </#assign>
 <#assign pageCss>
 <link rel="stylesheet" href="${ContextPath}/admin/assets/css/data-tables/dataTables.tableTools.css" />
@@ -123,11 +91,13 @@
 						<thead>
 							<tr>
 								<th>序号</th>
+								
 								<th>标题</th>
 								<th class="hidden-480">申报部门</th>
 								<th class="hidden-480">申报人</th>
 								<th><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>申报时间</th>
 								<th class="hidden-480">当前状态</th>
+								<th>工单编号</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -137,6 +107,7 @@
 							<tr>
 
 								<td>${order_index+1}</td>
+								
 								<td>${(order.title)!}</td>
 								<td class="hidden-480">${(order.off_branch)!}</td>
 								<td class="hidden-480">${(order.off_user)!}</td>
@@ -156,11 +127,12 @@
 									</#if>
 									</b>
 								</td>
+								<td>${(order.id)!}</td>
 
 								<td>
 									<div class="hidden-sm hidden-xs action-buttons">
-										<a class="btn btn-minier btn-primary  blue" href="#"> 查看</a> 
-										<a class="btn btn-minier btn-danger red" href="#"> 删除</a>
+										<a class="btn btn-minier btn-primary  blue query" href="#" orderid="${(order.id)!}"> 查看</a> 
+										<a class="btn btn-minier btn-danger red delete" href="#" orderid="${(order.id)!}"> 删除</a>
 									</div>
 
 									<div class="hidden-md hidden-lg">
@@ -173,7 +145,7 @@
 											<ul
 												class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 												<li>
-													<a href="#" class="tooltip-info" data-rel="tooltip" title="查看"> 
+													<a href="#" class="tooltip-info" data-rel="tooltip"  title="查看"> 
 														<span class="blue"> 
 																<i class="ace-icon fa fa-search-plus bigger-120"></i>
 														</span>
@@ -198,11 +170,10 @@
 				</div>
 			</div>
 		</div>
-
 		<!-- PAGE CONTENT ENDS -->
 	</div>
 	<!-- /.col -->
 </div>
 <!-- pageContent END -->
-
+<#include "/app/admin/order/_model.html" />
 </@mainlayout>

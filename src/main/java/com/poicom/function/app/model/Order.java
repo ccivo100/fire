@@ -134,7 +134,7 @@ public class Order extends Model<Order> {
 	public void format(Page<Record> page,String... paras){
 		for(Record record:page.getList()){
 			for(String attr:paras){
-				record.set(attr, StringUtils.abbreviate(record.getStr(attr), (new Random().nextInt(2)+22)));
+				record.set(attr, StringUtils.abbreviate(record.getStr(attr), (new Random().nextInt(2)+35)));
 			}
 			
 		}
@@ -143,7 +143,7 @@ public class Order extends Model<Order> {
 	public void format(List<Record> list,String... paras){
 		for(Record record:list){
 			for(String attr:paras){
-				record.set(attr, StringUtils.abbreviate(record.getStr(attr), (new Random().nextInt(2)+22)));
+				record.set(attr, StringUtils.abbreviate(record.getStr(attr), (new Random().nextInt(2)+35)));
 			}
 			
 		}
