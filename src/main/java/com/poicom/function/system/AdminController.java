@@ -32,9 +32,11 @@ import com.poicom.common.kit.WebKit;
 import com.poicom.function.app.model.Apartment;
 import com.poicom.function.app.model.ApartmentType;
 import com.poicom.function.app.model.Branch;
+import com.poicom.function.app.model.Comment;
 import com.poicom.function.app.model.ErrorType;
 import com.poicom.function.app.model.Order;
 import com.poicom.function.app.model.Position;
+import com.poicom.function.app.model.UserOrder;
 import com.poicom.function.system.model.Permission;
 import com.poicom.function.system.model.Role;
 import com.poicom.function.system.model.RolePermission;
@@ -943,7 +945,25 @@ public class AdminController extends Controller {
 		renderJson(ordersList);
 	}
 	
+	@Before(Tx.class)
 	public void deleteOrder(){
+		long orderid=getParaToLong("orderid");
+		Order order=Order.dao.findById(orderid);
+		
+		List<UserOrder> userOrderList=UserOrder.dao.findBy(" order_id=?", orderid);
+		List<Comment> commentList=Comment.dao.findBy(" order_id=?", orderid);
+		
+		if(order.delete()){
+			for(UserOrder userorder:userOrderList){
+				userorder.delete();
+			}
+			for(Comment comment:commentList){
+				comment.delete();
+			}
+			renderJson("state","删除成功！");
+		}else{
+			renderJson("state","删除失败！");
+		}
 		
 	}
 	
