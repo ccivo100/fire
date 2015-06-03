@@ -13,11 +13,10 @@ public class ValiKit extends ValidateKit {
 	   * @return boolean
 	   */
 	  public static  boolean isPhone(String value) {
-	    String telcheck = "^(0[0-9]{2,3}\\-)?([2-9][0-9]{6,7})+(\\-[0-9]{1,4})?$";
+	    //String telcheck = "^(0[0-9]{2,3}\\-)?([2-9][0-9]{6,7})+(\\-[0-9]{1,4})?$";
 	    String mobilecheck = "^(13[0-9]|14[0-9]|15[0|1|2|3|5|6|7|8|9]|17[6|7|8]|18[0-9])\\d{8}$";
 
-	    if (match(telcheck, Pattern.CASE_INSENSITIVE, value)
-	        || match(mobilecheck, Pattern.CASE_INSENSITIVE, value)) {
+	    if (match(mobilecheck, Pattern.CASE_INSENSITIVE, value)) {
 	      return true;
 	    } else
 	      return false;
