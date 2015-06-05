@@ -6,7 +6,7 @@
 		<small> <i class="ace-icon fa fa-angle-double-right"></i> 权限分配</small>
 	</h1>
 </div>
-<form class="form-horizontal" role="form" action="${ContextPath}/admin/doassignrole" method="post" >
+<form class="form-horizontal" role="form" action="${ContextPath}/admin/role/doassign" method="post" >
 	
 	
 	<div class="row">

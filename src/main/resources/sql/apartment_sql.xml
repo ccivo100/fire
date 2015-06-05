@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<sqlRoot>
+	<!-- 部门SQL -->
+	<sqlGroup name="apartment">
+	<!-- 根据故障类型，查找运维部门的信息 -->
+	<sql id="findApartmentBySelect">
+		select apartment.id,apartment.name, apartment.pid,
+		apartment.created_at,apartment.updated_at,apartment.deleted_at
+	</sql>
+	<sql id="findApartmentByFrom">
+		from com_apartment as apartment
+		where apartment.id in(
+			select apartmenttype.apartment_id
+			from com_apartment_type as apartmenttype
+			where apartmenttype.type_id=?
+		)
+		and apartment.deleted_at is null
+	</sql>
+	</sqlGroup>
+</sqlRoot>

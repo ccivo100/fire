@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<sqlRoot>
+	<!-- 用户SQL -->
+  <sqlGroup name="user">
+  	<sql id="findUserPageBySelect">SELECT `user`.* 
+    </sql>
+    <sql id="findUserPageByFrom">FROM `sec_user` user 
+    </sql>
+    
+    <!-- 查询用户所有信息 -->
+    <sql id="findInfoBySelect">
+		select user.id uuserid,user.username uaccount,user.providername uprovidername,
+		user.email uemail,user.phone uphone,user.password upassword,
+		user.hasher uhasher,user.salt usalt,user.avatar_url uavatatarurl,
+		user.first_name ufirstname,user.last_name ulastname,user.full_name ufullname,
+		user.created_at ucreatetime,user.updated_at uupdatetime,user.deleted_at udeletetime,
+		userinfo.id info_id,userinfo.user_id info_userid,userinfo.branch_id info_branchid,userinfo.creator_id info_creatorid,
+		userinfo.gender info_gender,userinfo.apartment_id info_apartmentid,userinfo.position_id info_positionid,
+    	userinfo.created_at info_createtime,userinfo.updated_at info_updatetime,userinfo.deleted_at info_deletetime,
+		branch.id bid,branch.name bname,apartment.id aid,apartment.name aname,position.id pid,position.name pname,
+    	branch.created_at bcreatetime,branch.updated_at bupdatetime,branch.deleted_at bdeletetime
+    </sql>
+    <sql id="findInfoByFrom">
+    	FROM sec_user_info AS userinfo 
+		LEFT OUTER JOIN com_branch AS branch on userinfo.branch_id=branch.id
+		left outer join com_apartment as apartment on userinfo.apartment_id=apartment.id
+        left outer join com_position as position on userinfo.position_id=position.id
+		LEFT OUTER JOIN sec_user as user on userinfo.user_id=user.id 
+		where user.id=?
+    </sql>
+    <sql id="findAllUserByFrom">
+    	FROM sec_user_info AS userinfo 
+		LEFT OUTER JOIN com_branch AS branch on userinfo.branch_id=branch.id
+		left outer join com_apartment as apartment on userinfo.apartment_id=apartment.id
+        left outer join com_position as position on userinfo.position_id=position.id
+		LEFT OUTER JOIN sec_user as user on userinfo.user_id=user.id 
+    </sql>
+    
+    <!-- 根据用户id，查询用户所属公司 -->
+  	
+  	<sql id="findUserBranchBySelect">
+  		SELECT branch.id bid,branch.name bname,apartment.id aid,apartment.name aname,position.id pid,position.name pname
+  	</sql>
+  	<sql id="findUserBranchByFrom">
+  		FROM sec_user_info AS userinfo
+		LEFT OUTER JOIN sec_user AS user ON userinfo.user_id=user.id
+		LEFT OUTER JOIN com_branch AS branch ON userinfo.branch_id=branch.id
+		left outer join com_apartment as apartment on userinfo.apartment_id=apartment.id
+        left outer join com_position as position on userinfo.position_id=position.id
+		WHERE userinfo.user_id=?
+  	</sql>
+  	
+  	<!-- 根据故障类型，查找运维人员的信息 -->
+  	<sql id="findOperatorsBySelect">
+  		SELECT user.id userid,user.email useremail,user.phone userphone,
+		user.first_name firstname,user.last_name lastname,user.full_name fullname,
+		branch.name bname,apartment.name aname,position.name pname
+  	</sql>
+  	<sql id="findOperatorsByFrom">
+  		FROM sec_user_info AS userinfo
+		LEFT OUTER JOIN com_branch AS branch ON userinfo.branch_id=branch.id
+		LEFT OUTER JOIN com_apartment AS apartment ON userinfo.apartment_id=apartment.id
+		LEFT OUTER JOIN com_position AS position ON userinfo.position_id=position.id
+		LEFT OUTER JOIN sec_user AS user ON userinfo.user_id=user.id 
+		WHERE user.id in(SELECT usertype.user_id FROM com_user_type AS usertype WHERE usertype.type_id=?)
+  	</sql>
+  	<sql id="findOperatorByFrom">
+  		FROM sec_user AS user
+		WHERE user.id =?
+  	</sql>
+  	
+  	<!-- 根据部门id，查询部门人员 -->
+  	<sql id="findBranchUserBySelect">
+  		SELECT user.id userid,user.email useremail,user.phone userphone,user.full_name fullname,
+  		userinfo.gender gender,branch.id bid,branch.name branch,
+  		apartment.id aid,apartment.name aname,position.id pid,position.name pname,
+		user.deleted_at delete_at,user.remark remark
+  	</sql>
+  	<sql id="findBranchUserByFrom">
+  		FROM sec_user_info AS userinfo
+		LEFT OUTER JOIN sec_user AS user ON userinfo.user_id=user.id
+		LEFT OUTER JOIN com_branch AS branch ON userinfo.branch_id=branch.id
+		left outer join com_apartment as apartment on userinfo.apartment_id=apartment.id
+        left outer join com_position as position on userinfo.position_id=position.id
+		
+  	</sql>
+  	<!-- 动态SQL处理 -->
+  	<sql id="splitPage">
+  		<![CDATA[ 
+	  		FROM sec_user_info AS userinfo 
+			LEFT OUTER JOIN com_branch AS branch ON userinfo.branch_id=branch.id
+			LEFT OUTER JOIN com_apartment AS apartment ON userinfo.apartment_id=apartment.id
+	        LEFT OUTER JOIN com_position AS position ON userinfo.position_id=position.id
+			LEFT OUTER JOIN sec_user AS user ON userinfo.user_id=user.id 
+			WHERE 1=1 
+			<% if(!isEmpty(userClass)){ %>
+				and user.userClass = #'$userClass$'#
+			<% } %>
+			
+			<% if(!isEmpty(userName)){ %>
+				and user.userName like #'$userName$'#
+			<% } %>
+			
+			<% if(!isEmpty(full_name)){ %>
+				and user.full_name like #'$full_name$'#
+			<% } %>
+			
+			<% if(!isEmpty(email)){ %>
+				and user.email like #'$email$'#
+			<% } %>
+		]]>
+  	</sql>
+  	
+  </sqlGroup>
+
+</sqlRoot>

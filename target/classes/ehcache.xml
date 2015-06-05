@@ -58,13 +58,57 @@
 		 /> -->
 		 
 	<defaultCache
-      	maxElementsInMemory="10000"
+      	maxElementsInMemory="50000"
+      	clearOnFlush="false"
       	eternal="false"
       	timeToIdleSeconds="360"
       	timeToLiveSeconds="360"
-      	overflowToDisk="false"
+      	
+      	overflowToDisk="true"
+      	
+      	diskSpoolBufferSizeMB="1024"
+        maxElementsOnDisk="100000"
       	diskPersistent="false"
-      	diskExpiryThreadIntervalSeconds="120"/>
+      	diskExpiryThreadIntervalSeconds="120"
+      	memoryStoreEvictionPolicy="LFU"
+        transactionalMode="off"/>
+    
+    <!-- URL缓存 ：1小时 -->
+    <cache name="SimplePageCachingFilter"
+    	   maxElementsInMemory="50000"
+    	   clearOnFlush="false"
+           eternal="false"
+           timeToIdleSeconds="60"
+           timeToLiveSeconds="60"
+           
+           overflowToDisk="true"
+           
+           diskSpoolBufferSizeMB="1024"
+           maxElementsOnDisk="100000"
+           diskPersistent="false"
+           diskExpiryThreadIntervalSeconds="120"
+           
+           memoryStoreEvictionPolicy="LFU"
+           transactionalMode="off">
+    </cache>
+    
+    <!-- 系统全局变量：永不过期-->
+    <cache name="system"
+    	   maxElementsInMemory="50000"
+           eternal="true"
+    	   clearOnFlush="false"
+           
+           overflowToDisk="true"
+           
+           diskSpoolBufferSizeMB="1024"
+           maxElementsOnDisk="100000"
+           diskPersistent="false"
+           diskExpiryThreadIntervalSeconds="120"
+           
+           memoryStoreEvictionPolicy="LFU"
+           transactionalMode="off">
+    </cache>
+    
 
   	<cache name="defaultCache"
         maxElementsInMemory="10000"

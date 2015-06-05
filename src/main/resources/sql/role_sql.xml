@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<sqlRoot>
+
+	<!--角色SQL-->
+  <sqlGroup name="role">
+    <sql id="findUserByFrom">FROM sec_role `role` WHERE `role`.id IN (SELECT `userRole`.role_id FROM
+      sec_user_role `userRole` WHERE `userRole`.user_id=?)
+    </sql>
+    <!--需要一个参数-->
+    <sql id="findChildrenByFrom">FROM sec_role `role`
+      INNER JOIN (SELECT left_code,right_code FROM sec_role WHERE id=?) `code` ON (`role`.left_code
+      &gt; `code`.left_code AND
+      `role`.right_code &lt;
+      `code`.right_code)
+    </sql>
+    
+    <sql>
+    	<![CDATA[ 
+    		from sec_role where 1=1
+    		
+    		<% if(!isEmpty(name)){ %>
+					and name like #'%$name$%'#
+			<% } %>
+			
+			<% if(!isEmpty(value)){ %>
+					and value like #'%$value$%'#
+			<% } %>
+    		
+    	]]>
+    </sql>
+  </sqlGroup>
+
+</sqlRoot>

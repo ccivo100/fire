@@ -1,0 +1,72 @@
+package com.poicom.function.model;
+
+import java.util.List;
+
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
+
+import cn.dreampie.tablebind.TableBind;
+
+
+/**
+ * @描述 故障类型Model
+ * @author 唐东宇
+ *
+ */
+@TableBind(tableName = "com_type")
+public class Etype extends BaseModel<Etype>{
+	
+	private static final long serialVersionUID = 3010321427941080031L;
+	public static Etype dao=new Etype();
+	
+	public void cacheAdd(Long id){
+		Etype errorType =new Etype();
+	}
+	
+	
+	/**
+	 * 获得所有故障类型（通用）
+	 * @return
+	 */
+	public List<Etype> getAllType(){
+		return Etype.dao.find("select * from com_type where deleted_at is null");
+	}
+	
+	/**
+	 * @描述 获取用户id为paras故障类型中间表
+	 * @param paras
+	 * @return
+	 */
+	public List<Record> getTypeByUser(Object... paras){
+		return Db
+				.find("select cut.id id,cut.user_id userid,cut.type_id typeid from com_user_type as cut where cut.user_id=?",
+						paras);
+	}
+	
+	/**
+	 * @描述 获取运维人员处理故障类型列表
+	 * @param paras
+	 * @return
+	 */
+	public List<Record> getOperatorType(Object... paras){
+		return Db.find(getSql("type.findOperatorTypeBySelect") + blank
+				+ getSql("type.findOperatorTypeByFrom"), paras);
+	}
+	
+	/**
+	 * @描述 获取运维部门 处理的故障类型列表
+	 * @param paras
+	 * @return
+	 */
+	public List<Record> findApartmentType(Object... paras){
+		return Db.find(getSql("type.findApartmentTypeBySelect") + blank
+				+ getSql("type.findApartmentTypeByFrom"), paras);
+	}
+	
+	public Page<Etype> findErrorTypePage(int pageNumber, int pageSize,String where,String orderby,
+			Object... paras){
+		return paginateBy(pageNumber, pageSize, where+orderby, paras);
+	}
+
+}

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<sqlRoot>
+	<!-- 工单SQL -->
+  	<sqlGroup name="order">
+
+  	<!-- 通用 -->
+  	<!-- 根据工单id查询该工单的详细内容 多表查询 -->
+  	<sql id="findOrderInfoBySelect">
+		SELECT o.id oorderid,  t1.name tname,o.type otypeid,l1.name lname,o.level olevelid,
+		o.offer_user oofferid,u1.full_name uoffername, u1.phone uofferphone,
+		o.description odescription,o.offer_at ooffertime,o.status ostatus,
+		o.title otitle,o.spend_time ospendtime,
+		o.created_at ocreatetime,o.deleted_at odeletetime,o.flag oflag
+  	</sql>
+
+  	<sql id="findOrderInfoByFrom"><!-- 根据条件，查询工单 -->
+  	  	FROM com_order AS o 
+		LEFT OUTER JOIN sec_user AS u1 ON o.offer_user = u1.id
+		LEFT OUTER JOIN com_type AS t1 ON o.type=t1.id
+		LEFT OUTER JOIN com_level AS l1 ON o.level=l1.id
+  	</sql>
+  	
+  	<sql id="findOfferQueryBySelect"><!-- Reports-Operates-Orders 分页故障查询 -->
+  	SELECT o.id, o.description, u1.bname off_branch,u1.full_name off_user,o.offer_at,  o.status,
+  		 o.type tid, t1.name type_name,o.created_at,o.updated_at,o.deleted_at,o.title
+  	</sql>
+  	
+  	<sql id="findOfferQueryByFrom"><!-- Reports-Operates-Orders 分页故障查询 -->
+  	FROM com_order AS o 
+		LEFT OUTER JOIN 
+		(
+			select uu1.id id,uu1.full_name full_name, bb1.name bname
+			from sec_user_info as ssui
+						 left outer join sec_user as uu1 on ssui.user_id=uu1.id
+						 left outer join com_branch as bb1 on ssui.branch_id=bb1.id
+		) 
+			AS u1 ON o.offer_user = u1.id
+		LEFT OUTER JOIN com_type 
+			AS t1 ON o.type=t1.id
+  	</sql>
+  	
+  </sqlGroup>
+  
+</sqlRoot>
