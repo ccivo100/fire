@@ -3,6 +3,9 @@ package com.poicom.function.model;
 import java.util.List;
 
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.ehcache.CacheKit;
+import com.poicom.basic.common.DictKeys;
+import com.poicom.basic.thread.ThreadParamInit;
 
 import cn.dreampie.tablebind.TableBind;
 import cn.dreampie.tree.TreeNode;
@@ -40,6 +43,34 @@ public class Apartment extends BaseModel<Apartment> implements TreeNode<Apartmen
 		// TODO Auto-generated method stub
 		this.put("children", children);
 	}
+	
+	/**
+	 * 添加、更新缓存
+	 * @param id
+	 */
+	public void cacheAdd(Long id){
+		Apartment apartment = Apartment.dao.findById(id);
+		CacheKit.put(DictKeys.cache_name_system, ThreadParamInit.cacheStart_apartment + id, apartment);
+	}
+	
+	/**
+	 * 移除缓存
+	 * @param id
+	 */
+	public void cacheRemove(Long id){
+		CacheKit.remove(DictKeys.cache_name_system, ThreadParamInit.cacheStart_apartment + id);
+	}
+	
+	/**
+	 * 获取缓存对象
+	 * @param id
+	 * @return
+	 */
+	public Apartment cacheGet(Long id ){
+		Apartment apartment = CacheKit.get(DictKeys.cache_name_system, ThreadParamInit.cacheStart_apartment + id);
+		return apartment;
+	}
+	
 	
 	public List<Apartment> getAllApartment(){
 		return find("select * from com_apartment where deleted_at is null");

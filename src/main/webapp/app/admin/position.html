@@ -26,17 +26,19 @@
 <table class="table table-bordered table-hover">
 		<thead>
 			<tr>
-				<th width="2%">序号</th>
-				<th width="10%">职位名称</th>
-				<th width="5%">创建时间</th>
-				<th width="4%">状态</th>
-				<th width="4%">操作</th>
+				<th>序号</th>
+				<th>所属部门</th>
+				<th >职位名称</th>
+				<th>创建时间</th>
+				<th>状态</th>
+				<th>操作</th>
 			</tr>
 		</thead>
 		<tbody>
 			<#list positionPage.getList() as position>
 			<tr>
 				<td>${(position_index+1)!}</td>
+				<td></td>
 				<td> ${(position.name)!}</td>
 				<td> ${(position.created_at)!}</td>
 				<td><#if position.deleted_at??>
@@ -49,11 +51,11 @@
 				</td>
 				<td>
 				<div class="action-buttons">
-				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/editposition?id=${(position.id)!}" >编辑</a>
+				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/position/edit?id=${(position.id)!}" >编辑</a>
 				<#if position.deleted_at??>
-				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/onposition?id=${(position.id)!}" >启用</a>
+				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/position/on?id=${(position.id)!}" >启用</a>
 				<#else>
-				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/offposition?id=${(position.id)!}" >禁用</a>
+				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/position/off?id=${(position.id)!}" >禁用</a>
 				</#if>
 				</div>
 				</td>
@@ -64,6 +66,7 @@
 				<#list 1..size as t>
 					<tr>
 						<td>${(positionPage.getList().size()+t)!}</td>
+						<td></td>
 						<td></td>
 						<td></td>
 						<td></td>

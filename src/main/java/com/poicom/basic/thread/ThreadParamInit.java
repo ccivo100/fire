@@ -15,6 +15,8 @@ public class ThreadParamInit extends Thread {
 	public static String cacheStart_operator = "operator_";
 	public static String cacheStart_dict = "dict_";
 	public static String cacheStart_dict_child = "dict_child_";
+	public static String cacheStart_etype = "etype_";
+	public static String cacheStart_etype_child = "etype_child_";
 	
 	@Override
 	public void run() {

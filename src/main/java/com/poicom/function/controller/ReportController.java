@@ -338,7 +338,7 @@ public class ReportController extends BaseController{
 		//选中部门
 		long selectApartment=getParaToLong("selectApartment");
 		//根据部门id，获取该部门人员
-		List<Record> selectDealList=UserInfo.dao.getUserByApartment(" apartment.id=?",selectApartment);
+		List<Record> selectDealList=UserInfo.dao.getUserByApartment(" apartment.id=? and user.deleted_at is not null",selectApartment);
 		
 		Order o=Order.dao.findById(order.get("id"));
 		

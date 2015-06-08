@@ -61,15 +61,8 @@ public class AdminController extends BaseController {
 	
 	private final static String USER_ADD_PAGE="user/add.html";
 	private final static String USER_EDIT_PAGE="user/edit.html";
-	private final static String BRANCH_ADD_PAGE="branch/add.html";
-	private final static String BRANCH_EDIT_PAGE="branch/edit.html";
-	private final static String APARTMENT_ADD_PAGE="apartment/add.html";
-	private final static String APARTMENT_EDIT_PAGE="apartment/edit.html";
 	
-	private final static String POSITION_ADD_PAGE="position/add.html";
-	private final static String POSITION_EDIT_PAGE="position/edit.html";
-	private final static String TYPE_ADD_PAGE="type/add.html";
-	private final static String TYPE_EDIT_PAGE="type/edit.html";
+	
 	private final static String TYPE_TASK_PAGE="type/task.html";
 	
 	private final static String CENTER_INFO_PAGE="center/center.html";
@@ -448,120 +441,6 @@ public class AdminController extends BaseController {
 		redirect("/admin/user");
 	}
 	
-	/**
-	 * 单位管理
-	 */
-	public void branch(){
-		Page<Branch> branchPage;
-		String orderby=" ORDER BY branch.id ";
-		if(ValidateKit.isNullOrEmpty(getPara("branch"))){
-			String where = " 1=1 ";
-			branchPage=Branch.dao.findBranchPage(getParaToInt(0,1), 10, where, orderby);
-		}else{
-			String where=" branch.name like ?  ";
-			String condition ="%"+getPara("branch").trim()+"%";
-			branchPage=Branch.dao.findBranchPage(getParaToInt(0,1), 10, where, orderby, condition);
-			setAttr("branch",getPara("branch").trim());
-		}
-		setAttr("branchPage",branchPage);
-	}
-	
-	public void addbranch(){
-		render(BRANCH_ADD_PAGE);
-	}
-	@Before(AdminValidator.class)
-	public void doaddbranch(){
-		Branch branch=getModel(Branch.class);
-		branch.set("name", WebKit.delHTMLTag(branch.getStr("name")));
-		branch.save();
-		redirect("/admin/branch");
-	}
-	
-	public void editbranch(){
-		Branch branch=Branch.dao.findById(getPara("id"));
-		setAttr("branch",branch);
-		render(BRANCH_EDIT_PAGE);
-	}
-	@Before(AdminValidator.class)
-	public void doeditbranch(){
-		Branch branch=getModel(Branch.class);
-		branch.set("name", WebKit.delHTMLTag(branch.getStr("name")));
-		branch.update();
-		redirect("/admin/branch");
-	}
-	
-	public void onbranch(){
-		Branch.dao.findById(getPara("id")).set("deleted_at", null).update();
-		redirect("/admin/branch");
-	}
-	public void offbranch(){
-		Branch.dao.findById(getPara("id")).set("deleted_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
-		redirect("/admin/branch");
-	}
-	
-	/**
-	 * 部门管理
-	 */
-	public void apartment(){
-		
-		List<Apartment> apartments=Apartment.dao.findApartmentsByPid(" pid=? ",0);
-		
-		for(Apartment apartment:apartments){
-			List<Apartment> achild=Apartment.dao.findApartmentsByPid(" pid=? ",apartment.get("id"));
-			apartment.setChildren(achild);
-		}
-		setAttr("apartmentTree",apartments);
-		
-		/*Page<Apartment> apartmentPage;
-		String orderby=" ORDER BY apartment.id ";
-		if(ValidateKit.isNullOrEmpty(getPara("apartment"))){
-			String where = " 1=1 ";
-			apartmentPage=Apartment.dao.findApartmentPage(getParaToInt(0,1), 10, where, orderby);
-		}else{
-			String where=" apartment.name like ?  ";
-			String condition ="%"+getPara("apartment").trim()+"%";
-			apartmentPage=Apartment.dao.findApartmentPage(getParaToInt(0,1), 10, where, orderby, condition);
-			setAttr("apartment",getPara("apartment").trim());
-		}
-		setAttr("apartmentPage",apartmentPage);*/
-		
-	}
-	public void addapartment(){
-		if(ValidateKit.isNullOrEmpty(getPara("id"))){
-
-		}else{
-			System.out.println(getParaToLong("id"));
-			setAttr("pid",getParaToLong("id"));
-		}
-		render(APARTMENT_ADD_PAGE);
-	}
-	@Before(AdminValidator.class)
-	public void doaddapartment(){
-		Apartment apartment=getModel(Apartment.class);
-		apartment.set("name", WebKit.delHTMLTag(apartment.getStr("name")));
-		apartment.save();
-		redirect("/admin/apartment");
-	}
-	public void editapartment(){
-		Apartment apartment=Apartment.dao.findById(getPara("id"));
-		setAttr("apartment",apartment);
-		render(APARTMENT_EDIT_PAGE);
-	}
-	@Before(AdminValidator.class)
-	public void doeditapartment(){
-		Apartment apartment=getModel(Apartment.class);
-		apartment.set("name", WebKit.delHTMLTag(apartment.getStr("name")));
-		apartment.update();
-		redirect("/admin/apartment");
-	}
-	public void onapartment(){
-		Apartment.dao.findById(getPara("id")).set("deleted_at", null).update();
-		redirect("/admin/apartment");
-	}
-	public void offapartment(){
-		Apartment.dao.findById(getPara("id")).set("deleted_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
-		redirect("/admin/apartment");
-	}
 	
 	/**
 	 * @描述 对运维部 二级部门分配运维任务。
@@ -649,54 +528,6 @@ public class AdminController extends BaseController {
 	}
 	
 	/**
-	 * 职位管理
-	 */
-	public void position(){
-		
-		Page<Position> positionPage;
-		String orderby=" ORDER BY position.id ";
-		if(ValidateKit.isNullOrEmpty(getPara("position"))){
-			String where = " 1=1 ";
-			positionPage=Position.dao.findPositionPage(getParaToInt(0,1), 10, where, orderby);
-		}else{
-			String where=" position.name like ?  ";
-			String condition ="%"+getPara("position").trim()+"%";
-			positionPage=Position.dao.findPositionPage(getParaToInt(0,1), 10, where, orderby, condition);
-			setAttr("position",getPara("position").trim());
-		}
-		setAttr("positionPage",positionPage);
-	}
-	public void addposition(){
-		render(POSITION_ADD_PAGE);
-	}
-	@Before(AdminValidator.class)
-	public void doaddposition(){
-		Position position=getModel(Position.class);
-		position.set("name", WebKit.delHTMLTag(position.getStr("name")));
-		position.save();
-		redirect("/admin/position");
-	}
-	public void editposition(){
-		Position position=Position.dao.findById(getPara("id"));
-		setAttr("position",position);
-		render(POSITION_EDIT_PAGE);
-	}
-	@Before(AdminValidator.class)
-	public void doeditposition(){
-		Position position=getModel(Position.class);
-		position.set("name", WebKit.delHTMLTag(position.getStr("name")));
-		position.update();
-		redirect("/admin/position");
-	}
-	public void onposition(){
-		Position.dao.findById(getPara("id")).set("deleted_at", null).update();
-		redirect("/admin/position");
-	}
-	public void offposition(){
-		Position.dao.findById(getPara("id")).set("deleted_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
-		redirect("/admin/position");
-	}
-	/**
 	 * 异常工单管理
 	 */
 	public void exception(){
@@ -705,61 +536,6 @@ public class AdminController extends BaseController {
 		setAttr("orderPage",orderPage);
 	}
 	
-	/**
-	 * 故障类型管理
-	 */
-	public void type(){
-		
-		Page<Etype> errorTypePage;
-		String orderby=" ORDER BY etype.id ";
-		if(ValidateKit.isNullOrEmpty(getPara("errorType"))){
-			String where = " 1=1 ";
-			errorTypePage=Etype.dao.findErrorTypePage(getParaToInt(0,1), 10, where, orderby);
-		}else{
-			String where=" etype.name like ?  ";
-			String condition ="%"+getPara("errorType").trim()+"%";
-			errorTypePage=Etype.dao.findErrorTypePage(getParaToInt(0,1), 10, where, orderby, condition);
-			setAttr("errorType",getPara("errorType").trim());
-		}
-		setAttr("errorTypePage",errorTypePage);
-	}
-	
-	public void addtype(){
-		render(TYPE_ADD_PAGE);
-	}
-	@Before({AdminValidator.class,EvictInterceptor.class})
-	@CacheName("/admin/type")
-	public void doaddtype(){
-		Etype etype=getModel(Etype.class);
-		etype.set("name", WebKit.delHTMLTag(etype.getStr("name")));
-		etype.save();
-		redirect("/admin/type");
-	}
-	public void edittype(){
-		Etype etype=Etype.dao.findById(getPara("id"));
-		setAttr("etype",etype);
-		render(TYPE_EDIT_PAGE);
-	}
-	@Before({AdminValidator.class,EvictInterceptor.class})
-	@CacheName("/admin/type")
-	public void doedittype(){
-		Etype etype=getModel(Etype.class);
-		etype.set("name", WebKit.delHTMLTag(etype.getStr("name")));
-		etype.update();
-		redirect("/admin/type");
-	}
-	@Before({EvictInterceptor.class})
-	@CacheName("/admin/type")
-	public void ontype(){
-		Etype.dao.findById(getPara("id")).set("deleted_at", null).update();
-		redirect("/admin/type");
-	}
-	@Before({EvictInterceptor.class})
-	@CacheName("/admin/type")
-	public void offtype(){
-		Etype.dao.findById(getPara("id")).set("deleted_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss")).update();
-		redirect("/admin/type");
-	}
 	
 	
 	/**

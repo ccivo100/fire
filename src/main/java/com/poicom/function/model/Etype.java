@@ -7,6 +7,7 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 
 import cn.dreampie.tablebind.TableBind;
+import cn.dreampie.tree.TreeNode;
 
 
 /**
@@ -15,13 +16,33 @@ import cn.dreampie.tablebind.TableBind;
  *
  */
 @TableBind(tableName = "com_type")
-public class Etype extends BaseModel<Etype>{
+public class Etype extends BaseModel<Etype> implements TreeNode<Etype>{
 	
 	private static final long serialVersionUID = 3010321427941080031L;
-	public static Etype dao=new Etype();
+	public final static Etype dao=new Etype();
 	
-	public void cacheAdd(Long id){
-		Etype errorType =new Etype();
+	@Override
+	public long getId() {
+		
+		return this.getLong("id");
+	}
+
+
+	@Override
+	public long getParentId() {
+		return this.getLong("pid");
+	}
+
+
+	@Override
+	public List<Etype> getChildren() {
+		return this.get("children");
+	}
+
+
+	@Override
+	public void setChildren(List<Etype> children) {
+		this.put("children", children);
 	}
 	
 	
@@ -68,5 +89,8 @@ public class Etype extends BaseModel<Etype>{
 			Object... paras){
 		return paginateBy(pageNumber, pageSize, where+orderby, paras);
 	}
+
+
+	
 
 }

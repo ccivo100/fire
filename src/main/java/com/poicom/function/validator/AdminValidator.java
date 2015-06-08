@@ -80,91 +80,6 @@ public class AdminValidator extends Validator{
 				addError("nameMsg", "输入字数不少于5...");
 			}
 		}
-		//单位验证
-		else if(getActionKey().equals("/admin/doaddbranch")|getActionKey().equals("/admin/doeditbranch")){
-			if(ValidateKit.isNullOrEmpty("branch.name")){
-				
-				addError("nameMsg", "输入内容不为空");
-			}else if(!ValidateKit.isLength(c.getPara("branch.name"), 4, 15)){
-				addError("nameMsg", "输入字数不少于4...");
-			}
-		}
-		
-		/*else if(getActionKey().equals("/admin/doaddapartment")|getActionKey().equals("/admin/doeditapartment")){
-			if(ValidateKit.isNullOrEmpty("apartment.name")){
-				
-				addError("nameMsg", "输入内容不为空");
-			}else if(!ValidateKit.isLength(c.getPara("apartment.name"), 3, 15)){
-				addError("nameMsg", "输入字数不少于3...");
-			}
-		}*/
-		//新增部门验证
-		else if(getActionKey().equals("/admin/doaddapartment")){
-			if(ValidateKit.isNullOrEmpty(c.getPara("apartment.name").trim())){
-				addError("nameMsg", "部门名称不可为空");
-			}
-			List<Apartment> apartments=Apartment.dao.findApartmentsByPid(" pid=? ",0);
-			
-			if(ValidateKit.isNullOrEmpty(c.getPara("apartment.id"))&ValidateKit.isNullOrEmpty(c.getPara("pid"))){
-				if(c.getParaToLong("apartment.pid")!=0){
-					addError("pidMsg","父节点应该为0");
-				}
-			}else if(!ValidateKit.isNullOrEmpty(c.getPara("pid"))){
-				boolean flag=false;
-				StringBuffer str=new StringBuffer();
-				for(Apartment apartment:apartments){
-					str.append(apartment.get("id")+" ");
-					if(apartment.getLong("id")==c.getParaToLong("pid")){
-						
-						flag=true;
-					}
-				}
-				if(!flag){
-					addError("pidMsg","父节点应为："+str.toString());
-				}
-			}
-			
-		}
-		//更新部门验证
-		else if(getActionKey().equals("/admin/doeditapartment")){
-			if(ValidateKit.isNullOrEmpty(c.getPara("apartment.name").trim())){
-				addError("nameMsg", "部门名称不可为空");
-			}
-			if(ValidateKit.isNullOrEmpty(c.getPara("apartment.pid").trim())){
-				addError("pidMsg","父节点不可为空");
-				
-			}else{
-				Apartment apartment=Apartment.dao.findById(c.getParaToInt("apartment.id"));
-				if(apartment.getLong("pid")==0&c.getParaToLong("apartment.pid")!=apartment.getLong("pid")){
-					addError("pidMsg","根节点不可修改");
-				}else if(apartment.getLong("pid")!=0&c.getParaToLong("apartment.pid")==0){
-					addError("pidMsg","子节点不可修改为根节点");
-				}
-				else if(c.getParaToLong("apartment.pid")!=0){
-					List<Apartment> apartments=Apartment.dao.findApartmentsByPid(" pid=? ",0);
-					boolean flag=false;
-					StringBuffer str=new StringBuffer();
-					for(Apartment a:apartments){
-						str.append(a.get("id")+" ");
-						if(c.getParaToLong("apartment.pid")==a.getLong("id")){
-							flag=true;
-						}
-					}
-					if(!flag){
-						addError("pidMsg","父节点应为："+str.toString());
-					}
-				}
-			}
-		}
-		//职位验证
-		else if(getActionKey().equals("/admin/doaddposition")|getActionKey().equals("/admin/doeditposition")){
-			if(ValidateKit.isNullOrEmpty("position.name")){
-				
-				addError("nameMsg", "输入内容不为空");
-			}else if(!ValidateKit.isLength(c.getPara("position.name"), 3, 15)){
-				addError("nameMsg", "输入字数不少于3...");
-			}
-		}
 		//修改密码
 		else if(getActionKey().equals("/admin/updatePwd")){
 			
@@ -232,34 +147,6 @@ public class AdminValidator extends Validator{
 		}else if(getActionKey().equals("/admin/doedittype")){
 			c.keepModel(Etype.class);
 			c.render("/app/admin/type/edit.html");
-		}
-		//单位跳转
-		else if(getActionKey().equals("/admin/doaddbranch")){
-			c.keepModel(Branch.class);
-			c.render("/app/admin/branch/add.html");
-		}else if(getActionKey().equals("/admin/doeditbranch")){
-			c.keepModel(Branch.class);
-			c.render("/app/admin/branch/edit.html");
-		}
-		//部门跳转
-		else if(getActionKey().equals("/admin/doaddapartment")){
-			if(ValidateKit.isNullOrEmpty(c.getPara("apartment.id"))&ValidateKit.isNullOrEmpty(c.getPara("pid"))){
-				c.keepPara("apartment.pid");
-			}else if(!ValidateKit.isNullOrEmpty(c.getPara("pid"))){
-				c.keepPara("pid");
-			}
-			c.render("/app/admin/apartment/add.html");
-		}else if(getActionKey().equals("/admin/doeditapartment")){
-			c.keepModel(Apartment.class);
-			c.render("/app/admin/apartment/edit.html");
-		}
-		//职位跳转
-		else if(getActionKey().equals("/admin/doaddposition")){
-			c.keepModel(Position.class);
-			c.render("/app/admin/position/add.html");
-		}else if(getActionKey().equals("/admin/doeditposition")){
-			c.keepModel(Position.class);
-			c.render("/app/admin/position/edit.html");
 		}
 		else if(getActionKey().equals("/admin/updatePwd")){
 			c.keepModel(User.class);
