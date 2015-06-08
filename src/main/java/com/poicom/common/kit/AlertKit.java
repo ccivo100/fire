@@ -399,9 +399,9 @@ public class AlertKit {
 		System.out.println("进入发送短信主方法");
 		//电话列表...
 		String phones=phoneFormat(phone);
-		String department="XX";
-		String name="XX";
-		String type="XX";
+		String department="研发部";
+		String name="firetercel";
+		String type="1";
 		try {
 			
 			URL url=new URL("http://sms.poicom.net/postsms.php");
