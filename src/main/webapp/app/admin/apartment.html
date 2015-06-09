@@ -11,10 +11,11 @@
 		<thead>
 			<tr>
 				<th width="2%">序号</th>
-				<th width="10%">单位名称</th>
+				<th width="6%">单位名称</th>
 				<th width="4%">父节点编号</th>
 				<th width="5%">创建时间</th>
-				<th width="4%">状态</th>
+				<th width="2%">状态</th>
+				<th width="2%">运维标示</th>
 				<th width="4%">操作</th>
 			</tr>
 		</thead>
@@ -33,6 +34,13 @@
 					</#if>
 					</b>
 				</td>
+				<td><b>
+					<#if apartments.flag="1">
+						<span class="green">是</span>
+					<#elseif apartments.flag="0">
+						<span class="orange">否</span>
+					</#if></b>
+				</td>
 				<td>
 				<div class="action-buttons">
 				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/apartment/edit?id=${(apartments.id)!}" >编辑</a>
@@ -48,7 +56,7 @@
 			<#list apartments.children as apartment>
 				<tr>
 				<td>${(apartment.id)!}</td>
-				<td><span class="glyphicon glyphicon-minus-sign"></span>     ${(apartment.name)!}</td>
+				<td><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;${(apartment.name)!}</td>
 				<td>${(apartment.pid)!}</td>
 				<td>${(apartment.created_at)!}</td>
 				<td><#if apartment.deleted_at??>
@@ -59,6 +67,7 @@
 					</#if>
 					</b>
 				</td>
+				<td></td>
 				<td>
 				<div class="action-buttons">
 				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/apartment/edit?id=${(apartment.id)!}" >编辑</a>

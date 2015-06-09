@@ -1,5 +1,7 @@
 package com.poicom.function.service;
 
+import java.util.List;
+
 import org.joda.time.DateTime;
 
 import com.jfinal.log.Logger;
@@ -48,5 +50,28 @@ public class ApartmentService extends BaseService {
 
 	public boolean on(Apartment apartment){
 		return apartment.set("deleted_at", null).update();
+	}
+	
+	/**
+	 * 获取根节点
+	 * @return
+	 */
+	public List<Apartment> rootNode(){
+		return Apartment.dao.rootNode(" pid=? ",0);
+	}
+	
+	/**
+	 * 递归获取子节点
+	 * @param apartments
+	 */
+	public void childNode(List<Apartment> apartments){
+		for(Apartment apartment:apartments){
+			List<Apartment> achild=Apartment.dao.rootNode(" pid=? ",apartment.get("id"));
+			if(achild!=null){
+				apartment.setChildren(achild);
+				//调用自身方法
+				childNode(achild);
+			}
+		}
 	}
 }

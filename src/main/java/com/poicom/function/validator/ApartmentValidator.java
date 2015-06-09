@@ -16,7 +16,7 @@ public class ApartmentValidator extends Validator {
 			if(ValidateKit.isNullOrEmpty(c.getPara("apartment.name").trim())){
 				addError("nameMsg", "部门名称不可为空");
 			}
-			List<Apartment> apartments=Apartment.dao.findApartmentsByPid(" pid=? ",0);
+			List<Apartment> apartments=Apartment.dao.rootNode(" pid=? ",0);
 			
 			if(ValidateKit.isNullOrEmpty(c.getPara("apartment.id"))&ValidateKit.isNullOrEmpty(c.getPara("pid"))){
 				if(c.getParaToLong("apartment.pid")!=0){
@@ -54,7 +54,7 @@ public class ApartmentValidator extends Validator {
 					addError("pidMsg","子节点不可修改为根节点");
 				}
 				else if(c.getParaToLong("apartment.pid")!=0){
-					List<Apartment> apartments=Apartment.dao.findApartmentsByPid(" pid=? ",0);
+					List<Apartment> apartments=Apartment.dao.rootNode(" pid=? ",0);
 					boolean flag=false;
 					StringBuffer str=new StringBuffer();
 					for(Apartment a:apartments){

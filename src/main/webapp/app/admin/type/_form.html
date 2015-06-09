@@ -1,5 +1,6 @@
 <div >
 	<input type="hidden" name="etype.id" value="${(etype.id)!}" />
+	<input type="hidden" name="pid" value="${pid!}"/>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">类型名称</label>
 		<div class="col-sm-4">
@@ -9,6 +10,23 @@
 			<#if nameMsg??>
 			<div class="index-alert index-alert-danger" style="background-image:none;">
 				${(nameMsg)!}
+			</div>
+			</#if>
+		</div>
+	</div>
+	<div class="form-group"> 
+		<label class="col-sm-2 control-label">父节点</label>
+		<div class="col-sm-4">
+			<#if pid??>
+			<input type="text" class="form-control" name="etype.pid" value="${pid}" readonly  required />
+			<#else>
+			<input type="text" class="form-control" name="etype.pid" <#if etype?? > value="${(etype.pid)!}" <#else>value="0" readonly</#if> <#if (etype.pid)?? && etype.pid=0>readonly</#if>  required/>
+			</#if>
+		</div>
+		<div class="col-sm-4">
+			<#if pidMsg??>
+			<div class="index-alert index-alert-danger" style="background-image:none;">
+				${(pidMsg)!}
 			</div>
 			</#if>
 		</div>

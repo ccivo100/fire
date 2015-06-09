@@ -1,9 +1,10 @@
 ﻿<#include "/app/common/layout/__backstagemainlayout.html"/>
-<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="typeFlag-apartmentTypeFlag">
+<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="typeFlag-childTaskFlag">
 <div class="page-header">
 	<h1>
 		<a href="${ContextPath}/admin/type">类型管理</a>
-		<small> <i class="ace-icon fa fa-angle-double-right"></i> 任务分配</small>
+		<small> <i class="ace-icon fa fa-angle-double-right"></i><a href="${ContextPath}/admin/task/rootTask">任务分配-1级</a></small>
+		<small> <i class="ace-icon fa fa-angle-double-right"></i>任务分配-2级</small>
 	</h1>
 </div>
 	<table class="table table-bordered table-hover">
@@ -22,7 +23,7 @@
 				<td>${apartment_index+1}</td>
 				<td>${apartment.name}</td>
 				
-				<form class="form-horizontal" role="form" action="${ContextPath}/admin/doassign" method="post" >
+				<form class="form-horizontal" role="form" action="${ContextPath}/admin/task/childAssign" method="post" >
 				<input type="hidden" name="id" value="${(apartment.id)}">
 				<td>
 					<#list typeList as type>
@@ -40,7 +41,7 @@
 				</td>
 				<td>
 					<div class="action-buttons">
-					<a value="提交" type="submit" class="btn btn-minier btn-primary btn-xs " data-loading-text="正在提交...">提交</a>
+						<button value="提交" type="submit" class="btn btn-minier btn-primary btn-xs " data-loading-text="正在提交...">提交</button>
 					</div>
 				</td>
 				</form>

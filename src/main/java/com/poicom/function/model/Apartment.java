@@ -22,25 +22,21 @@ public class Apartment extends BaseModel<Apartment> implements TreeNode<Apartmen
 	
 	@Override
 	public long getId() {
-		// TODO Auto-generated method stub
 		return this.getLong("id");
 	}
 
 	@Override
 	public long getParentId() {
-		// TODO Auto-generated method stub
 		return this.getLong("pid");
 	}
 
 	@Override
 	public List<Apartment> getChildren() {
-		// TODO Auto-generated method stub
 		return this.get("children");
 	}
 
 	@Override
 	public void setChildren(List<Apartment> children) {
-		// TODO Auto-generated method stub
 		this.put("children", children);
 	}
 	
@@ -96,10 +92,9 @@ public class Apartment extends BaseModel<Apartment> implements TreeNode<Apartmen
 	 * @param paras
 	 * @return
 	 */
-	public List<Apartment> findApartmentsByPid(String where,Object... paras){
+	public List<Apartment> rootNode(String where,Object... paras){
 		return findBy(where, paras);
 	}
-
 	
 
 }

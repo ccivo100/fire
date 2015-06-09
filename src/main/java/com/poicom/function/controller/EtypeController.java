@@ -1,5 +1,7 @@
 package com.poicom.function.controller;
 
+import java.util.List;
+
 import cn.dreampie.ValidateKit;
 import cn.dreampie.routebind.ControllerKey;
 
@@ -20,18 +22,9 @@ public class EtypeController extends BaseController {
 	private final static String TYPE_EDIT_PAGE="type/edit.html";
 	
 	public void index(){
-		Page<Etype> errorTypePage;
-		String orderby=" ORDER BY etype.id ";
-		if(ValidateKit.isNullOrEmpty(getPara("errorType"))){
-			String where = " 1=1 ";
-			errorTypePage=Etype.dao.findErrorTypePage(getParaToInt(0,1), 10, where, orderby);
-		}else{
-			String where=" etype.name like ?  ";
-			String condition ="%"+getPara("errorType").trim()+"%";
-			errorTypePage=Etype.dao.findErrorTypePage(getParaToInt(0,1), 10, where, orderby, condition);
-			setAttr("errorType",getPara("errorType").trim());
-		}
-		setAttr("errorTypePage",errorTypePage);
+		List<Etype> etypes = EtypeService.service.rootNode();
+		EtypeService.service.childNode(etypes);
+		setAttr("etypeTree",etypes);
 		render("type.html");
 	}
 	
@@ -39,6 +32,12 @@ public class EtypeController extends BaseController {
 	 * 准备新增故障类型
 	 */
 	public void add(){
+		if(ValidateKit.isNullOrEmpty(getPara("id"))){
+
+		}else{
+			System.out.println(getParaToLong("id"));
+			setAttr("pid",getParaToLong("id"));
+		}
 		render(TYPE_ADD_PAGE);
 	}
 	

@@ -26,12 +26,8 @@ public class ApartmentController extends BaseController {
 	private final static String APARTMENT_EDIT_PAGE="apartment/edit.html";
 	
 	public void index(){
-		List<Apartment> apartments=Apartment.dao.findApartmentsByPid(" pid=? ",0);
-		
-		for(Apartment apartment:apartments){
-			List<Apartment> achild=Apartment.dao.findApartmentsByPid(" pid=? ",apartment.get("id"));
-			apartment.setChildren(achild);
-		}
+		List<Apartment> apartments=ApartmentService.service.rootNode();
+		ApartmentService.service.childNode(apartments);
 		setAttr("apartmentTree",apartments);
 		render("apartment.html");
 	}
@@ -40,12 +36,15 @@ public class ApartmentController extends BaseController {
 	 * 准备新增部门
 	 */
 	public void add(){
+		List<Apartment> apartments=ApartmentService.service.rootNode();
+		
 		if(ValidateKit.isNullOrEmpty(getPara("id"))){
 
 		}else{
 			System.out.println(getParaToLong("id"));
 			setAttr("pid",getParaToLong("id"));
 		}
+		setAttr("apartments",apartments);
 		render(APARTMENT_ADD_PAGE);
 	}
 	

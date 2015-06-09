@@ -90,7 +90,24 @@ public class Etype extends BaseModel<Etype> implements TreeNode<Etype>{
 		return paginateBy(pageNumber, pageSize, where+orderby, paras);
 	}
 
-
+	/**
+	 * 获取根-故障类型
+	 * @param where
+	 * @param paras
+	 * @return
+	 */
+	public List<Etype> rootNode(String where,Object... paras){
+		return findBy(where,paras);
+	}
 	
+	/**
+	 * 获取子节点-故障类型
+	 * @param where
+	 * @param paras
+	 * @return
+	 */
+	public List<Etype> childNode(String where,Object... paras){
+		return findBy(where,paras);
+	}
 
 }

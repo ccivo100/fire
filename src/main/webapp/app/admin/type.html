@@ -6,7 +6,7 @@
 		类型管理
 	</h1>
 </div>
-<form class="bs-example bs-example-form" role="form" action="${ContextPath}/admin/type" method="post">
+<!-- <form class="bs-example bs-example-form" role="form" action="${ContextPath}/admin/type" method="post">
 	<div class="row">
 		<div class="col-xs-4" >
 			<div class="input-group">
@@ -20,25 +20,27 @@
 			</div>
 		</div>
 	</div>
-</form>
+</form> -->
 <div class="hr hr-dotted"></div>
 	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>
 				<th width="2%">序号</th>
 				<th width="10%">类型名称</th>
+				<th width="2%">父节点编号</th>
 				<th width="5%">创建时间</th>
 				<th width="4%">状态</th>
 				<th width="4%">操作</th>
 			</tr>
 		</thead>
 		<tbody>
-			<#list errorTypePage.getList() as type>
+		<#list etypeTree as etypes>
 			<tr>
-				<td>${(type_index+1)!}</td>
-				<td> ${(type.name)!}</td>
-				<td> ${(type.created_at)!}</td>
-				<td><#if type.deleted_at??>
+				<td>${(etypes.id)!}</td>
+				<td> ${(etypes.name)!}</td>
+				<td>${(etypes.pid)!}</td>
+				<td>${(etypes.created_at)!}</td>
+				<td><#if etypes.deleted_at??>
 					<b>
 					<span class="red">禁用</span>
 					<#else>
@@ -48,30 +50,44 @@
 				</td>
 				<td>
 				<div class="action-buttons">
-				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/type/edit?id=${(type.id)!}" >编辑</a>
-				<#if type.deleted_at??>
-				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/type/on?id=${(type.id)!}" >启用</a>
+				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/type/edit?id=${(etypes.id)!}" >编辑</a>
+				<#if etypes.deleted_at??>
+				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/type/on?id=${(etypes.id)!}" >启用</a>
 				<#else>
-				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/type/off?id=${(type.id)!}" >禁用</a>
+				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/type/off?id=${(etypes.id)!}" >禁用</a>
+				</#if>
+				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/type/add?id=${(etypes.id)!}" >添加</a>
+				</div>
+				</td>
+			</tr>
+			<#list etypes.children as etype>
+				<tr>
+				<td>${(etype.id)!}</td>
+				<td><span class="glyphicon glyphicon-minus-sign"></span>     ${(etype.name)!}</td>
+				<td>${(etype.pid)!}</td>
+				<td>${(etype.created_at)!}</td>
+				<td><#if etype.deleted_at??>
+					<b>
+					<span class="red">禁用</span>
+					<#else>
+					<span class="gray">正常</span>
+					</#if>
+					</b>
+				</td>
+				<td>
+				<div class="action-buttons">
+				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/type/edit?id=${(etype.id)!}" >编辑</a>
+				<#if etype.deleted_at??>
+				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/type/on?id=${(etype.id)!}" >启用</a>
+				<#else>
+				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/type/off?id=${(etype.id)!}" >禁用</a>
 				</#if>
 				</div>
 				</td>
 			</tr>
 			</#list>
-			<#if errorTypePage.getList().size()!=10>
-			<#assign size=(10-errorTypePage.getList().size())>
-				<#list 1..size as t>
-					<tr>
-						<td>${(errorTypePage.getList().size()+t)!}</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</#list>
-			</#if>
+			</#list>
 		</tbody>
+		
 	</table>
-	<#include "/app/common/inc/_paginate.html" />
-	<@paginate currentPage=errorTypePage.pageNumber totalPage=errorTypePage.totalPage actionUrl="/admin/type/" />
 </@mainlayout>
