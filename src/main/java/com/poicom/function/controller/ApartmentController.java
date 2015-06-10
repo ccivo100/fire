@@ -93,5 +93,14 @@ public class ApartmentController extends BaseController {
 		redirect("/admin/apartment");
 	}
 	
+	/**
+	 * 设置是否可运维
+	 */
+	public void able(){
+		Apartment apartment = Apartment.dao.findById(getPara("apartmentid"));
+		boolean able =ApartmentService.service.operate(apartment);
+		renderJson("state",able);
+	}
+	
 	
 }

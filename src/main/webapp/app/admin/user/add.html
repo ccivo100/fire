@@ -19,6 +19,7 @@ function select1() {
 };
 function select2() {
 	$("#selectApartment").html("");
+	$("#selectPosition").html("");
 	$.ajax(
 	{
 		type: "post",
@@ -26,8 +27,12 @@ function select2() {
 		data: { "type": "achilren","typeid":$('#selectFapartment').val() },
 		success: function (msg) {
 			$("#selectApartment").append("<option value=''>请选择二级部门</option>");
+			$("#selectPosition").append("<option value=''>请选择职位</option>");
 			for (var i = 0; i < msg.achilrenList.length; i++) {
 				$("#selectApartment").append("<option value=" + msg.achilrenList[i].id + ">" +msg.achilrenList[i].name + "</option>");
+			}
+			for (var i = 0; i < msg.pList.length; i++) {
+				$("#selectPosition").append("<option value=" + msg.pList[i].id + ">" +msg.pList[i].name + "</option>");
 			}
 		}
 	})

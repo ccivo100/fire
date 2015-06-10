@@ -21,6 +21,7 @@ public class ApartmentService extends BaseService {
 	 */
 	public Long save(Apartment apartment){
 		apartment.set("name", WebKit.delHTMLTag(apartment.getStr("name")));
+		apartment.set("flag", "0");
 		apartment.save();
 		return apartment.getPKValue();
 	}
@@ -50,6 +51,19 @@ public class ApartmentService extends BaseService {
 
 	public boolean on(Apartment apartment){
 		return apartment.set("deleted_at", null).update();
+	}
+	/**
+	 * 设置是否可运维
+	 * @param apartment
+	 * @return
+	 */
+	public boolean operate(Apartment apartment){
+		if(apartment.get("flag").equals("1")){
+			apartment.set("flag", "0");
+		}else if(apartment.get("flag").equals("0")){
+			apartment.set("flag", "1");
+		}
+		return apartment.update();
 	}
 	
 	/**

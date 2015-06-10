@@ -53,7 +53,9 @@ function select1() {
 };
 function select2() {
 	var apartid=$('#apartid').val();
+	var positionid=$('#positionid').val();
 	$("#selectApartment").html("");
+	$("#selectPosition").html("");
 	$.ajax(
 	{
 		type: "post",
@@ -61,12 +63,19 @@ function select2() {
 		data: { "type": "achilren","typeid":$('#selectFapartment').val() },
 		success: function (msg) {
 			$("#selectApartment").append("<option value='-1'>请选择二级部门</option>");
+			$("#selectPosition").append("<option value=''>请选择职位</option>");
 			for (var i = 0; i < msg.achilrenList.length; i++) {
-				
 				if(msg.achilrenList[i].id==apartid){
 					$("#selectApartment").append("<option value=" + msg.achilrenList[i].id + " selected='selected'>" +msg.achilrenList[i].name +"</option>");
 				}else{
 					$("#selectApartment").append("<option value=" + msg.achilrenList[i].id + ">" +msg.achilrenList[i].name + "</option>");
+				}
+			}
+			for (var i = 0; i < msg.pList.length; i++) {
+				if(msg.pList[i].id==positionid){
+					$("#selectPosition").append("<option value=" + msg.pList[i].id + " selected='selected'>" +msg.pList[i].name +"</option>");
+				}else{
+					$("#selectPosition").append("<option value=" + msg.pList[i].id + ">" +msg.pList[i].name + "</option>");
 				}
 			}
 		}
@@ -94,6 +103,7 @@ $(function(){
 			<input id="userid" type="hidden" name="userid" value="${(userinfo.uuserid)}">
 			<input id="papartid" type="hidden" name="papartid" value="${(papartment.id)}">
 			<input id="apartid" type="hidden" name="apartid" value="${(userinfo.info_apartmentid)}">
+			<input id="positionid" type="hidden" name="positionid" value="${(userinfo.info_positionid)}">
 			<div class="form-group">
 				<label class="col-sm-2 control-label">姓名</label>
 				<div class="col-sm-4">
@@ -154,10 +164,6 @@ $(function(){
 				<label class="col-sm-2 control-label">职位</label>
 				<div class="col-sm-4">
 					<select id="selectPosition" name="selectPosition" class="form-control"  required >
-						<option value="-1" selected="selected">请选择</option>
-						<#list positionList as position>
-						<option value="${(position.id)!}" <#if (userinfo.info_positionid)=position.id>selected="selected"<#else></#if>>${(position.name)!}	</option>
-						</#list>
 					</select>
 				</div>
 			</div>

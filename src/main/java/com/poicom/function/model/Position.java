@@ -50,6 +50,10 @@ public class Position extends BaseModel<Position> {
 		return find("select * from com_position where deleted_at is null");
 	}
 	
+	public List<Position> positionByApartmentId(Object paras){
+		return findBy(" apartment_id=? and deleted_at is null", paras);
+	}
+	
 	public Page<Position> findPositionPage(int pageNumber, int pageSize,String where,String orderby,
 			Object... paras){
 		return paginateBy(pageNumber, pageSize, where+orderby, paras);

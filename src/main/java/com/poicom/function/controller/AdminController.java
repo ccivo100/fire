@@ -168,8 +168,12 @@ public class AdminController extends BaseController {
 			List<Apartment> afacherList=Apartment.dao.rootNode(" deleted_at is null and pid=? ",0);
 			renderJson("afacherList", afacherList);
 		}else if(type.equals("achilren")){
+			Map<String,Object> jsons =new HashMap<String, Object>();
 			List<Apartment> achilrenList=Apartment.dao.rootNode(" deleted_at is null and pid=?",getParaToInt("typeid"));
-			renderJson("achilrenList", achilrenList);
+			List<Position> pList = Position.dao.positionByApartmentId(getParaToInt("typeid"));
+			jsons.put("achilrenList", achilrenList);
+			jsons.put("pList", pList);
+			renderJson(jsons);
 		}
 	}
 	

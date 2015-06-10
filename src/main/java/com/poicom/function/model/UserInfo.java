@@ -21,7 +21,7 @@ public class UserInfo extends BaseModel<UserInfo> {
 	 * 
 	 */
 	private static final long serialVersionUID = -3424907544751263092L;
-	public static final UserInfo dao=new UserInfo();
+	public static UserInfo dao=new UserInfo();
 	
 	/**
 	 * 根据用户id，获得该用户的所有信息
@@ -67,9 +67,9 @@ public class UserInfo extends BaseModel<UserInfo> {
 				SqlXmlKit.sql("user.findBranchUserByFrom")+getWhere(where),paras);
 	}
 	
-	/*@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	public UserInfo get(String attr,Object paras){
 		return findFirst("select * from sec_user_info where " + attr + " =? ", paras);
-	}*/
+	}
 	
 }

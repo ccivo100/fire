@@ -1,9 +1,13 @@
 package com.poicom.function.controller;
 
+import java.util.List;
+
 import com.jfinal.aop.Before;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.Page;
+import com.poicom.function.model.Apartment;
 import com.poicom.function.model.Position;
+import com.poicom.function.service.ApartmentService;
 import com.poicom.function.service.PositionService;
 import com.poicom.function.validator.PositionValidator;
 
@@ -39,6 +43,8 @@ public class PositionController extends BaseController {
 	 * 准备新增职位
 	 */
 	public void add(){
+		List<Apartment> rootApartment=ApartmentService.service.rootNode();
+		setAttr("rootApartment",rootApartment);
 		render(POSITION_ADD_PAGE);
 	}
 	
@@ -58,6 +64,8 @@ public class PositionController extends BaseController {
 	 */
 	public void edit(){
 		Position position=Position.dao.findById(getPara("id"));
+		List<Apartment> rootApartment=ApartmentService.service.rootNode();
+		setAttr("rootApartment",rootApartment);
 		setAttr("position",position);
 		render(POSITION_EDIT_PAGE);
 	}

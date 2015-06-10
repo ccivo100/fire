@@ -4,6 +4,7 @@ import org.joda.time.DateTime;
 
 import com.jfinal.log.Logger;
 import com.poicom.basic.kit.WebKit;
+import com.poicom.function.model.Apartment;
 import com.poicom.function.model.Position;
 
 public class PositionService extends BaseService {
@@ -19,6 +20,7 @@ public class PositionService extends BaseService {
 	 */
 	public Long save(Position position){
 		position.set("name", WebKit.delHTMLTag(position.getStr("name")));
+		position.set("apartment_name", Apartment.dao.findById(position.getLong("apartment_id")).get("name"));
 		position.save();
 		return position.getPKValue();
 	}
@@ -29,6 +31,7 @@ public class PositionService extends BaseService {
 	 */
 	public void update(Position position){
 		position.set("name", WebKit.delHTMLTag(position.getStr("name")));
+		position.set("apartment_name", Apartment.dao.findById(position.getLong("apartment_id")).get("name"));
 		position.update();
 		Position.dao.cacheAdd(position.getPKValue());
 	}

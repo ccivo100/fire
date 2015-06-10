@@ -1,4 +1,30 @@
 <#include "/app/common/layout/__backstagemainlayout.html"/>
+
+<#assign pageJavascript>
+<script type="text/javascript">
+$(function(){
+	$(".checked").click(function(){
+		$.ajax({
+			type:"post",
+			url:"${ContextPath}/admin/apartment/able",
+			data:{
+				"apartmentid":$(this).attr("apartmentid"),
+			},
+			success:function(msg){
+				if(msg.state){
+					alert("修改成功！");
+				}else{
+					alert("修改失败！");
+				}
+			},
+			error:function(){
+				alert("失败了！");
+			}
+		});
+	});
+});
+</script>
+</#assign>
 <@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="organizationFlag-apartmentFlag-apartmentsListFlag">
 
 <div class="page-header">
@@ -10,13 +36,13 @@
 <table class="table table-bordered table-hover">
 		<thead>
 			<tr>
-				<th width="2%">序号</th>
-				<th width="6%">单位名称</th>
-				<th width="4%">父节点编号</th>
-				<th width="5%">创建时间</th>
-				<th width="2%">状态</th>
-				<th width="2%">运维标示</th>
-				<th width="4%">操作</th>
+				<th >编号</th>
+				<th >单位名称</th>
+				<th >父节点编号</th>
+				<th >创建时间</th>
+				<th >状态</th>
+				<th >运维</th>
+				<th >操作</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -34,12 +60,9 @@
 					</#if>
 					</b>
 				</td>
-				<td><b>
-					<#if apartments.flag="1">
-						<span class="green">是</span>
-					<#elseif apartments.flag="0">
-						<span class="orange">否</span>
-					</#if></b>
+				<td>
+					<input type="checkbox" class="ace ace-switch ace-switch-5 checked"  apartmentid="${(apartments.id)}"<#if apartments.flag="1"> checked<#elseif apartments.flag="0"></#if> />
+					<span class="lbl middle"></span>
 				</td>
 				<td>
 				<div class="action-buttons">
@@ -55,7 +78,7 @@
 			</tr>
 			<#list apartments.children as apartment>
 				<tr>
-				<td>${(apartment.id)!}</td>
+				<td></td>
 				<td><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;${(apartment.name)!}</td>
 				<td>${(apartment.pid)!}</td>
 				<td>${(apartment.created_at)!}</td>
