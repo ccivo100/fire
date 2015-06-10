@@ -13,7 +13,7 @@ function select1() {
     	url: "${ContextPath}/report/handler",
     	data: { "type": "type" },
         success: function (msg) {
-        	$("#selectType").append("<option value=''>请选择故障类型</option>");
+        	$("#selectType").append("<option value='-1'>请选择故障大类</option>");
         	for (var i = 0; i < msg.typeList.length; i++) {
             	$("#selectType").append("<option value=" + msg.typeList[i].id + ">" + msg.typeList[i].name + "</option>");
         	}
@@ -23,30 +23,69 @@ function select1() {
 };
 function select2() {
 	$("#selectApartment").html("");
+	$("#selectChildType").html("");
 	$.ajax(
 	{
 		type: "post",
 		url: "${ContextPath}/report/handler",
 		data: { "type": "apartment","typeid":$('#selectType').val() },
 		success: function (msg) {
-			$("#selectApartment").append("<option value=''>请选择运维部门</option>");
+			$("#selectApartment").append("<option value='-1'>请选择运维部门</option>");
+			$("#selectChildType").append("<option value='-1'>请选择故障小类</option>");
 			for (var i = 0; i < msg.apartmentList.length; i++) {
 				$("#selectApartment").append("<option value=" + msg.apartmentList[i].id + ">" +msg.apartmentList[i].name + "</option>");
 			}
+			
+			for (var i = 0; i < msg.childTypeList.length; i++) {
+				$("#selectChildType").append("<option value=" + msg.childTypeList[i].id + ">" +msg.childTypeList[i].name + "</option>");
+			}
+			select3();
 		}
 	})
 };
-function select3(){
+
+function select3() {
+	$("#selectChildApartment").html("");
 	$.ajax(
 	{
 		type: "post",
 		url: "${ContextPath}/report/handler",
-		data: { "type": "effective","apartmentid":$('#selectApartment').val() },
+		data: { "type": "childApartment","childTypeid":$('#selectChildType').val(),"rootApartment": $('#selectApartment').val()},
+		success: function (msg) {
+			$("#selectChildApartment").append("<option value='-1'>请选择运维组别</option>");
+			for (var i = 0; i < msg.childApartmentList.length; i++) {
+				$("#selectChildApartment").append("<option value=" + msg.childApartmentList[i].id + ">" +msg.childApartmentList[i].name + "</option>");
+			}
+		}
+	})
+};
+function select4() {
+	$("#selectChildApartment").html("");
+	$.ajax(
+	{
+		type: "post",
+		url: "${ContextPath}/report/handler",
+		data: { "type": "childApartment","childTypeid":$('#selectChildType').val(),"rootApartment": $('#selectApartment').val()},
+		success: function (msg) {
+			$("#selectChildApartment").append("<option value='-1'>请选择运维组别</option>");
+			for (var i = 0; i < msg.childApartmentList.length; i++) {
+				$("#selectChildApartment").append("<option value=" + msg.childApartmentList[i].id + ">" +msg.childApartmentList[i].name + "</option>");
+			}
+		}
+	})
+};
+
+function select5(){
+	$.ajax(
+	{
+		type: "post",
+		url: "${ContextPath}/report/handler",
+		data: { "type": "effective","apartmentid":$('#selectChildApartment').val() },
 		success: function (msg) {
 			if(msg.state=="error"){
 				alertModal("该分组无运维人员，请选择其他运维组!");
 				$('#alertModal').modal();
-				select2();
+				select3();
 			}
 		}
 	})
@@ -56,7 +95,9 @@ function select3(){
 $(function(){
 	select1();
 	$('#selectType').bind("change", select2);
-	$('#selectApartment').bind("change", select3);
+	$('#selectChildType').bind("change", select3);
+	$('#selectApartment').bind("change", select4);
+	$('#selectChildApartment').bind("change", select5);
 });
 
 function alertModal(msg){

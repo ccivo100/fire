@@ -2,7 +2,9 @@ package com.poicom.function.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -299,12 +301,25 @@ public class ReportController extends BaseController{
 	public void handler(){
 		String type=getPara("type");
 		if(type.equals("type")){
-			List<Etype> typeList=Etype.dao.getAllType();
+			List<Etype> typeList=Etype.dao.rootNode(" pid=? and deleted_at is null ", 0);
 			renderJson("typeList", typeList);
 		}else if(type.equals("apartment")){
-			List<Apartment> apartmentList=Apartment.dao.getApartmentsList(getParaToInt("typeid"));
-			renderJson("apartmentList",apartmentList);
-		}else if(type.equals("effective")){
+			Long typeid= getParaToLong("typeid");
+			Map<String,Object> jsonList= new HashMap<String,Object>();
+			List<Apartment> apartmentList=Apartment.dao.getApartmentsList(typeid);
+			jsonList.put("apartmentList", apartmentList);
+			
+			List<Etype> childTypeList = Etype.dao.childNode(" pid=? and deleted_at is null ", typeid);
+			jsonList.put("childTypeList", childTypeList);
+			renderJson(jsonList);
+		}
+		else if(type.equals("childApartment")){
+			Long childTypeid= getParaToLong("childTypeid");
+			Long rootApartment = getParaToLong("rootApartment");
+			List<Apartment> childApartmentList=Apartment.dao.getATApartmentsList(rootApartment,childTypeid);
+			renderJson("childApartmentList",childApartmentList);
+		}
+		else if(type.equals("effective")){
 			List<UserInfo> userinfoList=UserInfo.dao.findBy(" apartment_id=?", getParaToInt("apartmentid"));
 			if(userinfoList.size()==0){
 				renderJson("state","error");
@@ -327,7 +342,7 @@ public class ReportController extends BaseController{
 		Order order=new Order().set("offer_user", getParaToInt("uuserid"))
 				.set("title",WebKit.getHTMLToString(getPara("otitle")))
 				.set("description", WebKit.getHTMLToString(getPara("odescription")))
-				.set("type", getParaToInt("selectType"))
+				.set("type", getParaToInt("selectChildType"))
 				.set("level", getPara("selectLevel"))
 				.set("status", 2)
 				.set("offer_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss"))
@@ -336,9 +351,9 @@ public class ReportController extends BaseController{
 		order.save();
 		
 		//选中部门
-		long selectApartment=getParaToLong("selectApartment");
+		long selectChildApartment=getParaToLong("selectChildApartment");
 		//根据部门id，获取该部门人员
-		List<Record> selectDealList=UserInfo.dao.getUserByApartment(" apartment.id=? and user.deleted_at is null",selectApartment);
+		List<Record> selectDealList=UserInfo.dao.getUserByApartment(" apartment.id=? and user.deleted_at is null",selectChildApartment);
 		
 		Order o=Order.dao.findById(order.get("id"));
 		

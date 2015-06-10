@@ -87,6 +87,10 @@ public class Apartment extends BaseModel<Apartment> implements TreeNode<Apartmen
 				+ getSql("apartment.findApartmentByFrom"), paras);
 	}
 	
+	public List<Apartment> getATApartmentsList(Object... paras){
+		return find(getSql("apartment.ATApartments"),paras);
+	}
+	
 	/**
 	 * @描述 获取根部门
 	 * @param paras

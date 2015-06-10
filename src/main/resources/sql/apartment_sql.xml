@@ -17,6 +17,19 @@
 		and apartment.deleted_at is null
 	</sql>
 	
+	<sql id="ATApartments">select apartment.id,apartment.name, apartment.pid,
+		apartment.created_at,apartment.updated_at,apartment.deleted_at from 
+		(select * 
+		from com_apartment 
+		where pid=?
+		) as apartment
+		where apartment.id in(
+			select apartmenttype.apartment_id
+			from com_apartment_type as apartmenttype
+			where apartmenttype.type_id=?
+		)
+		and apartment.deleted_at is null</sql>
+	
 	<sql id="treeChildNode">
 	select id,name,pid,level,image from com_apartment where pid=? order by orderid asc
 	</sql>
