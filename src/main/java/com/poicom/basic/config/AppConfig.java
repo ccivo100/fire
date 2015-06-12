@@ -145,7 +145,9 @@ public class AppConfig extends JFinalConfig {
 			tableBindPlugin.setDialect(new MysqlDialect());
 		}else if(db_type.equals(DictKeys.db_type_oracle)){
 			log.info("  == Plugins ==    使用数据库类型是 oracle");
-			druidPlugin.setValidationQuery("select 1 FROM DUAL"); //指定连接验证语句(用于保存数据库连接池), 这里不加会报错误:invalid oracle validationQuery. select 1, may should be : select 1 FROM DUAL 
+			//指定连接验证语句(用于保存数据库连接池), 这里不加会报错误:
+			//invalid oracle validationQuery. select 1, may should be : select 1 FROM DUAL
+			druidPlugin.setValidationQuery("select 1 FROM DUAL");  
 			tableBindPlugin.setDialect(new OracleDialect());
 		}
 		log.info("  == Plugins ==    添加druidPlugin插件");

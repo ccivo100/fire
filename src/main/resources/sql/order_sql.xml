@@ -21,7 +21,7 @@
   	</sql>
   	
   	<sql id="findOfferQueryBySelect"><!-- Reports-Operates-Orders 分页故障查询 -->
-  	SELECT o.id, o.description, u1.bname off_branch,u1.full_name off_user,o.offer_at,  o.status,
+  	SELECT o.id, o.description, u1.bname off_branch, u1.aname off_apartment, u1.paname off_paname, u1.full_name off_user,o.offer_at,  o.status,
   		 o.type tid, t1.name type_name,o.created_at,o.updated_at,o.deleted_at,o.title
   	</sql>
   	
@@ -29,10 +29,12 @@
   	FROM com_order AS o 
 		LEFT OUTER JOIN 
 		(
-			select uu1.id id,uu1.full_name full_name, bb1.name bname
+			select uu1.id id,uu1.full_name full_name, bb1.name bname, aa1.name aname, pp1.name pname, pp1.apartment_name paname
 			from sec_user_info as ssui
 						 left outer join sec_user as uu1 on ssui.user_id=uu1.id
 						 left outer join com_branch as bb1 on ssui.branch_id=bb1.id
+						 left outer join com_apartment as aa1 on ssui.apartment_id=aa1.id
+						 left outer join com_position as pp1 on ssui.position_id=pp1.id
 		) 
 			AS u1 ON o.offer_user = u1.id
 		LEFT OUTER JOIN com_type 

@@ -1,6 +1,7 @@
 package com.poicom.function.controller;
 
 import java.io.File;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,8 +24,10 @@ import com.jfinal.plugin.activerecord.Record;
 import com.poicom.basic.kit.AlertKit;
 import com.poicom.basic.kit.DateKit;
 import com.poicom.basic.thread.ThreadAlert;
+import com.poicom.function.model.Comment;
 import com.poicom.function.model.Order;
 import com.poicom.function.model.User;
+import com.poicom.function.model.UserInfo;
 import com.poicom.function.validator.IndexValidator;
 
 /**
@@ -33,9 +36,10 @@ import com.poicom.function.validator.IndexValidator;
  *
  */
 @ControllerKey(value = "/", path = "/app/index")
-public class IndexController extends Controller {
+public class IndexController extends BaseController {
 
 	private final static String indexView = "index.html";
+	private final static String INDEX_QUERY_PAGE="query.html";
 	private final static String RETRIEVE_PAGE="retrieve.html";
 	private final static String REPASSWORD_PAGE="repassword.html";
 	protected Logger logger = LoggerFactory.getLogger(IndexController.class);
@@ -71,6 +75,29 @@ public class IndexController extends Controller {
 			render(indexView);
 		}
 		
+	}
+	
+	/**
+	 * 查询故障工单详细内容
+	 */
+	public void query(){
+		String where="o.id=?";
+		Record order = Order.dao.findReportById(where,getParaToInt("id"));
+
+		//获取工单申报者的分公司信息
+		Record offer=UserInfo.dao.getUserBranch(order.getLong("oofferid"));
+		
+		if(!ValidateKit.isNullOrEmpty(offer)){
+			setAttr("offer",offer);
+		}
+		//获取工单处理意见
+		List<Record> commentList=Comment.dao.findCommentsByOrderId(" comments.order_id=? order by comments.add_at asc ",order.getLong("oorderid"));
+		setAttr("commentList",commentList);
+			
+		//工单详细信息
+		setAttr(order);
+
+		render(INDEX_QUERY_PAGE);
 	}
 
 	/**

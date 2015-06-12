@@ -13,7 +13,6 @@ import cn.dreampie.ValidateKit;
 import cn.dreampie.encription.EncriptionKit;
 import cn.dreampie.mail.Mailer;
 
-import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.activerecord.Record;
 import com.poicom.function.model.Order;
 import com.poicom.function.model.Retrieve;
@@ -132,11 +131,17 @@ public class AlertKit {
 						+ offer.getStr("uphone") + ") 发来故障工单。<br/>")
 		.append("故障内容："+description+"<br/>")
 		.append("请及时处理。");
-		
 		return body;
-		
 	}
 	
+	/**
+	 * 提交故障工单发送邮件
+	 * @param offer
+	 * @param deal
+	 * @param order
+	 * @param description
+	 * @return
+	 */
 	public static StringBuffer getMailBody(Record offer,Record deal,Order order,String description){
 		StringBuffer body=new StringBuffer();
 		body.append("尊敬的 "+deal.getStr("fullname")+"，您好：<br/>")
@@ -148,6 +153,70 @@ public class AlertKit {
 		.append("请及时处理。");
 		
 		return body;
+	}
+	
+	/**
+	 * @描述 报障员提交新故障工单时调用
+	 * @param userinfo
+	 * @param phone
+	 */
+	public static String setSmsContext(Object obj,Record userinfo,Order order ){
+		
+		StringBuffer contt=new StringBuffer();
+		if(ValidateKit.isNullOrEmpty(userinfo)){
+			contt.append("null");
+		}else{
+			contt.append("您好，")
+			.append(userinfo.getStr("bname")+"的 ")
+			.append(userinfo.getStr("ufullname"))
+			.append("（"+userinfo.getStr("uphone")+"） ")
+			//.append("于 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms))
+			.append("提交了故障工单，请尽快处理。");
+		}
+		return contt.toString();
+	}
+	
+	/**
+	 * 工单指派二级部门发送邮件
+	 * C：change；O：order
+	 * @param offer
+	 * @param deal
+	 * @param order
+	 * @param description
+	 * @return
+	 */
+	public static StringBuffer getCOMailBody(Record offer,Record deal,Order order,String description){
+		StringBuffer body=new StringBuffer();
+		body.append("尊敬的 "+deal.getStr("fullname")+"，您好：<br/>")
+		.append(offer.getStr("bname") + " 的 "+ offer.getStr("ufullname"))
+		.append(" （"+ offer.getStr("uphone") + "）")
+		//.append(" 于 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms)+" ")
+		.append("发来故障工单。<br/>")
+		.append("故障内容为："+description+"<br/>")
+		.append("请及时处理。（指派）");
+		return body;
+	}
+	
+	/**
+	 * 工单指派二级部门发送短信
+	 * @param obj
+	 * @param userinfo
+	 * @param order
+	 * @return
+	 */
+	public static String setCOSmsContext(Record userinfo,Order order ){
+		StringBuffer contt=new StringBuffer();
+		if(ValidateKit.isNullOrEmpty(userinfo)){
+			contt.append("null");
+		}else{
+			contt.append("您好，")
+			.append(userinfo.getStr("bname")+"的 ")
+			.append(userinfo.getStr("ufullname"))
+			.append("（"+userinfo.getStr("uphone")+"） ")
+			//.append("于 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms))
+			.append("提交了故障工单，请尽快处理。（指派）");
+		}
+		return contt.toString();
 	}
 	
 	/**
@@ -168,6 +237,27 @@ public class AlertKit {
 	}
 	
 	/**
+	 * @描述 报障员催办时使用
+	 * @param userinfo
+	 * @param phone
+	 */
+	@Deprecated
+	public static String getSmsBody(Record offer,Order order){
+		StringBuffer contt=new StringBuffer();
+		if(ValidateKit.isNullOrEmpty(offer)){
+			contt.append("null");
+		}else{
+			contt.append("您好，")
+			.append("你有一条来自 "+offer.getStr("bname")+" 的 ")
+			.append(offer.getStr("ufullname")+"（"+offer.getStr("uphone")+"）")
+			.append(" 于 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms)+" ")
+			.append("发起的故障申告，现已超时，请尽快处理！");
+		}
+		
+		return contt.toString();
+	}
+	
+	/**
 	 * @描述 报障员撤回工单时使用
 	 * @param offer
 	 * @param deal
@@ -182,7 +272,26 @@ public class AlertKit {
 		.append("撤回于 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms)+" ")
 		.append("发起的故障申告！");
 		return body;
-		
+	}
+	
+	/**
+	 * @描述 申报员撤回故障工单通知
+	 * @param offer
+	 * @param order
+	 * @return
+	 */
+	public static String getSmsBodyRecall(Record offer,Order order){
+		StringBuffer contt=new StringBuffer();
+		if(ValidateKit.isNullOrEmpty(offer)){
+			contt.append("null");
+		}else{
+			contt.append("您好，")
+			.append(offer.getStr("bname")+" 的 ")
+			.append(offer.getStr("ufullname")+"（"+offer.getStr("uphone")+"）")
+			.append("撤回于 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms)+" ")
+			.append("发起的故障申告！");
+		}
+		return contt.toString();
 	}
 	
 	/**
@@ -244,8 +353,6 @@ public class AlertKit {
 		return body;
 	}
 	
-
-	
 	/**
 	 * @描述 电话数组格式化
 	 */
@@ -263,73 +370,6 @@ public class AlertKit {
 	}
 	
 	/**
-	 * @描述 报障员提交新故障工单时调用
-	 * @param userinfo
-	 * @param phone
-	 */
-	public static String setSmsContext(Object obj,Record userinfo,Order order ){
-		
-		StringBuffer contt=new StringBuffer();
-		if(ValidateKit.isNullOrEmpty(userinfo)){
-			contt.append("null");
-		}else{
-			contt.append("您好，")
-			.append(userinfo.getStr("bname")+"的 ")
-			.append(userinfo.getStr("ufullname"))
-			.append("（"+userinfo.getStr("uphone")+"） ")
-			//.append("于 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms))
-			.append("提交了故障工单，请尽快处理。");
-		}
-		
-		//String content =contt.toString();
-		//sendSms(content,phone);
-		return contt.toString();
-	}
-	
-	/**
-	 * @描述 报障员催办时使用
-	 * @param userinfo
-	 * @param phone
-	 */
-	@Deprecated
-	public static String getSmsBody(Record offer,Order order){
-		StringBuffer contt=new StringBuffer();
-		if(ValidateKit.isNullOrEmpty(offer)){
-			contt.append("null");
-		}else{
-			contt.append("您好，")
-			.append("你有一条来自 "+offer.getStr("bname")+" 的 ")
-			.append(offer.getStr("ufullname")+"（"+offer.getStr("uphone")+"）")
-			.append(" 于 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms)+" ")
-			.append("发起的故障申告，现已超时，请尽快处理！");
-		}
-		
-		//String content =contt.toString();
-		//sendSms(content,phone);
-		return contt.toString();
-	}
-	
-	/**
-	 * @描述 申报员撤回故障工单通知
-	 * @param offer
-	 * @param order
-	 * @return
-	 */
-	public static String getSmsBodyRecall(Record offer,Order order){
-		StringBuffer contt=new StringBuffer();
-		if(ValidateKit.isNullOrEmpty(offer)){
-			contt.append("null");
-		}else{
-			contt.append("您好，")
-			.append(offer.getStr("bname")+" 的 ")
-			.append(offer.getStr("ufullname")+"（"+offer.getStr("uphone")+"）")
-			.append("撤回于 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms)+" ")
-			.append("发起的故障申告！");
-		}
-		return contt.toString();
-	}
-	
-	/**
 	 * @描述 运维人员指派通知
 	 * @param offeruser
 	 * @param acceptuser
@@ -340,14 +380,12 @@ public class AlertKit {
 	@Deprecated
 	public static String getSmsBodyArrange(Record offeruser,Record acceptuser,Record dealuser,Order order){
 		StringBuffer contt=new StringBuffer();
-		
 		contt.append("亲爱的 "+offeruser.getStr("ufullname")+"，您好！")
 		.append("您在"+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms))
 		.append("提交的，关于“"+order.get("title")+"”的故障工单，已由")
 		.append(acceptuser.getStr("ufullname")+"（"+acceptuser.getStr("uphone")+"）")
 		.append("指派给"+dealuser.getStr("ufullname")+"（"+dealuser.getStr("uphone")+"）")
 		.append("处理。");
-		
 		return contt.toString();
 	}
 	
@@ -358,7 +396,6 @@ public class AlertKit {
 	 * @param order
 	 */
 	public static String getSmsBody(User offer,User deal,Order order){
-		
 		StringBuffer contt=new StringBuffer();
 		if(ValidateKit.isNullOrEmpty(offer)){
 			contt.append("null");
@@ -369,9 +406,6 @@ public class AlertKit {
 			//.append("于 "+DateKit.format(order.getDate("deal_at"),DateKit.pattern_ymd_hms))
 			.append(" 处理完毕！");
 		}
-		
-		//String content =contt.toString();
-		//sendSms(content,offer.getStr("phone"));
 		return contt.toString();
 	}
 	

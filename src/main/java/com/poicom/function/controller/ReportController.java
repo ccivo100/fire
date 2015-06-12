@@ -287,10 +287,7 @@ public class ReportController extends BaseController{
 	public void offer(){
 		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
 		
-		setAttr(userinfo);
-		
 		setAttr("userinfo",userinfo);
-		setAttr("typeList",Etype.dao.getAllType());
 		setAttr("levelList",Level.dao.findAll());
 		render("add.html");
 	}
@@ -320,12 +317,18 @@ public class ReportController extends BaseController{
 			renderJson("childApartmentList",childApartmentList);
 		}
 		else if(type.equals("effective")){
-			List<UserInfo> userinfoList=UserInfo.dao.findBy(" apartment_id=?", getParaToInt("apartmentid"));
-			if(userinfoList.size()==0){
-				renderJson("state","error");
+			Long selectChildApartmentid=getParaToLong("apartmentid");
+			if(selectChildApartmentid==-1){
+				renderJson("state","null");
 			}else{
-				renderJson("state","success");
+				List<UserInfo> userinfoList=UserInfo.dao.findBy(" apartment_id=?", getParaToInt("apartmentid"));
+				if(userinfoList.size()==0){
+					renderJson("state","error");
+				}else{
+					renderJson("state","success");
+				}
 			}
+			
 		}
 	}
 	
@@ -333,59 +336,80 @@ public class ReportController extends BaseController{
 	/**
 	 * @描述 新建故障工单 并发送邮件、短信通知
 	 */
-	//@Before( {Tx.class,CommonValidator.class,EvictInterceptor.class})
-	@Before( {Tx.class,CommonValidator.class})
-	//@CacheName("/order/query")
+	@Before(Tx.class)
 	public void save(){
 		
-		//获取表单数据，填充进Order
-		Order order=new Order().set("offer_user", getParaToInt("uuserid"))
-				.set("title",WebKit.getHTMLToString(getPara("otitle")))
-				.set("description", WebKit.getHTMLToString(getPara("odescription")))
-				.set("type", getParaToInt("selectChildType"))
-				.set("level", getPara("selectLevel"))
-				.set("status", 2)
-				.set("offer_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss"))
-				//.set("accept_user", getParaToLong("selectDeal"))
-				.set("flag", 0);
-		order.save();
-		
-		//选中部门
-		long selectChildApartment=getParaToLong("selectChildApartment");
-		//根据部门id，获取该部门人员
-		List<Record> selectDealList=UserInfo.dao.getUserByApartment(" apartment.id=? and user.deleted_at is null",selectChildApartment);
-		
-		Order o=Order.dao.findById(order.get("id"));
-		
-		for(Record selectDeal:selectDealList){
-			UserOrder userorder=new UserOrder()
-			.set("user_id", selectDeal.get("userid"))
-			.set("order_id", order.get("id"));
-			userorder.save();
-			
-			//当前用户详细信息
-			Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
-			
-			//邮件内容
-			String body=AlertKit.getMailBody(userinfo,selectDeal,o,WebKit.getHTMLToString(getPara("odescription"))).toString();
-			//发送邮件、短信线程
-			AlertKit alertKit=new AlertKit();
-			//发送邮件
-			if(ValidateKit.isEmail(selectDeal.getStr("useremail"))){
-				alertKit.setEmailTitle("点通故障系统提醒您！").setEmailBody(body).setEmailAdd(selectDeal.getStr("useremail"));
-			}
-			if(ValidateKit.isPhone(selectDeal.getStr("userphone"))){
-				//短信内容
-				String smsBody=AlertKit.setSmsContext(null,userinfo,o);
-				alertKit.setSmsContext(smsBody).setSmsPhone(selectDeal.getStr("userphone"));
-			}
-			//加入进程
-			logger.info("日志添加到入库队列 ---> 新建故障工单");
-			ThreadAlert.add(alertKit);
+		if(ValidateKit.isNullOrEmpty(getPara("title"))){
+			renderJson("state","故障单标题不能为空！");
 		}
-		
-		redirect("/report/reports");
+		else if(Order.dao.findBy(" offer_user=? and title=? ", getPara("userid"),getPara("title").trim()).size()>0){
+			renderJson("state","已存在该故障单，请重新输入！");
+		}else if(getParaToLong("selectType")==-1){
+			renderJson("state","请选择故障大类！");
+		}else if(getParaToLong("selectApartment")==-1){
+			renderJson("state","请选择运维部门！");
+		}else if(getParaToLong("selectChildType")==-1){
+			renderJson("state","请选择故障小类！");
+		}else if(getParaToLong("selectChildApartment")==-1){
+			renderJson("state","请选择运维组别！");
+		}else if(getParaToLong("selectLevel")==-1){
+			renderJson("state","请选择故障等级！");
+		}else if(ValidateKit.isNullOrEmpty(getPara("description"))){
+			renderJson("state","故障单描述不能为空！");
+		}else {
+			
+			//获取表单数据，填充进Order
+			Order order=new Order().set("offer_user", getParaToInt("userid"))
+					.set("title",WebKit.getHTMLToString(getPara("title")))
+					.set("description", WebKit.getHTMLToString(getPara("description")))
+					.set("type", getParaToLong("selectChildType"))
+					.set("level", getParaToLong("selectLevel"))
+					.set("status", 2)
+					.set("offer_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss"))
+					//.set("accept_user", getParaToLong("selectDeal"))
+					.set("flag", 0);
+			
+			if(order.save()){
+				//选中部门
+				long selectChildApartment=getParaToLong("selectChildApartment");
+				//根据部门id，获取该部门人员
+				List<Record> selectDealList=UserInfo.dao.getUserByApartment(" apartment.id=? and user.deleted_at is null",selectChildApartment);
+				
+				Order o=Order.dao.findById(order.get("id"));
+				
+				for(Record selectDeal:selectDealList){
+					UserOrder userorder=new UserOrder()
+					.set("user_id", selectDeal.get("userid"))
+					.set("order_id", order.get("id"));
+					userorder.save();
+					
+					//当前用户详细信息
+					Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
+					
+					//邮件内容
+					String body=AlertKit.getMailBody(userinfo,selectDeal,o,WebKit.getHTMLToString(getPara("description"))).toString();
+					//发送邮件、短信线程
+					AlertKit alertKit=new AlertKit();
+					//发送邮件
+					if(ValidateKit.isEmail(selectDeal.getStr("useremail"))){
+						alertKit.setEmailTitle("点通故障系统提醒您！").setEmailBody(body).setEmailAdd(selectDeal.getStr("useremail"));
+					}
+					if(ValidateKit.isPhone(selectDeal.getStr("userphone"))){
+						//短信内容
+						String smsBody=AlertKit.setSmsContext(null,userinfo,o);
+						alertKit.setSmsContext(smsBody).setSmsPhone(selectDeal.getStr("userphone"));
+					}
+					//加入进程
+					logger.info("日志添加到入库队列 ---> 新建故障工单");
+					ThreadAlert.add(alertKit);
+				}
+				renderJson("state","提交成功！");
+			}else{
+				renderJson("state","提交失败！");
+			}
+		}
 	}
+	
 	
 	/**
 	 * @描述 申报人员可以修改未被处理的工单
@@ -415,30 +439,8 @@ public class ReportController extends BaseController{
 	/**
 	 *  @描述 处理申报人员更新故障工单操作 
 	 */
-	//@Before( {Tx.class,CommonValidator.class,EvictInterceptor.class})
-	@Before( CommonValidator.class)
-	//@CacheName("/order/query")
-	public void update(){
-		//order_id
-		Integer orderid=getParaToInt("oorderid");
-		//description
-		String title=getPara("otitle");
-		String description=getPara("odescription");
-		
-		Order order=Order.dao
-				.findById(orderid);
-		order.set("title", title)
-				.set("description",WebKit.getHTMLToString(description))
-				.set("updated_at",
-						DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
-		
-		if(order.update()){
-			redirect("/report/reports");
-		}
-
-	}
 	@Before(Tx.class)
-	public void upup(){
+	public void update(){
 		//order_id
 		Integer orderid=getParaToInt("orderid");
 		Order order=Order.dao.findById(orderid);

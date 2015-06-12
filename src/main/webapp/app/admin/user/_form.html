@@ -102,7 +102,11 @@
 				<select id="selectBranch" name="selectBranch" class="form-control"  required disabled>
 					<option value="" selected="selected">请选择</option>
 					<#list branchList as branch>
-					<option value="${(branch.id)!}" <#if (branchid?number)=branch.id>selected="selected"<#else></#if>>${(branch.name)!}	</option>
+					<#if (branchid?number)=branch.id>
+					<option value="${(branch.id)!}"  selected="selected">${(branch.name)!}	</option>
+					<#else>
+					<option value="${(branch.id)!}"  >${(branch.name)!}	</option>
+					</#if>
 					</#list>
 				</select>
 		</div>

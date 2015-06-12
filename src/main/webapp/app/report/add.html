@@ -105,13 +105,44 @@ function alertModal(msg){
 	$("#modal-body-content").html(msg);  
 }
 
+$(document).ready(function(){
+	$("#reportsave").click(function(){
+		$.ajax({
+			type:"post",
+			url:"${ContextPath}/report/save",
+			data:{
+					"userid":$('#userid').val(),
+					"title":$('#title').val(),
+					"description":$('#description').val(),
+					
+					"selectType":$('#selectType').val(),
+					"selectApartment":$('#selectApartment').val(),
+					"selectChildType":$('#selectChildType').val(),
+					"selectChildApartment":$('#selectChildApartment').val(),
+					"selectLevel":$('#selectLevel').val(),
+					
+			},
+			success:function(msg){
+				alertModal(msg.state);
+				$('#alertModal').modal();
+				$('#alertModal').on('hidden.bs.modal', function () {
+					if(msg.state=='提交成功！'){
+						window.location.href='${ContextPath}/report/reports'
+					}
+				});
+			}
+		});
+	});
+
+});
+
 </script>
 
 </#assign>
 
 <@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="offerFlag">
 <div class="index-background">
-	<!-- 代表上写文、/blog代表控制器、/save代表控制器中的方法 -->
+	
 	<form class="form-horizontal" role="form"  action="${ContextPath}/report/save" method="post" >
 		<#include "_formadd.html" />
 	</form>

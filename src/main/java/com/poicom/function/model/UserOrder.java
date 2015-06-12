@@ -1,5 +1,7 @@
 package com.poicom.function.model;
 
+import java.util.List;
+
 import cn.dreampie.tablebind.TableBind;
 
 /**
@@ -14,5 +16,14 @@ public class UserOrder extends BaseModel<UserOrder> {
 	
 	public static final UserOrder dao=new UserOrder();
 	
+	/**
+	 * 根据orderid获取userList
+	 * @param paras
+	 * @return
+	 */
+	public List<User> getUserList(Object... paras){
+		
+		return User.dao.find(getSql("user.userByOrderId"), paras);
+	}
 
 }

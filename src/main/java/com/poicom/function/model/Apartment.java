@@ -1,5 +1,6 @@
 package com.poicom.function.model;
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.jfinal.plugin.activerecord.Page;
@@ -87,9 +88,35 @@ public class Apartment extends BaseModel<Apartment> implements TreeNode<Apartmen
 				+ getSql("apartment.findApartmentByFrom"), paras);
 	}
 	
+	/**
+	 * @描述 根据工单故障类型type_id，查其父类pid。排除已指派部门。
+	 * @param paras
+	 * @return 该工单未指派根部门list
+	 */
+	public List<Apartment> getApartmentsListExcept(Object... paras){
+		
+		return find(
+				"select apartment.id,apartment.name, apartment.pid, apartment.created_at,apartment.updated_at,apartment.deleted_at "
+						+ "from com_apartment as apartment "
+						+ "where apartment.id in"
+						+ "( select apartmenttype.apartment_id "
+						+ "from com_apartment_type as apartmenttype "
+						+ "where apartmenttype.type_id=? "
+						+ "and apartmenttype.apartment_id not in "
+						+ getParaNumber_1(paras)
+						+ ") and apartment.deleted_at is null ", paras);
+	}
+	
+	/**
+	 * @描述 根据故障类型&&父级部门，查询负责子部门
+	 * @param paras
+	 * @return
+	 */
 	public List<Apartment> getATApartmentsList(Object... paras){
 		return find(getSql("apartment.ATApartments"),paras);
 	}
+	
+	
 	
 	/**
 	 * @描述 获取根部门

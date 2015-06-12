@@ -486,4 +486,20 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 		return sb.toString();
 	}
 	
+	public static String getParaNumber_1(Object... paras){
+		int length=paras.length-1;
+		StringBuffer sb=new StringBuffer();
+		sb.append("(");
+		for(int i=1;i<=length;i++){
+			if(i!=length){
+				sb.append("?,");
+			}else{
+				sb.append("?");
+			}
+		}
+		sb.append(")");
+		return sb.toString();
+	}
+	
+	
 }

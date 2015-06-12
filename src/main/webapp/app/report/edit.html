@@ -9,7 +9,7 @@ $(document).ready(function(){
 	$("#reportupdate").click(function(){
 		$.ajax({
 			type:"post",
-			url:"${ContextPath}/report/upup",
+			url:"${ContextPath}/report/update",
 			data:{"orderid":$('#oorderid').val(),
 					"title":$('#otitle').val(),
 					"description":$('#odescription').val(),

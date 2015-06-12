@@ -84,6 +84,13 @@
         left outer join com_position as position on userinfo.position_id=position.id
 		
   	</sql>
+  	
+  	<sql id="userByOrderId">
+  		<![CDATA[ 
+  			select * from sec_user where id in(select user_id from com_user_order where order_id = ?)
+  		]]>
+  	</sql>
+  	
   	<!-- 动态SQL处理 -->
   	<sql id="splitPage">
   		<![CDATA[ 

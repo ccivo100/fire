@@ -29,6 +29,7 @@
 			where apartmenttype.type_id=?
 		)
 		and apartment.deleted_at is null</sql>
+		
 	
 	<sql id="treeChildNode">
 	select id,name,pid,level,image from com_apartment where pid=? order by orderid asc

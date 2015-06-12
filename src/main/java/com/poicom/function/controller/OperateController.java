@@ -24,6 +24,7 @@ import com.poicom.basic.kit.AlertKit;
 import com.poicom.basic.kit.DateKit;
 import com.poicom.basic.kit.WebKit;
 import com.poicom.basic.thread.ThreadAlert;
+import com.poicom.function.model.Apartment;
 import com.poicom.function.model.Comment;
 import com.poicom.function.model.Etype;
 import com.poicom.function.model.Level;
@@ -31,6 +32,7 @@ import com.poicom.function.model.Order;
 import com.poicom.function.model.User;
 import com.poicom.function.model.UserInfo;
 import com.poicom.function.model.UserOrder;
+import com.poicom.function.service.OrderService;
 import com.poicom.function.validator.CommonValidator;
 
 /**
@@ -221,6 +223,34 @@ public class OperateController extends BaseController{
 			renderJson("state","指派失败");
 	} 
 	
+	public void handler(){
+		String type=getPara("type");
+		if(type.equals("apartment")){
+			Long orderid = getParaToLong("orderid");//工单id
+			Long typeid = getParaToLong("typeid");//细类id
+			List<Apartment> apartmentList=OrderService.service.apartmentByTypeExcApart(orderid,typeid);
+			renderJson("apartmentList",apartmentList);
+		}else if(type.equals("childApartment")){
+			Long childTypeid= getParaToLong("childTypeid");
+			Long rootApartment = getParaToLong("rootApartment");
+			List<Apartment> childApartmentList=Apartment.dao.getATApartmentsList(rootApartment,childTypeid);
+			renderJson("childApartmentList",childApartmentList);
+		}else if(type.equals("effective")){
+			Long selectChildApartmentid=getParaToLong("apartmentid");
+			if(selectChildApartmentid==-1){
+				renderJson("state","null");
+			}else{
+				List<UserInfo> userinfoList=UserInfo.dao.findBy(" apartment_id=?", getParaToInt("apartmentid"));
+				if(userinfoList.size()==0){
+					renderJson("state","error");
+				}else{
+					renderJson("state","success");
+				}
+			}
+		}
+		
+	}
+	
 	
 	/**
 	 * @描述 提交故障处理建议
@@ -315,6 +345,43 @@ public class OperateController extends BaseController{
 				} else {
 					renderJson("state", "提交失败！");
 				}
+			}
+			//故障工单指派其他二级部门加入
+			else if(selectProgress==3){
+				order.set("status", 1).update();
+				//选中部门
+				long selectChildApartment=getParaToLong("selectChildApartment");
+				//根据部门id，获取该部门人员
+				List<Record> selectDealList=UserInfo.dao.getUserByApartment(" apartment.id=? and user.deleted_at is null",selectChildApartment);
+				
+				Order o=Order.dao.findById(order.get("id"));
+				for(Record selectDeal:selectDealList){
+					UserOrder userorder=new UserOrder()
+					.set("user_id", selectDeal.get("userid"))
+					.set("order_id", order.get("id"));
+					userorder.save();
+					
+					//当前用户详细信息
+					Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
+					
+					//邮件内容
+					String body=AlertKit.getCOMailBody(userinfo,selectDeal,o,WebKit.getHTMLToString(getPara("description"))).toString();
+					//发送邮件、短信线程
+					AlertKit alertKit=new AlertKit();
+					//发送邮件
+					if(ValidateKit.isEmail(selectDeal.getStr("useremail"))){
+						alertKit.setEmailTitle("点通故障系统提醒您！").setEmailBody(body).setEmailAdd(selectDeal.getStr("useremail"));
+					}
+					if(ValidateKit.isPhone(selectDeal.getStr("userphone"))){
+						//短信内容
+						String smsBody=AlertKit.setCOSmsContext(userinfo,o);
+						alertKit.setSmsContext(smsBody).setSmsPhone(selectDeal.getStr("userphone"));
+					}
+					//加入进程
+					logger.info("日志添加到入库队列 ---> 新建故障工单");
+					ThreadAlert.add(alertKit);
+				}
+				renderJson("state","指派成功！");
 			}
 		}
 	}
