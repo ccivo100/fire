@@ -9,16 +9,7 @@
 	</div>
 	<div class="col-xs-8">
 	
-	<input id="uuserid" type="hidden" name="uuserid" value="${(uuserid)!}">
 	<input id="oorderid"  type="hidden" name="oorderid" value="${(oorderid)!}">
-	<input id="otypeid" type="hidden" name="otypeid" value="${(otypeid)!}">
-	<input id="olevelid" type="hidden" name="olevelid" value="${(olevelid)!}">
-	
-	<input id="ufullname" type="hidden" name="ufullname" value="${(ufullname)!}">
-	<input id="uphone"  type="hidden" name="uphone" value="${(uphone)!}">
-	<input id="bname" type="hidden" name="bname" value="${(bname)!}">
-	<input id="aname" type="hidden" name="aname" value="${(aname)!}">
-	<input id="pname" type="hidden" name="pname" value="${(pname)!}">
 	
 	<div class="form-group">
 		<div >
@@ -154,8 +145,8 @@
 			
 			<#if odeletetime?exists>
 			<#else>
-			<a id="reportupdate" value="提交" type="submit" class="btn btn-primary save" data-loading-text="正在提交...">提交</a>
-			<a id="recall" value="撤回"  class="btn btn-danger"  data-loading-text="正在撤回...">撤回</a>
+			<a id="reportupdate"  class="btn btn-primary save" >提交</a>
+			<a id="recall"   class="btn btn-danger" >撤回</a>
 			</#if>
 			
 		</div>

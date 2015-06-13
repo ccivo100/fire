@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<sqlRoot>
+	<!--权限SQL-->
+  <sqlGroup name="permission">
+    <sql id="findRoleByFrom">FROM sec_permission `permission` WHERE `permission`.id IN (SELECT
+      `role_permission`.permission_id FROM sec_role_permission
+      `role_permission` WHERE `role_permission`.role_id=?)
+    </sql>
+  </sqlGroup>
+
+  <sqlGroup name="rolePermission">
+
+  </sqlGroup>
+</sqlRoot>

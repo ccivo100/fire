@@ -1,7 +1,7 @@
 ﻿<#include "/app/common/layout/__frontmainlayout.html"/>
 
 <#assign pageCss>
-<link rel="stylesheet" href="${ContextPath}/admin/assets/css/bootstrap-datetimepicker.css" />
+<link rel="stylesheet" href="${ContextPath}/admin/assets/css/bootstrap-datetimepicker.min.css" />
 <link rel="stylesheet" href="${ContextPath}/admin/assets/css/signin.css" />
 <link rel="stylesheet" href="${ContextPath}/admin/assets/css/jquery-ui.css" />
 </#assign>
@@ -21,7 +21,8 @@ $(document).ready(function(){
 				"uuserid":$('#uuserid').val(),
 				"deal_at":$('#deal_at').val(),
 				"progress":$('#selectProgress').val(),
-				"ocomment":$('#ocomment').val()},
+				"ocomment":$('#ocomment').val(),
+				"selectChildApartment":$('#selectChildApartment').val()},
 			success:function(msg){
 				alertModal(msg.state);
 				$('#alertModal').modal();
@@ -32,6 +33,9 @@ $(document).ready(function(){
 					window.location.href='${ContextPath}/operate/deal'
 				}
 				else if(msg.state=='故障工单继续处理！'){
+					window.location.href='${ContextPath}/operate/deal'
+				}
+				else if(msg.state=='指派成功！'){
 					window.location.href='${ContextPath}/operate/deal'
 				}
 			}
@@ -68,6 +72,83 @@ $(document).ready(function(){
 		$(this).popover('hide');
 	});
 	
+});
+
+function sendinit(){
+	$('#apartment').hide();
+	$('#childApartment').hide();
+}
+
+function ordersend(){
+	$('#apartment').hide();
+	$('#childApartment').hide();
+	var p=$('#selectProgress').val();
+	if(p==3){
+		$("#selectApartment").html("");
+		$('#apartment').show();
+		$('#childApartment').show();
+		select1();
+	}
+};
+
+function select1() {
+	$.ajax(
+    {
+    	type: "post",
+    	url: "${ContextPath}/operate/handler",
+    	data: { "type": "apartment",
+    		"orderid":$('#oorderid').val(),
+    		"typeid":$("#otypeid").val(),
+    	 },
+        success: function (msg) {
+        	$("#selectApartment").append("<option value='-1'>请选择运维部门</option>");
+        	for (var i = 0; i < msg.apartmentList.length; i++) {
+            	$("#selectApartment").append("<option value=" + msg.apartmentList[i].id + ">" + msg.apartmentList[i].name + "</option>");
+        	}
+            select2();
+        }
+	})
+};
+function select2() {
+	$("#selectChildApartment").html("");
+	$.ajax(
+    {
+    	type: "post",
+    	url: "${ContextPath}/operate/handler",
+    	data: { "type": "childApartment",
+    		"childTypeid":$("#otypeid").val(),
+    		"rootApartment":$('#selectApartment').val(),
+    	 },
+        success: function (msg) {
+        	$("#selectChildApartment").append("<option value='-1'>请选择运维组别</option>");
+        	for (var i = 0; i < msg.childApartmentList.length; i++) {
+            	$("#selectChildApartment").append("<option value=" + msg.childApartmentList[i].id + ">" + msg.childApartmentList[i].name + "</option>");
+        	}
+        }
+	})
+};
+
+function select3(){
+	$.ajax(
+	{
+		type: "post",
+		url: "${ContextPath}/operate/handler",
+		data: { "type": "effective","apartmentid":$('#selectChildApartment').val() },
+		success: function (msg) {
+			if(msg.state=="error"){
+				alertModal("该分组无运维人员，请选择其他运维组!");
+				$('#alertModal').modal();
+				select2();
+			}
+		}
+	})
+};
+
+$(function(){
+	sendinit();
+	$('#selectProgress').bind("change", ordersend);
+	$('#selectApartment').bind("change", select2);
+	$('#selectChildApartment').bind("change",select3);
 });
 
 function alertModal(msg){
@@ -243,7 +324,7 @@ $(function () {
 							</span>
 						</div>
 					</div>
-					<div class="col-xs-12 col-sm-4">
+					<div class="col-xs-12 col-sm-5">
 						<div class="input-group">
 							<span class="input-group-addon">进度</span>
 								<select id="selectProgress" class="form-control" name="selectProgress">
@@ -256,8 +337,26 @@ $(function () {
 									<option value="1">继续处理</option>
 									</#if>
 									<option value="2">处理完毕</option>
+									<option value="3">工单转派</option>
 								</select>
 							 </div>
+					</div>
+				</div>
+				<br>
+				<div id="ordersend">
+					<div class="row">
+						<div class="col-xs-12 col-sm-5">
+							<div id="apartment" class="input-group">
+								<span class='input-group-addon'>部门</span>
+								<select id='selectApartment' name='selectApartment' class='form-control' required></select>
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-5">
+							<div id="childApartment" class="input-group">
+								<span class='input-group-addon'>组别</span>
+								<select id='selectChildApartment' name='selectChildApartment' class='form-control' required></select>
+							</div>
+						</div>
 					</div>
 				</div>
 				<br>

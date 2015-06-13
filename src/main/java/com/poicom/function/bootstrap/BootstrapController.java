@@ -13,8 +13,8 @@ import cn.dreampie.routebind.ControllerKey;
 
 import com.jfinal.core.Controller;
 import com.jfinal.upload.UploadFile;
-import com.poicom.common.kit.excel.PoiKit;
-import com.poicom.function.system.model.Permission;
+import com.poicom.basic.kit.PoiKit;
+import com.poicom.function.model.Permission;
 
 /**
  * 用于指向BootStrap例子的控制器。

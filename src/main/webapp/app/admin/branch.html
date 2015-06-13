@@ -1,4 +1,56 @@
 <#include "/app/common/layout/__backstagemainlayout.html"/>
+<#assign pageCss>
+<link rel="stylesheet" href="${ContextPath}/plugin/ztree/css/zTreeStyle/zTreeStyle.css" />
+
+</#assign>
+<#assign pageJavascript>
+<script src="${ContextPath}/plugin/ztree/js/jquery.ztree.core-3.5.js"></script>
+<script src="${ContextPath}/plugin/ztree/js/jquery.ztree.excheck-3.5.js"></script>
+<SCRIPT type="text/javascript">
+		<!--
+		var setting = {
+			check:{
+				enable:true,
+			},
+			data:{
+				simpleData:{
+					enable:true,
+					idKey:"id",
+					pIdKey:"pId",
+					rootPId:null,
+				},
+			},
+			view:{
+				showIcon: true,
+				showLine: true,
+			},
+		};
+
+		var zNodes =[
+			{ id:1, pId:0, name:"随意勾选 1", open:true},
+			{ id:11, pId:1, name:"随意勾选 1-1", open:true},
+			{ id:111, pId:11, name:"随意勾选 1-1-1"},
+			{ id:112, pId:11, name:"随意勾选 1-1-2"},
+			{ id:12, pId:1, name:"随意勾选 1-2", open:true},
+			{ id:121, pId:12, name:"随意勾选 1-2-1"},
+			{ id:122, pId:12, name:"随意勾选 1-2-2"},
+			{ id:2, pId:0, name:"随意勾选 2", checked:true, open:true},
+			{ id:21, pId:2, name:"随意勾选 2-1"},
+			{ id:22, pId:2, name:"随意勾选 2-2", open:true},
+			{ id:221, pId:22, name:"随意勾选 2-2-1", checked:true},
+			{ id:222, pId:22, name:"随意勾选 2-2-2"},
+			{ id:23, pId:2, name:"随意勾选 2-3"}
+		];
+
+		$(document).ready(function(){
+			$('.mytree').click(function(){
+				$('#zTree').modal();
+				$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+			});
+		});
+		//-->
+	</SCRIPT>
+</#assign>
 <@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="organizationFlag-branchFlag-branchsListFlag">
 
 <div class="page-header">
@@ -49,12 +101,13 @@
 				</td>
 				<td>
 				<div class="action-buttons">
-				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/editbranch?id=${(branch.id)!}" >编辑</a>
+				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/branch/edit?id=${(branch.id)!}" >编辑</a>
 				<#if branch.deleted_at??>
-				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/onbranch?id=${(branch.id)!}" >启用</a>
+				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/branch/on?id=${(branch.id)!}" >启用</a>
 				<#else>
-				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/offbranch?id=${(branch.id)!}" >禁用</a>
+				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/branch/off?id=${(branch.id)!}" >禁用</a>
 				</#if>
+				<a class="btn btn-minier btn-primary btn-xs mytree" href="#" >部门</a>
 				</div>
 				</td>
 			</tr>
@@ -75,4 +128,5 @@
 	</table>
 	<#include "/app/common/inc/_paginate.html" />
 	<@paginate currentPage=branchPage.pageNumber totalPage=branchPage.totalPage actionUrl="/admin/branch/" />
+<#include "branch/_apartmentTree.html" />
 </@mainlayout>

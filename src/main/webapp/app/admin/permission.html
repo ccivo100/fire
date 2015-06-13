@@ -37,13 +37,13 @@
 					</td>
 					<td>
 					<div class="action-buttons">
-					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/editpermission?id=${(permissions.id)!}" >编辑</a>
+					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/permission/edit?id=${(permissions.id)!}" >编辑</a>
 					<#if permissions.deleted_at??>
-					<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/onpermission?id=${(permissions.id)!}" >启用</a>
+					<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/permission/on?id=${(permissions.id)!}" >启用</a>
 					<#else>
-					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/offpermission?id=${(permissions.id)!}" >禁用</a>
+					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/permission/off?id=${(permissions.id)!}" >禁用</a>
 					</#if>
-					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/addpermission?id=${(permissions.id)!}" >添加</a>
+					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/permission/add?id=${(permissions.id)!}" >添加</a>
 					</div>
 					</td>
 				</tr>
@@ -65,11 +65,11 @@
 					</td>
 					<td>
 					<div class="action-buttons">
-					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/editpermission?id=${(permission.id)!}" >编辑</a>
+					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/permission/edit?id=${(permission.id)!}" >编辑</a>
 					<#if permission.deleted_at??>
-					<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/onpermission?id=${(permission.id)!}" >启用</a>
+					<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/permission/on?id=${(permission.id)!}" >启用</a>
 					<#else>
-					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/offpermission?id=${(permission.id)!}" >禁用</a>
+					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/permission/off?id=${(permission.id)!}" >禁用</a>
 					</#if>
 					</div>
 					</td>

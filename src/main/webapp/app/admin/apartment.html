@@ -1,4 +1,30 @@
 <#include "/app/common/layout/__backstagemainlayout.html"/>
+
+<#assign pageJavascript>
+<script type="text/javascript">
+$(function(){
+	$(".checked").click(function(){
+		$.ajax({
+			type:"post",
+			url:"${ContextPath}/admin/apartment/able",
+			data:{
+				"apartmentid":$(this).attr("apartmentid"),
+			},
+			success:function(msg){
+				if(msg.state){
+					alert("修改成功！");
+				}else{
+					alert("修改失败！");
+				}
+			},
+			error:function(){
+				alert("失败了！");
+			}
+		});
+	});
+});
+</script>
+</#assign>
 <@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="organizationFlag-apartmentFlag-apartmentsListFlag">
 
 <div class="page-header">
@@ -10,12 +36,13 @@
 <table class="table table-bordered table-hover">
 		<thead>
 			<tr>
-				<th width="2%">序号</th>
-				<th width="10%">单位名称</th>
-				<th width="4%">父节点编号</th>
-				<th width="5%">创建时间</th>
-				<th width="4%">状态</th>
-				<th width="4%">操作</th>
+				<th >编号</th>
+				<th >单位名称</th>
+				<th >父节点编号</th>
+				<th >创建时间</th>
+				<th >状态</th>
+				<th >运维</th>
+				<th >操作</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -34,21 +61,29 @@
 					</b>
 				</td>
 				<td>
+					<#if apartments.flag="1">
+					<input type="checkbox" class="ace ace-switch ace-switch-5 checked"  apartmentid="${(apartments.id)}"  checked />
+					<#elseif apartments.flag="0">
+					<input type="checkbox" class="ace ace-switch ace-switch-5 checked"  apartmentid="${(apartments.id)}"   />
+					</#if>
+					<span class="lbl middle"></span>
+				</td>
+				<td>
 				<div class="action-buttons">
-				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/editapartment?id=${(apartments.id)!}" >编辑</a>
+				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/apartment/edit?id=${(apartments.id)!}" >编辑</a>
 				<#if apartments.deleted_at??>
-				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/onapartment?id=${(apartments.id)!}" >启用</a>
+				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/apartment/on?id=${(apartments.id)!}" >启用</a>
 				<#else>
-				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/offapartment?id=${(apartments.id)!}" >禁用</a>
+				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/apartment/off?id=${(apartments.id)!}" >禁用</a>
 				</#if>
-				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/addapartment?id=${(apartments.id)!}" >添加</a>
+				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/apartment/add?id=${(apartments.id)!}" >添加</a>
 				</div>
 				</td>
 			</tr>
 			<#list apartments.children as apartment>
 				<tr>
-				<td>${(apartment.id)!}</td>
-				<td><span class="glyphicon glyphicon-minus-sign"></span>     ${(apartment.name)!}</td>
+				<td></td>
+				<td><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;${(apartment.name)!}</td>
 				<td>${(apartment.pid)!}</td>
 				<td>${(apartment.created_at)!}</td>
 				<td><#if apartment.deleted_at??>
@@ -59,13 +94,14 @@
 					</#if>
 					</b>
 				</td>
+				<td></td>
 				<td>
 				<div class="action-buttons">
-				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/editapartment?id=${(apartment.id)!}" >编辑</a>
+				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/apartment/edit?id=${(apartment.id)!}" >编辑</a>
 				<#if apartment.deleted_at??>
-				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/onapartment?id=${(apartment.id)!}" >启用</a>
+				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/apartment/on?id=${(apartment.id)!}" >启用</a>
 				<#else>
-				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/offapartment?id=${(apartment.id)!}" >禁用</a>
+				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/apartment/off?id=${(apartment.id)!}" >禁用</a>
 				</#if>
 				</div>
 				</td>

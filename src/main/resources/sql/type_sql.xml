@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<sqlRoot>
+	<!-- 故障类型SQL -->
+	<sqlGroup name="type">
+	  	<!-- 运维-分配 根据运维人员id，获取处理故障类型列表 -->
+  	<sql id="findOperatorTypeBySelect">
+  		SELECT ct.id id, ct.name typename
+  	</sql>
+  	
+  	<sql id="findOperatorTypeByFrom">
+  		FROM com_type AS ct 
+		WHERE ct.deleted_at is null 
+		AND ct.id in(
+      		SELECT cut.type_id 
+      		FROM com_user_type AS cut 
+      		WHERE cut.user_id=?)
+  	</sql>
+  	
+  		<!-- 部门-分配 根据部门id，获取处理故障类型列表 -->
+  	<sql id="findApartmentTypeBySelect">
+  		select type.id id, type.name typename
+  	</sql>
+  	<sql id="findApartmentTypeByFrom">
+  		from com_type as type
+  		where type.deleted_at is null 
+  		and type.id in(
+  			select apartmenttype.type_id
+  			from com_apartment_type as apartmenttype 
+  			where apartmenttype.apartment_id=?
+  		)
+  	</sql>
+  	
+	</sqlGroup>
+</sqlRoot>

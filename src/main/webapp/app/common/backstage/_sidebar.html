@@ -68,7 +68,7 @@
 							</li>
 
 							<li class="" id="addRoleFlag">
-								<a href="${ContextPath}/admin/addrole">
+								<a href="${ContextPath}/admin/role/add">
 									<i class="menu-icon fa fa-caret-right"></i>
 									新增角色
 								</a>
@@ -101,7 +101,7 @@
 							</li>
 
 							<li class="" id="addPermissionFlag">
-								<a href="${ContextPath}/admin/addpermission">
+								<a href="${ContextPath}/admin/permission/add">
 									<i class="menu-icon fa fa-caret-right"></i>
 									新增权限
 								</a>
@@ -133,22 +133,24 @@
 								<b class="arrow"></b>
 							</li>
 							
-							<li class="" id="apartmentTypeFlag">
-								<a href="${ContextPath}/admin/apartmentType">
-									<i class="menu-icon fa fa-caret-right"></i>
-									任务分配
-								</a>
-
-								<b class="arrow"></b>
-							</li>
 							<li class="" id="addTypeFlag">
-								<a href="${ContextPath}/admin/addtype">
+								<a href="${ContextPath}/admin/type/add">
 									<i class="menu-icon fa fa-caret-right"></i>
 									新增类型
 								</a>
 
 								<b class="arrow"></b>
 							</li>
+							
+							<li class="" id="rootTaskFlag">
+								<a href="${ContextPath}/admin/task/rootTask">
+									<i class="menu-icon fa fa-caret-right"></i>
+									任务分配
+								</a>
+
+								<b class="arrow"></b>
+							</li>
+							
 						</ul>
 					</li>
 					</@shiro.hasPermission>
@@ -215,7 +217,7 @@
 										<b class="arrow"></b>
 									</li>
 									<li class="" id="addBranchFlag">
-										<a href="${ContextPath}/admin/addbranch">
+										<a href="${ContextPath}/admin/branch/add">
 											<i class="menu-icon fa fa-caret-right"></i>
 										新增单位
 										</a>
@@ -243,7 +245,7 @@
 										<b class="arrow"></b>
 									</li>
 									<li class="" id="addApartmentFlag">
-										<a href="${ContextPath}/admin/addapartment">
+										<a href="${ContextPath}/admin/apartment/add">
 											<i class="menu-icon fa fa-caret-right"></i>
 										新增部门
 										</a>
@@ -271,7 +273,7 @@
 										<b class="arrow"></b>
 									</li>
 									<li class="" id="addPositionFlag">
-										<a href="${ContextPath}/admin/addposition">
+										<a href="${ContextPath}/admin/position/add">
 											<i class="menu-icon fa fa-caret-right"></i>
 										新增职位
 										</a>
