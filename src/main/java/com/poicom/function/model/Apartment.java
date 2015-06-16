@@ -2,6 +2,8 @@ package com.poicom.function.model;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.ehcache.CacheKit;
@@ -39,6 +41,13 @@ public class Apartment extends BaseModel<Apartment> implements TreeNode<Apartmen
 	@Override
 	public void setChildren(List<Apartment> children) {
 		this.put("children", children);
+	}
+	
+	public Map<Long,Apartment> getChild(){
+		return this.get("child");
+	}
+	public void setChild(Map<Long,Apartment> child){
+		this.put("child", child);
 	}
 	
 	/**

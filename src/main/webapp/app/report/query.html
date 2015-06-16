@@ -10,6 +10,26 @@
 <script src="${ContextPath}/admin/assets/js/tree.js"></script>
 <script type="text/javascript">
 jQuery(function($){
+	$.ajax(
+    {
+    	type: "post",
+    	url: "${ContextPath}/report/dealList",
+    	data: { "orderid": $('#oorderid').val() },
+        success: function (msg) {
+        	$.each(msg.apartments,function(key,value){
+        		$("#deal-div").append("<div class='profile-info-row'>");
+            	$("#deal-div").append("<div class='profile-info-name'>"+value.name+"</div>");
+            	$("#deal-div").append("<div class='profile-info-value'><span class='editable'>"+Object.keys(value.child).length+"组</span></div>");
+            	$.each(value.child,function(key,value){
+            		$("#deal-div").append("<div class='profile-info-row'>");
+            		$("#deal-div").append("<div class='profile-info-name'></div>");
+            		$("#deal-div").append("<div class='profile-info-value'><span class='editable'>"+value.name+"</span></div>");
+            		$("#deal-div").append("</div>");
+            	});
+            	$("#deal-div").append("</div>");
+        	});
+        }
+	});
 	$(".created_at").each(function(){
 		var $created_at=$(this).attr("title");
 		var $format_time=formatDateTime($created_at);
@@ -133,6 +153,7 @@ $(function () {
 				</div>
 			</div>
 		</div>
+		
 	</div>
 </div>
 		
@@ -188,7 +209,22 @@ $(function () {
 					</#if>
 				</div>
 			</div>
-		
+			<div class="col-md-3 hidden-xs hidden-sm" style="padding-left: 0px;" >
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="widget-box transparent">
+							<div class="widget-header widget-header-small">
+								<h4 class="widget-title blue smaller">
+									<i class="ace-icon fa fa-credit-card orange"></i> 处理部门
+								</h4>
+							</div>
+							<div id="deal-div" class="profile-user-info profile-user-info-striped">
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 
 </@mainlayout>

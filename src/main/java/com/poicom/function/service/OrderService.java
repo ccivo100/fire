@@ -1,8 +1,11 @@
 package com.poicom.function.service;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import cn.dreampie.shiro.core.SubjectKit;
@@ -48,6 +51,54 @@ public class OrderService extends BaseService {
 		
 		List<Apartment> apartmentList=Apartment.dao.getApartmentsListExcept(l1);
 		return apartmentList;
+	}
+	
+	public Map<Long,Apartment> getDealApartmentsByOrderid(Long orderid){
+		List<User> userList = UserOrder.dao.getUserList(orderid);//根据工单id，查询工单拥有者
+		Map<Long,Apartment> papartmentMap=new HashMap<Long,Apartment>();//保存父级部门。
+		for(User user:userList){
+			UserInfo userinfo = UserInfo.dao.get("user_id",user.get("id"));//每个拥有者的详细信息
+			Long apartment_id = userinfo.getLong("apartment_id");//拥有者的部门id（二级部门）
+			Apartment apartment = Apartment.dao.findById(apartment_id);//二级部门信息
+			Long papartment_id=apartment.getLong("pid");//父级部门id
+			Apartment papartment;
+			//在获得父级部门后，添加入
+			if(papartmentMap.get(papartment_id)==null){
+				papartment= Apartment.dao.findById(papartment_id);//父级部门信息
+				Map<Long,Apartment> childList;
+				if(papartment.getChild()==null){
+					childList=new HashMap<Long,Apartment>();
+				}else{
+					childList=papartment.getChild();
+				}
+				childList.put(apartment_id,apartment);
+				papartment.setChild(childList);
+				papartmentMap.put(papartment_id, papartment);
+			}else{
+				papartment =papartmentMap.get(papartment_id);
+				Map<Long,Apartment> childList;
+				if(papartment.getChild()==null){
+					childList=new HashMap<Long,Apartment>();
+				}else{
+					childList=papartment.getChild();
+				}
+				childList.put(apartment_id,apartment);
+				papartment.setChild(childList);
+			}
+		}
+		return papartmentMap;
+	}
+	
+	public Map<Long,Apartment> getDealCApartmentsByOrderid(Long orderid){
+		List<User> userList = UserOrder.dao.getUserList(orderid);//根据工单id，查询工单拥有者
+		Map<Long,Apartment> papartmentMap=new HashMap<Long,Apartment>();//保存父级部门。
+		for(User user:userList){
+			UserInfo userinfo = UserInfo.dao.get("user_id",user.get("id"));//每个拥有者的详细信息
+			Long apartment_id = userinfo.getLong("apartment_id");//拥有者的部门id（二级部门）
+			Apartment apartment = Apartment.dao.findById(apartment_id);//二级部门信息
+			papartmentMap.put(apartment_id, apartment);
+		}
+		return papartmentMap;
 	}
 
 }

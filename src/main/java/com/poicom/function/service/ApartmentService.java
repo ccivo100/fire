@@ -7,6 +7,7 @@ import org.joda.time.DateTime;
 import com.jfinal.log.Logger;
 import com.poicom.basic.kit.WebKit;
 import com.poicom.function.model.Apartment;
+import com.poicom.function.model.ApartmentType;
 
 public class ApartmentService extends BaseService {
 	
@@ -60,10 +61,23 @@ public class ApartmentService extends BaseService {
 	public boolean operate(Apartment apartment){
 		if(apartment.get("flag").equals("1")){
 			apartment.set("flag", "0");
+			dropApartmentType(apartment.getPKValue());
 		}else if(apartment.get("flag").equals("0")){
 			apartment.set("flag", "1");
 		}
 		return apartment.update();
+	}
+	
+	/**
+	 * 删除指定根部门及其子部门负责的运维类型
+	 * @param pid
+	 */
+	private static void dropApartmentType(Long pid){
+		List<Apartment> childList= Apartment.dao.findBy(" pid=?", pid);
+		for(Apartment child:childList){
+			ApartmentType.dao.dropBy(" apartment_id=?", child.get("id"));
+		}
+		ApartmentType.dao.dropBy(" apartment_id=?", pid);
 	}
 	
 	/**

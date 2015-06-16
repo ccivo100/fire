@@ -31,6 +31,7 @@ import com.poicom.function.model.Order;
 import com.poicom.function.model.User;
 import com.poicom.function.model.UserInfo;
 import com.poicom.function.model.UserOrder;
+import com.poicom.function.service.OrderService;
 import com.poicom.function.validator.CommonValidator;
 
 /**
@@ -140,6 +141,17 @@ public class ReportController extends BaseController{
 		setAttr(order);
 
 		render(REPORT_QUERY_PAGE);
+	}
+	
+	/**
+	 * 获得工单运维组信息
+	 */
+	public void dealList(){
+		Long orderid=getParaToLong("orderid");
+		Map<Long,Apartment> papartmentMap=OrderService.service.getDealApartmentsByOrderid(orderid);
+		Map<String,Object> jsonList= new HashMap<String,Object>();
+		jsonList.put("apartments",papartmentMap);
+		renderJson(jsonList);
 	}
 	
 	/**

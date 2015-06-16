@@ -22,6 +22,16 @@ $(function(){
 			}
 		});
 	});
+	$("[data-toggle='popover']").popover({html : true });
+});
+
+$(document).ready(function() {
+	$('.alert-you').mouseenter(function() {
+		$(this).popover('show');
+	});
+	$('.alert-you').mouseleave(function() {
+		$(this).popover('hide');
+	});
 });
 </script>
 </#assign>
@@ -61,12 +71,19 @@ $(function(){
 					</b>
 				</td>
 				<td>
+					
 					<#if apartments.flag="1">
+					<div class="alert-you" title="<b><span class='red'>提示</span></b>"  data-container="body" data-toggle="popover" data-placement="left" 
+      							data-content="<b>取消后，该部门分配的故障处理选项将一起被取消！</b>">
 					<input type="checkbox" class="ace ace-switch ace-switch-5 checked"  apartmentid="${(apartments.id)}"  checked />
+					<span class="lbl middle"></span>
+					</div>
 					<#elseif apartments.flag="0">
 					<input type="checkbox" class="ace ace-switch ace-switch-5 checked"  apartmentid="${(apartments.id)}"   />
-					</#if>
 					<span class="lbl middle"></span>
+					</#if>
+					
+					
 				</td>
 				<td>
 				<div class="action-buttons">
