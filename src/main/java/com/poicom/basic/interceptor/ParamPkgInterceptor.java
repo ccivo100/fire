@@ -9,6 +9,11 @@ import com.poicom.function.controller.BaseController;
 import com.poicom.function.model.Permission;
 import com.poicom.function.model.Syslog;
 
+/**
+ * 参数封装拦截器
+ * @author FireTercel 2015年6月17日 
+ *
+ */
 public class ParamPkgInterceptor implements Interceptor {
 	
 	private static Logger log = Logger.getLogger(ParamPkgInterceptor.class);

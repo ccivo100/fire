@@ -136,5 +136,13 @@ public class Apartment extends BaseModel<Apartment> implements TreeNode<Apartmen
 		return findBy(where, paras);
 	}
 	
+	public List<Apartment> rootNode(Object... paras){
+		return findBy(" pid=? ", paras);
+	}
+	
+	public List<Apartment> rootNode(){
+		return rootNode(" pid=? ",0);
+	}
+	
 
 }
