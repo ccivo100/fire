@@ -54,6 +54,10 @@ public class BranchService extends BaseService {
 		return branch.set("deleted_at", null).update();
 	}
 	
+	/**
+	 * 用于zTree，查询分公司分配部门
+	 * @return
+	 */
 	public String treeNodeData(){
 		
 		List<Apartment> rootNode = Apartment.dao.rootNode();

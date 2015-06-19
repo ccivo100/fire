@@ -1,8 +1,12 @@
 package com.poicom.function.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.jfinal.log.Logger;
 import com.poicom.basic.common.DictKeys;
 import com.poicom.basic.common.SplitPage;
+import com.poicom.function.model.Apartment;
 import com.poicom.function.model.User;
 import com.poicom.function.model.UserInfo;
 
@@ -38,6 +42,24 @@ public class UserService extends BaseService {
 	public void list(SplitPage splitPage){
 		String select = "select user.id, user.username, user.email, user.full_name, branch.name, apartment.name, position.name ";
 		splitPageBase(DictKeys.db_dataSource_main, splitPage, select, "user.splitPage");
+	}
+	
+	/**
+	 * 查询用户所在大部门的所有人员
+	 */
+	public List<User> usersByApartment(User user){
+		List<User> userList =new ArrayList<User>();
+		//user所属部门
+		Apartment apartment = user.getDepartment();
+		
+		//user部门同级部门
+		List<Apartment> apartmentlist = Apartment.dao.rootNode(apartment.get("pid"));
+		
+		for(Apartment apt : apartmentlist){
+			List<User> uList = Apartment.dao.getUsersById(apt.getPKValue());
+			userList.addAll(uList);
+		}
+		return userList;
 	}
 
 }

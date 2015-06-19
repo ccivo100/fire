@@ -81,9 +81,9 @@
 			<div class="col-sm-8">
 				<select id="selectLevel" name="selectLevel" class="form-control" required >
 					<option value="-1" selected="selected">请选择故障等级</option>
-					<#list levelList as level>
-						<option value="${level.id}">${level.name}</option>
-					</#list>
+					[#list levelList as level]
+					<option value="${level.id}">${level.name}</option>
+					[/#list]
 				</select>
 			</div>
 		</div>
@@ -107,4 +107,4 @@
 	<div class="col-xs-2">
 	</div>
 </div>
-<#include "_model.html" />
+[#include "_model.html" /]

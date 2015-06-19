@@ -31,7 +31,6 @@ public class UserValidator extends Validator {
 			
 			boolean passwordEmpty=ValidateKit.isNullOrEmpty(c.getPara("user.password"));
 			
-			
 			//新密码不为空
 			if (passwordEmpty) {
 				addError("user_passwordMsg", "新密码不能为空");
@@ -44,7 +43,6 @@ public class UserValidator extends Validator {
 			else if (!passwordEmpty&&!c.getPara("user.password").equals(c.getPara("repassword"))) {
 				addError("user_passwordMsg", "重复密码不匹配");
 			}
-			
 			//旧密码不为空
 			else if(oldpasswordEmpty){
 				addError("user_passwordMsg", "原始密码不能为空！");
@@ -60,8 +58,6 @@ public class UserValidator extends Validator {
 				}else {
 					addError("user_passwordMsg", "用户信息错误！");
 				}
-				
-				
 			}
 			
 		}else if(getActionKey().equals("/user/contactMe")){

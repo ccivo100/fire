@@ -1,5 +1,5 @@
-﻿<#include "/app/common/layout/__frontmainlayout.html"/>
-<@mainlayout pageJavascript=pageJavascript>
+﻿[#include "/app/common/layout/__frontmainlayout.html"/]
+[@mainlayout pageJavascript=pageJavascript]
 <div class="page-header">
 	<h1>
 		个人中心 
@@ -21,7 +21,6 @@
 									</span>
 									<div class="space space-4"></div>
 									
-									
 								</div>
 								<div class="col-xs-12 col-sm-9">
 									<h4 class="blue">
@@ -36,7 +35,7 @@
 											<div class="profile-info-name">登陆账号</div>
 
 											<div class="profile-info-value">
-												<span><#if userInfo.info_creatorid=0>*****<#else>${(userInfo.uaccount)!}</#if></span>
+												<span>[#if userInfo.info_creatorid=0]*****[#else]${(userInfo.uaccount)!}[/#if]</span>
 											</div>
 										</div>
 										
@@ -44,7 +43,7 @@
 											<div class="profile-info-name">性别</div>
 
 											<div class="profile-info-value">
-												<span><#if userInfo.info_gender=0>男<#else>女</#if></span>
+												<span>[#if userInfo.info_gender=0]男[#else]女[/#if]</span>
 											</div>
 										</div>
 
@@ -105,7 +104,4 @@
 		</div>
 	</div>
 </div>
-
-
-
-</@mainlayout>
+[/@mainlayout]

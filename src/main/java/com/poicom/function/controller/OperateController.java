@@ -33,6 +33,7 @@ import com.poicom.function.model.User;
 import com.poicom.function.model.UserInfo;
 import com.poicom.function.model.UserOrder;
 import com.poicom.function.service.OrderService;
+import com.poicom.function.service.UserService;
 import com.poicom.function.validator.CommonValidator;
 
 /**
@@ -127,8 +128,7 @@ public class OperateController extends BaseController{
 	public void operate(){
 		
 		//工单详细信息
-		String where="o.id=?";
-		Record order = Order.dao.findOperateById(where,getParaToInt("id"));
+		Record order = Order.dao.findOperateById(" o.id=? ",getParaToInt("id"));
 		setAttr(order);
 		
 		//获取工单申报者的分公司信息
@@ -320,27 +320,32 @@ public class OperateController extends BaseController{
 				if (order.update()) {
 					// 故障工单提交人员
 					User offer = User.dao.findById(order.get("offer_user"));
-					// 获取邮件内容
-					String body = AlertKit.getMailBody(offer, cUser, order)
-							.toString();
-					AlertKit alertKit = new AlertKit();
-					if (ValidateKit.isEmail(offer.getStr("email"))) {
-						alertKit.setEmailTitle("故障申报处理情况通知！").setEmailBody(body)
-								.setEmailAdd(offer.getStr("email"));
-					}
-					// 电话非空
-					if (!ValidateKit.isNullOrEmpty(offer.getStr("phone"))) {
-						if (ValidateKit.isPhone(offer.getStr("phone"))) {
-							// 短信内容
-							String smsBody = AlertKit
-									.getSmsBody(offer, cUser, order);
-							alertKit.setSmsContext(smsBody).setSmsPhone(
-									offer.getStr("phone"));
+					
+					List<User> userList = UserService.service.usersByApartment(offer);
+					
+					for(User user:userList){
+						// 获取邮件内容
+						String body = AlertKit.getMailBody(user,offer, cUser, order)
+								.toString();
+						AlertKit alertKit = new AlertKit();
+						if (ValidateKit.isEmail(user.getStr("email"))) {
+							alertKit.setEmailTitle("故障申报处理情况通知！").setEmailBody(body)
+									.setEmailAdd(user.getStr("email"));
 						}
+						// 电话非空
+						if (!ValidateKit.isNullOrEmpty(user.getStr("phone"))) {
+							if (ValidateKit.isPhone(user.getStr("phone"))) {
+								// 短信内容
+								String smsBody = AlertKit
+										.getSmsBody(user,offer, cUser, order);
+								alertKit.setSmsContext(smsBody).setSmsPhone(
+										user.getStr("phone"));
+							}
+						}
+						// 加入进程
+						logger.info("日志添加到入库队列 ---> 处理故障工单");
+						ThreadAlert.add(alertKit);
 					}
-					// 加入进程
-					logger.info("日志添加到入库队列 ---> 处理故障工单");
-					ThreadAlert.add(alertKit);
 					renderJson("state", "故障工单处理完毕！");
 				} else {
 					renderJson("state", "提交失败！");

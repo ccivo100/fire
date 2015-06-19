@@ -210,8 +210,10 @@ public class IndexController extends BaseController {
 	
 	@Before(IndexValidator.class)
 	public void repassword(){
+		String username=getPara("username");
 		String newValidCode=getPara("newValidCode");
 		String email=getPara("email");
+		setAttr("username",username);
 		setAttr("email",email);
 		setAttr("newValidCode",newValidCode);
 		System.out.println(newValidCode);
@@ -223,10 +225,11 @@ public class IndexController extends BaseController {
 	public void dorepassword(){
 		
 		String newValidCode=getPara("newValidCode");
+		String username =  getPara("username");
 		String email=getPara("email");
 		String password=getPara("password");
 		
-		User user=User.dao.findFirstBy("`user`.email = ? AND `user`.deleted_at is null", email);
+		User user=User.dao.findFirstBy("`user`.username = ? AND `user`.email = ? AND `user`.deleted_at is null", username,email);
 		if(!ValidateKit.isNullOrEmpty(user)){
 			HasherInfo passwordInfo=HasherKit.hash(password,Hasher.DEFAULT);
 			user.set("password", passwordInfo.getHashResult());
@@ -246,7 +249,7 @@ public class IndexController extends BaseController {
 				renderFile(downfile);
 				return ;
 			}else{
-				renderError(404);;
+				renderError(404);
 			}
 		}catch(Exception e){
 			e.printStackTrace();

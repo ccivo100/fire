@@ -8,11 +8,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.joda.time.DateTime;
+
+import cn.dreampie.ValidateKit;
 import cn.dreampie.shiro.core.SubjectKit;
 
 import com.jfinal.log.Logger;
+import com.jfinal.plugin.activerecord.Record;
+import com.poicom.basic.kit.AlertKit;
+import com.poicom.basic.kit.WebKit;
+import com.poicom.basic.thread.ThreadAlert;
 import com.poicom.function.model.Apartment;
 import com.poicom.function.model.Etype;
+import com.poicom.function.model.Order;
 import com.poicom.function.model.User;
 import com.poicom.function.model.UserInfo;
 import com.poicom.function.model.UserOrder;
@@ -53,6 +61,12 @@ public class OrderService extends BaseService {
 		return apartmentList;
 	}
 	
+	/**
+	 * 根据工单id，查询需要处理工单人员的一级部门，和二级部门。
+	 * 二级部门为一级部门对象的child属性。
+	 * @param orderid
+	 * @return papartmentMap 
+	 */
 	public Map<Long,Apartment> getDealApartmentsByOrderid(Long orderid){
 		List<User> userList = UserOrder.dao.getUserList(orderid);//根据工单id，查询工单拥有者
 		Map<Long,Apartment> papartmentMap=new HashMap<Long,Apartment>();//保存父级部门。
@@ -89,6 +103,11 @@ public class OrderService extends BaseService {
 		return papartmentMap;
 	}
 	
+	/**
+	 * 根据工单id获取处理人员的二级部门信息。
+	 * @param orderid
+	 * @return papartmentMap
+	 */
 	public Map<Long,Apartment> getDealCApartmentsByOrderid(Long orderid){
 		List<User> userList = UserOrder.dao.getUserList(orderid);//根据工单id，查询工单拥有者
 		Map<Long,Apartment> papartmentMap=new HashMap<Long,Apartment>();//保存父级部门。
@@ -99,6 +118,70 @@ public class OrderService extends BaseService {
 			papartmentMap.put(apartment_id, apartment);
 		}
 		return papartmentMap;
+	}
+	
+	public void query(Long orderid){
+		//工单详细信息
+		String where="o.id=?";
+		Record order = Order.dao.findOperateById(where,orderid);
+	}
+	
+	public boolean updateOrder(Order order){
+		order
+			.set("title", WebKit.getHTMLToString(order.getStr("title")))
+			.set("description",WebKit.getHTMLToString(order.getStr("description")))
+			.set("updated_at",
+				DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
+		return order.update();
+	}
+	
+	/**
+	 * 新增工单
+	 * @param order
+	 * @return
+	 */
+	public boolean saveOrder(Order order){
+		order
+			.set("title", WebKit.getHTMLToString(order.getStr("title")))
+			.set("description", WebKit.getHTMLToString(order.getStr("description")))
+			.set("status", 2)
+			.set("offer_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss"))
+			.set("flag", 0);
+		return order.save();
+	}
+	
+	/**
+	 * 新增工单-人员关系 && 发送通知。
+	 * @param apartmentid
+	 * @param order
+	 */
+	public void saveUserOrder(Long apartmentid,Order order){
+		//根据部门id，获取该部门人员
+		List<Record> selectDealList=UserInfo.dao.getUserByApartment(" apartment.id=? and user.deleted_at is null",apartmentid);
+		for(Record selectDeal:selectDealList){
+			UserOrder userorder=new UserOrder()
+			.set("user_id", selectDeal.get("userid"))
+			.set("order_id", order.get("id"));
+			userorder.save();
+			
+			//当前用户详细信息
+			Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
+			//邮件内容
+			String body=AlertKit.getMailBody(userinfo,selectDeal,order,order.getStr("description")).toString();
+			//发送邮件、短信线程
+			AlertKit alertKit=new AlertKit();
+			//发送邮件
+			if(ValidateKit.isEmail(selectDeal.getStr("useremail"))){
+				alertKit.setEmailTitle("点通故障系统提醒您！").setEmailBody(body).setEmailAdd(selectDeal.getStr("useremail"));
+			}
+			if(ValidateKit.isPhone(selectDeal.getStr("userphone"))){
+				//短信内容
+				String smsBody=AlertKit.setSmsContext(null,userinfo,order);
+				alertKit.setSmsContext(smsBody).setSmsPhone(selectDeal.getStr("userphone"));
+			}
+			//加入进程
+			ThreadAlert.add(alertKit);
+		}
 	}
 
 }

@@ -1,9 +1,9 @@
-<#include "/app/common/layout/__frontmainlayout.html"/>
-<#assign pageCss>
+[#include "/app/common/layout/__frontmainlayout.html"/]
+[#assign pageCss]
 <link rel="stylesheet"
 	href="${ContextPath}/admin/assets/css/bootstrap-datetimepicker.min.css" />
-</#assign>
-<#assign pageJavascript>
+[/#assign]
+[#assign pageJavascript]
 <script>
 $("#offertime").datetimepicker({
 	format: 'yyyy-mm-dd',
@@ -13,9 +13,9 @@ $("#offertime").datetimepicker({
     minView: 2,
 });
 </script>
-</#assign>
+[/#assign]
 
-<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="operatesFlag">
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="operatesFlag"]
 <div class="page-header">
 	<h1>
 		运维记录 
@@ -68,7 +68,7 @@ $("#offertime").datetimepicker({
 			</tr>
 		</thead>
 				<tbody>
-			<#list operatePage.getList() as operate>
+			[#list operatePage.getList() as operate]
 			<tr class="<#if operate.status=0><#elseif operate.status=2>danger</#if>">
 				<td >${operate_index+1}</td>
 				<td style="text-align:left;">${(operate.title)!}</td>
@@ -77,13 +77,13 @@ $("#offertime").datetimepicker({
 				<td style="text-align:left;">${(operate.offer_at)!}</td>
 				<td >
 					<b>
-					<#if operate.status=0>
+					[#if operate.status=0]
 					<span class="green">已处理</span>
-					<#elseif operate.status=1>
+					[#elseif operate.status=1]
 					<span class="orange">处理中</span>
-					<#elseif operate.status=2>
+					[#elseif operate.status=2]
 					<span class="gray">未处理</span>
-					</#if>
+					[/#if]
 					</b>
 				</td>
 				
@@ -91,11 +91,11 @@ $("#offertime").datetimepicker({
 				<a class="btn btn-minier btn-primary "   href="${ContextPath}/operate/operate?id=${operate.id}"  >查看</a> 
 				</td>
 			</tr>
-			</#list>
+			[/#list]
 			
-			<#if operatePage.getList().size()!=10>
-			<#assign size=(10-operatePage.getList().size())>
-				<#list 1..size as t>
+			[#if operatePage.getList().size()!=10]
+			[#assign size=(10-operatePage.getList().size())]
+				[#list 1..size as t]
 					<tr>
 						<td>${(operatePage.getList().size()+t)!}</td>
 						<td></td>
@@ -105,13 +105,13 @@ $("#offertime").datetimepicker({
 						<td></td>
 						<td></td>
 					</tr>
-				</#list>
-			</#if>
+				[/#list]
+			[/#if]
 		</tbody>
 	</table>
-	<#include "/app/common/inc/_paginate.html" />
-	<@paginate currentPage=operatePage.pageNumber totalPage=operatePage.totalPage actionUrl="/operate/operates/" />
+	[#include "/app/common/inc/_paginate.html" /]
+	[@paginate currentPage=operatePage.pageNumber totalPage=operatePage.totalPage actionUrl="/operate/operates/" /]
 		</div>
 	</div>
 </div>
-</@mainlayout>
+[/@mainlayout]

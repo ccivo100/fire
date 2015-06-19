@@ -1,0 +1,61 @@
+package com.poicom.function.validator;
+
+import cn.dreampie.ValidateKit;
+
+import com.jfinal.core.Controller;
+import com.jfinal.validate.Validator;
+import com.poicom.function.model.Order;
+
+public class ReportValidator extends Validator {
+
+	@Override
+	protected void validate(Controller c) {
+		if(getActionKey().equals("/report/save")){
+			if(ValidateKit.isNullOrEmpty(c.getPara("order.title"))){
+				addError("state","故障单标题不能为空！");
+			}
+			else if(Order.dao.findBy(" offer_user=? and title=? ", c.getPara("order.offer_user"),c.getPara("order.title").trim()).size()>0){
+				addError("state","已存在该故障单，请重新输入！");
+			}else if(c.getParaToLong("selectType")==-1){
+				addError("state","请选择故障大类！");
+			}else if(c.getParaToLong("selectApartment")==-1){
+				addError("state","请选择运维部门！");
+			}else if(c.getParaToLong("order.type")==-1){
+				addError("state","请选择故障小类！");
+			}else if(c.getParaToLong("selectChildApartment")==-1){
+				addError("state","请选择运维组别！");
+			}else if(c.getParaToLong("order.level")==-1){
+				addError("state","请选择故障等级！");
+			}else if(ValidateKit.isNullOrEmpty(c.getPara("order.description"))){
+				addError("state","故障单描述不能为空！");
+			}
+		}else if(getActionKey().equals("/report/update")){
+			Order order=Order.dao.findById(c.getParaToInt("order.id"));
+			if(order.getInt("status")==1){
+				addError("state","失败：工单正在处理，无法修改。");
+			}else if(order.getInt("status")==0){
+				addError("state","失败：工单已处理，无法修改。");
+			}else if(!ValidateKit.isNullOrEmpty(order.get("deleted_at"))){
+				addError("state","失败：工单已撤销，无法修改。");
+			}
+			else if(ValidateKit.isNullOrEmpty(c.getPara("order.title").trim())){
+				addError("state","故障单标题不能为空！");
+			}
+			else if(ValidateKit.isNullOrEmpty(c.getPara("order.description").trim())){
+				addError("state","故障单描述不能为空！");
+			}
+		}
+		
+	}
+
+	@Override
+	protected void handleError(Controller c) {
+		if(getActionKey().equals("/report/save")){
+			c.renderJson("state", c.getAttr("state"));
+		}else if(getActionKey().equals("/report/update")){
+			c.renderJson("state", c.getAttr("state"));
+		}
+		
+	}
+
+}

@@ -91,6 +91,14 @@
   		]]>
   	</sql>
   	
+  	<sql id="userByApartmentId">
+  		<![CDATA[ 
+  			select * from sec_user as user where user.id in( 
+  				select userinfo.user_id from sec_user_info as userinfo where apartment_id=?
+  			)
+  		]]>
+  	</sql>
+  	
   	<!-- 动态SQL处理 -->
   	<sql id="splitPage">
   		<![CDATA[ 

@@ -126,7 +126,6 @@ public class Apartment extends BaseModel<Apartment> implements TreeNode<Apartmen
 	}
 	
 	
-	
 	/**
 	 * @描述 获取根部门
 	 * @param paras
@@ -137,12 +136,20 @@ public class Apartment extends BaseModel<Apartment> implements TreeNode<Apartmen
 	}
 	
 	public List<Apartment> rootNode(Object... paras){
-		return findBy(" pid=? ", paras);
+		return findBy(" pid=? and deleted_at is null  ", paras);
 	}
 	
 	public List<Apartment> rootNode(){
-		return rootNode(" pid=? ",0);
+		return rootNode(" pid=? and deleted_at is null  ",0);
 	}
 	
-
+	/**
+	 * 根据部门id查询该部门人员users
+	 * @param apartmentid
+	 * @return
+	 */
+	public List<User> getUsersById(Long apartmentid){
+		return User.dao.find(getSql("user.userByApartmentId"), apartmentid);
+	}
+	
 }

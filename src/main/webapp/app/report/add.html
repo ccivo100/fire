@@ -1,10 +1,10 @@
-﻿<#include "/app/common/layout/__frontmainlayout.html"/>
+﻿[#include "/app/common/layout/__frontmainlayout.html"/]
 
-<#assign pageCss>
+[#assign pageCss]
 <link rel="stylesheet" href="${ContextPath}/admin/assets/css/signin.css" />
-</#assign>
+[/#assign]
 
-<#assign pageJavascript>
+[#assign pageJavascript]
 <script type="text/javascript">
 function select1() {
 	$.ajax(
@@ -111,15 +111,15 @@ $(document).ready(function(){
 			type:"post",
 			url:"${ContextPath}/report/save",
 			data:{
-					"userid":$('#userid').val(),
-					"title":$('#title').val(),
-					"description":$('#description').val(),
-					
 					"selectType":$('#selectType').val(),
 					"selectApartment":$('#selectApartment').val(),
-					"selectChildType":$('#selectChildType').val(),
 					"selectChildApartment":$('#selectChildApartment').val(),
-					"selectLevel":$('#selectLevel').val(),
+					
+					"order.offer_user":$('#userid').val(),
+					"order.title":$('#title').val(),
+					"order.description":$('#description').val(),
+					"order.type":$('#selectChildType').val(),
+					"order.level":$('#selectLevel').val(),
 					
 			},
 			success:function(msg){
@@ -138,13 +138,13 @@ $(document).ready(function(){
 
 </script>
 
-</#assign>
+[/#assign]
 
-<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="offerFlag">
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="offerFlag"]
 <div class="index-background">
 	
 	<form class="form-horizontal" role="form"  action="${ContextPath}/report/save" method="post" >
-		<#include "_formadd.html" />
+		[#include "_formadd.html" /]
 	</form>
 </div>
-</@mainlayout>
+[/@mainlayout]

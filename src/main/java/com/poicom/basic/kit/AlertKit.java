@@ -304,10 +304,11 @@ public class AlertKit {
 		
 		String newValidCode=EncriptionKit.encrypt(user.getStr("email")+new Date());
 		new Retrieve()
+		.set("username", user.getStr("username"))
 		.set("email", user.getStr("email"))
 		.set("random", newValidCode).save();
 		
-		String retrieve="http://"+context+"/repassword?email="+user.get("email")+"&newValidCode="+newValidCode;
+		String retrieve="http://"+context+"/repassword?username="+user.getStr("username")+"&email="+user.get("email")+"&newValidCode="+newValidCode;
 		
 		StringBuffer body=new StringBuffer();
 		body.append("亲爱的用户，"+user.getStr("full_name")+"，您好！<br/>")
@@ -354,6 +355,70 @@ public class AlertKit {
 	}
 	
 	/**
+	 * 运维处理完毕通知申报人部门所有人员。
+	 * @param user
+	 * @param offer
+	 * @param deal
+	 * @param order
+	 * @return
+	 */
+	public static StringBuffer getMailBody(User user,User offer,User deal,Order order){
+		StringBuffer body=new StringBuffer();
+		body
+		.append("尊敬的"+user.getStr("full_name")+"，您好！<br/>")
+		.append(offer.getStr("full_name"))
+		.append("在 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms))
+		.append(" 提交的故障工单，已由 "+deal.getStr("full_name")+"（"+deal.getStr("phone")+"）")
+		.append(" 处理完毕，感谢您使用故障申报系统，祝您生活愉快！");
+		
+		return body;
+	}
+	
+	/**
+	 * @描述 工单处理完反馈。
+	 * @param offer
+	 * @param deal
+	 * @param order
+	 */
+	public static String getSmsBody(User offer,User deal,Order order){
+		StringBuffer contt=new StringBuffer();
+		if(ValidateKit.isNullOrEmpty(offer)){
+			contt.append("null");
+		}else{
+			contt.append("尊敬的"+offer.getStr("full_name")+"，您好！")
+			.append("您在 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms))
+			.append(" 提交的故障工单，已由 "+deal.getStr("full_name")+"（"+deal.getStr("phone")+"）")
+			//.append("于 "+DateKit.format(order.getDate("deal_at"),DateKit.pattern_ymd_hms))
+			.append(" 处理完毕！");
+		}
+		return contt.toString();
+	}
+	
+	/**
+	 * 运维处理完毕通知申报人部门所有人员。
+	 * @param user
+	 * @param offer
+	 * @param deal
+	 * @param order
+	 * @return
+	 */
+	public static String getSmsBody(User user,User offer,User deal,Order order){
+		StringBuffer contt=new StringBuffer();
+		if(ValidateKit.isNullOrEmpty(user)){
+			contt.append("null");
+		}else{
+			contt
+			.append("尊敬的"+user.getStr("full_name")+"，您好！")
+			.append(offer.getStr("full_name"))
+			.append("在 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms))
+			.append(" 提交的故障工单，已由 "+deal.getStr("full_name")+"（"+deal.getStr("phone")+"）")
+			//.append("于 "+DateKit.format(order.getDate("deal_at"),DateKit.pattern_ymd_hms))
+			.append(" 处理完毕！");
+		}
+		return contt.toString();
+	}
+	
+	/**
 	 * @描述 电话数组格式化
 	 */
 	private static String phoneFormat(String... phone){
@@ -389,25 +454,6 @@ public class AlertKit {
 		return contt.toString();
 	}
 	
-	/**
-	 * @描述 工单处理完反馈。
-	 * @param offer
-	 * @param deal
-	 * @param order
-	 */
-	public static String getSmsBody(User offer,User deal,Order order){
-		StringBuffer contt=new StringBuffer();
-		if(ValidateKit.isNullOrEmpty(offer)){
-			contt.append("null");
-		}else{
-			contt.append("尊敬的"+offer.getStr("full_name")+"，您好！")
-			.append("您在 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms))
-			.append(" 提交的故障工单，已由 "+deal.getStr("full_name")+"（"+deal.getStr("phone")+"）")
-			//.append("于 "+DateKit.format(order.getDate("deal_at"),DateKit.pattern_ymd_hms))
-			.append(" 处理完毕！");
-		}
-		return contt.toString();
-	}
 	
 	/**
 	 * @描述 提供定时提醒短信

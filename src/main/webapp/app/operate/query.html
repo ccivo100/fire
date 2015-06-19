@@ -1,10 +1,10 @@
-﻿<#include "/app/common/layout/__frontmainlayout.html"/>
+﻿[#include "/app/common/layout/__frontmainlayout.html"/]
 
-<#assign pageCss>
+[#assign pageCss]
 <link rel="stylesheet" href="${ContextPath}/admin/assets/css/signin.css" />
 <link rel="stylesheet" href="${ContextPath}/admin/assets/css/jquery-ui.css" />
-</#assign>
-<#assign pageJavascript>
+[/#assign]
+[#assign pageJavascript]
 <script src="${ContextPath}/admin/assets/js/jquery-ui.js"></script>
 <script src="${ContextPath}/admin/assets/js/jquery.ui.touch-punch.js"></script>
 <script src="${ContextPath}/admin/assets/js/tree.js"></script>
@@ -37,8 +37,8 @@ $(function () {
 	$("[data-toggle='popover']").popover({html : true });
 });
 </script>
-</#assign>
-<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="operatesFlag">
+[/#assign]
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="operatesFlag"]
 <div class="page-header">
 	<h1>
 		<a href="${ContextPath}/operate/operates">运维记录</a> 
@@ -53,13 +53,13 @@ $(function () {
 				故障内容
 			</div>
 			<div class="jf_header jf_topic_header">
-				<#if ostatus=0>
+				[#if ostatus=0]
 				<span class="label label-success">已处理</span>
-				<#elseif ostatus=1>
+				[#elseif ostatus=1]
 				<span class="label label-default">处理中</span>
-				<#elseif ostatus=2>
+				[#elseif ostatus=2]
 				<span class="label label-danger">未处理</span>
-				</#if>
+				[/#if]
 				
 				<span class="jf_topic_full_title">${(otitle)!}</span>
 				
@@ -143,7 +143,7 @@ $(function () {
 				<span class="label label-primary arrowed-in-right label-lg">处理情况</span>
 			</div>
 			<div class="timeline-items">
-				<#list commentList as comments>
+				[#list commentList as comments]
 				<div class="timeline-item clearfix">
 					<div class="timeline-info" title="个人信息"  data-container="body" data-toggle="popover" data-placement="left" 
     							data-content="电话：${(comments.uphone)!}<br/>单位：${(comments.bname)!}<br/>部门：${(comments.aname)!}<br/>职位：${(comments.pname)!}">
@@ -166,10 +166,10 @@ $(function () {
 						</div>
 					</div>
 				</div>
-				</#list>
+				[/#list]
 			</div>
-			<#if commentList?has_content>
-			<#else>
+			[#if commentList?has_content]
+			[#else]
 			<div class="timeline-items">
 				<div class="timeline-item clearfix">
 					<div class="widget-box transparent">
@@ -177,16 +177,16 @@ $(function () {
 						</div>
 						<div class="widget-body">
 							<div class="widget-main">
-							<span class="red "><h4>空空如也~~</h4></span>
+							<h3><span class="red ">空空如也~~</span></h3>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			</#if>
+			[/#if]
 		</div>
 	</div>
 
 </div>
 
-</@mainlayout>
+[/@mainlayout]

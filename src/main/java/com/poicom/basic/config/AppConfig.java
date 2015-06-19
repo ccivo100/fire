@@ -32,8 +32,6 @@ import com.jfinal.render.FreeMarkerRender;
 import com.poicom.basic.common.DictKeys;
 import com.poicom.basic.freemarker.FreeMarkerRenderFactory;
 import com.poicom.basic.freemarker.resource.ResourceTags;
-import com.poicom.basic.handler.GlobalHandler;
-import com.poicom.basic.interceptor.AttrsInterceptor;
 import com.poicom.basic.interceptor.SessionInterceptor;
 import com.poicom.basic.kit.StringKit;
 import com.poicom.basic.plugin.properties.PropertiesPlugin;
@@ -42,8 +40,6 @@ import com.poicom.basic.plugin.routebind.RouteBind;
 import com.poicom.basic.plugin.sqlxml.SqlInXmlPlugin;
 import com.poicom.basic.shiro.MyJdbcAuthzService;
 import com.poicom.basic.thread.ThreadAlert;
-import com.poicom.basic.thread.ThreadSysLog;
-import com.poicom.function.*;
 /**
  * 
  * @author 唐东宇
