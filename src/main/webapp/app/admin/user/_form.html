@@ -8,11 +8,11 @@
 			<input type="text" class="form-control" name="user.username" value="${(user.username)!}" placeholder="登陆账号" autofocus  required autocomplete="off"/>
 		</div>
 		<div class="col-xs-4">
-		<#if usernameMsg??>
+		[#if usernameMsg??]
 			<div class="index-alert index-alert-danger" style="background-image:none;">
 			${(usernameMsg)!}
 			</div>
-		</#if>
+		[/#if]
 		</div>
 	</div>
 	<div class="form-group">
@@ -25,11 +25,11 @@
 			<input type="text" class="form-control" name="user.last_name" value="${(user.last_name)!}" placeholder="名"   required autocomplete="off"/>
 		</div>
 		<div class="col-xs-4">
-		<#if fullnameMsg??>
+		[#if fullnameMsg??]
 			<div class="index-alert index-alert-danger" style="background-image:none;">
 			${(fullnameMsg)!}
 			</div>
-		</#if>
+		[/#if]
 		</div>
 	</div>
 	<div class="form-group">
@@ -42,11 +42,11 @@
 				</select>
 		</div>
 		<div class="col-xs-4">
-		<#if genderMsg??>
+		[#if genderMsg??]
 			<div class="index-alert index-alert-danger" style="background-image:none;">
 			${(genderMsg)!}
 			</div>
-		</#if>
+		[/#if]
 		</div>
 	</div>
 	<div class="form-group">
@@ -55,11 +55,11 @@
 			<input type="text" class="form-control" name="user.phone" value="${(user.phone)!}" placeholder="联系方式"   required autocomplete="off"/>
 		</div>
 		<div class="col-xs-4">
-		<#if phoneMsg??>
+		[#if phoneMsg??]
 			<div class="index-alert index-alert-danger" style="background-image:none;">
 			${(phoneMsg)!}
 			</div>
-		</#if>
+		[/#if]
 		</div>
 	</div>
 	<div class="form-group">
@@ -68,50 +68,50 @@
 			<input type="text" class="form-control" name="user.email" value="${(user.email)!}" placeholder="邮箱地址"   required autocomplete="off"/>
 		</div>
 		<div class="col-xs-4">
-		<#if emailMsg??>
+		[#if emailMsg??]
 			<div class="index-alert index-alert-danger" style="background-image:none;">
 			${(emailMsg)!}
 			</div>
-		</#if>
+		[/#if]
 		</div>
 	</div>
-	<@shiro.hasRole name="R_ADMIN">
+	[@shiro.hasRole name="R_ADMIN"]
 	<div class="form-group">
 		<label class="col-xs-2 control-label">单位</label>
 		<div class="col-xs-4">
 				<select id="selectBranch" name="selectBranch" class="form-control"  required>
 					<option value="" selected="selected">请选择</option>
-					<#list branchList as branch>
+					[#list branchList as branch]
 					<option value="${(branch.id)!}" >${(branch.name)!}	</option>
-					</#list>
+					[/#list]
 				</select>
 		</div>
 		<div class="col-xs-4">
-		<#if brandhMsg??>
+		[#if brandhMsg??]
 			<div class="index-alert index-alert-danger" style="background-image:none;">
 			${(branchMsg)!}
 			</div>
-		</#if>
+		[/#if]
 		</div>
 	</div>
-	</@shiro.hasRole>
-	<@shiro.hasRole name="R_MANAGER">
+	[/@shiro.hasRole]
+	[@shiro.hasRole name="R_MANAGER"]
 	<div class="form-group">
 		<label class="col-xs-2 control-label">单位</label>
 		<div class="col-xs-4">
 				<select id="selectBranch" name="selectBranch" class="form-control"  required disabled>
 					<option value="" selected="selected">请选择</option>
-					<#list branchList as branch>
-					<#if (branchid?number)=branch.id>
+					[#list branchList as branch]
+					[#if (branchid?number)=branch.id]
 					<option value="${(branch.id)!}"  selected="selected">${(branch.name)!}	</option>
-					<#else>
+					[#else]
 					<option value="${(branch.id)!}"  >${(branch.name)!}	</option>
-					</#if>
-					</#list>
+					[/#if]
+					[/#list]
 				</select>
 		</div>
 	</div>
-	</@shiro.hasRole>
+	[/@shiro.hasRole]
 
 	<div class="form-group">
 		<label class="col-xs-2 control-label">部门</label>
@@ -124,11 +124,11 @@
 			</select>
 		</div>
 		<div class="col-xs-4">
-		<#if apartmentMsg??>
+		[#if apartmentMsg??]
 			<div class="index-alert index-alert-danger" style="background-image:none;">
 			${(apartmentMsg)!}
 			</div>
-		</#if>
+		[/#if]
 		</div>
 	</div>
 	<div class="form-group">
@@ -138,11 +138,11 @@
 				</select>
 		</div>
 		<div class="col-xs-4">
-		<#if positionMsg??>
+		[#if positionMsg??]
 			<div class="index-alert index-alert-danger" style="background-image:none;">
 			${(positionMsg)!}
 			</div>
-		</#if>
+		[/#if]
 		</div>
 	</div>
 

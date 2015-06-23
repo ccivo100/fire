@@ -1,5 +1,5 @@
-<#include "/app/common/layout/__backstagemainlayout.html"/>
-<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="roleFlag-rolesListFlag">
+[#include "/app/common/layout/__backstagemainlayout.html"/]
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="roleFlag-rolesListFlag"]
 <div class="page-header">
 	<h1>
 		角色管理 
@@ -18,89 +18,65 @@
 				</tr>
 			</thead>
 			<tbody>
-				<#list roleTree as roles>
+				[#list roleTree as roles]
 				<tr>
 					<td>${(roles.id)!}</td>
 					<td> ${(roles.name)!}</td>
 					<td>${(roles.value)!}</td>
 					<td>${(roles.pid)!}</td>
 					<td>${(roles.created_at)!}</td>
-					<td><#if roles.deleted_at??>
+					<td>
 						<b>
+						[#if roles.deleted_at??]
 						<span class="red">禁用</span>
-						<#else>
+						[#else]
 						<span class="gray">正常</span>
-						</#if>
+						[/#if]
 						</b>
 					</td>
 					<td>
 					<div class="action-buttons">
 					<a class="btn btn-minier btn-primary btn-xs "  href="${ContextPath}/admin/role/edit?id=${(roles.id)!}" >编辑</a>
 					<a class="btn btn-minier btn-primary btn-sm"   href="${ContextPath}/admin/role/assign?id=${(roles.id)!}"  >分配</a> 
-					<#if roles.deleted_at??>
+					[#if roles.deleted_at??]
 					<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/role/on?id=${(roles.id)!}" >启用</a>
-					<#else>
+					[#else]
 					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/role/off?id=${(roles.id)!}" >禁用</a>
-					</#if>
+					[/#if]
 					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/role/add?id=${(roles.id)!}" >添加</a>
 					</div>
 					</td>
 				</tr>
-				<#list roles.children as role>
+					[#list roles.children as role]
 					<tr>
-					<td>${(role.id)!}</td>
-					<td><span class="glyphicon glyphicon-minus-sign"></span>     ${(role.name)!}</td>
-					<td>${(role.value)!}</td>
-					<td>${(role.pid)!}</td>
-					<td>${(role.created_at)!}</td>
-					<td><#if role.deleted_at??>
-						<b>
-						<span class="red">禁用</span>
-						<#else>
-						<span class="gray">正常</span>
-						</#if>
-						</b>
-					</td>
-					<td>
-					<div class="action-buttons">
-					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/role/edit?id=${(role.id)!}" >编辑</a>
-					<a class="btn btn-minier btn-primary btn-sm"   href="${ContextPath}/admin/role/assign?id=${(role.id)!}"  >分配</a>
-					<#if role.deleted_at??>
-					<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/role/on?id=${(role.id)!}" >启用</a>
-					<#else>
-					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/role/off?id=${(role.id)!}" >禁用</a>
-					</#if>
-					</div>
-					</td>
-				</tr>
-				</#list>
-				</#list>
+						<td>${(role.id)!}</td>
+						<td><span class="glyphicon glyphicon-minus-sign"></span>     ${(role.name)!}</td>
+						<td>${(role.value)!}</td>
+						<td>${(role.pid)!}</td>
+						<td>${(role.created_at)!}</td>
+						<td>
+							<b>
+							[#if role.deleted_at??]
+							<span class="red">禁用</span>
+							[#else]
+							<span class="gray">正常</span>
+							[/#if]
+							</b>
+						</td>
+						<td>
+							<div class="action-buttons">
+								<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/role/edit?id=${(role.id)!}" >编辑</a>
+								<a class="btn btn-minier btn-primary btn-sm"   href="${ContextPath}/admin/role/assign?id=${(role.id)!}"  >分配</a>
+								[#if role.deleted_at??]
+								<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/role/on?id=${(role.id)!}" >启用</a>
+								[#else]
+								<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/role/off?id=${(role.id)!}" >禁用</a>
+								[/#if]
+							</div>
+						</td>
+					</tr>
+					[/#list]
+				[/#list]
 			</tbody>
 		</table>
-		<!-- <div class="row">
-			<div class="col-sm-4 col-md-4 col-lg-4">
-			<ul>
-				<#list roleTree as roles>
-					<li>
-					<span>
-						<i class="glyphicon glyphicon-folder-open"></i> ${(roles.name)!}
-					</span>
-					<a class="btn btn-minier btn-info btn-sm"   href="${ContextPath}/admin/assignrole?id=${(roles.id)!}"  >权限分配</a> 
-					<button id="ajaxrole" roleid="${(roles.id)!}" class="btn btn-info btn-sm ">分配</button>
-					<ul>
-						<#list roles.children as role>
-						<li>
-							<span><i class="glyphicon glyphicon-minus-sign"></i> ${(role.name)!}</span> 
-								<a class="btn btn-minier btn-info btn-sm"   href="${ContextPath}/admin/assignrole?id=${(role.id)!}"  >权限分配</a> 
-						</li>
-						</#list>
-					</ul>
-					</li>
-				</#list>
-			</ul>
-			</div>
-			<div id="per" class="col-sm-8 col-md-8 col-lg-8">
-	
-			</div>
-		</div> -->
-</@mainlayout>
+[/@mainlayout]

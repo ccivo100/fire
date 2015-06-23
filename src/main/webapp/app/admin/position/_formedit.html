@@ -6,17 +6,17 @@
 		<div class="col-xs-4">
 				<select id="position.apartment_id" name="position.apartment_id" class="form-control"  required>
 					<option value="-1" selected="selected">请选择</option>
-					<#list rootApartment as apartment>
-					<option value="${(apartment.id)!}" <#if (position.apartment_id)=(apartment.id)>selected="selected"<#else></#if>>${(apartment.name)!}	</option>
-					</#list>
+					[#list rootApartment as apartment]
+					<option value="${(apartment.id)!}" [#if (position.apartment_id)=(apartment.id) ] selected="selected" [#else] [/#if] >${(apartment.name)!}	</option>
+					[/#list]
 				</select>
 		</div>
 		<div class="col-xs-4">
-		<#if apartmentMsg??>
+		[#if apartmentMsg??]
 			<div class="index-alert index-alert-danger" style="background-image:none;">
 			${(apartmentMsg)!}
 			</div>
-		</#if>
+		[/#if]
 		</div>
 	</div>
 	
@@ -26,11 +26,11 @@
 			<input type="text" class="form-control" name="position.name" value="${(position.name)!}" placeholder="职位名称"   required autocomplete="off"/>
 		</div>
 		<div class="col-sm-4">
-			<#if nameMsg??>
+			[#if nameMsg??]
 			<div class="index-alert index-alert-danger" style="background-image:none;">
 				${(nameMsg)!}
 			</div>
-			</#if>
+			[/#if]
 		</div>
 	</div>
 

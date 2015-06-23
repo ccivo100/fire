@@ -1,9 +1,9 @@
-<#include "/app/common/layout/__backstagemainlayout.html"/>
-<#assign pageCss>
+[#include "/app/common/layout/__backstagemainlayout.html"/]
+[#assign pageCss]
 <link rel="stylesheet" href="${ContextPath}/plugin/ztree/css/zTreeStyle/zTreeStyle.css" />
 
-</#assign>
-<#assign pageJavascript>
+[/#assign]
+[#assign pageJavascript]
 <script src="${ContextPath}/plugin/ztree/js/jquery.ztree.core-3.5.js"></script>
 <script src="${ContextPath}/plugin/ztree/js/jquery.ztree.excheck-3.5.js"></script>
 <SCRIPT type="text/javascript">
@@ -60,8 +60,8 @@
 		});
 		
 	</SCRIPT>
-</#assign>
-<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="organizationFlag-branchFlag-branchsListFlag">
+[/#assign]
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="organizationFlag-branchFlag-branchsListFlag"]
 
 <div class="page-header">
 	<h1>
@@ -96,35 +96,36 @@
 			</tr>
 		</thead>
 		<tbody>
-			<#list branchPage.getList() as branch>
+			[#list branchPage.getList() as branch]
 			<tr>
 				<td>${(branch_index+1)!}</td>
 				<td> ${(branch.name)!}</td>
 				<td> ${(branch.created_at)!}</td>
-				<td><#if branch.deleted_at??>
+				<td>
 					<b>
+					[#if branch.deleted_at??]
 					<span class="red">禁用</span>
-					<#else>
+					[#else]
 					<span class="gray">正常</span>
-					</#if>
+					[/#if]
 					</b>
 				</td>
 				<td>
 				<div class="action-buttons">
 				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/branch/edit?id=${(branch.id)!}" >编辑</a>
-				<#if branch.deleted_at??>
+				[#if branch.deleted_at??]
 				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/branch/on?id=${(branch.id)!}" >启用</a>
-				<#else>
+				[#else]
 				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/branch/off?id=${(branch.id)!}" >禁用</a>
-				</#if>
+				[/#if]
 				<a class="btn btn-minier btn-primary btn-xs mytree" href="#" >部门</a>
 				</div>
 				</td>
 			</tr>
-			</#list>
-			<#if branchPage.getList().size()!=10>
-			<#assign size=(10-branchPage.getList().size())>
-				<#list 1..size as t>
+			[/#list]
+			[#if branchPage.getList().size()!=10]
+			[#assign size=(10-branchPage.getList().size())]
+				[#list 1..size as t]
 					<tr>
 						<td>${(branchPage.getList().size()+t)!}</td>
 						<td></td>
@@ -132,11 +133,11 @@
 						<td></td>
 						<td></td>
 					</tr>
-				</#list>
-			</#if>
+				[/#list]
+			[/#if]
 		</tbody>
 	</table>
-	<#include "/app/common/inc/_paginate.html" />
-	<@paginate currentPage=branchPage.pageNumber totalPage=branchPage.totalPage actionUrl="/admin/branch/" />
-<#include "branch/_apartmentTree.html" />
-</@mainlayout>
+	[#include "/app/common/inc/_paginate.html" /]
+	[@paginate currentPage=branchPage.pageNumber totalPage=branchPage.totalPage actionUrl="/admin/branch/" /]
+	[#include "branch/_apartmentTree.html" /]
+[/@mainlayout]

@@ -1,5 +1,5 @@
-﻿<#include "/app/common/layout/__backstagemainlayout.html"/>
-<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="typeFlag-childTaskFlag">
+﻿[#include "/app/common/layout/__backstagemainlayout.html"/]
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="typeFlag-childTaskFlag"]
 <div class="page-header">
 	<h1>
 		<a href="${ContextPath}/admin/type">类型管理</a>
@@ -18,7 +18,7 @@
 		</thead>
 
 		<tbody>
-			<#list apartmentPage.getList() as apartment>
+			[#list apartmentPage.getList() as apartment]
 			<tr>
 				<td>${apartment_index+1}</td>
 				<td>${apartment.name}</td>
@@ -26,17 +26,17 @@
 				<form class="form-horizontal" role="form" action="${ContextPath}/admin/task/childAssign" method="post" >
 				<input type="hidden" name="id" value="${(apartment.id)}">
 				<td>
-					<#list typeList as type>
+					[#list typeList as type]
 						
 						<input type="checkbox" id="inlineCheckbox1" name="types" value="${(type.id)!}"
-							<#list apartment.remark as t>
-								<#if t.id=type.id>
+							[#list apartment.remark as t]
+								[#if t.id=type.id ]
 								checked 
-								</#if>
-							</#list>
+								[/#if]
+							[/#list]
 						> ${(type.name)!}
 
-					</#list>
+					[/#list]
 				
 				</td>
 				<td>
@@ -46,18 +46,18 @@
 				</td>
 				</form>
 			</tr>
-			</#list>
-			<#if apartmentPage.getList().size()!=10>
-			<#assign size=(10-apartmentPage.getList().size())>
-				<#list 1..size as t>
+			[/#list]
+			[#if apartmentPage.getList().size()!=10]
+			[#assign size=(10-apartmentPage.getList().size())]
+				[#list 1..size as t]
 					<tr>
 						<td>${(apartmentPage.getList().size()+t)!}</td>
 						<td></td>
 						<td></td>
 						<td></td>
 					</tr>
-				</#list>
-			</#if>
+				[/#list]
+			[/#if]
 		</tbody>
 		
 		<tfoot>
@@ -68,7 +68,7 @@
 		</tfoot>
 	</table>
 	
-	<#include "/page/common/_paginate.html" />
-	<@paginate currentPage=apartmentPage.pageNumber totalPage=apartmentPage.totalPage actionUrl="/admin/apartmentType/" />
+	[#include "/page/common/_paginate.html" /]
+	[@paginate currentPage=apartmentPage.pageNumber totalPage=apartmentPage.totalPage actionUrl="/admin/apartmentType/" /]
 	
-</@mainlayout>
+[/@mainlayout]

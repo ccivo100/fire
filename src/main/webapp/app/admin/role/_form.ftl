@@ -1,4 +1,3 @@
-
 <div >
 	<input type="hidden" name="role.id" value="${(role.id)!}" />
 	<input type="hidden" name="pid" value="${(pid)!}" />
@@ -9,11 +8,11 @@
 			<input type="text" class="form-control" name="role.name" value="${(role.name)!}" placeholder="名称" required autocomplete="off"/>
 		</div>
 		<div class="col-sm-4">
-			<#if nameMsg??>
+			[#if nameMsg??]
 			<div class="index-alert index-alert-danger" style="background-image:none;">
 				${(nameMsg)!}
 			</div>
-			</#if>
+			[/#if]
 		</div>
 	</div>
 	<div class="form-group">
@@ -22,28 +21,28 @@
 			<input type="text" class="form-control" name="role.value" value="${(role.value)!}" placeholder="如：R_**" required autocomplete="off"/>
 		</div>
 		<div class="col-sm-4">
-			<#if valueMsg??>
+			[#if valueMsg??]
 			<div class="index-alert index-alert-danger" style="background-image:none;">
 				${(valueMsg)!}
 			</div>
-			</#if>
+			[/#if]
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">父节点</label>
 		<div class="col-sm-4">
-			<#if pid??>
+			[#if pid??]
 			<input type="text" class="form-control" name="role.pid" value="${pid}" readonly  required />
-			<#else>
-			<input type="text" class="form-control" name="role.pid" <#if role?? > value="${(role.pid)!}" <#else>value="0" readonly</#if> <#if (role.pid)?? && role.pid=0>readonly</#if>  required/>
-			</#if>
+			[#else]
+			<input type="text" class="form-control" name="role.pid" [#if role?? ] value="${(role.pid)!}" [#else]value="0" readonly[/#if] [#if (role.pid)?? && role.pid=0]readonly[/#if]  required/>
+			[/#if]
 		</div>
 		<div class="col-sm-4">
-			<#if pidMsg??>
+			[#if pidMsg??]
 			<div class="index-alert index-alert-danger" style="background-image:none;">
 				${(pidMsg)!}
 			</div>
-			</#if>
+			[/#if]
 		</div>
 	</div>
 

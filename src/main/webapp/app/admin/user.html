@@ -1,5 +1,5 @@
-<#include "/app/common/layout/__backstagemainlayout.html"/>
-<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="organizationFlag-userFlag-usersListFlag">
+[#include "/app/common/layout/__backstagemainlayout.html"/]
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="organizationFlag-userFlag-usersListFlag"]
 
 <div class="page-header">
 	<h1>
@@ -15,7 +15,7 @@
 					<input class="form-control" id="username" name="username" value="${(username)!}" placeholder="姓名" type="text" autocomplete="off">
 					<span class="input-group-btn">
 						<button class="btn btn-sm btn-default">
-							<span class="glyphicon glyphicon-search"></span>Search
+							<span class="glyphicon glyphicon-search"></span>搜索
 						</button>
 					</span>
 				</div>
@@ -39,45 +39,43 @@
 			</tr>
 		</thead>
 		<tbody>
-			<#list userPage.getList() as user>
+			[#list userPage.getList() as user]
 			<tr>
 				<td>${(user_index+1)!}</td>
 				<td>${(user.ufullname)!}</td>
-				<td><#if user.info_userid=1>*****<#else>${(user.uaccount)!}</#if></td>
+				<td>[#if user.info_userid=1]*****[#else]${(user.uaccount)!}[/#if]</td>
 				<td>${(user.bname)!}</td>
 				<td>${(user.aname)!}</td>
 				<td>${(user.pname)!}</td>
 				<td>${(user.uphone)!}</td>
 				<td>${(user.remark)!}</td>
 				<td>
-				<#if user.udeletetime??>
+				[#if user.udeletetime??]
 					<b>
 					<span class="red">禁用</span>
-					<#else>
+					[#else]
 					<span class="gray">正常</span>
-					</#if>
+					[/#if]
 					</b>
 				</td>
 				<td>
-					<#if (user.uuserid?number)==1>
-					<#else>
+					[#if (user.uuserid?number)==1]
+					[#else]
 						<div class="action-buttons">
 						<a class="btn btn-minier btn-primary"  href="${ContextPath}/admin/edituser?id=${(user.uuserid)!}" >设置</a>
-						<#if user.udeletetime??>
+						[#if user.udeletetime??]
 						<a class="btn btn-minier btn-danger"  href="${ContextPath}/admin/onuser?id=${(user.uuserid)!}" >启用</a>
-						<#else>
+						[#else]
 						<a class="btn btn-minier btn-primary"  href="${ContextPath}/admin/offuser?id=${(user.uuserid)!}" >禁用</a>
 						</div>
-						</#if>
-					</#if>
-				
-					
+						[/#if]
+					[/#if]
 				</td>
 			</tr>
-			</#list>
-			<#if userPage.getList().size()!=10>
-			<#assign size=(10-userPage.getList().size())>
-				<#list 1..size as t>
+			[/#list]
+			[#if userPage.getList().size()!=10]
+			[#assign size=(10-userPage.getList().size())]
+				[#list 1..size as t]
 					<tr>
 						<td>${(userPage.getList().size()+t)!}</td>
 						<td></td>
@@ -90,10 +88,10 @@
 						<td></td>
 						<td></td>
 					</tr>
-				</#list>
-			</#if>
+				[/#list]
+			[/#if]
 		</tbody>
 	</table>
-	<#include "/app/common/inc/_paginate.html" />
-	<@paginate currentPage=userPage.pageNumber totalPage=userPage.totalPage actionUrl="/admin/user/" />
-</@mainlayout>
+	[#include "/app/common/inc/_paginate.html" /]
+	[@paginate currentPage=userPage.pageNumber totalPage=userPage.totalPage actionUrl="/admin/user/" /]
+[/@mainlayout]
