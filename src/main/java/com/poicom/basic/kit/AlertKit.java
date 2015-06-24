@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.mail.EmailException;
 
 import cn.dreampie.ValidateKit;
@@ -14,6 +15,7 @@ import cn.dreampie.encription.EncriptionKit;
 import cn.dreampie.mail.Mailer;
 
 import com.jfinal.plugin.activerecord.Record;
+import com.poicom.function.model.Comment;
 import com.poicom.function.model.Order;
 import com.poicom.function.model.Retrieve;
 import com.poicom.function.model.User;
@@ -171,7 +173,7 @@ public class AlertKit {
 			.append(userinfo.getStr("ufullname"))
 			.append("（"+userinfo.getStr("uphone")+"） ")
 			//.append("于 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms))
-			.append("提交了故障工单，请尽快处理。");
+			.append("提交了关于”"+StringUtils.abbreviate(order.getStr("title"),10)+"“的故障工单，请尽快处理。");
 		}
 		return contt.toString();
 	}
@@ -395,6 +397,67 @@ public class AlertKit {
 	}
 	
 	/**
+	 *  每个处理环节，发送邮件提醒。
+	 * @param user
+	 * @param offer
+	 * @param deal
+	 * @param order
+	 * @param selectProgress
+	 * @return
+	 */
+	public static StringBuffer getDealMailBody(Record user,Record offer,Record deal,Order order,Comment comment,int selectProgress){
+		StringBuffer body=new StringBuffer();
+		body.append("尊敬的"+user.getStr("fullname")+"，你好。<br/>")
+				.append(offer.getStr("aname")+"的"+offer.getStr("ufullname")+"（"+offer.getStr("uphone")+"）")
+				.append("于"+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms)+"，")
+				.append("提交关于“"+StringUtils.abbreviate(order.getStr("title"),15)+"”"+"的故障单。")
+				.append("现由"+deal.getStr("aname")+"的"+deal.getStr("ufullname"));
+		if(selectProgress == 0){
+			body.append("开始处理。<br/>");
+		}else if(selectProgress == 1){
+			body.append("继续处理。<br/>");
+		}else if(selectProgress == 2){
+			body.append("处理完毕。<br/>");
+		}else if(selectProgress == 3){
+			body.append("转派处理。<br/>");
+		}
+		body.append("处理意见为："+comment.getStr("context")+"。<br/>");
+		body.append("详情请登陆系统查看。");
+		return body;
+	}
+	
+	/**
+	 * 每个处理环节，发送短信提醒。
+	 * @param user
+	 * @param offer
+	 * @param deal
+	 * @param order
+	 * @return
+	 */
+	public static StringBuffer getDealSmsBody(Record user,Record offer,Record deal,Order order,int selectProgress){
+		StringBuffer body=new StringBuffer();
+		body.append("尊敬的"+user.getStr("fullname")+"，")
+				.append(offer.getStr("aname")+"的"+offer.getStr("ufullname"))
+				.append("于"+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms)+"，")
+				.append("提交关于“"+StringUtils.abbreviate(order.getStr("title"),15)+"”"+"的故障单。")
+				.append("现由"+deal.getStr("aname")+"的"+deal.getStr("ufullname"));
+		if(selectProgress == 0){
+			body.append("开始处理");
+		}else if(selectProgress == 1){
+			body.append("继续处理");
+		}else if(selectProgress == 2){
+			body.append("处理完毕");
+		}else if(selectProgress == 3){
+			body.append("转派处理");
+		}
+		
+		body.append("，详情请登陆系统查看。");
+		return body;
+	}
+	
+	
+	
+	/**
 	 * 运维处理完毕通知申报人部门所有人员。
 	 * @param user
 	 * @param offer
@@ -474,7 +537,7 @@ public class AlertKit {
 	 * @param content
 	 * @param phone
 	 */
-	public static void sendSms(String content,String... phone){
+	public static int sendSms(String content,String... phone){
 		
 		System.out.println("进入发送短信主方法");
 		//电话列表...
@@ -504,7 +567,7 @@ public class AlertKit {
 	        outStream.close();
 	        
 	        System.out.println(conn.getResponseCode()); //响应代码 200表示成功
-
+	        return conn.getResponseCode();
 			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
@@ -513,6 +576,7 @@ public class AlertKit {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return 0;
 	}
 
 }

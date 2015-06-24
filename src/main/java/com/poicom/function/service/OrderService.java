@@ -19,6 +19,7 @@ import com.poicom.basic.kit.AlertKit;
 import com.poicom.basic.kit.WebKit;
 import com.poicom.basic.thread.ThreadAlert;
 import com.poicom.function.model.Apartment;
+import com.poicom.function.model.Comment;
 import com.poicom.function.model.Etype;
 import com.poicom.function.model.Order;
 import com.poicom.function.model.User;
@@ -135,6 +136,8 @@ public class OrderService extends BaseService {
 		return order.update();
 	}
 	
+	
+	
 	/**
 	 * 新增工单
 	 * @param order
@@ -148,6 +151,16 @@ public class OrderService extends BaseService {
 			.set("offer_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss"))
 			.set("flag", 0);
 		return order.save();
+	}
+	
+	/**
+	 * 新增工单回复，处理人，处理意见，处理时间，修改状态等。
+	 * @param comment
+	 * @return
+	 */
+	public boolean saveComment(Comment comment,Long orderid,Long userid){
+		comment.set("order_id", orderid).set("user_id", userid).set("created_at",DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
+		return comment.save();
 	}
 	
 	/**
@@ -182,6 +195,45 @@ public class OrderService extends BaseService {
 			//加入进程
 			ThreadAlert.add(alertKit);
 		}
+	}
+	
+	/**
+	 * 重新设置邮件，短信提醒内容。
+	 * @param userinfoList 		接收邮件和短信的用户列表
+	 * @param offer 					工单提交者
+	 * @param deal 					工单处理者，即当前用户
+	 * @param order 				工单内容
+	 * @param comment 			工单处理意见
+	 * @param selectProgress 	工单处理情况
+	 * @return boolean
+	 */
+	public boolean updateOrderAndAlert(List<Record> userinfoList,Record offer,Record deal,Order order,Comment comment,int selectProgress){
+		if(!userinfoList.isEmpty()){
+			for (Record user : userinfoList) {
+				// 获取邮件内容
+				String body = AlertKit.getDealMailBody(user, offer, deal,order,comment,selectProgress).toString();
+				AlertKit alertKit = new AlertKit();
+				if (ValidateKit.isEmail(user.getStr("useremail"))) {
+					alertKit.setEmailTitle("故障申报处理情况通知！")
+							.setEmailBody(body)
+							.setEmailAdd(user.getStr("useremail"));
+				}
+				// 电话非空
+				if (!ValidateKit.isNullOrEmpty(user.getStr("userphone"))) {
+					if (ValidateKit.isPhone(user.getStr("userphone"))) {
+						// 短信内容
+						String smsBody = AlertKit.getDealSmsBody(user, offer,deal, order,selectProgress).toString();
+						alertKit.setSmsContext(smsBody).setSmsPhone(
+								user.getStr("userphone"));
+					}
+				}
+				// 加入进程
+				log.info("日志添加到入库队列 ---> 处理故障工单");
+				ThreadAlert.add(alertKit);
+			}
+			return true;
+		}
+		return false;
 	}
 
 }

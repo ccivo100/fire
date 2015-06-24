@@ -80,8 +80,8 @@
   		FROM sec_user_info AS userinfo
 		LEFT OUTER JOIN sec_user AS user ON userinfo.user_id=user.id
 		LEFT OUTER JOIN com_branch AS branch ON userinfo.branch_id=branch.id
-		left outer join com_apartment as apartment on userinfo.apartment_id=apartment.id
-        left outer join com_position as position on userinfo.position_id=position.id
+		LEFT OUTER JOIN com_apartment AS apartment ON userinfo.apartment_id=apartment.id
+        LEFT OUTER JOIN com_position AS position ON userinfo.position_id=position.id
 		
   	</sql>
   	

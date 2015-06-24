@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jfinal.log.Logger;
+import com.jfinal.plugin.activerecord.Record;
 import com.poicom.basic.common.DictKeys;
 import com.poicom.basic.common.SplitPage;
 import com.poicom.function.model.Apartment;
@@ -60,6 +61,24 @@ public class UserService extends BaseService {
 			userList.addAll(uList);
 		}
 		return userList;
+	}
+	
+	/**
+	 * 查询用户所在大部门的所有人员详细信息
+	 * @param user
+	 * @return
+	 */
+	public List<Record> userinfosByApartment(User user){
+		List<Record> userinfoList = new ArrayList<Record>();
+		//user所属部门
+		Apartment apartment = user.getDepartment();
+		//user部门同级部门
+		List<Apartment> apartmentlist = Apartment.dao.rootNode(apartment.get("pid"));
+		for(Apartment apt : apartmentlist){
+			List<Record> uList = UserInfo.dao.getUserByApartment(" apartment.id=? and user.deleted_at is null",apt.getPKValue());
+			userinfoList.addAll(uList);
+		}
+		return userinfoList;
 	}
 
 }

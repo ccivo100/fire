@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.ehcache.CacheKit;
 import com.poicom.basic.common.DictKeys;
 import com.poicom.basic.thread.ThreadParamInit;
@@ -151,5 +152,6 @@ public class Apartment extends BaseModel<Apartment> implements TreeNode<Apartmen
 	public List<User> getUsersById(Long apartmentid){
 		return User.dao.find(getSql("user.userByApartmentId"), apartmentid);
 	}
+	
 	
 }

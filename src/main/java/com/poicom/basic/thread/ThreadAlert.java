@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.poicom.basic.kit.AlertKit;
+import com.poicom.basic.kit.StringKit;
+import com.poicom.function.model.Alertinfo;
 /**
  * 
  * @author 唐东宇
@@ -57,7 +59,7 @@ public class ThreadAlert {
 	
 	public static void startSendEmailAndSmsThread(){
 		try{
-			for(int i=0;i<3;i++){
+			for(int i=0;i<10;i++){
 				Thread sendEmailAndSmsThread=new Thread(new Runnable(){
 					public void run(){
 						while(threadRun){
@@ -70,7 +72,16 @@ public class ThreadAlert {
 								}else{
 									logger.debug("启动--发送邮件/短信提醒功能...");
 									alertKit.sendEmail(alertKit.getEmailTitle(),alertKit.getEmailBody(),alertKit.getEmailAdd());
-									alertKit.sendSms(alertKit.getSmsContext(),alertKit.getSmsPhone());
+									int smsrecode=alertKit.sendSms(alertKit.getSmsContext(),alertKit.getSmsPhone());
+									
+									Alertinfo alertinfo= new Alertinfo();
+									alertinfo.set("email", alertKit.getEmailAdd())
+												.set("emailcontext", alertKit.getEmailBody())
+												.set("phone", StringKit.arrayToString(alertKit.getSmsPhone()))
+												.set("smscontext", alertKit.getSmsContext())
+												.set("smsrecode", smsrecode);
+									alertinfo.save();
+									
 									logger.debug("完毕--发送邮件/短信提醒功能...");
 								}
 							}catch(Exception e){

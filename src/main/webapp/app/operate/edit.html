@@ -18,11 +18,14 @@ $(document).ready(function(){
 			url:"${ContextPath}/operate/update",
 			data:{
 				"oorderid":$('#oorderid').val(),
-				"uuserid":$('#uuserid').val(),
-				"deal_at":$('#deal_at').val(),
 				"progress":$('#selectProgress').val(),
-				"ocomment":$('#ocomment').val(),
-				"selectChildApartment":$('#selectChildApartment').val()},
+				"selectChildApartment":$('#selectChildApartment').val(),
+				
+				"orderid":$('#oorderid').val(),
+				"comment.add_at":$('#deal_at').val(),
+				"comment.context":$('#ocomment').val(),
+				},
+				
 			success:function(msg){
 				alertModal(msg.state);
 				$('#alertModal').modal();
