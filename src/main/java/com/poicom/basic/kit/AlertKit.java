@@ -117,26 +117,6 @@ public class AlertKit {
 	}
 	
 	/**
-	 * @描述 报障员提交新故障工单时调用
-	 * @param offer
-	 * @param description
-	 * @param deal
-	 * @return
-	 */
-	public static StringBuffer getMailBody(Record offer,String description,String deal){
-		
-		StringBuffer body=new StringBuffer();
-		
-		body.append("您好，"+deal+"：<br/>")
-		.append("&nbsp;&nbsp;&nbsp;&nbsp;" + offer.getStr("bname") + "的 "
-						+ offer.getStr("ufullname") + " ("
-						+ offer.getStr("uphone") + ") 发来故障工单。<br/>")
-		.append("故障内容："+description+"<br/>")
-		.append("请及时处理。");
-		return body;
-	}
-	
-	/**
 	 * 提交故障工单发送邮件
 	 * @param offer
 	 * @param deal
@@ -144,39 +124,75 @@ public class AlertKit {
 	 * @param description
 	 * @return
 	 */
-	public static StringBuffer getMailBody(Record offer,Record deal,Order order,String description){
+	public static StringBuffer getNewOrderMailBody(Record offer,Record deal,Order order){
 		StringBuffer body=new StringBuffer();
 		body.append("尊敬的 "+deal.getStr("fullname")+"，您好：<br/>")
 		.append(offer.getStr("bname") + " 的 "+ offer.getStr("ufullname"))
 		.append(" （"+ offer.getStr("uphone") + "）")
-		//.append(" 于 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms)+" ")
 		.append("发来故障工单。<br/>")
-		.append("故障内容为："+description+"<br/>")
+		.append("故障内容为："+order.getStr("description")+"<br/>")
 		.append("请及时处理。");
 		
 		return body;
 	}
+	
+	
 	
 	/**
 	 * @描述 报障员提交新故障工单时调用
 	 * @param userinfo
 	 * @param phone
 	 */
-	public static String setSmsContext(Object obj,Record userinfo,Order order ){
+	public static String setNewOrderSmsContext(Record offer,Order order ){
 		
 		StringBuffer contt=new StringBuffer();
-		if(ValidateKit.isNullOrEmpty(userinfo)){
+		if(ValidateKit.isNullOrEmpty(offer)){
 			contt.append("null");
 		}else{
 			contt.append("您好，")
-			.append(userinfo.getStr("bname")+"的 ")
-			.append(userinfo.getStr("ufullname"))
-			.append("（"+userinfo.getStr("uphone")+"） ")
+			.append(offer.getStr("bname")+"的 ")
+			.append(offer.getStr("ufullname"))
+			.append("（"+offer.getStr("uphone")+"） ")
 			//.append("于 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms))
 			.append("提交了关于”"+StringUtils.abbreviate(order.getStr("title"),10)+"“的故障工单，请尽快处理。");
 		}
 		return contt.toString();
 	}
+	
+	/**
+	 * 申报人提交工单时，发送该邮件给同部门人员。
+	 * @param offer
+	 * @param receiver
+	 * @param order
+	 * @return
+	 */
+	public static StringBuffer getOwnApartMailBody(Record offer,Record receiver,Order order){
+		StringBuffer body=new StringBuffer();
+		body.append("尊敬的 "+ receiver.getStr("fullname")+"，您好：<br/>")
+				.append("贵部门的"+offer.getStr("ufullname"))
+				.append(" （"+ offer.getStr("uphone") + "）")
+				.append("提交了故障工单。<br/>")
+				.append("标题为："+order.getStr("title")+"<br/>")
+				.append("故障内容为："+order.getStr("description")+"<br/>")
+				.append("详情请登陆系统查看。");
+		return body;
+	}
+	
+	/**
+	 * 申报人提交工单时，发送该短信给同部门人员。
+	 * @param offer
+	 * @param order
+	 * @return
+	 */
+	public static String setOwnApartSmsContext(Record offer,Order order){
+		StringBuffer contt=new StringBuffer();
+		contt.append("您好，贵部门的")
+				.append(offer.getStr("ufullname")+"（"+offer.getStr("uphone")+"） ")
+				.append("提交了关于”"+StringUtils.abbreviate(order.getStr("title"),10)+"“的故障工单，详情请登陆系统查看。");
+		return contt.toString();
+	}
+	
+	
 	
 	/**
 	 * 工单指派二级部门发送邮件
@@ -456,7 +472,6 @@ public class AlertKit {
 	}
 	
 	
-	
 	/**
 	 * 运维处理完毕通知申报人部门所有人员。
 	 * @param user
@@ -475,7 +490,6 @@ public class AlertKit {
 			.append(offer.getStr("full_name"))
 			.append("在 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms))
 			.append(" 提交的故障工单，已由 "+deal.getStr("full_name")+"（"+deal.getStr("phone")+"）")
-			//.append("于 "+DateKit.format(order.getDate("deal_at"),DateKit.pattern_ymd_hms))
 			.append(" 处理完毕！");
 		}
 		return contt.toString();

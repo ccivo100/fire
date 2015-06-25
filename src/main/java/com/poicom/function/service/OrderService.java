@@ -1,19 +1,23 @@
 package com.poicom.function.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 
 import cn.dreampie.ValidateKit;
 import cn.dreampie.shiro.core.SubjectKit;
 
 import com.jfinal.log.Logger;
+import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.poicom.basic.kit.AlertKit;
 import com.poicom.basic.kit.WebKit;
@@ -31,6 +35,20 @@ public class OrderService extends BaseService {
 	private static Logger log = Logger.getLogger(OrderService.class);
 	
 	public static OrderService service = new OrderService();
+	
+	public void format(Page<Record> page,String... paras){
+		for(Record record:page.getList()){
+			for(String attr:paras){
+				record.set(attr, StringUtils.abbreviate(record.getStr(attr), (new Random().nextInt(2)+35)));
+			}
+			Long orderid=record.getLong("id");
+			UserOrder userorder = UserOrder.dao.findFirstBy(" order_id=? ", orderid);
+			Long userid = userorder.getLong("user_id");
+			User user= User.dao.findById(userid);
+			String paname=user.getPosition().getStr("apartment_name");
+			record.set("deal_paname", paname);
+		}
+	}
 	
 	/**
 	 * 根据工单故障类型id，查其父类pid。排除已指派部门。
@@ -163,8 +181,32 @@ public class OrderService extends BaseService {
 		return comment.save();
 	}
 	
+	
+	
 	/**
-	 * 新增工单-人员关系 && 发送通知。
+	 * 提交工单部门人员消息提醒
+	 * @param order
+	 */
+	public void saveUserOrderToOwnApart(Order order){
+		
+		User user = User.dao.getCurrentUser();//当前用户
+		Record userinfo=UserInfo.dao.getAllUserInfo(user.getLong("id"));//当前用户详细信息
+		List<Record> receiverList=UserService.service.userinfosByApartment(user);
+		for(Record receiver:receiverList){
+			//获取邮件内容
+			String EmailTitle="新故障工单提醒！";
+			String EmailBody=AlertKit.getOwnApartMailBody(userinfo, receiver, order).toString();
+			String emailAddr=receiver.getStr("useremail");
+			//短信内容
+			String smsContext=AlertKit.setOwnApartSmsContext(userinfo,order);
+			String phone=receiver.getStr("userphone");
+			AlertService.service.doAlert(EmailTitle, EmailBody, emailAddr, smsContext, phone);
+		}
+		
+	}
+	
+	/**
+	 * 提交工单处理人员消息提醒
 	 * @param apartmentid
 	 * @param order
 	 */
@@ -173,32 +215,54 @@ public class OrderService extends BaseService {
 		List<Record> selectDealList=UserInfo.dao.getUserByApartment(" apartment.id=? and user.deleted_at is null",apartmentid);
 		for(Record selectDeal:selectDealList){
 			UserOrder userorder=new UserOrder()
-			.set("user_id", selectDeal.get("userid"))
-			.set("order_id", order.get("id"));
+				.set("user_id", selectDeal.get("userid"))
+				.set("order_id", order.get("id"));
 			userorder.save();
 			
 			//当前用户详细信息
 			Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
 			//邮件内容
-			String body=AlertKit.getMailBody(userinfo,selectDeal,order,order.getStr("description")).toString();
-			//发送邮件、短信线程
-			AlertKit alertKit=new AlertKit();
-			//发送邮件
-			if(ValidateKit.isEmail(selectDeal.getStr("useremail"))){
-				alertKit.setEmailTitle("点通故障系统提醒您！").setEmailBody(body).setEmailAdd(selectDeal.getStr("useremail"));
-			}
-			if(ValidateKit.isPhone(selectDeal.getStr("userphone"))){
-				//短信内容
-				String smsBody=AlertKit.setSmsContext(null,userinfo,order);
-				alertKit.setSmsContext(smsBody).setSmsPhone(selectDeal.getStr("userphone"));
-			}
-			//加入进程
-			ThreadAlert.add(alertKit);
+			String EmailTitle="点通故障系统提醒您！";
+			String EmailBody=AlertKit.getNewOrderMailBody(userinfo,selectDeal,order).toString();
+			String emailAddr=selectDeal.getStr("useremail");
+			//短信内容
+			String smsContext=AlertKit.setNewOrderSmsContext(userinfo,order);
+			String phone=selectDeal.getStr("userphone");
+			
+			AlertService.service.doAlert(EmailTitle, EmailBody, emailAddr, smsContext, phone);
 		}
 	}
 	
 	/**
-	 * 重新设置邮件，短信提醒内容。
+	 * 工单撤回消息提醒。
+	 * @param order
+	 */
+	public void recallOrder(Order order){
+		//当前用户详细信息
+		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
+		//运维人员列表
+		List<Record> dealList=new ArrayList<Record>();
+		List<UserOrder> userOrderList=UserOrder.dao.findBy(" order_id=?", order.getLong("id"));
+		for(UserOrder userorder:userOrderList){
+			Record accept_user=UserInfo.dao.getAllUserInfo(userorder.get("user_id"));
+			dealList.add(accept_user);
+		}
+		
+		for (Record deal : dealList) {
+			//获取邮件内容
+			String EmailTitle="【撤回通知】故障申报撤回提醒！";
+			String EmailBody=AlertKit.getMailBodyRecall(userinfo,deal,order).toString();
+			String emailAddr=deal.getStr("uemail");
+			//短信内容
+			String smsContext=AlertKit.getSmsBodyRecall(userinfo,order);
+			String phone=deal.getStr("uphone");
+			AlertService.service.doAlert(EmailTitle, EmailBody, emailAddr, smsContext, phone);
+		}
+		
+	}
+	
+	/**
+	 * 重新设置邮件，短信提醒内容，每个处理环节，发送短信提醒。
 	 * @param userinfoList 		接收邮件和短信的用户列表
 	 * @param offer 					工单提交者
 	 * @param deal 					工单处理者，即当前用户
@@ -211,25 +275,13 @@ public class OrderService extends BaseService {
 		if(!userinfoList.isEmpty()){
 			for (Record user : userinfoList) {
 				// 获取邮件内容
-				String body = AlertKit.getDealMailBody(user, offer, deal,order,comment,selectProgress).toString();
-				AlertKit alertKit = new AlertKit();
-				if (ValidateKit.isEmail(user.getStr("useremail"))) {
-					alertKit.setEmailTitle("故障申报处理情况通知！")
-							.setEmailBody(body)
-							.setEmailAdd(user.getStr("useremail"));
-				}
-				// 电话非空
-				if (!ValidateKit.isNullOrEmpty(user.getStr("userphone"))) {
-					if (ValidateKit.isPhone(user.getStr("userphone"))) {
-						// 短信内容
-						String smsBody = AlertKit.getDealSmsBody(user, offer,deal, order,selectProgress).toString();
-						alertKit.setSmsContext(smsBody).setSmsPhone(
-								user.getStr("userphone"));
-					}
-				}
-				// 加入进程
-				log.info("日志添加到入库队列 ---> 处理故障工单");
-				ThreadAlert.add(alertKit);
+				String EmailTitle="故障申报处理情况通知！";
+				String EmailBody = AlertKit.getDealMailBody(user, offer, deal,order,comment,selectProgress).toString();
+				String emailAddr=user.getStr("useremail");
+				// 短信内容
+				String smsContext = AlertKit.getDealSmsBody(user, offer,deal, order,selectProgress).toString();
+				String phone = user.getStr("userphone");
+				AlertService.service.doAlert(EmailTitle, EmailBody, emailAddr, smsContext, phone);
 			}
 			return true;
 		}

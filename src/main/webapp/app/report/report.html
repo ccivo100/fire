@@ -62,13 +62,14 @@
 	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>
-				<th width="2%">序号</th>
-				<th width="10%">标题</th>
-				<th width="5%">申报部门</th>
-				<th width="3%">申报人</th>
-				<th width="5%">申报时间</th>
-				<th width="2%">当前状态</th>
-				<th width="5%">操作</th>
+				<th >序号</th>
+				<th >标题</th>
+				<th >申报部门</th>
+				<th >运维部门</th>
+				<th >申报人</th>
+				<th >申报时间</th>
+				<th >当前状态</th>
+				<th >操作</th>
 			</tr>
 		</thead>
 				<tbody>
@@ -76,7 +77,8 @@
 			<tr >
 				<td >${report_index+1}</td>
 				<td style="text-align:left;">${(report.title)!}</td>
-				<td style="text-align:left;">${(report.off_branch)!}</td>
+				<td style="text-align:left;">${(report.off_paname)!}</td>
+				<td style="text-align:left;">${(report.deal_paname)!}</td>
 				<td style="text-align:left;">${(report.off_user)!}</td>
 				<td style="text-align:left;">${(report.offer_at)!}</td>
 				<td >
@@ -111,6 +113,7 @@
 				[#list 1..size as t]
 					<tr>
 						<td >${(reportPage.getList().size()+t)!}</td>
+						<td></td>
 						<td></td>
 						<td></td>
 						<td></td>

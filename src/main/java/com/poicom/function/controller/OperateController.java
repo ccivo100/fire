@@ -282,8 +282,8 @@ public class OperateController extends BaseController{
 		
 		//工单提交者部门人员
 		List<Record> offerinfoList = UserService.service.userinfosByApartment(offer);
-		//工单处理者部门人员
-		List<Record> dealinfoList = UserService.service.userinfosByApartment(deal);
+		//所有工单处理人员
+		List<Record> dealinfoList = UserService.service.userinfosByUserOrder(orderid);
 
 		// 开始处理
 		if (selectProgress == 0) {

@@ -52,8 +52,6 @@ public class ReportController extends BaseController{
 		render("order");
 	}
 
-	
-	
 	/**
 	 * @描述 报障人员查询本账号申报的故障工单
 	 */
@@ -79,8 +77,6 @@ public class ReportController extends BaseController{
 			String where=" WHERE o.offer_user=? ";
 			String orderby=" ORDER BY o.deleted_at ASC,o.status DESC, o.offer_at DESC ";
 			reportPage=Order.dao.findReportsByUserId(getParaToInt(0,1), 10,where,orderby, user.get("id"));
-			Order.dao.format(reportPage,"title");
-			setAttr("reportPage",reportPage);
 			
 		}else{
 			
@@ -113,10 +109,9 @@ public class ReportController extends BaseController{
 			Object[] condition= new Object[conditions.size()];
 			conditions.toArray(condition);
 			reportPage=Order.dao.findReportsByUserId(getParaToInt(0,1), 10,where,orderby,condition);
-			Order.dao.format(reportPage,"title");
-			setAttr("reportPage",reportPage);
-			
 		}
+		OrderService.service.format(reportPage, "title");
+		setAttr("reportPage",reportPage);
 		
 		render("report.html");
 	}
@@ -127,10 +122,8 @@ public class ReportController extends BaseController{
 	public void report(){
 		
 		Record order = Order.dao.findReportById(" o.id=? ",getParaToInt("id"));
-
 		//获取工单申报者的分公司信息
 		Record offer=UserInfo.dao.getUserBranch(order.getLong("oofferid"));
-		
 		if(!ValidateKit.isNullOrEmpty(offer)){
 			setAttr("offer",offer);
 		}
@@ -140,7 +133,6 @@ public class ReportController extends BaseController{
 			
 		//工单详细信息
 		setAttr(order);
-
 		render(REPORT_QUERY_PAGE);
 	}
 	
@@ -217,58 +209,17 @@ public class ReportController extends BaseController{
 	/**
 	 * @描述 对提交故障工单进行撤回
 	 */
-	@Before(Tx.class)
+	@Before({Tx.class,ReportValidator.class})
 	public void recall(){
-		int id=getParaToInt("oorderid");
+		int id=getParaToInt("order.id");
 		Order order=Order.dao.findById(id);
-		if(order.getInt("status")!=2){
-			renderJson("state","工单已处理，撤回失败！");
-		}else if(!ValidateKit.isNullOrEmpty(order.get("deleted_at"))){
-			renderJson("state","工单已撤回，请勿重复操作！");
-		}
-		else{
-			order.set("deleted_at", DateKit.format(new Date(),DateKit.pattern_ymd_hms));
-			
-			if(order.update()){
-				//当前用户详细信息
-				Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
-				//运维人员列表
-				List<Record> dealList=new ArrayList<Record>();
-				
-				List<UserOrder> userOrderList=UserOrder.dao.findBy(" order_id=?", id);
-				for(UserOrder userorder:userOrderList){
-					Record accept_user=UserInfo.dao.getAllUserInfo(userorder.get("user_id"));
-					dealList.add(accept_user);
-				}
-				
-				List<String> phones=new ArrayList<String>();
-				//发送邮件
-				for (Record deal : dealList) {
-					//发送邮件、短信线程
-					AlertKit alertKit=new AlertKit();
-					//获取邮件内容
-					String body=AlertKit.getMailBodyRecall(userinfo,deal,order).toString();
-					//发送邮件通知
-					if(ValidateKit.isEmail(deal.getStr("uemail"))){
-						alertKit.setEmailTitle("【撤回通知】故障申报撤回提醒！").setEmailBody(body).setEmailAdd(deal.getStr("uemail"));
-					}
-					//电话&&非空 then 保存电话列表
-					if(!ValidateKit.isNullOrEmpty(deal.getStr("uphone"))){
-						if(ValidateKit.isPhone(deal.getStr("uphone"))){
-							phones.add(deal.getStr("uphone"));
-							//短信内容
-							String smsBody=AlertKit.getSmsBodyRecall(userinfo,order);
-							alertKit.setSmsContext(smsBody).setSmsPhone(deal.getStr("uphone"));
-						}
-					}
-					//加入进程
-					logger.info("日志添加到入库队列 ---> 工单撤回处理通知");
-					ThreadAlert.add(alertKit);
-				}
-				renderJson("state","撤回成功！");
-			}else{
-				renderJson("state","撤回失败！");
-			}
+		order.set("deleted_at", DateKit.format(new Date(),DateKit.pattern_ymd_hms));
+		boolean flag=order.update();
+		if(flag){
+			OrderService.service.recallOrder(order);
+			renderJson("state","撤回成功！");
+		}else{
+			renderJson("state","撤回失败！");
 		}
 	}
 	
@@ -355,6 +306,7 @@ public class ReportController extends BaseController{
 		boolean flag = OrderService.service.saveOrder(order);
 		if(flag){
 			long selectChildApartment=getParaToLong("selectChildApartment");//选中部门
+			OrderService.service.saveUserOrderToOwnApart(order);
 			OrderService.service.saveUserOrder(selectChildApartment, order);
 			renderJson("state","提交成功！");
 		}else{

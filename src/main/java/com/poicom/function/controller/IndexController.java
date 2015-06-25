@@ -28,6 +28,7 @@ import com.poicom.function.model.Comment;
 import com.poicom.function.model.Order;
 import com.poicom.function.model.User;
 import com.poicom.function.model.UserInfo;
+import com.poicom.function.service.OrderService;
 import com.poicom.function.validator.IndexValidator;
 
 /**
@@ -60,17 +61,10 @@ public class IndexController extends BaseController {
 		else{
 			Page <Record> ordersPage;
 			String orderby=" ORDER BY o.offer_at DESC";
-			if(ValidateKit.isNullOrEmpty(getPara("condition"))){
-				String where=" 1=1 and o.deleted_at is null ";
-				ordersPage=Order.dao.findIndexOrders(getParaToInt(0,1), 10, where,orderby);
-				
-			}else{
-				String condition ="%"+getPara("condition").trim()+"%";
-				String where=" 1=1 and o.deleted_at is null and o.description like ?";
-				ordersPage=Order.dao.findIndexOrders(getParaToInt(0,1), 10, where,orderby, condition);
-			}
 			
-			Order.dao.format(ordersPage,"title");
+			String where=" 1=1 and o.deleted_at is null ";
+			ordersPage=Order.dao.findIndexOrders(getParaToInt(0,1), 10, where,orderby);
+			OrderService.service.format(ordersPage, "title");
 			setAttr("overOrderPage",ordersPage);
 			render(indexView);
 		}

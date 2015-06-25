@@ -36,7 +36,7 @@ $(document).ready(function(){
 			type:"post",
 			url:"${ContextPath}/report/recall",
 			data:{
-				"oorderid":$('#oorderid').val()
+				"order.id":$('#oorderid').val(),
 			},
 			dataType : "json",
 			success:function(msg){

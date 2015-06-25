@@ -36,17 +36,18 @@
 		LEFT OUTER JOIN sec_user as user on userinfo.user_id=user.id 
     </sql>
     
-    <!-- 根据用户id，查询用户所属公司 -->
+    <!-- 根据用户id，查询用户所属公司、部门、职位 -->
   	
   	<sql id="findUserBranchBySelect">
-  		SELECT branch.id bid,branch.name bname,apartment.id aid,apartment.name aname,position.id pid,position.name pname
+  		SELECT branch.id bid,branch.name bname,apartment.id aid,apartment.name aname,position.id pid,position.name pname,
+  		position.apartment_name paname
   	</sql>
   	<sql id="findUserBranchByFrom">
   		FROM sec_user_info AS userinfo
 		LEFT OUTER JOIN sec_user AS user ON userinfo.user_id=user.id
 		LEFT OUTER JOIN com_branch AS branch ON userinfo.branch_id=branch.id
-		left outer join com_apartment as apartment on userinfo.apartment_id=apartment.id
-        left outer join com_position as position on userinfo.position_id=position.id
+		LEFT OUTER JOIN com_apartment AS apartment ON userinfo.apartment_id=apartment.id
+        LEFT OUTER JOIN com_position AS position ON userinfo.position_id=position.id
 		WHERE userinfo.user_id=?
   	</sql>
   	
@@ -74,6 +75,7 @@
   		SELECT user.id userid,user.email useremail,user.phone userphone,user.full_name fullname,
   		userinfo.gender gender,branch.id bid,branch.name branch,
   		apartment.id aid,apartment.name aname,position.id pid,position.name pname,
+  		position.apartment_name paname,
 		user.deleted_at delete_at,user.remark remark
   	</sql>
   	<sql id="findBranchUserByFrom">
