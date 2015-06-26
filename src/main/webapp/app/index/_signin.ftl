@@ -52,10 +52,10 @@
 				      	<input  type="text" name="captcha" value="" class="form-control captcha form-height" ng-minlength="4" ng-maxlength="4"
 				             placeholder="验证码" required autocomplete="off" style="width:90px">
 				        <a style="float:right;" href="javascript:ref_captcha()">
-				    	<img id="captcha" class="captcha form-height" src="${ContextPath}/captcha?width=128&height=45&fontsize=30&time=${.now?time}">
+				    	<img id="captcha" class="captcha form-height" src="${ContextPath}/captcha?width=128&height=45&fontsize=30">
 				      	</a>
 				    </div>
-				    <div class="input-group input-sign margin-buttom" >
+				    <div class="input-group input-sign margin-buttom" > 
 				    	<span class="font-size-span" style="float:right;height:35px;"> 
 							<a href="${ContextPath}/retrieve">忘记密码?</a>
 						</span>

@@ -86,5 +86,11 @@ public class BranchController extends BaseController {
 		BranchService.service.on(Branch.dao.findById(getPara("id")));
 		redirect("/admin/branch");
 	}
+	
+	public void treeData(){
+		
+		String json=BranchService.service.treeNodeData();
+		renderJson(json);
+	}
 
 }

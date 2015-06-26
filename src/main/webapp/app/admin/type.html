@@ -1,26 +1,11 @@
-<#include "/app/common/layout/__backstagemainlayout.html"/>
-<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="typeFlag-typesListFlag">
+[#include "/app/common/layout/__backstagemainlayout.html"/]
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="typeFlag-typesListFlag"]
 
 <div class="page-header">
 	<h1>
 		类型管理
 	</h1>
 </div>
-<!-- <form class="bs-example bs-example-form" role="form" action="${ContextPath}/admin/type" method="post">
-	<div class="row">
-		<div class="col-xs-4" >
-			<div class="input-group">
-				<span class="input-group-addon">关键字</span> 
-				<input class="form-control" id="errorType" name="errorType" value="${(errorType)!}" placeholder="请输入故障名称……" type="text" autocomplete="off">
-				<span class="input-group-btn">
-					<button class="btn btn-sm btn-default">
-						<span class="glyphicon glyphicon-search"></span> 查询
-					</button>
-				</span>
-			</div>
-		</div>
-	</div>
-</form> -->
 <div class="hr hr-dotted"></div>
 	<table class="table table-bordered table-hover">
 		<thead>
@@ -34,60 +19,62 @@
 			</tr>
 		</thead>
 		<tbody>
-		<#list etypeTree as etypes>
+		[#list etypeTree as etypes]
 			<tr>
 				<td>${(etypes.id)!}</td>
 				<td> ${(etypes.name)!}</td>
 				<td>${(etypes.pid)!}</td>
 				<td>${(etypes.created_at)!}</td>
-				<td><#if etypes.deleted_at??>
+				<td>
 					<b>
+					[#if etypes.deleted_at??]
 					<span class="red">禁用</span>
-					<#else>
+					[#else]
 					<span class="gray">正常</span>
-					</#if>
+					[/#if]
 					</b>
 				</td>
 				<td>
 				<div class="action-buttons">
 				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/type/edit?id=${(etypes.id)!}" >编辑</a>
-				<#if etypes.deleted_at??>
+				[#if etypes.deleted_at??]
 				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/type/on?id=${(etypes.id)!}" >启用</a>
-				<#else>
+				[#else]
 				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/type/off?id=${(etypes.id)!}" >禁用</a>
-				</#if>
+				[/#if]
 				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/type/add?id=${(etypes.id)!}" >添加</a>
 				</div>
 				</td>
 			</tr>
-			<#list etypes.children as etype>
+				[#list etypes.children as etype]
 				<tr>
-				<td>${(etype.id)!}</td>
-				<td><span class="glyphicon glyphicon-minus-sign"></span>     ${(etype.name)!}</td>
-				<td>${(etype.pid)!}</td>
-				<td>${(etype.created_at)!}</td>
-				<td><#if etype.deleted_at??>
-					<b>
-					<span class="red">禁用</span>
-					<#else>
-					<span class="gray">正常</span>
-					</#if>
-					</b>
-				</td>
-				<td>
-				<div class="action-buttons">
-				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/type/edit?id=${(etype.id)!}" >编辑</a>
-				<#if etype.deleted_at??>
-				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/type/on?id=${(etype.id)!}" >启用</a>
-				<#else>
-				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/type/off?id=${(etype.id)!}" >禁用</a>
-				</#if>
-				</div>
-				</td>
-			</tr>
-			</#list>
-			</#list>
+					<td>${(etype.id)!}</td>
+					<td><span class="glyphicon glyphicon-minus-sign"></span>     ${(etype.name)!}</td>
+					<td>${(etype.pid)!}</td>
+					<td>${(etype.created_at)!}</td>
+					<td>
+						<b>
+						[#if etype.deleted_at??]
+						<span class="red">禁用</span>
+						[#else]
+						<span class="gray">正常</span>
+						[/#if]
+						</b>
+					</td>
+					<td>
+						<div class="action-buttons">
+							<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/type/edit?id=${(etype.id)!}" >编辑</a>
+							[#if etype.deleted_at??]
+							<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/type/on?id=${(etype.id)!}" >启用</a>
+							[#else]
+							<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/type/off?id=${(etype.id)!}" >禁用</a>
+							[/#if]
+						</div>
+					</td>
+				</tr>
+				[/#list]
+			[/#list]
 		</tbody>
 		
 	</table>
-</@mainlayout>
+[/@mainlayout]

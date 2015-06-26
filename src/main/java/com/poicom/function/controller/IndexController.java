@@ -28,6 +28,7 @@ import com.poicom.function.model.Comment;
 import com.poicom.function.model.Order;
 import com.poicom.function.model.User;
 import com.poicom.function.model.UserInfo;
+import com.poicom.function.service.OrderService;
 import com.poicom.function.validator.IndexValidator;
 
 /**
@@ -60,17 +61,10 @@ public class IndexController extends BaseController {
 		else{
 			Page <Record> ordersPage;
 			String orderby=" ORDER BY o.offer_at DESC";
-			if(ValidateKit.isNullOrEmpty(getPara("condition"))){
-				String where=" 1=1 and o.deleted_at is null ";
-				ordersPage=Order.dao.findIndexOrders(getParaToInt(0,1), 10, where,orderby);
-				
-			}else{
-				String condition ="%"+getPara("condition").trim()+"%";
-				String where=" 1=1 and o.deleted_at is null and o.description like ?";
-				ordersPage=Order.dao.findIndexOrders(getParaToInt(0,1), 10, where,orderby, condition);
-			}
 			
-			Order.dao.format(ordersPage,"title");
+			String where=" 1=1 and o.deleted_at is null ";
+			ordersPage=Order.dao.findIndexOrders(getParaToInt(0,1), 10, where,orderby);
+			OrderService.service.format(ordersPage, "title");
 			setAttr("overOrderPage",ordersPage);
 			render(indexView);
 		}
@@ -210,8 +204,10 @@ public class IndexController extends BaseController {
 	
 	@Before(IndexValidator.class)
 	public void repassword(){
+		String username=getPara("username");
 		String newValidCode=getPara("newValidCode");
 		String email=getPara("email");
+		setAttr("username",username);
 		setAttr("email",email);
 		setAttr("newValidCode",newValidCode);
 		System.out.println(newValidCode);
@@ -223,10 +219,11 @@ public class IndexController extends BaseController {
 	public void dorepassword(){
 		
 		String newValidCode=getPara("newValidCode");
+		String username =  getPara("username");
 		String email=getPara("email");
 		String password=getPara("password");
 		
-		User user=User.dao.findFirstBy("`user`.email = ? AND `user`.deleted_at is null", email);
+		User user=User.dao.findFirstBy("`user`.username = ? AND `user`.email = ? AND `user`.deleted_at is null", username,email);
 		if(!ValidateKit.isNullOrEmpty(user)){
 			HasherInfo passwordInfo=HasherKit.hash(password,Hasher.DEFAULT);
 			user.set("password", passwordInfo.getHashResult());
@@ -246,7 +243,7 @@ public class IndexController extends BaseController {
 				renderFile(downfile);
 				return ;
 			}else{
-				renderError(404);;
+				renderError(404);
 			}
 		}catch(Exception e){
 			e.printStackTrace();

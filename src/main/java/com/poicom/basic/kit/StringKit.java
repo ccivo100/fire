@@ -147,12 +147,26 @@ public class StringKit {
 	
 	public final static Pattern referer_pattern = Pattern.compile("@([^@^\\s^:]{1,})([\\s\\:\\,\\;]{0,1})");//@.+?[\\s:]
 	
-	
+	public static String arrayToString(String[] str){
+		StringBuffer sb = new StringBuffer();
+		sb.append("('");
+		for (int i = 0; i < str.length; i++) {
+			if (i == str.length - 1) {
+				sb.append(str[i]);
+			} else {
+				sb.append(str[i]);
+				sb.append("', '");
+			}
+		}
+		sb.append("')");
+		return sb.toString();
+	}
 	
 	
 	@Test
 	public void test(){
-			System.out.println(urlEncode("唐东宇"));
+		String[] str = { "1", "2", "3", "4", "5", "6", "7" };
+		  System.out.println(arrayToString(str));
 	}
 
 }

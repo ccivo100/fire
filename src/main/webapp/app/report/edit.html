@@ -1,22 +1,23 @@
-﻿<#include "/app/common/layout/__frontmainlayout.html"/>
-<#assign pageCss>
+﻿[#include "/app/common/layout/__frontmainlayout.html"/]
+[#assign pageCss]
 <link rel="stylesheet" href="${ContextPath}/admin/assets/css/signin.css" />
-</#assign>
+[/#assign]
 
-<#assign pageJavascript>
+[#assign pageJavascript]
 <script type="text/javascript">
 $(document).ready(function(){
+
 	$("#reportupdate").click(function(){
 		$.ajax({
 			type:"post",
 			url:"${ContextPath}/report/update",
-			data:{"orderid":$('#oorderid').val(),
-					"title":$('#otitle').val(),
-					"description":$('#odescription').val(),
+			data:{
+					"order.id":$('#oorderid').val(),
+					"order.title":$('#otitle').val(),
+					"order.description":$('#odescription').val(),
 			},
 			success:function(msg){
 				alertModal(msg.state);
-				$('#alertModal').modal();
 				$('#alertModal').on('hidden.bs.modal', function () {
 					if(msg.state=='更新故障工单成功！'){
 						window.location.href='${ContextPath}/report/reports'
@@ -35,19 +36,17 @@ $(document).ready(function(){
 			type:"post",
 			url:"${ContextPath}/report/recall",
 			data:{
-				"oorderid":$('#oorderid').val()
+				"order.id":$('#oorderid').val(),
 			},
 			dataType : "json",
 			success:function(msg){
 				$('#sureModal').modal('hide');
 				alertModal(msg.state);
-				$('#alertModal').modal();
 				$('#alertModal').on('hidden.bs.modal', function () {
 					if(msg.state=='撤回成功！'){
 						window.location.href='${ContextPath}/report/reports'
 					}
 				});
-				
 			}
 		});
 	});
@@ -62,13 +61,11 @@ $(document).ready(function(){
 			dataType : "json",
 			success:function(msg){
 				alertModal(msg.state);
-				$('#alertModal').modal();
 				$('#alertModal').on('hidden.bs.modal', function () {
 					if(msg.state=='删除成功！'){
 						window.location.href='${ContextPath}/report/reports'
 					}
 				});
-				
 			}
 		});
 	});
@@ -77,19 +74,18 @@ $(document).ready(function(){
 function alertModal(msg){
 	$("#modal-title-content").html("提示!");  
 	$("#modal-body-content").html(msg);  
+	$('#alertModal').modal();
 }
 
-
-
 </script>
-</#assign>
+[/#assign]
 
-<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="reportsFlag">
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="reportsFlag"]
 
 <div class="index-background">
 	<!-- 代表上写文、/blog代表控制器、/save代表控制器中的方法 -->
 	<form class="form-horizontal"  method="post">
-		<#include "_formedit.html" />
+		[#include "_formedit.html" /]
 	</form>
 </div>
-</@mainlayout>
+[/@mainlayout]

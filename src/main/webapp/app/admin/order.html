@@ -1,7 +1,5 @@
-<#include "/app/common/layout/__backstagemainlayout.html"/>
-
-
-<#assign pageJavascript>
+[#include "/app/common/layout/__backstagemainlayout.html"/]
+[#assign pageJavascript]
 <!-- page specific plugin scripts -->
 <script src="${ContextPath}/admin/assets/js/jquery.dataTables.js"></script>
 <script src="${ContextPath}/admin/assets/js/jquery.dataTables.bootstrap.js"></script>
@@ -66,12 +64,12 @@ function alertModal(msg){
 	
 	
 </script>
-</#assign>
-<#assign pageCss>
+[/#assign]
+[#assign pageCss]
 <link rel="stylesheet" href="${ContextPath}/admin/assets/css/data-tables/dataTables.tableTools.css" />
-</#assign>
+[/#assign]
 
-<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="orderFlag-ordersListFlag">
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="orderFlag-ordersListFlag"]
 
 <div class="page-header">
 	<h1>
@@ -103,28 +101,27 @@ function alertModal(msg){
 						</thead>
 						
 						<tbody>
-							<#list ordersList as order>
+							[#list ordersList as order]
 							<tr>
 
 								<td>${order_index+1}</td>
 								
 								<td>${(order.title)!}</td>
-								<td class="hidden-480">${(order.off_branch)!}</td>
+								<td class="hidden-480">${(order.off_paname)!}</td>
 								<td class="hidden-480">${(order.off_user)!}</td>
 								<td>${(order.offer_at)!}</td>
 
 								<td class="hidden-480">
 									<b>
-									<#if order.deleted_at??>
+									[#if order.deleted_at??]
 									<span class="red">已撤销</span>
-									
-									<#elseif order.status=0>
+									[#elseif order.status=0]
 									<span class="green">已处理</span>
-									<#elseif order.status=1>
+									[#elseif order.status=1]
 									<span class="orange">处理中</span>
-									<#elseif order.status=2>
+									[#elseif order.status=2]
 									<span class="gray">未处理</span>
-									</#if>
+									[/#if]
 									</b>
 								</td>
 								<td>${(order.id)!}</td>
@@ -164,7 +161,7 @@ function alertModal(msg){
 									</div>
 								</td>
 							</tr>
-							</#list>
+							[/#list]
 						</tbody>
 					</table>
 				</div>
@@ -175,5 +172,5 @@ function alertModal(msg){
 	<!-- /.col -->
 </div>
 <!-- pageContent END -->
-<#include "/app/admin/order/_model.html" />
-</@mainlayout>
+[#include "/app/admin/order/_model.html" /]
+[/@mainlayout]

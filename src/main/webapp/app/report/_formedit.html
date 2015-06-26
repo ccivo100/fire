@@ -20,25 +20,25 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">申报人员：</label>
 		<div class="col-sm-2">
-			<label class=" control-label"><span class="label label-info ">${(ufullname)!}</span></label>
+			<label class=" control-label"><span class="label label-info ">${(userinfo.ufullname)!}</span></label>
 		</div>
 		<label class="col-sm-2 control-label">联系电话：</label>
 		<div class="col-sm-2">
-			<label class=" control-label"><span class="label label-info ">${(uphone)!}</span></label>
+			<label class=" control-label"><span class="label label-info ">${(userinfo.uphone)!}</span></label>
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">单位：</label>
 		<div class="col-sm-2">
-			<label class=" control-label"><span class="label label-info ">${(bname)!}</span></label>
+			<label class=" control-label"><span class="label label-info ">${(userinfo.bname)!}</span></label>
 		</div>
 		<label class="col-sm-2 control-label">部门：</label>
 		<div class="col-sm-2">
-			<label class=" control-label"><span class="label label-info ">${(aname)!}</span></label>
+			<label class=" control-label"><span class="label label-info ">${(userinfo.aname)!}</span></label>
 		</div>
 		<label class="col-sm-2 control-label">职位：</label>
 		<div class="col-sm-2">
-			<label class=" control-label"><span class="label label-info ">${(pname)!}</span></label>
+			<label class=" control-label"><span class="label label-info ">${(userinfo.pname)!}</span></label>
 		</div>
 	</div>
 	
@@ -58,60 +58,30 @@
 		<label class="col-sm-2 control-label">故障类型：</label>
 
 		<div class="col-sm-3">
-			<#if otypeid??>
-				<select id="selectType" name="selectType" class="form-control" disabled required autofocus>
-			<#else>
-	
-			<select id="selectType" name="selectType" class="form-control" required autofocus>
-			
-			</#if>
-						<option value="" selected="selected">请选择故障类型</option>
-				<#if otypeid??>
-					<#list typeList as type>
-						
-						<option value="${type.id}"  
-							<#if ((otypeid!'-1')?number)=type.id>
-								selected="selected"
-							</#if> >
-							${type.name}
-						</option>
-					</#list>
-				<#else>
-					<#list typeList as type>
-						<option value="${type.id}">${type.name}</option>
-					</#list>
-				</#if>
-			
+			<select id="selectType" name="selectType" class="form-control" disabled required autofocus>
+				<option value="" selected="selected">请选择故障类型</option>
+				[#list typeList as type]
+					[#if ((order.otypeid!'-1')?number)=type.id]
+					<option value="${type.id}"  selected="selected">${type.name}</option>
+					[#else]
+					<option value="${type.id}"  >${type.name}</option>
+					[/#if]
+				[/#list]
 			</select>
 		</div>
 
 		<label class="col-sm-2 control-label">故障等级：</label>
 
 		<div class="col-sm-3">
-			<#if olevelid??>
-				<select id="selectLevel" name="selectLevel" class="form-control" disabled required autofocus>
-			<#else>
-	
-			<select id="selectLevel" name="selectLevel" class="form-control" required autofocus>
-			
-			</#if>
-						<option value="" selected="selected">请选择故障等级</option>
-				<#if olevelid??>
-					<#list levelList as level>
-						
-						<option value="${level.id}"  
-							<#if ((olevelid!'-1')?number)=level.id>
-								selected="selected"
-							</#if> >
-							${level.name}
-						</option>
-					</#list>
-				<#else>
-					<#list levelList as level>
-						<option value="${level.id}">${level.name}</option>
-					</#list>
-				</#if>
-			
+			<select id="selectLevel" name="selectLevel" class="form-control" disabled required autofocus>
+				<option value="" selected="selected">请选择故障等级</option>
+				[#list levelList as level]
+					[#if ((order.olevelid!'-1')?number)=level.id]
+					<option value="${level.id}"  selected="selected">${level.name}</option>
+					[#else]
+					<option value="${level.id}"  >${level.name}</option>
+					[/#if]
+				[/#list]
 			</select>
 		</div>
 	</div>
@@ -130,12 +100,12 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label"></label>
 		<div class="col-sm-6">
-			<#if descriptionMsg??>
+			[#if descriptionMsg??]
 			<div class="alert alert-danger" role="alert">
   				${descriptionMsg!}
 			</div>
 				
-			</#if>
+			[/#if]
 		</div>
 	</div>
 
@@ -143,11 +113,11 @@
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
 			
-			<#if odeletetime?exists>
-			<#else>
+			[#if odeletetime?exists]
+			[#else]
 			<a id="reportupdate"  class="btn btn-primary save" >提交</a>
 			<a id="recall"   class="btn btn-danger" >撤回</a>
-			</#if>
+			[/#if]
 			
 		</div>
 	</div>
@@ -157,4 +127,4 @@
 </div>
 
 
-<#include "_model.html" />
+[#include "_model.html" /]

@@ -1,5 +1,5 @@
-<#include "/app/common/layout/__backstagemainlayout.html"/>
-<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="permissionFlag-permissionsListFlag">
+[#include "/app/common/layout/__backstagemainlayout.html"/]
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="permissionFlag-permissionsListFlag"]
 <div class="page-header">
 	<h1>
 		权限管理 
@@ -19,7 +19,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<#list permissionTree as permissions>
+				[#list permissionTree as permissions]
 				<tr>
 					<td>${(permissions.id)!}</td>
 					<td>${(permissions.name)!}</td>
@@ -27,55 +27,57 @@
 					<td>${(permissions.url)!}</td>
 					<td>${(permissions.pid)!}</td>
 					<td>${(permissions.created_at)!}</td>
-					<td><#if permissions.deleted_at??>
+					<td>
 						<b>
+						[#if permissions.deleted_at??]
 						<span class="red">禁用</span>
-						<#else>
+						[#else]
 						<span class="gray">正常</span>
-						</#if>
+						[/#if]
 						</b>
 					</td>
 					<td>
 					<div class="action-buttons">
 					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/permission/edit?id=${(permissions.id)!}" >编辑</a>
-					<#if permissions.deleted_at??>
+					[#if permissions.deleted_at??]
 					<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/permission/on?id=${(permissions.id)!}" >启用</a>
-					<#else>
+					[#else]
 					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/permission/off?id=${(permissions.id)!}" >禁用</a>
-					</#if>
+					[/#if]
 					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/permission/add?id=${(permissions.id)!}" >添加</a>
 					</div>
 					</td>
 				</tr>
-				<#list permissions.children as permission>
+					[#list permissions.children as permission]
 					<tr>
-					<td>${(permission.id)!}</td>
-					<td><span class="glyphicon glyphicon-minus-sign"></span>     ${(permission.name)!}</td>
-					<td>${(permission.value)!}</td>
-					<td>${(permission.url)!}</td>
-					<td>${(permission.pid)!}</td>
-					<td>${(permission.created_at)!}</td>
-					<td><#if permission.deleted_at??>
-						<b>
-						<span class="red">禁用</span>
-						<#else>
-						<span class="gray">正常</span>
-						</#if>
-						</b>
-					</td>
-					<td>
-					<div class="action-buttons">
-					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/permission/edit?id=${(permission.id)!}" >编辑</a>
-					<#if permission.deleted_at??>
-					<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/permission/on?id=${(permission.id)!}" >启用</a>
-					<#else>
-					<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/permission/off?id=${(permission.id)!}" >禁用</a>
-					</#if>
-					</div>
-					</td>
-				</tr>
-				</#list>
-				</#list>
+						<td>${(permission.id)!}</td>
+						<td><span class="glyphicon glyphicon-minus-sign"></span>     ${(permission.name)!}</td>
+						<td>${(permission.value)!}</td>
+						<td>${(permission.url)!}</td>
+						<td>${(permission.pid)!}</td>
+						<td>${(permission.created_at)!}</td>
+						<td>
+							<b>
+							[#if permission.deleted_at??]
+							<span class="red">禁用</span>
+							[#else]
+							<span class="gray">正常</span>
+							[/#if]
+							</b>
+						</td>
+						<td>
+							<div class="action-buttons">
+								<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/permission/edit?id=${(permission.id)!}" >编辑</a>
+								[#if permission.deleted_at??]
+								<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/permission/on?id=${(permission.id)!}" >启用</a>
+								[#else]
+								<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/permission/off?id=${(permission.id)!}" >禁用</a>
+								[/#if]
+							</div>
+						</td>
+					</tr>
+					[/#list]
+				[/#list]
 			</tbody>
 		</table>
-</@mainlayout>
+[/@mainlayout]

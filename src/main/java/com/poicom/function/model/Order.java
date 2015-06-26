@@ -141,6 +141,8 @@ public class Order extends BaseModel<Order> {
 		}
 	}
 	
+	
+	
 	public void format(List<Record> list,String... paras){
 		for(Record record:list){
 			for(String attr:paras){

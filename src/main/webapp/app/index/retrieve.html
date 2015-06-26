@@ -1,5 +1,5 @@
-﻿<#include "/page/common/_layout.html"/>
-<@layout activebar="findpw" html_title="找回密码">
+﻿[#include "/page/common/_layout.html"/]
+[@layout activebar="findpw" html_title="找回密码"]
 <div class="jumbotron">
 
 <form class="form-retrieve" role="form" method="post" action="${ContextPath}/doretrieve">
@@ -18,11 +18,11 @@
 	<div class="form-group">
 		<label class="col-xm-2 control-label"></label>
 		<div class="col-xm-6">
-			<#if retrieveMsg??>
+			[#if retrieveMsg??]
 			<div class="alert alert-danger" role="alert">
   				${retrieveMsg!}
 			</div>
-			</#if>
+			[/#if]
 		</div>
 	</div>
 	
@@ -30,4 +30,4 @@
 </form>
 </div>
 
-</@layout>
+[/@layout]

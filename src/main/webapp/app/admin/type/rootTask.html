@@ -1,5 +1,5 @@
-﻿<#include "/app/common/layout/__backstagemainlayout.html"/>
-<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="typeFlag-rootTaskFlag">
+﻿[#include "/app/common/layout/__backstagemainlayout.html"/]
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="typeFlag-rootTaskFlag"]
 <div class="page-header">
 	<h1>
 		<a href="${ContextPath}/admin/type">类型管理</a>
@@ -17,7 +17,7 @@
 		</thead>
 
 		<tbody>
-			<#list rootApartmentList as apartment>
+			[#list rootApartmentList as apartment]
 			<tr>
 				<td>${apartment_index+1}</td>
 				<td>${apartment.name}</td>
@@ -25,17 +25,17 @@
 				<form class="form-horizontal" role="form" action="${ContextPath}/admin/task/rootAssign" method="post" >
 				<input type="hidden" name="id" value="${(apartment.id)}">
 				<td>
-					<#list typeList as type>
+					[#list typeList as type]
 						
 						<input type="checkbox" id="inlineCheckbox1" name="types" value="${(type.id)!}"
-							<#list apartment.remark as t>
-								<#if t.id=type.id>
+							[#list apartment.remark as t]
+								[#if t.id=type.id]
 								checked 
-								</#if>
-							</#list>
+								[/#if]
+							[/#list]
 						> ${(type.name)!}
 
-					</#list>
+					[/#list]
 				
 				</td>
 				<td>
@@ -46,18 +46,18 @@
 				</td>
 				</form>
 			</tr>
-			</#list>
-			<#if rootApartmentList.size()!=10>
-			<#assign size=(10-rootApartmentList.size())>
-				<#list 1..size as t>
+			[/#list]
+			[#if rootApartmentList.size()!=10]
+			[#assign size=(10-rootApartmentList.size())]
+				[#list 1..size as t]
 					<tr>
 						<td>${(rootApartmentList.size()+t)!}</td>
 						<td></td>
 						<td></td>
 						<td></td>
 					</tr>
-				</#list>
-			</#if>
+				[/#list]
+			[/#if]
 		</tbody>
 		
 		<tfoot>
@@ -68,4 +68,4 @@
 		</tfoot>
 	</table>
 	
-</@mainlayout>
+[/@mainlayout]

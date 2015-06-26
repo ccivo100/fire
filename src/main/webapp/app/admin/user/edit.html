@@ -1,6 +1,6 @@
-﻿<#include "/app/common/layout/__backstagemainlayout.html"/>
+﻿[#include "/app/common/layout/__backstagemainlayout.html"/]
 
-<#assign pageJavascript>
+[#assign pageJavascript]
 <script>
 $(document).ready(function(){
 	$("#doedituser").click(function(){
@@ -93,9 +93,9 @@ function alertModal(msg){
 }
 
 </script>
-</#assign>
+[/#assign]
 
-<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="organizationFlag-userFlag-usersListFlag">
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="organizationFlag-userFlag-usersListFlag"]
 
 <div class="page-header">
 	<h1>
@@ -122,11 +122,11 @@ function alertModal(msg){
 					<input id="uphone" type="text" class="form-control"  name="uphone" value="${(userinfo.uphone)!}"  autofocus/>
 				</div>
 				<div class="col-xs-4">
-				<#if phoneMsg??>
+				[#if phoneMsg??]
 					<div class="index-alert index-alert-danger" style="background-image:none;">
 					${(phoneMsg)!}
 					</div>
-				</#if>
+				[/#if]
 				</div>
 			</div>
 			<div class="form-group">
@@ -135,11 +135,11 @@ function alertModal(msg){
 					<input id="uemail" type="text" class="form-control"  name="uemail" value="${(userinfo.uemail)!}" />
 				</div>
 				<div class="col-xs-4">
-				<#if emailMsg??>
+				[#if emailMsg??]
 					<div class="index-alert index-alert-danger" style="background-image:none;">
 					${(emailMsg)!}
 					</div>
-				</#if>
+				[/#if]
 				</div>
 			</div>
 			<div class="form-group">
@@ -147,13 +147,13 @@ function alertModal(msg){
 				<div class="col-sm-4">
 					<select id="selectBranch" name="selectBranch" class="form-control"  required >
 						<option value="-1" selected="selected">请选择</option>
-						<#list branchList as branch>
-						<#if (userinfo.info_branchid)=branch.id>
+						[#list branchList as branch]
+						[#if (userinfo.info_branchid)=branch.id]
 						<option value="${(branch.id)!}" selected="selected">${(branch.name)!}	</option>
-						<#else>
+						[#else]
 						<option value="${(branch.id)!}" >${(branch.name)!}	</option>
-						</#if>
-						</#list>
+						[/#if]
+						[/#list]
 					</select>
 				</div>
 			</div>
@@ -180,20 +180,20 @@ function alertModal(msg){
 			<div class="control-group">
 				<label class="col-sm-2 control-label">角色类型</label>
 				<div class="col-sm-4">
-						<#list roleList as role>
+						[#list roleList as role]
 							<div class="checkbox">
 						    <label class="checkbox inline">
 						    <input id="roles"   type="checkbox"  name="roles" value="${(role.id)!}"
-							    <#list userrole as r>
-							    	<#if r.roleid=role.id>
+							    [#list userrole as r]
+							    	[#if r.roleid=role.id]
 							    	 checked
-							    	</#if>
-							    </#list>
+							    	[/#if]
+							    [/#list]
 						    
 						    > ${(role.name)!}
 						    </label>
 						    </div>
-					    </#list>
+					    [/#list]
 
 				</div>
 			</div>
@@ -204,5 +204,5 @@ function alertModal(msg){
 				</div>
 		</div>
 	</div>
-<#include "/app/admin/_model.html" />
-</@mainlayout>
+[#include "/app/admin/_model.html" /]
+[/@mainlayout]

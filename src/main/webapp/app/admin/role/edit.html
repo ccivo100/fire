@@ -1,9 +1,9 @@
-﻿<#include "/app/common/layout/__backstagemainlayout.html"/>
-<#assign pageCss>
+﻿[#include "/app/common/layout/__backstagemainlayout.html"/]
+[#assign pageCss]
 <link rel="stylesheet"
 	href="${ContextPath}/admin/assets/css/signin.css" />
-</#assign>
-<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="roleFlag-rolesListFlag">
+[/#assign]
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="roleFlag-rolesListFlag"]
 <div class="page-header">
 	<h1>
 		<a href="${ContextPath}/admin/role">角色管理 </a>
@@ -11,7 +11,6 @@
 	</h1>
 </div>
 <form class="form-horizontal" role="form"  action="${ContextPath}/admin/role/update" method="post" >
-	<#include "_form.ftl" />
+	[#include "_form.ftl" /]
 </form>
-	
-</@mainlayout>
+[/@mainlayout]

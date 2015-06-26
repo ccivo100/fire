@@ -33,6 +33,7 @@ import com.poicom.function.model.UserInfo;
 import com.poicom.function.model.UserOrder;
 import com.poicom.function.service.OrderService;
 import com.poicom.function.validator.CommonValidator;
+import com.poicom.function.validator.ReportValidator;
 
 /**
  * @描述 故障申报
@@ -51,8 +52,6 @@ public class ReportController extends BaseController{
 		render("order");
 	}
 
-	
-	
 	/**
 	 * @描述 报障人员查询本账号申报的故障工单
 	 */
@@ -78,8 +77,6 @@ public class ReportController extends BaseController{
 			String where=" WHERE o.offer_user=? ";
 			String orderby=" ORDER BY o.deleted_at ASC,o.status DESC, o.offer_at DESC ";
 			reportPage=Order.dao.findReportsByUserId(getParaToInt(0,1), 10,where,orderby, user.get("id"));
-			Order.dao.format(reportPage,"title");
-			setAttr("reportPage",reportPage);
 			
 		}else{
 			
@@ -112,10 +109,9 @@ public class ReportController extends BaseController{
 			Object[] condition= new Object[conditions.size()];
 			conditions.toArray(condition);
 			reportPage=Order.dao.findReportsByUserId(getParaToInt(0,1), 10,where,orderby,condition);
-			Order.dao.format(reportPage,"title");
-			setAttr("reportPage",reportPage);
-			
 		}
+		OrderService.service.format(reportPage, "title");
+		setAttr("reportPage",reportPage);
 		
 		render("report.html");
 	}
@@ -124,12 +120,10 @@ public class ReportController extends BaseController{
 	 * 查询故障工单详细内容
 	 */
 	public void report(){
-		String where="o.id=?";
-		Record order = Order.dao.findReportById(where,getParaToInt("id"));
-
+		
+		Record order = Order.dao.findReportById(" o.id=? ",getParaToInt("id"));
 		//获取工单申报者的分公司信息
 		Record offer=UserInfo.dao.getUserBranch(order.getLong("oofferid"));
-		
 		if(!ValidateKit.isNullOrEmpty(offer)){
 			setAttr("offer",offer);
 		}
@@ -139,7 +133,6 @@ public class ReportController extends BaseController{
 			
 		//工单详细信息
 		setAttr(order);
-
 		render(REPORT_QUERY_PAGE);
 	}
 	
@@ -216,58 +209,17 @@ public class ReportController extends BaseController{
 	/**
 	 * @描述 对提交故障工单进行撤回
 	 */
-	@Before(Tx.class)
+	@Before({Tx.class,ReportValidator.class})
 	public void recall(){
-		int id=getParaToInt("oorderid");
+		int id=getParaToInt("order.id");
 		Order order=Order.dao.findById(id);
-		if(order.getInt("status")!=2){
-			renderJson("state","工单已处理，撤回失败！");
-		}else if(!ValidateKit.isNullOrEmpty(order.get("deleted_at"))){
-			renderJson("state","工单已撤回，请勿重复操作！");
-		}
-		else{
-			order.set("deleted_at", DateKit.format(new Date(),DateKit.pattern_ymd_hms));
-			
-			if(order.update()){
-				//当前用户详细信息
-				Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
-				//运维人员列表
-				List<Record> dealList=new ArrayList<Record>();
-				
-				List<UserOrder> userOrderList=UserOrder.dao.findBy(" order_id=?", id);
-				for(UserOrder userorder:userOrderList){
-					Record accept_user=UserInfo.dao.getAllUserInfo(userorder.get("user_id"));
-					dealList.add(accept_user);
-				}
-				
-				List<String> phones=new ArrayList<String>();
-				//发送邮件
-				for (Record deal : dealList) {
-					//发送邮件、短信线程
-					AlertKit alertKit=new AlertKit();
-					//获取邮件内容
-					String body=AlertKit.getMailBodyRecall(userinfo,deal,order).toString();
-					//发送邮件通知
-					if(ValidateKit.isEmail(deal.getStr("uemail"))){
-						alertKit.setEmailTitle("【撤回通知】故障申报撤回提醒！").setEmailBody(body).setEmailAdd(deal.getStr("uemail"));
-					}
-					//电话&&非空 then 保存电话列表
-					if(!ValidateKit.isNullOrEmpty(deal.getStr("uphone"))){
-						if(ValidateKit.isPhone(deal.getStr("uphone"))){
-							phones.add(deal.getStr("uphone"));
-							//短信内容
-							String smsBody=AlertKit.getSmsBodyRecall(userinfo,order);
-							alertKit.setSmsContext(smsBody).setSmsPhone(deal.getStr("uphone"));
-						}
-					}
-					//加入进程
-					logger.info("日志添加到入库队列 ---> 工单撤回处理通知");
-					ThreadAlert.add(alertKit);
-				}
-				renderJson("state","撤回成功！");
-			}else{
-				renderJson("state","撤回失败！");
-			}
+		order.set("deleted_at", DateKit.format(new Date(),DateKit.pattern_ymd_hms));
+		boolean flag=order.update();
+		if(flag){
+			OrderService.service.recallOrder(order);
+			renderJson("state","撤回成功！");
+		}else{
+			renderJson("state","撤回失败！");
 		}
 	}
 	
@@ -292,7 +244,7 @@ public class ReportController extends BaseController{
 		}
 	}
 
-	
+	 
 	/**
 	 * @描述 进入新建故障工单页面
 	 */
@@ -348,77 +300,17 @@ public class ReportController extends BaseController{
 	/**
 	 * @描述 新建故障工单 并发送邮件、短信通知
 	 */
-	@Before(Tx.class)
+	@Before({ReportValidator.class,Tx.class})
 	public void save(){
-
-		if(ValidateKit.isNullOrEmpty(getPara("title"))){
-			renderJson("state","故障单标题不能为空！");
-		}
-		else if(Order.dao.findBy(" offer_user=? and title=? ", getPara("userid"),getPara("title").trim()).size()>0){
-			renderJson("state","已存在该故障单，请重新输入！");
-		}else if(getParaToLong("selectType")==-1){
-			renderJson("state","请选择故障大类！");
-		}else if(getParaToLong("selectApartment")==-1){
-			renderJson("state","请选择运维部门！");
-		}else if(getParaToLong("selectChildType")==-1){
-			renderJson("state","请选择故障小类！");
-		}else if(getParaToLong("selectChildApartment")==-1){
-			renderJson("state","请选择运维组别！");
-		}else if(getParaToLong("selectLevel")==-1){
-			renderJson("state","请选择故障等级！");
-		}else if(ValidateKit.isNullOrEmpty(getPara("description"))){
-			renderJson("state","故障单描述不能为空！");
-		}else {
-			
-			//获取表单数据，填充进Order
-			Order order=new Order().set("offer_user", getParaToInt("userid"))
-					.set("title",WebKit.getHTMLToString(getPara("title")))
-					.set("description", WebKit.getHTMLToString(getPara("description")))
-					.set("type", getParaToLong("selectChildType"))
-					.set("level", getParaToLong("selectLevel"))
-					.set("status", 2)
-					.set("offer_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss"))
-					//.set("accept_user", getParaToLong("selectDeal"))
-					.set("flag", 0);
-			
-			if(order.save()){
-				//选中部门
-				long selectChildApartment=getParaToLong("selectChildApartment");
-				//根据部门id，获取该部门人员
-				List<Record> selectDealList=UserInfo.dao.getUserByApartment(" apartment.id=? and user.deleted_at is null",selectChildApartment);
-				
-				Order o=Order.dao.findById(order.get("id"));
-				
-				for(Record selectDeal:selectDealList){
-					UserOrder userorder=new UserOrder()
-					.set("user_id", selectDeal.get("userid"))
-					.set("order_id", order.get("id"));
-					userorder.save();
-					
-					//当前用户详细信息
-					Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
-					
-					//邮件内容
-					String body=AlertKit.getMailBody(userinfo,selectDeal,o,WebKit.getHTMLToString(getPara("description"))).toString();
-					//发送邮件、短信线程
-					AlertKit alertKit=new AlertKit();
-					//发送邮件
-					if(ValidateKit.isEmail(selectDeal.getStr("useremail"))){
-						alertKit.setEmailTitle("点通故障系统提醒您！").setEmailBody(body).setEmailAdd(selectDeal.getStr("useremail"));
-					}
-					if(ValidateKit.isPhone(selectDeal.getStr("userphone"))){
-						//短信内容
-						String smsBody=AlertKit.setSmsContext(null,userinfo,o);
-						alertKit.setSmsContext(smsBody).setSmsPhone(selectDeal.getStr("userphone"));
-					}
-					//加入进程
-					logger.info("日志添加到入库队列 ---> 新建故障工单");
-					ThreadAlert.add(alertKit);
-				}
-				renderJson("state","提交成功！");
-			}else{
-				renderJson("state","提交失败！");
-			}
+		Order order = getModel(Order.class);
+		boolean flag = OrderService.service.saveOrder(order);
+		if(flag){
+			long selectChildApartment=getParaToLong("selectChildApartment");//选中部门
+			OrderService.service.saveUserOrderToOwnApart(order);
+			OrderService.service.saveUserOrder(selectChildApartment, order);
+			renderJson("state","提交成功！");
+		}else{
+			renderJson("state","提交失败！");
 		}
 	}
 	
@@ -443,7 +335,6 @@ public class ReportController extends BaseController{
 		
 		//当前用户详细信息
 		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
-		setAttr(userinfo);
 		setAttr("userinfo",userinfo);
 		
 	}
@@ -451,38 +342,15 @@ public class ReportController extends BaseController{
 	/**
 	 *  @描述 处理申报人员更新故障工单操作 
 	 */
-	@Before(Tx.class)
+	@Before({ReportValidator.class,Tx.class})
 	public void update(){
-		//order_id
-		Integer orderid=getParaToInt("orderid");
-		Order order=Order.dao.findById(orderid);
-		//description
-		String description=getPara("description").trim();
-		String title=getPara("title").trim();
-		
-		if(order.getInt("status")==1){
-			renderJson("state","失败：工单正在处理，无法修改。");
-		}else if(order.getInt("status")==0){
-			renderJson("state","失败：工单已处理，无法修改。");
-		}else if(!ValidateKit.isNullOrEmpty(order.get("deleted_at"))){
-			renderJson("state","失败：工单已撤销，无法修改。");
+		Order order=getModel(Order.class);
+		boolean flag = OrderService.service.updateOrder(order);
+		if(flag){
+			renderJson("state","更新故障工单成功！");
 		}
-		else if(ValidateKit.isNullOrEmpty(description)){
-			renderJson("state","故障单描述不能为空！");
-		}else if(ValidateKit.isNullOrEmpty(title)){
-			renderJson("state","故障单标题不能为空！");
-		}else{
-			order.set("title", WebKit.getHTMLToString(title))
-					.set("description",WebKit.getHTMLToString(description))
-					.set("updated_at",
-							DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
-			
-			if(order.update()){
-				renderJson("state","更新故障工单成功！");
-			}
-			else {
-				renderJson("state","操作失败！");
-			}
+		else {
+			renderJson("state","操作失败！");
 		}
 		
 	}

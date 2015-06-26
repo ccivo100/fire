@@ -1,6 +1,6 @@
-﻿<#include "/app/common/layout/__backstagemainlayout.html"/>
+﻿[#include "/app/common/layout/__backstagemainlayout.html"/]
 
-<#assign pageJavascript>
+[#assign pageJavascript]
 <script>
 function select1() {
 	$.ajax(
@@ -44,14 +44,14 @@ $(function(){
 });
 
 </script>
-</#assign>
+[/#assign]
 
-<#assign pageCss>
+[#assign pageCss]
 <link rel="stylesheet"
 	href="${ContextPath}/admin/assets/css/signin.css" />
-</#assign>
+[/#assign]
 
-<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="organizationFlag-userFlag-addUserFlag">
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="organizationFlag-userFlag-addUserFlag"]
 <div class="page-header">
 	<h1>
 		<a href="${ContextPath}/admin/user">用户管理</a>
@@ -59,7 +59,6 @@ $(function(){
 	</h1>
 </div>
 <form class="form-horizontal" role="form"  action="${ContextPath}/admin/doadduser" method="post" >
-	<#include "_form.html" />
+	[#include "_form.html" /]
 </form>
-	
-</@mainlayout>
+[/@mainlayout]

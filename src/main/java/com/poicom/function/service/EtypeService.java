@@ -62,12 +62,17 @@ public class EtypeService extends BaseService {
 		}
 	}
 	
+	/**
+	 * 获取指定部门处理类型的所有子类型。
+	 * @param pid
+	 * @return allChildList
+	 */
 	public List<Etype> childNode(Long pid){
-		List<ApartmentType> apartmenttype=ApartmentType.dao.findBy("apartmentType.apartment_id=?",pid);
+		List<ApartmentType> apartmenttype=ApartmentType.dao.findBy("apartmentType.apartment_id=?",pid);//指定部门id-故障类型关联数据
 		List<Etype> allChildList=new LinkedList<Etype>();
 		for(ApartmentType at:apartmenttype){
 			Long typeid=at.get("type_id");
-			List<Etype> childList = Etype.dao.childNode(" pid=? and deleted_at is null ", typeid);
+			List<Etype> childList = Etype.dao.childNode(" pid=? and deleted_at is null ", typeid);//根据类型pid获取子类列表
 			allChildList.addAll(childList);
 		}
 		return allChildList;

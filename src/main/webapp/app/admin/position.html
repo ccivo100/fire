@@ -1,5 +1,5 @@
-<#include "/app/common/layout/__backstagemainlayout.html"/>
-<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="organizationFlag-positionFlag-positionsListFlag">
+[#include "/app/common/layout/__backstagemainlayout.html"/]
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="organizationFlag-positionFlag-positionsListFlag"]
 
 <div class="page-header">
 	<h1>
@@ -35,35 +35,36 @@
 			</tr>
 		</thead>
 		<tbody>
-			<#list positionPage.getList() as position>
+			[#list positionPage.getList() as position]
 			<tr>
 				<td>${(position_index+1)!}</td>
 				<td>${(position.apartment_name)!}</td>
 				<td> ${(position.name)!}</td>
 				<td> ${(position.created_at)!}</td>
-				<td><#if position.deleted_at??>
+				<td>
 					<b>
+					[#if position.deleted_at??]
 					<span class="red">禁用</span>
-					<#else>
+					[#else]
 					<span class="gray">正常</span>
-					</#if>
+					[/#if]
 					</b>
 				</td>
 				<td>
 				<div class="action-buttons">
 				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/position/edit?id=${(position.id)!}" >编辑</a>
-				<#if position.deleted_at??>
+				[#if position.deleted_at??]
 				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/position/on?id=${(position.id)!}" >启用</a>
-				<#else>
+				[#else]
 				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/position/off?id=${(position.id)!}" >禁用</a>
-				</#if>
+				[/#if]
 				</div>
 				</td>
 			</tr>
-			</#list>
-			<#if positionPage.getList().size()!=10>
-			<#assign size=(10-positionPage.getList().size())>
-				<#list 1..size as t>
+			[/#list]
+			[#if positionPage.getList().size()!=10]
+			[#assign size=(10-positionPage.getList().size())]
+				[#list 1..size as t]
 					<tr>
 						<td>${(positionPage.getList().size()+t)!}</td>
 						<td></td>
@@ -72,10 +73,10 @@
 						<td></td>
 						<td></td>
 					</tr>
-				</#list>
-			</#if>
+				[/#list]
+			[/#if]
 		</tbody>
 	</table>
-	<#include "/app/common/inc/_paginate.html" />
-	<@paginate currentPage=positionPage.pageNumber totalPage=positionPage.totalPage actionUrl="/admin/position/" />
-</@mainlayout>
+	[#include "/app/common/inc/_paginate.html" /]
+	[@paginate currentPage=positionPage.pageNumber totalPage=positionPage.totalPage actionUrl="/admin/position/" /]
+[/@mainlayout]

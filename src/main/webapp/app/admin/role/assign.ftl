@@ -1,5 +1,5 @@
-<#include "/app/common/layout/__backstagemainlayout.html"/>
-<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="roleFlag-rolesListFlag">
+[#include "/app/common/layout/__backstagemainlayout.html"/]
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="roleFlag-rolesListFlag"]
 <div class="page-header">
 	<h1>
 		<a href="${ContextPath}/admin/role">角色管理 </a>
@@ -21,39 +21,39 @@
 				<label class="col-sm-2 control-label">权限类型</label>
 				<div class="col-sm-4">
 					<ul>
-						<#list permissions as permission>
+						[#list permissions as permission]
 						<li>
 						    <label >
 						    <span>
 						    <i></i> <input type="checkbox" id="inlineCheckbox1" name="pers" value="${(permission.id)!}" disabled
-							    <#list userpermission as p>
-							    	<#if p=permission.id>
+							    [#list userpermission as p]
+							    	[#if p=permission.id]
 							    	 checked
-							    	</#if>
-							    </#list>
+							    	[/#if]
+							    [/#list]
 						    
 						    > ${(permission.name)!}
 						    </span>
 						    </label>
 						    <ul>
-						    <#list permission.children as pchild>
+						    [#list permission.children as pchild]
 						    	<li>
 						    	<label >
 						    	<span>
 						    		<i></i><input type="checkbox" id="inlineCheckbox1" name="pers" value="${(pchild.id)!}"
-						    			<#list userpermission as p>
-						    				<#if p=pchild.id>
+						    			[#list userpermission as p]
+						    				[#if p=pchild.id]
 						    				 checked 
-						    				</#if>
-						    			</#list>
+						    				[/#if]
+						    			[/#list]
 						    		> ${(pchild.name)!}
 						    	</span>
 						    	</label>
 						    	</li>
-						    </#list>
+						    [/#list]
 						    </ul>
 						    </li>
-					    </#list>
+					    [/#list]
 					</ul>
 				</div>
 			</div>
@@ -64,4 +64,4 @@
 			</div>
 		</div>
 </form>
-</@mainlayout>
+[/@mainlayout]

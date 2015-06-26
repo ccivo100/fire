@@ -6,11 +6,11 @@
 			<input type="text" class="form-control" name="branch.name" value="${(branch.name)!}" placeholder="单位名称"   required autocomplete="off"/>
 		</div>
 		<div class="col-sm-4">
-			<#if nameMsg??>
+			[#if nameMsg??]
 			<div class="index-alert index-alert-danger" style="background-image:none;">
 				${(nameMsg)!}
 			</div>
-			</#if>
+			[/#if]
 		</div>
 	</div>
 

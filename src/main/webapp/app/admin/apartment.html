@@ -1,6 +1,5 @@
-<#include "/app/common/layout/__backstagemainlayout.html"/>
-
-<#assign pageJavascript>
+[#include "/app/common/layout/__backstagemainlayout.html"/]
+[#assign pageJavascript]
 <script type="text/javascript">
 $(function(){
 	$(".checked").click(function(){
@@ -34,8 +33,8 @@ $(document).ready(function() {
 	});
 });
 </script>
-</#assign>
-<@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="organizationFlag-apartmentFlag-apartmentsListFlag">
+[/#assign]
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="organizationFlag-apartmentFlag-apartmentsListFlag"]
 
 <div class="page-header">
 	<h1>
@@ -56,77 +55,74 @@ $(document).ready(function() {
 			</tr>
 		</thead>
 		<tbody>
-			<#list apartmentTree as apartments>
+			[#list apartmentTree as apartments]
 			<tr>
 				<td>${(apartments.id)!}</td>
 				<td> ${(apartments.name)!}</td>
 				<td>${(apartments.pid)!}</td>
 				<td>${(apartments.created_at)!}</td>
-				<td><#if apartments.deleted_at??>
+				<td>
 					<b>
+					[#if apartments.deleted_at??]
 					<span class="red">禁用</span>
-					<#else>
+					[#else]
 					<span class="gray">正常</span>
-					</#if>
+					[/#if]
 					</b>
 				</td>
 				<td>
-					
-					<#if apartments.flag="1">
+					[#if apartments.flag="1"]
 					<div class="alert-you" title="<b><span class='red'>提示</span></b>"  data-container="body" data-toggle="popover" data-placement="left" 
       							data-content="<b>取消后，该部门分配的故障处理选项将一起被取消！</b>">
 					<input type="checkbox" class="ace ace-switch ace-switch-5 checked"  apartmentid="${(apartments.id)}"  checked />
 					<span class="lbl middle"></span>
 					</div>
-					<#elseif apartments.flag="0">
+					[#elseif apartments.flag="0"]
 					<input type="checkbox" class="ace ace-switch ace-switch-5 checked"  apartmentid="${(apartments.id)}"   />
 					<span class="lbl middle"></span>
-					</#if>
-					
-					
+					[/#if]
 				</td>
 				<td>
 				<div class="action-buttons">
 				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/apartment/edit?id=${(apartments.id)!}" >编辑</a>
-				<#if apartments.deleted_at??>
+				[#if apartments.deleted_at??]
 				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/apartment/on?id=${(apartments.id)!}" >启用</a>
-				<#else>
+				[#else]
 				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/apartment/off?id=${(apartments.id)!}" >禁用</a>
-				</#if>
+				[/#if]
 				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/apartment/add?id=${(apartments.id)!}" >添加</a>
 				</div>
 				</td>
 			</tr>
-			<#list apartments.children as apartment>
+			[#list apartments.children as apartment]
 				<tr>
 				<td></td>
 				<td><span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;${(apartment.name)!}</td>
 				<td>${(apartment.pid)!}</td>
 				<td>${(apartment.created_at)!}</td>
-				<td><#if apartment.deleted_at??>
+				<td>
 					<b>
+					[#if apartment.deleted_at??]
 					<span class="red">禁用</span>
-					<#else>
+					[#else]
 					<span class="gray">正常</span>
-					</#if>
+					[/#if]
 					</b>
 				</td>
 				<td></td>
 				<td>
 				<div class="action-buttons">
 				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/apartment/edit?id=${(apartment.id)!}" >编辑</a>
-				<#if apartment.deleted_at??>
+				[#if apartment.deleted_at??]
 				<a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/apartment/on?id=${(apartment.id)!}" >启用</a>
-				<#else>
+				[#else]
 				<a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/apartment/off?id=${(apartment.id)!}" >禁用</a>
-				</#if>
+				[/#if]
 				</div>
 				</td>
 			</tr>
-			</#list>
-			</#list>
+			[/#list]
+			[/#list]
 		</tbody>
-	
 	</table>
-
-</@mainlayout>
+[/@mainlayout]
