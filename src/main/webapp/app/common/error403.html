@@ -1,9 +1,9 @@
-<#include "/app/common/layout/__frontmainlayout.html"/> 
-<#assign pageBreadCrumbs>
+[#include "/app/common/layout/__frontmainlayout.html"/] 
+[#assign pageBreadCrumbs]
 <li><a href="#">Other Pages</a></li>
 <li class="active">403页面</li>
-</#assign>
-<@mainlayout pageBreadCrumbs=pageBreadCrumbs  currentMenu="otherPageFlag-error403Flag">
+[/#assign]
+[@mainlayout pageBreadCrumbs=pageBreadCrumbs  currentMenu="otherPageFlag-error403Flag"]
 <div class="row">
 	<div class="col-xs-12">
 		<!-- pageContent BEGINS -->
@@ -27,4 +27,4 @@
 		<!-- pageContent ENDS -->
 	</div>
 </div>
-</@mainlayout>
+[/@mainlayout]
