@@ -299,7 +299,8 @@ public class OperateController extends BaseController{
 		else if (selectProgress == 1) {
 			
 			OrderService.service.updateOrderAndAlert(offerinfoList, offerinfo, dealinfo, order, comment, selectProgress);
-			OrderService.service.updateOrderAndAlert(dealinfoList, offerinfo, dealinfo, order, comment, selectProgress);
+			//继续处理不需要通知运维人员，只通知申报人员及其部门人员
+			//OrderService.service.updateOrderAndAlert(dealinfoList, offerinfo, dealinfo, order, comment, selectProgress);
 			
 			renderJson("state", "故障工单继续处理！");
 		}
@@ -342,6 +343,9 @@ public class OperateController extends BaseController{
 								.set("order_id",order.get("id"));
 				userorder.save();
 			}
+			//转派时，不通知申报人部门其他人。
+			offerinfoList = UserService.service.userinfosByUserid(offer);
+			dealinfoList = UserService.service.userinfosByUserOrder(orderid);
 			OrderService.service.updateOrderAndAlert(offerinfoList, offerinfo, dealinfo, order, comment, selectProgress);
 			OrderService.service.updateOrderAndAlert(dealinfoList, offerinfo, dealinfo, order, comment, selectProgress);
 			

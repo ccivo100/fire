@@ -64,6 +64,17 @@ public class UserService extends BaseService {
 	}
 	
 	/**
+	 * 用户详细信息
+	 * @param user
+	 * @return
+	 */
+	public List<Record> userinfosByUserid(User user){
+		List<Record> userinfoList = UserInfo.dao.getUserByApartment(" user.id=? and user.deleted_at is null",user.getLong("id"));
+		return userinfoList;
+	}
+	
+	
+	/**
 	 * 查询用户所在大部门的所有人员详细信息（用于申报人）
 	 * @param user
 	 * @return
@@ -80,6 +91,7 @@ public class UserService extends BaseService {
 		}
 		return userinfoList;
 	}
+	
 	
 	/**
 	 * 根据工单id，查询处理该工单人员的详细信息

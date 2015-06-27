@@ -118,7 +118,6 @@ public class User extends Model<User> {
 	}
 	
 	
-	
 	public Page<Record> getUserPage(int pageNumber,int pageSize){
 		return Db.paginate(pageNumber, pageSize,
 				SqlXmlKit.sql("user.findUserPageBySelect") + blank,
