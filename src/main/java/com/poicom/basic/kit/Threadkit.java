@@ -6,11 +6,15 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.mchange.v2.lang.ThreadUtils;
 
 /**
  * 线程工具
@@ -229,6 +233,11 @@ public class Threadkit {
 		}
 	}
 	
+	/**
+	 * 后台线程
+	 * @author FireTercel 2015年6月29日 
+	 *
+	 */
 	static class DaemonFromFactory implements Runnable{
 		@Override
 		public void run() {
@@ -255,11 +264,73 @@ public class Threadkit {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+	}
+	
+	static class DaemonThreadPoolExecutor extends ThreadPoolExecutor{
+		public DaemonThreadPoolExecutor(){
+			super(0,Integer.MAX_VALUE,60L,TimeUnit.SECONDS,new SynchronousQueue<Runnable>(),new DaemonThreadFactory());
+		}
+	}
+	
+	/**
+	 * 后台线程创建的子线程，同样是后台线程。
+	 * @author FireTercel 2015年6月29日 
+	 *
+	 */
+	static class Daemon implements Runnable{
+		private Thread[] t = new Thread[10];
+		public void run(){
+			for(int i=0;i<t.length;i++){
+				t[i] = new Thread(new DaemonSpawn());
+				t[i].start();
+				log.info("DaemonSpawn " +i + " started. ");
+			}
+			for(int i=0;i<t.length;i++){
+				log.info("t["+ i + "].isDaemon() = " +t[i].isDaemon());
+			}
+			while(true){
+				Thread.yield();
+			}
+		}
+	}
+	
+	static class DaemonSpawn implements Runnable{
+		public void run(){
+			while(true)
+				Thread.yield();
+		}
+	}
+	
+	public static void testDaemonThreadPoolExecutor(){
+		try {
+			Thread d = new Thread(new Daemon());
+			d.setDaemon(true);
+			d.start();
+			log.info("d.isDaemon() = " +d.isDaemon() +" , ");
+			TimeUnit.SECONDS.sleep(1);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 抛出异常。
+	 * @author FireTercel 2015年6月29日 
+	 *
+	 */
+	static class ExceptionThread implements Runnable{
+		public void run(){
+			throw new RuntimeException();
+		}
+	}
+	
+	public static void testExceptionThread(){
+		ExecutorService executor = getExecutor(1);
+		executor.execute(new ExceptionThread());
 	}
 	
 	public static void main(String[] args){
-		testDaemonFromFactory();
+		testExceptionThread();
 	}
 
 }

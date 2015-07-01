@@ -1,10 +1,13 @@
 package com.poicom.function.service;
 
+import java.util.List;
+
 import cn.dreampie.ValidateKit;
 
 import com.jfinal.log.Logger;
 import com.poicom.basic.kit.AlertKit;
 import com.poicom.basic.thread.ThreadAlert;
+import com.poicom.function.model.Alertinfo;
 
 /**
  * 邮件、短信提醒业务层。
@@ -16,6 +19,12 @@ public class AlertService extends BaseService {
 	private static Logger log = Logger.getLogger(AlertService.class);
 	
 	public static final AlertService service = new AlertService();
+	
+	public List<Alertinfo> list(){
+		List<Alertinfo> alertinfoList=Alertinfo.dao.list(" 1=1 order by created_at asc");
+		Alertinfo.dao.format(alertinfoList, 35,"emailcontext","smscontext");
+		return alertinfoList;
+	}
 	
 	/**
 	 * 邮件、短信内容加入线程

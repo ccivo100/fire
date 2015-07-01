@@ -30,7 +30,7 @@ function select2() {
 		url: "${ContextPath}/report/handler",
 		data: { "type": "apartment","typeid":$('#selectType').val() },
 		success: function (msg) {
-			$("#selectApartment").append("<option value='-1'>请选择运维部门</option>");
+			
 			$("#selectChildType").append("<option value='-1'>请选择故障小类</option>");
 			for (var i = 0; i < msg.apartmentList.length; i++) {
 				$("#selectApartment").append("<option value=" + msg.apartmentList[i].id + ">" +msg.apartmentList[i].name + "</option>");
@@ -61,6 +61,16 @@ function select3() {
 };
 function select4() {
 	$("#selectChildApartment").html("");
+	var apartmentArray=new Array();
+	$("#selectApartment option:selected").each(function(i){ 
+			apartmentArray[i]=$(this).val(); 
+	});
+	if(apartmentArray.length>1){
+		$('#childdiv').hide();
+	}
+	if(apartmentArray.length<=1){
+		$('#childdiv').show();
+	}
 	$.ajax(
 	{
 		type: "post",
@@ -107,11 +117,13 @@ function alertModal(msg){
 
 $(document).ready(function(){
 	$("#reportsave").click(function(){
+		
 		$.ajax({
 			type:"post",
 			url:"${ContextPath}/report/save",
 			data:{
 					"selectType":$('#selectType').val(),
+					"childTypeid":$('#selectChildType').val(),
 					"selectApartment":$('#selectApartment').val(),
 					"selectChildApartment":$('#selectChildApartment').val(),
 					

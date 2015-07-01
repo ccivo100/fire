@@ -8,7 +8,7 @@
 <script type="text/javascript">
 	
 $(document).ready(function(){
-	TableTools.DEFAULTS.aButtons = ["csv", "xls"];
+	
     $('#orders').dataTable({
     	"bPaginate": true,
     	"language": {
@@ -20,34 +20,54 @@ $(document).ready(function(){
              '</select> 条记录'
          },
          "iDisplayLength": 10,
-         "dom": 'T<"clear">lfrtip',
-         "tableTools":{
-         	//"sSwfPath": "../../Content/CSS/copy_csv_xls_pdf.swf"
-         },
     });
 });
 
 $(".query").click(function(){
-  	$("#queryModal").modal();
-   });
+	$.ajax({
+		type:"post",
+		url:"${ContextPath}/admin/alertinfo/query",
+		data:{
+			"alertinfoid":$(this).attr("alertinfoid"),
+		},
+		dataType:"json",
+		success:function(result){
+			$("#queryModal").modal();
+			$("#email").attr("value",result.alertinfo.email);
+			$("#emailcontext").text(result.alertinfo.emailcontext);
+			$("#phone").attr("value",result.alertinfo.phone);
+			$("#smscontext").text(result.alertinfo.smscontext);
+			$("#smsrecode").attr("value",result.alertinfo.smsrecode);
+			$("#created_at").attr("value",result.alertinfo.created_at);
+		},
+		error:function(){
+			alert("error"+$("#orderid").attr("value"));
+		}
+	});
+});
     
 $(".delete").click(function(){
-	var orderid=$(this).attr("orderid");
-	alertModal(orderid);
+	var alertinfoid=$(this).attr("alertinfoid");
+	alertModal(alertinfoid);
 	$("#alertModal").modal();
-	$("#orderid").attr("value",orderid);
+	$("#alertinfoid").attr("value",alertinfoid);
 });
     
  $("#sure").click(function(){
 	$.ajax({
 		type:"post",
-		url:"${ContextPath}/admin/deleteOrder",
+		url:"${ContextPath}/admin/alertinfo/delete",
 		data:{
-			"orderid":$("#orderid").attr("value")
+			"alertinfoid":$("#alertinfoid").attr("value")
 		},
 		dataType:"json",
 		success:function(result){
-			location.reload();
+			if(result.state="删除成功！"){
+				alert("删除成功！");
+				location.reload();
+			}else if(result.state="删除失败！"){
+				
+			}
 		},
 		error:function(){
 			alert("error"+$("#orderid").attr("value"));
@@ -58,7 +78,7 @@ $(".delete").click(function(){
 
 function alertModal(msg){
 	$("#modal-title-order").html("提示!");  
-	$("#modal-body-order").html("是否确定删除"+msg+"号工单？");  
+	$("#modal-body-order").html("是否确定删除"+msg+"号记录？");  
 }
 	
 	
@@ -68,15 +88,16 @@ function alertModal(msg){
 [#assign pageCss]
 <link rel="stylesheet" href="${ContextPath}/admin/assets/css/data-tables/dataTables.tableTools.css" />
 [/#assign]
-
-[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="orderFlag-ordersListFlag"]
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="alertinfoFlag-alertinfosListFlag"]
 
 <div class="page-header">
 	<h1>
-		工单管理 
-		<small> <i class="ace-icon fa fa-angle-double-right"></i> 动态工单</small>
+		系统管理
+		<small> <i class="ace-icon fa fa-angle-double-right"></i> 通知日志管理</small>
 	</h1>
 </div>
+<div class="hr hr-dotted"></div>
+
 <div class="row">
 	<div class="col-xs-12">
 		<!-- PAGE CONTENT BEGINS -->
@@ -88,48 +109,43 @@ function alertModal(msg){
 					<table id="orders" class="table table-striped table-bordered table-hover">
 						<thead>
 							<tr>
-								<th>序号</th>
-								
-								<th>标题</th>
-								<th class="hidden-480">申报部门</th>
-								<th class="hidden-480">申报人</th>
-								<th><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>申报时间</th>
-								<th class="hidden-480">当前状态</th>
-								<th>工单编号</th>
-								<th></th>
+								<th width="2%">序号</th>
+								<th width="3%">邮箱</th>
+								<th width="15%" class="hidden-480">邮件内容</th>
+								<th width="3%" class="hidden-480">手机号码</th>
+								<th width="8%"><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>短信内容</th>
+								<th width="3%" class="hidden-480">状态</th>
+								<th width="6%">创建时间</th>
+								<th width="6%"></th>
 							</tr>
 						</thead>
 						
 						<tbody>
-							[#list ordersList as order]
+							[#list alertinfoList as alertinfo]
 							<tr>
 
-								<td>${order_index+1}</td>
+								<td>${alertinfo.id}</td>
 								
-								<td>${(order.title)!}</td>
-								<td class="hidden-480">${(order.off_paname)!}</td>
-								<td class="hidden-480">${(order.off_user)!}</td>
-								<td>${(order.offer_at)!}</td>
+								<td nowrap>${(alertinfo.email)!}</td>
+								<td class="hidden-480">${(alertinfo.emailcontext)!}</td>
+								<td class="hidden-480">${(alertinfo.phone)!}</td>
+								<td nowrap>${(alertinfo.smscontext)!}</td>
 
 								<td class="hidden-480">
 									<b>
-									[#if order.deleted_at??]
-									<span class="red">已撤销</span>
-									[#elseif order.status=0]
-									<span class="green">已处理</span>
-									[#elseif order.status=1]
-									<span class="orange">处理中</span>
-									[#elseif order.status=2]
-									<span class="gray">未处理</span>
+									[#if (alertinfo.smsrecode)=200]
+									<span class="green">正常</span>
+									[#else]
+									<span class="red">${(alertinfo.smsrecode)!}</span>
 									[/#if]
 									</b>
 								</td>
-								<td>${(order.id)!}</td>
+								<td>${(alertinfo.created_at)!}</td>
 
 								<td>
 									<div class="hidden-sm hidden-xs action-buttons">
-										<a class="btn btn-minier btn-primary  blue query" href="#" orderid="${(order.id)!}"> 查看</a> 
-										<a class="btn btn-minier btn-danger red delete" href="#" orderid="${(order.id)!}"> 删除</a>
+										<a class="btn btn-minier btn-primary  blue query" href="#" alertinfoid="${(alertinfo.id)!}"> 查看</a> 
+										<a class="btn btn-minier btn-danger red delete" href="#" alertinfoid="${(alertinfo.id)!}"> 删除</a>
 									</div>
 
 									<div class="hidden-md hidden-lg">
@@ -171,6 +187,5 @@ function alertModal(msg){
 	</div>
 	<!-- /.col -->
 </div>
-<!-- pageContent END -->
-[#include "/app/admin/order/_model.html" /]
+[#include "/app/admin/alertinfo/_model.html" /]
 [/@mainlayout]

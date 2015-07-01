@@ -92,17 +92,17 @@ public class RouteBind extends Routes {
 				continue;
 			} 
 			controllerKey = (ControllerKey) controller	.getAnnotation(ControllerKey.class);
-			if (controllerKey == null) {
+			if (controllerKey == null) {//如果没有该注解
 				if (!autoScan) {
 					continue;
 				}
 				this.add(controllerKey(controller), controller);
 				logger.debug("routes.add(" + controllerKey(controller) + ", "+ controller.getName() + ")");
 			} else if (StrKit.isBlank(controllerKey.path())) {
-				this.add(controllerKey.value(), controller);
+				this.add(controllerKey.value(), controller);//不存在viewPath则使用actionKey作为viewPath
 				logger.debug("routes.add(" + controllerKey.value() + ", "	+ controller.getName() + ")");
 			} else {
-				this.add(controllerKey.value(), controller,controllerKey.path());
+				this.add(controllerKey.value(), controller,controllerKey.path());//存在viewPath
 				logger.debug("routes.add(" + controllerKey.value() + ", "	+ controller + "," + controllerKey.path() + ")");
 			}
 		}
@@ -111,11 +111,11 @@ public class RouteBind extends Routes {
 	
 	private String controllerKey(Class<Controller> clazz) {
 		Preconditions.checkArgument(clazz.getSimpleName().endsWith(suffix),
-				" does not has a @ControllerKey annotation and it's name is not end with "	+ suffix);
-		String simpleName = clazz.getSimpleName();
+				" does not has a @ControllerKey annotation and it's name is not end with "	+ suffix);//如果没有该注解则报错。
+		String simpleName = clazz.getSimpleName();//类名
 		String controllerKey = "/";
 		if (!simpleName.equalsIgnoreCase(suffix)) {
-			controllerKey += StrKit.firstCharToLowerCase(simpleName.replace(suffix, ""));
+			controllerKey += StrKit.firstCharToLowerCase(simpleName.replace(suffix, ""));//XXXController，截取前面一部分当做actionKey
 		}
 		return controllerKey;
 	}
