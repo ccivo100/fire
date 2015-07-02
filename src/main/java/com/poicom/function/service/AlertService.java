@@ -5,6 +5,7 @@ import java.util.List;
 import cn.dreampie.ValidateKit;
 
 import com.jfinal.log.Logger;
+import com.jfinal.plugin.activerecord.Page;
 import com.poicom.basic.kit.AlertKit;
 import com.poicom.basic.thread.ThreadAlert;
 import com.poicom.function.model.Alertinfo;
@@ -21,9 +22,15 @@ public class AlertService extends BaseService {
 	public static final AlertService service = new AlertService();
 	
 	public List<Alertinfo> list(){
-		List<Alertinfo> alertinfoList=Alertinfo.dao.list(" 1=1 order by created_at asc");
+		List<Alertinfo> alertinfoList=Alertinfo.dao.list(" 1=1 order by created_at desc");
 		Alertinfo.dao.format(alertinfoList, 35,"emailcontext","smscontext");
 		return alertinfoList;
+	}
+	
+	public Page<Alertinfo> page(int pageNumber,int pageSize,Object... paras){
+		Page<Alertinfo> alertinfoPage = Alertinfo.dao.page(pageNumber, pageSize, " 1=1 order by created_at desc ", paras);
+		//Alertinfo.dao.format(alertinfoPage.getList(), 35,"emailcontext");
+		return alertinfoPage;
 	}
 	
 	/**

@@ -22,47 +22,73 @@ $(document).ready(function(){
          "iDisplayLength": 10,
          "dom": 'T<"clear">lfrtip',
          "tableTools":{
-         	//"sSwfPath": "../../Content/CSS/copy_csv_xls_pdf.swf"
+         	<!-- //"sSwfPath": "../../Content/CSS/copy_csv_xls_pdf.swf" -->
          },
     });
-});
 
-$(".query").click(function(){
-  	$("#queryModal").modal();
-   });
-    
-$(".delete").click(function(){
-	var orderid=$(this).attr("orderid");
-	alertModal(orderid);
-	$("#alertModal").modal();
-	$("#orderid").attr("value",orderid);
-});
-    
- $("#sure").click(function(){
-	$.ajax({
-		type:"post",
-		url:"${ContextPath}/admin/deleteOrder",
-		data:{
-			"orderid":$("#orderid").attr("value")
-		},
-		dataType:"json",
-		success:function(result){
-			location.reload();
-		},
-		error:function(){
-			alert("error"+$("#orderid").attr("value"));
-		}
-	
+	$(".query").click(function(){
+		$.ajax({
+			type:"post",
+			url:"${ContextPath}/admin/queryOrder",
+			data:{
+				"orderid":$(this).attr("orderid"),
+			},
+			dataType:"json",
+			success:function(result){
+				$("#queryModal").modal();
+				$("#comments").html("");
+				$("#orderid").attr("value",result.order.id);
+				$("#title").attr("value",result.order.title);
+				$("#description").text(result.order.description);
+				$("#type_name").attr("value",result.order.type_name);
+				if(result.commentList.length>0){
+					$("#comments").append('<thead><tr><th width="10%">编号</th><th width="15%">提交者</th><th width="60%">内容</th><th width="10%">操作</th></tr></thead>');
+				}
+				$("#comments").append("<tbody>");
+				for (var i = 0; i < result.commentList.length; i++) {
+					$("#comments").append('<tr><td>'+result.commentList[i].id+'</td>'+'<td>'+result.commentList[i].ufull_name+'</td>'+'<td nowrap title='+result.commentList[i].context+'><div style="overflow: hidden; width: 400px;">'+result.commentList[i].context+'</div></td><td><a class="btn btn-minier btn-danger red comment" commentid='+result.commentList[i].id+'>删除</a></td></tr>');
+				}
+				$("#comments").append('</tbody>');
+			},
+			error:function(){
+				alert("error"+$("#orderid").attr("value"));
+			}
+		});
 	});
+
+
+    
+	$(".delete").click(function(){
+		var orderid=$(this).attr("orderid");
+		alertModal(orderid);
+		$("#alertModal").modal();
+		$("#orderid").attr("value",orderid);
+	});
+    
+	$("#sure").click(function(){
+		$.ajax({
+			type:"post",
+			url:"${ContextPath}/admin/deleteOrder",
+			data:{
+				"orderid":$("#orderid").attr("value")
+			},
+			dataType:"json",
+			success:function(result){
+				location.reload();
+			},
+			error:function(){
+				alert("error"+$("#orderid").attr("value"));
+			}
+		
+		});
+	});
+
 });
 
 function alertModal(msg){
 	$("#modal-title-order").html("提示!");  
 	$("#modal-body-order").html("是否确定删除"+msg+"号工单？");  
 }
-	
-	
-	
 </script>
 [/#assign]
 [#assign pageCss]
@@ -167,6 +193,7 @@ function alertModal(msg){
 				</div>
 			</div>
 		</div>
+		<div class="aaa"></div>
 		<!-- PAGE CONTENT ENDS -->
 	</div>
 	<!-- /.col -->

@@ -43,6 +43,7 @@ import com.poicom.function.model.User;
 import com.poicom.function.model.UserInfo;
 import com.poicom.function.model.UserOrder;
 import com.poicom.function.model.UserRole;
+import com.poicom.function.service.OrderService;
 import com.poicom.function.service.UserService;
 import com.poicom.function.validator.AdminValidator;
 
@@ -543,6 +544,16 @@ public class AdminController extends BaseController {
 		//System.out.println(uploadFile);
 		
 		renderJson("imgurl","/upload/"+uploadFile.getFileName());
+	}
+	
+	public void queryOrder(){
+		long orderid=getParaToLong("orderid");
+		Record order=OrderService.service.query(orderid);
+		List<Record> commentList=Comment.dao.findCommentsByOrderId(" comments.order_id=? order by comments.add_at asc ",orderid);
+		Map<String,Object> jsonList= new HashMap<String,Object>();
+		jsonList.put("order", order);
+		jsonList.put("commentList", commentList);
+		renderJson(jsonList);
 	}
 	
 	@Before(Tx.class)

@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.jfinal.aop.Before;
+import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.ehcache.CacheInterceptor;
 import com.jfinal.plugin.ehcache.CacheName;
 import com.poicom.function.model.Alertinfo;
@@ -21,9 +22,9 @@ public class AlertinfoController extends BaseController {
 	private final static String ALERTINFO_QUERY_PAGE="alertinfo/query.html";
 	
 	public void index(){
-		List<Alertinfo> alertinfoList;
-		alertinfoList=AlertService.service.list();
-		setAttr("alertinfoList",alertinfoList);
+		Page<Alertinfo> alertinfoPage;
+		alertinfoPage=AlertService.service.page(getParaToInt(0,1), 10);
+		setAttr("alertinfoPage",alertinfoPage);
 		render("alertinfo.html");
 	}
 	

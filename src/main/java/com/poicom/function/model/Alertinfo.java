@@ -5,6 +5,7 @@ import java.util.Random;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 
 import cn.dreampie.tablebind.TableBind;
@@ -18,6 +19,11 @@ public class Alertinfo extends BaseModel<Alertinfo> {
 	
 	public List<Alertinfo> list(String where,Object... paras){
 		return find("select id,email,emailcontext,emailrecode,phone,smscontext,smsrecode,created_at from com_alertinfo where "+where, paras);
+	}
+	
+	public Page<Alertinfo> page(int pageNumber,int pageSize,String where,Object... paras){
+		
+		return paginateBy(pageNumber, pageSize, where, paras);
 	}
 	
 	

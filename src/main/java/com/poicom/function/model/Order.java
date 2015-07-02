@@ -119,6 +119,18 @@ public class Order extends BaseModel<Order> {
 	}
 	
 	/**
+	 * @描述 查询order 管理员
+	 * @param where
+	 * @param paras
+	 * @return
+	 */
+	public Record query(String where,Object... paras){
+		
+		return Db.findFirst(getSql("order.findOfferQueryBySelect")+
+				getSql("order.findOfferQueryByFrom")+getWhere(where), paras);
+	}
+	
+	/**
 	 * 获得所有故障类型（弃用）
 	 * @return
 	 */

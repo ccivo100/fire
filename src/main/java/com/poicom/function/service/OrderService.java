@@ -139,10 +139,9 @@ public class OrderService extends BaseService {
 		return papartmentMap;
 	}
 	
-	public void query(Long orderid){
-		//工单详细信息
-		String where="o.id=?";
-		Record order = Order.dao.findOperateById(where,orderid);
+	public Record query(Long orderid){
+		Record order = Order.dao.query(" o.id=?", orderid);
+		return order;
 	}
 	
 	public boolean updateOrder(Order order){
