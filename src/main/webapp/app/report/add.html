@@ -148,6 +148,20 @@ $(document).ready(function(){
 
 });
 
+$(document).ready(function() {
+	$('.alert-info').mouseenter(function() {
+		$(this).popover('show');
+	});
+	$('.alert-info').mouseleave(function() {
+		$(this).popover('hide');
+	});
+});
+
+
+$(function () { 
+	$("[data-toggle='popover']").popover({html : true });
+});
+
 </script>
 
 [/#assign]

@@ -45,7 +45,7 @@ public class MyJdbcRealm extends AuthorizingRealm {
 		if(ValidateKit.isEmail(username)){
 			user=User.dao.findFirstBy("`user`.email = ? AND `user`.deleted_at is null", username);
 		}else if (ValidateKit.isMobile(username)) {
-			user=User.dao.findFirstBy("`user`.mobile = ? AND `user`.deleted_at is null", username);
+			user=User.dao.findFirstBy("`user`.phone = ? AND `user`.deleted_at is null", username);
 		}else {
 			user=User.dao.findFirstBy("`user`.username = ? AND `user`.deleted_at is null", username);
 		}
