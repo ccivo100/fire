@@ -118,6 +118,14 @@ public class Order extends BaseModel<Order> {
 						+ orderby, paras);
 	}
 	
+	public List<Record> exporter(String where,String orderby,Object... paras){
+		return Db.find(getSql("order.exporter")+getWhere(where)+orderby,paras);
+	}
+	
+	public List<Record> exporterWithComments(String where,String orderby,Object... paras){
+		return Db.find(getSql("order.exporterWithComments")+getWhere(where)+orderby,paras);
+	}
+	
 	/**
 	 * @描述 查询order 管理员
 	 * @param where

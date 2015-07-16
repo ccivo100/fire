@@ -1,5 +1,10 @@
 package com.poicom.function.controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
@@ -17,8 +22,11 @@ import cn.dreampie.shiro.hasher.Hasher;
 import cn.dreampie.shiro.hasher.HasherInfo;
 import cn.dreampie.shiro.hasher.HasherKit;
 
+import com.google.common.collect.Lists;
 import com.jfinal.aop.Before;
+import com.jfinal.ext.kit.excel.PoiExporter;
 import com.jfinal.kit.JsonKit;
+import com.jfinal.kit.PathKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
@@ -518,23 +526,6 @@ public class AdminController extends BaseController {
 		setAttr("ordersList",ordersList);
 	}
 	
-	public void jqorder(){
-		List<Record> ordersList;
-		String where=" 1=1 ";
-		String orderby=" ORDER BY o.offer_at DESC";
-		ordersList=Order.dao.findAdminOrders(where, orderby);
-		setAttr("ordersList",ordersList);
-	}
-	
-	public void loadOrder(){
-		List<Record> ordersList;
-		String where=" 1=1 ";
-		String orderby=" ORDER BY o.offer_at DESC";
-		ordersList=Order.dao.findAdminOrders(where, orderby);
-		
-		renderJson(ordersList);
-	}
-	
 	/**
 	 * AJAX上传图片
 	 */
@@ -576,6 +567,40 @@ public class AdminController extends BaseController {
 			renderJson("state","删除失败！");
 		}
 		
+	}
+	
+	public void exporter(){
+		String url = PathKit.getWebRootPath() +"\\temp"+"\\"+new Date().getTime()+".xls";
+		List<Record> ordersList,orderList;
+		ordersList=Order.dao.exporter(" 1=1 and orders.status=2 ", " ORDER BY orders.offer_at DESC");
+		orderList=Order.dao.exporterWithComments(" 1=1 ", " ORDER BY orderinfo.offer_at DESC");
+		
+		PoiExporter per = new PoiExporter(ordersList,orderList);
+		per.version("2003");
+		per.sheetNames("未处理","处理中&已处理");
+		String[] header1={"编号","标题","故障描述","故障类型","申报时间","当前状态","所属单位","申报人","部门","职位"};
+		String[] column1={"id","title","description","typename","offer_at","status","branchname","userfull_name","apartmentname","positionname"};
+		String[] header2={"编号","标题","故障描述","故障类型","申报时间","当前状态","所属单位","申报人","部门","职位","处理意见","处理时间","提交时间","处理人"};
+		String[] column2={"id","title","description","typename","offer_at","status","branchname","userfull_name","apartmentname","positionname","context","add_at","created_at","full_name"};
+		per.headers(header1,header2);
+		per.columns(column1,column2);
+		
+		try {
+			OutputStream os = new FileOutputStream(url);
+			per.export().write(os);
+			File downfile=new File(url);
+			if(downfile.exists()){
+				renderFile(downfile);
+			}else{
+				renderError(404);
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	
