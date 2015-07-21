@@ -7,6 +7,18 @@
     <sql id="findUserPageByFrom">FROM `sec_user` user 
     </sql>
     
+    <sql id="userinfo">
+  		<![CDATA[ 
+  			SELECT user.*,userinfo.*,branch.*,apartment.*,position.*
+			FROM sec_user_info AS userinfo 
+			     LEFT OUTER JOIN com_branch AS branch ON userinfo.branch_id=branch.id
+			     LEFT OUTER JOIN com_apartment AS apartment ON userinfo.apartment_id=apartment.id
+			     LEFT OUTER JOIN com_position AS position ON userinfo.position_id=position.id
+			     LEFT OUTER JOIN sec_user AS user ON userinfo.user_id=user.id 
+			     WHERE user.id=?
+  		]]>
+  	</sql>
+    
     <!-- 查询用户所有信息 -->
     <sql id="findInfoBySelect">
 		select user.id uuserid,user.username uaccount,user.providername uprovidername,

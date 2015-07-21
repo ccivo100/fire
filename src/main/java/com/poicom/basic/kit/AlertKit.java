@@ -9,6 +9,8 @@ import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.mail.EmailException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cn.dreampie.ValidateKit;
 import cn.dreampie.encription.EncriptionKit;
@@ -26,6 +28,8 @@ import com.poicom.function.model.User;
  *
  */
 public class AlertKit {
+	
+	private static Logger logger = LoggerFactory.getLogger(AlertKit.class);
 	
 	//邮件标题
 	private String EmailTitle;
@@ -580,7 +584,7 @@ public class AlertKit {
 	        outStream.flush();
 	        outStream.close();
 	        
-	        System.out.println(conn.getResponseCode()); //响应代码 200表示成功
+	        logger.debug("表单提交响应代码："+conn.getResponseCode()); //响应代码 200表示成功
 	        return conn.getResponseCode();
 			
 		} catch (MalformedURLException e) {

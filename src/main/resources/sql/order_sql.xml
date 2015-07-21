@@ -41,6 +41,53 @@
 			AS t1 ON o.type=t1.id
   	</sql>
   	
+  	<sql id="exporter">
+		select orders.id ,orders.title,orders.description,type.name typename,
+		userinfos.branchname,userinfos.apartmentname,userinfos.positionname,
+		userinfos.userfull_name,orders.offer_at,orders.status,orders.deleted_at
+  		from com_order orders
+  		left outer join
+  		(
+  			select user.id userid,user.full_name userfull_name,branch.name branchname,apartment.name apartmentname,position.name positionname
+  			from sec_user_info as userinfo
+  				left outer join sec_user as user on userinfo.user_id=user.id
+  				left outer join com_branch as branch on userinfo.branch_id= branch.id
+  				left outer join com_apartment as apartment on userinfo.apartment_id=apartment.id
+  				left outer join com_position as position on userinfo.position_id=position.id
+  		)
+  		as userinfos on orders.offer_user = userinfos.userid
+  		left outer join com_type as type on orders.type=type.id
+  	</sql>
+  	
+  	<sql id="exporterWithComments">
+  	select orderinfo.id,orderinfo.title,orderinfo.description,orderinfo.typename,
+	orderinfo.branchname,orderinfo.apartmentname,orderinfo.positionname,
+	orderinfo.userfull_name,orderinfo.offer_at,
+	comments.context,comments.add_at,comments.created_at,user.full_name,
+	orderinfo.status,orderinfo.deleted_at
+	from com_comment comments 
+	left outer join
+	(
+			select orders.id ,orders.title,orders.description,type.name typename,
+			userinfos.branchname,userinfos.apartmentname,userinfos.positionname,
+			userinfos.userfull_name,orders.offer_at,orders.status,orders.deleted_at
+	  		from com_order orders
+	  		left outer join
+	  		(
+	    			select user.id userid,user.full_name userfull_name,branch.name branchname,apartment.name apartmentname,position.name positionname
+	    			from sec_user_info as userinfo
+	  				left outer join sec_user as user on userinfo.user_id=user.id
+	  				left outer join com_branch as branch on userinfo.branch_id= branch.id
+	  				left outer join com_apartment as apartment on userinfo.apartment_id=apartment.id
+	  				left outer join com_position as position on userinfo.position_id=position.id
+	  		)
+	  		as userinfos on orders.offer_user = userinfos.userid
+	  		left outer join com_type as type on orders.type=type.id
+	)
+	as orderinfo on orderinfo.id=comments.order_id
+	left outer join sec_user user on comments.user_id=user.id
+  	</sql>
+  	
   </sqlGroup>
   
 </sqlRoot>

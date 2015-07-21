@@ -8,12 +8,16 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cn.dreampie.ValidateKit;
+import cn.dreampie.shiro.core.SubjectKit;
+
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Record;
 import com.poicom.basic.common.DictKeys;
 import com.poicom.basic.common.SplitPage;
 import com.poicom.basic.plugin.properties.PropertiesPlugin;
 import com.poicom.function.model.Syslog;
+import com.poicom.function.model.User;
 /**
  * 
  * @author FireTercel 2015年6月2日 
@@ -68,8 +72,17 @@ public class BaseController extends Controller{
 	 * 获取当前用户
 	 * @return
 	 */
-	protected String getCUser(){
+	protected String getCUserName(){
 		return getAttr("cUser");
+	}
+	
+	protected User getCUser(){
+		User user=SubjectKit.getUser();
+		if(ValidateKit.isNullOrEmpty(user)){
+			return null;
+		}else{
+			return user;
+		}
 	}
 	
 	/**

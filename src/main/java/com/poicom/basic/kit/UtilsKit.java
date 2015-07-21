@@ -1,6 +1,8 @@
 package com.poicom.basic.kit;
 
 import java.text.DecimalFormat;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
@@ -37,7 +39,17 @@ private static Logger log= Logger.getLogger(UtilsKit.class);
 	
 	@Test
 	public void test(){
-		System.out.println(getUuidByJdk(false));
+		Set<String> set = new HashSet<String>();
+		long start = System.currentTimeMillis();
+		for(int i=0;i<100000;i++){
+			String uuid = getUuidByJdk(false);
+			set.add(uuid);
+			log.info(uuid);	
+		}
+		long end = System.currentTimeMillis();
+		
+		log.info(" Time is:"+(end-start)+" ms. \n Set's size is:"+set.size());
+		
 	}
 
 }

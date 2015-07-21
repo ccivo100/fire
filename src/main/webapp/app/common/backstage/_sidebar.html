@@ -46,7 +46,7 @@
 						<b class="arrow"></b>
 					</li>
 					
-					<@shiro.hasPermission name="P_A_ROLE">
+					[@shiro.hasPermission name="P_A_ROLE"]
 					<li class="" id="roleFlag">
 						<a href="#" class="dropdown-toggle" >
 							<i class="menu-icon fa fa-list"></i>
@@ -77,9 +77,9 @@
 							</li>
 						</ul>
 					</li>
-					</@shiro.hasPermission>
+					[/@shiro.hasPermission]
 					
-					<@shiro.hasPermission name="P_A_PERMISSION">
+					[@shiro.hasPermission name="P_A_PERMISSION"]
 					<li class="" id="permissionFlag">
 						<a href="#" class="dropdown-toggle" >
 							<i class="menu-icon fa fa-pencil-square-o"></i>
@@ -110,9 +110,9 @@
 							</li>
 						</ul>
 					</li>
-					</@shiro.hasPermission>
+					[/@shiro.hasPermission]
 					
-					<@shiro.hasPermission name="P_A_TYPE">
+					[@shiro.hasPermission name="P_A_TYPE"]
 					<li class="" id="typeFlag">
 						<a href="#" class="dropdown-toggle" >
 							<i class="menu-icon fa fa-list-alt"></i>
@@ -153,9 +153,9 @@
 							
 						</ul>
 					</li>
-					</@shiro.hasPermission>
+					[/@shiro.hasPermission]
 					
-					<@shiro.hasPermission name="P_A_ORDER">
+					[@shiro.hasPermission name="P_A_ORDER"]
 					<li class="" id="orderFlag">
 						<a href="#" class="dropdown-toggle" >
 							<i class="menu-icon fa fa-list-alt"></i>
@@ -175,17 +175,9 @@
 								<b class="arrow"></b>
 							</li>
 							
-							<li class="" id="jqordersListFlag">
-								<a href="${ContextPath}/admin/jqorder">
-									<i class="menu-icon fa fa-caret-right" ></i>
-									动态工单列表
-								</a>
-								<b class="arrow"></b>
-							</li>
-							
 						</ul>
 					</li>
-					</@shiro.hasPermission>
+					[/@shiro.hasPermission]
 					
 					<li class="" id="organizationFlag">
 						<a href="#" class="dropdown-toggle" >
@@ -198,7 +190,7 @@
 						<b class="arrow"></b>
 
 						<ul class="submenu">
-							<@shiro.hasPermission name="P_A_BRANCH">
+							[@shiro.hasPermission name="P_A_BRANCH"]
 							<li class="" id="branchFlag">
 								<a href="#" class="dropdown-toggle">
 									<i class="menu-icon fa fa-caret-right"></i>
@@ -225,8 +217,9 @@
 									</li>
 								</ul>
 							</li>
-							</@shiro.hasPermission>
-							<@shiro.hasPermission name="P_A_APARTMENT">
+							[/@shiro.hasPermission]
+							
+							[@shiro.hasPermission name="P_A_APARTMENT"]
 							<li class="" id="apartmentFlag">
 								<a href="#" class="dropdown-toggle">
 									<i class="menu-icon fa fa-caret-right"></i>
@@ -253,8 +246,8 @@
 									</li>
 								</ul>
 							</li>
-							</@shiro.hasPermission>
-							<@shiro.hasPermission name="P_A_POSITION">
+							[/@shiro.hasPermission]
+							[@shiro.hasPermission name="P_A_POSITION"]
 							<li class="" id="positionFlag">
 								<a href="#" class="dropdown-toggle">
 									<i class="menu-icon fa fa-caret-right"></i>
@@ -281,8 +274,8 @@
 									</li>
 								</ul>
 							</li>
-							</@shiro.hasPermission>
-							<@shiro.hasPermission name="P_A_USER">
+							[/@shiro.hasPermission]
+							[@shiro.hasPermission name="P_A_USER"]
 							<li class="" id="userFlag">
 								<a href="#" class="dropdown-toggle">
 									<i class="menu-icon fa fa-caret-right"></i>
@@ -309,11 +302,34 @@
 									</li>
 								</ul>
 							</li>
-							</@shiro.hasPermission>
-							
+							[/@shiro.hasPermission]
 						</ul>
 					</li>
 					
+					[@shiro.hasPermission name="P_A_ALERTINFO"]
+					<li class="" id="alertinfoFlag">
+						<a href="#" class="dropdown-toggle" >
+							<i class="menu-icon fa fa-list-alt"></i>
+							<span class="menu-text">系统工具</span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+						
+						<ul class="submenu">
+							<li class="" id="alertinfosListFlag">
+								<a href="${ContextPath}/admin/alertinfo">
+									<i class="menu-icon fa fa-caret-right" ></i>
+									通知日志管理
+								</a>
+								<b class="arrow"></b>
+							</li>
+							
+							
+						</ul>
+					</li>
+					[/@shiro.hasPermission]
 					
 					<!-- <li class="" id="UIFlag">
 						<a href="#" class="dropdown-toggle">

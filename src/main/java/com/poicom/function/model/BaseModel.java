@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.jfinal.kit.JsonKit;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.Db;
@@ -453,6 +455,15 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 		}
 		
 		return super.update();
+	}
+	
+	public void format(List<M> list,int length,String... paras){
+		for(M model:list){
+			for(String attr:paras){
+				model.set(attr, StringUtils.abbreviate(model.getStr(attr), length));
+			}
+			
+		}
 	}
 	
 	/**

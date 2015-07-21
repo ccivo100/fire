@@ -11,6 +11,14 @@ public class ReportValidator extends Validator {
 	@Override
 	protected void validate(Controller c) {
 		if(getActionKey().equals("/report/save")){
+			
+			String[] selectApartment;
+			if(c.getParaValues("selectApartment")==null){
+				selectApartment=c.getParaValues("selectApartment[]");
+			}else{
+				selectApartment=c.getParaValues("selectApartment");
+			}
+			
 			if(ValidateKit.isNullOrEmpty(c.getPara("order.title"))){
 				addError("state","故障单标题不能为空！");
 			}
@@ -18,11 +26,11 @@ public class ReportValidator extends Validator {
 				addError("state","已存在该故障单，请重新输入！");
 			}else if(c.getParaToLong("selectType")==-1){
 				addError("state","请选择故障大类！");
-			}else if(c.getParaToLong("selectApartment")==-1){
-				addError("state","请选择运维部门！");
 			}else if(c.getParaToLong("order.type")==-1){
 				addError("state","请选择故障小类！");
-			}else if(c.getParaToLong("selectChildApartment")==-1){
+			}else if(ValidateKit.isNullOrEmpty(selectApartment[0])){
+				addError("state","请选择运维部门！");
+			}else if(selectApartment.length==1&&c.getParaToLong("selectChildApartment")==-1){
 				addError("state","请选择运维组别！");
 			}else if(c.getParaToLong("order.level")==-1){
 				addError("state","请选择故障等级！");

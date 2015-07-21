@@ -1,7 +1,10 @@
 package com.poicom.basic.kit;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,6 +16,11 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.junit.Test;
+
+import com.google.common.collect.Lists;
+import com.jfinal.ext.kit.excel.PoiExporter;
+import com.jfinal.plugin.activerecord.Record;
 
 public class PoiKit {
 	private static POIFSFileSystem fs; 
@@ -134,6 +142,26 @@ public class PoiKit {
 
 	}
 	
+	@Test
+	public void test() throws IOException{
+		String url = "E:\\test.xls";
+		Record[] records=new Record[10];
+		for(int i = 0;i<records.length;i++){
+			records[i] = new Record();
+			records[i].set("title", "我是标题");
+			records[i].set("context", "我是内容");
+		}
+		
+		PoiExporter per = new PoiExporter(Lists.newArrayList(records));
+		per.version("2003");
+		per.sheetName("sheet01");
+		per.header("标题","内容");
+		per.column("title","context");
+		
+		OutputStream os = new FileOutputStream(url);
+		per.export().write(os);
+		
+	}
 	
 	
 

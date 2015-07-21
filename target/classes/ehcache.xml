@@ -197,5 +197,15 @@
          diskExpiryThreadIntervalSeconds="600" 
 	 />
 	 
+	 <cache name="/admin/alertinfo" 
+		 maxElementsInMemory="50"
+         overflowToDisk="false"
+         eternal="false"
+         timeToIdleSeconds="1200"
+         timeToLiveSeconds="1200"
+         diskPersistent="false"
+         diskExpiryThreadIntervalSeconds="600" 
+	 />
+	 
 	
 </ehcache>

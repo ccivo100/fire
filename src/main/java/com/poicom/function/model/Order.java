@@ -118,6 +118,26 @@ public class Order extends BaseModel<Order> {
 						+ orderby, paras);
 	}
 	
+	public List<Record> exporter(String where,String orderby,Object... paras){
+		return Db.find(getSql("order.exporter")+getWhere(where)+orderby,paras);
+	}
+	
+	public List<Record> exporterWithComments(String where,String orderby,Object... paras){
+		return Db.find(getSql("order.exporterWithComments")+getWhere(where)+orderby,paras);
+	}
+	
+	/**
+	 * @描述 查询order 管理员
+	 * @param where
+	 * @param paras
+	 * @return
+	 */
+	public Record query(String where,Object... paras){
+		
+		return Db.findFirst(getSql("order.findOfferQueryBySelect")+
+				getSql("order.findOfferQueryByFrom")+getWhere(where), paras);
+	}
+	
 	/**
 	 * 获得所有故障类型（弃用）
 	 * @return

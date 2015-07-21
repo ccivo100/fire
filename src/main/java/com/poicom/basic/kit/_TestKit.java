@@ -1,6 +1,7 @@
 package com.poicom.basic.kit;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Enumeration;
@@ -43,6 +44,22 @@ public class _TestKit {
 			System.out.println("true");
 		}else
 			System.out.println("false");
+	}
+	
+	@Test
+	public void t_class(){
+		Method[] methods = _TestKit.class.getMethods();
+		for (Method m : methods) {
+			if (m.getParameterTypes().length == 0)
+				System.out.println(m.getName());
+			else{
+				System.out.println("===============");
+				System.out.println(m.getName());
+				for(Class clazz:m.getParameterTypes()){
+					System.out.println(clazz.getName());
+				}
+			}
+		}
 	}
 
 }

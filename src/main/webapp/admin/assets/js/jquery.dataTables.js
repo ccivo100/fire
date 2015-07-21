@@ -11140,7 +11140,7 @@
 			 *    } );
 			 */
 			/*"sInfoFiltered": "(filtered from _MAX_ total entries)",*/
-			"sInfoFiltered": "(总共 _MAX_ 条)",
+			"sInfoFiltered": "(从 _MAX_ 条记录中过滤)",
 	
 	
 			/**
