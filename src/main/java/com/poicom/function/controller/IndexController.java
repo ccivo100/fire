@@ -113,7 +113,12 @@ public class IndexController extends BaseController {
 	}
 
 	public void signin() {
-		render("_signin.ftl");
+		if(ValidateKit.isNullOrEmpty(getCUser())){
+			render("_signin.ftl");
+		}else{
+			redirect("/");
+		}
+		
 	}
 
 	/**

@@ -276,7 +276,8 @@ public class ReportController extends BaseController{
 		}
 		else if(type.equals("childApartment")){
 			Long childTypeid= getParaToLong("childTypeid");
-			Long rootApartment = getParaToLong("rootApartment[]");
+			//Long rootApartment = getParaToLong("rootApartment[]");
+			Long rootApartment = getParaToLong("rootApartment");
 			List<Apartment> childApartmentList=Apartment.dao.getATApartmentsList(rootApartment,childTypeid);
 			renderJson("childApartmentList",childApartmentList);
 		}
@@ -305,13 +306,14 @@ public class ReportController extends BaseController{
 		Order order = getModel(Order.class);
 		boolean flag = OrderService.service.saveOrder(order);
 		if(flag){
-			Integer[] selectApartment=getParaValuesToInt("selectApartment[]");
-			if(selectApartment.length==1){//当一级部门只有一个时
+			//Integer[] selectApartment=getParaValuesToInt("selectApartment[]");
+			//Integer selectApartment=getParaToInt("selectApartment");
+			//if(selectApartment.length==1){//当一级部门只有一个时
 				long selectChildApartment=getParaToLong("selectChildApartment");//选中部门
 				OrderService.service.saveUserOrderToOwnApart(order);
 				OrderService.service.saveUserOrder(selectChildApartment, order);
 				renderJson("state","提交成功！");
-			}else if(selectApartment.length>1){//当一级部门为多个时。
+			/*}else if(selectApartment.length>1){//当一级部门为多个时。
 				Long childTypeid= getParaToLong("childTypeid");
 				OrderService.service.saveUserOrderToOwnApart(order);
 				for(int i=0;i<selectApartment.length;i++){
@@ -322,7 +324,7 @@ public class ReportController extends BaseController{
 					}
 				}
 				renderJson("state","提交成功！");
-			}
+			}*/
 		}else{
 			renderJson("state","提交失败！");
 		}

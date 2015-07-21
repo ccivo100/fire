@@ -30,10 +30,12 @@ function select2() {
 		url: "${ContextPath}/report/handler",
 		data: { "type": "apartment","typeid":$('#selectType').val() },
 		success: function (msg) {
-			
+			$("#selectApartment").append("<option value='-1'>请选择运维部门</option>");
 			$("#selectChildType").append("<option value='-1'>请选择故障小类</option>");
 			for (var i = 0; i < msg.apartmentList.length; i++) {
-				$("#selectApartment").append("<option value=" + msg.apartmentList[i].id + ">" +msg.apartmentList[i].name + "</option>");
+				if(msg.apartmentList[i].id==2){
+					$("#selectApartment").append("<option value=" + msg.apartmentList[i].id + ">" +msg.apartmentList[i].name + "</option>");
+				}
 			}
 			
 			for (var i = 0; i < msg.childTypeList.length; i++) {
@@ -148,19 +150,6 @@ $(document).ready(function(){
 
 });
 
-$(document).ready(function() {
-	$('.alert-info').mouseenter(function() {
-		$(this).popover('show');
-	});
-	$('.alert-info').mouseleave(function() {
-		$(this).popover('hide');
-	});
-});
-
-
-$(function () { 
-	$("[data-toggle='popover']").popover({html : true });
-});
 
 </script>
 

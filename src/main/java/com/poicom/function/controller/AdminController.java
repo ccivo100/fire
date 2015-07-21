@@ -570,20 +570,23 @@ public class AdminController extends BaseController {
 	}
 	
 	public void exporter(){
-		String url = PathKit.getWebRootPath() +"\\temp"+"\\"+new Date().getTime()+".xls";
-		List<Record> ordersList,orderList;
-		ordersList=Order.dao.exporter(" 1=1 and orders.status=2 ", " ORDER BY orders.offer_at DESC");
-		orderList=Order.dao.exporterWithComments(" 1=1 ", " ORDER BY orderinfo.offer_at DESC");
+		String url = PathKit.getWebRootPath() +"/temp"+"/"+new Date().getTime()+".xls";
+		List<Record> orders2Status,orders1Status,orders0Status,ordersNotNullDeleted;
+		orders2Status=Order.dao.exporter(" 1=1 and orders.status=2 and orders.deleted_at is null", " ORDER BY orders.offer_at DESC");
+		ordersNotNullDeleted = Order.dao.exporter(" 1=1 and orders.deleted_at is not null ", " ORDER BY orders.offer_at DESC");
+		orders1Status=Order.dao.exporterWithComments(" 1=1 and orderinfo.status=1 ", " ORDER BY orderinfo.offer_at DESC");
+		orders0Status=Order.dao.exporterWithComments(" 1=1 and orderinfo.status=0 ", " ORDER BY orderinfo.offer_at DESC");
 		
-		PoiExporter per = new PoiExporter(ordersList,orderList);
+		PoiExporter per = new PoiExporter(orders2Status,orders1Status,orders0Status,ordersNotNullDeleted);
 		per.version("2003");
-		per.sheetNames("未处理","处理中&已处理");
+		per.sheetNames("未处理","处理中","已处理","已撤销");
 		String[] header1={"编号","标题","故障描述","故障类型","申报时间","当前状态","所属单位","申报人","部门","职位"};
 		String[] column1={"id","title","description","typename","offer_at","status","branchname","userfull_name","apartmentname","positionname"};
 		String[] header2={"编号","标题","故障描述","故障类型","申报时间","当前状态","所属单位","申报人","部门","职位","处理意见","处理时间","提交时间","处理人"};
 		String[] column2={"id","title","description","typename","offer_at","status","branchname","userfull_name","apartmentname","positionname","context","add_at","created_at","full_name"};
-		per.headers(header1,header2);
-		per.columns(column1,column2);
+		
+		per.headers(header1,header2,header2,header1);
+		per.columns(column1,column2,column2,column1);
 		
 		try {
 			OutputStream os = new FileOutputStream(url);
@@ -591,6 +594,7 @@ public class AdminController extends BaseController {
 			File downfile=new File(url);
 			if(downfile.exists()){
 				renderFile(downfile);
+				return ;
 			}else{
 				renderError(404);
 			}
