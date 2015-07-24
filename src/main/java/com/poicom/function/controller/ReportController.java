@@ -309,10 +309,10 @@ public class ReportController extends BaseController{
 			//Integer[] selectApartment=getParaValuesToInt("selectApartment[]");
 			//Integer selectApartment=getParaToInt("selectApartment");
 			//if(selectApartment.length==1){//当一级部门只有一个时
-				long selectChildApartment=getParaToLong("selectChildApartment");//选中部门
-				OrderService.service.saveUserOrderToOwnApart(order);
-				OrderService.service.saveUserOrder(selectChildApartment, order);
-				renderJson("state","提交成功！");
+			long selectChildApartment=getParaToLong("selectChildApartment");//选中部门
+			OrderService.service.saveUserOrderToOwnApart(order);
+			OrderService.service.saveUserOrder(selectChildApartment, order);
+			renderJson("state","提交成功！");
 			/*}else if(selectApartment.length>1){//当一级部门为多个时。
 				Long childTypeid= getParaToLong("childTypeid");
 				OrderService.service.saveUserOrderToOwnApart(order);

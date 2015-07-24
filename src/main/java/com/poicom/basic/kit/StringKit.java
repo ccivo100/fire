@@ -150,6 +150,11 @@ public class StringKit {
 	
 	public final static Pattern referer_pattern = Pattern.compile("@([^@^\\s^:]{1,})([\\s\\:\\,\\;]{0,1})");//@.+?[\\s:]
 	
+	/**
+	 * 数组转换为('xx','xx','xx')
+	 * @param str
+	 * @return
+	 */
 	public static String arrayToString(String[] str){
 		StringBuffer sb = new StringBuffer();
 		sb.append("('");
@@ -163,6 +168,22 @@ public class StringKit {
 		}
 		sb.append("')");
 		return sb.toString();
+	}
+	
+	/**
+	 * 数组转换为 xx,xx,xx,xx
+	 * @param paras
+	 * @return
+	 */
+	public static String arrayWithDot(String... paras){
+		StringBuffer p=new StringBuffer();
+		for(int i=0;i<paras.length;i++){
+			if(i==(paras.length-1)){
+				p.append(paras[i]);
+			}else
+				p.append(paras[i]).append(",");
+		}
+		return p.toString();
 	}
 	
 	

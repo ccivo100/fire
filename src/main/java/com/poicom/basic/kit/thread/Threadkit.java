@@ -1,4 +1,4 @@
-package com.poicom.basic.kit;
+package com.poicom.basic.kit.thread;
 
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
@@ -26,6 +26,10 @@ public class Threadkit {
 	private static Logger log = LoggerFactory.getLogger(Threadkit.class);
 	
 	private final static int POOL_SIZE=50;
+	
+	public static void print(String print){
+		System.out.println(print);
+	}
 	
 	/**
 	 * 1：缓存型线程池；
@@ -69,7 +73,7 @@ public class Threadkit {
 		@Override
 		public void run() {
 			while(countDown-->0){
-				log.info(status());
+				print(status());
 				Thread.yield();
 			}
 		}
@@ -171,7 +175,7 @@ public class Threadkit {
 					if(i%1000 ==0)
 						Thread.yield();
 				}
-				log.info(this.toString());
+				print(this.toString());
 				if(--countDown ==0) return;
 			}
 		}
@@ -244,7 +248,7 @@ public class Threadkit {
 			try{
 				while(true){
 					TimeUnit.MILLISECONDS.sleep(100);
-					log.info(Thread.currentThread() + " " + this);
+					print(Thread.currentThread() + " " + this);
 				}
 			}catch(InterruptedException e ){
 				log.error("Interrupted");
@@ -257,7 +261,7 @@ public class Threadkit {
 		for(int i=0 ; i<10; i++){
 			executor.execute(new DaemonFromFactory());
 		}
-		log.info(" All daemons started");
+		print(" All daemons started");
 		try {
 			TimeUnit.MILLISECONDS.sleep(500);
 		} catch (InterruptedException e) {
@@ -283,10 +287,10 @@ public class Threadkit {
 			for(int i=0;i<t.length;i++){
 				t[i] = new Thread(new DaemonSpawn());
 				t[i].start();
-				log.info("DaemonSpawn " +i + " started. ");
+				print("DaemonSpawn " +i + " started. ");
 			}
 			for(int i=0;i<t.length;i++){
-				log.info("t["+ i + "].isDaemon() = " +t[i].isDaemon());
+				print("t["+ i + "].isDaemon() = " +t[i].isDaemon());
 			}
 			while(true){
 				Thread.yield();
@@ -329,8 +333,54 @@ public class Threadkit {
 		executor.execute(new ExceptionThread());
 	}
 	
+	/**
+	 * 捕获异常
+	 * @author FireTercel 2015年7月23日 
+	 *
+	 */
+	static class ExceptionThread2 implements Runnable{
+		public void run(){
+			Thread t = Thread.currentThread();
+			print(" run() by "+t);
+			print("eh = "+t.getUncaughtExceptionHandler());
+			throw new RuntimeException();
+		}
+	}
+	
+	static class MyUncaughtExceptionHandler implements Thread.UncaughtExceptionHandler{
+		public void uncaughtException(Thread t, Throwable e){
+			print(" caught "+e);
+		}
+	}
+	
+	static class HandlerThreadFactory implements ThreadFactory{
+		public Thread newThread(Runnable r){
+			print(this + " creating new Thread");
+			Thread t = new Thread(r);
+			print("created "+t);
+			t.setUncaughtExceptionHandler(new MyUncaughtExceptionHandler());
+			print("eh = "+t.getUncaughtExceptionHandler());
+			return t;
+		}
+	}
+	
+	public static void testCaptureUncaughtException(){
+		ExecutorService exec = Executors.newCachedThreadPool(new HandlerThreadFactory());
+		exec.execute(new ExceptionThread2());
+	}
+	
+	/**
+	 * 使用相同的异常处理器，可以设置处理器为Default。
+	 */
+	public static void testSettingDefaultHandler(){
+		Thread.setDefaultUncaughtExceptionHandler(new MyUncaughtExceptionHandler());
+		ExecutorService exec = getExecutor(1);
+		exec.execute(new ExceptionThread());
+	}
+	
+	
 	public static void main(String[] args){
-		testExceptionThread();
+		testSimplePriorities();
 	}
 
 }

@@ -1,6 +1,5 @@
 package com.poicom.basic.config;
 
-import cn.dreampie.mail.MailerPlugin;
 import cn.dreampie.shiro.core.ShiroInterceptor;
 import cn.dreampie.shiro.core.ShiroPlugin;
 import cn.dreampie.shiro.freemarker.ShiroTags;
@@ -34,6 +33,7 @@ import com.poicom.basic.freemarker.FreeMarkerRenderFactory;
 import com.poicom.basic.freemarker.resource.ResourceTags;
 import com.poicom.basic.interceptor.SessionInterceptor;
 import com.poicom.basic.kit.StringKit;
+import com.poicom.basic.plugin.mail.MailerPlugin;
 import com.poicom.basic.plugin.properties.PropertiesPlugin;
 import com.poicom.basic.plugin.quartz.QuartzPlugin;
 import com.poicom.basic.plugin.routebind.RouteBind;

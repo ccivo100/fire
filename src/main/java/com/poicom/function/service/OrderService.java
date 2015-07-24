@@ -29,12 +29,32 @@ import com.poicom.function.model.Order;
 import com.poicom.function.model.User;
 import com.poicom.function.model.UserInfo;
 import com.poicom.function.model.UserOrder;
+import com.poicom.function.notice.MailSender;
+import com.poicom.function.notice.Notice;
+import com.poicom.function.notice.Provider;
+import com.poicom.function.notice.Sender;
+import com.poicom.function.notice.SmsSender;
+import com.poicom.function.notice.factory.SendMailFactory;
+import com.poicom.function.notice.factory.SendSmsFactory;
+import com.poicom.function.notice.template.MailTemplate;
+import com.poicom.function.notice.template.SmsTemplate;
 
 public class OrderService extends BaseService {
 	
 	private static Logger log = Logger.getLogger(OrderService.class);
 	
 	public static OrderService service = new OrderService();
+	
+	private MailSender mailSender;
+	private SmsSender smsSender;
+	
+	public OrderService(){
+		mailSender = (MailSender) new SendMailFactory().produce();
+		smsSender = (SmsSender) new SendSmsFactory().produce();
+	}
+	
+	private List<String> recipients = new ArrayList<String>();
+	private List<String> phones = new ArrayList<String>();
 	
 	public void format(Page<Record> page,String... paras){
 		for(Record record:page.getList()){
@@ -187,21 +207,19 @@ public class OrderService extends BaseService {
 	 * @param order
 	 */
 	public void saveUserOrderToOwnApart(Order order){
-		
 		User user = User.dao.getCurrentUser();//当前用户
 		Record userinfo=UserInfo.dao.getAllUserInfo(user.getLong("id"));//当前用户详细信息
 		List<Record> receiverList=UserService.service.userinfosByApartment(user);
-		for(Record receiver:receiverList){
-			//获取邮件内容
-			String EmailTitle="新故障工单提醒！";
-			String EmailBody=AlertKit.getOwnApartMailBody(userinfo, receiver, order).toString();
-			String emailAddr=receiver.getStr("useremail");
-			//短信内容
-			String smsContext=AlertKit.setOwnApartSmsContext(userinfo,order);
-			String phone=receiver.getStr("userphone");
-			AlertService.service.doAlert(EmailTitle, EmailBody, emailAddr, smsContext, phone);
-		}
 		
+		for(Record receiver:receiverList){
+			recipients.add(receiver.getStr("useremail"));
+			phones.add(receiver.getStr("userphone"));
+		}
+		String[] recipient = recipients.toArray(new String[recipients.size()]);
+		String[] phone = phones.toArray(new String[phones.size()]);
+		Notice.newOrderToOwn(mailSender, smsSender, userinfo, order, recipient, phone);
+		recipients.clear();
+		phones.clear();
 	}
 	
 	/**
@@ -212,24 +230,22 @@ public class OrderService extends BaseService {
 	public void saveUserOrder(Long apartmentid,Order order){
 		//根据部门id，获取该部门人员
 		List<Record> selectDealList=UserInfo.dao.getUserByApartment(" apartment.id=? and user.deleted_at is null",apartmentid);
+		//当前用户详细信息
+		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
+		
 		for(Record selectDeal:selectDealList){
 			UserOrder userorder=new UserOrder()
 				.set("user_id", selectDeal.get("userid"))
 				.set("order_id", order.get("id"));
 			userorder.save();
-			
-			//当前用户详细信息
-			Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
-			//邮件内容
-			String EmailTitle="点通故障系统提醒您！";
-			String EmailBody=AlertKit.getNewOrderMailBody(userinfo,selectDeal,order).toString();
-			String emailAddr=selectDeal.getStr("useremail");
-			//短信内容
-			String smsContext=AlertKit.setNewOrderSmsContext(userinfo,order);
-			String phone=selectDeal.getStr("userphone");
-			
-			AlertService.service.doAlert(EmailTitle, EmailBody, emailAddr, smsContext, phone);
+			recipients.add(selectDeal.getStr("useremail"));
+			phones.add(selectDeal.getStr("userphone"));
 		}
+		String[] recipient = recipients.toArray(new String[recipients.size()]);
+		String[] phone = phones.toArray(new String[phones.size()]);
+		Notice.newOrder(mailSender, smsSender, userinfo, order, recipient, phone);
+		recipients.clear();
+		phones.clear();
 	}
 	
 	/**
@@ -248,15 +264,14 @@ public class OrderService extends BaseService {
 		}
 		
 		for (Record deal : dealList) {
-			//获取邮件内容
-			String EmailTitle="【撤回通知】故障申报撤回提醒！";
-			String EmailBody=AlertKit.getMailBodyRecall(userinfo,deal,order).toString();
-			String emailAddr=deal.getStr("uemail");
-			//短信内容
-			String smsContext=AlertKit.getSmsBodyRecall(userinfo,order);
-			String phone=deal.getStr("uphone");
-			AlertService.service.doAlert(EmailTitle, EmailBody, emailAddr, smsContext, phone);
+			recipients.add(deal.getStr("uemail"));
+			phones.add(deal.getStr("uphone"));
 		}
+		String[] recipient = recipients.toArray(new String[recipients.size()]);
+		String[] phone = phones.toArray(new String[phones.size()]);
+		Notice.recallOrder(mailSender, smsSender, userinfo, order, recipient, phone);
+		recipients.clear();
+		phones.clear();
 		
 	}
 	
@@ -273,15 +288,14 @@ public class OrderService extends BaseService {
 	public boolean updateOrderAndAlert(List<Record> userinfoList,Record offer,Record deal,Order order,Comment comment,int selectProgress){
 		if(!userinfoList.isEmpty()){
 			for (Record user : userinfoList) {
-				// 获取邮件内容
-				String EmailTitle="故障申报处理情况通知！";
-				String EmailBody = AlertKit.getDealMailBody(user, offer, deal,order,comment,selectProgress).toString();
-				String emailAddr=user.getStr("useremail");
-				// 短信内容
-				String smsContext = AlertKit.getDealSmsBody(user, offer,deal, order,selectProgress).toString();
-				String phone = user.getStr("userphone");
-				AlertService.service.doAlert(EmailTitle, EmailBody, emailAddr, smsContext, phone);
+				recipients.add(user.getStr("useremail"));
+				phones.add(user.getStr("userphone"));
 			}
+			String[] recipient = recipients.toArray(new String[recipients.size()]);
+			String[] phone = phones.toArray(new String[phones.size()]);
+			Notice.dealOrder(mailSender, smsSender, offer, deal, order, comment, selectProgress, recipient, phone);
+			recipients.clear();
+			phones.clear();
 			return true;
 		}
 		return false;
