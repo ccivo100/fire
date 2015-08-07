@@ -1,6 +1,5 @@
 package com.poicom.basic.config;
 
-import cn.dreampie.mail.MailerPlugin;
 import cn.dreampie.shiro.core.ShiroInterceptor;
 import cn.dreampie.shiro.core.ShiroPlugin;
 import cn.dreampie.shiro.freemarker.ShiroTags;
@@ -34,6 +33,7 @@ import com.poicom.basic.freemarker.FreeMarkerRenderFactory;
 import com.poicom.basic.freemarker.resource.ResourceTags;
 import com.poicom.basic.interceptor.SessionInterceptor;
 import com.poicom.basic.kit.StringKit;
+import com.poicom.basic.plugin.mail.MailerPlugin;
 import com.poicom.basic.plugin.properties.PropertiesPlugin;
 import com.poicom.basic.plugin.quartz.QuartzPlugin;
 import com.poicom.basic.plugin.routebind.RouteBind;
@@ -183,14 +183,14 @@ public class AppConfig extends JFinalConfig {
 		log.info("afterJFinalStart 启动操作日志入库线程");
 		//ThreadSysLog.startSaveDBThread();
 		log.info("afterJFinalStart 启动操作发送邮件、短信线程");
-		ThreadAlert.startSendEmailAndSmsThread();
+		//ThreadAlert.startSendEmailAndSmsThread();
 	} 
 	
 	public void beforeJFinalStop(){
 		log.info("beforeJFinalStop 释放日志入库线程");
 		//ThreadSysLog.setThreadRun(false);
 		log.info("beforeJFinalStop 释放发送邮件、短信线程");
-		ThreadAlert.setThreadRun(false);
+		//ThreadAlert.setThreadRun(false);
 	}
 	
 	public static void main(String[] args) {

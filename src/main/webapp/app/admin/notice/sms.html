@@ -10,19 +10,17 @@
 $(".query").click(function(){
 	$.ajax({
 		type:"post",
-		url:"${ContextPath}/admin/notice/query",
+		url:"${ContextPath}/admin/notice/querySms",
 		data:{
-			"alertinfoid":$(this).attr("alertinfoid"),
+			"smsid":$(this).attr("smsid"),
 		},
 		dataType:"json",
 		success:function(result){
-			$("#queryModal").modal();
-			$("#email").attr("value",result.alertinfo.email);
-			$("#emailcontext").text(result.alertinfo.emailcontext);
-			$("#phone").attr("value",result.alertinfo.phone);
-			$("#smscontext").text(result.alertinfo.smscontext);
-			$("#smsrecode").attr("value",result.alertinfo.smsrecode);
-			$("#created_at").attr("value",result.alertinfo.created_at);
+			$("#smsModal").modal();
+			$("#phones").attr("value",result.sms.phones);
+			$("#message").text(result.sms.message);
+			$("#sms_recode").attr("value",result.sms.recode);
+			$("#sms_created_at").attr("value",result.sms.created_at);
 		},
 		error:function(){
 			alert("error"+$("#orderid").attr("value"));
@@ -31,18 +29,18 @@ $(".query").click(function(){
 });
     
 $(".delete").click(function(){
-	var alertinfoid=$(this).attr("alertinfoid");
-	alertModal(alertinfoid);
-	$("#alertModal").modal();
-	$("#alertinfoid").attr("value",alertinfoid);
+	var smsid=$(this).attr("smsid");
+	alertModal(smsid);
+	$("#deleteSmsModal").modal();
+	$("#smsid").attr("value",smsid);
 });
     
- $("#sure").click(function(){
+ $("#deleteSms").click(function(){
 	$.ajax({
 		type:"post",
-		url:"${ContextPath}/admin/notice/delete",
+		url:"${ContextPath}/admin/notice/deleteSms",
 		data:{
-			"alertinfoid":$("#alertinfoid").attr("value")
+			"smsid":$("#smsid").attr("value")
 		},
 		dataType:"json",
 		success:function(result){
@@ -54,15 +52,15 @@ $(".delete").click(function(){
 			}
 		},
 		error:function(){
-			alert("error"+$("#orderid").attr("value"));
+			alert("error"+$(this).attr("value"));
 		}
 	
 	});
 });
 
 function alertModal(msg){
-	$("#modal-title-order").html("提示!");  
-	$("#modal-body-order").html("是否确定删除"+msg+"号记录？");  
+	$("#modal-title-sms").html("提示!");  
+	$("#modal-body-sms").html("是否确定删除"+msg+"号记录？");  
 }
 	
 </script>
@@ -70,12 +68,12 @@ function alertModal(msg){
 [#assign pageCss]
 <link rel="stylesheet" href="${ContextPath}/admin/assets/css/data-tables/dataTables.tableTools.css" />
 [/#assign]
-[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="alertinfoFlag-alertinfosListFlag"]
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="alertinfoFlag-smsListFlag"]
 
 <div class="page-header">
 	<h1>
 		系统管理
-		<small> <i class="ace-icon fa fa-angle-double-right"></i> 通知日志管理</small>
+		<small> <i class="ace-icon fa fa-angle-double-right"></i> 短信通知管理</small>
 	</h1>
 </div>
 <div class="hr hr-dotted"></div>
@@ -91,11 +89,9 @@ function alertModal(msg){
 					<table id="orders" class="table table-striped table-bordered table-hover">
 						<thead>
 							<tr>
-								<th width="3%">序号</th>
-								<th width="3%">邮箱</th>
-								<th width="13%" class="hidden-480">邮件内容</th>
-								<th width="3%" class="hidden-480">手机号码</th>
-								<th width="6%" class="hidden-480">短信内容</th>
+								<th width="2%">序号</th>
+								<th width="6%" class="hidden-480">手机号码</th>
+								<th width="16%" class="hidden-480">短信内容</th>
 								<th width="4%">状态</th>
 								<th width="6%"><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>创建时间</th>
 								<th width="6%"></th>
@@ -103,31 +99,29 @@ function alertModal(msg){
 						</thead>
 						
 						<tbody>
-							[#list alertinfoPage.getList() as alertinfo]
+							[#list smsPage.getList() as sms]
 							<tr>
 
-								<td width="3%">${alertinfo.id}</td>
+								<td width="3%">${sms.id}</td>
 								
-								<td width="4%">${(alertinfo.email)!}</td>
-								<td class="hidden-480" nowrap title="${(alertinfo.emailcontext)!}"><div style="overflow: hidden; width: 200px; height: 20px;">${(alertinfo.emailcontext)!}</div></td>
-								<td class="hidden-480">${(alertinfo.phone)!}</td>
-								<td class="hidden-480" nowrap title="${(alertinfo.smscontext)!}"><div style="overflow: hidden; width: 300px;">${(alertinfo.smscontext)!}</div></td>
+								<td class="hidden-480" nowrap title="${(sms.phones)!}"><div style="overflow: hidden; width: 300px;">${(sms.phones)!}</div></td>
+								<td class="hidden-480" nowrap title="${(sms.message)!}"><div style="overflow: hidden; width: 400px;">${(sms.message)!}</div></td>
 
 								<td>
 									<b>
-									[#if (alertinfo.smsrecode)=200]
+									[#if (sms.recode)=200]
 									<span class="green">正常</span>
 									[#else]
-									<span class="red">${(alertinfo.smsrecode)!}</span>
+									<span class="red">${(sms.recode)!}</span>
 									[/#if]
 									</b>
 								</td>
-								<td width="10%">${(alertinfo.created_at)!}</td>
+								<td width="10%">${(sms.created_at)!}</td>
 
 								<td>
 									<div class="hidden-sm hidden-xs action-buttons">
-										<a class="btn btn-minier btn-primary  blue query" href="#" alertinfoid="${(alertinfo.id)!}"> 查看</a> 
-										<a class="btn btn-minier btn-danger red delete" href="#" alertinfoid="${(alertinfo.id)!}"> 删除</a>
+										<a class="btn btn-minier btn-primary  blue query" href="#" smsid="${(sms.id)!}"> 查看</a> 
+										<a class="btn btn-minier btn-danger red delete" href="#" smsid="${(sms.id)!}"> 删除</a>
 									</div>
 
 									<div class="hidden-md hidden-lg">
@@ -140,7 +134,7 @@ function alertModal(msg){
 											<ul
 												class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 												<li>
-													<a href="#" class="tooltip-info query" data-rel="tooltip"  title="查看" alertinfoid="${(alertinfo.id)!}"> 
+													<a href="#" class="tooltip-info query" data-rel="tooltip"  title="查看" smsid="${(sms.id)!}"> 
 														<span class="blue"> 
 																<i class="ace-icon fa fa-search-plus bigger-120"></i>
 														</span>
@@ -148,7 +142,7 @@ function alertModal(msg){
 												</li>
 
 												<li>
-													<a href="#" class="tooltip-error delete" data-rel="tooltip" title="删除" alertinfoid="${(alertinfo.id)!}"> 
+													<a href="#" class="tooltip-error delete" data-rel="tooltip" title="删除" smsid="${(sms.id)!}"> 
 														<span class="red">
 															<i class="ace-icon fa fa-trash-o bigger-120"></i>
 														</span>
@@ -163,7 +157,7 @@ function alertModal(msg){
 						</tbody>
 					</table>
 					[#include "/app/common/inc/_paginate.html" /]
-					[@paginate currentPage=alertinfoPage.pageNumber totalPage=alertinfoPage.totalPage actionUrl="/admin/notice/" /]
+					[@paginate currentPage=smsPage.pageNumber totalPage=smsPage.totalPage actionUrl="/admin/notice/sms/" /]
 				</div>
 			</div>
 		</div>

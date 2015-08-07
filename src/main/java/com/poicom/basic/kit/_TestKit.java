@@ -6,9 +6,15 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Enumeration;
 
+import org.apache.commons.mail.EmailException;
 import org.junit.Test;
 
 import cn.dreampie.ValidateKit;
+import cn.dreampie.akka.AkkaPlugin;
+import cn.dreampie.mail.AkkaMailer;
+import cn.dreampie.mail.ExecutorMailer;
+import cn.dreampie.mail.Mailer;
+import cn.dreampie.mail.MailerPlugin;
 
 public class _TestKit {
 	
@@ -37,7 +43,6 @@ public class _TestKit {
 			e.printStackTrace();
 		}
 	}
-	@Test
 	public void t_isEmail(){
 		String email="dantechan@poicom.net";
 		if(ValidateKit.isEmail(email)){
@@ -46,7 +51,6 @@ public class _TestKit {
 			System.out.println("false");
 	}
 	
-	@Test
 	public void t_class(){
 		Method[] methods = _TestKit.class.getMethods();
 		for (Method m : methods) {
@@ -58,6 +62,20 @@ public class _TestKit {
 				for(Class clazz:m.getParameterTypes()){
 					System.out.println(clazz.getName());
 				}
+			}
+		}
+	}
+	
+	@Test
+	public void t_mail(){
+		MailerPlugin mailerPlugin = new MailerPlugin();
+		boolean result =mailerPlugin.start();
+		if(result){
+			System.out.println("启动成功");
+			try {
+				ExecutorMailer.sendHtml("测试", "测试内容", "fireterceltong@poicom.net");
+			} catch (EmailException e) {
+				e.printStackTrace();
 			}
 		}
 	}

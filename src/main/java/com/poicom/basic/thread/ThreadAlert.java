@@ -3,6 +3,7 @@ package com.poicom.basic.thread;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -79,7 +80,8 @@ public class ThreadAlert {
 												.set("emailcontext", alertKit.getEmailBody())
 												.set("phone", StringKit.arrayToString(alertKit.getSmsPhone()))
 												.set("smscontext", alertKit.getSmsContext())
-												.set("smsrecode", smsrecode);
+												.set("smsrecode", smsrecode)
+												.set("created_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
 									alertinfo.save();
 									
 									logger.debug("完毕--发送邮件/短信提醒功能...");

@@ -14,9 +14,9 @@ import org.slf4j.LoggerFactory;
 
 import cn.dreampie.ValidateKit;
 import cn.dreampie.encription.EncriptionKit;
-import cn.dreampie.mail.Mailer;
 
 import com.jfinal.plugin.activerecord.Record;
+import com.poicom.basic.plugin.mail.Mailer;
 import com.poicom.function.model.Comment;
 import com.poicom.function.model.Order;
 import com.poicom.function.model.Retrieve;
@@ -37,6 +37,7 @@ public class AlertKit {
 	private String EmailBody;
 	//收件人邮箱
 	private String emailAdd;
+	private String[] emailAdds;
 	
 	//短信内容
 	private String smsContext;
@@ -70,6 +71,14 @@ public class AlertKit {
 	public AlertKit setEmailAdd(String emailAdd) {
 		this.emailAdd = emailAdd;
 		return this;
+	}
+
+	public String[] getEmailAdds() {
+		return emailAdds;
+	}
+
+	public void setEmailAdds(String[] emailAdds) {
+		this.emailAdds = emailAdds;
 	}
 
 	public String getSmsContext() {
