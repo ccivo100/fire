@@ -28,6 +28,7 @@ import com.poicom.function.model.Comment;
 import com.poicom.function.model.Order;
 import com.poicom.function.model.User;
 import com.poicom.function.model.UserInfo;
+import com.poicom.function.service.IndexService;
 import com.poicom.function.service.OrderService;
 import com.poicom.function.validator.IndexValidator;
 
@@ -188,22 +189,9 @@ public class IndexController extends BaseController {
 	public void doretrieve(){
 		String username=getPara("username");
 		String email=getPara("email");
-		User user=User.dao.findFirstBy("`user`.username = ? AND `user`.deleted_at is null", username);
-		AlertKit alertKit=new AlertKit();
-		String body=AlertKit.getMailBody(user,getRequest().getHeader("Host")+getRequest().getContextPath()).toString();
-		if(ValidateKit.isEmail(email)){
-			alertKit.setEmailTitle("找回密码！【一点通】").setEmailBody(body).setEmailAdd(email);
-		}
-		if(!ValidateKit.isNullOrEmpty(user.getStr("phone"))){
-			if(ValidateKit.isPhone(user.getStr("phone"))){
-				//短信内容
-				String smsBody="找回密码，重置密码的链接（24小时内有效）已经发到您邮箱，让及时登录处理";
-				alertKit.setSmsContext(smsBody).setSmsPhone(user.getStr("phone"));
-			}
-		}
-		//加入进程
-		logger.info("日志添加到入库队列 ---> 找回密码");
-		ThreadAlert.add(alertKit);
+		String context = getRequest().getHeader("Host")+getRequest().getContextPath();
+		IndexService.serivce.retrieve(username, email, context);
+		
 		redirect("/signin");
 	}
 	

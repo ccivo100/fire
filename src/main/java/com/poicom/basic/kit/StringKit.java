@@ -157,16 +157,16 @@ public class StringKit {
 	 */
 	public static String arrayToString(String[] str){
 		StringBuffer sb = new StringBuffer();
-		sb.append("('");
+		sb.append("(\"");
 		for (int i = 0; i < str.length; i++) {
 			if (i == str.length - 1) {
 				sb.append(str[i]);
 			} else {
 				sb.append(str[i]);
-				sb.append("', '");
+				sb.append("\", \"");
 			}
 		}
-		sb.append("')");
+		sb.append("\")");
 		return sb.toString();
 	}
 	

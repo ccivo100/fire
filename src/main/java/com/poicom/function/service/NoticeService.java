@@ -7,19 +7,22 @@ import cn.dreampie.ValidateKit;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.Page;
 import com.poicom.basic.kit.AlertKit;
+import com.poicom.basic.kit.WebKit;
 import com.poicom.basic.thread.ThreadAlert;
 import com.poicom.function.model.Alertinfo;
+import com.poicom.function.model.NoticeMail;
+import com.poicom.function.model.NoticeSms;
 
 /**
  * 邮件、短信提醒业务层。
  * @author FireTercel 2015年6月25日 
  *
  */
-public class AlertService extends BaseService {
+public class NoticeService extends BaseService {
 	
-	private static Logger log = Logger.getLogger(AlertService.class);
+	private static Logger log = Logger.getLogger(NoticeService.class);
 	
-	public static final AlertService service = new AlertService();
+	public static final NoticeService service = new NoticeService();
 	
 	public List<Alertinfo> list(){
 		List<Alertinfo> alertinfoList=Alertinfo.dao.list(" 1=1 order by created_at desc");
@@ -29,8 +32,18 @@ public class AlertService extends BaseService {
 	
 	public Page<Alertinfo> page(int pageNumber,int pageSize,Object... paras){
 		Page<Alertinfo> alertinfoPage = Alertinfo.dao.page(pageNumber, pageSize, " 1=1 order by created_at desc ", paras);
-		//Alertinfo.dao.format(alertinfoPage.getList(), 35,"emailcontext");
 		return alertinfoPage;
+	}
+	
+	public Page<NoticeMail> pageToMail(int pageNumber,int pageSize,Object... paras){
+		Page<NoticeMail> mailPage = NoticeMail.dao.page(pageNumber, pageSize, " 1=1 order by created_at desc ", paras);
+		format(mailPage);
+		return mailPage;
+	}
+	
+	public Page<NoticeSms> pageToSms(int pageNumber,int pageSize,Object... paras){
+		Page<NoticeSms> smsPage = NoticeSms.dao.page(pageNumber, pageSize, " 1=1 order by created_at desc ", paras);
+		return smsPage;
 	}
 	
 	/**
@@ -59,5 +72,12 @@ public class AlertService extends BaseService {
 		log.info("日志添加到入库队列 ---> 处理故障工单");
 		ThreadAlert.add(alertKit);
 	}
+	
+	public void format(Page<NoticeMail> mailPage){
+		for(NoticeMail mail : mailPage.getList()){
+			mail.set("body", WebKit.getHTMLToString(mail.getStr("body")));
+		}
+	}
+	
 
 }

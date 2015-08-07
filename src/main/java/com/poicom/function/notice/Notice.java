@@ -3,10 +3,24 @@ package com.poicom.function.notice;
 import com.jfinal.plugin.activerecord.Record;
 import com.poicom.function.model.Comment;
 import com.poicom.function.model.Order;
+import com.poicom.function.model.User;
 import com.poicom.function.notice.template.MailTemplate;
 import com.poicom.function.notice.template.SmsTemplate;
 
 public class Notice {
+	
+	public static void retrieve(MailSender mailSender, SmsSender smsSender, User user, String context, String[] recipient, String[] phone){
+		mailSender
+			.setSubject("【新提醒】找回密码提醒！")
+			.setBody(MailTemplate.resetPasswordMailBody(user, context))
+			.setRecipients(recipient);
+		smsSender
+			.setMessage("找回密码，重置密码的链接（24小时内有效）已经发到您邮箱，让及时登录处理")
+			.setPhones(phone);
+		mailSender.send();
+		smsSender.send();
+			
+	}
 	
 	public static void newOrderToOwn(MailSender mailSender, SmsSender smsSender, Record offer,Order order, String[] recipient, String[] phone){
 		mailSender

@@ -8,6 +8,7 @@ import cn.dreampie.encription.EncriptionKit;
 
 import com.jfinal.plugin.activerecord.Record;
 import com.poicom.basic.kit.DateKit;
+import com.poicom.basic.kit.WebKit;
 import com.poicom.function.model.Comment;
 import com.poicom.function.model.Order;
 import com.poicom.function.model.Retrieve;
@@ -123,6 +124,7 @@ public class MailTemplate {
 		}else if(selectProgress == 3){
 			body.append("转派处理。<br/>");
 		}
+		body.append("故障内容为："+WebKit.getStringToHTML(order.getStr("description"))+"<br/>");
 		body.append("处理意见为："+comment.getStr("context")+"。<br/>");
 		body.append("详情请登陆系统查看。");
 		return body.toString();

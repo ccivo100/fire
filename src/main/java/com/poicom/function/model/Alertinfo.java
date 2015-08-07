@@ -22,7 +22,6 @@ public class Alertinfo extends BaseModel<Alertinfo> {
 	}
 	
 	public Page<Alertinfo> page(int pageNumber,int pageSize,String where,Object... paras){
-		
 		return paginateBy(pageNumber, pageSize, where, paras);
 	}
 	

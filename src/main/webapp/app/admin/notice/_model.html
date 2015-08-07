@@ -1,0 +1,205 @@
+<!-- modal alert -->
+<div class="modal fade" id="queryModal" tabindex="-1" role="dialog" aria-labelledby="testModalLabel" aria-hidden="true" >
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span >&times;</span></button>
+				<h4 class="modal-title" id="modal-title-content">查看</h4>
+			</div>
+			<div class="modal-body" id="modal-body-content">
+				<input id="alertinfo.id" type="hidden" value="">
+				<div class="form-horizontal"  >
+				<div class="row">
+					<div class="form-group">
+						<label class="col-xs-2 control-label">邮箱</label>
+						<div class="col-sm-6">
+							<input id="email" class="form-control" type="text" value="" readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-2 control-label">邮件内容</label>
+						<div class="col-sm-8">
+							<textarea id="emailcontext" class="form-control" rows="6" cols="16" readonly></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-2 control-label">手机号码</label>
+						<div class="col-sm-6">
+							<input id="phone" class="form-control" type="text" value="" readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-2 control-label">短信内容</label>
+						<div class="col-sm-8">
+							<textarea id="smscontext" class="form-control" rows="6" cols="16" readonly></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-2 control-label">状态</label>
+						<div class="col-sm-6">
+							<input id="smsrecode" class="form-control" type="text" value="" readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-2 control-label">发送时间</label>
+						<div class="col-sm-6">
+							<input id="created_at" class="form-control" type="text" value="" readonly>
+						</div>
+					</div>
+				</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="mailModal" tabindex="-1" role="dialog" aria-labelledby="testModalLabel" aria-hidden="true" >
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span >&times;</span></button>
+				<h4 class="modal-title" id="modal-title-content">查看</h4>
+			</div>
+			<div class="modal-body" id="modal-body-content">
+				<input id="mail.id" type="hidden" value="">
+				<div class="form-horizontal"  >
+				<div class="row">
+					<div class="form-group">
+						<label class="col-xs-2 control-label">主题</label>
+						<div class="col-sm-6">
+							<input id="subject" class="form-control" type="text" value="" readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-2 control-label">邮件内容</label>
+						<div class="col-sm-8">
+							<textarea id="body" class="form-control" rows="6" cols="16" readonly></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-2 control-label">接收邮箱</label>
+						<div class="col-sm-8">
+							<textarea id="recipients" class="form-control" rows="6" cols="16" readonly></textarea>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-xs-2 control-label">发送时间</label>
+						<div class="col-sm-6">
+							<input id="mail_created_at" class="form-control" type="text" value="" readonly>
+						</div>
+					</div>
+				</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="smsModal" tabindex="-1" role="dialog" aria-labelledby="testModalLabel" aria-hidden="true" >
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span >&times;</span></button>
+				<h4 class="modal-title" id="modal-title-content">查看</h4>
+			</div>
+			<div class="modal-body" id="modal-body-content">
+				<input id="sms.id" type="hidden" value="">
+				<div class="form-horizontal"  >
+				<div class="row">
+					<div class="form-group">
+						<label class="col-xs-2 control-label">接收号码</label>
+						<div class="col-sm-6">
+							<input id="phones" class="form-control" type="text" value="" readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-2 control-label">短信内容</label>
+						<div class="col-sm-8">
+							<textarea id="message" class="form-control" rows="6" cols="16" readonly></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-2 control-label">状态</label>
+						<div class="col-sm-6">
+							<input id="sms_recode" class="form-control" type="text" value="" readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-2 control-label">发送时间</label>
+						<div class="col-sm-6">
+							<input id="sms_created_at" class="form-control" type="text" value="" readonly>
+						</div>
+					</div>
+				</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="testModalLabel" aria-hidden="true" >
+	<div class="modal-dialog">
+		<div class="modal-content">
+		
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span >&times;</span></button>
+				<h4 class="modal-title" id="modal-title-order">提示</h4>
+			</div>
+			<input id="alertinfoid" type="hidden" value="">
+			<div class="modal-body" id="modal-body-order">是否确定删除？</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        		<button id="sure" type="button" class="btn btn-primary ok">确定</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="deleteMailModal" tabindex="-1" role="dialog" aria-labelledby="testModalLabel" aria-hidden="true" >
+	<div class="modal-dialog">
+		<div class="modal-content">
+		
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span >&times;</span></button>
+				<h4 class="modal-title" id="modal-title-mail">提示</h4>
+			</div>
+			<input id="mailid" type="hidden" value="">
+			<div class="modal-body" id="modal-body-mail">是否确定删除？</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        		<button id="deleteMail" type="button" class="btn btn-primary ok">确定</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="deleteSmsModal" tabindex="-1" role="dialog" aria-labelledby="testModalLabel" aria-hidden="true" >
+	<div class="modal-dialog">
+		<div class="modal-content">
+		
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span >&times;</span></button>
+				<h4 class="modal-title" id="modal-title-sms">提示</h4>
+			</div>
+			<input id="smsid" type="hidden" value="">
+			<div class="modal-body" id="modal-body-sms">是否确定删除？</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        		<button id="deleteSms" type="button" class="btn btn-primary ok">确定</button>
+			</div>
+		</div>
+	</div>
+</div>

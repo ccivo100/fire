@@ -7,7 +7,6 @@ import org.apache.commons.mail.EmailException;
 
 import scala.concurrent.duration.Duration;
 import cn.dreampie.akka.Akka;
-import cn.dreampie.mail.Mailer;
 import akka.actor.Scheduler;
 
 /**
