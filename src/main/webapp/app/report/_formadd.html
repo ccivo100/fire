@@ -3,6 +3,7 @@
 		故障申报 <small> <i id="test" class="ace-icon fa fa-angle-double-right"></i> 新建工单</small>
 	</h1>
 </div>
+
 <div class="row">
 	<div class="col-xs-2">
 	</div>
@@ -66,8 +67,7 @@
 		<div class="form-group" >
 			<label class="col-sm-2 control-label">运维部门：</label>
 			<div class="col-sm-3">
-				
-				<select id="selectApartment" name="selectApartment" class="form-control"  required >
+				<select id="selectApartment" name="selectApartment" class="chosen-select form-control" multiple="multiple" >
 				</select>
 			</div>
 			<div id="childdiv" >
@@ -79,7 +79,18 @@
 			</div>
 		</div>
 		
-		
+		<div class="form-group" >
+			<label class="col-sm-2 control-label">邮件人员：</label>
+			<div class="col-sm-3">
+				<select id="selectMail" name="selectMail" class="form-control" multiple="multiple" >
+				</select>
+			</div>
+			<label class="col-sm-2 control-label">短信人员：</label>
+			<div class="col-sm-3">
+				<select id="selectSms" name="selectSms" class="form-control" multiple="multiple" >
+				</select>
+			</div>
+		</div>
 		
 		<div class="form-group">
 		<label class="col-sm-2 control-label">故障等级：</label>
@@ -92,7 +103,7 @@
 				</select>
 			</div>
 		</div>
-	
+		
 		<div class="form-group">
 			<label class="col-sm-2 control-label">故障描述：</label>
 			<div class="col-sm-8">

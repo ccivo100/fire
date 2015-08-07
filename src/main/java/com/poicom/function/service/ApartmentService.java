@@ -1,5 +1,6 @@
 package com.poicom.function.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -8,6 +9,7 @@ import com.jfinal.log.Logger;
 import com.poicom.basic.kit.WebKit;
 import com.poicom.function.model.Apartment;
 import com.poicom.function.model.ApartmentType;
+import com.poicom.function.model.User;
 
 public class ApartmentService extends BaseService {
 	
@@ -101,5 +103,14 @@ public class ApartmentService extends BaseService {
 				childNode(achild);
 			}
 		}
+	}
+	
+	public List<User> findUsers(List<Apartment> apartments){
+		List<User> userList = new ArrayList<User>();
+		for(Apartment apartment:apartments){
+			List<User> users = apartment.getUsersById(apartment.getPKValue());
+			userList.addAll(users);
+		}
+		return userList;
 	}
 }

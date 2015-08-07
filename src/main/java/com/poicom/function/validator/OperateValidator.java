@@ -6,6 +6,7 @@ import cn.dreampie.ValidateKit;
 
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
+import com.poicom.basic.kit.DateKit;
 import com.poicom.function.model.Order;
 
 public class OperateValidator extends Validator {
@@ -19,7 +20,12 @@ public class OperateValidator extends Validator {
 			}
 			else if(!ValidateKit.isDateTime(c.getPara("comment.add_at"))){
 				addError("state","请选择处理时间！");
-			}else if(c.getParaToInt("progress")==-1){
+			}else if(!ValidateKit.isDateTime(c.getPara("comment.predict_at"))){
+				addError("state","请选择预计完成时间！");
+			}else if(!DateKit.dateBetween(c.getPara("comment.add_at"), c.getPara("comment.predict_at"))){
+				addError("state","预计完成时间应该大于处理时间！");
+			}
+			else if(c.getParaToInt("progress")==-1){
 				addError("state","请选择处理进度！");
 			}else if(!valiProcess(c.getParaToInt("progress"))){
 				

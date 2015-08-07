@@ -23,6 +23,7 @@ $(document).ready(function(){
 				
 				"orderid":$('#oorderid').val(),
 				"comment.add_at":$('#deal_at').val(),
+				"comment.predict_at":$('#predict_at').val(),
 				"comment.context":$('#ocomment').val(),
 				},
 				
@@ -52,6 +53,13 @@ $(document).ready(function(){
 		pickerPosition: "bottom-left",
 		language:'zh-CN',
 		minView: 2,
+	});
+	$("#predict_at").datetimepicker({
+		format: 'yyyy-mm-dd hh:ii:ss',
+		autoclose: true,
+		todayBtn: true,
+		pickerPosition: "bottom-left",
+		language:'zh-CN',
 	});
 	
 	jQuery(function($){
@@ -162,6 +170,7 @@ function alertModal(msg){
 $(function () { 
 	$("[data-toggle='popover']").popover({html : true });
 });
+
 
 </script>
 [/#assign]
@@ -282,9 +291,10 @@ $(function () {
 						</div>
 						<div class="widget-body">
 							<div class="widget-main">
-							处理时间：<span class="red">${(comments.add_at)!} </span>
+							处理时间：<span class="red">${(comments.add_at)!} </span><br>
+							预计时间：<span class="red">${(comments.predict_at)!} </span>
 							<div class="space-6"></div>
-							处理意见：<div style="word-wrap:break-word;"><span class="green">${(comments.context)!}</span></div>
+							<div style="word-wrap:break-word;">处理意见：<span class="green">${(comments.context)!}</span></div>
 							</div>
 						</div>
 					</div>
@@ -321,14 +331,26 @@ $(function () {
 			<div class="jf_header jf_topic_header">
 				<div class="row">
 					<div class="col-xs-12 col-sm-5">
-						<div>
-							<span class="changes">
-								<span>处理时间：
-										<input id="deal_at" type="text" class="datetimepicker" readonly ><span class="add-on"><i class="icon-th"></i></span>
-								</span>
+						<div class="input-group">
+						<span class="input-group-addon">处理时间</span>
+							<input id="deal_at" type="text" class="form-control datetimepicker" readonly >
+							<span class="input-group-addon">
+								<i class="fa fa-calendar bigger-110"></i>
 							</span>
 						</div>
 					</div>
+					<div class="col-xs-12 col-sm-5">
+						<div class="input-group">
+							<span class="input-group-addon">预计时间</span>
+							<input id="predict_at" type="text" class="form-control " readonly>
+							<span class="input-group-addon">
+								<i class="fa fa-calendar bigger-110"></i>
+							</span>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="row">
 					<div class="col-xs-12 col-sm-5">
 						<div class="input-group">
 							<span class="input-group-addon">进度</span>

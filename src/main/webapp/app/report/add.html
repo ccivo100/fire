@@ -2,9 +2,11 @@
 
 [#assign pageCss]
 <link rel="stylesheet" href="${ContextPath}/admin/assets/css/signin.css" />
+<link rel="stylesheet" href="${ContextPath}/admin/assets/css/chosen.css" />
 [/#assign]
 
 [#assign pageJavascript]
+<script src="${ContextPath}/admin/assets/js/chosen.jquery.js"></script>
 <script type="text/javascript">
 function select1() {
 	$.ajax(
@@ -30,12 +32,9 @@ function select2() {
 		url: "${ContextPath}/report/handler",
 		data: { "type": "apartment","typeid":$('#selectType').val() },
 		success: function (msg) {
-			$("#selectApartment").append("<option value='-1'>请选择运维部门</option>");
 			$("#selectChildType").append("<option value='-1'>请选择故障小类</option>");
 			for (var i = 0; i < msg.apartmentList.length; i++) {
-				if(msg.apartmentList[i].id==2){
-					$("#selectApartment").append("<option value=" + msg.apartmentList[i].id + ">" +msg.apartmentList[i].name + "</option>");
-				}
+				$("#selectApartment").append("<option value=" + msg.apartmentList[i].id + ">" +msg.apartmentList[i].name + "</option>");
 			}
 			
 			for (var i = 0; i < msg.childTypeList.length; i++) {
@@ -63,6 +62,7 @@ function select3() {
 };
 function select4() {
 	$("#selectChildApartment").html("");
+	
 	var apartmentArray=new Array();
 	$("#selectApartment option:selected").each(function(i){ 
 			apartmentArray[i]=$(this).val(); 
@@ -73,6 +73,7 @@ function select4() {
 	if(apartmentArray.length<=1){
 		$('#childdiv').show();
 	}
+	
 	$.ajax(
 	{
 		type: "post",
@@ -86,6 +87,49 @@ function select4() {
 		}
 	})
 };
+
+function selectMailAndSms(){
+	$("#selectMail").html("");
+	$("#selectSms").html("");
+	var apartmentArray=new Array();
+	$("#selectApartment option:selected").each(function(i){ 
+			apartmentArray[i]=$(this).val(); 
+	});
+	if(apartmentArray.length>1){
+	
+		$('#childdiv').hide();
+		$.ajax(
+		{
+			type: "post",
+			url: "${ContextPath}/report/handler",
+			data: { "type": "mailAndSm", "childTypeid":$('#selectChildType').val(), "selectApartment": $('#selectApartment').val()},
+			success: function (msg) {
+				for (var i = 0; i < msg.userList.length; i++) {
+					$("#selectMail").append("<option value=" + msg.userList[i].id + ">" +msg.userList[i].full_name + "</option>");
+					$("#selectSms").append("<option value=" + msg.userList[i].id + ">" +msg.userList[i].full_name + "</option>");
+				}
+			}
+		});
+	
+	}
+	if(apartmentArray.length<=1){
+	
+		$('#childdiv').show();
+		$.ajax(
+		{
+			type: "post",
+			url: "${ContextPath}/report/handler",
+			data: { "type": "mailAndSm", "childTypeid":$('#selectChildType').val(), "selectApartment": $('#selectApartment').val(), "selectChildApartment": $('#selectChildApartment').val()},
+			success: function (msg) {
+				for (var i = 0; i < msg.userList.length; i++) {
+					$("#selectMail").append("<option value=" + msg.userList[i].id + ">" +msg.userList[i].full_name + "</option>");
+					$("#selectSms").append("<option value=" + msg.userList[i].id + ">" +msg.userList[i].full_name + "</option>");
+				}
+			}
+		});
+	
+	}
+}
 
 function select5(){
 	$.ajax(
@@ -109,7 +153,9 @@ $(function(){
 	$('#selectType').bind("change", select2);
 	$('#selectChildType').bind("change", select3);
 	$('#selectApartment').bind("change", select4);
+	$('#selectApartment').bind("change",  selectMailAndSms);
 	$('#selectChildApartment').bind("change", select5);
+	$('#selectChildApartment').bind("change",  selectMailAndSms);
 });
 
 function alertModal(msg){
@@ -149,7 +195,6 @@ $(document).ready(function(){
 	});
 
 });
-
 
 </script>
 

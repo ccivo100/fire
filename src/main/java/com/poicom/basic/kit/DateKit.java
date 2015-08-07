@@ -50,6 +50,18 @@ public class DateKit {
         return time;
 	}
 	
+	public static boolean dateBetween(String start, String end) {
+		format = DateTimeFormat .forPattern(pattern_ymd_hms);
+		DateTime startDate=DateTime.parse(start,format);
+		DateTime endDate=DateTime.parse(end,format);
+		Long time = endDate.getMillis() - startDate.getMillis();
+		if(time>0){
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
 	/**
 	 * 主要是给jfinal使用，数据库只认java.sql.*
 	 * @param date

@@ -31,6 +31,7 @@ import com.poicom.function.model.Order;
 import com.poicom.function.model.User;
 import com.poicom.function.model.UserInfo;
 import com.poicom.function.model.UserOrder;
+import com.poicom.function.service.ApartmentService;
 import com.poicom.function.service.OrderService;
 import com.poicom.function.validator.CommonValidator;
 import com.poicom.function.validator.ReportValidator;
@@ -276,10 +277,27 @@ public class ReportController extends BaseController{
 		}
 		else if(type.equals("childApartment")){
 			Long childTypeid= getParaToLong("childTypeid");
-			//Long rootApartment = getParaToLong("rootApartment[]");
-			Long rootApartment = getParaToLong("rootApartment");
+			Long rootApartment = getParaToLong("rootApartment[]");
+			//Long rootApartment = getParaToLong("rootApartment");
 			List<Apartment> childApartmentList=Apartment.dao.getATApartmentsList(rootApartment,childTypeid);
 			renderJson("childApartmentList",childApartmentList);
+		}else if(type.equals("mailAndSm")){
+			Integer[] selectApartment = getParaValuesToInt("selectApartment[]");
+			if(selectApartment.length>1){
+				Long childTypeid= getParaToLong("childTypeid");
+				List<User> userList = new ArrayList<User>();
+				for(int i=0;i<selectApartment.length;i++){
+					int rootApartment=selectApartment[i];//一级部门id
+					List<Apartment> childApartmentList=Apartment.dao.getATApartmentsList(rootApartment,childTypeid);
+					List<User> users = ApartmentService.service.findUsers(childApartmentList);
+					userList.addAll(users);
+				}
+				renderJson("userList",userList);
+			}else{
+				Long selectChildApartment=getParaToLong("selectChildApartment");
+				List<User> userList = Apartment.dao.getUsersById(selectChildApartment);
+				renderJson("userList",userList);
+			}
 		}
 		else if(type.equals("effective")){
 			Long selectChildApartmentid=getParaToLong("apartmentid");
@@ -306,14 +324,14 @@ public class ReportController extends BaseController{
 		Order order = getModel(Order.class);
 		boolean flag = OrderService.service.saveOrder(order);
 		if(flag){
-			//Integer[] selectApartment=getParaValuesToInt("selectApartment[]");
+			Integer[] selectApartment=getParaValuesToInt("selectApartment[]");
 			//Integer selectApartment=getParaToInt("selectApartment");
-			//if(selectApartment.length==1){//当一级部门只有一个时
+			if(selectApartment.length==1){//当一级部门只有一个时
 			long selectChildApartment=getParaToLong("selectChildApartment");//选中部门
-			OrderService.service.saveUserOrderToOwnApart(order);
-			OrderService.service.saveUserOrder(selectChildApartment, order);
-			renderJson("state","提交成功！");
-			/*}else if(selectApartment.length>1){//当一级部门为多个时。
+				OrderService.service.saveUserOrderToOwnApart(order);
+				OrderService.service.saveUserOrder(selectChildApartment, order);
+				renderJson("state","提交成功！");
+			}else if(selectApartment.length>1){//当一级部门为多个时。
 				Long childTypeid= getParaToLong("childTypeid");
 				OrderService.service.saveUserOrderToOwnApart(order);
 				for(int i=0;i<selectApartment.length;i++){
@@ -324,7 +342,7 @@ public class ReportController extends BaseController{
 					}
 				}
 				renderJson("state","提交成功！");
-			}*/
+			}
 		}else{
 			renderJson("state","提交失败！");
 		}

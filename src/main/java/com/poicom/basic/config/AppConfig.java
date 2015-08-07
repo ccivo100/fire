@@ -39,7 +39,6 @@ import com.poicom.basic.plugin.quartz.QuartzPlugin;
 import com.poicom.basic.plugin.routebind.RouteBind;
 import com.poicom.basic.plugin.sqlxml.SqlInXmlPlugin;
 import com.poicom.basic.shiro.MyJdbcAuthzService;
-import com.poicom.basic.thread.ThreadAlert;
 /**
  * 
  * @author 唐东宇
@@ -170,7 +169,7 @@ public class AppConfig extends JFinalConfig {
 		RouteBind routeBind=new RouteBind();
 		me.add(routeBind);
 	} 
-	 
+	
 	public void afterJFinalStart(){
 		super.afterJFinalStart();
 		log.info("afterJFinalStart 读取freemarker配置文件");
@@ -182,15 +181,10 @@ public class AppConfig extends JFinalConfig {
 		 
 		log.info("afterJFinalStart 启动操作日志入库线程");
 		//ThreadSysLog.startSaveDBThread();
-		log.info("afterJFinalStart 启动操作发送邮件、短信线程");
-		//ThreadAlert.startSendEmailAndSmsThread();
 	} 
 	
 	public void beforeJFinalStop(){
 		log.info("beforeJFinalStop 释放日志入库线程");
-		//ThreadSysLog.setThreadRun(false);
-		log.info("beforeJFinalStop 释放发送邮件、短信线程");
-		//ThreadAlert.setThreadRun(false);
 	}
 	
 	public static void main(String[] args) {

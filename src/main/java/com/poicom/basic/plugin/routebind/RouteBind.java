@@ -38,6 +38,7 @@ public class RouteBind extends Routes {
 		return this;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public RouteBind addExcludeClasses(Class<? extends Controller>... clazzes){
 		for(Class<? extends Controller> clazz:clazzes){
 			excludeClasses.add(clazz);
@@ -59,6 +60,7 @@ public class RouteBind extends Routes {
 		return this;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public RouteBind addIncludeClasses(Class<? extends Controller>... clazzes){
 		for (Class<? extends Controller> clazz : clazzes) {
 			includeClasses.add(clazz);
@@ -81,6 +83,7 @@ public class RouteBind extends Routes {
 	}
 	
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void config() {
 		List<Class<? extends Controller>> controllerClasses = ClassSearchKit.of(Controller.class).includepaths(includeClassPaths).search();
