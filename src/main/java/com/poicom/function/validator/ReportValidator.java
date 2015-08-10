@@ -12,12 +12,16 @@ public class ReportValidator extends Validator {
 	protected void validate(Controller c) {
 		if(getActionKey().equals("/report/save")){
 			
-			String[] selectApartment;
+			String[] selectApartment, selectMail, selectSms;
+			
+			//  选择一级部门 multiple or not
 			if(c.getParaValues("selectApartment")==null){
 				selectApartment=c.getParaValues("selectApartment[]");
 			}else{
 				selectApartment=c.getParaValues("selectApartment");
 			}
+			selectMail = c.getParaValues("selectMail[]");    //  选择邮件接收者 multiple or not
+			selectSms = c.getParaValues("selectSms[]");    //  选择短信接收者 multiple or not
 			
 			if(ValidateKit.isNullOrEmpty(c.getPara("order.title"))){
 				addError("state","故障单标题不能为空！");
@@ -32,7 +36,14 @@ public class ReportValidator extends Validator {
 				addError("state","请选择运维部门！");
 			}else if(selectApartment.length==1&&c.getParaToLong("selectChildApartment")==-1){
 				addError("state","请选择运维组别！");
-			}else if(c.getParaToLong("order.level")==-1){
+			}
+			else if(ValidateKit.isNullOrEmpty(selectMail)){
+				addError("state","请选择邮件接收人员！");
+			}
+			else if(ValidateKit.isNullOrEmpty(selectSms)){
+				addError("state","请选择短信接收人员！");
+			}
+			else if(c.getParaToLong("order.level")==-1){
 				addError("state","请选择故障等级！");
 			}else if(ValidateKit.isNullOrEmpty(c.getPara("order.description"))){
 				addError("state","故障单描述不能为空！");

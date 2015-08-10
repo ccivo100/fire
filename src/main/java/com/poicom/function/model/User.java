@@ -1,6 +1,8 @@
 package com.poicom.function.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
@@ -156,5 +158,18 @@ public class User extends Model<User> {
 	/*public User findUserByAttr(String attr,Object paras){
 		return findFirst("select * from sec_user where "+attr+" =? ",paras);
 	}*/
+	
+	/**
+	 * 根据用户id，获得用户集合，只包含column
+	 * @param column
+	 * @param paras
+	 * @return
+	 */
+	public List<User> findUserAttrValues(String column,String paras){
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("column", column);
+		param.put("param", paras);
+		return find(SqlXmlKit.sql("user.column", param));
+	}
 
 }

@@ -18,6 +18,13 @@
 			     WHERE user.id=?
   		]]>
   	</sql>
+  	
+  	<sql id = "column">
+  		<![CDATA[ 
+  			select ${column}
+        	from sec_user where id in (${param})
+  		]]>
+  	</sql>
     
     <!-- 查询用户所有信息 -->
     <sql id="findInfoBySelect">
@@ -109,7 +116,7 @@
   		<![CDATA[ 
   			select * from sec_user as user where user.id in( 
   				select userinfo.user_id from sec_user_info as userinfo where apartment_id=?
-  			)
+  			) and user.deleted_at is null 
   		]]>
   	</sql>
   	

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<sqlRoot>
+<!--  
+	baseModel公共sql
+-->
+	<sqlGroup name="basic.template">
+		<!-- 查询版本号 -->
+		<sql id="version">select version from ${table} where ${pk} = ?</sql>
+
+		<!-- 通用查询 -->
+		<sql id="select">select * from ${table} where ${column} = ?</sql>
+		
+		<!-- 通用查询 数量 -->
+		<sql id="selectCount">select count(*) from ${table} where ${column} = ?</sql>
+		
+		<!-- 通用更新 -->
+		<sql id="update">update ${table} set ${column} = ? where ${condition} = ?</sql>
+		
+		<!-- 通用删除 -->
+		<sql id="delete">delete from ${table} where ${column} = ?</sql>
+		
+	</sqlGroup>
+</sqlRoot>

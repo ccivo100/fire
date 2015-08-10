@@ -21,6 +21,7 @@ import com.jfinal.plugin.ehcache.CacheName;
 import com.jfinal.plugin.ehcache.EvictInterceptor;
 import com.poicom.basic.kit.AlertKit;
 import com.poicom.basic.kit.DateKit;
+import com.poicom.basic.kit.StringKit;
 import com.poicom.basic.kit.WebKit;
 import com.poicom.basic.thread.ThreadAlert;
 import com.poicom.function.model.Apartment;
@@ -324,23 +325,29 @@ public class ReportController extends BaseController{
 		Order order = getModel(Order.class);
 		boolean flag = OrderService.service.saveOrder(order);
 		if(flag){
-			Integer[] selectApartment=getParaValuesToInt("selectApartment[]");
+			Integer[] selectApartment;
+			String selectMail, selectSms;
+			selectApartment=getParaValuesToInt("selectApartment[]");
+			selectMail = StringKit.arrayWithDot(getParaValues("selectMail[]"));    //  将提交的id转换为  xx,xx,xx
+			selectSms = StringKit.arrayWithDot(getParaValues("selectSms[]"));    
 			//Integer selectApartment=getParaToInt("selectApartment");
-			if(selectApartment.length==1){//当一级部门只有一个时
-			long selectChildApartment=getParaToLong("selectChildApartment");//选中部门
+			if(selectApartment.length==1){    //当一级部门只有一个时
+			long selectChildApartment=getParaToLong("selectChildApartment");    //选中部门
 				OrderService.service.saveUserOrderToOwnApart(order);
 				OrderService.service.saveUserOrder(selectChildApartment, order);
+				OrderService.service.sendMailAndSms(selectMail, selectSms, order);
 				renderJson("state","提交成功！");
-			}else if(selectApartment.length>1){//当一级部门为多个时。
+			}else if(selectApartment.length>1){    //当一级部门为多个时。
 				Long childTypeid= getParaToLong("childTypeid");
 				OrderService.service.saveUserOrderToOwnApart(order);
 				for(int i=0;i<selectApartment.length;i++){
-					int rootApartment=selectApartment[i];//一级部门id
-					List<Apartment> childApartmentList=Apartment.dao.getATApartmentsList(rootApartment,childTypeid);
+					int rootApartment=selectApartment[i];    //一级部门id
+					List<Apartment> childApartmentList=Apartment.dao.getATApartmentsList(rootApartment,childTypeid);    //根据故障类型，获得二级部门
 					for(Apartment childApartment:childApartmentList){
 						OrderService.service.saveUserOrder(childApartment.getLong("id"), order);
 					}
 				}
+				OrderService.service.sendMailAndSms(selectMail, selectSms, order);
 				renderJson("state","提交成功！");
 			}
 		}else{

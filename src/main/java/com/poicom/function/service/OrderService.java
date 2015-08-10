@@ -58,7 +58,7 @@ public class OrderService extends BaseService {
 	
 	public void format(Page<Record> page,String... paras){
 		for(Record record:page.getList()){
-			for(String attr:paras){
+			for(String attr:paras) {
 				record.set(attr, StringUtils.abbreviate(record.getStr(attr), (new Random().nextInt(2)+35)));
 			}
 			Long orderid=record.getLong("id");
@@ -223,23 +223,38 @@ public class OrderService extends BaseService {
 	}
 	
 	/**
-	 * 提交工单处理人员消息提醒
+	 * 提交工单处理人员
 	 * @param apartmentid
 	 * @param order
 	 */
 	public void saveUserOrder(Long apartmentid,Order order){
 		//根据部门id，获取该部门人员
 		List<Record> selectDealList=UserInfo.dao.getUserByApartment(" apartment.id=? and user.deleted_at is null",apartmentid);
-		//当前用户详细信息
-		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
 		
 		for(Record selectDeal:selectDealList){
 			UserOrder userorder=new UserOrder()
 				.set("user_id", selectDeal.get("userid"))
 				.set("order_id", order.get("id"));
 			userorder.save();
-			recipients.add(selectDeal.getStr("useremail"));
-			phones.add(selectDeal.getStr("userphone"));
+		}
+	}
+	
+	/**
+	 * 提交工单处理人员消息提醒，单纯发送邮件、短信。配合saveUserOrder方法。
+	 * @param selectMail
+	 * @param selectSms
+	 * @param order
+	 */
+	public void sendMailAndSms(String selectMail, String selectSms, Order order){
+		//当前用户详细信息
+		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
+		List<User> mailUserList = User.dao.findUserAttrValues("email", selectMail);
+		List<User> smsUserList = User.dao.findUserAttrValues("phone", selectSms);
+		for(User mailUser : mailUserList){
+			recipients.add(mailUser.getStr("email"));   //只有email
+		}
+		for(User smsUser : smsUserList){
+			phones.add(smsUser.getStr("phone"));    //只有phone
 		}
 		String[] recipient = recipients.toArray(new String[recipients.size()]);
 		String[] phone = phones.toArray(new String[phones.size()]);

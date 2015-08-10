@@ -145,7 +145,7 @@ public class Apartment extends BaseModel<Apartment> implements TreeNode<Apartmen
 	}
 	
 	/**
-	 * 根据部门id查询该部门人员users
+	 * 根据部门id查询该部门人员users，排除禁用账号。
 	 * @param apartmentid
 	 * @return
 	 */
