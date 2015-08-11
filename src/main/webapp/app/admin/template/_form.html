@@ -1,0 +1,55 @@
+<div class="row">
+	<input type = "hidden" id="templateid" value="${(template.id)!}">
+	<div class="form-group">
+		<label class="col-sm-2 control-label" >故障类型：</label>
+		<div class="col-sm-2">
+			<select id="selectType" name="selectType" class="form-control" required >
+			</select>
+		</div>
+		<div class="col-sm-2">
+			<select id="selectChildType" name="selectChildType" class="form-control" required>
+			</select>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label class="col-xs-2 control-label">接收部门：</label>
+		<div class="col-sm-2">
+			<select id="selectApartment" name="selectApartment" class="form-control" required >
+			</select>
+		</div>
+		<div class="col-sm-2">
+			<select id="selectChildApartment" name="selectChildApartment" class="form-control" required>
+			</select>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label class="col-xs-2 control-label">接收人员：</label>
+		<div class="col-sm-4">
+			<select id="selectReceiver" name="selectReceiver" class="form-control" required multiple="multiple">
+			</select>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label class="col-xs-2 control-label">模板内容：</label>
+		<div class="col-xs-4">
+				<textarea id="context"  class="form-control"
+					placeholder="模板内容……"  maxlength="250" cols="80" rows="7"
+					required>${(template.context)!}</textarea>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-xs-offset-2 col-sx-10">
+			[#if template??]
+			<a id="templateupdate"  class="btn btn-primary save" >更新</a>
+			[#else]
+			<a id="templatesave"  class="btn btn-primary save" >保存</a>
+			[/#if]
+			
+		</div>
+	</div>
+</div>
+[#include "_model.html" /]

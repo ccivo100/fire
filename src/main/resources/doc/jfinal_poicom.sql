@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version: 5.6.23-log)
-# Date: 2015-08-10 18:05:21
+# Date: 2015-08-11 17:21:52
 # Generator: MySQL-Front 5.3  (Build 4.89)
 
 /*!40101 SET NAMES utf8 */;
@@ -211,7 +211,7 @@ CREATE TABLE `com_notice_email` (
   `recode` varchar(100) DEFAULT NULL COMMENT '返回内容',
   `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "com_notice_email"
@@ -231,7 +231,7 @@ CREATE TABLE `com_notice_sms` (
   `recode` int(5) DEFAULT NULL COMMENT '返回值',
   `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "com_notice_sms"
@@ -259,7 +259,7 @@ CREATE TABLE `com_order` (
   `created_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=156 DEFAULT CHARSET=utf8 COMMENT='工单';
+) ENGINE=InnoDB AUTO_INCREMENT=159 DEFAULT CHARSET=utf8 COMMENT='工单';
 
 #
 # Data for table "com_order"
@@ -299,18 +299,20 @@ CREATE TABLE `com_template` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `context` text COMMENT '内容',
   `apartmentid` bigint(20) DEFAULT NULL COMMENT '所属部门',
+  `typeid` bigint(20) DEFAULT NULL COMMENT '关联故障',
   `receive_userids` text COMMENT '接收人员id',
   `created_at` timestamp NULL DEFAULT NULL COMMENT '创建时间',
   `created_userid` bigint(20) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL COMMENT '修改时间',
   `updated_userid` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='申报模板';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='申报模板';
 
 #
 # Data for table "com_template"
 #
 
+INSERT INTO `com_template` VALUES (1,'模板--模板--模板--模板--模板--模板--模板--模板',1,25,'1,2,3','2015-08-11 00:00:00',1,NULL,NULL),(2,'淡淡的淡淡的淡淡的淡淡的',12,25,'1','2015-08-11 16:15:11',7,'2015-08-11 16:56:21',7),(3,'模板啊',12,8,'1','2015-08-11 16:24:06',7,NULL,NULL),(4,'淡淡的。我是模板',12,6,'1','2015-08-11 16:32:47',7,NULL,NULL),(5,'淡淡的。我是模板。',12,8,'3,2','2015-08-11 16:33:12',7,NULL,NULL),(6,'故障。',12,8,'1','2015-08-11 17:02:40',7,'2015-08-11 17:03:01',7);
 
 #
 # Structure for table "com_type"
@@ -346,7 +348,7 @@ CREATE TABLE `com_user_order` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2025 DEFAULT CHARSET=utf8 COMMENT='运维-工单';
+) ENGINE=InnoDB AUTO_INCREMENT=2031 DEFAULT CHARSET=utf8 COMMENT='运维-工单';
 
 #
 # Data for table "com_user_order"
@@ -581,10 +583,10 @@ CREATE TABLE `sec_user_role` (
   `user_id` bigint(20) NOT NULL,
   `role_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=139 DEFAULT CHARSET=utf8 COMMENT='用户-角色';
+) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8 COMMENT='用户-角色';
 
 #
 # Data for table "sec_user_role"
 #
 
-INSERT INTO `sec_user_role` VALUES (1,1,1),(34,8,4),(43,2,3),(44,17,4),(48,18,4),(54,20,2),(56,21,4),(57,22,3),(61,7,4),(63,3,4),(64,63,2),(65,7,3),(66,4,3),(67,4,4),(68,64,4),(73,65,4),(75,67,4),(76,70,4),(77,71,4),(78,72,3),(79,73,3),(80,74,3),(81,75,3),(82,76,3),(83,77,3),(84,78,3),(85,79,3),(86,80,3),(87,69,3),(88,68,3),(89,66,3),(90,81,4),(110,83,3),(111,84,3),(112,85,3),(115,9,3),(116,82,3),(117,10,3),(118,11,3),(119,12,3),(120,13,3),(121,86,4),(122,87,4),(123,88,4),(124,89,4),(125,90,4),(126,91,4),(127,92,4),(128,93,4),(129,94,4),(130,95,4),(131,96,4),(132,97,4),(133,98,4),(134,99,4),(135,100,4),(136,101,4),(137,102,4),(138,103,3);
+INSERT INTO `sec_user_role` VALUES (1,1,1),(34,8,4),(43,2,3),(44,17,4),(48,18,4),(54,20,2),(56,21,4),(57,22,3),(63,3,4),(64,63,2),(66,4,3),(67,4,4),(68,64,4),(73,65,4),(75,67,4),(76,70,4),(77,71,4),(78,72,3),(79,73,3),(80,74,3),(81,75,3),(82,76,3),(83,77,3),(84,78,3),(85,79,3),(86,80,3),(87,69,3),(88,68,3),(89,66,3),(90,81,4),(110,83,3),(111,84,3),(112,85,3),(115,9,3),(116,82,3),(117,10,3),(118,11,3),(119,12,3),(120,13,3),(121,86,4),(122,87,4),(123,88,4),(124,89,4),(125,90,4),(126,91,4),(127,92,4),(128,93,4),(129,94,4),(130,95,4),(131,96,4),(132,97,4),(133,98,4),(134,99,4),(135,100,4),(136,101,4),(137,102,4),(138,103,3),(139,7,2),(140,104,3);

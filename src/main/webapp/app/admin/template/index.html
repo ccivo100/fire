@@ -12,46 +12,26 @@
 		<thead>
 			<tr>
 				<th>编号</th>
-				<th>姓名</th>
-				<th>账号</th>
-				<th>单位</th>
-				<th>部门</th>
-				<th>职位</th>
-				<th>联系电话</th>
-				<th>角色</th>
-				<th>状态</th>
+				<th>内容</th>
+				<th>接收人员</th>
+				<th>创建时间</th>
+				<th>创建人员</th>
 				<th>操作</th>
 			</tr>
 		</thead>
 		<tbody>
 			[#list templatePage.getList() as template]
 			<tr>
-				<td>${(template.id)!}</td>
+				<td>${(template_index+1)!}</td>
 				<td>${(template.context)!}</td>
-				<td>${(template.pname)!}</td>
-				<td>${(template.uphone)!}</td>
-				<td>${(template.remark)!}</td>
+				<td>${(template.receive_userids)!}</td>
+				<td>${(template.created_at)!}</td>
+				<td>${(template.created_userid)!}</td>
 				<td>
-				[#if template.udeletetime??]
-					<b>
-					<span class="red">禁用</span>
-					[#else]
-					<span class="gray">正常</span>
-					[/#if]
-					</b>
-				</td>
-				<td>
-					[#if (template.uuserid?number)==1]
-					[#else]
-						<div class="action-buttons">
-						<a class="btn btn-minier btn-primary"  href="${ContextPath}/admin/edituser?id=${(user.uuserid)!}" >设置</a>
-						[#if template.udeletetime??]
-						<a class="btn btn-minier btn-danger"  href="${ContextPath}/admin/onuser?id=${(user.uuserid)!}" >启用</a>
-						[#else]
-						<a class="btn btn-minier btn-primary"  href="${ContextPath}/admin/offuser?id=${(user.uuserid)!}" >禁用</a>
-						</div>
-						[/#if]
-					[/#if]
+					<div class="action-buttons">
+					<a class="btn btn-minier btn-primary"  href="${ContextPath}/admin/template/query?id=${(template.id)!}" >查看</a>
+					<a class="btn btn-minier btn-primary"  href="${ContextPath}/admin/template/edit?id=${(template.id)!}" >编辑</a>
+					</div>
 				</td>
 			</tr>
 			[/#list]
@@ -60,10 +40,6 @@
 				[#list 1..size as t]
 					<tr>
 						<td>${(templatePage.getList().size()+t)!}</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
 						<td></td>
 						<td></td>
 						<td></td>

@@ -4,8 +4,7 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.poicom.basic.plugin.shiro.core.SubjectKit;
-
+import cn.dreampie.shiro.core.SubjectKit;
 import cn.dreampie.tablebind.TableBind;
 
 /**
@@ -20,15 +19,21 @@ public class Template extends BaseModel<Template> {
 	public static final Template dao = new Template();
 	
 	public boolean save(){
+		User user = SubjectKit.getUser();
+		UserInfo userinfo = user.getUserInfo();
+		
+		this.set("apartmentid", userinfo.getLong("apartment_id"));
 		this.set("created_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
-		this.set("created_userid", SubjectKit.getUser().getPKValue());
+		this.set("created_userid", user.getLong("id"));
 		
 		return super.save();
 	}
 	
 	public boolean update(){
+		User user = SubjectKit.getUser();
+		
 		this.set("updated_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
-		this.set("updated_userid", SubjectKit.getUser().getPKValue());
+		this.set("updated_userid", user.getLong("id"));
 		return super.update();
 	}
 	

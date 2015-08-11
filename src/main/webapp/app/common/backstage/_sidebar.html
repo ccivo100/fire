@@ -306,6 +306,34 @@
 						</ul>
 					</li>
 					
+					<li class="" id="templateFlag">
+						<a href="#" class="dropdown-toggle" >
+							<i class="menu-icon fa fa-list-alt"></i>
+							<span class="menu-text">模板管理</span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+						
+						<ul class="submenu">
+							<li class="" id="templateListFlag">
+								<a href="${ContextPath}/admin/template">
+									<i class="menu-icon fa fa-caret-right" ></i>
+									模板列表
+								</a>
+								<b class="arrow"></b>
+							</li>
+							<li class="" id="addTemplateFlag">
+								<a href="${ContextPath}/admin/template/add">
+									<i class="menu-icon fa fa-caret-right" ></i>
+									添加模板
+								</a>
+								<b class="arrow"></b>
+							</li>
+						</ul>
+					</li>
+					
 					[@shiro.hasPermission name="P_A_ALERTINFO"]
 					<li class="" id="alertinfoFlag">
 						<a href="#" class="dropdown-toggle" >
@@ -332,8 +360,6 @@
 								</a>
 								<b class="arrow"></b>
 							</li>
-							
-							
 						</ul>
 					</li>
 					[/@shiro.hasPermission]

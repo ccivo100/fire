@@ -1,0 +1,154 @@
+[#include "/app/common/layout/__backstagemainlayout.html"/]
+
+[#assign pageJavascript]
+<script type="text/javascript">
+
+function select1() {
+	$.ajax(
+    {
+    	type: "post",
+    	url: "${ContextPath}/admin/template/handler",
+    	data: { "type": "type" },
+        success: function (msg) {
+        	$("#selectType").append("<option value='-1'>请选择故障大类</option>");
+        	for (var i = 0; i < msg.typeList.length; i++) {
+            	$("#selectType").append("<option value=" + msg.typeList[i].id + ">" + msg.typeList[i].name + "</option>");
+        	}
+            select2();
+        }
+	})
+};
+
+/* 异步获取一级部门、二级故障类别数据 */
+function select2() {
+	$("#selectApartment").html("");    //清除一级部门数据
+	$("#selectChildType").html("");    //清除二级故障数据
+	
+	$.ajax(
+	{
+		type: "post",
+		url: "${ContextPath}/admin/template/handler",
+		data: { "type": "apartment","typeid":$('#selectType').val() },
+		success: function (msg) {
+			$("#selectChildType").append("<option value='-1'>请选择故障小类</option>");
+			$("#selectApartment").append("<option value='-1'>请选择运维部门</option>");
+			for (var i = 0; i < msg.apartmentList.length; i++) {
+				$("#selectApartment").append("<option value=" + msg.apartmentList[i].id + ">" +msg.apartmentList[i].name + "</option>");
+			}
+			for (var i = 0; i < msg.childTypeList.length; i++) {
+				$("#selectChildType").append("<option value=" + msg.childTypeList[i].id + ">" +msg.childTypeList[i].name + "</option>");
+			}
+			select3();
+		}
+	})
+};
+
+/* 异步获取二级部门数据，点击二级故障 */
+function select3() {
+	$("#selectChildApartment").html("");
+	$.ajax(
+	{
+		type: "post",
+		url: "${ContextPath}/admin/template/handler",
+		data: { "type": "childApartment","childTypeid":$('#selectChildType').val(),"rootApartment": $('#selectApartment').val()},
+		success: function (msg) {
+			$("#selectChildApartment").append("<option value='-1'>请选择运维组别</option>");
+			for (var i = 0; i < msg.childApartmentList.length; i++) {
+				$("#selectChildApartment").append("<option value=" + msg.childApartmentList[i].id + ">" +msg.childApartmentList[i].name + "</option>");
+			}
+		}
+	})
+};
+
+/* 异步获取二级部门数据，点击一级部门 */
+function select4() {
+	$("#selectChildApartment").html("");
+	$("#selectReceiver").html("");    //清除接收人员
+	$.ajax(
+	{
+		type: "post",
+		url: "${ContextPath}/admin/template/handler",
+		data: { "type": "childApartment","childTypeid":$('#selectChildType').val(),"rootApartment": $('#selectApartment').val()},
+		success: function (msg) {
+			$("#selectChildApartment").append("<option value='-1'>请选择运维组别</option>");
+			for (var i = 0; i < msg.childApartmentList.length; i++) {
+				$("#selectChildApartment").append("<option value=" + msg.childApartmentList[i].id + ">" +msg.childApartmentList[i].name + "</option>");
+			}
+		}
+	})
+};
+
+function receiver() {
+	$("#selectReceiver").html("");    //清除接收人员
+	$.ajax(
+	{
+		type: "post",
+		url: "${ContextPath}/admin/template/handler",
+		data: { "type": "recerver","selectChildApartment":$('#selectChildApartment').val() },
+		success: function (msg) {
+			for (var i = 0; i < msg.userList.length; i++) {
+				$("#selectReceiver").append("<option value=" + msg.userList[i].id + ">" +msg.userList[i].full_name + "</option>");
+			}
+		}
+	})
+};
+
+$(function(){
+	select1();
+	$('#selectType').bind("change", select2);
+	$('#selectChildType').bind("change", select3);
+	$('#selectApartment').bind("change", select4);
+	$('#selectChildApartment').bind("change", receiver);
+});
+
+function alertModal(msg){
+	$("#modal-title-content").html("提示!");  
+	$("#modal-body-content").html(msg);  
+}
+
+/* 提交故障工单 */
+$(document).ready(function(){
+	$("#templateupdate").click(function(){
+		
+		$.ajax({
+			type:"post",
+			url:"${ContextPath}/admin/template/update",
+			data:{
+					"selectType":$('#selectType').val(),
+					"template.typeid":$('#selectChildType').val(),
+					"selectApartment":$('#selectApartment').val(),
+					"selectChildApartment":$('#selectChildApartment').val(),
+					"selectReceiver":$('#selectReceiver').val(),
+					
+					"template.id":$('#templateid').val(),
+					"template.context":$('#context').val(),
+					
+			},
+			success:function(msg){
+				alertModal(msg.state);
+				$('#alertModal').modal();
+				$('#alertModal').on('hidden.bs.modal', function () {
+					if(msg.state=='提交成功'){
+						window.location.href='${ContextPath}/admin/template'
+					}
+				});
+			}
+		});
+	});
+});
+
+</script>
+[/#assign]
+
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="templateFlag-editTemplateFlag"]
+<div class="page-header">
+	<h1>
+		<a href="${ContextPath}/admin/template">模板管理  </a>
+		<small> <i class="ace-icon fa fa-angle-double-right"></i> 修改模板</small>
+	</h1>
+</div>
+<div class="hr hr-dotted"></div>
+<form class="form-horizontal" role="form"  action="${ContextPath}/admin/template/update" method="post" >
+	[#include "_form.html" /]
+</form>
+[/@mainlayout]
