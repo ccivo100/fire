@@ -1,0 +1,55 @@
+[#include "/app/common/layout/__backstagemainlayout.html"/]
+[#assign pageCss]
+<!-- page specific plugin styles -->
+<link rel="stylesheet" href="${ContextPath}/admin/assets/css/prettify.css" />
+[/#assign]
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="templateFlag-templateListFlag"]
+
+<div class="page-header">
+	<h1>
+		<a href="${ContextPath}/admin/template">模板管理  </a>
+		<small> <i class="ace-icon fa fa-angle-double-right"></i> 模板详情</small>
+	</h1>
+</div>
+<div class="hr hr-dotted"></div>
+<div class = "row">
+	<div class="col-sm-6">
+		<div class="widget-box">
+			<div class="widget-header widget-header-flat">
+				<h4 class="widget-title smaller">
+					<i class="ace-icon fa fa-quote-left smaller-80"></i> 详情
+				</h4>
+			</div>
+			<div class="widget-body">
+				<div class="widget-main">
+					<div class="row">
+						<div class="col-xs-12">
+							<h3>${(template.title)!}</h3>
+							<blockquote>
+								<p>${(template.context)!}</p>
+								<small> By.${(created_user.full_name)!} <cite title="Source Title"> at.${(template.created_at)!}</cite>
+								</small>
+							</blockquote>
+						</div>
+					</div>
+					<hr />
+					<address>
+						<strong>故障类型：</strong>  ${(etype.name)!}<br />
+					</address>
+					<address>
+						<strong>模板所属：</strong>  ${(apartment.name)!}<br />
+					</address>
+					
+					<address>
+						<strong>接收人员：</strong> 
+						[#list userList as user]
+						${(user.full_name)!}，
+						[/#list]
+					</address><br /> 
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+[/@mainlayout]

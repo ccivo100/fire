@@ -72,7 +72,27 @@ public class TemplateController extends BaseController {
 		}
 	}
 	
-	public void query(){}
+	public void query(){
+		Template template = Template.dao.findById(getParaToLong("id"));
+		if(template == null ){
+			
+		}else {
+			Apartment apartment = Apartment.dao.findById(template.getLong("apartmentid"));
+			Etype etype = Etype.dao.findById(template.getLong("typeid"));
+			List<User> userList = User.dao.findUserAttrValues(" * ",template.getStr("receive_userids"));
+			User created_user = User.dao.findById(template.getLong("created_userid"));
+			Map<String,Object> attrMap = new HashMap<String,Object>();
+			attrMap.put("template", template);
+			attrMap.put("apartment", apartment);
+			attrMap.put("etype", etype);
+			attrMap.put("userList", userList);
+			attrMap.put("created_user", created_user);
+			
+			setAttrs(attrMap);
+		}
+		
+		render(TEMPLATE_QUERY_PAGE);
+	}
 	
 	public void add(){
 		
@@ -98,6 +118,7 @@ public class TemplateController extends BaseController {
 	@Before({TemplateValidator.class,Tx.class})
 	public void update(){
 		Template template = Template.dao.findById(getParaToLong("template.id"));
+		template.set("title", getPara("template.title"));
 		template.set("context", getPara("template.context"));
 		String[] receives = getParaValues("selectReceiver[]"); 
 		TemplateService.service.update(template, receives);

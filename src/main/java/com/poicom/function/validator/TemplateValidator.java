@@ -12,7 +12,9 @@ public class TemplateValidator extends Validator {
 		if(getActionKey().equals("/admin/template/save")|getActionKey().equals("/admin/template/update")){
 			String[] selectReceiver;
 			selectReceiver = c.getParaValues("selectReceiver[]");    //  选择邮件接收者 multiple or not
-			if(c.getParaToLong("selectType")==-1){
+			if (ValidateKit.isNullOrEmpty(c.getPara("template.title"))){
+				addError("state","模板标题不能为空！");
+			}else if(c.getParaToLong("selectType")==-1){
 				addError("state","请选择故障大类！");
 			}else if(c.getParaToLong("template.typeid")==-1){
 				addError("state","请选择故障小类！");

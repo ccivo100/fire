@@ -1,10 +1,15 @@
 package com.poicom.function.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.jfinal.plugin.activerecord.Page;
 import com.poicom.basic.kit.StringKit;
+import com.poicom.basic.plugin.sqlxml.SqlXmlKit;
 import com.poicom.function.model.Template;
 
 /**
@@ -30,6 +35,16 @@ public class TemplateService extends BaseService {
 	public void update(Template template, String[] receives) {
 		template.set("receive_userids", StringKit.arrayWithDot(receives));
 		template.update();
+	}
+	/**
+	 * 根据用户部门id
+	 */
+	public List<Template> findByApartmentId(Long apartmentid, Long typeid){
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("apartmentid", "apartmentid");
+		param.put("typeid", "typeid");
+		return Template.dao.find(SqlXmlKit.sql("basic.template.byApartmentid", param), apartmentid, typeid);
+		
 	}
 	
 

@@ -12,10 +12,13 @@
 		<thead>
 			<tr>
 				<th>编号</th>
+				<th>标题</th>
 				<th>内容</th>
+				[@shiro.hasRole name="R_ADMIN"]
 				<th>接收人员</th>
-				<th>创建时间</th>
 				<th>创建人员</th>
+				[/@shiro.hasRole]
+				<th>创建时间</th>
 				<th>操作</th>
 			</tr>
 		</thead>
@@ -23,10 +26,13 @@
 			[#list templatePage.getList() as template]
 			<tr>
 				<td>${(template_index+1)!}</td>
+				<td>${(template.title)!}</td>
 				<td>${(template.context)!}</td>
+				[@shiro.hasRole name="R_ADMIN"]
 				<td>${(template.receive_userids)!}</td>
-				<td>${(template.created_at)!}</td>
 				<td>${(template.created_userid)!}</td>
+				[/@shiro.hasRole]
+				<td>${(template.created_at)!}</td>
 				<td>
 					<div class="action-buttons">
 					<a class="btn btn-minier btn-primary"  href="${ContextPath}/admin/template/query?id=${(template.id)!}" >查看</a>
@@ -43,7 +49,10 @@
 						<td></td>
 						<td></td>
 						<td></td>
+						[@shiro.hasRole name="R_ADMIN"]
 						<td></td>
+						<td></td>
+						[/@shiro.hasRole]
 						<td></td>
 					</tr>
 				[/#list]

@@ -121,6 +121,7 @@ $(document).ready(function(){
 					"selectReceiver":$('#selectReceiver').val(),
 					
 					"template.id":$('#templateid').val(),
+					"template.title":$('#title').val(),
 					"template.context":$('#context').val(),
 					
 			},
@@ -140,7 +141,7 @@ $(document).ready(function(){
 </script>
 [/#assign]
 
-[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="templateFlag-editTemplateFlag"]
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="templateFlag-templateListFlag"]
 <div class="page-header">
 	<h1>
 		<a href="${ContextPath}/admin/template">模板管理  </a>

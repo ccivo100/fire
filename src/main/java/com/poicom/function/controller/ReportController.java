@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import cn.dreampie.ValidateKit;
 import cn.dreampie.routebind.ControllerKey;
+import cn.dreampie.shiro.core.SubjectKit;
 
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
@@ -29,11 +30,13 @@ import com.poicom.function.model.Comment;
 import com.poicom.function.model.Etype;
 import com.poicom.function.model.Level;
 import com.poicom.function.model.Order;
+import com.poicom.function.model.Template;
 import com.poicom.function.model.User;
 import com.poicom.function.model.UserInfo;
 import com.poicom.function.model.UserOrder;
 import com.poicom.function.service.ApartmentService;
 import com.poicom.function.service.OrderService;
+import com.poicom.function.service.TemplateService;
 import com.poicom.function.validator.CommonValidator;
 import com.poicom.function.validator.ReportValidator;
 
@@ -313,6 +316,13 @@ public class ReportController extends BaseController{
 				}
 			}
 			
+		}else if(type.equals("template")){
+			Long childTypeid= getParaToLong("childTypeid");
+			User user = SubjectKit.getUser();
+			UserInfo userinfo = user.getUserInfo();
+			List<Template> templateList = TemplateService.service.findByApartmentId(userinfo.getLong("apartment_id"), childTypeid);
+			renderJson("templateList", templateList);
+			
 		}
 	}
 	
@@ -396,6 +406,17 @@ public class ReportController extends BaseController{
 		
 	}
 	
+	/**
+	 * 模板保存工单
+	 */
+	@Before({ReportValidator.class,Tx.class})
+	public void saveByTemplate(){
+		Order order = getModel(Order.class);
+		boolean flag = OrderService.service.saveOrder(order);
+		if(flag){
+			
+		}
+	}
 	
 	
 

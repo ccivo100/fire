@@ -48,7 +48,10 @@ public class ReportValidator extends Validator {
 			}else if(ValidateKit.isNullOrEmpty(c.getPara("order.description"))){
 				addError("state","故障单描述不能为空！");
 			}
-		}else if(getActionKey().equals("/report/update")){
+		}else if(getActionKey().equals("/report/saveByTemplate")){
+			addError("state","失败：工单已处理，无法修改。");
+		}
+		else if(getActionKey().equals("/report/update")){
 			Order order=Order.dao.findById(c.getParaToInt("order.id"));
 			if(order.getInt("status")==1){
 				addError("state","失败：工单正在处理，无法修改。");
@@ -78,7 +81,10 @@ public class ReportValidator extends Validator {
 	protected void handleError(Controller c) {
 		if(getActionKey().equals("/report/save")){
 			c.renderJson("state", c.getAttr("state"));
-		}else if(getActionKey().equals("/report/update")){
+		}else if(getActionKey().equals("/report/saveByTemplate")){
+			c.renderJson("state", c.getAttr("state"));
+		}
+		else if(getActionKey().equals("/report/update")){
 			c.renderJson("state", c.getAttr("state"));
 		}else if(getActionKey().equals("/report/recall")){
 			c.renderJson("state", c.getAttr("state"));
