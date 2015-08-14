@@ -269,7 +269,9 @@ public class ReportController extends BaseController{
 		if(type.equals("type")){
 			List<Etype> typeList=Etype.dao.rootNode(" pid=? and deleted_at is null ", 0);
 			renderJson("typeList", typeList);
-		}else if(type.equals("apartment")){
+		}
+		
+		else if(type.equals("apartment")){
 			Long typeid= getParaToLong("typeid");
 			Map<String,Object> jsonList= new HashMap<String,Object>();
 			List<Apartment> apartmentList=Apartment.dao.getApartmentsList(typeid);
@@ -279,13 +281,16 @@ public class ReportController extends BaseController{
 			jsonList.put("childTypeList", childTypeList);//故障子类
 			renderJson(jsonList);
 		}
+		
 		else if(type.equals("childApartment")){
 			Long childTypeid= getParaToLong("childTypeid");
 			Long rootApartment = getParaToLong("rootApartment[]");
 			//Long rootApartment = getParaToLong("rootApartment");
 			List<Apartment> childApartmentList=Apartment.dao.getATApartmentsList(rootApartment,childTypeid);
 			renderJson("childApartmentList",childApartmentList);
-		}else if(type.equals("mailAndSm")){
+		}
+		
+		else if(type.equals("mailAndSm")){
 			Integer[] selectApartment = getParaValuesToInt("selectApartment[]");
 			if(selectApartment.length>1){
 				Long childTypeid= getParaToLong("childTypeid");
@@ -317,12 +322,28 @@ public class ReportController extends BaseController{
 			}
 			
 		}else if(type.equals("template")){
-			Long childTypeid= getParaToLong("childTypeid");
+			Long typeid= getParaToLong("typeid");
+			Map<String,Object> jsonList= new HashMap<String,Object>();
+			//Long childTypeid= getParaToLong("childTypeid");
 			User user = SubjectKit.getUser();
 			UserInfo userinfo = user.getUserInfo();
-			List<Template> templateList = TemplateService.service.findByApartmentId(userinfo.getLong("apartment_id"), childTypeid);
-			renderJson("templateList", templateList);
+			Apartment apartment = Apartment.dao.findById(userinfo.getLong("apartment_id"));
+			List<Etype> childTypeList = Etype.dao.childNode(" pid=? and deleted_at is null ", typeid);
+			List<Template> templateList = TemplateService.service.findByApartmentId(apartment.getLong("pid"), typeid);
+			jsonList.put("childTypeList", childTypeList);//故障子类
+			jsonList.put("templateList", templateList);//模板
+			renderJson(jsonList);
 			
+		}else if (type.equals("setValue")) {
+			Long selectTemplateid = getParaToLong("selectTemplateid");
+			
+			Map<String,Object> jsonList= new HashMap<String,Object>();
+			
+			Template template = Template.dao.findById(selectTemplateid);
+			List<User> userList = User.dao.findUserAttrValues(" * ",template.getStr("receive_userids"));
+			jsonList.put("template", template);	//模板内容
+			jsonList.put("userList", userList);	//接收用户
+			renderJson(jsonList);
 		}
 	}
 	
@@ -412,10 +433,24 @@ public class ReportController extends BaseController{
 	@Before({ReportValidator.class,Tx.class})
 	public void saveByTemplate(){
 		Order order = getModel(Order.class);
+		order.set("level", 1);
+		Template template = Template.dao.findById(getParaToLong("selectTemplate"));
+		List<User> userList = User.dao.findUserAttrValues(" * ",template.getStr("receive_userids"));
+		
+		//  提交工单内容
 		boolean flag = OrderService.service.saveOrder(order);
 		if(flag){
 			
+			//  通知自己部门人员
+			OrderService.service.saveUserOrderToOwnApart(order);
+			//  提交工单关联
+			OrderService.service.saveUserOrderByTemplate(userList, order);
+			OrderService.service.sendMailAndSmsByTemplate(userList, order);
+			renderJson("state","提交成功！");
+		}else {
+			renderJson("state","操作失败！");
 		}
+		
 	}
 	
 	

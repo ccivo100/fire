@@ -11,7 +11,8 @@ function select1() {
         success: function (msg) {
         	$("#selectFapartment").append("<option value=''>请选择一级部门</option>");
         	for (var i = 0; i < msg.afacherList.length; i++) {
-            	$("#selectFapartment").append("<option value=" + msg.afacherList[i].id + ">" + msg.afacherList[i].name + "</option>");
+        			$("#selectFapartment").append("<option value=" + msg.afacherList[i].id + ">" + msg.afacherList[i].name + "</option>");
+            	
         	}
             select2();
         }

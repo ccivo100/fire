@@ -26,8 +26,8 @@
 			[#list templatePage.getList() as template]
 			<tr>
 				<td>${(template_index+1)!}</td>
-				<td>${(template.title)!}</td>
-				<td>${(template.context)!}</td>
+				<td title="${(template.title)!}"><div style="overflow: hidden; width: 200px; height: 20px;">${(template.title)!}</div></td>
+				<td title="${(template.context)!}"><div style="overflow: hidden; width: 350px; height: 20px;">${(template.context)!}</div></td>
 				[@shiro.hasRole name="R_ADMIN"]
 				<td>${(template.receive_userids)!}</td>
 				<td>${(template.created_userid)!}</td>

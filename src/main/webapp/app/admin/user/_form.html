@@ -1,6 +1,7 @@
 <div class="row">
 	<input type="hidden" name="branch.id" value="${(branch.id)!}" />
 	<input type="hidden" name="branchid" value="${(branchid)!}" />
+	<input type="hidden" id="apartmentid" value="${(apartmentid)!}" />
 	
 	<div class="form-group">
 		<label class="col-xs-2 control-label">账号</label>
@@ -112,11 +113,29 @@
 		</div>
 	</div>
 	[/@shiro.hasRole]
+	
+		[@shiro.hasRole name="R_DEPARTMENT"]
+	<div class="form-group">
+		<label class="col-xs-2 control-label">单位</label>
+		<div class="col-xs-4">
+				<select id="selectBranch" name="selectBranch" class="form-control"  required disabled>
+					<option value="" selected="selected">请选择</option>
+					[#list branchList as branch]
+					[#if (branchid?number)=branch.id]
+					<option value="${(branch.id)!}"  selected="selected">${(branch.name)!}	</option>
+					[#else]
+					<option value="${(branch.id)!}"  >${(branch.name)!}	</option>
+					[/#if]
+					[/#list]
+				</select>
+		</div>
+	</div>
+	[/@shiro.hasRole]
 
 	<div class="form-group">
 		<label class="col-xs-2 control-label">部门</label>
 		<div class="col-sm-2">
-			<select id="selectFapartment" name="selectFapartment" class="form-control" required >
+			<select id="selectFapartment" name="selectFapartment" class="form-control" required>
 			</select>
 		</div>
 		<div class="col-sm-2">

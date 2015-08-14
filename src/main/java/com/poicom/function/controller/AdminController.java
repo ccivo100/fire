@@ -51,6 +51,7 @@ import com.poicom.function.model.User;
 import com.poicom.function.model.UserInfo;
 import com.poicom.function.model.UserOrder;
 import com.poicom.function.model.UserRole;
+import com.poicom.function.service.ApartmentService;
 import com.poicom.function.service.OrderService;
 import com.poicom.function.service.UserService;
 import com.poicom.function.validator.AdminValidator;
@@ -120,10 +121,16 @@ public class AdminController extends BaseController {
 		String w = "";
 		if(SubjectKit.getSubject().hasRole("R_ADMIN")){
 			
-		}else{
+		}else if(SubjectKit.getSubject().hasRole("R_MANAGER")){
 			User cUser=SubjectKit.getUser();
 			long branchid=UserInfo.dao.findFirstBy("user_id=?",cUser.get("id")).getLong("branch_id");
 			w=" and branch.id="+branchid;
+		}else if(SubjectKit.getSubject().hasRole("R_DEPARTMENT")){
+			User cUser=SubjectKit.getUser();
+			long branchid=UserInfo.dao.findFirstBy("user_id=?",cUser.get("id")).getLong("branch_id");
+			long apartmentid=UserInfo.dao.findFirstBy("user_id=?",cUser.get("id")).getLong("apartment_id");
+			
+			w=" and branch.id=" + branchid +" and apartment.id in "+ApartmentService.service.childNodeId(apartmentid);
 		}
 		
 		Page<User> userPage;
@@ -154,16 +161,22 @@ public class AdminController extends BaseController {
 	public void adduser(){
 		
 		if(SubjectKit.getSubject().hasRole("R_ADMIN")){
-			
+			setAttr("branchList",Branch.dao.getAllBranch());
+			setAttr("apartmentList",Apartment.dao.getAllApartment());
+			setAttr("positionList",Position.dao.getAllPosition());
 		}else{
+			Map<String,Object> attrMap = new HashMap<String,Object>();
 			User subUser=SubjectKit.getUser();
-			long branchid=UserInfo.dao.findFirstBy("user_id=?",subUser.get("id")).getLong("branch_id");
-			setAttr("branchid",branchid);
+			UserInfo userinfo = UserInfo.dao.findFirstBy("user_id=?",subUser.get("id"));
+			Apartment papartment=Apartment.dao.findById(Apartment.dao.findById(userinfo.getLong("apartment_id")).get("pid"));
+			attrMap.put("branchid", userinfo.getLong("branch_id"));
+			attrMap.put("apartmentid", papartment.getLong("id"));
+			setAttrs(attrMap);
+			setAttr("branchList",Branch.dao.getAllBranch());
+			setAttr("positionList",Position.dao.getAllPosition());
 		}
 		
-		setAttr("branchList",Branch.dao.getAllBranch());
-		setAttr("apartmentList",Apartment.dao.getAllApartment());
-		setAttr("positionList",Position.dao.getAllPosition());
+		
 		render(USER_ADD_PAGE);
 	}
 	
@@ -174,8 +187,17 @@ public class AdminController extends BaseController {
 		String type=getPara("type");
 		
 		if(type.equals("afacher")){
-			List<Apartment> afacherList=Apartment.dao.rootNode(" deleted_at is null and pid=? ",0);
-			renderJson("afacherList", afacherList);
+			
+			if(SubjectKit.getSubject().hasRole("R_ADMIN")){
+				List<Apartment> afacherList=Apartment.dao.rootNode(" deleted_at is null and pid=? ",0);
+				renderJson("afacherList", afacherList);
+			}else {
+				User subUser=SubjectKit.getUser();
+				UserInfo userinfo = UserInfo.dao.findFirstBy("user_id=?",subUser.get("id"));
+				Apartment papartment=Apartment.dao.findById(Apartment.dao.findById(userinfo.getLong("apartment_id")).get("pid"));
+				renderJson("afacherList", Apartment.dao.find("select * from com_apartment where deleted_at is null and id = ?",papartment.getPKValue()));
+			}
+			
 		}else if(type.equals("achilren")){
 			Map<String,Object> jsons =new HashMap<String, Object>();
 			List<Apartment> achilrenList=Apartment.dao.rootNode(" deleted_at is null and pid=?",getParaToInt("typeid"));
@@ -327,6 +349,8 @@ public class AdminController extends BaseController {
 			setAttr("roleList",Role.dao.findRolesExceptId(1));
 		}else if(SubjectKit.getSubject().hasRole("R_MANAGER")){
 			setAttr("roleList",Role.dao.findRolesExceptId(1,2));
+		}else if(SubjectKit.getSubject().hasRole("R_DEPARTMENT")){
+			setAttr("roleList",Role.dao.findRolesExceptId(1,2,5));
 		}
 		setAttr("branchList",Branch.dao.getAllBranch());
 		setAttr("apartmentList",Apartment.dao.getAllApartment());

@@ -239,6 +239,8 @@ public class OrderService extends BaseService {
 		}
 	}
 	
+
+	
 	/**
 	 * 提交工单处理人员消息提醒，单纯发送邮件、短信。配合saveUserOrder方法。
 	 * @param selectMail
@@ -255,6 +257,39 @@ public class OrderService extends BaseService {
 		}
 		for(User smsUser : smsUserList){
 			phones.add(smsUser.getStr("phone"));    //只有phone
+		}
+		String[] recipient = recipients.toArray(new String[recipients.size()]);
+		String[] phone = phones.toArray(new String[phones.size()]);
+		Notice.newOrder(mailSender, smsSender, userinfo, order, recipient, phone);
+		recipients.clear();
+		phones.clear();
+	}
+	
+	/**
+	 * 提交工单处理人员-通过模板
+	 * @param userList
+	 * @param order
+	 */
+	public void saveUserOrderByTemplate(List<User> userList, Order order){
+		for(User user: userList){
+			UserOrder userorder=new UserOrder()
+			.set("user_id", user.get("id"))
+			.set("order_id", order.get("id"));
+			userorder.save();
+		}
+	}
+	
+	/**
+	 * 提交工单处理人员消息提醒，单纯发送邮件、短信。配合saveUserOrderByTemplate方法。
+	 * @param userList
+	 * @param order
+	 */
+	public void sendMailAndSmsByTemplate(List<User> userList, Order order){
+		//当前用户详细信息
+		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
+		for(User user : userList) {
+			recipients.add(user.getStr("email"));   //只有email
+			phones.add(user.getStr("phone"));    //只有phone
 		}
 		String[] recipient = recipients.toArray(new String[recipients.size()]);
 		String[] phone = phones.toArray(new String[phones.size()]);

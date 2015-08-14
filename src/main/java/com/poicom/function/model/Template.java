@@ -21,8 +21,9 @@ public class Template extends BaseModel<Template> {
 	public boolean save(){
 		User user = SubjectKit.getUser();
 		UserInfo userinfo = user.getUserInfo();
+		Apartment apartment = Apartment.dao.findById(userinfo.getLong("apartment_id"));
 		
-		this.set("apartmentid", userinfo.getLong("apartment_id"));
+		this.set("apartmentid", apartment.getLong("pid"));
 		this.set("created_at", DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
 		this.set("created_userid", user.getLong("id"));
 		

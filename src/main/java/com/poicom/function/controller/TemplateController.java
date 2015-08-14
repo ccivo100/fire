@@ -1,5 +1,6 @@
 package com.poicom.function.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import com.poicom.function.model.Etype;
 import com.poicom.function.model.Template;
 import com.poicom.function.model.User;
 import com.poicom.function.model.UserInfo;
+import com.poicom.function.service.ApartmentService;
 import com.poicom.function.service.TemplateService;
 import com.poicom.function.validator.TemplateValidator;
 
@@ -36,8 +38,9 @@ public class TemplateController extends BaseController {
 		}else {
 			User currentUser = SubjectKit.getUser();
 			UserInfo userinfo = currentUser.getUserInfo();
+			Apartment apartment = Apartment.dao.findById(userinfo.getLong("apartment_id"));
 			String where = " and apartmentid = ? ";
-			templatePage = TemplateService.service.allTemplatePage(getParaToInt(0,1), 10,where,userinfo.getLong("apartment_id"));
+			templatePage = TemplateService.service.allTemplatePage(getParaToInt(0,1), 10,where,apartment.getLong("pid"));
 		}
 		
 		setAttr("templatePage", templatePage);
@@ -62,13 +65,27 @@ public class TemplateController extends BaseController {
 			
 		}else if(type.equals("childApartment")){
 			Long childTypeid= getParaToLong("childTypeid");
-			Long rootApartment = getParaToLong("rootApartment");
+			Long rootApartment = getParaToLong("rootApartment[]");
 			List<Apartment> childApartmentList=Apartment.dao.getATApartmentsList(rootApartment,childTypeid);
 			renderJson("childApartmentList",childApartmentList);
 		}else if(type.equals("recerver")){
-			Long selectChildApartment=getParaToLong("selectChildApartment");
-			List<User> userList = Apartment.dao.getUsersById(selectChildApartment);
-			renderJson("userList",userList);
+			Integer[] selectApartment = getParaValuesToInt("selectApartment[]");
+			if(selectApartment.length>1){
+				Long childTypeid= getParaToLong("childTypeid");
+				List<User> userList = new ArrayList<User>();
+				for(int i=0;i<selectApartment.length;i++){
+					int rootApartment=selectApartment[i];//一级部门id
+					List<Apartment> childApartmentList=Apartment.dao.getATApartmentsList(rootApartment,childTypeid);
+					List<User> users = ApartmentService.service.findUsers(childApartmentList);
+					userList.addAll(users);
+				}
+				renderJson("userList",userList);
+			}else{
+				Long selectChildApartment=getParaToLong("selectChildApartment");
+				List<User> userList = Apartment.dao.getUsersById(selectChildApartment);
+				renderJson("userList",userList);
+			}
+			
 		}
 	}
 	
@@ -120,6 +137,7 @@ public class TemplateController extends BaseController {
 		Template template = Template.dao.findById(getParaToLong("template.id"));
 		template.set("title", getPara("template.title"));
 		template.set("context", getPara("template.context"));
+		template.set("typeid", getParaToLong("template.typeid"));
 		String[] receives = getParaValues("selectReceiver[]"); 
 		TemplateService.service.update(template, receives);
 		renderJson("state","提交成功");

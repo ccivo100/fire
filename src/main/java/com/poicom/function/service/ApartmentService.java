@@ -6,7 +6,9 @@ import java.util.List;
 import org.joda.time.DateTime;
 
 import com.jfinal.log.Logger;
+import com.poicom.basic.kit.StringKit;
 import com.poicom.basic.kit.WebKit;
+import com.poicom.basic.plugin.sqlxml.SqlXmlKit;
 import com.poicom.function.model.Apartment;
 import com.poicom.function.model.ApartmentType;
 import com.poicom.function.model.User;
@@ -112,5 +114,15 @@ public class ApartmentService extends BaseService {
 			userList.addAll(users);
 		}
 		return userList;
+	}
+	
+	public String childNodeId(Long apartmentid){
+		Apartment apartment = Apartment.dao.findById(apartmentid);
+		List<Apartment> apartmentList = Apartment.dao.find(SqlXmlKit.sql("apartment.treeChildNode"), apartment.getLong("pid"));
+		String[] str = new String[apartmentList.size()];
+		for(int i=0;i<apartmentList.size();i++) {
+			str[i] = new String(apartmentList.get(i).getLong("id").toString());
+		}
+		return StringKit.arrayToString(str);
 	}
 }

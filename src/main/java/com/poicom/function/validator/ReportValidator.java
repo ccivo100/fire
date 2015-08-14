@@ -48,8 +48,28 @@ public class ReportValidator extends Validator {
 			}else if(ValidateKit.isNullOrEmpty(c.getPara("order.description"))){
 				addError("state","故障单描述不能为空！");
 			}
-		}else if(getActionKey().equals("/report/saveByTemplate")){
-			addError("state","失败：工单已处理，无法修改。");
+		}
+		else if(getActionKey().equals("/report/saveByTemplate")){
+			
+			if(ValidateKit.isNullOrEmpty(c.getPara("order.title"))){
+				addError("state","故障单标题不能为空！");
+			}
+			else if(Order.dao.findBy(" offer_user=? and title=? ", c.getPara("order.offer_user"),c.getPara("order.title").trim()).size()>0){
+				addError("state","已存在该故障单，请重新输入！");
+			}
+			else if(c.getParaToLong("selectType")==-1){
+				addError("state","请选择故障大类！");
+			}
+			else if(c.getParaToLong("order.type")==-1){
+				addError("state","请选择故障小类！");
+			}
+			else if(c.getParaToLong("selectTemplate")==-1){
+				addError("state","请选择模板！");
+			}
+			else if(ValidateKit.isNullOrEmpty(c.getPara("order.description"))){
+				addError("state","故障单描述不能为空！");
+			}
+			
 		}
 		else if(getActionKey().equals("/report/update")){
 			Order order=Order.dao.findById(c.getParaToInt("order.id"));
@@ -81,12 +101,14 @@ public class ReportValidator extends Validator {
 	protected void handleError(Controller c) {
 		if(getActionKey().equals("/report/save")){
 			c.renderJson("state", c.getAttr("state"));
-		}else if(getActionKey().equals("/report/saveByTemplate")){
+		}
+		else if(getActionKey().equals("/report/saveByTemplate")){
 			c.renderJson("state", c.getAttr("state"));
 		}
 		else if(getActionKey().equals("/report/update")){
 			c.renderJson("state", c.getAttr("state"));
-		}else if(getActionKey().equals("/report/recall")){
+		}
+		else if(getActionKey().equals("/report/recall")){
 			c.renderJson("state", c.getAttr("state"));
 		}
 		

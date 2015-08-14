@@ -46,33 +46,41 @@ function select1ByTemplate() {
 /* 异步获取二级故障类别数据-模板功能 */
 function select2ByTemplate() {
 	$("#selectChildType2").html("");    //清除二级故障数据
+	$("#selectTemplate").html("");    //清除模板数据
 	$.ajax(
 	{
 		type: "post",
 		url: "${ContextPath}/report/handler",
-		data: { "type": "apartment","typeid":$('#selectType2').val() },
+		data: { "type": "template","typeid":$('#selectType2').val() },
 		success: function (msg) {
 			$("#selectChildType2").append("<option value='-1'>请选择故障小类</option>");
+			$("#selectTemplate").append("<option value='-1'>请选择模板类型</option>");
 			
 			for (var i = 0; i < msg.childTypeList.length; i++) {
 				$("#selectChildType2").append("<option value=" + msg.childTypeList[i].id + ">" +msg.childTypeList[i].name + "</option>");
+			}
+			for (var i = 0; i < msg.templateList.length; i++) {
+				$("#selectTemplate").append("<option value=" + msg.templateList[i].id + ">" +msg.templateList[i].title + "</option>");
 			}
 			select3ByTemplate();
 		}
 	})
 };
+
 function select3ByTemplate(){
-	$("#selectTemplate").html("");    //清除二级故障数据
+	$("#description2").html("");    //清除二级故障数据
+	$("#userListTitle").html("");    //清除标题
+	$("#userList").html("");    //清除接收人员数据
 	$.ajax(
 	{
 		type: "post",
 		url: "${ContextPath}/report/handler",
-		data: { "type": "template","childTypeid":$('#selectChildType2').val() },
+		data: { "type": "setValue","selectTemplateid":$('#selectTemplate').val() },
 		success: function (msg) {
-			$("#selectTemplate").append("<option value='-1'>请选择模板类型</option>");
-			
-			for (var i = 0; i < msg.templateList.length; i++) {
-				$("#selectTemplate").append("<option value=" + msg.templateList[i].id + ">" +msg.templateList[i].title + "</option>");
+			$("#description2").text(msg.template.context);
+			$("#userListTitle").append("接收人员：");
+			for (var i = 0; i < msg.userList.length; i++) {
+				$("#userList").append("<span class='label label-success'>"+ msg.userList[i].full_name + "</span> ");
 			}
 		}
 	})
@@ -193,7 +201,7 @@ function selectMailAndSms(){
 		{
 			type: "post",
 			url: "${ContextPath}/report/handler",
-			data: { "type": "mailAndSm", "childTypeid":$('#selectChildType').val(), "selectApartment": $('#selectApartment').val(), "selectChildApartment": $('#selectChildApartment').val()},
+			data: { "type": "mailAndSm", "selectApartment": $('#selectApartment').val(), "selectChildApartment": $('#selectChildApartment').val()},
 			success: function (msg) {
 				for (var i = 0; i < msg.userList.length; i++) {
 					$("#selectMail").append("<option value=" + msg.userList[i].id + ">" +msg.userList[i].full_name + "</option>");
@@ -228,7 +236,7 @@ $(function(){
 	select1ByTemplate();
 	$('#selectType').bind("change", select2);
 	$('#selectType2').bind("change",select2ByTemplate);
-	$('#selectChildType2').bind("change",select3ByTemplate);
+	$('#selectTemplate').bind("change",select3ByTemplate);
 	
 	$('#selectChildType').bind("change", select3);
 	$('#selectChildType').bind("change",  selectMailAndSms);
@@ -291,7 +299,8 @@ $(document).ready(function(){
 					"order.offer_user":$('#userid').val(),
 					"order.title":$('#title2').val(),
 					"order.description":$('#description2').val(),
-					"order.type":$('#selectChildType').val(),
+					"order.type":$('#selectChildType2').val(),
+					"selectTemplate":$('#selectTemplate').val(),
 			},
 			success:function(msg){
 				alertModal(msg.state);

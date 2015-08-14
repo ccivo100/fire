@@ -145,7 +145,7 @@ function alertModal(msg){
 			<div class="form-group">
 				<label class="col-sm-2 control-label">单位</label>
 				<div class="col-sm-4">
-					<select id="selectBranch" name="selectBranch" class="form-control"  required >
+					<select id="selectBranch" name="selectBranch" class="form-control"  required disabled>
 						<option value="-1" selected="selected">请选择</option>
 						[#list branchList as branch]
 						[#if (userinfo.info_branchid)=branch.id]
@@ -161,7 +161,7 @@ function alertModal(msg){
 			<div class="form-group">
 				<label class="col-xs-2 control-label">部门</label>
 				<div class="col-sm-2">
-					<select id="selectFapartment" name="selectFapartment" class="form-control" required >
+					<select id="selectFapartment" name="selectFapartment" class="form-control" required>
 					</select>
 				</div>
 				<div class="col-sm-2">
