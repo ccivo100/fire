@@ -247,7 +247,7 @@ public class OrderService extends BaseService {
 	 * @param selectSms
 	 * @param order
 	 */
-	public void sendMailAndSms(String selectMail, String selectSms, Order order){
+/*	public void sendMailAndSms(String selectMail, String selectSms, Order order){
 		//当前用户详细信息
 		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
 		List<User> mailUserList = User.dao.findUserAttrValues("email", selectMail);
@@ -262,6 +262,40 @@ public class OrderService extends BaseService {
 		String[] phone = phones.toArray(new String[phones.size()]);
 		Notice.newOrder(mailSender, smsSender, userinfo, order, recipient, phone);
 		recipients.clear();
+		phones.clear();
+	}*/
+	
+	/**
+	 * 提交工单处理人员消息提醒，单纯发送邮件。配合saveUserOrder方法。
+	 * @param selectMail
+	 * @param order
+	 */
+	public void sendMail(String selectMail, Order order){
+		//当前用户详细信息
+		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
+		List<User> mailUserList = User.dao.findUserAttrValues("email", selectMail);
+		for(User mailUser : mailUserList){
+			recipients.add(mailUser.getStr("email"));   //只有email
+		}
+		String[] recipient = recipients.toArray(new String[recipients.size()]);
+		Notice.newOrder(mailSender, userinfo, order, recipient);
+		recipients.clear();
+	}
+	
+	/**
+	 * 提交工单处理人员消息提醒，单纯发送短信。配合saveUserOrder方法。
+	 * @param selectSms
+	 * @param order
+	 */
+	public void sendSms(String selectSms, Order order){
+		//当前用户详细信息
+		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
+		List<User> smsUserList = User.dao.findUserAttrValues("phone", selectSms);
+		for(User smsUser : smsUserList){
+			phones.add(smsUser.getStr("phone"));    //只有phone
+		}
+		String[] phone = phones.toArray(new String[phones.size()]);
+		Notice.newOrder(smsSender, userinfo, order, phone);
 		phones.clear();
 	}
 	

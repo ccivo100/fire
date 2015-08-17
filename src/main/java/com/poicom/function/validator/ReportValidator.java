@@ -37,12 +37,12 @@ public class ReportValidator extends Validator {
 			}else if(selectApartment.length==1&&c.getParaToLong("selectChildApartment")==-1){
 				addError("state","请选择运维组别！");
 			}
-			else if(ValidateKit.isNullOrEmpty(selectMail)){
+			/*else if(ValidateKit.isNullOrEmpty(selectMail)){
 				addError("state","请选择邮件接收人员！");
 			}
 			else if(ValidateKit.isNullOrEmpty(selectSms)){
 				addError("state","请选择短信接收人员！");
-			}
+			}*/
 			else if(c.getParaToLong("order.level")==-1){
 				addError("state","请选择故障等级！");
 			}else if(ValidateKit.isNullOrEmpty(c.getPara("order.description"))){

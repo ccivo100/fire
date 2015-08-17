@@ -9,6 +9,7 @@ import com.jfinal.aop.Before;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.tx.Tx;
+import com.poicom.basic.kit.ObjectKit;
 import com.poicom.function.model.Apartment;
 import com.poicom.function.model.Etype;
 import com.poicom.function.model.Template;
@@ -97,6 +98,7 @@ public class TemplateController extends BaseController {
 			Apartment apartment = Apartment.dao.findById(template.getLong("apartmentid"));
 			Etype etype = Etype.dao.findById(template.getLong("typeid"));
 			List<User> userList = User.dao.findUserAttrValues(" * ",template.getStr("receive_userids"));
+			ObjectKit.formatUser(userList);
 			User created_user = User.dao.findById(template.getLong("created_userid"));
 			Map<String,Object> attrMap = new HashMap<String,Object>();
 			attrMap.put("template", template);

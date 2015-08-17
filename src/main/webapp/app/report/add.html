@@ -77,10 +77,13 @@ function select3ByTemplate(){
 		url: "${ContextPath}/report/handler",
 		data: { "type": "setValue","selectTemplateid":$('#selectTemplate').val() },
 		success: function (msg) {
-			$("#description2").text(msg.template.context);
-			$("#userListTitle").append("接收人员：");
-			for (var i = 0; i < msg.userList.length; i++) {
-				$("#userList").append("<span class='label label-success'>"+ msg.userList[i].full_name + "</span> ");
+			if(msg.template){
+				$("#description2").text(msg.template.context);
+				$("#userListTitle").append("接收人员：");
+				for (var i = 0; i < msg.userList.length; i++) {
+					$("#userList").append("<span class='label label-success'>"+ msg.userList[i].full_name + "</span> ");
+				}
+			}else{
 			}
 		}
 	})
@@ -250,6 +253,34 @@ function alertModal(msg){
 	$("#modal-title-content").html("提示!");  
 	$("#modal-body-content").html(msg);  
 }
+function alertSaveModal(msg){
+	$("#modal-title-saveOrder").html("提示!");  
+	$("#modal-body-saveOrder").html(msg);  
+}
+
+$(".reportsave").click(function(){
+	var mailArray=new Array();
+	var smsArray=new Array();
+	var alertMsg="";
+	
+	$("#selectMail option:selected").each(function(i){ 
+			apartmentArray[i]=$(this).val(); 
+	});
+	$("#selectSms option:selected").each(function(i){ 
+			apartmentArray[i]=$(this).val(); 
+	});
+	
+	if(mailArray.length==0){
+		alertMsg+="邮件通知员 ";
+	}
+	if(smsArray.length==0){
+		alertMsg+="短信通知员 ";
+	}
+	
+	alertSaveModal(alertMsg);
+	$("#saveModal").modal();
+	
+});
 
 /* 提交故障工单 */
 $(document).ready(function(){

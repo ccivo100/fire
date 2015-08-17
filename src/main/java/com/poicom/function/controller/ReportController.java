@@ -340,9 +340,12 @@ public class ReportController extends BaseController{
 			Map<String,Object> jsonList= new HashMap<String,Object>();
 			
 			Template template = Template.dao.findById(selectTemplateid);
-			List<User> userList = User.dao.findUserAttrValues(" * ",template.getStr("receive_userids"));
 			jsonList.put("template", template);	//模板内容
-			jsonList.put("userList", userList);	//接收用户
+			
+			if(!ValidateKit.isNullOrEmpty(template)){
+				List<User> userList = User.dao.findUserAttrValues(" * ",template.getStr("receive_userids"));
+				jsonList.put("userList", userList);	//接收用户
+			}
 			renderJson(jsonList);
 		}
 	}
@@ -354,19 +357,20 @@ public class ReportController extends BaseController{
 	@Before({ReportValidator.class,Tx.class})
 	public void save(){
 		Order order = getModel(Order.class);
-		boolean flag = OrderService.service.saveOrder(order);
+		boolean flag = OrderService.service.saveOrder(order);		//先提交工单，成功后建立关联并发送通知。
 		if(flag){
 			Integer[] selectApartment;
+			String[] selectMailes, selectSmses;
 			String selectMail, selectSms;
 			selectApartment=getParaValuesToInt("selectApartment[]");
-			selectMail = StringKit.arrayWithDot(getParaValues("selectMail[]"));    //  将提交的id转换为  xx,xx,xx
-			selectSms = StringKit.arrayWithDot(getParaValues("selectSms[]"));    
+			selectMailes = getParaValues("selectMail[]");
+			selectSmses = getParaValues("selectSms[]");
+			
 			//Integer selectApartment=getParaToInt("selectApartment");
 			if(selectApartment.length==1){    //当一级部门只有一个时
 			long selectChildApartment=getParaToLong("selectChildApartment");    //选中部门
 				OrderService.service.saveUserOrderToOwnApart(order);
 				OrderService.service.saveUserOrder(selectChildApartment, order);
-				OrderService.service.sendMailAndSms(selectMail, selectSms, order);
 				renderJson("state","提交成功！");
 			}else if(selectApartment.length>1){    //当一级部门为多个时。
 				Long childTypeid= getParaToLong("childTypeid");
@@ -378,9 +382,18 @@ public class ReportController extends BaseController{
 						OrderService.service.saveUserOrder(childApartment.getLong("id"), order);
 					}
 				}
-				OrderService.service.sendMailAndSms(selectMail, selectSms, order);
 				renderJson("state","提交成功！");
 			}
+			
+			if(!ValidateKit.isNullOrEmpty(selectMailes) ){
+				selectMail = StringKit.arrayWithDot(selectMailes);    //  将提交的id转换为  xx,xx,xx
+				OrderService.service.sendMail(selectMail, order);		//发送邮件提醒
+			}
+			if(!ValidateKit.isNullOrEmpty(selectSmses)){
+				selectSms = StringKit.arrayWithDot(selectSmses);
+				OrderService.service.sendSms(selectSms, order);		//发送短信提醒
+			}
+			
 		}else{
 			renderJson("state","提交失败！");
 		}

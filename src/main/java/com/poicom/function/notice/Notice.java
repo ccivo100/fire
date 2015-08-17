@@ -46,6 +46,35 @@ public class Notice {
 		smsSender.send();
 	}
 	
+	/**
+	 * 新工单-邮件提醒运维人员
+	 * @param mailSender
+	 * @param offer
+	 * @param order
+	 * @param recipient
+	 */
+	public static void newOrder(MailSender mailSender, Record offer,Order order, String[] recipient){
+		mailSender
+			.setSubject("【新提醒】新故障工单提醒！")
+			.setBody(MailTemplate.newOrderMailBody(offer, order))
+			.setRecipients(recipient);
+		mailSender.send();
+	}
+	
+	/**
+	 * 新工单-短信提醒运维人员
+	 * @param smsSender
+	 * @param offer
+	 * @param order
+	 * @param phone
+	 */
+	public static void newOrder(SmsSender smsSender, Record offer,Order order, String[] phone){
+		smsSender
+			.setMessage(SmsTemplate.newOrderSmsMsg(offer, order))
+			.setPhones(phone);
+		smsSender.send();
+	}
+	
 	public static void recallOrder(MailSender mailSender, SmsSender smsSender, Record offer,Order order, String[] recipient, String[] phone){
 		mailSender
 			.setSubject("【撤回通知】故障申报撤回提醒！")

@@ -6,6 +6,7 @@ import java.util.List;
 import org.joda.time.DateTime;
 
 import com.jfinal.log.Logger;
+import com.poicom.basic.kit.ObjectKit;
 import com.poicom.basic.kit.StringKit;
 import com.poicom.basic.kit.WebKit;
 import com.poicom.basic.plugin.sqlxml.SqlXmlKit;
@@ -107,13 +108,30 @@ public class ApartmentService extends BaseService {
 		}
 	}
 	
+	/**
+	 * 获得给定部门列表中，所有人员
+	 * @param apartments
+	 * @return
+	 */
 	public List<User> findUsers(List<Apartment> apartments){
 		List<User> userList = new ArrayList<User>();
 		for(Apartment apartment:apartments){
 			List<User> users = apartment.getUsersById(apartment.getPKValue());
+			ObjectKit.formatUser(users,apartment);
 			userList.addAll(users);
 		}
 		return userList;
+	}
+	
+	/**
+	 * 在用户姓名后面加上部门名称
+	 * @param users
+	 * @param apartment
+	 */
+	public void formatUser(List<User> users,Apartment apartment){
+		for(User user:users){
+			user.set("full_name", user.get("full_name")+"（"+apartment.getStr("name")+"）");
+		}
 	}
 	
 	public String childNodeId(Long apartmentid){
