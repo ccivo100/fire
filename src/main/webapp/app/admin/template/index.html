@@ -29,7 +29,8 @@
 				<td title="${(template.title)!}"><div style="overflow: hidden; width: 200px; height: 20px;">${(template.title)!}</div></td>
 				<td title="${(template.context)!}"><div style="overflow: hidden; width: 350px; height: 20px;">${(template.context)!}</div></td>
 				[@shiro.hasRole name="R_ADMIN"]
-				<td>${(template.receive_userids)!}</td>
+				<!--<td>${(template.receive_userids)!}</td>-->
+				<td title="${(template.receive_userids)!}"><div style="overflow: hidden; width: 250px; height: 20px;">${(template.receive_userids)!}</div></td>
 				<td>${(template.created_userid)!}</td>
 				[/@shiro.hasRole]
 				<td>${(template.created_at)!}</td>

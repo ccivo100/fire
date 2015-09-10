@@ -331,7 +331,8 @@ $(document).ready(function(){
 					"order.title":$('#title2').val(),
 					"order.description":$('#description2').val(),
 					"order.type":$('#selectChildType2').val(),
-					"selectTemplate":$('#selectTemplate').val(),
+			        <!-- "selectTemplate":$('#selectTemplate').val(), -->
+	          		"order.selectTemplate":$('#selectTemplate').val(),
 			},
 			success:function(msg){
 				alertModal(msg.state);

@@ -63,7 +63,7 @@ public class ReportValidator extends Validator {
 			else if(c.getParaToLong("order.type")==-1){
 				addError("state","请选择故障小类！");
 			}
-			else if(c.getParaToLong("selectTemplate")==-1){
+			else if(c.getParaToLong("order.selectTemplate")==-1){
 				addError("state","请选择模板！");
 			}
 			else if(ValidateKit.isNullOrEmpty(c.getPara("order.description"))){

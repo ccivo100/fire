@@ -447,7 +447,7 @@ public class ReportController extends BaseController{
 	public void saveByTemplate(){
 		Order order = getModel(Order.class);
 		order.set("level", 1);
-		Template template = Template.dao.findById(getParaToLong("selectTemplate"));
+		Template template = Template.dao.findById(getParaToLong("order.selectTemplate"));
 		List<User> userList = User.dao.findUserAttrValues(" * ",template.getStr("receive_userids"));
 		
 		//  提交工单内容
