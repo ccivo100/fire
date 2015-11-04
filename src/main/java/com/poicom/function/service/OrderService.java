@@ -221,7 +221,21 @@ public class OrderService extends BaseService {
 		recipients.clear();
 		phones.clear();
 	}
-	
+	public void saveUserOrderToOwnApart2(Order order){
+		User user = User.dao.getCurrentUser();//当前用户
+		Record userinfo=UserInfo.dao.getAllUserInfo(user.getLong("id"));//当前用户详细信息
+		List<Record> receiverList=UserService.service.userinfosByApartment(user);
+		
+		for(Record receiver:receiverList){
+			recipients.add(receiver.getStr("useremail"));
+			//phones.add(receiver.getStr("userphone"));
+		}
+		String[] recipient = recipients.toArray(new String[recipients.size()]);
+		String[] phone = phones.toArray(new String[phones.size()]);
+		Notice.newOrderToOwn(mailSender, smsSender, userinfo, order, recipient, phone);
+		recipients.clear();
+		phones.clear();
+	}
 	/**
 	 * 提交工单处理人员
 	 * @param apartmentid

@@ -447,19 +447,30 @@ public class ReportController extends BaseController{
 	public void saveByTemplate(){
 		Order order = getModel(Order.class);
 		order.set("level", 1);
+		long selectTemplate = getParaToLong("order.selectTemplate");
 		Template template = Template.dao.findById(getParaToLong("order.selectTemplate"));
 		List<User> userList = User.dao.findUserAttrValues(" * ",template.getStr("receive_userids"));
 		
 		//  提交工单内容
 		boolean flag = OrderService.service.saveOrder(order);
 		if(flag){
-			
+		      if(4==getParaToLong("order.selectTemplate")){
+		          OrderService.service.saveUserOrderToOwnApart2(order);
+		          OrderService.service.saveUserOrderByTemplate(userList, order);
+		          OrderService.service.sendMailAndSmsByTemplate(userList, order);
+		          renderJson("state","提交成功！");
+		        }else{
+		          OrderService.service.saveUserOrderToOwnApart(order);
+		          OrderService.service.saveUserOrderByTemplate(userList, order);
+		          OrderService.service.sendMailAndSmsByTemplate(userList, order);
+		          renderJson("state","提交成功！");        
+		        }
 			//  通知自己部门人员
-			OrderService.service.saveUserOrderToOwnApart(order);
+			//OrderService.service.saveUserOrderToOwnApart(order);
 			//  提交工单关联
-			OrderService.service.saveUserOrderByTemplate(userList, order);
-			OrderService.service.sendMailAndSmsByTemplate(userList, order);
-			renderJson("state","提交成功！");
+			//OrderService.service.saveUserOrderByTemplate(userList, order);
+			//OrderService.service.sendMailAndSmsByTemplate(userList, order);
+			//renderJson("state","提交成功！");
 		}else {
 			renderJson("state","操作失败！");
 		}
