@@ -25,7 +25,8 @@ public class SmsTemplate {
 				.append(offer.getStr("bname")+"的 ")
 				.append(offer.getStr("ufullname"))
 				.append("（"+offer.getStr("uphone")+"） ")
-				.append("提交了关于”"+StringUtils.abbreviate(order.getStr("title"),10)+"“的故障工单，请尽快处理。");
+				//.append("提交了关于”"+StringUtils.abbreviate(order.getStr("title"),10)+"“的故障工单，请尽快处理。");
+				.append("提交了来自”"+StringUtils.abbreviate(order.getStr("title"),10)+"“的故障申诉，请尽快处理。");
 		return msg.toString();
 	}
 	
@@ -39,8 +40,9 @@ public class SmsTemplate {
 		StringBuffer msg=new StringBuffer();
 		msg.append("您好，贵部门的")
 				.append(offer.getStr("ufullname")+"（"+offer.getStr("uphone")+"） ")
-				.append("提交了关于”"+StringUtils.abbreviate(order.getStr("title"),10)+"“")
-				.append("的故障工单，详情请登陆系统查看。");
+				//.append("提交了关于”"+StringUtils.abbreviate(order.getStr("title"),10)+"“")
+				.append("提交了来自”"+StringUtils.abbreviate(order.getStr("title"),10)+"“")
+				.append("的故障申诉，详情请登陆系统查看。");
 		return msg.toString();
 	}
 	
@@ -73,7 +75,8 @@ public class SmsTemplate {
 		msg.append("尊敬的用户，")
 				.append(offer.getStr("aname")+"的"+offer.getStr("ufullname"))
 				.append("于"+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms)+"，")
-				.append("提交关于“"+StringUtils.abbreviate(order.getStr("title"),15)+"”"+"的故障单。")
+				//.append("提交关于“"+StringUtils.abbreviate(order.getStr("title"),15)+"”"+"的故障单。")
+				.append("提交来自“"+StringUtils.abbreviate(order.getStr("title"),15)+"”"+"故障申诉。")
 				.append("现由"+deal.getStr("aname")+"的"+deal.getStr("ufullname"));
 		if(selectProgress == 0){
 			msg.append("开始处理");

@@ -454,13 +454,38 @@ public class ReportController extends BaseController{
 		//  提交工单内容
 		boolean flag = OrderService.service.saveOrder(order);
 		if(flag){
-		      if(4==getParaToLong("order.selectTemplate")){
-		          OrderService.service.saveUserOrderToOwnApart2(order);
+		      if(5==getParaToLong("order.selectTemplate")){
+		          OrderService.service.saveUserOrderToOwnApart(order);
 		          OrderService.service.saveUserOrderByTemplate(userList, order);
 		          OrderService.service.sendMailAndSmsByTemplate(userList, order);
 		          renderJson("state","提交成功！");
-		        }else{
+		        }
+		      else if(6==getParaToLong("order.selectTemplate")){
 		          OrderService.service.saveUserOrderToOwnApart(order);
+		          OrderService.service.saveUserOrderByTemplate(userList, order);
+		          OrderService.service.sendMailAndSmsByTemplate(userList, order);
+		          renderJson("state","提交成功！");
+				}
+			  else if(14==getParaToLong("order.selectTemplate")){
+			      OrderService.service.saveUserOrderToOwnApart(order);
+			      OrderService.service.saveUserOrderByTemplate(userList, order);
+			      OrderService.service.sendMailAndSmsByTemplate(userList, order);
+			      renderJson("state","提交成功！");
+		        }
+			  else if(15==getParaToLong("order.selectTemplate")){
+			      OrderService.service.saveUserOrderToOwnApart(order);
+			      OrderService.service.saveUserOrderByTemplate(userList, order);
+			      OrderService.service.sendMailAndSmsByTemplate(userList, order);
+			      renderJson("state","提交成功！");
+		        }
+			  else if(16==getParaToLong("order.selectTemplate")){
+			      OrderService.service.saveUserOrderToOwnApart(order);
+			      OrderService.service.saveUserOrderByTemplate(userList, order);
+			      OrderService.service.sendMailAndSmsByTemplate(userList, order);
+			      renderJson("state","提交成功！");
+		        }
+			  else{
+		          OrderService.service.saveUserOrderToOwnApart2(order);
 		          OrderService.service.saveUserOrderByTemplate(userList, order);
 		          OrderService.service.sendMailAndSmsByTemplate(userList, order);
 		          renderJson("state","提交成功！");        

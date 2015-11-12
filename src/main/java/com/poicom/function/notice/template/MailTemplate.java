@@ -50,7 +50,7 @@ public class MailTemplate {
 				.append("贵部门的"+offer.getStr("ufullname"))
 				.append(" （"+ offer.getStr("uphone") + "）")
 				.append("提交了故障工单。<br/>")
-				.append("标题为："+order.getStr("title")+"<br/>")
+				//.append("标题为："+order.getStr("title")+"<br/>")
 				.append("<p>故障内容为："+order.getStr("description")+"</p><br/>")
 				.append("详情请登陆系统查看。");
 		return body.toString();
@@ -113,7 +113,8 @@ public class MailTemplate {
 		body.append("尊敬的用户，你好，<br/>")
 				.append(offer.getStr("aname")+"的"+offer.getStr("ufullname")+"（"+offer.getStr("uphone")+"）")
 				.append("于"+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms)+"，")
-				.append("提交关于“"+StringUtils.abbreviate(order.getStr("title"),15)+"”"+"的故障单。")
+				//.append("提交关于“"+StringUtils.abbreviate(order.getStr("title"),15)+"”"+"的故障单。")
+				.append("提交来自“"+StringUtils.abbreviate(order.getStr("title"),15)+"”"+"报障申诉。")
 				.append("现由"+deal.getStr("aname")+"的"+deal.getStr("ufullname"));
 		if(selectProgress == 0){
 			body.append("开始处理。<br/>");

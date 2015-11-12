@@ -32,7 +32,7 @@ public class CommonValidator extends Validator{
 		if(getActionKey().equals("/report/save")|getActionKey().equals("/report/update")){
 			List<Order> orderList=Order.dao.findBy(" offer_user=? and title=? ", c.getParaToLong("uuserid"),c.getPara("otitle"));
 			if(ValidateKit.isNullOrEmpty(c.getPara("otitle"))){
-				addError("titleMsg","故障单标题不能为空！");
+				addError("titleMsg","客户姓名不能为空！");
 			}else if(orderList.size()>0){
 				addError("titleMsg","已存在该故障单，请重新输入！");
 			}else if(ValidateKit.isNullOrEmpty(c.getPara("odescription"))){

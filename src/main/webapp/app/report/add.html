@@ -323,17 +323,32 @@ $(document).ready(function(){
 		$.ajax({
 			type:"post",
 			url:"${ContextPath}/report/saveByTemplate",
-			data:{
-					"selectType":$('#selectType2').val(),
-					"childTypeid":$('#selectChildType2').val(),
-					
-					"order.offer_user":$('#userid').val(),
-					"order.title":$('#title2').val(),
-					"order.description":$('#description2').val(),
-					"order.type":$('#selectChildType2').val(),
-			        <!-- "selectTemplate":$('#selectTemplate').val(), -->
-	          		"order.selectTemplate":$('#selectTemplate').val(),
-			},
+            data:{
+        		"selecttotalType2":$('#selecttotalType2').val(),//故障总类
+				"selectType":$('#selectType2').val(),//故障大类
+				"childTypeid":$('#selectChildType2').val(),//故障小类
+                
+                "order.offer_user":$('#userid').val(),//故障申报人
+                "order.title":$('#title2').val(),//故障标题-客户姓名
+                "order.description":$('#description2').val(),//故障描述
+
+                "order.typess":$('#selecttotalType2').val(),//故障总类id
+                "order.types":$('#selectType2').val(),//故障大类id
+                "order.type":$('#selectChildType2').val(),//故障小类id
+
+                <!-- "selectTemplate":$('#selectTemplate').val(), -->
+                "order.selectTemplate":$('#selectTemplate').val(),//故障模板id
+
+                "order.client_num":$('#clientnum').val(),//客户编号
+                "order.client_phone":$('#clientphone').val(),//终端手机号
+                "order.accident_place":$('#accidentplace').val(),//故障发生地
+                "order.contact_name":$('#contactname').val(),//联系人姓名
+                "order.contact_phone":$('#contactphone').val(),//联系电话
+
+                "order.product_type":$('#producttype').val(),//产品类型
+                "order.smart_phones":$('#smartphones').val(),//手机品牌
+                //"order.otherss":$('#others').val(),//其他
+        },
 			success:function(msg){
 				alertModal(msg.state);
 				$('#alertModal').modal();

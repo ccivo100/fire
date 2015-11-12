@@ -167,7 +167,8 @@ public class AlertKit {
 			.append(offer.getStr("ufullname"))
 			.append("（"+offer.getStr("uphone")+"） ")
 			//.append("于 "+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms))
-			.append("提交了关于”"+StringUtils.abbreviate(order.getStr("title"),10)+"“的故障工单，请尽快处理。");
+			//.append("提交了关于”"+StringUtils.abbreviate(order.getStr("title"),10)+"“的故障工单，请尽快处理。");
+			.append("提交了来自”"+StringUtils.abbreviate(order.getStr("title"),10)+"“的故障申诉，请尽快处理。");
 		}
 		return contt.toString();
 	}
@@ -185,7 +186,7 @@ public class AlertKit {
 				.append("贵部门的"+offer.getStr("ufullname"))
 				.append(" （"+ offer.getStr("uphone") + "）")
 				.append("提交了故障工单。<br/>")
-				.append("标题为："+order.getStr("title")+"<br/>")
+				//.append("标题为："+order.getStr("title")+"<br/>")
 				.append("故障内容为："+order.getStr("description")+"<br/>")
 				.append("详情请登陆系统查看。");
 		return body;
@@ -201,7 +202,8 @@ public class AlertKit {
 		StringBuffer contt=new StringBuffer();
 		contt.append("您好，贵部门的")
 				.append(offer.getStr("ufullname")+"（"+offer.getStr("uphone")+"） ")
-				.append("提交了关于”"+StringUtils.abbreviate(order.getStr("title"),10)+"“的故障工单，详情请登陆系统查看。");
+				//.append("提交了关于”"+StringUtils.abbreviate(order.getStr("title"),10)+"“的故障工单，详情请登陆系统查看。");
+				.append("提交了来自”"+StringUtils.abbreviate(order.getStr("title"),10)+"“的故障申诉，详情请登陆系统查看。");
 		return contt.toString();
 	}
 	
@@ -439,7 +441,8 @@ public class AlertKit {
 		body.append("尊敬的"+user.getStr("fullname")+"，你好。<br/>")
 				.append(offer.getStr("aname")+"的"+offer.getStr("ufullname")+"（"+offer.getStr("uphone")+"）")
 				.append("于"+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms)+"，")
-				.append("提交关于“"+StringUtils.abbreviate(order.getStr("title"),15)+"”"+"的故障单。")
+				//.append("提交关于“"+StringUtils.abbreviate(order.getStr("title"),15)+"”"+"的报障单。")
+				.append("提交来自“"+StringUtils.abbreviate(order.getStr("title"),15)+"”"+"报障申诉。")
 				.append("现由"+deal.getStr("aname")+"的"+deal.getStr("ufullname"));
 		if(selectProgress == 0){
 			body.append("开始处理。<br/>");
@@ -468,7 +471,8 @@ public class AlertKit {
 		body.append("尊敬的"+user.getStr("fullname")+"，")
 				.append(offer.getStr("aname")+"的"+offer.getStr("ufullname"))
 				.append("于"+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms)+"，")
-				.append("提交关于“"+StringUtils.abbreviate(order.getStr("title"),15)+"”"+"的故障单。")
+				//.append("提交关于“"+StringUtils.abbreviate(order.getStr("title"),15)+"”"+"的故障单。")
+				.append("提交来自“"+StringUtils.abbreviate(order.getStr("title"),15)+"”"+"报障申诉。")
 				.append("现由"+deal.getStr("aname")+"的"+deal.getStr("ufullname"));
 		if(selectProgress == 0){
 			body.append("开始处理");
@@ -537,7 +541,8 @@ public class AlertKit {
 		StringBuffer contt=new StringBuffer();
 		contt.append("亲爱的 "+offeruser.getStr("ufullname")+"，您好！")
 		.append("您在"+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms))
-		.append("提交的，关于“"+order.get("title")+"”的故障工单，已由")
+		//.append("提交的，关于“"+order.get("title")+"”的故障工单，已由")
+		.append("提交的，来自“"+order.get("title")+"”的报障申诉，已由")
 		.append(acceptuser.getStr("ufullname")+"（"+acceptuser.getStr("uphone")+"）")
 		.append("指派给"+dealuser.getStr("ufullname")+"（"+dealuser.getStr("uphone")+"）")
 		.append("处理。");
