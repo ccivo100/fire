@@ -91,18 +91,26 @@
 					<span class="orange">处理中</span>
 					[#elseif report.status=2]
 					<span class="gray">未处理</span>
-					[/#if]
+		            [#elseif report.status=3]
+		            <span class="red">待回复</span>
+		            [#elseif report.status=4]
+		            <span class="pink">待回访</span>
+		            [/#if]
 					</b>
 				</td>
 				
 				<td style="text-align:left;">
 					<a class="btn btn-minier btn-primary "   href="${ContextPath}/report/report?id=${report.id}"  >查看</a> 
 					[#if report.status==2 ]
-					[#if report.deleted_at??]
-					[#else]
+						[#if report.deleted_at??]
+						[#else]
 					<a class="btn btn-minier btn-primary "  href="${ContextPath}/report/edit?id=${report.id}" >修改</a>
-					[/#if]
-					[/#if]
+						[/#if]
+					[#elseif report.status=3]
+		            <a class="btn btn-minier btn-primary "  href="${ContextPath}/report/answer?id=${report.id}" >处理</a>
+		            [#elseif report.status=4]
+		            <a class="btn btn-minier btn-primary "  href="${ContextPath}/report/answer?id=${report.id}" >处理</a>
+		            [/#if]
 				</td>
 			</tr>
 			[/#list]

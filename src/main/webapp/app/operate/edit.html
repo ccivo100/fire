@@ -12,163 +12,163 @@
 <script src="${ContextPath}/admin/assets/js/tree.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#operateupdate").click(function(){
-		$.ajax({
-			type:"post",
-			url:"${ContextPath}/operate/update",
-			data:{
-				"oorderid":$('#oorderid').val(),
-				"progress":$('#selectProgress').val(),
-				"selectChildApartment":$('#selectChildApartment').val(),
-				
-				"orderid":$('#oorderid').val(),
-				"comment.add_at":$('#deal_at').val(),
-				"comment.predict_at":$('#predict_at').val(),
-				"comment.context":$('#ocomment').val(),
-				},
-				
-			success:function(msg){
-				alertModal(msg.state);
-				$('#alertModal').modal();
-				if(msg.state=='故障工单处理完毕！'){
-					window.location.href='${ContextPath}/operate/operates'
-				}
-				else if(msg.state=='故障工单开始处理！'){
-					window.location.href='${ContextPath}/operate/deal'
-				}
-				else if(msg.state=='故障工单继续处理！'){
-					window.location.href='${ContextPath}/operate/deal'
-				}
-				else if(msg.state=='指派成功！'){
-					window.location.href='${ContextPath}/operate/deal'
-				}
-			}
-		});
-	});
-	
-	$("#deal_at").datetimepicker({
-		format: 'yyyy-mm-dd hh:ii:ss',
-		autoclose: true,
-		todayBtn: true,
-		pickerPosition: "bottom-left",
-		language:'zh-CN',
-		minView: 2,
-	});
-	$("#predict_at").datetimepicker({
-		format: 'yyyy-mm-dd hh:ii:ss',
-		autoclose: true,
-		todayBtn: true,
-		pickerPosition: "bottom-left",
-		language:'zh-CN',
-	});
-	
-	jQuery(function($){
-		$(".created_at").each(function(){
-			var $created_at=$(this).attr("title");
-			var $format_time=formatDateTime($created_at);
-			$(this).html('<i class="ace-icon fa fa-clock-o bigger-110"></i> '+$format_time);
-			$(this).tooltip({
-				show: {
-					effect: "slideDown",
-					delay: 250
-				}
-			});
-		});
-	});
-	
-	$('.timeline-info').mouseenter(function() {
-		$(this).popover('show');
-	});
-	$('.timeline-info').mouseleave(function() {
-		$(this).popover('hide');
-	});
-	
+    $("#operateupdate").click(function(){
+        $.ajax({
+            type:"post",
+            url:"${ContextPath}/operate/update",
+            data:{
+                "oorderid":$('#oorderid').val(),
+                "progress":$('#selectProgress').val(),
+                "selectChildApartment":$('#selectChildApartment').val(),
+                
+                "orderid":$('#oorderid').val(),
+                "comment.add_at":$('#deal_at').val(),
+                "comment.predict_at":$('#predict_at').val(),
+                "comment.context":$('#ocomment').val(),
+                },
+                
+            success:function(msg){
+                alertModal(msg.state);
+                $('#alertModal').modal();
+                if(msg.state=='故障工单处理完毕！'){
+                    window.location.href='${ContextPath}/operate/operates'
+                }
+                else if(msg.state=='故障工单开始处理！'){
+                    window.location.href='${ContextPath}/operate/deal'
+                }
+                else if(msg.state=='故障工单继续处理！'){
+                    window.location.href='${ContextPath}/operate/deal'
+                }
+                else if(msg.state=='指派成功！'){
+                    window.location.href='${ContextPath}/operate/deal'
+                }
+            }
+        });
+    });
+    
+    $("#deal_at").datetimepicker({
+        format: 'yyyy-mm-dd hh:ii:ss',
+        autoclose: true,
+        todayBtn: true,
+        pickerPosition: "bottom-left",
+        language:'zh-CN',
+        //minView: 2,
+    });
+    $("#predict_at").datetimepicker({
+        format: 'yyyy-mm-dd hh:ii:ss',
+        autoclose: true,
+        todayBtn: true,
+        pickerPosition: "bottom-left",
+        language:'zh-CN',
+    });
+    
+    jQuery(function($){
+        $(".created_at").each(function(){
+            var $created_at=$(this).attr("title");
+            var $format_time=formatDateTime($created_at);
+            $(this).html('<i class="ace-icon fa fa-clock-o bigger-110"></i> '+$format_time);
+            $(this).tooltip({
+                show: {
+                    effect: "slideDown",
+                    delay: 250
+                }
+            });
+        });
+    });
+    
+    $('.timeline-info').mouseenter(function() {
+        $(this).popover('show');
+    });
+    $('.timeline-info').mouseleave(function() {
+        $(this).popover('hide');
+    });
+    
 });
 
 function sendinit(){
-	$('#apartment').hide();
-	$('#childApartment').hide();
+    $('#apartment').hide();
+    $('#childApartment').hide();
 }
 
 function ordersend(){
-	$('#apartment').hide();
-	$('#childApartment').hide();
-	var p=$('#selectProgress').val();
-	if(p==3){
-		$("#selectApartment").html("");
-		$('#apartment').show();
-		$('#childApartment').show();
-		select1();
-	}
+    $('#apartment').hide();
+    $('#childApartment').hide();
+    var p=$('#selectProgress').val();
+    if(p==3){
+        $("#selectApartment").html("");
+        $('#apartment').show();
+        $('#childApartment').show();
+        select1();
+    }
 };
 
 function select1() {
-	$.ajax(
+    $.ajax(
     {
-    	type: "post",
-    	url: "${ContextPath}/operate/handler",
-    	data: { "type": "apartment",
-    		"orderid":$('#oorderid').val(),
-    		"typeid":$("#otypeid").val(),
-    	 },
+        type: "post",
+        url: "${ContextPath}/operate/handler",
+        data: { "type": "apartment",
+            "orderid":$('#oorderid').val(),
+            "typeid":$("#otypeid").val(),
+         },
         success: function (msg) {
-        	$("#selectApartment").append("<option value='-1'>请选择运维部门</option>");
-        	for (var i = 0; i < msg.apartmentList.length; i++) {
-            	$("#selectApartment").append("<option value=" + msg.apartmentList[i].id + ">" + msg.apartmentList[i].name + "</option>");
-        	}
+            $("#selectApartment").append("<option value='-1'>请选择运维部门</option>");
+            for (var i = 0; i < msg.apartmentList.length; i++) {
+                $("#selectApartment").append("<option value=" + msg.apartmentList[i].id + ">" + msg.apartmentList[i].name + "</option>");
+            }
             select2();
         }
-	})
+    })
 };
 function select2() {
-	$("#selectChildApartment").html("");
-	$.ajax(
+    $("#selectChildApartment").html("");
+    $.ajax(
     {
-    	type: "post",
-    	url: "${ContextPath}/operate/handler",
-    	data: { "type": "childApartment",
-    		"childTypeid":$("#otypeid").val(),
-    		"rootApartment":$('#selectApartment').val(),
-    	 },
+        type: "post",
+        url: "${ContextPath}/operate/handler",
+        data: { "type": "childApartment",
+            "childTypeid":$("#otypeid").val(),
+            "rootApartment":$('#selectApartment').val(),
+         },
         success: function (msg) {
-        	$("#selectChildApartment").append("<option value='-1'>请选择运维组别</option>");
-        	for (var i = 0; i < msg.childApartmentList.length; i++) {
-            	$("#selectChildApartment").append("<option value=" + msg.childApartmentList[i].id + ">" + msg.childApartmentList[i].name + "</option>");
-        	}
+            $("#selectChildApartment").append("<option value='-1'>请选择运维组别</option>");
+            for (var i = 0; i < msg.childApartmentList.length; i++) {
+                $("#selectChildApartment").append("<option value=" + msg.childApartmentList[i].id + ">" + msg.childApartmentList[i].name + "</option>");
+            }
         }
-	})
+    })
 };
 
 function select3(){
-	$.ajax(
-	{
-		type: "post",
-		url: "${ContextPath}/operate/handler",
-		data: { "type": "effective","apartmentid":$('#selectChildApartment').val() },
-		success: function (msg) {
-			if(msg.state=="error"){
-				alertModal("该分组无运维人员，请选择其他运维组!");
-				$('#alertModal').modal();
-				select2();
-			}
-		}
-	})
+    $.ajax(
+    {
+        type: "post",
+        url: "${ContextPath}/operate/handler",
+        data: { "type": "effective","apartmentid":$('#selectChildApartment').val() },
+        success: function (msg) {
+            if(msg.state=="error"){
+                alertModal("该分组无运维人员，请选择其他运维组!");
+                $('#alertModal').modal();
+                select2();
+            }
+        }
+    })
 };
 
 $(function(){
-	sendinit();
-	$('#selectProgress').bind("change", ordersend);
-	$('#selectApartment').bind("change", select2);
-	$('#selectChildApartment').bind("change",select3);
+    sendinit();
+    $('#selectProgress').bind("change", ordersend);
+    $('#selectApartment').bind("change", select2);
+    $('#selectChildApartment').bind("change",select3);
 });
 
 function alertModal(msg){
-	$("#modal-title-content").html("提示!");  
-	$("#modal-body-content").html(msg);  
+    $("#modal-title-content").html("提示!");  
+    $("#modal-body-content").html(msg);  
 }
 
 $(function () { 
-	$("[data-toggle='popover']").popover({html : true });
+    $("[data-toggle='popover']").popover({html : true });
 });
 
 
@@ -177,238 +177,244 @@ $(function () {
 
 [@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="dealFlag"]
 <div class="page-header">
-	<h1>
-		<a href="${ContextPath}/operate/deal">未处理故障</a>
-		<small> <i class="ace-icon fa fa-angle-double-right"></i> 处理工单</small>
-	</h1>
+    <h1>
+        <a href="${ContextPath}/operate/deal">未处理故障</a>
+        <small> <i class="ace-icon fa fa-angle-double-right"></i> 处理工单</small>
+    </h1>
 </div>
-	<input id="oorderid" type="hidden" name="oorderid" value="${(oorderid)!}">
-	<input id="uuserid" type="hidden" name="uuserid" value="${(uuserid)!}">
-	<input id="otypeid" type="hidden" name="otypeid" value="${(otypeid)!}">
-	<input id="olevelid"  type="hidden" name="olevelid" value="${(olevelid)!}">
-	<input id="ostatus" type="hidden" name="ostatus" value="${(ostatus)!}">
+    <input id="oorderid" type="hidden" name="oorderid" value="${(oorderid)!}">
+    <input id="uuserid" type="hidden" name="uuserid" value="${(uuserid)!}">
+    <input id="otypeid" type="hidden" name="otypeid" value="${(otypeid)!}">
+    <input id="olevelid"  type="hidden" name="olevelid" value="${(olevelid)!}">
+    <input id="ostatus" type="hidden" name="ostatus" value="${(ostatus)!}">
 <div class="row">
-	<div class="col-md-8 col-sm-offset-1">
-		<!-- 故障描述 -->
-		<div class="jf_panel">
-			<div class="jf_header ">
-				故障内容
-			</div>
-			<div class="jf_header jf_topic_header">
-				[#if (ostatus?number)=0]
-				<span class="label label-success">已处理</span>
-				[#elseif (ostatus?number)=1]
-				<span class="label label-warning">处理中</span>
-				[#elseif (ostatus?number)=2]
-				<span class="label label-default">未处理</span>
-				[/#if]
-				<span class="jf_topic_full_title">${(otitle)!}</span>
-				<br>
-		        <span class="changes">
-		          <span>•故障小类：<span class="label label-info ">${(tname)!}</span></span>
-		          <span>•故障大类：<span class="label label-info ">${(tbname)!}</span></span>
-		          <span>•故障总类：<span class="label label-info ">${(otypess)!}</span></span>
-		          <span>•模板名称：<span class="label label-info ">${(tptitle)!}</span></span>
-		          <p></p>
-		          <span>•客户编号：<span class="label label-info ">${(oclient_num)!}</span></span>
-		          <span>•终端手机号：<span class="label label-info ">${(oclient_phone)!}</span></span>
-		          <span>•故障发生地：<span class="label label-info ">${(oaccident_place)!}</span></span>
-		          <span>•申报时间：<span class="label label-info ">${(ooffertime)!}</span></span>
-		          <p></p>
-		          <span>•联系人姓名：<span class="label label-info ">${(ocontact_name)!}</span></span>
-		          <span>•联系电话：<span class="label label-info ">${(ocontact_phone)!}</span></span>
-		          <span>•产品类型：<span class="label label-info ">${(oproduct_type)!}</span></span>
-		          <span>•手机品牌：<span class="label label-info ">${(osmart_phones)!}</span></span>
-		        </span>
-			</div>
-			<div class="jf_inner jf_topic">
-				<div style="margin: 30px;">
-					<div style="word-wrap:break-word;">
-						<h3>${(odescription)!}</h3>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="hr hr-12 hr-double"></div>
-	</div>
-	<div class="col-md-3 hidden-xs hidden-sm" style="padding-left: 0px;" >
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="widget-box transparent">
-					<div class="widget-header widget-header-small">
-						<h4 class="widget-title blue smaller">
-							<i class="ace-icon fa fa-credit-card orange"></i> 申报人员信息
-						</h4>
-					</div>
-					<div class="profile-user-info profile-user-info-striped">
-						<div class="profile-info-row">
-							<div class="profile-info-name">姓名：</div>
-							<div class="profile-info-value">
-								<span class="editable" id="username">${(uoffername)!}</span>
-							</div>
-						</div>
-						<div class="profile-info-row">
-							<div class="profile-info-name">电话：</div>
-							<div class="profile-info-value">
-								<span class="editable" id="username">${(uofferphone)!}</span>
-							</div>
-						</div>
-						<div class="profile-info-row">
-							<div class="profile-info-name">单位：</div>
-							<div class="profile-info-value">
-								<span class="editable" id="age">${(offer.bname)!}</span>
-							</div>
-						</div>
-						<div class="profile-info-row">
-							<div class="profile-info-name">部门：</div>
-							<div class="profile-info-value">
-								<span class="editable" id="signup">${(offer.aname)!}</span>
-							</div>
-						</div>
-						<div class="profile-info-row">
-							<div class="profile-info-name">职位：</div>
-							<div class="profile-info-value">
-								<span class="editable" id="login">${(offer.pname)!}</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="col-xs-12 col-sm-8 col-sm-offset-1">
-		<!-- 处理情况panel -->
-		<div class="timeline-container">
-			<div class="timeline-label">
-				<span class="label label-primary arrowed-in-right label-lg">处理意见 [#if commentList?size gt 0]共${(commentList.size())!}个[/#if]</span>
-			</div>
-			<div class="timeline-items">
-				[#list commentList as comments]
-				<div class="timeline-item clearfix">
-					<div class="timeline-info" title="个人信息"  data-container="body" data-toggle="popover" data-placement="left" 
-    							data-content="电话：${(comments.uphone)!}<br/>单位：${(comments.bname)!}<br/>部门：${(comments.aname)!}<br/>职位：${(comments.pname)!}">
-						<img src="${ContextPath}${(comments.uavatar)!}" alt="Susan't Avatar"></img>
-					</div>
-					<div class="widget-box transparent">
-						<div class="widget-header widget-header-small">
-							<h5 class="widget-title smaller">
-								${(comments_index+1)!}楼：${(comments.ufull_name)!}
-								<span class="grey"></span>
-							</h5>
-							<span class="created_at widget-toolbar no-border" title="${(comments.created_at)!}"><i class="ace-icon fa fa-clock-o bigger-110"></i> 1天前</span>
-						</div>
-						<div class="widget-body">
-							<div class="widget-main">
-							处理时间：<span class="red">${(comments.add_at)!} </span><br>
-							预计时间：<span class="red">${(comments.predict_at)!} </span>
-							<div class="space-6"></div>
-							<div style="word-wrap:break-word;">处理意见：<span class="green">${(comments.context)!}</span></div>
-							</div>
-						</div>
-					</div>
-				</div>
-				[/#list]
-			</div>
-			[#if commentList?has_content]
-			[#else]
-			<div class="timeline-items">
-				<div class="timeline-item clearfix">
-					<div class="widget-box transparent">
-						<div class="widget-header widget-header-small">
-						</div>
-						<div class="widget-body">
-							<div class="widget-main">
-							<span class="red "><h4>空空如也~~</h4></span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			[/#if]
-		</div>
-		<div class="hr hr-12 hr-double"></div>
-	</div>
+    <div class="col-md-8 col-sm-offset-1">
+        <!-- 故障描述 -->
+        <div class="jf_panel">
+            <div class="jf_header ">
+                故障内容
+            </div>
+            <div class="jf_header jf_topic_header">
+                [#if (ostatus?number)=0]
+                <!-- <span class="label label-success">已处理</span> -->
+                <span class="label label-success">已回访</span>
+                [#elseif (ostatus?number)=1]
+                <span class="label label-warning">处理中</span>
+                [#elseif (ostatus?number)=2]
+                <span class="label label-default">未处理</span>
+                [#elseif (ostatus?number)=3]
+                <span class="label label-warning">待回复</span>
+                [#elseif (ostatus?number)=4]
+                <span class="label label-warning">待回访</span>
+                [/#if]
+                <span class="jf_topic_full_title">${(otitle)!}</span>
+                <br>
+                <span class="changes">
+                  <span>•故障小类：<span class="label label-info ">${(tname)!}</span></span>
+                  <span>•故障大类：<span class="label label-info ">${(tbname)!}</span></span>
+                  <span>•故障总类：<span class="label label-info ">${(otypess)!}</span></span>
+                  <span>•模板名称：<span class="label label-info ">${(tptitle)!}</span></span>
+                  <p></p>
+                  <span>•客户编号：<span class="label label-info ">${(oclient_num)!}</span></span>
+                  <span>•终端手机号：<span class="label label-info ">${(oclient_phone)!}</span></span>
+                  <span>•故障发生地：<span class="label label-info ">${(oaccident_place)!}</span></span>
+                  <span>•申报时间：<span class="label label-info ">${(ooffertime)!}</span></span>
+                  <p></p>
+                  <span>•联系人姓名：<span class="label label-info ">${(ocontact_name)!}</span></span>
+                  <span>•联系电话：<span class="label label-info ">${(ocontact_phone)!}</span></span>
+                  <span>•产品类型：<span class="label label-info ">${(oproduct_type)!}</span></span>
+                  <span>•手机品牌：<span class="label label-info ">${(osmart_phones)!}</span></span>
+                </span>
+            </div>
+            <div class="jf_inner jf_topic">
+                <div style="margin: 30px;">
+                    <div style="word-wrap:break-word;">
+                        <h3>${(odescription)!}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hr hr-12 hr-double"></div>
+    </div>
+    <div class="col-md-3 hidden-xs hidden-sm" style="padding-left: 0px;" >
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="widget-box transparent">
+                    <div class="widget-header widget-header-small">
+                        <h4 class="widget-title blue smaller">
+                            <i class="ace-icon fa fa-credit-card orange"></i> 申报人员信息
+                        </h4>
+                    </div>
+                    <div class="profile-user-info profile-user-info-striped">
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">姓名：</div>
+                            <div class="profile-info-value">
+                                <span class="editable" id="username">${(uoffername)!}</span>
+                            </div>
+                        </div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">电话：</div>
+                            <div class="profile-info-value">
+                                <span class="editable" id="username">${(uofferphone)!}</span>
+                            </div>
+                        </div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">单位：</div>
+                            <div class="profile-info-value">
+                                <span class="editable" id="age">${(offer.bname)!}</span>
+                            </div>
+                        </div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">部门：</div>
+                            <div class="profile-info-value">
+                                <span class="editable" id="signup">${(offer.aname)!}</span>
+                            </div>
+                        </div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">职位：</div>
+                            <div class="profile-info-value">
+                                <span class="editable" id="login">${(offer.pname)!}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="row">
-	<div class="col-md-8 col-sm-offset-1">
-		<!-- 处理 操作 panel -->
-		<div class="jf_panel">
-			<div class="jf_header ">
-				处理
-			</div>
-			<div class="jf_header jf_topic_header">
-				<div class="row">
-					<div class="col-xs-12 col-sm-5">
-						<div class="input-group">
-						<span class="input-group-addon">处理时间</span>
-							<input id="deal_at" type="text" class="datetimepicker" readonly >
-							<span class="input-group-addon">
-								<i class="fa fa-calendar bigger-110"></i>
-							</span>
-						</div>
-					</div>
-					<div class="col-xs-12 col-sm-5">
-						<div class="input-group">
-							<span class="input-group-addon">预计时间</span>
-							<input id="predict_at" type="text" class="datetimepicker" readonly>
-							<span class="input-group-addon">
-								<i class="fa fa-calendar bigger-110"></i>
-							</span>
-						</div>
-					</div>
-				</div>
-				<br>
-				<div class="row">
-					<div class="col-xs-12 col-sm-5">
-						<div class="input-group">
-							<span class="input-group-addon">进度</span>
-								<select id="selectProgress" class="form-control" name="selectProgress">
-									<option value="-1">请选中处理进度</option>
-									[#if ostatus==1]
-									[#else]
-									<option value="0">开始处理</option>
-									[/#if]
-									[#if ostatus==1]
-									<option value="1">继续处理</option>
-									[/#if]
-									<option value="2">处理完毕</option>
-									<option value="3">工单转派</option>
-								</select>
-							 </div>
-					</div>
-				</div>
-				<br>
-				<div id="ordersend">
-					<div class="row">
-						<div class="col-xs-12 col-sm-5">
-							<div id="apartment" class="input-group">
-								<span class='input-group-addon'>部门</span>
-								<select id='selectApartment' name='selectApartment' class='form-control' required></select>
-							</div>
-						</div>
-						<div class="col-xs-12 col-sm-5">
-							<div id="childApartment" class="input-group">
-								<span class='input-group-addon'>组别</span>
-								<select id='selectChildApartment' name='selectChildApartment' class='form-control' required></select>
-							</div>
-						</div>
-					</div>
-				</div>
-				<br>
-				<div>
-					<textarea id="ocomment" name="ocomment" class="form-control"
-							placeholder="提交处理意见……" maxlength="250" cols="80" rows="7"
-							 >${(ocomment)!}</textarea>
-				</div>
-				<br>
-				<div>
-					<button id="operateupdate" name="submit" value="提交"  class="btn btn-primary save" >提交</button>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="col-xs-12 col-sm-8 col-sm-offset-1">
+        <!-- 处理情况panel -->
+        <div class="timeline-container">
+            <div class="timeline-label">
+                <span class="label label-primary arrowed-in-right label-lg">处理意见 [#if commentList?size gt 0]共${(commentList.size())!}个[/#if]</span>
+            </div>
+            <div class="timeline-items">
+                [#list commentList as comments]
+                <div class="timeline-item clearfix">
+                    <div class="timeline-info" title="个人信息"  data-container="body" data-toggle="popover" data-placement="left" 
+                                data-content="电话：${(comments.uphone)!}<br/>单位：${(comments.bname)!}<br/>部门：${(comments.aname)!}<br/>职位：${(comments.pname)!}">
+                        <img src="${ContextPath}${(comments.uavatar)!}" alt="Susan't Avatar"></img>
+                    </div>
+                    <div class="widget-box transparent">
+                        <div class="widget-header widget-header-small">
+                            <h5 class="widget-title smaller">
+                                ${(comments_index+1)!}楼：${(comments.aname)!}${(comments.ufull_name)!}
+                                <span class="grey"></span>
+                            </h5>
+                            <span class="created_at widget-toolbar no-border" title="${(comments.created_at)!}"><i class="ace-icon fa fa-clock-o bigger-110"></i> 1天前</span>
+                        </div>
+                        <div class="widget-body">
+                            <div class="widget-main">
+						                            处理时间：<span class="red">${(comments.add_at)!} </span><br>
+						                            预计时间：<span class="red">${(comments.predict_at)!} </span>
+                            <!-- <div class="space-6"></div> -->
+                            <div style="word-wrap:break-word;">处理意见：<span class="green">${(comments.context)!}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                [/#list]
+            </div>
+            [#if commentList?has_content]
+            [#else]
+            <div class="timeline-items">
+                <div class="timeline-item clearfix">
+                    <div class="widget-box transparent">
+                        <div class="widget-header widget-header-small">
+                        </div>
+                        <div class="widget-body">
+                            <div class="widget-main">
+                            <span class="red "><h4>空空如也~~</h4></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            [/#if]
+        </div>
+        <div class="hr hr-12 hr-double"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8 col-sm-offset-1">
+        <!-- 处理 操作 panel -->
+        <div class="jf_panel">
+            <div class="jf_header ">
+                处理
+            </div>
+            <div class="jf_header jf_topic_header">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="input-group">
+                        <span class="input-group-addon">处理时间</span>
+                            <input id="deal_at" type="text" class="datetimepicker" readonly >
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar bigger-110"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="input-group">
+                            <span class="input-group-addon">预计时间</span>
+                            <input id="predict_at" type="text" class="datetimepicker" readonly>
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar bigger-110"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="input-group">
+                            <span class="input-group-addon">进度</span>
+                                <select id="selectProgress" class="form-control" name="selectProgress">
+                                    <option value="-1">请选中处理进度</option>
+                                    [#if ostatus==1]
+                                    [#else]
+                                    <option value="0">开始处理</option>
+                                    [/#if]
+                                    [#if ostatus==1]
+                                    <option value="1">继续处理</option>
+                                    [/#if]
+                                    <option value="2">处理完毕</option>
+                                    <option value="3">工单转派</option>
+                                    <option value="4">反馈话务</option>
+                                </select>
+                             </div>
+                    </div>
+                </div>
+                <br>
+                <div id="ordersend">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-5">
+                            <div id="apartment" class="input-group">
+                                <span class='input-group-addon'>部门</span>
+                                <select id='selectApartment' name='selectApartment' class='form-control' required></select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-5">
+                            <div id="childApartment" class="input-group">
+                                <span class='input-group-addon'>组别</span>
+                                <select id='selectChildApartment' name='selectChildApartment' class='form-control' required></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <textarea id="ocomment" name="ocomment" class="form-control"
+                            placeholder="提交处理意见……" maxlength="250" cols="80" rows="7"
+                             >${(ocomment)!}</textarea>
+                </div>
+                <br>
+                <div>
+                    <button id="operateupdate" name="submit" value="提交"  class="btn btn-primary save" >提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 [#include "_model.html" /]

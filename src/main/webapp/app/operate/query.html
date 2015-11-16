@@ -53,14 +53,24 @@ $(function () {
 				故障内容
 			</div>
 			<div class="jf_header jf_topic_header">
-				[#if ostatus=0]
+				<!-- [#if ostatus=0]
 				<span class="label label-success">已处理</span>
 				[#elseif ostatus=1]
 				<span class="label label-default">处理中</span>
 				[#elseif ostatus=2]
 				<span class="label label-danger">未处理</span>
-				[/#if]
-				
+				[/#if] -->
+				[#if (ostatus?number)=0]
+                <span class="label label-success">已回访</span>
+                [#elseif (ostatus?number)=1]
+                <span class="label label-warning">处理中</span>
+                [#elseif (ostatus?number)=2]
+                <span class="label label-default">未处理</span>
+                [#elseif (ostatus?number)=3]
+                <span class="label label-warning">待回复</span>
+                [#elseif (ostatus?number)=4]
+                <span class="label label-warning">待回访</span>
+                [/#if]
 				<span class="jf_topic_full_title">${(otitle)!}</span>
 				
 				<br></br>

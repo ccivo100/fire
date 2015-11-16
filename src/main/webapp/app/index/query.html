@@ -60,7 +60,11 @@ $(function () {
 				<span class="label label-warning">处理中</span>
 				[#elseif ostatus=2]
 				<span class="label label-default">未处理</span>
-				[/#if]
+				[#elseif ostatus=3]
+                <span class="label label-warning">待回复</span>
+                [#elseif ostatus=4]
+                <span class="label label-warning">待回访</span>
+                [/#if]
 				<span class="jf_topic_full_title">${(otitle)!}</span>
 				<p></p>
 		        <span class="changes">

@@ -10,80 +10,83 @@
 <script src="${ContextPath}/admin/assets/js/tree.js"></script>
 <script type="text/javascript">
 jQuery(function($){
-	$.ajax(
+    $.ajax(
     {
-    	type: "post",
-    	url: "${ContextPath}/report/dealList",
-    	data: { "orderid": $('#oorderid').val() },
+        type: "post",
+        url: "${ContextPath}/report/dealList",
+        data: { "orderid": $('#oorderid').val() },
         success: function (msg) {
-        	$.each(msg.apartments,function(key,value){
-        		$("#deal-div").append("<div class='profile-info-row'>");
-            	$("#deal-div").append("<div class='profile-info-name'>"+value.name+"</div>");
-            	$("#deal-div").append("<div class='profile-info-value'><span class='editable'>"+Object.keys(value.child).length+"组</span></div>");
-            	$.each(value.child,function(key,value){
-            		$("#deal-div").append("<div class='profile-info-row'>");
-            		$("#deal-div").append("<div class='profile-info-name'></div>");
-            		$("#deal-div").append("<div class='profile-info-value'><span class='editable'>"+value.name+"</span></div>");
-            		$("#deal-div").append("</div>");
-            	});
-            	$("#deal-div").append("</div>");
-        	});
+            $.each(msg.apartments,function(key,value){
+                $("#deal-div").append("<div class='profile-info-row'>");
+                $("#deal-div").append("<div class='profile-info-name'>"+value.name+"</div>");
+                $("#deal-div").append("<div class='profile-info-value'><span class='editable'>"+Object.keys(value.child).length+"组</span></div>");
+                $.each(value.child,function(key,value){
+                    $("#deal-div").append("<div class='profile-info-row'>");
+                    $("#deal-div").append("<div class='profile-info-name'></div>");
+                    $("#deal-div").append("<div class='profile-info-value'><span class='editable'>"+value.name+"</span></div>");
+                    $("#deal-div").append("</div>");
+                });
+                $("#deal-div").append("</div>");
+            });
         }
-	});
-	$(".created_at").each(function(){
-		var $created_at=$(this).attr("title");
-		var $format_time=formatDateTime($created_at);
-		$(this).html('<i class="ace-icon fa fa-clock-o bigger-110"></i> '+$format_time);
-		$(this).tooltip({
-			show: {
-				effect: "slideDown",
-				delay: 250
-			}
-		});
-	});
+    });
+    $(".created_at").each(function(){
+        var $created_at=$(this).attr("title");
+        var $format_time=formatDateTime($created_at);
+        $(this).html('<i class="ace-icon fa fa-clock-o bigger-110"></i> '+$format_time);
+        $(this).tooltip({
+            show: {
+                effect: "slideDown",
+                delay: 250
+            }
+        });
+    });
 });
 $(document).ready(function() {
-	$('.timeline-info').mouseenter(function() {
-		$(this).popover('show');
-	});
-	$('.timeline-info').mouseleave(function() {
-		$(this).popover('hide');
-	});
+    $('.timeline-info').mouseenter(function() {
+        $(this).popover('show');
+    });
+    $('.timeline-info').mouseleave(function() {
+        $(this).popover('hide');
+    });
 });
 
 
 $(function () { 
-	$("[data-toggle='popover']").popover({html : true });
+    $("[data-toggle='popover']").popover({html : true });
 });
 </script>
 [/#assign]
 [@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="reportsFlag"]
 <div class="page-header">
-	<h1>
-		<a href="${ContextPath}/report/reports">申报记录 </a>
-		<small> <i class="ace-icon fa fa-angle-double-right"></i> 工单详情</small>
-	</h1>
+    <h1>
+        <a href="${ContextPath}/report/reports">申报记录 </a>
+        <small> <i class="ace-icon fa fa-angle-double-right"></i> 工单详情</small>
+    </h1>
 </div>
 <input id="oorderid"  type="hidden" name="oorderid" value="${(oorderid)!}">
 <div class="row">
-	<div class="col-md-8 col-sm-offset-1">
-		<div class="jf_panel">
-			<div class="jf_header ">
-				故障内容
-			</div>
-			<div class="jf_header jf_topic_header">
-				[#if odeletetime??]
-				<span class="label label-danger">已撤销</span>
-				[#elseif ostatus=0]
-				<span class="label label-success">已处理</span>
-				[#elseif ostatus=1]
-				<span class="label label-warning">处理中</span>
-				[#elseif ostatus=2]
-				<span class="label label-default">未处理</span>
-				[/#if]
-				
-				<span class="jf_topic_full_title">${(otitle)!}</span>
-				<br></br>
+    <div class="col-md-8 col-sm-offset-1">
+        <div class="jf_panel">
+            <div class="jf_header ">
+                故障内容
+            </div>
+            <div class="jf_header jf_topic_header">
+                [#if odeletetime??]
+                <span class="label label-danger">已撤销</span>
+                [#elseif ostatus=0]
+                <span class="label label-success">已回访</span>
+                [#elseif (ostatus?number)=1]
+                <span class="label label-warning">处理中</span>
+                [#elseif (ostatus?number)=2]
+                <span class="label label-default">未处理</span>
+                [#elseif (ostatus?number)=3]
+                <span class="label label-warning">待回复</span>
+                [#elseif (ostatus?number)=4]
+                <span class="label label-warning">待回访</span>
+                [/#if]
+                <span class="jf_topic_full_title">${(otitle)!}</span>
+                <br></br>
             <span class="changes">
               <span>•故障小类：<span class="label label-info ">${(tname)!}</span></span>
               <span>•故障大类：<span class="label label-info ">${(tbname)!}</span></span>
@@ -100,145 +103,145 @@ $(function () {
               <span>•产品类型：<span class="label label-info ">${(oproduct_type)!}</span></span>
               <span>•手机品牌：<span class="label label-info ">${(osmart_phones)!}</span></span>
             </span>
-				</span>
-			</div>
-			<div class="jf_inner jf_topic">
-				<div style="margin: 30px;">
-					<div style="word-wrap:break-word;">
-						<h3>${(odescription)!}</h3>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="hr hr-12 hr-double"></div>
-		
-	</div>
-	<div class="col-md-3 hidden-xs hidden-sm" style="padding-left: 0px;" >
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="widget-box transparent">
-					<div class="widget-header widget-header-small">
-						<h4 class="widget-title blue smaller">
-							<i class="ace-icon fa fa-credit-card orange"></i> 申报人员信息
-						</h4>
-					</div>
-					<div class="profile-user-info profile-user-info-striped">
-						<div class="profile-info-row">
-							<div class="profile-info-name">姓名：</div>
+                </span>
+            </div>
+            <div class="jf_inner jf_topic">
+                <div style="margin: 30px;">
+                    <div style="word-wrap:break-word;">
+                        <h3>${(odescription)!}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hr hr-12 hr-double"></div>
+        
+    </div>
+    <div class="col-md-3 hidden-xs hidden-sm" style="padding-left: 0px;" >
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="widget-box transparent">
+                    <div class="widget-header widget-header-small">
+                        <h4 class="widget-title blue smaller">
+                            <i class="ace-icon fa fa-credit-card orange"></i> 申报人员信息
+                        </h4>
+                    </div>
+                    <div class="profile-user-info profile-user-info-striped">
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">姓名：</div>
 
-							<div class="profile-info-value">
-								<span class="editable" id="username">${(uoffername)!}</span>
-							</div>
-						</div>
+                            <div class="profile-info-value">
+                                <span class="editable" id="username">${(uoffername)!}</span>
+                            </div>
+                        </div>
 
-						<div class="profile-info-row">
-							<div class="profile-info-name">电话：</div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">电话：</div>
 
-							<div class="profile-info-value">
-								<span class="editable" id="username">${(uofferphone)!}</span>
-							</div>
-						</div>
+                            <div class="profile-info-value">
+                                <span class="editable" id="username">${(uofferphone)!}</span>
+                            </div>
+                        </div>
 
-						<div class="profile-info-row">
-							<div class="profile-info-name">单位：</div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">单位：</div>
 
-							<div class="profile-info-value">
-								<span class="editable" id="age">${(offer.bname)!}</span>
-							</div>
-						</div>
+                            <div class="profile-info-value">
+                                <span class="editable" id="age">${(offer.bname)!}</span>
+                            </div>
+                        </div>
 
-						<div class="profile-info-row">
-							<div class="profile-info-name">部门：</div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">部门：</div>
 
-							<div class="profile-info-value">
-								<span class="editable" id="signup">${(offer.aname)!}</span>
-							</div>
-						</div>
+                            <div class="profile-info-value">
+                                <span class="editable" id="signup">${(offer.aname)!}</span>
+                            </div>
+                        </div>
 
-						<div class="profile-info-row">
-							<div class="profile-info-name">职位：</div>
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">职位：</div>
 
-							<div class="profile-info-value">
-								<span class="editable" id="login">${(offer.pname)!}</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-	</div>
+                            <div class="profile-info-value">
+                                <span class="editable" id="login">${(offer.pname)!}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
 </div>
-		
-		
-		<!-- 处理情况panel -->
-		<div class="row">
-			<div class="col-xs-12 col-sm-8 col-sm-offset-1">
-				<div class="timeline-container">
-					<div class="timeline-label">
-						<span class="label label-primary arrowed-in-right label-lg">处理情况</span>
-					</div>
-					<div class="timeline-items">
-						[#list commentList as comments]
-						<div class="timeline-item clearfix">
-							<div class="timeline-info" title="个人信息"  data-container="body" data-toggle="popover" data-placement="left" 
-      							data-content="电话：${(comments.uphone)!}<br/>单位：${(comments.bname)!}<br/>部门：${(comments.aname)!}<br/>职位：${(comments.pname)!}">
-								<img src="${ContextPath}${(comments.uavatar)!}" alt="Susan't Avatar"></img>
-							</div>
-							<div class="widget-box transparent">
-								<div class="widget-header widget-header-small">
-									<h5 class="widget-title smaller">
-										${(comments_index+1)!}楼：${(comments.ufull_name)!}
-										<span class="grey"></span>
-									</h5>
-									<span class="created_at widget-toolbar no-border" title="${(comments.created_at)!}"><i class="ace-icon fa fa-clock-o bigger-110"></i> 1天前</span>
-								</div>
-								<div class="widget-body">
-									<div class="widget-main">
-									处理时间：<span class="red">${(comments.add_at)!} </span><br>
-									预计时间：<span class="red">${(comments.predict_at)!} </span>
-									<div class="space-6"></div>
-									<div style="word-wrap:break-word;">处理意见：<span class="green">${(comments.context)!}</span></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						[/#list]
-					</div>
-					[#if commentList?has_content]
-					[#else]
-					<div class="timeline-items">
-						<div class="timeline-item clearfix">
-							<div class="widget-box transparent">
-								<div class="widget-header widget-header-small">
-								</div>
-								<div class="widget-body">
-									<div class="widget-main">
-										<h3><span class="red "> 空空如也~~</span></h3>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					[/#if]
-				</div>
-			</div>
-			<div class="col-md-3 hidden-xs hidden-sm" style="padding-left: 0px;" >
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="widget-box transparent">
-							<div class="widget-header widget-header-small">
-								<h4 class="widget-title blue smaller">
-									<i class="ace-icon fa fa-credit-card orange"></i> 处理部门
-								</h4>
-							</div>
-							<div id="deal-div" class="profile-user-info profile-user-info-striped">
-								
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+        
+        
+        <!-- 处理情况panel -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-1">
+                <div class="timeline-container">
+                    <div class="timeline-label">
+                        <span class="label label-primary arrowed-in-right label-lg">处理情况</span>
+                    </div>
+                    <div class="timeline-items">
+                        [#list commentList as comments]
+                        <div class="timeline-item clearfix">
+                            <div class="timeline-info" title="个人信息"  data-container="body" data-toggle="popover" data-placement="left" 
+                                data-content="电话：${(comments.uphone)!}<br/>单位：${(comments.bname)!}<br/>部门：${(comments.aname)!}<br/>职位：${(comments.pname)!}">
+                                <img src="${ContextPath}${(comments.uavatar)!}" alt="Susan't Avatar"></img>
+                            </div>
+                            <div class="widget-box transparent">
+                                <div class="widget-header widget-header-small">
+                                    <h5 class="widget-title smaller">
+                                        ${(comments_index+1)!}楼：${(comments.ufull_name)!}
+                                        <span class="grey"></span>
+                                    </h5>
+                                    <span class="created_at widget-toolbar no-border" title="${(comments.created_at)!}"><i class="ace-icon fa fa-clock-o bigger-110"></i> 1天前</span>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                    处理时间：<span class="red">${(comments.add_at)!} </span><br>
+                                    预计时间：<span class="red">${(comments.predict_at)!} </span>
+                                    <div class="space-6"></div>
+                                    <div style="word-wrap:break-word;">处理意见：<span class="green">${(comments.context)!}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        [/#list]
+                    </div>
+                    [#if commentList?has_content]
+                    [#else]
+                    <div class="timeline-items">
+                        <div class="timeline-item clearfix">
+                            <div class="widget-box transparent">
+                                <div class="widget-header widget-header-small">
+                                </div>
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <h3><span class="red "> 空空如也~~</span></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    [/#if]
+                </div>
+            </div>
+            <div class="col-md-3 hidden-xs hidden-sm" style="padding-left: 0px;" >
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="widget-box transparent">
+                            <div class="widget-header widget-header-small">
+                                <h4 class="widget-title blue smaller">
+                                    <i class="ace-icon fa fa-credit-card orange"></i> 处理部门
+                                </h4>
+                            </div>
+                            <div id="deal-div" class="profile-user-info profile-user-info-striped">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 [/@mainlayout]

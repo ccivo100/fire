@@ -452,6 +452,8 @@ public class AlertKit {
 			body.append("处理完毕。<br/>");
 		}else if(selectProgress == 3){
 			body.append("转派处理。<br/>");
+		}else if(selectProgress == 4){
+			body.append("提出反馈。<br/>");
 		}
 		body.append("处理意见为："+comment.getStr("context")+"。<br/>");
 		body.append("详情请登陆系统查看。");

@@ -39,7 +39,11 @@
 						<span class="orange">处理中</span>
 						[#elseif order.status=2]
 						<span class="gray">未处理</span>
-						[/#if]
+		                [#elseif order.status=3]
+		                <span class="red">待回复</span>
+		                [#elseif order.status=4]
+		                <span class="pink">待回访</span>
+		                [/#if]
 						</b>
 					</td>
 					<td >

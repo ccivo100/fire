@@ -58,36 +58,48 @@ $("#offertime").datetimepicker({
 	<table  class="table table-bordered table-hover ">
 		<thead>
 			<tr>
-				<th width="2%">序号</th>
-				<th width="10%">标题</th>
-				<th width="5%">申报部门</th>
-				<th width="3%">申报人</th>
-				<th width="5%">申报时间</th>
-				<th width="2%">当前状态</th>
-				<th width="5%">操作</th>
+				<th style="text-align:center;width:2%;">序号</th>
+				<!-- <th width="10%">标题</th> -->
+                <th style="text-align:center;width:5%;">客户姓名</th>
+				<th style="text-align:center;width:5%;">申报部门</th>
+				<th style="text-align:center;width:2%;">申报人</th>
+				<th style="text-align:center;width:5%;">申报时间</th>
+				<th style="text-align:center;width:2%;">当前状态</th>
+				<th style="text-align:center;width:2%;">操作</th>
 			</tr>
 		</thead>
 				<tbody>
 			[#list operatePage.getList() as operate]
 			<tr class="<#if operate.status=0><#elseif operate.status=2>danger</#if>">
 				<td >${operate_index+1}</td>
-				<td style="text-align:left;">${(operate.title)!}</td>
-				<td style="text-align:left;">${(operate.off_paname)!}</td>
-				<td style="text-align:left;">${(operate.off_user)!}</td>
-				<td style="text-align:left;">${(operate.offer_at)!}</td>
+				<td style="text-align:center;">${(operate.title)!}</td>
+				<td style="text-align:center;">${(operate.off_paname)!}</td>
+				<td style="text-align:center;">${(operate.off_user)!}</td>
+				<td style="text-align:center;">${(operate.offer_at)!}</td>
 				<td >
 					<b>
-					[#if operate.status=0]
+					<!-- [#if operate.status=0]
 					<span class="green">已处理</span>
 					[#elseif operate.status=1]
 					<span class="orange">处理中</span>
 					[#elseif operate.status=2]
 					<span class="gray">未处理</span>
-					[/#if]
+					[/#if] -->
+					[#if operate.status=0]
+	                <span class="green">已回访</span>
+	                [#elseif operate.status=1]
+	                <span class="orange">处理中</span>
+	                [#elseif operate.status=2]
+	                <span class="gray">未处理</span>
+	                [#elseif operate.status=3]
+	                <span class="red">待回复</span>
+	                [#elseif operate.status=4]
+	                <span class="pink">待回访</span>
+	                [/#if]
 					</b>
 				</td>
 				
-				<td style="text-align:left;">
+				<td style="text-align:center;">
 				<a class="btn btn-minier btn-primary "   href="${ContextPath}/operate/operate?id=${operate.id}"  >查看</a> 
 				</td>
 			</tr>

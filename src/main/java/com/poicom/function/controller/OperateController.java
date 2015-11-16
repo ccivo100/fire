@@ -261,98 +261,107 @@ public class OperateController extends BaseController{
 	 */
 	@Before({Tx.class,OperateValidator.class})
 	public void update() {
-		// 工单id
-		Long orderid = getParaToLong("orderid");
-		// 处理进度
-		int selectProgress = getParaToInt("progress");
-		//工单内容
-		Order order = Order.dao.findById(orderid);
-		
-		//当前用户
-		User deal = SubjectKit.getUser();
-		Record dealinfo = UserInfo.dao.getAllUserInfo(deal.get("id"));
-		// 故障工单提交人员
-		User offer = User.dao.findById(order.get("offer_user"));
-		Record offerinfo = UserInfo.dao.getAllUserInfo(offer.get("id"));
+        // 工单id
+        Long orderid = getParaToLong("orderid");
+        // 处理进度
+        int selectProgress = getParaToInt("progress");
+        //工单内容
+        Order order = Order.dao.findById(orderid);
+        
+        //当前用户
+        User deal = SubjectKit.getUser();
+        Record dealinfo = UserInfo.dao.getAllUserInfo(deal.get("id"));
+        // 故障工单提交人员
+        User offer = User.dao.findById(order.get("offer_user"));
+        Record offerinfo = UserInfo.dao.getAllUserInfo(offer.get("id"));
 
-		//获取页面提交数据：add_at、context。
-		Comment comment = getModel(Comment.class);
-		// 设置基本内容：处理人，建议，处理时间，修改状态等。
-		OrderService.service.saveComment(comment, orderid, deal.getLong("id"));
-		
-		//工单提交者部门人员
-		List<Record> offerinfoList = UserService.service.userinfosByApartment(offer);
-		//所有工单处理人员
-		List<Record> dealinfoList = UserService.service.userinfosByUserOrder(orderid);
+        //获取页面提交数据：add_at、context。
+        Comment comment = getModel(Comment.class);
+        // 设置基本内容：处理人，建议，处理时间，修改状态等。
+        OrderService.service.saveComment(comment, orderid, deal.getLong("id"));
+        
+        //工单提交者部门人员
+        List<Record> offerinfoList = UserService.service.userinfosByApartment(offer);
+        //所有工单处理人员
+        List<Record> dealinfoList = UserService.service.userinfosByUserOrder(orderid);
 
-		// 开始处理
-		if (selectProgress == 0) {
-			// 设置状态为 1 及处理中
-			order.set("status", 1).update();
-			
-			OrderService.service.updateOrderAndAlert(offerinfoList, offerinfo, dealinfo, order, comment, selectProgress);
-			OrderService.service.updateOrderAndAlert(dealinfoList, offerinfo, dealinfo, order, comment, selectProgress);
-			
-			renderJson("state", "故障工单开始处理！");
-		}
-		// 继续处理
-		else if (selectProgress == 1) {
-			
-			OrderService.service.updateOrderAndAlert(offerinfoList, offerinfo, dealinfo, order, comment, selectProgress);
-			//继续处理不需要通知运维人员，只通知申报人员及其部门人员
-			//OrderService.service.updateOrderAndAlert(dealinfoList, offerinfo, dealinfo, order, comment, selectProgress);
-			
-			renderJson("state", "故障工单继续处理！");
-		}
-		// 处理完毕
-		else if (selectProgress == 2) {
-			// 设置状态为 0 及已处理
-			order.set("status", 0);
+        // 开始处理
+        if (selectProgress == 0) {
+            // 设置状态为 1 及处理中
+            order.set("status", 1).update();
+            
+            OrderService.service.updateOrderAndAlert(offerinfoList, offerinfo, dealinfo, order, comment, selectProgress);
+            OrderService.service.updateOrderAndAlert(dealinfoList, offerinfo, dealinfo, order, comment, selectProgress);
+            
+            renderJson("state", "故障工单开始处理！");
+        }
+        // 继续处理
+        else if (selectProgress == 1) {
+            
+            OrderService.service.updateOrderAndAlert(offerinfoList, offerinfo, dealinfo, order, comment, selectProgress);
+            //继续处理不需要通知运维人员，只通知申报人员及其部门人员
+            //OrderService.service.updateOrderAndAlert(dealinfoList, offerinfo, dealinfo, order, comment, selectProgress);
+            
+            renderJson("state", "故障工单继续处理！");
+        }
+        // 处理完毕
+        else if (selectProgress == 2) {
+            // 设置状态为 0 及待回访4
+            // order.set("status", 0);
+            order.set("status", 4);
 
-			int time = Level.dao.findById(order.get("level")).get("deadline");
-			String offer_at = order.get("offer_at").toString();
-			DateTime now = DateTime.now();
-			int t = DateKit.dateBetween(offer_at, now);
+            int time = Level.dao.findById(order.get("level")).get("deadline");
+            String offer_at = order.get("offer_at").toString();
+            DateTime now = DateTime.now();
+            int t = DateKit.dateBetween(offer_at, now);
 
-			// 若处理时间超时，则
-			if (t > time) {
-				order.set("spend_time", t);
-			}
-			if (order.update()) {
-				
-				OrderService.service.updateOrderAndAlert(offerinfoList, offerinfo, dealinfo, order, comment, selectProgress);
-				OrderService.service.updateOrderAndAlert(dealinfoList, offerinfo, dealinfo, order, comment, selectProgress);
+            // 若处理时间超时，则
+            if (t > time) {
+                order.set("spend_time", t);
+            }
+            if (order.update()) {
+                
+                OrderService.service.updateOrderAndAlert(offerinfoList, offerinfo, dealinfo, order, comment, selectProgress);
+                OrderService.service.updateOrderAndAlert(dealinfoList, offerinfo, dealinfo, order, comment, selectProgress);
 
-				renderJson("state", "故障工单处理完毕！");
-			} else {
-				renderJson("state", "提交失败！");
-			}
-		}
-		// 故障工单指派其他二级部门加入
-		else if (selectProgress == 3) {
-			order.set("status", 1).update();
-			// 选中部门
-			long selectChildApartment = getParaToLong("selectChildApartment");
-			// 根据部门id，获取该部门人员
-			List<Record> selectDealList = UserInfo.dao.getUserByApartment(
-					" apartment.id=? and user.deleted_at is null",selectChildApartment);
+                renderJson("state", "故障工单处理完毕！");
+            } else {
+                renderJson("state", "提交失败！");
+            }
+        }
+        // 故障工单指派其他二级部门加入
+        else if (selectProgress == 3) {
+            order.set("status", 1).update();
+            // 选中部门
+            long selectChildApartment = getParaToLong("selectChildApartment");
+            // 根据部门id，获取该部门人员
+            List<Record> selectDealList = UserInfo.dao.getUserByApartment(
+                    " apartment.id=? and user.deleted_at is null",selectChildApartment);
 
-			for (Record selectDeal : selectDealList) {
-				UserOrder userorder = new UserOrder();
-				userorder.set("user_id",	selectDeal.get("userid"))
-								.set("order_id",order.get("id"));
-				userorder.save();
-			}
-			//转派时，不通知申报人部门其他人。
-			offerinfoList = UserService.service.userinfosByUserid(offer);
-			dealinfoList = UserService.service.userinfosByUserOrder(orderid);
-			OrderService.service.updateOrderAndAlert(offerinfoList, offerinfo, dealinfo, order, comment, selectProgress);
-			OrderService.service.updateOrderAndAlert(dealinfoList, offerinfo, dealinfo, order, comment, selectProgress);
-			
-			renderJson("state", "指派成功！");
-		}
-
-	}
+            for (Record selectDeal : selectDealList) {
+                UserOrder userorder = new UserOrder();
+                userorder.set("user_id",    selectDeal.get("userid"))
+                                .set("order_id",order.get("id"));
+                userorder.save();
+            }
+            //转派时，不通知申报人部门其他人。
+            offerinfoList = UserService.service.userinfosByUserid(offer);
+            dealinfoList = UserService.service.userinfosByUserOrder(orderid);
+            OrderService.service.updateOrderAndAlert(offerinfoList, offerinfo, dealinfo, order, comment, selectProgress);
+            OrderService.service.updateOrderAndAlert(dealinfoList, offerinfo, dealinfo, order, comment, selectProgress);
+            
+            renderJson("state", "指派成功！");
+        }
+        //反馈话务
+        else if (selectProgress == 4) {
+            order.set("status", 3).update();
+            OrderService.service.updateOrderAndAlert(offerinfoList, offerinfo, dealinfo, order, comment, selectProgress);
+            //继续处理不需要通知运维人员，只通知申报人员及其部门人员
+            //OrderService.service.updateOrderAndAlert(dealinfoList, offerinfo, dealinfo, order, comment, selectProgress);
+            
+            renderJson("state", "故障工单继续处理！");
+        }
+    }
 	
 	
 	/**

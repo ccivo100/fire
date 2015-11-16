@@ -52,7 +52,7 @@ public class OperateValidator extends Validator {
 	 * @return
 	 */
 	public static boolean valiProcess(int process){
-		int[] paras={-1,0,1,2,3};
+		int[] paras={-1,0,1,2,3,4};
 		return ArrayUtils.contains(paras, process);
 	}
 
