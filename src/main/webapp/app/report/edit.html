@@ -7,74 +7,77 @@
 <script type="text/javascript">
 $(document).ready(function(){
 
-	$("#reportupdate").click(function(){
-		$.ajax({
-			type:"post",
-			url:"${ContextPath}/report/update",
-			data:{
-					"order.id":$('#oorderid').val(),
-					"order.title":$('#otitle').val(),
-					"order.description":$('#odescription').val(),
-			},
-			success:function(msg){
-				alertModal(msg.state);
-				$('#alertModal').on('hidden.bs.modal', function () {
-					if(msg.state=='更新故障工单成功！'){
-						window.location.href='${ContextPath}/report/reports'
-					}
-				});
-			}
-		});
-	});
-	
-	$('#recall').click(function(){
-		$('#sureModal').modal();
-	});
-		
-	$("#sure").click(function(){
-		$.ajax({
-			type:"post",
-			url:"${ContextPath}/report/recall",
-			data:{
-				"order.id":$('#oorderid').val(),
-			},
-			dataType : "json",
-			success:function(msg){
-				$('#sureModal').modal('hide');
-				alertModal(msg.state);
-				$('#alertModal').on('hidden.bs.modal', function () {
-					if(msg.state=='撤回成功！'){
-						window.location.href='${ContextPath}/report/reports'
-					}
-				});
-			}
-		});
-	});
-	
-	$("#delete").click(function(){
-		$.ajax({
-			type:"post",
-			url:"${ContextPath}/report/delete",
-			data:{
-				"oorderid":$('#oorderid').val()
-			},
-			dataType : "json",
-			success:function(msg){
-				alertModal(msg.state);
-				$('#alertModal').on('hidden.bs.modal', function () {
-					if(msg.state=='删除成功！'){
-						window.location.href='${ContextPath}/report/reports'
-					}
-				});
-			}
-		});
-	});
+    $("#reportupdate").click(function(){
+        $.ajax({
+            type:"post",
+            url:"${ContextPath}/report/update",
+            data:{
+                    "order.id":$('#oorderid').val(),
+                    "order.title":$('#otitle').val(),
+                    "order.description":$('#odescription').val(),
+            },
+            success:function(msg){
+                alertModal(msg.state);
+                $('#alertModal').on('hidden.bs.modal', function () {
+                    if(msg.state=='更新故障工单成功！'){
+                        window.location.href='${ContextPath}/report/reports'
+                    }
+                    else{
+	                	$("#reportupdate").attr({"disabled":"disabled"})
+	                }
+                });
+            }
+        });
+    });
+    
+    $('#recall').click(function(){
+        $('#sureModal').modal();
+    });
+        
+    $("#sure").click(function(){
+        $.ajax({
+            type:"post",
+            url:"${ContextPath}/report/recall",
+            data:{
+                "order.id":$('#oorderid').val(),
+            },
+            dataType : "json",
+            success:function(msg){
+                $('#sureModal').modal('hide');
+                alertModal(msg.state);
+                $('#alertModal').on('hidden.bs.modal', function () {
+                    if(msg.state=='撤回成功！'){
+                        window.location.href='${ContextPath}/report/reports'
+                    }
+                });
+            }
+        });
+    });
+    
+    $("#delete").click(function(){
+        $.ajax({
+            type:"post",
+            url:"${ContextPath}/report/delete",
+            data:{
+                "oorderid":$('#oorderid').val()
+            },
+            dataType : "json",
+            success:function(msg){
+                alertModal(msg.state);
+                $('#alertModal').on('hidden.bs.modal', function () {
+                    if(msg.state=='删除成功！'){
+                        window.location.href='${ContextPath}/report/reports'
+                    }
+                });
+            }
+        });
+    });
 });
 
 function alertModal(msg){
-	$("#modal-title-content").html("提示!");  
-	$("#modal-body-content").html(msg);  
-	$('#alertModal').modal();
+    $("#modal-title-content").html("提示!");  
+    $("#modal-body-content").html(msg);  
+    $('#alertModal').modal();
 }
 
 </script>
@@ -83,9 +86,9 @@ function alertModal(msg){
 [@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="reportsFlag"]
 
 <div class="index-background">
-	<!-- 代表上写文、/blog代表控制器、/save代表控制器中的方法 -->
-	<form class="form-horizontal"  method="post">
-		[#include "_formedit.html" /]
-	</form>
+    <!-- 代表上写文、/blog代表控制器、/save代表控制器中的方法 -->
+    <form class="form-horizontal"  method="post">
+        [#include "_formedit.html" /]
+    </form>
 </div>
 [/@mainlayout]

@@ -12,7 +12,7 @@ import cn.dreampie.tree.TreeNode;
 
 /**
  * @描述 故障类型Model
- * @author 唐东宇
+ * @author 陈宇佳
  *
  */
 @TableBind(tableName = "com_type")

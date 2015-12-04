@@ -12,7 +12,7 @@ import com.poicom.basic.kit.StringKit;
 import com.poicom.function.model.Alertinfo;
 /**
  * 
- * @author 唐东宇
+ * @author 陈宇佳
  *
  */
 public class ThreadAlert {

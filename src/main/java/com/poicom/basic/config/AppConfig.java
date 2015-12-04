@@ -41,7 +41,7 @@ import com.poicom.basic.plugin.sqlxml.SqlInXmlPlugin;
 import com.poicom.basic.shiro.MyJdbcAuthzService;
 /**
  * 
- * @author 唐东宇
+ * @author 陈宇佳
  *
  */
 public class AppConfig extends JFinalConfig {
@@ -52,7 +52,7 @@ public class AppConfig extends JFinalConfig {
 
 	@Override
 	public void configConstant(Constants me) {
-		// 加载少量必要配置，随后可用getProperty(...)获取值
+		// 加载少量必要配置，随后可用getProperty(...)获取值 
 		log.info(" == Constants == 缓存 Properties配置文件中的配置信息！");
 		new PropertiesPlugin(loadPropertyFile("application.properties")).start();
 		

@@ -16,7 +16,7 @@ import com.poicom.basic.kit.ClassSearchKit;
 import com.poicom.basic.kit.CollectionKit;
 /**
  * 
- * @author 唐东宇
+ * @author 陈宇佳
  *
  */
 public class RouteBind extends Routes {

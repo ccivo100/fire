@@ -9,26 +9,33 @@ import com.jfinal.core.ActionInvocation;
 import com.poicom.function.model.User;
 /**
  * 
- * @author 唐东宇
+ * @author 陈宇佳
  *
  */
 public class CommonInterceptor implements Interceptor{
 
 	@Override
-	public void intercept(ActionInvocation ai) {
-		if(ai.getActionKey().equals("/")){
-			ai.invoke();
-			ai.getController().setAttr("back", backParamUrl(ai));
-		}else if(ai.getActionKey().equals("/report/reports")){
-			ai.invoke();
-			ai.getController().setAttr("back", backParamUrl(ai));
-		}else if(ai.getActionKey().equals("/operate/operates")){
-			ai.invoke();
-			ai.getController().setAttr("back", backParamUrl(ai));
-		}else{
-			ai.invoke();
-		}
-	}
+    public void intercept(ActionInvocation ai) {
+        if(ai.getActionKey().equals("/")){
+            ai.invoke();
+            ai.getController().setAttr("back", backParamUrl(ai));
+        }
+        else if(ai.getActionKey().equals("/report/reports")){
+            ai.invoke();
+            ai.getController().setAttr("back", backParamUrl(ai));
+        }
+        else if(ai.getActionKey().equals("/operate/operates")){
+            ai.invoke();
+            ai.getController().setAttr("back", backParamUrl(ai));
+        }
+        else if(ai.getActionKey().equals("/index/indexs")){
+            ai.invoke();
+            ai.getController().setAttr("back", backParamUrl(ai));
+        }
+        else{
+            ai.invoke();
+        }
+    }
 	
 	public static String backParamUrl(ActionInvocation ai){
 		if(ai.getController().getPara()==null){

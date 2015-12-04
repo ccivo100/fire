@@ -39,7 +39,7 @@ import com.poicom.function.validator.OperateValidator;
 
 /**
  * @描述 运维管理
- * @author 唐东宇
+ * @author 陈宇佳
  *
  */
 @ControllerKey(value="/operate",path="/app/operate")
@@ -358,7 +358,6 @@ public class OperateController extends BaseController{
             OrderService.service.updateOrderAndAlert(offerinfoList, offerinfo, dealinfo, order, comment, selectProgress);
             //继续处理不需要通知运维人员，只通知申报人员及其部门人员
             //OrderService.service.updateOrderAndAlert(dealinfoList, offerinfo, dealinfo, order, comment, selectProgress);
-            
             renderJson("state", "故障工单继续处理！");
         }
     }
@@ -371,7 +370,8 @@ public class OperateController extends BaseController{
 		User user=User.dao.getCurrentUser();
 		if(ValidateKit.isNullOrEmpty(user)){
 			render("operate.html");
-		}else{
+		}
+		else{
 			String where=" 1=1 and o.deleted_at is null and o.status<>0 and o.id IN(SELECT userorder.order_id  FROM com_user_order AS userorder WHERE user_id=?) ";
 			String orderby=" ORDER BY o.offer_at DESC ";
 			Page <Record> operatePage=Order.dao.findOperatesByUserId(getParaToInt(0,1), 10,where,orderby, user.get("id"));

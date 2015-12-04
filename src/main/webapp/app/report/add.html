@@ -282,6 +282,8 @@ $(".reportsave").click(function(){
 	
 });
 
+
+
 /* 提交故障工单 */
 $(document).ready(function(){
 	$("#reportsave").click(function(){
@@ -310,8 +312,12 @@ $(document).ready(function(){
 				$('#alertModal').modal();
 				$('#alertModal').on('hidden.bs.modal', function () {
 					if(msg.state=='提交成功！'){
+						$("#reportsave").attr({"disabled":"disabled"})
 						window.location.href='${ContextPath}/report/reports'
 					}
+					else{
+	                	$("#reportsave").attr({"disabled":"disabled"})
+	                }
 				});
 			}
 		});
@@ -319,7 +325,7 @@ $(document).ready(function(){
 });
 $(document).ready(function(){
 	$("#reportsave2").click(function(){
-		
+		$(this).attr("disabled","disabled"); 
 		$.ajax({
 			type:"post",
 			url:"${ContextPath}/report/saveByTemplate",
@@ -354,7 +360,55 @@ $(document).ready(function(){
 				$('#alertModal').modal();
 				$('#alertModal').on('hidden.bs.modal', function () {
 					if(msg.state=='提交成功！'){
-						window.location.href='${ContextPath}/report/reports'
+					    window.location.href='${ContextPath}/report/reports'
+					}
+					else if(msg.state=='客户姓名不能为空！'){
+					    $("#reportsave2").removeAttr("disabled")
+					}
+					else if(msg.state=='请填写客户编号！'){
+					    $("#reportsave2").removeAttr("disabled")
+					}
+					else if(msg.state=='请填写终端手机号！'){
+					    $("#reportsave2").removeAttr("disabled")
+					}
+					else if(msg.state=='终端手机号格式不正确！'){
+					    $("#reportsave2").removeAttr("disabled")
+					}
+					else if(msg.state=='请填写故障发生地！'){
+					    $("#reportsave2").removeAttr("disabled")
+					}
+					else if(msg.state=='请填写联系人姓名！'){
+					    $("#reportsave2").removeAttr("disabled")
+					}
+					else if(msg.state=='请填写联系电话！'){
+					    $("#reportsave2").removeAttr("disabled")
+					}
+					else if(msg.state=='联系电话格式不正确！'){
+					    $("#reportsave2").removeAttr("disabled")
+					}
+					else if(msg.state=='请填写产品类型！'){
+					    $("#reportsave2").removeAttr("disabled")
+					}
+					else if(msg.state=='请填写手机品牌！'){
+					    $("#reportsave2").removeAttr("disabled")
+					}
+					else if(msg.state=='请选择故障总类！'){
+					    $("#reportsave2").removeAttr("disabled")
+					}
+					else if(msg.state=='请选择故障大类！'){
+					    $("#reportsave2").removeAttr("disabled")
+					}
+					else if(msg.state=='请选择故障小类！'){
+					    $("#reportsave2").removeAttr("disabled")
+					}
+					else if(msg.state=='请选择模板！'){
+					    $("#reportsave2").removeAttr("disabled")
+					}
+					else if(msg.state=='故障单描述不能为空！'){
+					    $("#reportsave2").removeAttr("disabled")
+					}
+					else{
+					    $("#reportsave2").attr({"disabled":"disabled"})
 					}
 				});
 			}

@@ -27,9 +27,20 @@ public class OperateValidator extends Validator {
 			}
 			else if(c.getParaToInt("progress")==-1){
 				addError("state","请选择处理进度！");
-			}else if(!valiProcess(c.getParaToInt("progress"))){
-				
+			}
+			else if(!valiProcess(c.getParaToInt("progress"))){	
 				addError("state","处理进度参数错误！");//防止人为修改参数。
+			}
+			else if(c.getParaToInt("progress")==3){
+				if(c.getParaToLong("selectApartment")==-1){
+	                addError("state","请选择运维部门！");
+	            }
+	            else if(c.getParaToLong("selectApartment")!=-1&&c.getParaToLong("selectChildApartment")==-1){
+	                addError("state","请选择运维组别！");
+	            }
+	            else if(ValidateKit.isNullOrEmpty(c.getPara("comment.context"))){
+	            	addError("state","处理意见不能为空！");
+	            }
 			}
 			else if(ValidateKit.isNullOrEmpty(c.getPara("comment.context"))){
 				addError("state","处理意见不能为空！");
@@ -52,7 +63,7 @@ public class OperateValidator extends Validator {
 	 * @return
 	 */
 	public static boolean valiProcess(int process){
-		int[] paras={-1,0,1,2,3,4};
+		int[] paras={-1,0,1,2,3,4,5,6};
 		return ArrayUtils.contains(paras, process);
 	}
 

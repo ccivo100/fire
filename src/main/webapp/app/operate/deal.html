@@ -12,14 +12,14 @@
 	<table class="table table-bordered table-hover ">
 		<thead>
 			<tr>
-				<th style="text-align:center;width:2%;">序号</th>
+				<th style="text-align:center;">序号</th>
 				<!-- <th width="10%">标题</th> -->
-                <th style="text-align:center;width:5%;">客户姓名</th>
-				<th style="text-align:center;width:5%;">申报部门</th>
-				<th style="text-align:center;width:2%;">申报人</th>
-				<th style="text-align:center;width:5%;">申报时间</th>
-				<th style="text-align:center;width:2%;">当前状态</th>
-				<th style="text-align:center;width:2%;">操作</th>
+                <th style="text-align:center;">客户姓名</th>
+				<th style="text-align:center;">申报部门</th>
+				<th style="text-align:center;">申报人</th>
+				<th style="text-align:center;">申报时间</th>
+				<th style="text-align:center;">当前状态</th>
+				<th style="text-align:center;">操作</th>
 			</tr>
 		</thead>
 				<tbody>
@@ -52,9 +52,22 @@
 	                [/#if]
 					</b>
 				</td>
-				<td style="text-align:center;">
+				<!--<td style="text-align:center;">
 					<a class="btn btn-minier btn-primary "  href="${ContextPath}/operate/edit?id=${operate.id}" >处理</a>
+				</td>-->
+				
+				<td style="text-align:left;">
+					[#if operate.status==3]
+					<a class="btn btn-minier btn-primary "  href="${ContextPath}/operate/operate?id=${operate.id}" >查看</a>
+					[#elseif operate.status=4]
+		            <a class="btn btn-minier btn-primary "  href="${ContextPath}/operate/operate?id=${operate.id}" >查看</a>
+		            [#elseif operate.status=1]
+		            <a class="btn btn-minier btn-primary "  href="${ContextPath}/operate/edit?id=${operate.id}" >处理</a>
+		            [#elseif operate.status=2]
+		            <a class="btn btn-minier btn-primary "  href="${ContextPath}/operate/edit?id=${operate.id}" >处理</a>
+		            [/#if]
 				</td>
+				
 			</tr>
 			[/#list]
 			[#if operatePage.getList().size()!=10]

@@ -58,7 +58,7 @@ import com.poicom.function.validator.AdminValidator;
 
 /**
  * 
- * @author 唐东宇
+ * @author 陈宇佳
  *
  */
 @ControllerKey(value="/admin",path="/app/admin")

@@ -454,6 +454,11 @@ public class AlertKit {
 			body.append("转派处理。<br/>");
 		}else if(selectProgress == 4){
 			body.append("提出反馈。<br/>");
+		}else if(selectProgress == 5){
+			body.append("反馈结果。<br/>");
+		}
+		else if(selectProgress == 6){
+			body.append("回访完毕。<br/>");
 		}
 		body.append("处理意见为："+comment.getStr("context")+"。<br/>");
 		body.append("详情请登陆系统查看。");
@@ -484,8 +489,15 @@ public class AlertKit {
 			body.append("处理完毕");
 		}else if(selectProgress == 3){
 			body.append("转派处理");
+		}else if(selectProgress == 4){
+			body.append("提出反馈");
+		}else if(selectProgress == 5){
+			body.append("反馈结果");
 		}
-		
+		else if(selectProgress == 6){
+			body.append("回访完毕");
+		}
+
 		body.append("，详情请登陆系统查看。");
 		return body;
 	}

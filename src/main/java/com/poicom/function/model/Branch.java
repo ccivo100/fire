@@ -10,7 +10,7 @@ import com.poicom.basic.thread.ThreadParamInit;
 import cn.dreampie.tablebind.TableBind;
 /**
  * 
- * @author 唐东宇
+ * @author 陈宇佳
  *
  */
 @TableBind(tableName="com_branch")

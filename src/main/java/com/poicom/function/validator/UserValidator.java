@@ -13,7 +13,7 @@ import com.jfinal.validate.Validator;
 import com.poicom.function.model.User;
 /**
  * 
- * @author 唐东宇
+ * @author 陈宇佳
  *
  */
 public class UserValidator extends Validator {

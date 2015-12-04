@@ -12,7 +12,7 @@ import cn.dreampie.tablebind.TableBind;
 import cn.dreampie.tree.TreeNode;
 /**
  * 角色Model
- * @author 唐东宇
+ * @author 陈宇佳
  *
  */
 @TableBind(tableName="sec_role")

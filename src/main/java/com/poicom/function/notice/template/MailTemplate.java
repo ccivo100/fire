@@ -118,15 +118,24 @@ public class MailTemplate {
 				.append("现由"+deal.getStr("aname")+"的"+deal.getStr("ufullname"));
 		if(selectProgress == 0){
 			body.append("开始处理。<br/>");
-		}else if(selectProgress == 1){
+		}
+		else if(selectProgress == 1){
 			body.append("继续处理。<br/>");
-		}else if(selectProgress == 2){
+		}
+		else if(selectProgress == 2){
 			body.append("处理完毕。<br/>");
-		}else if(selectProgress == 3){
+		}
+		else if(selectProgress == 3){
 			body.append("转派处理。<br/>");
 		}
 		else if(selectProgress == 4){
 			body.append("提出反馈。<br/>");
+		}
+		else if(selectProgress == 5){
+			body.append("反馈结果。<br/>");
+		}
+		else if(selectProgress == 6){
+			body.append("回访完毕。<br/>");
 		}
 		body.append("故障内容为："+WebKit.getStringToHTML(order.getStr("description"))+"<br/>");
 		body.append("处理意见为："+comment.getStr("context")+"。<br/>");

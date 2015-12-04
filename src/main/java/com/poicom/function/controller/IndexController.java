@@ -1,6 +1,7 @@
 package com.poicom.function.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -34,7 +35,7 @@ import com.poicom.function.validator.IndexValidator;
 
 /**
  * 
- * @author 唐东宇
+ * @author 陈宇佳
  *
  */
 @ControllerKey(value = "/", path = "/app/index")
@@ -71,6 +72,45 @@ public class IndexController extends BaseController {
 		}
 		
 	}
+	
+    /*public void indexs(){
+    User user=User.dao.getCurrentUser();;
+     Page <Record> ordersPage;;//返回查询结果，并覆盖原来的申报列表
+    
+    //拼接where语句
+    StringBuffer whereadd=new StringBuffer();
+    //保存condition条件
+    List<Object> conditions=new ArrayList<Object>();
+    Integer status=getParaToInt("status");
+    //若无查询条件 则按正常查询。
+    if(getParaToInt("status")==-1){
+        
+        String where=" WHERE o.offer_user=? ";
+        String orderby=" ORDER BY o.deleted_at ASC,o.status DESC, o.offer_at DESC ";
+        //reportPage=Order.dao.findReportsByUserId(getParaToInt(0,1), 10,where,orderby, user.get("id"));
+        ordersPage=Order.dao.findIndexOrders(getParaToInt(0,1), 10,where,orderby, user.get("id"));
+    }
+    else{
+        
+        conditions.add(user.get("id"));//这句待定
+
+        if(getParaToInt("status")!=-1){
+            whereadd.append(" and u1.full_name like ? ");
+            conditions.add("%"+getPara("offeruser").trim()+"%");
+            setAttr("status",status);
+        }
+
+        String where=" WHERE o.offer_user=? "+whereadd.toString();
+        String orderby=" ORDER BY o.deleted_at ASC,o.status DESC, o.offer_at DESC ";
+        Object[] condition= new Object[conditions.size()];
+        conditions.toArray(condition);
+        ordersPage=Order.dao.findIndexOrders(getParaToInt(0,1), 10,where,orderby,condition);
+    }
+    OrderService.service.format(ordersPage, "title");
+    setAttr("overOrderPage",ordersPage);
+    
+    render("index.html");
+}*/
 	
 	/**
 	 * 查询故障工单详细内容

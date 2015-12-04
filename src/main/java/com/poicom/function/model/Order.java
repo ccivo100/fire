@@ -14,7 +14,7 @@ import com.poicom.basic.plugin.sqlxml.SqlXmlKit;
 import cn.dreampie.tablebind.TableBind;
 /**
  * 工单model
- * @author 唐东宇
+ * @author 陈宇佳
  *
  */
 @SuppressWarnings("unused")

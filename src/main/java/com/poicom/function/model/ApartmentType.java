@@ -3,7 +3,7 @@ package com.poicom.function.model;
 import cn.dreampie.tablebind.TableBind;
 /**
  * 部门-类型 Model
- * @author 唐东宇
+ * @author 陈宇佳
  *
  */
 @TableBind(tableName = "com_apartment_type")

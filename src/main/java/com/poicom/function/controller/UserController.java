@@ -20,7 +20,7 @@ import com.poicom.function.model.UserInfo;
 import com.poicom.function.validator.UserValidator;
 /**
  * 
- * @author 唐东宇
+ * @author 陈宇佳
  *
  */
 @ControllerKey(value="/user",path="/app/user")

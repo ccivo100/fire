@@ -12,7 +12,7 @@ import com.jfinal.core.Controller;
 import com.poicom.function.model.User;
 /**
  * 获取session中用户资料
- * @author 唐东宇
+ * @author 陈宇佳
  *
  */
 public class SessionInterceptor implements Interceptor {

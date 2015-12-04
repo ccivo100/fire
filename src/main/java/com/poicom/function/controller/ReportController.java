@@ -37,23 +37,22 @@ import com.poicom.function.model.UserOrder;
 import com.poicom.function.service.ApartmentService;
 import com.poicom.function.service.OrderService;
 import com.poicom.function.service.TemplateService;
+import com.poicom.function.service.UserService;
 import com.poicom.function.validator.CommonValidator;
 import com.poicom.function.validator.ReportValidator;
 
 /**
  * @描述 故障申报
- * @author 唐东宇
+ * @author 陈宇佳
  *
  */
 @ControllerKey(value = "/report", path = "/app/report")
 public class ReportController extends BaseController{
-	
 	protected Logger logger=LoggerFactory.getLogger(ReportController.class);
-	
 	private final static String REPORT_QUERY_PAGE="query.html";
+	private final static String REPORT_ANSWER_PAGE="answer.html";
 	
 	public void index(){
-		
 		render("order");
 	}
 
@@ -61,8 +60,8 @@ public class ReportController extends BaseController{
 	 * @描述 报障人员查询本账号申报的故障工单
 	 */
 	public void reports(){
-		User user=User.dao.getCurrentUser();
-		Page<Record> reportPage;
+		User user=User.dao.getCurrentUser();//查询本账号下的工单
+		Page<Record> reportPage;//返回查询结果，并覆盖原来的申报列表
 		
 		//拼接where语句
 		StringBuffer whereadd=new StringBuffer();
@@ -439,6 +438,106 @@ public class ReportController extends BaseController{
 		}
 		
 	}
+	
+	/*进入故障工单回复/回访页面、方法一
+	public void answer(){
+		Record order = Order.dao.findReportById(" o.id=? ",getParaToInt("id"));
+		//获取工单申报者的分公司信息
+		Record offer=UserInfo.dao.getUserBranch(order.getLong("oofferid"));
+		if(!ValidateKit.isNullOrEmpty(offer)){
+			setAttr("offer",offer);
+		}
+		//获取工单处理意见
+		List<Record> commentList=Comment.dao.findCommentsByOrderId(" comments.order_id=? order by comments.add_at asc ",order.getLong("oorderid"));
+		setAttr("commentList",commentList);
+		//工单详细信息
+		setAttr(order);
+		render(REPORT_ANSWER_PAGE);
+	}*/
+	
+	/*进入故障工单回复/回访页面、方法二*/
+	public void answer(){
+		//工单详细信息
+		String where="o.id=?";
+		Record order = Order.dao.findOperateById(where,getParaToInt("id"));
+		setAttr(order);
+		//当前用户详细信息
+		Record userinfo=UserInfo.dao.getAllUserInfo(User.dao.getCurrentUser().get("id"));
+		setAttr(userinfo);	
+		//获取工单申报者的单位、部门、职位信息
+		Record offer=UserInfo.dao.getUserBranch(order.getLong("oofferid"));
+			if(!ValidateKit.isNullOrEmpty(offer)){
+					setAttr("offer",offer);
+			}
+		List<Record> commentList=Comment.dao.findCommentsByOrderId(" comments.order_id=? order by comments.add_at asc ",order.getLong("oorderid"));
+		setAttr("commentList",commentList);
+		render(REPORT_ANSWER_PAGE);
+	} 
+	
+	/**
+	 *  @描述 处理申报人员更新故障工单操作 
+	 */
+	@Before({ReportValidator.class,Tx.class})
+    public void updateanswer() {
+        // 工单id
+        Long orderid = getParaToLong("orderid");
+        // 处理进度
+        int selectProgress = getParaToInt("progress");
+        //工单内容
+        Order order = Order.dao.findById(orderid);
+        
+        //当前用户
+        User deal = SubjectKit.getUser();
+        Record dealinfo = UserInfo.dao.getAllUserInfo(deal.get("id"));
+        // 故障工单提交人员
+        User offer = User.dao.findById(order.get("offer_user"));
+        Record offerinfo = UserInfo.dao.getAllUserInfo(offer.get("id"));
+
+        //获取页面提交数据：add_at、context。
+        Comment comment = getModel(Comment.class);
+        // 设置基本内容：处理人，建议，处理时间，修改状态等。
+        OrderService.service.saveComment(comment, orderid, deal.getLong("id"));
+        
+        //工单提交者部门人员
+        List<Record> offerinfoList = UserService.service.userinfosByApartment(offer);
+        //所有工单处理人员
+        List<Record> dealinfoList = UserService.service.userinfosByUserOrder(orderid);
+
+        // 回复问题
+        if (selectProgress == 5) {
+            // 设置状态为 1 及处理中
+            order.set("status", 1).update();
+            
+            //OrderService.service.updateOrderAndAlert(offerinfoList, offerinfo, dealinfo, order, comment, selectProgress);
+            OrderService.service.updateOrderAndAlert(dealinfoList, offerinfo, dealinfo, order, comment, selectProgress);
+            
+            renderJson("state", "故障工单继续处理！");
+        }
+        // 处理完毕
+        else if (selectProgress == 6) {
+            // 设置状态为 0 及已回访
+            order.set("status", 0);
+
+            int time = Level.dao.findById(order.get("level")).get("deadline");
+            String offer_at = order.get("offer_at").toString();
+            DateTime now = DateTime.now();
+            int t = DateKit.dateBetween(offer_at, now);
+
+            // 若处理时间超时，则
+            if (t > time) {
+                order.set("spend_time", t);
+            }
+            if (order.update()) {
+                
+                OrderService.service.updateOrderAndAlert(offerinfoList, offerinfo, dealinfo, order, comment, selectProgress);
+                OrderService.service.updateOrderAndAlert(dealinfoList, offerinfo, dealinfo, order, comment, selectProgress);
+
+                renderJson("state", "故障工单处理完毕！");
+            } else {
+                renderJson("state", "提交失败！");
+            }
+        }
+    }
 	
 	/**
 	 * 模板保存工单

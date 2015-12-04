@@ -7,7 +7,7 @@ import com.jfinal.plugin.activerecord.Db;
 import cn.dreampie.tablebind.TableBind;
 /**
  * 
- * @author 唐东宇
+ * @author 陈宇佳
  *
  */
 @TableBind(tableName = "sec_role_permission")

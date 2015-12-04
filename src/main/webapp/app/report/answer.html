@@ -1,0 +1,361 @@
+[#include "/app/common/layout/__frontmainlayout.html"/]
+
+[#assign pageCss]
+    <link rel="stylesheet" href="${ContextPath}/admin/assets/css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" href="${ContextPath}/admin/assets/css/signin.css" />
+    <link rel="stylesheet" href="${ContextPath}/admin/assets/css/jquery-ui.css" />
+[/#assign]
+
+[#assign pageJavascript]
+    <script src="${ContextPath}/admin/assets/js/jquery-ui.js"></script>
+    <script src="${ContextPath}/admin/assets/js/jquery.ui.touch-punch.js"></script>
+    <script src="${ContextPath}/admin/assets/js/tree.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#reportupdate").click(function(){
+            	$(this).attr("disabled","disabled"); 
+                $.ajax({
+                    type:"post",
+                    url:"${ContextPath}/report/updateanswer",
+                    data:{
+                        "oorderid":$('#oorderid').val(),
+                        "progress":$('#selectProgress').val(),
+                        
+                        "orderid":$('#oorderid').val(),
+                        "comment.add_at":$('#deal_at').val(),
+                        "comment.predict_at":$('#predict_at').val(),
+                        "comment.context":$('#ocomment').val(),
+                        },
+                        
+                    success:function(msg){
+                        alertModal(msg.state);
+                        $('#alertModal').modal();
+                        if(msg.state=='故障工单处理完毕！'){
+                        	window.location.href='${ContextPath}/report/reports'
+                        }
+                        else if(msg.state=='故障工单继续处理！'){
+                        	window.location.href='${ContextPath}/report/reports'
+                        }
+                        else if(msg.state=='请选择处理时间！'){
+                        	$("#reportupdate").removeAttr("disabled")
+                        }
+                        else if(msg.state=='请选择预计完成时间！'){
+                        	$("#reportupdate").removeAttr("disabled")
+                        }
+                        else if(msg.state=='预计完成时间应该大于处理时间！'){
+                        	$("#reportupdate").removeAttr("disabled")
+                        }
+                        else if(msg.state=='请选择处理进度！'){
+                        	$("#reportupdate").removeAttr("disabled")
+                        }
+                        else if(msg.state=='处理进度参数错误！'){
+                        	$("#reportupdate").removeAttr("disabled")
+                        }
+                        else if(msg.state=='处理意见不能为空！'){
+                        	$("#reportupdate").removeAttr("disabled")
+                        }
+                        else{
+    	                	$("#reportupdate").attr({"disabled":"disabled"})
+    	                }
+                    }
+                });
+            });
+            
+            $("#deal_at").datetimepicker({
+                format: 'yyyy-mm-dd hh:ii:ss',
+                autoclose: true,
+                todayBtn: true,
+                pickerPosition: "bottom-left",
+                language:'zh-CN',
+                //minView: 2,
+            });
+            $("#predict_at").datetimepicker({
+                format: 'yyyy-mm-dd hh:ii:ss',
+                autoclose: true,
+                todayBtn: true,
+                pickerPosition: "bottom-left",
+                language:'zh-CN',
+            });
+            
+            jQuery(function($){
+                $(".created_at").each(function(){
+                    var $created_at=$(this).attr("title");
+                    var $format_time=formatDateTime($created_at);
+                    $(this).html('<i class="ace-icon fa fa-clock-o bigger-110"></i> '+$format_time);
+                    $(this).tooltip({
+                        show: {
+                            effect: "slideDown",
+                            delay: 250
+                        }
+                    });
+                });
+                
+            });
+            $('.timeline-info').mouseenter(function() {
+                $(this).popover('show');
+            });
+
+            $('.timeline-info').mouseleave(function() {
+                $(this).popover('hide');
+            });
+        });
+        function sendinit(){
+            $('#apartment').hide();
+            $('#childApartment').hide();
+        }
+        function ordersend(){
+            $('#apartment').hide();
+            $('#childApartment').hide();
+            var p=$('#selectProgress').val();
+            if(p==3){
+                $("#selectApartment").html("");
+                $('#apartment').show();
+                $('#childApartment').show();
+                select1();
+            }
+        };
+        
+        $(function(){
+            sendinit();
+            $('#selectProgress').bind("change", ordersend);
+            //$('#selectApartment').bind("change", select2);
+            //$('#selectChildApartment').bind("change",select3);
+        });
+
+        function alertModal(msg){
+            $("#modal-title-content").html("提示!");  
+            $("#modal-body-content").html(msg);  
+        };
+
+        $(function(){ 
+            $("[data-toggle='popover']").popover({html : true });
+        });
+
+    </script>
+[/#assign]
+
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="reportsFlag"]
+<div class="page-header">
+    <h1>
+        <a href="${ContextPath}/report/reports">申报记录 </a>
+        <small> <i class="ace-icon fa fa-angle-double-right"></i> 工单详情</small>
+    </h1>
+</div>
+
+<input id="oorderid"  type="hidden" name="oorderid" value="${(oorderid)!}" />
+<div class="row">
+    <div class="col-md-8 col-sm-offset-1">
+        <div class="jf_panel">
+            <div class="jf_header ">故障内容</div>
+            <div class="jf_header jf_topic_header">
+                [#if odeletetime??]
+                <span class="label label-danger">已撤销</span>
+                [#elseif ostatus=0]
+                <span class="label label-success">已回访</span>
+                [#elseif (ostatus?number)=1]
+                <span class="label label-warning">处理中</span>
+                [#elseif (ostatus?number)=2]
+                <span class="label label-default">未处理</span>
+                [#elseif (ostatus?number)=3]
+                <span class="label label-warning">待回复</span>
+                [#elseif (ostatus?number)=4]
+                <span class="label label-warning">待回访</span>
+                [/#if]
+                <span class="jf_topic_full_title">${(otitle)!}</span>
+                <br></br>
+                <span class="changes">
+                  <span>•故障小类：<span class="label label-info ">${(tname)!}</span></span>
+                  <span>•故障大类：<span class="label label-info ">${(tbname)!}</span></span>
+                  <span>•故障总类：<span class="label label-info ">${(otypess)!}</span></span>
+                  <span>•模板名称：<span class="label label-info ">${(tptitle)!}</span></span>
+                  <p></p>
+                  <span>•客户编号：<span class="label label-info ">${(oclient_num)!}</span></span>
+                  <span>•终端手机号：<span class="label label-info ">${(oclient_phone)!}</span></span>
+                  <span>•故障发生地：<span class="label label-info ">${(oaccident_place)!}</span></span>
+                  <span>•申报时间：<span class="label label-info ">${(ooffertime)!}</span></span>
+                  <p></p>
+                  <span>•联系人姓名：<span class="label label-info ">${(ocontact_name)!}</span></span>
+                  <span>•联系电话：<span class="label label-info ">${(ocontact_phone)!}</span></span>
+                  <span>•产品类型：<span class="label label-info ">${(oproduct_type)!}</span></span>
+                  <span>•手机品牌：<span class="label label-info ">${(osmart_phones)!}</span></span>
+                </span>
+            </div>
+            <div class="jf_inner jf_topic">
+                <div style="margin: 30px;">
+                    <div style="word-wrap:break-word;"> <h3>${(odescription)!}</h3> </div>
+                </div>
+            </div>
+        </div>
+        <div class="hr hr-12 hr-double"></div>
+    </div>
+
+    <div class="col-md-3 hidden-xs hidden-sm" style="padding-left: 0px;" >
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="widget-box transparent">
+                    <div class="widget-header widget-header-small">
+                        <h4 class="widget-title blue smaller">
+                            <i class="ace-icon fa fa-credit-card orange"></i> 申报人员信息
+                        </h4>
+                    </div>
+                    <div class="profile-user-info profile-user-info-striped">
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">姓名：</div>
+
+                            <div class="profile-info-value">
+                                <span class="editable" id="username">${(uoffername)!}</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">电话：</div>
+
+                            <div class="profile-info-value">
+                                <span class="editable" id="username">${(uofferphone)!}</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">单位：</div>
+
+                            <div class="profile-info-value">
+                                <span class="editable" id="age">${(offer.bname)!}</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">部门：</div>
+
+                            <div class="profile-info-value">
+                                <span class="editable" id="signup">${(offer.aname)!}</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-info-row">
+                            <div class="profile-info-name">职位：</div>
+
+                            <div class="profile-info-value">
+                                <span class="editable" id="login">${(offer.pname)!}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+</div>
+
+<!-- 处理情况panel -->
+<div class="row">
+    <div class="col-xs-12 col-sm-8 col-sm-offset-1">
+        <div class="timeline-container">
+                <div class="timeline-label">
+                    <span class="label label-primary arrowed-in-right label-lg">处理情况</span>
+                </div>
+                <div class="timeline-items">
+                    [#list commentList as comments]
+                    <div class="timeline-item clearfix">
+                            <div class="timeline-info" title="个人信息"  data-container="body" data-toggle="popover" data-placement="left" 
+                                data-content="电话：${(comments.uphone)!}<br/>单位：${(comments.bname)!}<br/>部门：${(comments.aname)!}<br/>职位：${(comments.pname)!}">
+                                <img src="${ContextPath}${(comments.uavatar)!}" alt="Susan't Avatar" />
+                            </div>
+                            <div class="widget-box transparent">
+                                <div class="widget-header widget-header-small">
+                                    <p class="widget-title smaller">
+                                        ${(comments_index+1)!}楼：${(comments.ufull_name)!}
+                                        &nbsp;&nbsp;
+                                                                                                          处理时间：<span class="red">${(comments.add_at)!} </span>
+                                        &nbsp;&nbsp;
+										预计时间：<span class="red">${(comments.predict_at)!} </span>                                                    
+                                        <span class="grey"></span>
+                                    </p>
+                                    <span class="created_at widget-toolbar no-border" title="${(comments.created_at)!}"><i class="ace-icon fa fa-clock-o bigger-110"></i> 1天前</span>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                    <!-- 处理时间：<span class="red">${(comments.add_at)!} </span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    	预计时间：<span class="red">${(comments.predict_at)!} </span> -->
+                                    <div class="space-6"></div>
+                                    <div style="word-wrap:break-word;">处理意见：<span class="green">${(comments.context)!}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    [/#list]
+                </div>
+                [#if commentList?has_content]
+                [#else]
+                <div class="timeline-items">
+                        <div class="timeline-item clearfix">
+                            <div class="widget-box transparent">
+                                <div class="widget-header widget-header-small"></div>
+                                <div class="widget-body">
+                                    <div class="widget-main"> <h3><span class="red "> 空空如也~~</span></h3> </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                [/#if]
+        </div>
+
+    </div>      
+    <div class="col-md-8 col-sm-offset-1">
+    <div class="hr hr-12 hr-double"></div>
+        <!-- 处理 操作 panel -->
+        <div class="jf_panel">
+            <div class="jf_header ">
+                处理
+            </div>
+            <div class="jf_header jf_topic_header">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="input-group">
+                        <span class="input-group-addon">处理时间</span>
+                            <input id="deal_at" type="text" class="datetimepicker" readonly >
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar bigger-110"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="input-group">
+                            <span class="input-group-addon">预计时间</span>
+                            <input id="predict_at" type="text" class="datetimepicker" readonly>
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar bigger-110"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="input-group">
+                            <span class="input-group-addon">进度</span>
+                                <select id="selectProgress" class="form-control" name="selectProgress">
+                                    <option value="-1">请选中处理进度</option>
+                                    <option value="5">反馈结果</option>
+                                    <option value="6">回访完毕</option>
+                                </select>
+                             </div>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <textarea id="ocomment" name="ocomment" class="form-control"
+                            placeholder="提交处理意见……" maxlength="250" cols="80" rows="7"
+                             >${(ocomment)!}</textarea>
+                </div>
+                <br>
+                <div>
+                    <button id="reportupdate" name="submit" value="提交"  class="btn btn-primary save" >提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+[#include "_model.html" /]
+[/@mainlayout]

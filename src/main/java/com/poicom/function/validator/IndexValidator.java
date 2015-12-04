@@ -14,7 +14,7 @@ import com.poicom.function.model.Retrieve;
 import com.poicom.function.model.User;
 /**
  * 
- * @author 唐东宇
+ * @author 陈宇佳
  *
  */
 public class IndexValidator extends Validator{

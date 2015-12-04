@@ -10,7 +10,7 @@ import cn.dreampie.tablebind.TableBind;
 import cn.dreampie.web.model.Model;
 /**
  * 
- * @author 唐东宇
+ * @author 陈宇佳
  *
  */
 @TableBind(tableName = "sec_user_role")

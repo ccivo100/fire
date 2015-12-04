@@ -86,6 +86,14 @@ public class SmsTemplate {
 			msg.append("处理完毕");
 		}else if(selectProgress == 3){
 			msg.append("转派处理");
+		}else if(selectProgress == 4){
+			msg.append("提出反馈");
+		}
+		else if(selectProgress == 5){
+			msg.append("反馈结果");
+		}
+		else if(selectProgress == 6){
+			msg.append("回访完毕");
 		}
 		
 		msg.append("，详情请登陆系统查看。");

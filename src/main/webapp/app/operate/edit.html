@@ -1,9 +1,9 @@
 ﻿[#include "/app/common/layout/__frontmainlayout.html"/]
 
 [#assign pageCss]
-<link rel="stylesheet" href="${ContextPath}/admin/assets/css/bootstrap-datetimepicker.min.css" />
-<link rel="stylesheet" href="${ContextPath}/admin/assets/css/signin.css" />
-<link rel="stylesheet" href="${ContextPath}/admin/assets/css/jquery-ui.css" />
+	<link rel="stylesheet" href="${ContextPath}/admin/assets/css/bootstrap-datetimepicker.min.css" />
+	<link rel="stylesheet" href="${ContextPath}/admin/assets/css/signin.css" />
+	<link rel="stylesheet" href="${ContextPath}/admin/assets/css/jquery-ui.css" />
 [/#assign]
 
 [#assign pageJavascript]
@@ -13,12 +13,14 @@
 <script type="text/javascript">
 $(document).ready(function(){
     $("#operateupdate").click(function(){
+    	$(this).attr("disabled","disabled"); 
         $.ajax({
             type:"post",
             url:"${ContextPath}/operate/update",
             data:{
                 "oorderid":$('#oorderid').val(),
                 "progress":$('#selectProgress').val(),
+                "selectApartment":$('#selectApartment').val(),
                 "selectChildApartment":$('#selectChildApartment').val(),
                 
                 "orderid":$('#oorderid').val(),
@@ -31,7 +33,7 @@ $(document).ready(function(){
                 alertModal(msg.state);
                 $('#alertModal').modal();
                 if(msg.state=='故障工单处理完毕！'){
-                    window.location.href='${ContextPath}/operate/operates'
+                    window.location.href='${ContextPath}/operate/deal'
                 }
                 else if(msg.state=='故障工单开始处理！'){
                     window.location.href='${ContextPath}/operate/deal'
@@ -42,6 +44,34 @@ $(document).ready(function(){
                 else if(msg.state=='指派成功！'){
                     window.location.href='${ContextPath}/operate/deal'
                 }
+                else if(msg.state=='请选择处理时间！'){
+                	$("#operateupdate").removeAttr("disabled")
+                }
+                else if(msg.state=='请选择预计完成时间！'){
+                	$("#operateupdate").removeAttr("disabled")
+                }
+                else if(msg.state=='预计完成时间应该大于处理时间！'){
+                	$("#operateupdate").removeAttr("disabled")
+                }
+                else if(msg.state=='请选择处理进度！'){
+                	$("#operateupdate").removeAttr("disabled")
+                }
+                else if(msg.state=='处理进度参数错误！'){
+                	$("#operateupdate").removeAttr("disabled")
+                }
+                else if(msg.state=='处理意见不能为空！'){
+                	$("#operateupdate").removeAttr("disabled")
+                }
+                else if(msg.state=='请选择运维组别！'){
+                	$("#operateupdate").removeAttr("disabled")
+                }
+                else if(msg.state=='请选择运维部门！'){
+                	$("#operateupdate").removeAttr("disabled")
+                }
+                else{
+                	$("#operateupdate").attr({"disabled":"disabled"})
+                }
+                	
             }
         });
     });
@@ -306,8 +336,8 @@ $(function () {
                         </div>
                         <div class="widget-body">
                             <div class="widget-main">
-						                            处理时间：<span class="red">${(comments.add_at)!} </span><br>
-						                            预计时间：<span class="red">${(comments.predict_at)!} </span>
+                                                    处理时间：<span class="red">${(comments.add_at)!} </span><br>
+                                                    预计时间：<span class="red">${(comments.predict_at)!} </span>
                             <!-- <div class="space-6"></div> -->
                             <div style="word-wrap:break-word;">处理意见：<span class="green">${(comments.context)!}</span></div>
                             </div>

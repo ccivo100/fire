@@ -8,7 +8,7 @@ import com.jfinal.plugin.activerecord.Record;
 import cn.dreampie.tablebind.TableBind;
 /**
  * 
- * @author 唐东宇
+ * @author 陈宇佳
  *
  */
 @TableBind(tableName = "com_comment")
