@@ -13,7 +13,7 @@
 		o.created_at ocreatetime,o.deleted_at odeletetime,o.flag oflag,tp1.title tptitle
   	</sql> -->
   	<sql id="findOrderInfoBySelect">
-    	SELECT o.id oorderid,t1.name tname,t2.name tbname,o.type otypeid,l1.name lname,o.level olevelid,o.offer_user oofferid,u1.full_name uoffername,u1.phone uofferphone,o.typess otypess,o.client_num oclient_num,o.client_phone oclient_phone,o.accident_place oaccident_place,o.contact_name ocontact_name,o.contact_phone ocontact_phone,o.product_type oproduct_type,o.smart_phones osmart_phones,o.description odescription,o.offer_at ooffertime,o.status ostatus,o.title otitle,o.spend_time ospendtime,o.created_at ocreatetime,o.deleted_at odeletetime,o.flag oflag,tp1.title tptitle
+    	SELECT o.id oorderid,t1.name tname,t2.name tbname,o.type otypeid,l1.name lname,o.level olevelid,o.offer_user oofferid,u1.full_name uoffername,u1.phone uofferphone,o.typess otypess,o.client_num oclient_num,o.client_phone oclient_phone,o.accident_place oaccident_place,o.contact_name ocontact_name,o.contact_phone ocontact_phone,o.product_type oproduct_type,o.smart_phones osmart_phones,o.description odescription,o.offer_at ooffertime,o.status ostatus,o.title otitle,o.otherss ootherss,o.spend_time ospendtime,o.created_at ocreatetime,o.deleted_at odeletetime,o.flag oflag,tp1.title tptitle
   	</sql>
   	<sql id="findOrderInfoByFrom"><!-- 根据条件，查询工单 -->
   	  	FROM com_order AS o 

@@ -17,7 +17,8 @@ $(document).ready(function(){
                     "order.description":$('#odescription').val(),
             },
             success:function(msg){
-                alertModal(msg.state);
+            	$("#reportupdate").attr({"disabled":"disabled"});
+            	alertModal(msg.state);
                 $('#alertModal').on('hidden.bs.modal', function () {
                     if(msg.state=='更新故障工单成功！'){
                         window.location.href='${ContextPath}/report/reports'
@@ -43,7 +44,8 @@ $(document).ready(function(){
             },
             dataType : "json",
             success:function(msg){
-                $('#sureModal').modal('hide');
+            	$("#sure").attr({"disabled":"disabled"});
+            	$('#sureModal').modal('hide');
                 alertModal(msg.state);
                 $('#alertModal').on('hidden.bs.modal', function () {
                     if(msg.state=='撤回成功！'){
@@ -63,7 +65,8 @@ $(document).ready(function(){
             },
             dataType : "json",
             success:function(msg){
-                alertModal(msg.state);
+            	$("#delete").attr({"disabled":"disabled"});
+            	alertModal(msg.state);
                 $('#alertModal').on('hidden.bs.modal', function () {
                     if(msg.state=='删除成功！'){
                         window.location.href='${ContextPath}/report/reports'

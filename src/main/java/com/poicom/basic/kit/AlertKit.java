@@ -479,7 +479,7 @@ public class AlertKit {
 				.append(offer.getStr("aname")+"的"+offer.getStr("ufullname"))
 				.append("于"+DateKit.format(order.getDate("offer_at"),DateKit.pattern_ymd_hms)+"，")
 				//.append("提交关于“"+StringUtils.abbreviate(order.getStr("title"),15)+"”"+"的故障单。")
-				.append("提交来自“"+StringUtils.abbreviate(order.getStr("title"),15)+"”"+"报障申诉。")
+				.append("提交来自“"+StringUtils.abbreviate(order.getStr("title"),15)+"”"+"的报障申诉。")
 				.append("现由"+deal.getStr("aname")+"的"+deal.getStr("ufullname"));
 		if(selectProgress == 0){
 			body.append("开始处理");

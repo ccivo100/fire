@@ -11,328 +11,699 @@
 <script src="${ContextPath}/admin/assets/js/chosen.jquery.js"></script>
 <script type="text/javascript">
 
-/* 异步获取一级故障类别数据 */
-function select1() {
-	$.ajax(
-    {
-    	type: "post",
-    	url: "${ContextPath}/report/handler",
-    	data: { "type": "type" },
-        success: function (msg) {
-        	$("#selectType").append("<option value='-1'>请选择故障大类</option>");
-        	for (var i = 0; i < msg.typeList.length; i++) {
-            	$("#selectType").append("<option value=" + msg.typeList[i].id + ">" + msg.typeList[i].name + "</option>");
-        	}
-            select2();
+function addressInit(_producttype, _smartphones, _accidentplace, defaultProvince, defaultCity, defaultArea){
+    var producttype = document.getElementById(_producttype);
+    var smartphones = document.getElementById(_smartphones);
+    var accidentplace = document.getElementById(_accidentplace);
+    function cmbSelect(cmb, str){
+        for(var i=0; i<cmb.options.length; i++){
+            if(cmb.options[i].value == str){
+                cmb.selectedIndex = i;
+                return;
+            }
         }
-	})
+    }
+    function cmbAddOption(cmb, str, obj){
+        var option = document.createElement("OPTION");
+        cmb.options.add(option);
+        option.innerHTML = str;
+        option.value = str;
+        option.obj = obj;
+    }
+    
+    function changeCity(){
+        accidentplace.options.length = 0;
+        if(smartphones.selectedIndex == -1)return;
+        var item = smartphones.options[smartphones.selectedIndex].obj;
+        for(var i=0; i<item.areaList.length; i++){
+            cmbAddOption(accidentplace, item.areaList[i], null);
+        }
+        cmbSelect(accidentplace, defaultArea);
+    }
+    function changeProvince(){
+        smartphones.options.length = 0;
+        smartphones.onchange = null;
+        if(producttype.selectedIndex == -1)return;
+        var item = producttype.options[producttype.selectedIndex].obj;
+        for(var i=0; i<item.cityList.length; i++){
+            cmbAddOption(smartphones, item.cityList[i].name, item.cityList[i]);
+        }
+        cmbSelect(smartphones, defaultCity);
+        changeCity();
+        smartphones.onchange = changeCity;
+    }
+    
+    for(var i=0; i<provinceList.length; i++){
+        cmbAddOption(producttype, provinceList[i].name, provinceList[i]);
+    }
+    cmbSelect(producttype, defaultProvince);
+    changeProvince();
+    producttype.onchange = changeProvince;
+}
+
+var provinceList = [
+{name:'', cityList:[        
+{name:'', areaList:['']}
+]},
+{name:'易百年', cityList:[ 
+{name:'', areaList:['']},    
+{name:'易百年EZ601', areaList:['','2013-11-22','2014-09-27','2014-11-13']},        
+{name:'易百年EZ601A', areaList:['','2014-07-23','2014-08-26','2014-10-28','2014-10-31','2015-03-03','2015-06-23','2015-10-06','2015-11-25']},
+{name:'易百年EZ621', areaList:['','2015-06-25','2015-07-27']}
+]},
+{name:'雅器', cityList:[ 
+{name:'', areaList:['']},     
+{name:'雅器S728', areaList:['','2014-05-08','2014-05-09','2014-12-22','2015-07-17','2015-08-28','2015-10-13']}
+]},
+{name:'豪讯', cityList:[ 
+{name:'', areaList:['']},      
+{name:'豪讯S202', areaList:['','2015-05-25','2015-06-12']}
+]},
+{name:'联想', cityList:[ 
+{name:'', areaList:['']},      
+{name:'联想A360E', areaList:['','1.28']}
+]},
+{name:'老人桌面(安卓)', cityList:[ 
+{name:'', areaList:['']},     
+{name:'华为', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'三星', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'联想其他', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'LG', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'HTC', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'索尼', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'小米', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'酷派', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'金立', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'TCL', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'魅族', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'乐视', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'OPPO', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'VIVO', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'小辣椒', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'百立丰', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'中兴', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'天宏', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'步步高', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'海信', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'康佳', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'其它', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']}
+]},
+{name:'子女端(安卓)', cityList:[ 
+{name:'', areaList:['']},    
+{name:'华为', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'三星', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'联想其他', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'LG', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'HTC', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'索尼', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'小米', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'酷派', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'金立', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'TCL', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'魅族', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'乐视', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'OPPO', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'VIVO', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'小辣椒', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'百立丰', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'中兴', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'天宏', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'步步高', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'海信', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'康佳', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']},
+{name:'其它', areaList:['','Android 1.1/1.5/1.6','Android 2.0/2.1/2.2/2.3','Android 3.0/3.1/3.2','Android 4.0/4.1/4.2/4.3/4.4','Android 5.0/5.1','Android 6.0']}
+]},
+{name:'老人助手(IOS)', cityList:[ 
+{name:'', areaList:['']},    
+{name:'APPLE(苹果)', areaList:['','IOS4','IOS5','IOS6','IOS7','IOS8','IOS9']}
+]},
+{name:'子女端(IOS)', cityList:[ 
+{name:'', areaList:['']},    
+{name:'APPLE(苹果)', areaList:['','IOS4','IOS5','IOS6','IOS7','IOS8','IOS9']}
+]}
+];
+
+// 异步获取-平台报障-产品名称数据 
+function selectbyproducttype1() {
+    $("#producttype1").append("<option value=''>请选择</option>");
+    $("#producttype1").append("<option value='营销系统'>营销系统</option>");
+    $("#producttype1").append("<option value='官方商城'>官方商城</option>");
+    $("#producttype1").append("<option value='微信公众号'>微信公众号</option>");
+    $("#producttype1").append("<option value='短信平台'>短信平台</option>");
+    $("#producttype1").append("<option value='一点通平台'>一点通平台</option>");
 };
-/* 异步获取一级故障类别数据-模板功能 */
-function select1ByTemplate() {
-	$.ajax(
+
+/* 异步获取-平台报障-故障大类数据 */
+function select1() {
+    $.ajax(
     {
-    	type: "post",
-    	url: "${ContextPath}/report/handler",
-    	data: { "type": "type" },
+        type: "post",
+        url: "${ContextPath}/report/handler",
+        data: { "type": "type" },
         success: function (msg) {
-        	$("#selectType2").append("<option value='-1'>请选择故障大类</option>");
-        	for (var i = 0; i < msg.typeList.length; i++) {
-            	$("#selectType2").append("<option value=" + msg.typeList[i].id + ">" + msg.typeList[i].name + "</option>");
-        	}
+            $("#selectType").append("<option value='-1'>请选择故障大类</option>");
+            //for (var i = 0; i < msg.typeList.length; i++) {
+            for (var i = 5; i < 9; i++) {
+                $("#selectType").append("<option value=" + msg.typeList[i].id + ">" + msg.typeList[i].name + "</option>");
+            }
+            select2ByTemplate1();
+        }
+    })
+};
+/* 异步获取-一般报障-故障大类数据 */
+function select1ByTemplate() {
+    $.ajax(
+    {
+        type: "post",
+        url: "${ContextPath}/report/handler",
+        data: { "type": "type" },
+        success: function (msg) {
+            $("#selectType2").append("<option value='-1'>请选择故障大类</option>");
+            //for (var i = 0; i < msg.typeList.length; i++) {
+            for (var i = 0; i < 5; i++) {
+                $("#selectType2").append("<option value=" + msg.typeList[i].id + ">" + msg.typeList[i].name + "</option>");
+            }
             select2ByTemplate();
         }
-	})
+    })
 };
-/* 异步获取二级故障类别数据-模板功能 */
+/* 异步获取-不能开卡-故障大类数据 */
+function selectByselectType3() {
+    $.ajax(
+    {
+        type: "post",
+        url: "${ContextPath}/report/handler",
+        data: { "type": "type" },
+        success: function (msg) {
+            $("#selectType3").append("<option value='-1'>请选择故障大类</option>");
+            //for (var i = 0; i < msg.typeList.length; i++) {
+            //    $("#selectType3").append("<option value=" + msg.typeList[i].id + ">" + msg.typeList[i].name + "</option>");
+            //}
+            $("#selectType3").append("<option value=" + msg.typeList[9].id + ">" + msg.typeList[9].name + "</option>");
+            select2ByTemplate3();
+        }
+    })
+};
+/* 异步获取-重大报障-故障大类数据 */
+function selectByselectType4() {
+    $.ajax(
+    {
+        type: "post",
+        url: "${ContextPath}/report/handler",
+        data: { "type": "type" },
+        success: function (msg) {
+            $("#selectType4").append("<option value='-1'>请选择故障大类</option>");
+            //for (var i = 0; i < msg.typeList.length; i++) {
+            for (var i = 10; i < 13; i++) {
+                $("#selectType4").append("<option value=" + msg.typeList[i].id + ">" + msg.typeList[i].name + "</option>");
+            }
+            select2ByTemplate4();
+        }
+    })
+};
+
+
+
+/* 异步获取-平台报障-故障小类/模板功能 */
+function select2ByTemplate1() {
+    $("#selectChildType").html("");    //清除二级故障数据
+    $("#selectTemplate1").html("");    //清除模板数据
+    $.ajax(
+    {
+        type: "post",
+        url: "${ContextPath}/report/handler",
+        data: { "type": "template","typeid":$('#selectType').val()},
+        success: function (msg) {
+            $("#selectChildType").append("<option value='-1'>请选择故障小类</option>");
+            $("#selectTemplate1").append("<option value='-1'>请选择模板类型</option>");
+            
+            for (var i = 0; i < msg.childTypeList.length; i++) {
+                $("#selectChildType").append("<option value=" + msg.childTypeList[i].id + ">" +msg.childTypeList[i].name + "</option>");
+            }
+            for (var i = 0; i < msg.templateList.length; i++) {
+                $("#selectTemplate1").append("<option value=" + msg.templateList[i].id + ">" +msg.templateList[i].title + "</option>");
+            }
+            select3ByTemplate1();
+        }
+    })
+};
+/* 异步获取-一般报障-故障小类/模板功能 */
 function select2ByTemplate() {
-	$("#selectChildType2").html("");    //清除二级故障数据
-	$("#selectTemplate").html("");    //清除模板数据
-	$.ajax(
-	{
-		type: "post",
-		url: "${ContextPath}/report/handler",
-		data: { "type": "template","typeid":$('#selectType2').val() },
-		success: function (msg) {
-			$("#selectChildType2").append("<option value='-1'>请选择故障小类</option>");
-			$("#selectTemplate").append("<option value='-1'>请选择模板类型</option>");
-			
-			for (var i = 0; i < msg.childTypeList.length; i++) {
-				$("#selectChildType2").append("<option value=" + msg.childTypeList[i].id + ">" +msg.childTypeList[i].name + "</option>");
-			}
-			for (var i = 0; i < msg.templateList.length; i++) {
-				$("#selectTemplate").append("<option value=" + msg.templateList[i].id + ">" +msg.templateList[i].title + "</option>");
-			}
-			select3ByTemplate();
-		}
-	})
+    $("#selectChildType2").html("");    //清除二级故障数据
+    $("#selectTemplate").html("");    //清除模板数据
+    $.ajax(
+    {
+        type: "post",
+        url: "${ContextPath}/report/handler",
+        data: { "type": "template","typeid":$('#selectType2').val() },
+        success: function (msg) {
+            $("#selectChildType2").append("<option value='-1'>请选择故障小类</option>");
+            $("#selectTemplate").append("<option value='-1'>请选择模板类型</option>");
+            
+            for (var i = 0; i < msg.childTypeList.length; i++) {
+                $("#selectChildType2").append("<option value=" + msg.childTypeList[i].id + ">" +msg.childTypeList[i].name + "</option>");
+            }
+            for (var i = 0; i < msg.templateList.length; i++) {
+                $("#selectTemplate").append("<option value=" + msg.templateList[i].id + ">" +msg.templateList[i].title + "</option>");
+            }
+            select3ByTemplate();
+        }
+    })
+};
+/* 异步获取-不能开卡-故障小类/模板功能 */
+function select2ByTemplate3() {
+    $("#selectChildType3").html("");    //清除二级故障数据
+    $("#selectTemplate3").html("");    //清除模板数据
+    $.ajax(
+    {
+        type: "post",
+        url: "${ContextPath}/report/handler",
+        data: { "type": "template","typeid":$('#selectType3').val()},
+        success: function (msg) {
+            $("#selectChildType3").append("<option value='-1'>请选择故障小类</option>");
+            $("#selectTemplate3").append("<option value='-1'>请选择模板类型</option>");
+            
+            for (var i = 0; i < msg.childTypeList.length; i++) {
+                $("#selectChildType3").append("<option value=" + msg.childTypeList[i].id + ">" +msg.childTypeList[i].name + "</option>");
+            }
+            for (var i = 0; i < msg.templateList.length; i++) {
+                $("#selectTemplate3").append("<option value=" + msg.templateList[i].id + ">" +msg.templateList[i].title + "</option>");
+            }
+            select3ByTemplate3();
+        }
+    })
+};
+/* 异步获取-重大报障-故障小类/模板功能 */
+function select2ByTemplate4() {
+    $("#selectChildType4").html("");    //清除二级故障数据
+    $("#selectTemplate4").html("");    //清除模板数据
+    $.ajax(
+    {
+        type: "post",
+        url: "${ContextPath}/report/handler",
+        data: { "type": "template","typeid":$('#selectType4').val()},
+        success: function (msg) {
+            $("#selectChildType4").append("<option value='-1'>请选择故障小类</option>");
+            $("#selectTemplate4").append("<option value='-1'>请选择模板类型</option>");
+            
+            for (var i = 0; i < msg.childTypeList.length; i++) {
+                $("#selectChildType4").append("<option value=" + msg.childTypeList[i].id + ">" +msg.childTypeList[i].name + "</option>");
+            }
+            for (var i = 0; i < msg.templateList.length; i++) {
+                $("#selectTemplate4").append("<option value=" + msg.templateList[i].id + ">" +msg.templateList[i].title + "</option>");
+            }
+            select3ByTemplate4();
+        }
+    })
 };
 
+
+
+/* 异步获取-平台报障-故障描述 */
+function select3ByTemplate1(){
+    $("#description").html("");    //清除二级故障数据
+    $("#userListTitle1").html("");    //清除标题
+    $("#userList1").html("");    //清除接收人员数据
+    $.ajax(
+    {
+        type: "post",
+        url: "${ContextPath}/report/handler",
+        data: { "type": "setValue","selectTemplateid":$('#selectTemplate1').val() },
+        success: function (msg) {
+            if(msg.template){
+                $("#description").text(msg.template.context);
+                $("#userListTitle1").append("接收人员：");
+                for (var i = 0; i < msg.userList.length; i++) {
+                    $("#userList1").append("<span class='label label-success'>"+ msg.userList[i].full_name + "</span> ");
+                }
+            }else{
+            }
+        }
+    })
+};
+/* 异步获取-一般报障-故障描述 */
 function select3ByTemplate(){
-	$("#description2").html("");    //清除二级故障数据
-	$("#userListTitle").html("");    //清除标题
-	$("#userList").html("");    //清除接收人员数据
-	$.ajax(
-	{
-		type: "post",
-		url: "${ContextPath}/report/handler",
-		data: { "type": "setValue","selectTemplateid":$('#selectTemplate').val() },
-		success: function (msg) {
-			if(msg.template){
-				$("#description2").text(msg.template.context);
-				$("#userListTitle").append("接收人员：");
-				for (var i = 0; i < msg.userList.length; i++) {
-					$("#userList").append("<span class='label label-success'>"+ msg.userList[i].full_name + "</span> ");
-				}
-			}else{
-			}
-		}
-	})
+    $("#description2").html("");    //清除二级故障数据
+    $("#userListTitle").html("");    //清除标题
+    $("#userList").html("");    //清除接收人员数据
+    $.ajax(
+    {
+        type: "post",
+        url: "${ContextPath}/report/handler",
+        data: { "type": "setValue","selectTemplateid":$('#selectTemplate').val() },
+        success: function (msg) {
+            if(msg.template){
+                $("#description2").text(msg.template.context);
+                $("#userListTitle").append("接收人员：");
+                for (var i = 0; i < msg.userList.length; i++) {
+                    $("#userList").append("<span class='label label-success'>"+ msg.userList[i].full_name + "</span> ");
+                }
+            }else{
+            }
+        }
+    })
+};
+/* 异步获取-不能开卡-故障描述 */
+function select3ByTemplate3(){
+    $("#description3").html("");    //清除二级故障数据
+    $("#userListTitle3").html("");    //清除标题
+    $("#userList3").html("");    //清除接收人员数据
+    $.ajax(
+    {
+        type: "post",
+        url: "${ContextPath}/report/handler",
+        data: { "type": "setValue","selectTemplateid":$('#selectTemplate3').val() },
+        success: function (msg) {
+            if(msg.template){
+                $("#description3").text(msg.template.context);
+                $("#userListTitle3").append("接收人员：");
+                for (var i = 0; i < msg.userList.length; i++) {
+                    $("#userList3").append("<span class='label label-success'>"+ msg.userList[i].full_name + "</span> ");
+                }
+            }else{
+            }
+        }
+    })
+};
+/* 异步获取-重大报障-故障描述 */
+function select3ByTemplate4(){
+    $("#description4").html("");    //清除二级故障数据
+    $("#userListTitle4").html("");    //清除标题
+    $("#userList4").html("");    //清除接收人员数据
+    $.ajax(
+    {
+        type: "post",
+        url: "${ContextPath}/report/handler",
+        data: { "type": "setValue","selectTemplateid":$('#selectTemplate4').val() },
+        success: function (msg) {
+            if(msg.template){
+                $("#description4").text(msg.template.context);
+                $("#userListTitle4").append("接收人员：");
+                for (var i = 0; i < msg.userList.length; i++) {
+                    $("#userList4").append("<span class='label label-success'>"+ msg.userList[i].full_name + "</span> ");
+                }
+            }else{
+            }
+        }
+    })
 };
 
-/* 异步获取一级部门、二级故障类别数据 */
+
+/* 异步获取一级部门、二级故障类别数据
 function select2() {
-	$("#selectMail").html("");    //清除接收邮件人员
-	$("#selectSms").html("");    //清除接收短信人员
-	$("#selectApartment").html("");    //清除一级部门数据
-	$("#selectChildType").html("");    //清除二级故障数据
-	
-	var apartmentArray=new Array();    //判断选择的一级部门数量，是否显示二级部门。
-	$("#selectApartment option:selected").each(function(i){ 
-			apartmentArray[i]=$(this).val(); 
-	});
-	if(apartmentArray.length>1){
-		$('#childdiv').hide();
-	}
-	if(apartmentArray.length<=1){
-		$('#childdiv').show();
-	}
-	
-	$.ajax(
-	{
-		type: "post",
-		url: "${ContextPath}/report/handler",
-		data: { "type": "apartment","typeid":$('#selectType').val() },
-		success: function (msg) {
-			$("#selectChildType").append("<option value='-1'>请选择故障小类</option>");
-			for (var i = 0; i < msg.apartmentList.length; i++) {
-				$("#selectApartment").append("<option value=" + msg.apartmentList[i].id + ">" +msg.apartmentList[i].name + "</option>");
-			}
-			
-			for (var i = 0; i < msg.childTypeList.length; i++) {
-				$("#selectChildType").append("<option value=" + msg.childTypeList[i].id + ">" +msg.childTypeList[i].name + "</option>");
-			}
-			select3();
-		}
-	})
+    $("#selectMail").html("");    //清除接收邮件人员
+    $("#selectSms").html("");    //清除接收短信人员
+    $("#selectApartment").html("");    //清除一级部门数据
+    $("#selectChildType").html("");    //清除二级故障数据
+    
+    var apartmentArray=new Array();    //判断选择的一级部门数量，是否显示二级部门。
+    $("#selectApartment option:selected").each(function(i){ 
+            apartmentArray[i]=$(this).val(); 
+    });
+    if(apartmentArray.length>1){
+        $('#childdiv').hide();
+    }
+    if(apartmentArray.length<=1){
+        $('#childdiv').show();
+    }
+    
+    $.ajax(
+    {
+        type: "post",
+        url: "${ContextPath}/report/handler",
+        data: { "type": "apartment","typeid":$('#selectType').val() },
+        success: function (msg) {
+            $("#selectChildType").append("<option value='-1'>请选择故障小类</option>");
+            for (var i = 0; i < msg.apartmentList.length; i++) {
+                $("#selectApartment").append("<option value=" + msg.apartmentList[i].id + ">" +msg.apartmentList[i].name + "</option>");
+            }
+            
+            for (var i = 0; i < msg.childTypeList.length; i++) {
+                $("#selectChildType").append("<option value=" + msg.childTypeList[i].id + ">" +msg.childTypeList[i].name + "</option>");
+            }
+            select3();
+        }
+    })
 };
+*/
 
-/* 异步获取二级部门数据，点击二级故障 */
+/* 异步获取二级部门数据，点击二级故障 
 function select3() {
-	$("#selectChildApartment").html("");
-	$.ajax(
-	{
-		type: "post",
-		url: "${ContextPath}/report/handler",
-		data: { "type": "childApartment","childTypeid":$('#selectChildType').val(),"rootApartment": $('#selectApartment').val()},
-		success: function (msg) {
-			$("#selectChildApartment").append("<option value='-1'>请选择运维组别</option>");
-			for (var i = 0; i < msg.childApartmentList.length; i++) {
-				$("#selectChildApartment").append("<option value=" + msg.childApartmentList[i].id + ">" +msg.childApartmentList[i].name + "</option>");
-			}
-		}
-	})
-};
+    $("#selectChildApartment").html("");
+    $.ajax(
+    {
+        type: "post",
+        url: "${ContextPath}/report/handler",
+        data: { "type": "childApartment","childTypeid":$('#selectChildType').val(),"rootApartment": $('#selectApartment').val()},
+        success: function (msg) {
+            $("#selectChildApartment").append("<option value='-1'>请选择运维组别</option>");
+            for (var i = 0; i < msg.childApartmentList.length; i++) {
+                $("#selectChildApartment").append("<option value=" + msg.childApartmentList[i].id + ">" +msg.childApartmentList[i].name + "</option>");
+            }
+        }
+    })
+};*/
 
-/* 异步获取二级部门数据，点击一级部门 */
+/* 异步获取二级部门数据，点击一级部门 
 function select4() {
-	$("#selectChildApartment").html("");
-	
-	var apartmentArray=new Array();
-	$("#selectApartment option:selected").each(function(i){ 
-			apartmentArray[i]=$(this).val(); 
-	});
-	if(apartmentArray.length>1){
-		$('#childdiv').hide();
-	}
-	if(apartmentArray.length<=1){
-		$('#childdiv').show();
-	}
-	
-	$.ajax(
-	{
-		type: "post",
-		url: "${ContextPath}/report/handler",
-		data: { "type": "childApartment","childTypeid":$('#selectChildType').val(),"rootApartment": $('#selectApartment').val()},
-		success: function (msg) {
-			$("#selectChildApartment").append("<option value='-1'>请选择运维组别</option>");
-			for (var i = 0; i < msg.childApartmentList.length; i++) {
-				$("#selectChildApartment").append("<option value=" + msg.childApartmentList[i].id + ">" +msg.childApartmentList[i].name + "</option>");
-			}
-		}
-	})
-};
+    $("#selectChildApartment").html("");
+    
+    var apartmentArray=new Array();
+    $("#selectApartment option:selected").each(function(i){ 
+            apartmentArray[i]=$(this).val(); 
+    });
+    if(apartmentArray.length>1){
+        $('#childdiv').hide();
+    }
+    if(apartmentArray.length<=1){
+        $('#childdiv').show();
+    }
+    
+    $.ajax(
+    {
+        type: "post",
+        url: "${ContextPath}/report/handler",
+        data: { "type": "childApartment","childTypeid":$('#selectChildType').val(),"rootApartment": $('#selectApartment').val()},
+        success: function (msg) {
+            $("#selectChildApartment").append("<option value='-1'>请选择运维组别</option>");
+            for (var i = 0; i < msg.childApartmentList.length; i++) {
+                $("#selectChildApartment").append("<option value=" + msg.childApartmentList[i].id + ">" +msg.childApartmentList[i].name + "</option>");
+            }
+        }
+    })
+};*/
 
-/* 异步获取接收邮件、短信的人员数据。判断是否选择多个一级部门 */
+/* 异步获取接收邮件、短信的人员数据。判断是否选择多个一级部门 
 function selectMailAndSms(){
-	$("#selectMail").html("");
-	$("#selectSms").html("");
-	var apartmentArray=new Array();
-	$("#selectApartment option:selected").each(function(i){ 
-			apartmentArray[i]=$(this).val(); 
-	});
-	if(apartmentArray.length>1){
-	
-		$('#childdiv').hide();
-		$.ajax(
-		{
-			type: "post",
-			url: "${ContextPath}/report/handler",
-			data: { "type": "mailAndSm", "childTypeid":$('#selectChildType').val(), "selectApartment": $('#selectApartment').val()},
-			success: function (msg) {
-				for (var i = 0; i < msg.userList.length; i++) {
-					$("#selectMail").append("<option value=" + msg.userList[i].id + ">" +msg.userList[i].full_name + "</option>");
-					$("#selectSms").append("<option value=" + msg.userList[i].id + ">" +msg.userList[i].full_name + "</option>");
-				}
-			}
-		});
-	
-	}
-	if(apartmentArray.length<=1){
-	
-		$('#childdiv').show();
-		$.ajax(
-		{
-			type: "post",
-			url: "${ContextPath}/report/handler",
-			data: { "type": "mailAndSm", "selectApartment": $('#selectApartment').val(), "selectChildApartment": $('#selectChildApartment').val()},
-			success: function (msg) {
-				for (var i = 0; i < msg.userList.length; i++) {
-					$("#selectMail").append("<option value=" + msg.userList[i].id + ">" +msg.userList[i].full_name + "</option>");
-					$("#selectSms").append("<option value=" + msg.userList[i].id + ">" +msg.userList[i].full_name + "</option>");
-				}
-			}
-		});
-	
-	}
-}
+    $("#selectMail").html("");
+    $("#selectSms").html("");
+    var apartmentArray=new Array();
+    $("#selectApartment option:selected").each(function(i){ 
+            apartmentArray[i]=$(this).val(); 
+    });
+    if(apartmentArray.length>1){
+    
+        $('#childdiv').hide();
+        $.ajax(
+        {
+            type: "post",
+            url: "${ContextPath}/report/handler",
+            data: { "type": "mailAndSm", "childTypeid":$('#selectChildType').val(), "selectApartment": $('#selectApartment').val()},
+            success: function (msg) {
+                for (var i = 0; i < msg.userList.length; i++) {
+                    $("#selectMail").append("<option value=" + msg.userList[i].id + ">" +msg.userList[i].full_name + "</option>");
+                    $("#selectSms").append("<option value=" + msg.userList[i].id + ">" +msg.userList[i].full_name + "</option>");
+                }
+            }
+        });
+    
+    }
+    if(apartmentArray.length<=1){
+    
+        $('#childdiv').show();
+        $.ajax(
+        {
+            type: "post",
+            url: "${ContextPath}/report/handler",
+            data: { "type": "mailAndSm", "selectApartment": $('#selectApartment').val(), "selectChildApartment": $('#selectChildApartment').val()},
+            success: function (msg) {
+                for (var i = 0; i < msg.userList.length; i++) {
+                    $("#selectMail").append("<option value=" + msg.userList[i].id + ">" +msg.userList[i].full_name + "</option>");
+                    $("#selectSms").append("<option value=" + msg.userList[i].id + ">" +msg.userList[i].full_name + "</option>");
+                }
+            }
+        });
+    
+    }
+}*/
 
-/* 判断二级部门是否有人。 */
+/* 判断二级部门是否有人。
 function select5(){
-	$.ajax(
-	{
-		type: "post",
-		url: "${ContextPath}/report/handler",
-		data: { "type": "effective","apartmentid":$('#selectChildApartment').val() },
-		success: function (msg) {
-			if(msg.state=="error"){
-				alertModal("该分组无运维人员，请选择其他运维组!");
-				$('#alertModal').modal();
-				select3();
-			}
-		}
-	})
-}
+    $.ajax(
+    {
+        type: "post",
+        url: "${ContextPath}/report/handler",
+        data: { "type": "effective","apartmentid":$('#selectChildApartment').val() },
+        success: function (msg) {
+            if(msg.state=="error"){
+                alertModal("该分组无运维人员，请选择其他运维组!");
+                $('#alertModal').modal();
+                select3();
+            }
+        }
+    })
+} */
 
 /* 数据绑定 */
 $(function(){
-	select1();
-	select1ByTemplate();
-	$('#selectType').bind("change", select2);
-	$('#selectType2').bind("change",select2ByTemplate);
-	$('#selectTemplate').bind("change",select3ByTemplate);
-	
-	$('#selectChildType').bind("change", select3);
-	$('#selectChildType').bind("change",  selectMailAndSms);
-	$('#selectApartment').bind("change", select4);
-	$('#selectApartment').bind("change",  selectMailAndSms);
-	$('#selectChildApartment').bind("change", select5);
-	$('#selectChildApartment').bind("change",  selectMailAndSms);
+    /* selectbytotalType1();异步获取-平台报障-故障总类数据 */
+    /* selectbytotalType2();异步获取-一般报障-故障总类数据 */
+    /* selectbytotalType3();异步获取-不能开卡-故障总类数据 */
+    /* selectbytotalType4();异步获取-重大报障-故障总类数据 */
+
+    selectbyproducttype1();/* 异步获取-平台报障-产品名称数据 */
+    addressInit('producttype', 'smartphones', 'accidentplace');
+
+    select1();/* 异步获取-平台报障-故障大类数据 */
+    select1ByTemplate();/* 异步获取-一般报障-故障大类数据 */
+    selectByselectType3();/* 异步获取-不能开卡-故障大类数据 */
+    selectByselectType4();/* 异步获取-重大报障-故障大类数据 */
+
+    //$('#selectType').bind("change", select2);
+    /*selectType发生改变(change)时，重新加载select2ByTemplate1函数*/
+    $('#selectType').bind("change",select2ByTemplate1);
+    $('#selectType2').bind("change",select2ByTemplate);
+    $("#selectType3").bind("change",select2ByTemplate3);
+    $("#selectType4").bind("change",select2ByTemplate4);
+
+    $('#selectTemplate1').bind("change",select3ByTemplate1);
+    $('#selectTemplate').bind("change",select3ByTemplate);
+    $("#selectTemplate3").bind("change",select3ByTemplate3);
+    $("#selectTemplate4").bind("change",select3ByTemplate4);
+
+    //$('#selectChildType').bind("change", select3);
+    //$('#selectChildType').bind("change",  selectMailAndSms);
+    //$('#selectApartment').bind("change", select4);
+    //$('#selectApartment').bind("change",  selectMailAndSms);
+    //$('#selectChildApartment').bind("change", select5);
+    //$('#selectChildApartment').bind("change",  selectMailAndSms);
 });
 
 function alertModal(msg){
-	$("#modal-title-content").html("提示!");  
-	$("#modal-body-content").html(msg);  
+    $("#modal-title-content").html("提示!");  
+    $("#modal-body-content").html(msg);  
 }
 function alertSaveModal(msg){
-	$("#modal-title-saveOrder").html("提示!");  
-	$("#modal-body-saveOrder").html(msg);  
+    $("#modal-title-saveOrder").html("提示!");  
+    $("#modal-body-saveOrder").html(msg);  
 }
 
-$(".reportsave").click(function(){
-	var mailArray=new Array();
-	var smsArray=new Array();
-	var alertMsg="";
-	
-	$("#selectMail option:selected").each(function(i){ 
-			apartmentArray[i]=$(this).val(); 
-	});
-	$("#selectSms option:selected").each(function(i){ 
-			apartmentArray[i]=$(this).val(); 
-	});
-	
-	if(mailArray.length==0){
-		alertMsg+="邮件通知员 ";
-	}
-	if(smsArray.length==0){
-		alertMsg+="短信通知员 ";
-	}
-	
-	alertSaveModal(alertMsg);
-	$("#saveModal").modal();
-	
-});
+/*$(".reportsave").click(function(){
+    var mailArray=new Array();
+    var smsArray=new Array();
+    var alertMsg="";
+    
+    $("#selectMail option:selected").each(function(i){ 
+            apartmentArray[i]=$(this).val(); 
+    });
+    $("#selectSms option:selected").each(function(i){ 
+            apartmentArray[i]=$(this).val(); 
+    });
+    
+    if(mailArray.length==0){
+        alertMsg+="邮件通知员 ";
+    }
+    if(smsArray.length==0){
+        alertMsg+="短信通知员 ";
+    }
+    
+    alertSaveModal(alertMsg);
+    $("#saveModal").modal();
+    
+});*/
 
-
-
-/* 提交故障工单 */
+/* 提交故障工单-平台报障 */
 $(document).ready(function(){
-	$("#reportsave").click(function(){
-		
-		$.ajax({
-			type:"post",
-			url:"${ContextPath}/report/save",
-			data:{
-					"selectType":$('#selectType').val(),
-					"childTypeid":$('#selectChildType').val(),
-					"selectApartment":$('#selectApartment').val(),
-					"selectChildApartment":$('#selectChildApartment').val(),
-					
-					"selectMail":$('#selectMail').val(),
-					"selectSms":$('#selectSms').val(),
-					
-					"order.offer_user":$('#userid').val(),
-					"order.title":$('#title').val(),
-					"order.description":$('#description').val(),
-					"order.type":$('#selectChildType').val(),
-					"order.level":$('#selectLevel').val(),
-					
-			},
-			success:function(msg){
-				alertModal(msg.state);
-				$('#alertModal').modal();
-				$('#alertModal').on('hidden.bs.modal', function () {
-					if(msg.state=='提交成功！'){
-						$("#reportsave").attr({"disabled":"disabled"})
-						window.location.href='${ContextPath}/report/reports'
-					}
-					else{
-	                	$("#reportsave").attr({"disabled":"disabled"})
-	                }
-				});
-			}
-		});
-	});
-});
-$(document).ready(function(){
-	$("#reportsave2").click(function(){
-		$(this).attr("disabled","disabled"); 
-		$.ajax({
-			type:"post",
-			url:"${ContextPath}/report/saveByTemplate",
+    $("#reportsave").click(function(){
+    	$("#reportsave").attr({"disabled":"disabled"});
+    	$.ajax({
+            type:"post",
+            url:"${ContextPath}/report/save",
             data:{
-        		"selecttotalType2":$('#selecttotalType2').val(),//故障总类
-				"selectType":$('#selectType2').val(),//故障大类
-				"childTypeid":$('#selectChildType2').val(),//故障小类
+                    "selecttotalType1":$('#selecttotalType1').val(),//故障总类、给验证君用的
+                    "selectType":$('#selectType').val(),//故障大类id、给验证君用的
+                    "childTypeid":$('#selectChildType').val(),//故障小类id、给验证君用的
+                    "selectTemplate":$('#selectTemplate1').val(),//故障模板id、给验证君用的
+
+                    "selectApartment":$('#selectApartment').val(),
+                    "selectChildApartment":$('#selectChildApartment').val(),
+                    
+                    "selectMail":$('#selectMail').val(),
+                    "selectSms":$('#selectSms').val(),
+                    
+                    "order.offer_user":$('#userid').val(),//故障申报人
+                    "order.title":$('#title').val(),//网站地址/平台名称
+                    "order.product_type":$('#producttype1').val(),//产品名称
+
+                    "order.typess":$('#selecttotalType1').val(),//故障总类id
+                    "order.types":$('#selectType').val(),//故障大类id
+                    "order.type":$('#selectChildType').val(),//故障小类id
+                    "order.selectTemplate":$('#selectTemplate1').val(),//故障模板id
+
+                    "order.description":$('#description').val(),//故障描述
+                    "order.type":$('#selectChildType').val(),
+                    //"order.level":$('#selectLevel').val(), 
+            },
+            success:function(msg){
+            	$("#reportsave").attr({"disabled":"disabled"});
+            	alertModal(msg.state);
+                $('#alertModal').modal();
+                $('#alertModal').on('hidden.bs.modal', function () {
+                	if(msg.state=='提交成功！'){
+                        window.location.href='${ContextPath}/report/reports'
+                    }
+                    else if(msg.state=='网站地址/平台名称不能为空！'){
+                        $("#reportsave").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请选择产品名称！'){
+                        $("#reportsave").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请选择故障总类！'){
+                        $("#reportsave").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请选择故障大类！'){
+                        $("#reportsave").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请选择故障小类！'){
+                        $("#reportsave").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请选择模板！'){
+                        $("#reportsave").removeAttr("disabled")
+                    }
+                    else if(msg.state=='故障单描述不能为空！'){
+                        $("#reportsave").removeAttr("disabled")
+                    }
+                    else{
+                        $("#reportsave").attr({"disabled":"disabled"})
+                    }
+                });
+            }
+        });
+    });
+});
+/* 提交故障工单-一般报障 */
+$(document).ready(function(){
+    $("#reportsave2").click(function(){
+        //$(this).attr("disabled","disabled"); 
+       $("#reportsave2").attr({"disabled":"disabled"});
+        $.ajax({
+            type:"post",
+            url:"${ContextPath}/report/saveByTemplate",
+            data:{
+                "selecttotalType2":$('#selecttotalType2').val(),//故障总类、给验证君用的
+                "selectType":$('#selectType2').val(),//故障大类、给验证君用的
+                "childTypeid":$('#selectChildType2').val(),//故障小类、给验证君用的
+                "selectTemplate":$('#selectTemplate').val(),
                 
                 "order.offer_user":$('#userid').val(),//故障申报人
                 "order.title":$('#title2').val(),//故障标题-客户姓名
@@ -341,93 +712,209 @@ $(document).ready(function(){
                 "order.typess":$('#selecttotalType2').val(),//故障总类id
                 "order.types":$('#selectType2').val(),//故障大类id
                 "order.type":$('#selectChildType2').val(),//故障小类id
-
-                <!-- "selectTemplate":$('#selectTemplate').val(), -->
                 "order.selectTemplate":$('#selectTemplate').val(),//故障模板id
 
                 "order.client_num":$('#clientnum').val(),//客户编号
                 "order.client_phone":$('#clientphone').val(),//终端手机号
-                "order.accident_place":$('#accidentplace').val(),//故障发生地
+                "order.accident_place":$('#accidentplace').val(),//系统版本
                 "order.contact_name":$('#contactname').val(),//联系人姓名
                 "order.contact_phone":$('#contactphone').val(),//联系电话
 
-                "order.product_type":$('#producttype').val(),//产品类型
+                "order.product_type":$('#producttype').val(),//产品名称
                 "order.smart_phones":$('#smartphones').val(),//手机品牌
-                //"order.otherss":$('#others').val(),//其他
+                "order.otherss":$('#others').val(),//其他
         },
-			success:function(msg){
-				alertModal(msg.state);
-				$('#alertModal').modal();
-				$('#alertModal').on('hidden.bs.modal', function () {
-					if(msg.state=='提交成功！'){
-					    window.location.href='${ContextPath}/report/reports'
-					}
-					else if(msg.state=='客户姓名不能为空！'){
-					    $("#reportsave2").removeAttr("disabled")
-					}
-					else if(msg.state=='请填写客户编号！'){
-					    $("#reportsave2").removeAttr("disabled")
-					}
-					else if(msg.state=='请填写终端手机号！'){
-					    $("#reportsave2").removeAttr("disabled")
-					}
-					else if(msg.state=='终端手机号格式不正确！'){
-					    $("#reportsave2").removeAttr("disabled")
-					}
-					else if(msg.state=='请填写故障发生地！'){
-					    $("#reportsave2").removeAttr("disabled")
-					}
-					else if(msg.state=='请填写联系人姓名！'){
-					    $("#reportsave2").removeAttr("disabled")
-					}
-					else if(msg.state=='请填写联系电话！'){
-					    $("#reportsave2").removeAttr("disabled")
-					}
-					else if(msg.state=='联系电话格式不正确！'){
-					    $("#reportsave2").removeAttr("disabled")
-					}
-					else if(msg.state=='请填写产品类型！'){
-					    $("#reportsave2").removeAttr("disabled")
-					}
-					else if(msg.state=='请填写手机品牌！'){
-					    $("#reportsave2").removeAttr("disabled")
-					}
-					else if(msg.state=='请选择故障总类！'){
-					    $("#reportsave2").removeAttr("disabled")
-					}
-					else if(msg.state=='请选择故障大类！'){
-					    $("#reportsave2").removeAttr("disabled")
-					}
-					else if(msg.state=='请选择故障小类！'){
-					    $("#reportsave2").removeAttr("disabled")
-					}
-					else if(msg.state=='请选择模板！'){
-					    $("#reportsave2").removeAttr("disabled")
-					}
-					else if(msg.state=='故障单描述不能为空！'){
-					    $("#reportsave2").removeAttr("disabled")
-					}
-					else{
-					    $("#reportsave2").attr({"disabled":"disabled"})
-					}
-				});
-			}
-		});
-	});
+            success:function(msg){
+            	$("#reportsave2").attr({"disabled":"disabled"});
+            	alertModal(msg.state);
+                $('#alertModal').modal();
+                $('#alertModal').on('hidden.bs.modal', function () {
+                    if(msg.state=='提交成功！'){
+                    	window.location.href='${ContextPath}/report/reports'
+                    		$("#reportsave2").attr({"disabled":"disabled"});
+                    }
+                    else if(msg.state=='客户姓名不能为空！'){
+                        $("#reportsave2").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请填写联系人姓名！'){
+                        $("#reportsave2").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请填写联系电话！'){
+                        $("#reportsave2").removeAttr("disabled")
+                    }
+                    else if(msg.state=='联系电话格式不正确！'){
+                        $("#reportsave2").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请填写客户编号！'){
+                        $("#reportsave2").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请填写终端手机号！'){
+                        $("#reportsave2").removeAttr("disabled")
+                    }
+                    else if(msg.state=='终端手机号格式不正确！'){
+                        $("#reportsave2").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请填写IMEI码！'){
+                        $("#reportsave2").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请选择产品名称！'){
+                        $("#reportsave2").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请选择手机品牌！'){
+                        $("#reportsave2").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请选择系统版本！'){
+                        $("#reportsave2").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请选择故障总类！'){
+                        $("#reportsave2").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请选择故障大类！'){
+                        $("#reportsave2").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请选择故障小类！'){
+                        $("#reportsave2").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请选择模板！'){
+                        $("#reportsave2").removeAttr("disabled")
+                    }
+                    else if(msg.state=='故障单描述不能为空！'){
+                        $("#reportsave2").removeAttr("disabled")
+                    }
+                    else{
+                    	$("#reportsave2").attr({"disabled":"disabled"});
+                    }
+                });
+            }
+        });
+    });
 });
+/* 提交故障工单-不能开卡 */
+$(document).ready(function(){
+    $("#reportsave3").click(function(){
+    	$("#reportsave3").attr({"disabled":"disabled"});
+    	$.ajax({
+            type:"post",
+            url:"${ContextPath}/report/save3",
+            data:{
+                    "selecttotalType3":$('#selecttotalType3').val(),//故障总类、给验证君用的
+                    "selectType":$('#selectType3').val(),//故障大类id、给验证君用的
+                    "childTypeid":$('#selectChildType3').val(),//故障小类id、给验证君用的
+                    "selectTemplate":$('#selectTemplate3').val(),//故障模板id、给验证君用的
+                    
+                    "order.offer_user":$('#userid').val(),//故障申报人
+                    "order.title":$('#title3').val(),//网站地址/平台名称
 
+                    "order.typess":$('#selecttotalType3').val(),//故障总类id
+                    "order.types":$('#selectType3').val(),//故障大类id
+                    "order.type":$('#selectChildType3').val(),//故障小类id
+                    "order.selectTemplate":$('#selectTemplate3').val(),//故障模板id
 
+                    "order.description":$('#description3').val(),//故障描述
+                    "order.type":$('#selectChildType3').val(),
+            },
+            success:function(msg){
+            	$("#reportsave3").attr({"disabled":"disabled"});
+            	alertModal(msg.state);
+                $('#alertModal').modal();
+                $('#alertModal').on('hidden.bs.modal', function () {
+                    if(msg.state=='提交成功！'){
+                        window.location.href='${ContextPath}/report/reports'
+                        	$("#reportsave3").attr({"disabled":"disabled"})
+                    }
+                    else if(msg.state=='网站地址/平台名称不能为空！'){
+                        $("#reportsave3").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请选择故障总类！'){
+                        $("#reportsave3").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请选择故障大类！'){
+                        $("#reportsave3").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请选择故障小类！'){
+                        $("#reportsave3").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请选择模板！'){
+                        $("#reportsave3").removeAttr("disabled")
+                    }
+                    else if(msg.state=='故障单描述不能为空！'){
+                        $("#reportsave3").removeAttr("disabled")
+                    }
+                    else{
+                        $("#reportsave3").attr({"disabled":"disabled"})
+                    }
+                });
+            }
+        });
+    });
+});
+/* 提交故障工单-重大报障 */
+$(document).ready(function(){
+    $("#reportsave4").click(function(){
+    	$("#reportsave4").attr({"disabled":"disabled"});
+    	$.ajax({
+            type:"post",
+            url:"${ContextPath}/report/save4",
+            data:{
+                    "selecttotalType4":$('#selecttotalType4').val(),//故障总类
+                    "selectType":$('#selectType4').val(),//故障大类id
+                    "childTypeid":$('#selectChildType4').val(),//故障小类id
+                    "selectTemplate":$('#selectTemplate4').val(),//故障模板id
+                    
+                    "order.offer_user":$('#userid').val(),//故障申报人
+                    "order.title":$('#title4').val(),//网站地址/平台名称
+
+                    "order.typess":$('#selecttotalType4').val(),//故障总类id
+                    "order.types":$('#selectType4').val(),//故障大类id
+                    "order.type":$('#selectChildType4').val(),//故障小类id
+                    "order.selectTemplate":$('#selectTemplate4').val(),//故障模板id
+
+                    "order.description":$('#description4').val(),//故障描述
+                    "order.type":$('#selectChildType4').val(),
+            },
+            success:function(msg){
+            	$("#reportsave4").attr({"disabled":"disabled"});
+            	alertModal(msg.state);
+                $('#alertModal').modal();
+                $('#alertModal').on('hidden.bs.modal', function () {
+                    if(msg.state=='提交成功！'){
+                        window.location.href='${ContextPath}/report/reports'
+                        	$("#reportsave4").attr({"disabled":"disabled"})
+                    }
+                    else if(msg.state=='网站地址/平台名称不能为空！'){
+                        $("#reportsave4").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请选择故障总类！'){
+                        $("#reportsave4").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请选择故障大类！'){
+                        $("#reportsave4").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请选择故障小类！'){
+                        $("#reportsave4").removeAttr("disabled")
+                    }
+                    else if(msg.state=='请选择模板！'){
+                        $("#reportsave4").removeAttr("disabled")
+                    }
+                    else if(msg.state=='故障单描述不能为空！'){
+                        $("#reportsave4").removeAttr("disabled")
+                    }
+                    else{
+                        $("#reportsave4").attr({"disabled":"disabled"})
+                    }
+                });
+            }
+        });
+    });
+});
 $( "#tabs" ).tabs();
-
 </script>
-
 [/#assign]
 
 [@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="offerFlag"]
 <div class="index-background">
-	
-	<form class="form-horizontal" role="form"  action="${ContextPath}/report/save" method="post" >
-		[#include "_formadd.html" /]
-	</form>
+    <form class="form-horizontal" role="form"  action="${ContextPath}/report/save" method="post" >
+        [#include "_formadd.html" /]
+    </form>
 </div>
 [/@mainlayout]

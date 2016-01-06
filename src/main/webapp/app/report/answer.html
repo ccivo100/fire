@@ -29,13 +29,16 @@
                         },
                         
                     success:function(msg){
-                        alertModal(msg.state);
+                    	$("#reportupdate").attr({"disabled":"disabled"});
+                    	alertModal(msg.state);
                         $('#alertModal').modal();
                         if(msg.state=='故障工单处理完毕！'){
                         	window.location.href='${ContextPath}/report/reports'
+                        		$("#reportupdate").attr({"disabled":"disabled"})
                         }
                         else if(msg.state=='故障工单继续处理！'){
                         	window.location.href='${ContextPath}/report/reports'
+                        		$("#reportupdate").attr({"disabled":"disabled"})
                         }
                         else if(msg.state=='请选择处理时间！'){
                         	$("#reportupdate").removeAttr("disabled")
@@ -165,21 +168,21 @@
                 <span class="jf_topic_full_title">${(otitle)!}</span>
                 <br></br>
                 <span class="changes">
-                  <span>•故障小类：<span class="label label-info ">${(tname)!}</span></span>
-                  <span>•故障大类：<span class="label label-info ">${(tbname)!}</span></span>
-                  <span>•故障总类：<span class="label label-info ">${(otypess)!}</span></span>
-                  <span>•模板名称：<span class="label label-info ">${(tptitle)!}</span></span>
-                  <p></p>
-                  <span>•客户编号：<span class="label label-info ">${(oclient_num)!}</span></span>
-                  <span>•终端手机号：<span class="label label-info ">${(oclient_phone)!}</span></span>
-                  <span>•故障发生地：<span class="label label-info ">${(oaccident_place)!}</span></span>
-                  <span>•申报时间：<span class="label label-info ">${(ooffertime)!}</span></span>
-                  <p></p>
-                  <span>•联系人姓名：<span class="label label-info ">${(ocontact_name)!}</span></span>
-                  <span>•联系电话：<span class="label label-info ">${(ocontact_phone)!}</span></span>
-                  <span>•产品类型：<span class="label label-info ">${(oproduct_type)!}</span></span>
-                  <span>•手机品牌：<span class="label label-info ">${(osmart_phones)!}</span></span>
-                </span>
+		          <span>•故障小类：<span class="label label-info ">${(tname)!}</span></span>
+		          <span>•故障大类：<span class="label label-info ">${(tbname)!}</span></span>
+		          <span>•故障总类：<span class="label label-info ">${(otypess)!}</span></span>
+		          <span>•模板名称：<span class="label label-info ">${(tptitle)!}</span></span>
+		          <p></p>
+		          <span>•客户编号：<span class="label label-info ">${(oclient_num)!}</span></span>
+		          <span>•终端手机号：<span class="label label-info ">${(oclient_phone)!}</span></span>
+		          <span>•系统版本：<span class="label label-info ">${(oaccident_place)!}</span></span>
+		          <span>•IMEI码：<span class="label label-info ">${(ootherss)!}</span></span>
+		          <p></p>
+		          <span>•联系人姓名：<span class="label label-info ">${(ocontact_name)!}</span></span>
+		          <span>•联系电话：<span class="label label-info ">${(ocontact_phone)!}</span></span>
+		          <span>•产品名称：<span class="label label-info ">${(oproduct_type)!}</span></span>
+		          <span>•手机品牌：<span class="label label-info ">${(osmart_phones)!}</span></span>
+		        </span>
             </div>
             <div class="jf_inner jf_topic">
                 <div style="margin: 30px;">
@@ -239,6 +242,14 @@
                                 <span class="editable" id="login">${(offer.pname)!}</span>
                             </div>
                         </div>
+                        
+                        <div class="profile-info-row">
+							<div class="profile-info-name">申报时间：</div>
+
+							<div class="profile-info-value">
+								<span class="editable" id="login">${(ooffertime)!}</span>
+							</div>
+						</div>
                     </div>
                 </div>
             </div>
@@ -336,10 +347,14 @@
                             <span class="input-group-addon">进度</span>
                                 <select id="selectProgress" class="form-control" name="selectProgress">
                                     <option value="-1">请选中处理进度</option>
+                                    [#if (ostatus?number)=3]
+                                    <option value="5">反馈结果</option>
+                                    [#elseif (ostatus?number)=4]
                                     <option value="5">反馈结果</option>
                                     <option value="6">回访完毕</option>
+                                    [/#if]
                                 </select>
-                             </div>
+                        </div>
                     </div>
                 </div>
                 <br>
