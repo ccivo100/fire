@@ -14,7 +14,7 @@ public class ReportValidator extends Validator {
 
     @Override
     protected void validate(Controller c) {
-        if(getActionKey().equals("/report/save")){
+        /*if(getActionKey().equals("/report/save")){
             String[] selectApartment, selectMail, selectSms;
             //  选择一级部门 multiple or not
             if(c.getParaValues("selectApartment")==null){
@@ -43,14 +43,37 @@ public class ReportValidator extends Validator {
             else if(selectApartment.length==1&&c.getParaToLong("selectChildApartment")==-1){
                 addError("state","请选择运维组别！");
             }
-            /*else if(ValidateKit.isNullOrEmpty(selectMail)){
+            else if(ValidateKit.isNullOrEmpty(selectMail)){
                 addError("state","请选择邮件接收人员！");
             }
             else if(ValidateKit.isNullOrEmpty(selectSms)){
                 addError("state","请选择短信接收人员！");
-            }*/
+            }
             else if(c.getParaToLong("order.level")==-1){
                 addError("state","请选择故障等级！");
+            }
+            else if(ValidateKit.isNullOrEmpty(c.getPara("order.description"))){
+                addError("state","故障单描述不能为空！");
+            }
+        }*/
+        if(getActionKey().equals("/report/save")){
+            if(ValidateKit.isNullOrEmpty(c.getPara("order.title"))){
+                addError("state","网站地址/平台名称不能为空！");
+            }
+            /*else if(c.getPara("selecttotalType1")==""){
+                addError("state","请选择故障总类！");
+            }*/
+            else if(c.getPara("order.product_type")==""){
+                addError("state","请选择产品名称！");
+            }
+            else if(c.getParaToLong("selectType")==-1){
+                addError("state","请选择故障大类！");
+            }
+            else if(c.getParaToLong("childTypeid")==-1){
+                addError("state","请选择故障小类！");
+            }
+            else if(c.getParaToLong("order.selectTemplate")==-1){
+                addError("state","请选择模板！");
             }
             else if(ValidateKit.isNullOrEmpty(c.getPara("order.description"))){
                 addError("state","故障单描述不能为空！");
@@ -63,6 +86,15 @@ public class ReportValidator extends Validator {
             //else if(Order.dao.findBy(" offer_user=? and title=? ", c.getPara("order.offer_user"),c.getPara("order.title").trim()).size()>0){
             //    addError("state","已存在该故障单，请重新输入！");
             //}禁止同一账户下出现重复故障标题、现已改为客户姓名，因此不能启用改判断
+            else if(ValidateKit.isNullOrEmpty(c.getPara("order.contact_name"))){
+                addError("state","请填写联系人姓名！");
+            }
+            else if(ValidateKit.isNullOrEmpty(c.getPara("order.contact_phone"))){
+                addError("state","请填写联系电话！");
+            }
+            else if(!ValiKit.isPhone(c.getPara("order.contact_phone"))){
+                addError("state","联系电话格式不正确！");
+              }  
             else if(ValidateKit.isNullOrEmpty(c.getPara("order.client_num"))){
                 addError("state","请填写客户编号！");
             }
@@ -72,31 +104,60 @@ public class ReportValidator extends Validator {
             else if(!ValiKit.isPhone(c.getPara("order.client_phone"))){
               addError("state","终端手机号格式不正确！");
             }
-            else if(ValidateKit.isNullOrEmpty(c.getPara("order.accident_place"))){
-                addError("state","请填写故障发生地！");
+            else if(ValidateKit.isNullOrEmpty(c.getPara("order.otherss"))){
+                addError("state","请填写IMEI码！");
             }
-            else if(ValidateKit.isNullOrEmpty(c.getPara("order.contact_name"))){
-                addError("state","请填写联系人姓名！");
-            }
-            else if(ValidateKit.isNullOrEmpty(c.getPara("order.contact_phone"))){
-                addError("state","请填写联系电话！");
-            }
-            else if(!ValiKit.isPhone(c.getPara("order.contact_phone"))){
-              addError("state","联系电话格式不正确！");
-            }            
-            else if(ValidateKit.isNullOrEmpty(c.getPara("order.product_type"))){
-                addError("state","请填写产品类型！");
+            //else if(ValidateKit.isNullOrEmpty(c.getPara("order.product_type"))){
+            else if(c.getPara("order.product_type")==""){
+                addError("state","请选择产品名称！");
             }
             else if(ValidateKit.isNullOrEmpty(c.getPara("order.smart_phones"))){
-                addError("state","请填写手机品牌！");
+                addError("state","请选择手机品牌！");
             }
-            //else if(ValidateKit.isNullOrEmpty(c.getPara("order.otherss"))){
-            //    addError("state","请填写其他！");
-            //}
-            //else if(ValidateKit.isNullOrEmpty(c.getPara("order.typess"))){
-            //    addError("state","请选择故障总类！");
-            //}
+            else if(ValidateKit.isNullOrEmpty(c.getPara("order.accident_place"))){
+                addError("state","请选择系统版本！");
+            }
             else if(c.getPara("selecttotalType2")==""){
+                addError("state","请选择故障总类！");
+            }
+            else if(c.getParaToLong("selectType")==-1){
+                addError("state","请选择故障大类！");
+            }
+            else if(c.getParaToLong("childTypeid")==-1){
+                addError("state","请选择故障小类！");
+            }
+            else if(c.getParaToLong("order.selectTemplate")==-1){
+                addError("state","请选择模板！");
+            }
+            else if(ValidateKit.isNullOrEmpty(c.getPara("order.description"))){
+                addError("state","故障单描述不能为空！");
+            }
+        }
+        else if(getActionKey().equals("/report/save3")){
+            if(ValidateKit.isNullOrEmpty(c.getPara("order.title"))){
+                addError("state","网站地址/平台名称不能为空！");
+            }
+            else if(c.getPara("selecttotalType3")==""){
+                addError("state","请选择故障总类！");
+            }
+            else if(c.getParaToLong("selectType")==-1){
+                addError("state","请选择故障大类！");
+            }
+            else if(c.getParaToLong("childTypeid")==-1){
+                addError("state","请选择故障小类！");
+            }
+            else if(c.getParaToLong("order.selectTemplate")==-1){
+                addError("state","请选择模板！");
+            }
+            else if(ValidateKit.isNullOrEmpty(c.getPara("order.description"))){
+                addError("state","故障单描述不能为空！");
+            }
+        }
+        else if(getActionKey().equals("/report/save4")){
+            if(ValidateKit.isNullOrEmpty(c.getPara("order.title"))){
+                addError("state","网站地址/平台名称不能为空！");
+            }
+            else if(c.getPara("selecttotalType3")==""){
                 addError("state","请选择故障总类！");
             }
             else if(c.getParaToLong("selectType")==-1){
@@ -166,6 +227,12 @@ public class ReportValidator extends Validator {
         else if(getActionKey().equals("/report/saveByTemplate")){
             c.renderJson("state", c.getAttr("state"));
         }
+        else if(getActionKey().equals("/report/save3")){
+            c.renderJson("state", c.getAttr("state"));
+        }
+        else if(getActionKey().equals("/report/save4")){
+            c.renderJson("state", c.getAttr("state"));
+        }
         else if(getActionKey().equals("/report/update")){
             c.renderJson("state", c.getAttr("state"));
         }
@@ -175,8 +242,8 @@ public class ReportValidator extends Validator {
         else if(getActionKey().equals("/report/recall")){
             c.renderJson("state", c.getAttr("state"));
         }
-        
     }
+
     /**
      * 判断处理情况参数是否有异常
      * @param process

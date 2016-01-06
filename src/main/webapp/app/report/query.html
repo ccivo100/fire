@@ -95,12 +95,12 @@ $(function () {
               <p></p>
               <span>•客户编号：<span class="label label-info ">${(oclient_num)!}</span></span>
               <span>•终端手机号：<span class="label label-info ">${(oclient_phone)!}</span></span>
-              <span>•故障发生地：<span class="label label-info ">${(oaccident_place)!}</span></span>
-              <span>•申报时间：<span class="label label-info ">${(ooffertime)!}</span></span>
+              <span>•系统版本：<span class="label label-info ">${(oaccident_place)!}</span></span>
+              <span>•IMEI码：<span class="label label-info ">${(ootherss)!}</span></span>
               <p></p>
               <span>•联系人姓名：<span class="label label-info ">${(ocontact_name)!}</span></span>
               <span>•联系电话：<span class="label label-info ">${(ocontact_phone)!}</span></span>
-              <span>•产品类型：<span class="label label-info ">${(oproduct_type)!}</span></span>
+              <span>•产品名称：<span class="label label-info ">${(oproduct_type)!}</span></span>
               <span>•手机品牌：<span class="label label-info ">${(osmart_phones)!}</span></span>
             </span>
                 </span>
@@ -165,6 +165,13 @@ $(function () {
                                 <span class="editable" id="login">${(offer.pname)!}</span>
                             </div>
                         </div>
+                        <div class="profile-info-row">
+							<div class="profile-info-name">申报时间：</div>
+
+							<div class="profile-info-value">
+								<span class="editable" id="login">${(ooffertime)!}</span>
+							</div>
+						</div>
                     </div>
                 </div>
             </div>
