@@ -1,579 +1,646 @@
-<div id="sidebar" class="sidebar                  responsive">
-				<script type="text/javascript">
-					try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
-				</script>
-
-<!-- 				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
-					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-						<button class="btn btn-success">
-							<i class="ace-icon fa fa-signal"></i>
-						</button>
-
-						<button class="btn btn-info">
-							<i class="ace-icon fa fa-pencil"></i>
-						</button>
-
-						#section:basics/sidebar.layout.shortcuts
-						<button class="btn btn-warning">
-							<i class="ace-icon fa fa-users"></i>
-						</button>
-
-						<button class="btn btn-danger">
-							<i class="ace-icon fa fa-cogs"></i>
-						</button>
-
-						/section:basics/sidebar.layout.shortcuts
-					</div>
-
-					<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-						<span class="btn btn-success"></span>
-
-						<span class="btn btn-info"></span>
-
-						<span class="btn btn-warning"></span>
-
-						<span class="btn btn-danger"></span>
-					</div>
-				</div>/.sidebar-shortcuts
- -->
-				<ul class="nav nav-list">
-					<li class="" id="adminFlag">
-						<a href="${ContextPath}/admin/">
-							<i class="menu-icon fa fa-tachometer"></i>
-							<span class="menu-text">主页</span>
-						</a>
-
-						<b class="arrow"></b>
-					</li>
-					
-					[@shiro.hasPermission name="P_A_ROLE"]
-					<li class="" id="roleFlag">
-						<a href="#" class="dropdown-toggle" >
-							<i class="menu-icon fa fa-list"></i>
-							<span class="menu-text">角色管理</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-							<li class="" id="rolesListFlag">
-								<a href="${ContextPath}/admin/role">
-									<i class="menu-icon fa fa-caret-right" ></i>
-									角色列表
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-
-							<li class="" id="addRoleFlag">
-								<a href="${ContextPath}/admin/role/add">
-									<i class="menu-icon fa fa-caret-right"></i>
-									新增角色
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-						</ul>
-					</li>
-					[/@shiro.hasPermission]
-					
-					[@shiro.hasPermission name="P_A_PERMISSION"]
-					<li class="" id="permissionFlag">
-						<a href="#" class="dropdown-toggle" >
-							<i class="menu-icon fa fa-pencil-square-o"></i>
-							<span class="menu-text">权限管理</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-							<li class="" id="permissionsListFlag">
-								<a href="${ContextPath}/admin/permission">
-									<i class="menu-icon fa fa-caret-right" ></i>
-									权限列表
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-
-							<li class="" id="addPermissionFlag">
-								<a href="${ContextPath}/admin/permission/add">
-									<i class="menu-icon fa fa-caret-right"></i>
-									新增权限
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-						</ul>
-					</li>
-					[/@shiro.hasPermission]
-					
-					[@shiro.hasPermission name="P_A_TYPE"]
-					<li class="" id="typeFlag">
-						<a href="#" class="dropdown-toggle" >
-							<i class="menu-icon fa fa-list-alt"></i>
-							<span class="menu-text">类型管理</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-							<li class="" id="typesListFlag">
-								<a href="${ContextPath}/admin/type">
-									<i class="menu-icon fa fa-caret-right" ></i>
-									类型列表
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-							
-							<li class="" id="addTypeFlag">
-								<a href="${ContextPath}/admin/type/add">
-									<i class="menu-icon fa fa-caret-right"></i>
-									新增类型
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-							
-							<li class="" id="rootTaskFlag">
-								<a href="${ContextPath}/admin/task/rootTask">
-									<i class="menu-icon fa fa-caret-right"></i>
-									任务分配
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-							
-						</ul>
-					</li>
-					[/@shiro.hasPermission]
-					
-					[@shiro.hasPermission name="P_A_ORDER"]
-					<li class="" id="orderFlag">
-						<a href="#" class="dropdown-toggle" >
-							<i class="menu-icon fa fa-list-alt"></i>
-							<span class="menu-text">工单管理</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-						
-						<ul class="submenu">
-							<li class="" id="ordersListFlag">
-								<a href="${ContextPath}/admin/order">
-									<i class="menu-icon fa fa-caret-right" ></i>
-									工单列表
-								</a>
-								<b class="arrow"></b>
-							</li>
-							
-						</ul>
-					</li>
-					[/@shiro.hasPermission]
-					
-					<li class="" id="organizationFlag">
-						<a href="#" class="dropdown-toggle" >
-							<i class="menu-icon fa fa-list"></i>
-							<span class="menu-text">组织架构管理</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-							[@shiro.hasPermission name="P_A_BRANCH"]
-							<li class="" id="branchFlag">
-								<a href="#" class="dropdown-toggle">
-									<i class="menu-icon fa fa-caret-right"></i>
-								单位管理
-									<b class="arrow fa fa-angle-down"></b>
-								</a>
-
-								<b class="arrow"></b>
-
-								<ul class="submenu">
-									<li class="" id="branchsListFlag">
-										<a href="${ContextPath}/admin/branch">
-											<i class="menu-icon fa fa-caret-right"></i>
-										单位列表
-										</a>
-										<b class="arrow"></b>
-									</li>
-									<li class="" id="addBranchFlag">
-										<a href="${ContextPath}/admin/branch/add">
-											<i class="menu-icon fa fa-caret-right"></i>
-										新增单位
-										</a>
-										<b class="arrow"></b>
-									</li>
-								</ul>
-							</li>
-							[/@shiro.hasPermission]
-							
-							[@shiro.hasPermission name="P_A_APARTMENT"]
-							<li class="" id="apartmentFlag">
-								<a href="#" class="dropdown-toggle">
-									<i class="menu-icon fa fa-caret-right"></i>
-								部门管理
-									<b class="arrow fa fa-angle-down"></b>
-								</a>
-
-								<b class="arrow"></b>
-
-								<ul class="submenu">
-									<li class="" id="apartmentsListFlag">
-										<a href="${ContextPath}/admin/apartment">
-											<i class="menu-icon fa fa-caret-right"></i>
-										部门列表
-										</a>
-										<b class="arrow"></b>
-									</li>
-									<li class="" id="addApartmentFlag">
-										<a href="${ContextPath}/admin/apartment/add">
-											<i class="menu-icon fa fa-caret-right"></i>
-										新增部门
-										</a>
-										<b class="arrow"></b>
-									</li>
-								</ul>
-							</li>
-							[/@shiro.hasPermission]
-							[@shiro.hasPermission name="P_A_POSITION"]
-							<li class="" id="positionFlag">
-								<a href="#" class="dropdown-toggle">
-									<i class="menu-icon fa fa-caret-right"></i>
-								职位管理
-									<b class="arrow fa fa-angle-down"></b>
-								</a>
-
-								<b class="arrow"></b>
-
-								<ul class="submenu">
-									<li class="" id="positionsListFlag">
-										<a href="${ContextPath}/admin/position">
-											<i class="menu-icon fa fa-caret-right"></i>
-										职位列表
-										</a>
-										<b class="arrow"></b>
-									</li>
-									<li class="" id="addPositionFlag">
-										<a href="${ContextPath}/admin/position/add">
-											<i class="menu-icon fa fa-caret-right"></i>
-										新增职位
-										</a>
-										<b class="arrow"></b>
-									</li>
-								</ul>
-							</li>
-							[/@shiro.hasPermission]
-							[@shiro.hasPermission name="P_A_USER"]
-							<li class="" id="userFlag">
-								<a href="#" class="dropdown-toggle">
-									<i class="menu-icon fa fa-caret-right"></i>
-								用户管理
-									<b class="arrow fa fa-angle-down"></b>
-								</a>
-
-								<b class="arrow"></b>
-
-								<ul class="submenu">
-									<li class="" id="usersListFlag">
-										<a href="${ContextPath}/admin/user">
-											<i class="menu-icon fa fa-caret-right"></i>
-										用户列表
-										</a>
-										<b class="arrow"></b>
-									</li>
-									<li class="" id="addUserFlag">
-										<a href="${ContextPath}/admin/adduser">
-											<i class="menu-icon fa fa-caret-right"></i>
-										新增用户
-										</a>
-										<b class="arrow"></b>
-									</li>
-								</ul>
-							</li>
-							[/@shiro.hasPermission]
-						</ul>
-					</li>
-					
-					[@shiro.hasPermission name="P_A_TEMPLATE"]
-					<li class="" id="templateFlag">
-						<a href="#" class="dropdown-toggle" >
-							<i class="menu-icon fa fa-list-alt"></i>
-							<span class="menu-text">模板管理</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-						
-						<ul class="submenu">
-							<li class="" id="templateListFlag">
-								<a href="${ContextPath}/admin/template">
-									<i class="menu-icon fa fa-caret-right" ></i>
-									模板列表
-								</a>
-								<b class="arrow"></b>
-							</li>
-							<li class="" id="addTemplateFlag">
-								<a href="${ContextPath}/admin/template/add">
-									<i class="menu-icon fa fa-caret-right" ></i>
-									添加模板
-								</a>
-								<b class="arrow"></b>
-							</li>
-						</ul>
-					</li>
-					[/@shiro.hasPermission]
-					
-					[@shiro.hasPermission name="P_A_ALERTINFO"]
-					<li class="" id="alertinfoFlag">
-						<a href="#" class="dropdown-toggle" >
-							<i class="menu-icon fa fa-list-alt"></i>
-							<span class="menu-text">系统工具</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-						
-						<ul class="submenu">
-							<li class="" id="mailListFlag">
-								<a href="${ContextPath}/admin/notice/mail">
-									<i class="menu-icon fa fa-caret-right" ></i>
-									邮件通知管理
-								</a>
-								<b class="arrow"></b>
-							</li>
-							<li class="" id="smsListFlag">
-								<a href="${ContextPath}/admin/notice/sms">
-									<i class="menu-icon fa fa-caret-right" ></i>
-									短信通知管理
-								</a>
-								<b class="arrow"></b>
-							</li>
-						</ul>
-					</li>
-					[/@shiro.hasPermission]
-					
-					<!-- <li class="" id="UIFlag">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-desktop"></i>
-							<span class="menu-text">
-							界面元素
-							</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-							<li class="" id="layoutFlag">
-								<a href="#" class="dropdown-toggle">
-									<i class="menu-icon fa fa-caret-right"></i>
-
-								布局实例
-									<b class="arrow fa fa-angle-down"></b>
-								</a>
-
-								<b class="arrow"></b>
-
-								<ul class="submenu">
-									<li class="" id="twoMenuFlag">
-										<a href="${ContextPath}/aceAdmin/top_menu">
-											<i class="menu-icon fa fa-caret-right"></i>
-										顶部菜单布局
-										</a>
-
-										<b class="arrow"></b>
-									</li>
-
-									<li class="" id="twoMenuFlag1">
-										<a href="${ContextPath}/aceAdmin/two_menu_1">
-											<i class="menu-icon fa fa-caret-right"></i>
-										两列菜单布局1
-										</a>
-
-										<b class="arrow"></b>
-									</li>
-
-									<li class="" id="twoMenuFlag2">
-										<a href="${ContextPath}/aceAdmin/two_menu_2">
-											<i class="menu-icon fa fa-caret-right"></i>
-									两列菜单布局2	
-										</a>
-
-										<b class="arrow"></b>
-									</li>
-
-									<li class="" id="defaultMobileMenuFlag">
-										<a href="${ContextPath}/aceAdmin/default_mobile_menu">
-											<i class="menu-icon fa fa-caret-right"></i>
-										默认手机菜单布局
-										</a>
-
-										<b class="arrow"></b>
-									</li>
-
-									<li class="" id="mobileMenu2">
-										<a href="${ContextPath}/aceAdmin/mobile_menu_1">
-											<i class="menu-icon fa fa-caret-right"></i>
-											手机菜单布局1
-										</a>
-
-										<b class="arrow"></b>
-									</li>
-
-									<li class="" id="mobileMenu3">
-										<a href="${ContextPath}/aceAdmin/mobile_menu_2">
-											<i class="menu-icon fa fa-caret-right"></i>
-											手机菜单布局2
-										</a>
-
-										<b class="arrow"></b>
-									</li>
-								</ul>
-							</li>
-
-							<li class="" id="typographyFlag">
-								<a href="${ContextPath}/aceAdmin/typography">
-									<i class="menu-icon fa fa-caret-right"></i>
-									页面排版
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-
-							<li class="" id="elementsFlag">
-								<a href="${ContextPath}/aceAdmin/elements">
-									<i class="menu-icon fa fa-caret-right"></i>
-								界面元素
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-
-							<li class="" id="buttonsFlag">
-								<a href="${ContextPath}/aceAdmin/buttons_icons">
-									<i class="menu-icon fa fa-caret-right"></i>
-									按钮&amp;图标
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-
-							<li class="" id="contentSliderFlag">
-								<a href="${ContextPath}/aceAdmin/content_slider">
-									<i class="menu-icon fa fa-caret-right"></i>
-									滑块元素
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-
-							<li class="" id="treeViewFlag">
-								<a href="${ContextPath}/aceAdmin/treeview">
-									<i class="menu-icon fa fa-caret-right"></i>
-									属性视图
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-
-							<li class="" id="jqueryUIFlag">
-								<a href="${ContextPath}/aceAdmin/jquery_ui">
-									<i class="menu-icon fa fa-caret-right"></i>
-									jQuery 用户界面
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-
-							<li class="" id="nestableListFlag">
-								<a href="${ContextPath}/aceAdmin/nestable_list">
-									<i class="menu-icon fa fa-caret-right"></i>
-									嵌套列表视图
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-
-							<li class="" id="thirdLevelFlag">
-								<a href="#" class="dropdown-toggle">
-									<i class="menu-icon fa fa-caret-right"></i>
-
-									三级菜单示例
-									<b class="arrow fa fa-angle-down"></b>
-								</a>
-
-								<b class="arrow"></b>
-
-								<ul class="submenu">
-									<li class="" id="item1Flag">
-										<a href="#">
-											<i class="menu-icon fa fa-leaf green"></i>
-											菜单选项 #1
-										</a>
-
-										<b class="arrow"></b>
-									</li>
-
-									<li class="" id="forthFlag">
-										<a href="#" class="dropdown-toggle">
-											<i class="menu-icon fa fa-pencil orange"></i>
-
-											四级菜单视图
-											<b class="arrow fa fa-angle-down"></b>
-										</a>
-
-										<b class="arrow"></b>
-
-										<ul class="submenu">
-											<li class="" id="productFlag">
-												<a href="#">
-													<i class="menu-icon fa fa-plus purple"></i>
-													添加商品
-												</a>
-
-												<b class="arrow"></b>
-											</li>
-
-											<li class="">
-												<a href="#" id="viewMoreFlag">
-													<i class="menu-icon fa fa-eye pink"></i>
-													查看产品详情
-												</a>
-												<b class="arrow"></b>
-											</li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</li> -->
-
-					
-				</ul><!-- /.nav-list -->
-
-				<!-- #section:basics/sidebar.layout.minimize -->
-				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
-					<i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
-				</div>
-
-				<!-- /section:basics/sidebar.layout.minimize -->
-				<script type="text/javascript">
-					try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
-				</script>
-			</div/>
-           
+<div id="sidebar" class="sidebar responsive">
+    <script type="text/javascript">
+        try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+    </script>
+<!--                
+<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+    <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+        <button class="btn btn-success">
+            <i class="ace-icon fa fa-signal"></i>
+        </button>
+
+        <button class="btn btn-info">
+            <i class="ace-icon fa fa-pencil"></i>
+        </button>
+
+        #section:basics/sidebar.layout.shortcuts
+        <button class="btn btn-warning">
+            <i class="ace-icon fa fa-users"></i>
+        </button>
+
+        <button class="btn btn-danger">
+            <i class="ace-icon fa fa-cogs"></i>
+        </button>
+
+        /section:basics/sidebar.layout.shortcuts
+    </div>
+
+    <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+        <span class="btn btn-success"></span>
+        <span class="btn btn-info"></span>
+        <span class="btn btn-warning"></span>
+        <span class="btn btn-danger"></span>
+    </div>
+</div>/.sidebar-shortcuts
+-->
+    <ul class="nav nav-list">
+        <li class="" id="adminFlag">
+            <a href="${ContextPath}/admin/">
+                <i class="menu-icon fa fa-tachometer"></i>
+                <span class="menu-text">主页</span>
+            </a>
+            <b class="arrow"></b>
+        </li>
+                    
+        [@shiro.hasPermission name="P_A_ROLE"]
+        <li class="" id="roleFlag">
+            <a href="#" class="dropdown-toggle" >
+                <i class="menu-icon fa fa-list"></i>
+                <span class="menu-text">角色管理</span>
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+                <li class="" id="rolesListFlag">
+                    <a href="${ContextPath}/admin/role">
+                        <i class="menu-icon fa fa-caret-right" ></i>
+                            角色列表
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+
+                <li class="" id="addRoleFlag">
+                    <a href="${ContextPath}/admin/role/add">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                            新增角色
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+            </ul>
+        </li>
+        [/@shiro.hasPermission]
+                    
+        [@shiro.hasPermission name="P_A_PERMISSION"]
+        <li class="" id="permissionFlag">
+            <a href="#" class="dropdown-toggle" >
+                <i class="menu-icon fa fa-pencil-square-o"></i>
+                <span class="menu-text">权限管理</span>
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+                <li class="" id="permissionsListFlag">
+                    <a href="${ContextPath}/admin/permission">
+                        <i class="menu-icon fa fa-caret-right" ></i>
+                            权限列表
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+
+                <li class="" id="addPermissionFlag">
+                    <a href="${ContextPath}/admin/permission/add">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                            新增权限
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+            </ul>
+        </li>
+        [/@shiro.hasPermission]
+                    
+        [@shiro.hasPermission name="P_A_TYPE"]
+        <li class="" id="typeFlag">
+            <a href="#" class="dropdown-toggle" >
+                <i class="menu-icon fa fa-list-alt"></i>
+                <span class="menu-text">类型管理</span>
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+                <li class="" id="typesListFlag">
+                    <a href="${ContextPath}/admin/type">
+                        <i class="menu-icon fa fa-caret-right" ></i>
+                            类型列表
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                            
+                <li class="" id="addTypeFlag">
+                    <a href="${ContextPath}/admin/type/add">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                            新增类型
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                            
+                <li class="" id="rootTaskFlag">
+                    <a href="${ContextPath}/admin/task/rootTask">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                            任务分配
+                    </a>
+                    <b class="arrow"></b>
+                </li>        
+            </ul>
+        </li>
+        [/@shiro.hasPermission]
+                    
+        [@shiro.hasPermission name="P_A_ORDER"]
+        <li class="" id="orderFlag">
+            <a href="#" class="dropdown-toggle" >
+                <i class="menu-icon fa fa-list-alt"></i>
+                <span class="menu-text">工单管理</span>
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+            <b class="arrow"></b>
+                        
+            <ul class="submenu">
+                <li class="" id="ordersListFlag">
+                    <a href="${ContextPath}/admin/order">
+                        <i class="menu-icon fa fa-caret-right" ></i>
+                            工单列表
+                    </a>
+                    <b class="arrow"></b>
+                </li>   
+            </ul>
+        </li>
+        [/@shiro.hasPermission]
+        
+
+
+        <li class="" id="organizationFlag">
+            <a href="#" class="dropdown-toggle" >
+                <i class="menu-icon fa fa-list"></i>
+                <span class="menu-text">组织架构管理</span>
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+                [@shiro.hasPermission name="P_A_BRANCH"]
+                <li class="" id="branchFlag">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                            单位管理
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="" id="branchsListFlag">
+                            <a href="${ContextPath}/admin/branch">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                    单位列表
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="" id="addBranchFlag">
+                            <a href="${ContextPath}/admin/branch/add">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                    新增单位
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+                [/@shiro.hasPermission]
+                            
+                [@shiro.hasPermission name="P_A_APARTMENT"]
+                <li class="" id="apartmentFlag">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                            部门管理
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="" id="apartmentsListFlag">
+                            <a href="${ContextPath}/admin/apartment">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                    部门列表
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="" id="addApartmentFlag">
+                            <a href="${ContextPath}/admin/apartment/add">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                    新增部门
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+                [/@shiro.hasPermission]
+
+                [@shiro.hasPermission name="P_A_POSITION"]
+                <li class="" id="positionFlag">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                            职位管理
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="" id="positionsListFlag">
+                            <a href="${ContextPath}/admin/position">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                    职位列表
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="" id="addPositionFlag">
+                            <a href="${ContextPath}/admin/position/add">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                    新增职位
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+                [/@shiro.hasPermission]
+
+                [@shiro.hasPermission name="P_A_USER"]
+                <li class="" id="userFlag">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                            用户管理
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="" id="usersListFlag">
+                            <a href="${ContextPath}/admin/user">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                    用户列表
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="" id="addUserFlag">
+                            <a href="${ContextPath}/admin/adduser">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                    新增用户
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+                [/@shiro.hasPermission]
+            </ul>
+        </li>
+        
+                <li class="" id="commoditymanagementFlag">
+            <a href="#" class="dropdown-toggle" >
+                <i class="menu-icon fa fa-pencil-square-o"></i>
+                <span class="menu-text">商品管理</span>
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+            <b class="arrow"></b>
+
+            <ul class="submenu">
+                [@shiro.hasPermission name="P_A_PRODUCT"]
+                <li class="" id="productFlag">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                            产品管理
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="" id="productListFlag">
+                            <a href="${ContextPath}/admin/product">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                    产品列表
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="" id="addProductFlag">
+                            <a href="${ContextPath}/admin/product/add">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                    新增产品
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+                [/@shiro.hasPermission]
+
+                [@shiro.hasPermission name="P_A_PHONE"]
+                <li class="" id="phoneFlag">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                            手机管理
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="" id="phoneListFlag">
+                            <a href="${ContextPath}/admin/phone">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                    手机列表
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="" id="addPhoneFlag">
+                            <a href="${ContextPath}/admin/phone/add">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                    新增手机
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+                [/@shiro.hasPermission]
+				<!-- 
+                [@shiro.hasPermission name="P_A_VERSION"]
+                <li class="" id="versionFlag">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-caret-right"></i>
+                            版本管理
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="" id="versionListFlag">
+                            <a href="${ContextPath}/admin/version">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                    版本列表
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="" id="addVersionFlag">
+                            <a href="${ContextPath}/admin/version/add">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                    新增版本
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+                [/@shiro.hasPermission]
+                 -->
+            </ul>
+        </li>
+                    
+        [@shiro.hasPermission name="P_A_TEMPLATE"]
+        <li class="" id="templateFlag">
+            <a href="#" class="dropdown-toggle" >
+                <i class="menu-icon fa fa-list-alt"></i>
+                <span class="menu-text">模板管理</span>
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+            <b class="arrow"></b>
+                        
+            <ul class="submenu">
+                <li class="" id="templateListFlag">
+                    <a href="${ContextPath}/admin/template">
+                        <i class="menu-icon fa fa-caret-right" ></i>
+                            模板列表
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="" id="addTemplateFlag">
+                    <a href="${ContextPath}/admin/template/add">
+                        <i class="menu-icon fa fa-caret-right" ></i>
+                            添加模板
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+            </ul>
+        </li>
+        [/@shiro.hasPermission]
+                    
+        [@shiro.hasPermission name="P_A_ALERTINFO"]
+        <li class="" id="alertinfoFlag">
+            <a href="#" class="dropdown-toggle" >
+                <i class="menu-icon fa fa-list-alt"></i>
+                <span class="menu-text">系统工具</span>
+                <b class="arrow fa fa-angle-down"></b>
+            </a>
+            <b class="arrow"></b>
+                        
+            <ul class="submenu">
+                <li class="" id="mailListFlag">
+                    <a href="${ContextPath}/admin/notice/mail">
+                        <i class="menu-icon fa fa-caret-right" ></i>
+                            邮件通知管理
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+                <li class="" id="smsListFlag">
+                    <a href="${ContextPath}/admin/notice/sms">
+                        <i class="menu-icon fa fa-caret-right" ></i>
+                            短信通知管理
+                    </a>
+                    <b class="arrow"></b>
+                </li>
+            </ul>
+        </li>
+        [/@shiro.hasPermission]
+                    
+                    <!-- 
+                    <li class="" id="UIFlag">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-desktop"></i>
+                            <span class="menu-text">
+                            界面元素
+                            </span>
+
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+
+                        <b class="arrow"></b>
+
+                        <ul class="submenu">
+                            <li class="" id="layoutFlag">
+                                <a href="#" class="dropdown-toggle">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+
+                                布局实例
+                                    <b class="arrow fa fa-angle-down"></b>
+                                </a>
+
+                                <b class="arrow"></b>
+
+                                <ul class="submenu">
+                                    <li class="" id="twoMenuFlag">
+                                        <a href="${ContextPath}/aceAdmin/top_menu">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                        顶部菜单布局
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+
+                                    <li class="" id="twoMenuFlag1">
+                                        <a href="${ContextPath}/aceAdmin/two_menu_1">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                        两列菜单布局1
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+
+                                    <li class="" id="twoMenuFlag2">
+                                        <a href="${ContextPath}/aceAdmin/two_menu_2">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                    两列菜单布局2 
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+
+                                    <li class="" id="defaultMobileMenuFlag">
+                                        <a href="${ContextPath}/aceAdmin/default_mobile_menu">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                        默认手机菜单布局
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+
+                                    <li class="" id="mobileMenu2">
+                                        <a href="${ContextPath}/aceAdmin/mobile_menu_1">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            手机菜单布局1
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+
+                                    <li class="" id="mobileMenu3">
+                                        <a href="${ContextPath}/aceAdmin/mobile_menu_2">
+                                            <i class="menu-icon fa fa-caret-right"></i>
+                                            手机菜单布局2
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="" id="typographyFlag">
+                                <a href="${ContextPath}/aceAdmin/typography">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    页面排版
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+
+                            <li class="" id="elementsFlag">
+                                <a href="${ContextPath}/aceAdmin/elements">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                界面元素
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+
+                            <li class="" id="buttonsFlag">
+                                <a href="${ContextPath}/aceAdmin/buttons_icons">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    按钮&amp;图标
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+
+                            <li class="" id="contentSliderFlag">
+                                <a href="${ContextPath}/aceAdmin/content_slider">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    滑块元素
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+
+                            <li class="" id="treeViewFlag">
+                                <a href="${ContextPath}/aceAdmin/treeview">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    属性视图
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+
+                            <li class="" id="jqueryUIFlag">
+                                <a href="${ContextPath}/aceAdmin/jquery_ui">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    jQuery 用户界面
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+
+                            <li class="" id="nestableListFlag">
+                                <a href="${ContextPath}/aceAdmin/nestable_list">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    嵌套列表视图
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+
+                            <li class="" id="thirdLevelFlag">
+                                <a href="#" class="dropdown-toggle">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+
+                                    三级菜单示例
+                                    <b class="arrow fa fa-angle-down"></b>
+                                </a>
+
+                                <b class="arrow"></b>
+
+                                <ul class="submenu">
+                                    <li class="" id="item1Flag">
+                                        <a href="#">
+                                            <i class="menu-icon fa fa-leaf green"></i>
+                                            菜单选项 #1
+                                        </a>
+
+                                        <b class="arrow"></b>
+                                    </li>
+
+                                    <li class="" id="forthFlag">
+                                        <a href="#" class="dropdown-toggle">
+                                            <i class="menu-icon fa fa-pencil orange"></i>
+
+                                            四级菜单视图
+                                            <b class="arrow fa fa-angle-down"></b>
+                                        </a>
+
+                                        <b class="arrow"></b>
+
+                                        <ul class="submenu">
+                                            <li class="" id="productFlag">
+                                                <a href="#">
+                                                    <i class="menu-icon fa fa-plus purple"></i>
+                                                    添加商品
+                                                </a>
+
+                                                <b class="arrow"></b>
+                                            </li>
+
+                                            <li class="">
+                                                <a href="#" id="viewMoreFlag">
+                                                    <i class="menu-icon fa fa-eye pink"></i>
+                                                    查看产品详情
+                                                </a>
+                                                <b class="arrow"></b>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                     -->     
+    </ul><!-- /.nav-list -->
+
+                <!-- #section:basics/sidebar.layout.minimize -->
+    <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+        <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+    </div>
+                <!-- /section:basics/sidebar.layout.minimize -->
+    <script type="text/javascript">
+        try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+    </script>
+</div>

@@ -1,0 +1,22 @@
+<div >
+    <input type="hidden" name="product.id" value="${(product.id)!}" />
+    <div class="form-group">
+        <label class="col-sm-2 control-label">产品名称</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="product.name" value="${(product.name)!}" placeholder="产品名称"   required autocomplete="off"/>
+        </div>
+        <div class="col-sm-4">
+            [#if nameMsg??]
+            <div class="index-alert index-alert-danger" style="background-image:none;">
+                ${(nameMsg)!}
+            </div>
+            [/#if]
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="submit" value="提交" type="submit" class="btn btn-primary save" data-loading-text="正在提交...">提交</button>
+        </div>
+    </div>
+</div>

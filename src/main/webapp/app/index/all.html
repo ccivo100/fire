@@ -1,0 +1,179 @@
+[#include "/app/common/layout/__frontmainlayout.html"/]
+
+[#assign pageCss]
+<link rel="stylesheet"
+    href="${ContextPath}/admin/assets/css/bootstrap-datetimepicker.min.css" />
+[/#assign]
+[#assign pageJavascript]
+<script src="${ContextPath}/admin/assets/js/jquery-ui.js"></script>
+<script src="${ContextPath}/admin/assets/js/jquery.ui.touch-punch.js"></script>
+<script src="${ContextPath}/admin/assets/js/tree.js"></script>
+
+<script type="text/javascript">
+    jQuery(function($){
+        $("#offertime").datetimepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            pickerPosition: "bottom-left",
+            language:'zh-CN',
+            minView: 2,
+        });
+    });
+    jQuery(function($){
+        $("#offertime1").datetimepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            pickerPosition: "bottom-left",
+            language:'zh-CN',
+            minView: 2,
+        });
+    });
+
+</script>
+[/#assign]
+
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="allPage"]
+<div class="page-header">
+    <h1>
+        主页 <small> <i class="ace-icon fa fa-angle-double-right"></i> 查询故障工单</small>
+    </h1>
+</div>
+
+<form class="bs-example bs-example-form" role="form" action="${ContextPath}/all" method="post">
+    <div class="form-inline" role="form">
+        <div class="form-group">
+            <div class="input-group">
+                <a class="input-group-addon" href="${ContextPath}/">返回首页</a>
+                <input class="form-control" name="title" value="${(title)!}" placeholder="客户姓名" type="text" autocomplete="off">
+            </div>
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="client_num" value="${(client_num)!}" placeholder="客户编号" type="text" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="client_phone" value="${(client_phone)!}" placeholder="终端手机号" type="text" autocomplete="off">
+        </div>
+        <!--
+        <div class="form-group">
+            <input class="form-control" name="otherss" value="${(otherss)!}" placeholder="IMEI码" type="text" autocomplete="off">
+        </div>
+        
+        <div class="form-group">
+            <input class="form-control"  name="typess" value="${(typess)!}" placeholder="故障大类" type="text" autocomplete="off">
+        </div>
+        -->
+        <span class="form-group">
+            <button class="btn btn-sm btn-default ">
+                <span class="glyphicon glyphicon-search"></span>查询
+            </button>
+        </span>
+        <!--
+        <span class="form-group">
+            <button class="btn btn-sm btn-default " type="reset" value="Reset">
+                <span class="glyphicon glyphicon-search"></span>重置
+            </button>
+        </span>
+        -->
+    </div>
+    <!--
+    <div class="form-inline" role="form">
+        <div class="form-group">
+            <div class="input-group">
+                <a class="input-group-addon" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                <input class="form-control"  name="product_type" value="${(product_type)!}" placeholder="产品名称" type="text" autocomplete="off">
+            </div>
+        </div>
+        <div class="form-group">
+            <input class="form-control"  name="typess" value="${(typess)!}" placeholder="故障大类" type="text" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <div class="input-append date form_datetime">
+                <input id="offertime" name="offertime" type="text" value="${(offertime)!}" class="datetimepicker" placeholder="申报时间" readonly autocomplete="off">
+                <span class="add-on"><i class="icon-remove"></i></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <input class="form-control" id="branch" name="branch" value="${(branch)!}" placeholder="申报单位" type="text" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <input class="form-control" id="offeruser" name="offeruser" value="${(offeruser)!}" placeholder="申报人员" type="text" autocomplete="off">
+        </div>
+        <span class="form-group">
+            <button class="btn btn-sm btn-default ">
+                <span class="glyphicon glyphicon-search"></span>查询
+            </button>
+        </span>
+    </div>
+    -->
+</form>
+<div class="hr hr-dotted"></div>
+<!-- /.page-header -->
+<div class="row">
+    <div class="col-xs-12">
+        <div class="center">
+                    <table class="table table-bordered table-hover ">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center;">序号</th>
+                                <th style="text-align:center;">客户姓名</th>
+                                <th style="text-align:center;">申报部门</th>
+                                <th style="text-align:center;">运维部门</th>
+                                <th style="text-align:center;">申报人</th>
+                                <th style="text-align:center;">申报时间</th>
+                                <th style="text-align:center;">当前状态</th>
+                                <th style="text-align:center;">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        [#list allPage.getList() as order]
+                        <tr >
+                            <td style="text-align:center;">${order_index+1}</td>
+                            <td style="text-align:center;">${(order.title)!}</td>
+                            <td style="text-align:center;">${(order.off_paname)!}</td>
+                            <td style="text-align:center;">${(order.deal_paname)!}</td>
+                            <td style="text-align:center;">${(order.off_user)!}</td>
+                            <td style="text-align:center;">${(order.offer_at)!}</td>
+                            <td >
+                                <b>
+                                [#if order.status=0]
+                                <span class="green">已回访</span>
+                                [#elseif order.status=1]
+                                <span class="orange">处理中</span>
+                                [#elseif order.status=2]
+                                <span class="gray">未处理</span>
+                                [#elseif order.status=3]
+                                <span class="red">待回复</span>
+                                [#elseif order.status=4]
+                                <span class="pink">待回访</span>
+                                [/#if]
+                                </b>
+                            </td>
+                            <td >
+                            <a class="btn btn-minier btn-primary "   href="${ContextPath}/query?id=${order.id}"  >查看</a> 
+                            </td>
+                        </tr>
+                        [/#list]
+                        [#if allPage.getList().size()!=10]
+                        [#assign size=(10-allPage.getList().size())]
+                            [#list 1..size as t]
+                                <tr>
+                                    <td style="text-align:center;">${(allPage.getList().size()+t)!}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            [/#list]
+                        [/#if]
+                        </tbody>
+                    </table>
+            [#include "/page/common/_paginate.html" /]
+            [@paginate currentPage=allPage.pageNumber totalPage=allPage.totalPage actionUrl="/all/" /]
+        </div>
+    </div>
+</div>
+
+[/@mainlayout]

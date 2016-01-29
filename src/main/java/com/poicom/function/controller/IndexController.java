@@ -42,6 +42,7 @@ import com.poicom.function.validator.IndexValidator;
 public class IndexController extends BaseController {
 
     private final static String indexView = "index.html";
+    private final static String allView = "all.html";
     private final static String undealView = "undeal.html";
     private final static String dealingView = "dealing.html";
     private final static String waitreplyView = "waitreply.html";
@@ -75,6 +76,116 @@ public class IndexController extends BaseController {
             setAttr("overOrderPage",ordersPage);
             render(indexView);
         } 
+    }
+    /**
+     * 主页根目录
+     * */
+    @Before(IndexValidator.class)
+    public void all() {
+        User user=User.dao.getCurrentUser();//查询本账号下的工单
+        Page<Record> allPage;//返回查询结果，并覆盖原来的申报列表
+        
+        //拼接where语句
+        StringBuffer whereadd=new StringBuffer();
+        //保存condition条件
+        List<Object> conditions=new ArrayList<Object>();
+        String title=getPara("title");
+        String client_num=getPara("client_num");
+        String client_phone=getPara("client_phone");
+        //String otherss=getPara("otherss");
+        //String product_type=getPara("product_type");
+        //String typess=getPara("typess");
+        //String offertime=getPara("offertime");
+        //String offertime1=getPara("offertime1");
+        //String branch=getPara("branch");
+        //String offeruser=getPara("offeruser");
+        
+        //若无查询条件 则按正常查询。
+        if(ValidateKit.isNullOrEmpty(title)
+                &&ValidateKit.isNullOrEmpty(client_num)
+                &&ValidateKit.isNullOrEmpty(client_phone)){
+                //&&ValidateKit.isNullOrEmpty(otherss)
+                //&&ValidateKit.isNullOrEmpty(product_type)
+                //&&ValidateKit.isNullOrEmpty(typess)
+                //&&ValidateKit.isNullOrEmpty(offertime)
+                //&&ValidateKit.isNullOrEmpty(offertime1)){
+            
+            String where="  1=1 and o.deleted_at is null ";
+            String orderby=" ORDER BY o.offer_at DESC ";
+            allPage=Order.dao.findIndexOrders(getParaToInt(0,1), 10,where,orderby);
+        }else{
+            //查询标题
+            if(!ValidateKit.isNullOrEmpty(title)){
+                whereadd.append(" and o.title like ? ");
+                conditions.add("%"+getPara("title").trim()+"%");
+                setAttr("title",title);
+            }
+            //查询客户编号
+            if(!ValidateKit.isNullOrEmpty(client_num)){
+                whereadd.append(" and o.client_num like ? ");
+                conditions.add("%"+getPara("client_num").trim()+"%");
+                setAttr("client_num",client_num);
+            }
+            //查询终端手机号
+            if(!ValidateKit.isNullOrEmpty(client_phone)){
+                whereadd.append(" and o.client_phone like ? ");
+                conditions.add("%"+getPara("client_phone").trim()+"%");
+                setAttr("client_phoner",client_phone);
+            }
+            /*
+            //查询故障大类
+            if(!ValidateKit.isNullOrEmpty(typess)){
+                whereadd.append(" and o.typess like ? ");
+                conditions.add("%"+getPara("typess").trim()+"%");
+                setAttr("typess",typess);
+            }
+            //查询IMEI码
+            if(!ValidateKit.isNullOrEmpty(otherss)){
+                whereadd.append(" and o.otherss like ? ");
+                conditions.add("%"+getPara("otherss").trim()+"%");
+                setAttr("otherss",otherss);
+            }
+            //查询产品名称
+            if(!ValidateKit.isNullOrEmpty(product_type)){
+                whereadd.append(" and o.product_type like ? ");
+                conditions.add("%"+getPara("product_type").trim()+"%");
+                setAttr("product_type",product_type);
+            }
+            //查询申报时间
+            if(ValidateKit.isNullOrEmpty(offertime)&&!ValidateKit.isNullOrEmpty(offertime1)){
+                System.out.println("请输入开始时间，结束时间必须大于开始时间！");
+            }
+            //查询申报时间
+            if(!ValidateKit.isNullOrEmpty(offertime)&&ValidateKit.isNullOrEmpty(offertime1)){
+                System.out.println("请输入结束时间，结束时间必须大于开始时间！");
+            }
+            //查询申报时间
+            if(!ValidateKit.isNullOrEmpty(offertime)){
+                whereadd.append(" and o.offer_at like ? ");
+                conditions.add(getPara("offertime").trim()+"%");
+            /*
+            //查询申报人
+            if(!ValidateKit.isNullOrEmpty(offeruser)){
+                whereadd.append(" and u1.full_name like ? ");
+                conditions.add("%"+getPara("offeruser").trim()+"%");
+                setAttr("offeruser",offeruser);
+            }
+            //查询申报人公司
+            if(!ValidateKit.isNullOrEmpty(branch)){
+                whereadd.append(" and u1.bname like ? ");
+                conditions.add("%"+getPara("branch").trim()+"%");
+                setAttr("branch",branch);
+            }
+            */
+            String where=" 1=1 and o.deleted_at is null "+whereadd.toString();
+            String orderby=" ORDER BY o.offer_at DESC ";
+            Object[] condition= new Object[conditions.size()];
+            conditions.toArray(condition);
+            allPage=Order.dao.findReportsByUserId(getParaToInt(0,1), 10,where,orderby,condition);
+        }
+        OrderService.service.format(allPage, "title");
+        setAttr("allPage",allPage);
+        render(allView);
     }
     /**
      * 未处理

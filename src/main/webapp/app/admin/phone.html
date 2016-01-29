@@ -1,0 +1,129 @@
+[#include "/app/common/layout/__backstagemainlayout.html"/]
+[#assign pageJavascript]
+<script type="text/javascript">
+$(function(){
+    $(".checked").click(function(){
+        $.ajax({
+            type:"post",
+            url:"${ContextPath}/admin/phone/able",
+            data:{
+                "phoneid":$(this).attr("phoneid"),
+            },
+            success:function(msg){
+                if(msg.state){
+                    alert("修改成功！");
+                }else{
+                    alert("修改失败！");
+                }
+            },
+            error:function(){
+                alert("失败了！");
+            }
+        });
+    });
+    $("[data-toggle='popover']").popover({html : true });
+});
+
+$(document).ready(function() {
+    $('.alert-you').mouseenter(function() {
+        $(this).popover('show');
+    });
+    $('.alert-you').mouseleave(function() {
+        $(this).popover('hide');
+    });
+});
+</script>
+[/#assign]
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="commoditymanagementFlag-phoneFlag-phoneListFlag"]
+
+<div class="page-header">
+    <h1>
+        手机管理 
+        <small> <i class="ace-icon fa fa-angle-double-right"></i> 手机列表</small>
+    </h1>
+</div>
+<table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th style="text-align:center;">编号</th>
+                <th style="text-align:center;">手机名称</th>
+                <th style="text-align:center;">父节点编号</th>
+                <th style="text-align:center;">创建时间</th>
+                <th style="text-align:center;">状态</th>
+                <!-- <th >运维</th>  -->
+                <th style="text-align:center;">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            [#list phoneTree as phones]
+            <tr>
+                <td style="text-align:center;">${(phones.id)!}</td>
+                <td style="text-align:center;font-weight:bold"> ${(phones.name)!}</td>
+                <td style="text-align:center;">${(phones.pid)!}</td>
+                <td style="text-align:center;">${(phones.created_at)!}</td>
+                <td style="text-align:center;">
+                    <b>
+                    [#if phones.deleted_at??]
+                    <span class="red">禁用</span>
+                    [#else]
+                    <span class="gray">正常</span>
+                    [/#if]
+                    </b>
+                </td>
+                <!-- 
+                <td>
+                    [#if phones.flag="1"]
+                    <div class="alert-you" title="<b><span class='red'>提示</span></b>"  data-container="body" data-toggle="popover" data-placement="left" 
+                                data-content="<b>取消后，该部门分配的故障处理选项将一起被取消！</b>">
+                    <input type="checkbox" class="ace ace-switch ace-switch-5 checked"  phoneid="${(phones.id)}"  checked />
+                    <span class="lbl middle"></span>
+                    </div>
+                    [#elseif phones.flag="0"]
+                    <input type="checkbox" class="ace ace-switch ace-switch-5 checked"  phoneid="${(phones.id)}"   />
+                    <span class="lbl middle"></span>
+                    [/#if]
+                </td>
+                 -->
+                <td style="text-align:center;">
+                <div class="action-buttons">
+                <a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/phone/edit?id=${(phones.id)!}" >编辑</a>
+                [#if phones.deleted_at??]
+                <a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/phone/on?id=${(phones.id)!}" >启用</a>
+                [#else]
+                <a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/phone/off?id=${(phones.id)!}" >禁用</a>
+                [/#if]
+                <a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/phone/add?id=${(phones.id)!}" >添加</a>
+                </div>
+                </td>
+            </tr>
+            [#list phones.children as phone]
+                <tr>
+                <td style="text-align:center;"></td>
+                <td style="text-align:center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-minus-sign"></span>&nbsp;${(phone.name)!}</td>
+                <td style="text-align:center;">${(phone.pid)!}</td>
+                <td style="text-align:center;">${(phone.created_at)!}</td>
+                <td style="text-align:center;">
+                    <b>
+                    [#if phone.deleted_at??]
+                    <span class="red">禁用</span>
+                    [#else]
+                    <span class="gray">正常</span>
+                    [/#if]
+                    </b>
+                </td>
+                <td style="text-align:center;">
+                <div class="action-buttons">
+                <a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/phone/edit?id=${(phone.id)!}" >编辑</a>
+                [#if phone.deleted_at??]
+                <a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/phone/on?id=${(phone.id)!}" >启用</a>
+                [#else]
+                <a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/phone/off?id=${(phone.id)!}" >禁用</a>
+                [/#if]
+                </div>
+                </td>
+            </tr>
+            [/#list]
+            [/#list]
+        </tbody>
+    </table>
+[/@mainlayout]

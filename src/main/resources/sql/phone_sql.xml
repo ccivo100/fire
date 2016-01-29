@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<sqlRoot>
+    <!-- 部门SQL -->
+    <sqlGroup name="phone">
+    <!-- 根据故障类型，查找运维部门的信息 -->
+    <sql id="findPhoneBySelect">
+        select phone.id,phone.name,phone.pid,
+        phone.created_at,phone.updated_at,phone.deleted_at
+    </sql>
+    <sql id="findPhoneByFrom">
+        from com_phone as phone
+        where phone.id in(
+            select phonetype.phone_id
+            from com_phone_type as phonetype
+            where phonetype.version_id=?
+        )
+        and phone.deleted_at is null
+    </sql>
+    
+    <sql id="ATPhones">select phone.id,phone.name, phone.pid,
+        phone.created_at,phone.updated_at,phone.deleted_at from 
+        (select * 
+        from com_phone 
+        where pid=?
+        ) as phone
+        where phone.id in(
+            select phonetype.phone_id
+            from com_phone_type as phonetype
+            where phonetype.version_id=?
+        )
+        and phone.deleted_at is null</sql>
+        
+    
+    <sql id="treeChildNode">
+    select id,name,pid,level,image from com_phone where pid=? order by orderid asc
+    </sql>
+    
+    </sqlGroup>
+</sqlRoot>

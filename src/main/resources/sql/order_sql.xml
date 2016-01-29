@@ -26,7 +26,7 @@
   	
   	<sql id="findOfferQueryBySelect"><!-- Reports-Operates-Orders 分页故障查询 -->
   	SELECT o.id, o.description, u1.bname off_branch, u1.aname off_apartment, u1.paname off_paname, u1.full_name off_user,o.offer_at,  o.status,
-  		 o.type tid, t1.name type_name,o.created_at,o.updated_at,o.deleted_at,o.title
+  		 o.type tid, t1.name type_name,o.created_at,o.updated_at,o.deleted_at,o.title,o.client_phone
   	</sql>
   	
   	<sql id="findOfferQueryByFrom"><!-- Reports-Operates-Orders 分页故障查询 -->

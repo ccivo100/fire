@@ -1,0 +1,82 @@
+[#include "/app/common/layout/__backstagemainlayout.html"/]
+[@mainlayout pageJavascript=pageJavascript pageCss=pageCss currentMenu="commoditymanagementFlag-versionFlag-versionListFlag"]
+
+<div class="page-header">
+    <h1>
+        版本管理 
+        <small> <i class="ace-icon fa fa-angle-double-right"></i> 版本列表</small>
+    </h1>
+</div>
+<form class="bs-example bs-example-form" role="form" action="${ContextPath}/admin/version" method="post">
+    <div class="row">
+        <div class="col-xs-4" >
+            <div class="input-group">
+                <span class="input-group-addon">关键字</span>
+                <input class="form-control" id="version" name="version" value="${(version)!}" placeholder="版本名称" type="text" autocomplete="off">
+                <span class="input-group-btn">
+                    <button class="btn btn-sm btn-default">
+                        <span class="glyphicon glyphicon-search"></span>查找
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="hr hr-dotted"></div>
+<table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th style="text-align:center;">序号</th>
+                <th style="text-align:center;">所属手机</th>
+                <th style="text-align:center;">版本名称</th>
+                <th style="text-align:center;">创建时间</th>
+                <th style="text-align:center;">状态</th>
+                <th style="text-align:center;">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            [#list versionPage.getList() as version]
+            <tr>
+                <td style="text-align:center;">${(version_index+1)!}</td>
+                <td style="text-align:center;">${(version.phone_name)!}</td>
+                <td style="text-align:center;">${(version.name)!}</td>
+                <td style="text-align:center;">${(version.created_at)!}</td>
+                <td style="text-align:center;">
+                    <b>
+                    [#if version.deleted_at??]
+                    <span class="red">禁用</span>
+                    [#else]
+                    <span class="gray">正常</span>
+                    [/#if]
+                    </b>
+                </td>
+                <td style="text-align:center;">
+                <div class="action-buttons">
+                <a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/version/edit?id=${(version.id)!}" >编辑</a>
+                [#if version.deleted_at??]
+                <a class="btn btn-minier btn-danger btn-xs"  href="${ContextPath}/admin/version/on?id=${(version.id)!}" >启用</a>
+                [#else]
+                <a class="btn btn-minier btn-primary btn-xs"  href="${ContextPath}/admin/version/off?id=${(version.id)!}" >禁用</a>
+                [/#if]
+                </div>
+                </td>
+            </tr>
+            [/#list]
+            [#if versionPage.getList().size()!=10]
+            [#assign size=(10-versionPage.getList().size())]
+                [#list 1..size as t]
+                    <tr>
+                        <td style="text-align:center;">${(versionPage.getList().size()+t)!}</td>
+                        <td style="text-align:center;"></td>
+                        <td style="text-align:center;"></td>
+                        <td style="text-align:center;"></td>
+                        <td style="text-align:center;"></td>
+                        <td style="text-align:center;"></td>
+                    </tr>
+                [/#list]
+            [/#if]
+        </tbody>
+    </table>
+    [#include "/app/common/inc/_paginate.html" /]
+    [@paginate currentPage=versionPage.pageNumber totalPage=versionPage.totalPage actionUrl="/admin/version/" /]
+[/@mainlayout]
